@@ -1,0 +1,204 @@
+{
+  "navbar": [
+    {
+      "title": "خانه",
+      "path": "/",
+      "icon":"../../assets/home.png",
+      "active_icon":"../../assets/Home-active.png"
+      
+    },
+    {
+      "title": "نمایندگان",
+      "path": "/envoy",
+      "icon":"../../assets/profile.png",
+      "active_icon":"../../assets/profile-active.png"
+    },
+    {
+      "title": "رأی‌گیری‌ها",
+      "path": "/votes",
+      "icon":"../../assets/vote.png",
+      "active_icon":"../../assets/vote-active.png"
+    },
+    {
+      "title": "عملکردها",
+      "path": "/actions",
+      "icon":"../../assets/action.png",
+      "active_icon":"../../assets/action-active.png"
+    },
+    {
+      "title": "بلاگ",
+      "path": "/blog",
+      "icon":"../../assets/blog.png",
+      "active_icon":"../../assets/blog-active.png"
+    },
+    {
+      "title":" دربارۀ ما",
+      "path": "/about-me",
+      "icon":"../../assets/about.png",
+      "active_icon":"../../assets/about-active.png"
+    },
+    {
+      "title":"ورود به پنل",
+      "path": "/log-in",
+      "icon":"../../assets/panel.png",
+      "active_icon":"../../assets/panel.png"
+    }
+  ],
+  "footer":[
+    {
+      "contact":"WWW.AZMAA.NET",
+      "icon":"../../assets/site.png",
+      "href":""
+    },
+    {
+      "contact":" +989108993642",
+      "icon":"../../assets/phone.png",
+      "href":""
+    },
+    {
+      "contact":" @AZMAA_NET",
+      "icon":"../../assets/insta.png",
+      "href":""
+    }
+  ],
+  "state":[
+    {
+      "name":"استان خود را انتخاب کنید",
+      "value":"0"
+    },
+    {
+      "name":"خراسان رضوی",
+      "value":"1"
+    },
+    {
+      "name":"خراسان شمالی",
+      "value":"2"
+    },
+    {
+      "name":"گلستان",
+      "value":"3"
+    },
+    {
+      "name":"مازندران",
+      "value":"4"
+    },
+    {
+      "name":"گیلان",
+      "value":"5"
+    },
+    {
+      "name":"اردبیل",
+      "value":"6"
+    },
+    {
+      "name":"آذربایجان غربی",
+      "value":"7"
+    },
+    {
+      "name":"آذربایجان شرقی",
+      "value":"8"
+    },
+    {
+      "name":"سمنان",
+      "value":"9"
+    },
+    {
+      "name":"تهران",
+      "value":"10"
+    },
+    {
+      "name":"قزوین",
+      "value":"11"
+    },
+    {
+      "name":"زنجان",
+      "value":"12"
+    },
+    {
+      "name":"همدان",
+      "value":"13"
+    },
+    {
+      "name":"کردستان",
+      "value":"14"
+    },
+    {
+      "name":"مرکزی",
+      "value":"15"
+    },
+    {
+      "name":"قم",
+      "value":"16"
+    },
+    {
+      "name":"لرستان",
+      "value":"17"
+    },
+    {
+      "name":"کرمانشاه",
+      "value":"18"
+    },
+    {
+      "name":"اصفهان",
+      "value":"19"
+    },
+    {
+      "name":"یزد",
+      "value":"20"
+    },
+    {
+      "name":"سیستان وبلوچستان",
+      "value":"21"
+    },
+    {
+      "name":"هرمزگان",
+      "value":"22"
+    },
+    {
+      "name":"فارس",
+      "value":"23"
+    },
+    {
+      "name":"بوشهر",
+      "value":"24"
+    },
+    {
+      "name":"کهکلویه",
+      "value":"25"
+    },
+    {
+      "name":"خوزستان",
+      "value":"26"
+    },
+    {
+      "name":"چهارمحال",
+      "value":"27"
+    },
+    {
+      "name":"کهکلویه",
+      "value":"28"
+    }
+  ],
+  "controlPanel":[
+    {
+      "name":"همه",
+      "icon":""
+    },
+    {
+      "name":"نمایندگان",
+      "icon":"../../assets/user.png"
+    },
+    {
+      "name":"حوزه‌ها",
+      "icon":"../../assets/location.png"
+    },
+    {
+      "name":"رأی‌گیری‌ها",
+      "icon":"../../assets/tik.png"
+    },
+    {
+      "name":"عملکردها",
+      "icon":"../../assets/act.png"
+    }
+  ]
+}
