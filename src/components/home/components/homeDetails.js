@@ -14,6 +14,7 @@ export default function HomeDetails() {
     <HomeContainer>
       <SelectState />
       <Controller/>
+      
     </HomeContainer>
   );
 }

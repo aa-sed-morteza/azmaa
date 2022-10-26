@@ -3,6 +3,8 @@ import styled from "styled-components";
 import useWidth from "../../hook/useWidth";
 import FirstBanner from "./components/firstBanner";
 import HomeDetails from "./components/homeDetails";
+import Magazine from "./components/magazine";
+import SecondBanner from "./components/secondBanner";
 import Slider from "./components/slider";
 
 const HomeContainer = styled.section`
@@ -17,5 +19,7 @@ export default function Home() {
     {width>480?(<Slider/>):""}
     <FirstBanner/>
     <HomeDetails/>
+    <Magazine/>
+    <SecondBanner/>
   </HomeContainer>;
 }
