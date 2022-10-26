@@ -3,6 +3,9 @@ import styled from "styled-components";
 import background from "../../../assets/back-controll.png";
 import upArrow from "../../../assets/arrow.png";
 import data from "../../../data.json";
+import VoteCard from "./voteCard";
+import ActionCard from "./actionCard"
+import BestEnvoy from "./bestEnvoy";
 
 const ControllContainer = styled.section`
   display: flex;
@@ -88,51 +91,57 @@ const Tab = styled.div`
   }
 `;
 
-const LastVotes = styled.div`
-`
+const LastVotes = styled.div``;
 
 const Title = styled.h1`
-color:#9F9F9F;
-font-size:4.65vw;
-font-weight:300;
-overflow: hidden;
-text-align: center;
-margin-bottom:10px;
-&:after{
-    background-color: #9F9F9F;
+  color: #9f9f9f;
+  font-size: 4.65vw;
+  font-weight: 300;
+  overflow: hidden;
+  text-align: center;
+  margin-bottom: 10px;
+  &:after {
+    background-color: #9f9f9f;
     content: "";
     display: inline-block;
     height: 1px;
     position: relative;
     // vertical-align: middle;
-    width: 60%;
-}
-`
+    width: 59%;
+  }
+`;
 
 const ShowMore = styled.div`
-    border:1px solid #9F9F9F;
-    border-radius:4px;
-    display:flex;
-    padding:8px;
-    p{
-        margin:auto;
-        color:#9F9F9F;
-        font-size:4.65vw;
-        position:relative;
-        font-weight: 300;
-        &:after{
-            content:"";
-            display:flex;
-            position:absolute;
-            left:-25px;
-            bottom:8px;
-            background-image: url(${upArrow});
-            background-size: cover;
-            background-repeat: no-repeat;
-            width:9px;
-            height:5px;
-        }
+  border: 1px solid #9f9f9f;
+  border-radius: 4px;
+  display: flex;
+  padding: 8px;
+  p {
+    margin: auto;
+    color: #9f9f9f;
+    font-size: 4.65vw;
+    position: relative;
+    font-weight: 300;
+    &:after {
+      content: "";
+      display: flex;
+      position: absolute;
+      left: -25px;
+      bottom: 8px;
+      background-image: url(${upArrow});
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 9px;
+      height: 5px;
     }
+  }
+`;
+
+
+const LastActions =styled.div`
+`
+
+const BestEnvoyContainer= styled.div`
 `
 
 export default function Controller() {
@@ -162,14 +171,31 @@ export default function Controller() {
       <FilterContainer>
         <SearchInput type="text" placeholder="&#xF002; جستجو کن..." />
         <TabContainer>{controllItem}</TabContainer>
-       
       </FilterContainer>
 
       <LastVotes>
-            <Title>آخرین رأی‌گیری‌ها</Title>
+        <Title>آخرین رأی‌گیری‌ها</Title>
+        <VoteCard/>
+        <ShowMore>
+          <p>نمایش بیشتر</p>{" "}
+        </ShowMore>
+      </LastVotes>
 
-            <ShowMore><p>نمایش بیشتر</p> </ShowMore>
-        </LastVotes>
+      <LastActions>
+      <Title> آخرین عملکردها</Title>
+      <ActionCard/>
+      <ShowMore>
+          <p>نمایش بیشتر</p>{" "}
+        </ShowMore>
+      </LastActions>
+
+      <BestEnvoyContainer>
+        <Title>شفاف‌ترین نمایندگان</Title>
+          <BestEnvoy/>
+        <ShowMore>
+          <p>نمایش بیشتر</p>{" "}
+        </ShowMore>
+      </BestEnvoyContainer>
     </ControllContainer>
   );
 }
