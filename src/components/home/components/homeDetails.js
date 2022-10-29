@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Controller from "./controller";
 import SelectState from "./selectState";
+import useWidth from "../../../hook/useWidth";
 
 const HomeContainer = styled.section`
   background-color: #ffffff;
@@ -10,9 +11,11 @@ const HomeContainer = styled.section`
 `;
 
 export default function HomeDetails() {
+  const width = useWidth();
   return (
     <HomeContainer>
-      <SelectState />
+      {width<480?( <SelectState />):""}
+     
       <Controller/>
       
     </HomeContainer>

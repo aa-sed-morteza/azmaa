@@ -1,0 +1,145 @@
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import data from "../../../data.json";
+import leftArrow from "../../../assets/lightArrow.png";
+import SelectState from "./selectState";
+
+const Wraper = styled.section`
+  overflow: hidden;
+  flex-wrap: nowrap;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  margin-left: -1%;
+  margin-right: -2%;
+  margin-top: -6%;
+  position: relative;
+`;
+
+const ShowIndex = styled.div`
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 17%;
+  right: 8%;
+  .item {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    background-color: #cbcbcb;
+  }
+  .active {
+    background-color: #ffaa00;
+  }
+`;
+
+const Slide = styled.div`
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-width: 100%;
+  height: 20rem;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${(props) => props.photo});
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 44%;
+
+  .content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    top: 20%;
+    right: 7%;
+    h1 {
+      color: #ffffff;
+      font-size: 3.33vw;
+      font-weight: 800;
+      line-height: 5.78vw;
+      margin-top: 0;
+      margin-bottom: 28px;
+    }
+    p {
+      color: #ffffff;
+      font-weight: 400;
+      font-size: 1.45vw;
+      line-height: 2.5vw;
+      text-align: justify;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .show-more {
+      background-color: #ffaa00;
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 1.25vw;
+      font-weight: 700;
+      padding: 10px 60px;
+      width: fit-content;
+      margin-top: 30px;
+      position: relative;
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 10px;
+        height: 15px;
+        background-image: url(${leftArrow});
+        background-size: contain;
+        background-repeat: no-repeat;
+        top: 18px;
+        left: 25px;
+      }
+    }
+  }
+`;
+
+export default function Carousel() {
+  const items = data.slider;
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  function carouselInfiniteScroll() {
+    if (currentIndex === data.envoy.length - 1) {
+      return setCurrentIndex(0);
+    }
+    return setCurrentIndex(currentIndex + 1);
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      carouselInfiniteScroll();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  });
+
+  const index = items.map((x, i) => {
+    return <div key={i} className={i===currentIndex? "item active" : "item"}  ></div>;
+  });
+
+//   
+
+  return (
+    <Wraper>
+      {items.map((x, i) => {
+        return (
+          <Slide key={i} photo={x.image} style={{transform:`translate(${currentIndex*100}%)`}}>
+            <div className="content">
+              <h1>{x.title}</h1>
+              <p>{x.content}</p>
+              <div className="show-more">ادامه مطلب</div>
+            </div>
+          </Slide>
+        );
+      })}
+      <ShowIndex>{index}</ShowIndex>
+    <SelectState/>
+      
+    </Wraper>
+  );
+}
