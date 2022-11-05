@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import useWidth from "../../../hook/useWidth";
 import background from "../../../assets/back-controll.png";
 import upArrow from "../../../assets/arrow.png";
 import data from "../../../data.json";
 import VoteCard from "./voteCard";
-import ActionCard from "./actionCard"
+import ActionCard from "./actionCard";
 import BestEnvoy from "./bestEnvoy";
+import tik from "../../../assets/vote.png";
+import ControlCore from "./controlCore";
 
 const ControllContainer = styled.section`
   display: flex;
@@ -19,6 +22,14 @@ const FilterContainer = styled.div`
   padding: 19px;
   border-radius: 2px;
   margin-top: 10px;
+  @media (min-width: 480px) {
+    padding: 44px 50px 19px;
+    border-radius: 8px;
+    max-width: 1000px;
+    min-width: 1000px;
+    margin: auto;
+    margin-top: -19%;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -32,12 +43,23 @@ const SearchInput = styled.input`
   &:placeholder {
     // color:#D8D8D8;
   }
+  @media (min-width: 480px) {
+    border-radius: 4px;
+    font-size: 1.563vw;
+    font-weight: 400;
+    padding: 25px;
+    margin-bottom: 30px;
+  }
 `;
 
 const TabContainer = styled.div`
   display: flex;
   gap: 20px;
   align-items: flex-end;
+  @media(min-width:480px){
+    gap:93px;
+    justify-content:center;
+  }
 }
 `;
 
@@ -89,9 +111,35 @@ const Tab = styled.div`
       width: 37px;
     }
   }
+  @media (min-width: 480px) {
+    p {
+      font-size: 1.458vw;
+      font-weight: 300;
+    }
+    div {
+      width: 35px;
+      height: 35px;
+    }
+    &:nth-child(3) {
+      div {
+        width: 35px;
+        height: 33px;
+      }
+    }
+    &:nth-child(5) {
+      div {
+        width: 44px;
+        height: 39px;
+      }
+    }
+  }
 `;
 
-const LastVotes = styled.div``;
+const LastVotes = styled.div`
+  @media (min-width: 480px) {
+    margin-bottom: 90px;
+  }
+`;
 
 const Title = styled.h1`
   color: #9f9f9f;
@@ -108,6 +156,24 @@ const Title = styled.h1`
     position: relative;
     // vertical-align: middle;
     width: 59%;
+  }
+  @media (min-width: 480px) {
+    margin-top: 47px;
+    font-size: 1.87vw;
+    margin-bottom: 24px;
+    &:after {
+      width: 81%;
+    }
+    &:before {
+      content: "";
+      display: inline-block;
+      background-image: url(${tik});
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 59px;
+      height: 59px;
+      margin-bottom: -1%;
+    }
   }
 `;
 
@@ -135,17 +201,48 @@ const ShowMore = styled.div`
       height: 5px;
     }
   }
+
+  @media (min-width: 480px) {
+    border: 2px solid #9f9f9f;
+    border-radius: 8px;
+    max-width: 500px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 13px;
+    p {
+      font-size: 1.25vw;
+      font-weight: 400;
+      &:after {
+        width: 15px;
+        height: 8px;
+        left: -37px;
+      }
+    }
+  }
 `;
 
+const LastActions = styled.div``;
 
-const LastActions =styled.div`
-`
+const BestEnvoyContainer = styled.div``;
 
-const BestEnvoyContainer= styled.div`
+const VoterContainer = styled.div`
+  @media (min-width: 480px) {
+    display: flex;
+    gap: 20px;
+  }
+`;
+
+const ActionContainer =styled.div`
+@media (min-width: 480px) {
+  display: flex;
+  gap: 20px;
+}
 `
 
 export default function Controller() {
   const [select, setSelect] = useState(0);
+  const width = useWidth();
 
   const controllItem = data.controlPanel.map((x, i) => {
     return (
@@ -175,27 +272,68 @@ export default function Controller() {
 
       <LastVotes>
         <Title>آخرین رأی‌گیری‌ها</Title>
-        <VoteCard/>
+        <VoterContainer>
+          {width < 480 ? (
+            <VoteCard />
+          ) : (
+            <>
+              {" "}
+              <VoteCard />
+              <VoteCard />
+              <VoteCard />
+            </>
+          )}
+        </VoterContainer>
+
         <ShowMore>
           <p>نمایش بیشتر</p>{" "}
         </ShowMore>
       </LastVotes>
 
-      <LastActions>
-      <Title> آخرین عملکردها</Title>
-      <ActionCard/>
-      <ShowMore>
-          <p>نمایش بیشتر</p>{" "}
-        </ShowMore>
-      </LastActions>
+      {width < 480 ? (
+        <>
+          <LastActions>
+            <Title> آخرین عملکردها</Title>
+            <ActionCard />
+            <ShowMore>
+              <p>نمایش بیشتر</p>{" "}
+            </ShowMore>
+          </LastActions>
 
-      <BestEnvoyContainer>
-        <Title>شفاف‌ترین نمایندگان</Title>
-          <BestEnvoy/>
-        <ShowMore>
-          <p>نمایش بیشتر</p>{" "}
-        </ShowMore>
-      </BestEnvoyContainer>
+          <BestEnvoyContainer>
+            <Title>شفاف‌ترین نمایندگان</Title>
+            <BestEnvoy />
+            <ShowMore>
+              <p>نمایش بیشتر</p>{" "}
+            </ShowMore>
+          </BestEnvoyContainer>
+        </>
+      ) : (
+        <>
+          <ControlCore/>
+
+          <LastActions>
+            <Title> آخرین عملکردها</Title>
+            <ActionContainer>
+            {width < 480 ? (
+            <ActionCard />
+          ) : (
+            <>
+              {" "}
+              <ActionCard />
+              <ActionCard />
+              <ActionCard />
+            </>
+          )}
+            </ActionContainer>
+            
+            <ShowMore>
+              <p>نمایش بیشتر</p>{" "}
+            </ShowMore>
+          </LastActions>
+
+        </>
+      )}
     </ControllContainer>
   );
 }

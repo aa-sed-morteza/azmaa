@@ -8,6 +8,14 @@ const HomeContainer = styled.section`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 14px 10px;
+  @media(min-width:480px){
+    padding:10%;
+    margin-top:219px;
+    margin-left:-1%;
+    margin-right:-1%;
+    position:relative;
+    padding-bottom:76px;
+  }
 `;
 
 export default function HomeDetails() {
