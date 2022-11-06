@@ -8,6 +8,9 @@ const Container = styled.section`
   border-radius: 4px;
   position: relative;
   margin-bottom: 10px;
+  @media(min-width:480px){
+    margin-bottom:0;
+  }
 `;
 
 const IranMap = styled.div`
@@ -17,6 +20,10 @@ const IranMap = styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+  @media(min-width:480px){
+    width:45.156vw;
+    height:43.125vw;
   }
 `;
 

@@ -23,6 +23,19 @@ const Container = styled.div`
       
     }
   }
+  @media(min-width:480px){
+    width: 48%;
+    display:flex;
+    margin:auto;
+    padding:41px 34px;
+    // margin-left:10%;
+    input{
+      font-size:1.563vw;
+      padding: 18px;
+      margin:auto;
+      width:90%;
+    }
+  }
 `;
 
 export default function Search() {
