@@ -104,7 +104,7 @@ const Copyright = styled.div`
     color: #cbcbcb;
     white-space: nowrap;
     display: flex;
-    div {
+    span {
       background-image: url(${azmma});
       background-size: contain;
       padding-right: 5px;
@@ -120,7 +120,7 @@ const Copyright = styled.div`
 export default function Footer() {
   const contactItem = data.footer.map((x, i) => {
     return (
-      <div className="item">
+      <div className="item" key={i}>
         <span>
           <img src={x.icon} />
         </span>
@@ -156,7 +156,7 @@ export default function Footer() {
       </FooterContainer>
       <Copyright>
         <p>
-          همۀ حقوق نزد <div></div> محفوظ است.
+          همۀ حقوق نزد <span></span> محفوظ است.
         </p>
       </Copyright>
     </div>

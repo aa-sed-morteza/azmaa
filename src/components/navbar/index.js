@@ -16,6 +16,7 @@ const TopBar = styled.section`
   padding: 20px 30px;
   display: flex;
   justify-content: space-between;
+  
   @media (min-width: 480px) {
     padding: 16px 10%;
   }
@@ -50,6 +51,7 @@ const Menu = styled.div`
   background-size: contain;
   width: 20px;
   height: 20px;
+  
 `;
 
 const MenuList = styled.ul`
@@ -65,6 +67,7 @@ const MenuList = styled.ul`
   flex-direction: column;
   padding: 51px 81px;
   gap: 10px;
+  z-index:40;
 `;
 
 const List = styled.li`
