@@ -6,6 +6,7 @@ import success from "../../../assets/success.png";
 import faild from "../../../assets/faild.png";
 import not from "../../../assets/not.png";
 import data from "../../../data.json";
+import left from ".././../../assets/left.png";
 
 const VCContainer = styled.div`
   background-color: #ffffff;
@@ -15,6 +16,15 @@ const VCContainer = styled.div`
   flex-direction: column;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   margin-bottom: 14px;
+  @media (min-width: 480px) {
+    box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    margin-bottom: 34px;
+    max-width: 31%;
+    padding:20px 17px;
+    height:43.229vw;
+    min-height:0;
+  }
 `;
 
 const CardHeader = styled.div`
@@ -26,6 +36,10 @@ const CardHeader = styled.div`
     background-repeat: no-repeat;
     width: 89px;
     height: 89px;
+    @media (min-width: 480px) {
+      width: 130px;
+      height: 130px;
+    }
   }
 
   & > .title-card {
@@ -64,12 +78,29 @@ const CardHeader = styled.div`
       font-size: 2.79vw;
       font-weight: bold;
     }
+    @media (min-width: 480px) {
+      .title {
+        font-size: 1.25vw;
+        font-weight: 300;
+        &:beffore {
+          width: 36px;
+          height: 36px;
+        }
+      }
+      h2{
+        font-size:1.667vw;
+        font-weight:700;
+      }
+      .date{
+        font-size:1.250vw;
+        font-weight:500;
+      }
+    }
   }
 `;
 
 const Statistics = styled.div`
   display: flex;
-
   gap: 70px;
   padding-right: 50px;
   padding-top: 20px;
@@ -77,6 +108,10 @@ const Statistics = styled.div`
   margin-top: 17px;
   justify-content: center;
   padding-bottom: 13px;
+  @media(min-width:480px){
+    gap:90px;
+
+  }
 `;
 
 const Success = styled.div`
@@ -109,6 +144,19 @@ const Success = styled.div`
       right: -50px;
     }
   }
+  @media(min-width:480px){
+    font-size:1.458vw;
+    font-weight:400;
+    padding-bottom:10px;
+    &:before{
+      width:56px;
+      height:56px;
+      right:-65px;
+    }
+    &:after{
+      width:100px;
+    }
+  }
 `;
 
 const Faild = styled.div`
@@ -139,6 +187,19 @@ const Faild = styled.div`
       background-color: #ffa5a5;
       bottom: -13px;
       right: -50px;
+    }
+  }
+  @media(min-width:480px){
+    font-size:1.458vw;
+    font-weight:400;
+    padding-bottom:10px;
+    &:before{
+      width:56px;
+      height:56px;
+      right:-65px;
+    }
+    &:after{
+      width:100px;
     }
   }
 `;
@@ -175,6 +236,19 @@ const Not = styled.div`
       right: -50px;
     }
   }
+  @media(min-width:480px){
+    font-size:1.458vw;
+    font-weight:400;
+    padding-bottom:10px;
+    &:before{
+      width:56px;
+      height:56px;
+      right:-65px;
+    }
+    &:after{
+      width:100px;
+    }
+  }
 `;
 
 const EnvoyGallery = styled.div`
@@ -183,6 +257,16 @@ const EnvoyGallery = styled.div`
   padding: 18px 0 12px;
   display: flex;
   overflow-x: scroll;
+  @media(min-width:480px){
+    border-radius:8px;
+    flex-direction:column;
+    padding-inline:15px;
+  
+   margin-bottom:10px;
+   flex:1;
+   overflow-y: auto;
+   
+  }
 `;
 
 const Card = styled.div`
@@ -220,12 +304,43 @@ const Card = styled.div`
     font-weight: bold;
     margin: 0;
   }
+  @media(min-width:480px){
+    flex-wrap:wrap;
+    max-height:144px;
+    padding:19px 30px 10px;
+    border-left:none;
+    border-bottom:1px solid #FFFFFF;
+    .picture{
+      width: 96px;
+      height: 96px;
+      border-radius: 96px;
+      border-width:9px;
+    }
+    .name{
+      font-size:1.458vw;
+      text-align:start;
+      width:60%;
+      margin-bottom:10px;
+      margin-top:-4%;
+    }
+    .state{
+      font-size:1.042vw;
+      font-weight:300;
+      text-align:start;
+      width:60%;
+    }
+  }
 `;
 
 const ButtonWraper = styled.div`
   display: flex;
   margin-top: 10px;
   justify-content: space-between;
+  @media(min-width:480px){
+    border-top:1px solid #D8D8D8;
+    padding-top:14px;
+    flex-direction: row-reverse;
+  }
 `;
 
 const LargButton = styled.div`
@@ -241,6 +356,27 @@ const LargButton = styled.div`
     font-weight: bold;
     color: #ffffff;
   }
+  @media(min-width:480px){
+    border-radius: 8px;
+    padding:10px;
+    position:relative;
+    .content{
+      font-size:1.250vw;
+      margin:auto;
+      &:after{
+        content: "";
+        display: block;
+        position: absolute;
+        width: 10px;
+        height: 15px;
+        background-image: url(${left});
+        background-size: contain;
+        background-repeat: no-repeat;
+        top: 20px;
+        left: 33px;
+      }
+    }
+  }
 `;
 
 const SmallButton = styled.div`
@@ -255,6 +391,14 @@ const SmallButton = styled.div`
     font-size: 4.65vw;
     font-weight: 300;
     color: #095644;
+  }
+  @media(min-width:480px){
+    border-radius: 8px;
+    padding:10px;
+    .content{
+      font-size:1.250vw;
+      margin:auto;
+    }
   }
 `;
 

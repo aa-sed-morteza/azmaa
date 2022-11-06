@@ -12,6 +12,11 @@ const MagazineContainer = styled.section`
   margin-right: -20px;
   margin-left: -20px;
   display: flex;
+  @media (min-width: 480px) {
+    padding: 36px 0 50px;
+    // margin-top:70px;
+    margin-top:0;
+  }
 `;
 
 const Ttitle = styled.div`
@@ -46,13 +51,36 @@ const Ttitle = styled.div`
     height: 10px;
     left: -8px;
   }
+
+  @media (min-width: 480px) {
+    margin-right: 12%;
+    max-width: 200px;
+    span {
+      width: 97px;
+      height: 97px;
+    }
+    h1 {
+      font-size: 1.875vw;
+      white-space: nowrap;
+    }
+    &:after {
+      width: 15px;
+      height: 30px;
+      left: -45px;
+      bottom: 37.4%;
+    }
+  }
 `;
 
 const Wraper = styled.div`
   display: flex;
   overflow-x: scroll;
-  gap:10px;
-  padding-right:50px;
+  gap: 10px;
+  padding-right: 50px;
+  @media (min-width: 480px) {
+    padding-right: 90px;
+    gap: 28px;
+  }
 `;
 
 const Paper = styled.div`
@@ -73,40 +101,69 @@ const Paper = styled.div`
       object-fit: contain;
     }
   }
-  .user{
-    margin:0;
-    color:#707070;
-    font-weight:300;
-    font-size:3.72vw;
-    padding-right:20px;
-    position:relative;
-    margin-bottom:10px;
+  .user {
+    margin: 0;
+    color: #707070;
+    font-weight: 300;
+    font-size: 3.72vw;
+    padding-right: 20px;
+    position: relative;
+    margin-bottom: 10px;
     &:before {
-        content: "";
-        display: flex;
-        position: absolute;
-        background-image: url(${user});
-        background-size: cover;
-        background-repeat: no-repeat;
-        width: 15px;
-        height: 15px;
-        right: 2px;
-        top: 5px;
-      }
+      content: "";
+      display: flex;
+      position: absolute;
+      background-image: url(${user});
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 15px;
+      height: 15px;
+      right: 2px;
+      top: 5px;
+    }
   }
-  .content{
-    color:#707070;
-    font-size:3.72vw;
-    font-weight:400;
-    margin:0;
-    margin-bottom:10px;
+  .content {
+    color: #707070;
+    font-size: 3.72vw;
+    font-weight: 400;
+    margin: 0;
+    margin-bottom: 10px;
   }
 
-  .date{
-    color:rgba(0, 0, 0, 0.2);
-    font-size:3.25vw;
-    font-weight:bold;
-    margin:0;
+  .date {
+    color: rgba(0, 0, 0, 0.2);
+    font-size: 3.25vw;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  @media (min-width: 480px) {
+    padding: 20px 19px 25px 19px;
+    box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    .cover {
+      width: 330px;
+      height: 253px;
+      border-radius: 4px;
+      margin-bottom: 18px;
+    }
+    .user{
+      font-size:1.042vw;
+      margin-bottom: 36px;
+      padding-right: 30px;
+      &:before{
+        width: 20px;
+        height: 20px;
+      }
+    }
+    .content {
+      font-size: 1.250vw;
+      margin-bottom: 36px;
+    }
+    .date {
+      font-size: 1.042vw;
+      font-weight: 500;
+    }
   }
 `;
 
