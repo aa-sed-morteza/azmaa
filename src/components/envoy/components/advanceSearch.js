@@ -22,26 +22,27 @@ const Container = styled.section`
     background-repeat: no-repeat;
   }
   .label {
+    font-size: 3.72vw;
     text-align: center;
     margin: 0;
-    color:#9F9F9F;
+    color: #9f9f9f;
   }
- 
-  @media(min-width:480px){
+
+  @media (min-width: 480px) {
     width: 50.5%;
-    margin:auto;
-    margin-top:25px;
-    padding:14px;
-    border-radius:8px;
-    &:after{
+    margin: auto;
+    margin-top: 25px;
+    padding: 14px;
+    border-radius: 8px;
+    &:after {
       width: 15px;
       height: 9px;
       left: 345px;
       top: 27px;
-  }
     }
-    .label{
-      font-size:1.250vw;
+
+    .label {
+      font-size: 1.25vw;
     }
   }
 `;
@@ -69,7 +70,7 @@ const DropDown = styled.div`
   }
   @media (min-width: 480px) {
     padding: 15px;
-    border-radius:4px;
+    border-radius: 4px;
     &:after {
       width: 15px;
       height: 9px;

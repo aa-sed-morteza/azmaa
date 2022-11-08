@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import mag from "../../../assets/mag.png";
 import leftArrow from "../../../assets/leftArrow.png";
+import mag from "../../../assets/blog.png"
 import user from "../../../assets/profile.png";
 import data from "../../../data.json";
 
@@ -9,9 +9,10 @@ const MagazineContainer = styled.section`
   background-color: #ffaa00;
   padding: 13px 0;
   margin-top: 15px;
-  margin-right: -20px;
-  margin-left: -20px;
+  margin-right: -10px;
+  margin-left: -10px;
   display: flex;
+  margin-bottom:15px;
   @media (min-width: 480px) {
     padding: 36px 0 50px;
     // margin-top:70px;
@@ -31,8 +32,8 @@ const Ttitle = styled.div`
     background-image: url(${mag});
     background-size: contain;
     background-repeat: no-repeat;
-    width: 64px;
-    height: 64px;
+    width: 51px;
+    height: 50px;
   }
   h1 {
     color: #095644;
@@ -167,30 +168,30 @@ const Paper = styled.div`
   }
 `;
 
-export default function () {
-  const magPaper = data.magazine.map((x, i) => {
-    return (
-      <Paper>
-        <div className="cover">
-          <img src={x.img} alt={x.date} />
-        </div>
-
-        <p className="user">{x.name}</p>
-
-        <p className="content">{x.content}</p>
-
-        <p className="date">{x.date}</p>
-      </Paper>
-    );
-  });
-
+export default function Magazine() {
+    const magPaper = data.magazine.map((x, i) => {
+        return (
+          <Paper>
+            <div className="cover">
+              <img src={x.img} alt={x.date} />
+            </div>
+    
+            <p className="user">{x.name}</p>
+    
+            <p className="content">{x.content}</p>
+    
+            <p className="date">{x.date}</p>
+          </Paper>
+        );
+      });
   return (
     <MagazineContainer>
       <Ttitle>
         <span></span>
-        <h1> پیشنهاد سردبیر</h1>
+        <h1>جدیدترین مطالب</h1>
       </Ttitle>
       <Wraper>{magPaper}</Wraper>
+      
     </MagazineContainer>
   );
 }
