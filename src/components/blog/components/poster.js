@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import pic from "../../../assets/poster.png";
 import icon from "../../../assets/text.png";
 import more from "../../../assets/more.png";
@@ -7,7 +8,7 @@ import more from "../../../assets/more.png";
 const Container = styled.div`
   background: #ffffff;
   border-radius: 4px;
-  margin-bottom:15px;
+  margin-bottom: 15px;
 `;
 
 const Picture = styled.div`
@@ -83,14 +84,15 @@ const Paragraph = styled.p`
 `;
 
 const ShowMore = styled.p`
-width: fit-content;
-  margin:0;
-  font-weight:700;
-  font-size:3.721vw;
-  color:#FFAA00;
-  position:relative;
-  margin-top:5px;
-  &:after{
+  width: fit-content;
+  margin: 0;
+  font-weight: 700;
+  font-size: 3.721vw;
+  color: #ffaa00;
+  position: relative;
+  margin-top: 5px;
+  cursor: pointer;
+  &:after {
     content: "";
     display: block;
     background-image: url(${more});
@@ -102,36 +104,36 @@ width: fit-content;
     left: -18px;
     top: 7px;
   }
-`
+`;
 
 export default function Poster() {
+  const navigate = useNavigate();
+  const [report, setReport] = useState({
+    img: pic,
+    type: "یادداشت",
+    user:"سهیل داناچیان",
+    date: "۲۹ اسفند ۱۴۰۰",
+    title: "مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود کدام شرکت‌هاست؟",
+    expand:
+      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.",
+  });
   return (
     <Container>
       <Picture>
-        <img src={pic} alt="post-picture" />
+        <img src={report.img} alt="post-picture" />
       </Picture>
       <Content>
         <HeadContent>
-          <Type>یادداشت</Type>
-          <Date>۲۹ اسفند ۱۴۰۰</Date>
+          <Type>{report.type}</Type>
+          <Date>{report.date}</Date>
         </HeadContent>
         <Title>
-          مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود کدام شرکت‌هاست؟
+          {report.title}
         </Title>
         <Paragraph>
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-          استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
-          ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و
-          کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی
-          در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می
-          طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی
-          الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این
-          صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و
-          شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای
-          اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده
-          قرار گیرد.
+          {report.expand}
         </Paragraph>
-        <ShowMore>ادامۀ مطلب</ShowMore>
+        <ShowMore onClick={()=>{navigate(`/blog/${report.title}`)}} >ادامۀ مطلب</ShowMore>
       </Content>
     </Container>
   );

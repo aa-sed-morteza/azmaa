@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Magazine from "./components/magazine";
 import Poster from "./components/poster";
 import SelectNews from "./components/selectNews";
+import useWidth from "../../hook/useWidth"
+import Carousel from "./components/carousel";
 
 const Container = styled.section`
   background-color: #f5f5f5;
@@ -10,6 +12,10 @@ const Container = styled.section`
   flex-direction: column;
   padding: 10px ;
   overflow: hidden;
+  @media(min-width:480px){
+    background-color:#FFFFFF;
+    padding:25px 10%;
+  }
 `;
 
 const Title = styled.div`
@@ -30,7 +36,6 @@ const Title = styled.div`
   }
   @media (min-width: 480px) {
     margin-bottom: 25px;
-    padding-right: 10%;
     .home,
     .component {
       font-size: 1.25vw;
@@ -39,14 +44,15 @@ const Title = styled.div`
 `;
 
 export default function Blog() {
+  const width = useWidth();
   return (
     <Container>
       <Title>
         <p className="home">خانه / </p>
         <p className="component"> بلاگ </p>
       </Title>
-
-      <Poster/>
+      {width<480 ? <Poster/> : <Carousel/>}
+      
       <Magazine/>
       <SelectNews/>
     </Container>

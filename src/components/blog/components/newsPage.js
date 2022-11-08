@@ -1,0 +1,366 @@
+import React from "react";
+import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import pic from "../../../assets/poster.png";
+import profile from "../../../assets/profile.png";
+import like from "../../../assets/like1.png";
+import dislike from "../../../assets/dislike1.png";
+import data from "../../../data.json";
+import user from "../../../assets/profile.png";
+
+const Container = styled.section`
+  padding: 10px 20px;
+`;
+
+const Title = styled.div`
+  display: flex;
+  margin-bottom: 12px;
+  padding-right: 10px;
+  .home {
+    font-size: 3.721vw;
+    font-weight: 700;
+    margin: 0;
+    color: rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+  }
+  .component {
+    font-size: 3.721vw;
+    font-weight: 700;
+    margin: 0;
+    color: rgba(112, 112, 112, 1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  @media (min-width: 480px) {
+    margin-bottom: 25px;
+    padding-right: 10%;
+    .home,
+    .component {
+      font-size: 1.25vw;
+    }
+  }
+`;
+
+const NewsContainer = styled.div`
+  background: #ffffff;
+  border-radius: 4px;
+  margin-bottom: 12px;
+`;
+const Picture = styled.div`
+  width: 100%;
+  height: auto;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+`;
+
+const Content = styled.div`
+  padding: 8px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const HeadContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Type = styled.p`
+  color: #707070;
+  font-weight: 300;
+  font-size: 3.721vw;
+  margin: 0;
+  position: relative;
+  padding-right: 20px;
+  &:before {
+    content: "";
+    display: block;
+    background-image: url(${profile});
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 14px;
+    height: 17px;
+    right: 0;
+    top: 2px;
+  }
+`;
+const Date = styled.p`
+  margin: 0;
+  font-weight: 700;
+  font-size: 3.256vw;
+  color: rgba(0, 0, 0, 0.2);
+`;
+
+const SubTitle = styled.h1`
+  margin: 0;
+  color: #707070;
+  font-weight: 400;
+  font-size: 4.651vw;
+  line-height: 8.14vw;
+`;
+
+const Paragraph = styled.p`
+  margin: 0;
+  color: #707070;
+  font-size: 3.721vw;
+  line-height: 6.512vw;
+  font-weight: 300;
+  color: #707070;
+  text-align: justify;
+`;
+
+const Feedback = styled.div`
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  padding: 10px 13px;
+  background-color: #f3f3f3;
+  border-radius: 4px;
+  margin-top: 15px;
+`;
+
+const Button = styled.div`
+  color: ${(props) => props.color};
+  font-weight: 300;
+  font-size: 4.65vw;
+  padding-right: 45px;
+  position: relative;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    background-image: url(${(props) => props.icon});
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    right: 0;
+    top: -7px;
+  }
+`;
+
+const Share = styled.div`
+  padding: 6px 15px;
+  border: 1px solid #095644;
+  border-radius: 4px;
+  margin-right: auto;
+  .text {
+    color: #095644;
+    font-size: 4.65vw;
+    font-weight: 300;
+    margin: 0;
+  }
+`;
+
+const Related = styled.div`
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 13px 10px 17px;
+`;
+
+const Header = styled.h2`
+  color: #9f9f9f;
+  font-size: 4.65vw;
+  font-weight: 300;
+  overflow: hidden;
+  text-align: center;
+  margin-bottom: 10px;
+	margin-top:0;
+  &:after {
+    background-color: #9f9f9f;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 59%;
+  }
+  @media (min-width: 480px) {
+    margin-top: 47px;
+    font-size: 1.87vw;
+    margin-bottom: 24px;
+    &:after {
+      width: 81%;
+    }
+  }
+`;
+
+const CardContainer = styled.div`
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:space-between;
+	gap:10px;
+`
+
+const Paper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 14px 10px;
+  background: #ffffff;
+  box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+ 
+  .cover {
+    width: 160px;
+    height: 120px;
+    border-radius: 2px;
+    margin-bottom: 5px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  .user {
+    margin: 0;
+    color: #707070;
+    font-weight: 300;
+    font-size: 3.72vw;
+    padding-right: 20px;
+    position: relative;
+    margin-bottom: 10px;
+    &:before {
+      content: "";
+      display: flex;
+      position: absolute;
+      background-image: url(${user});
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 15px;
+      height: 15px;
+      right: 2px;
+      top: 5px;
+    }
+  }
+  .content {
+    color: #707070;
+    font-size: 3.72vw;
+    font-weight: 400;
+    margin: 0;
+    margin-bottom: 10px;
+    max-width: 160px;
+  }
+
+  .date {
+    color: rgba(0, 0, 0, 0.2);
+    font-size: 3.25vw;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  &:nth-child(5){
+    display:none;
+  }
+
+  @media (min-width: 480px) {
+    padding: 20px 19px 25px 19px;
+    box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    .cover {
+      width: 330px;
+      height: 253px;
+      border-radius: 4px;
+      margin-bottom: 18px;
+    }
+    .user {
+      font-size: 1.042vw;
+      margin-bottom: 36px;
+      padding-right: 30px;
+      &:before {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    .content {
+      font-size: 1.25vw;
+      margin-bottom: 36px;
+    }
+    .date {
+      font-size: 1.042vw;
+      font-weight: 500;
+    }
+  }
+`;
+
+export default function NewsPage() {
+  const { title } = useParams();
+
+	const magPaper = data.magazine.map((x, i) => {
+    return (
+      <Paper>
+        <div className="cover">
+          <img src={x.img} alt={x.date} />
+        </div>
+
+        <p className="user">{x.name}</p>
+
+        <p className="content">{x.content}</p>
+
+        <p className="date">{x.date}</p>
+      </Paper>
+    );
+  });
+
+  return (
+    <Container>
+      <Title>
+        <p className="home">خانه / بلاگ /</p>
+        <p className="component"> {title} </p>
+      </Title>
+
+      <NewsContainer>
+        <Picture>
+          <img src={pic} alt="news-cover" />
+        </Picture>
+        <Content>
+          <HeadContent>
+            <Type>سهیل داناچیان</Type>
+            <Date>۲۹ اسفند ۱۴۰۰</Date>
+          </HeadContent>
+          <SubTitle>
+            مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود کدام شرکت‌هاست؟
+          </SubTitle>
+
+          <Paragraph>
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+            استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
+            ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز،
+            و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای
+            زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و
+            متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان
+            رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد
+            کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه
+            راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل
+            حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود
+            طراحی اساسا مورد استفاده قرار گیرد.
+          </Paragraph>
+
+          <Feedback>
+            <Button color="#6CBBA9" icon={like}>
+              ۵۴
+            </Button>
+            <Button color="#FFA5A5" icon={dislike}>
+              ۱۰
+            </Button>
+            <Share>
+              <p className="text">بازنشر</p>
+            </Share>
+          </Feedback>
+        </Content>
+      </NewsContainer>
+
+      <Related>
+        <Header>مطالب مرتبط</Header>
+				<CardContainer>
+						{magPaper}
+				</CardContainer>
+      </Related>
+    </Container>
+  );
+}

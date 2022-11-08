@@ -9,6 +9,7 @@ import AboutMe from "./components/about-me";
 import Home from "./components/home";
 import LogIn from "./components/log-in";
 import Footer from"./components/footer";
+import NewsPage from "./components/blog/components/newsPage";
 function App() {
   return (
     <div className="App">
@@ -19,6 +20,7 @@ function App() {
         <Route path="/votes" element={<Vote />} />
         <Route path="/actions" element={<Actions />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:title" element={<NewsPage/>} />
         <Route path="/about-me" element={<AboutMe />} />
         <Route path="/log-in" element={<LogIn />} />
       </Routes>
