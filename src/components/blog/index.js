@@ -14,7 +14,7 @@ const Container = styled.section`
   overflow: hidden;
   @media(min-width:480px){
     background-color:#FFFFFF;
-    padding:25px 10%;
+    padding:25px 10% 0;
   }
 `;
 

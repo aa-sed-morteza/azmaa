@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import data from "../../../data.json";
 import leftArrow from "../../../assets/lightArrow.png";
+import profile from "../../../assets/profile.png";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.section`
   overflow: hidden;
@@ -17,8 +19,8 @@ const ShowIndex = styled.div`
   display: flex;
   gap: 10px;
   position: absolute;
-  bottom: 17%;
-  right: 8%;
+  bottom: 11%;
+  left: 30%;
   .item {
     width: 15px;
     height: 15px;
@@ -38,9 +40,10 @@ const Slide = styled.div`
   //   height: 20rem;
   justify-content: center;
   align-items: center;
+  gap: 2.6vw;
 `;
 const PicWraper = styled.div`
-  width: 60%;
+  width: 116%;
   height: auto;
   img {
     width: 100%;
@@ -50,11 +53,59 @@ const PicWraper = styled.div`
 `;
 
 const Content = styled.div`
-  width:35%
-  display:flex;
-  flex-direction:column;
-  gap:30px;
-  justify-content:flex-start;
+  width: 71%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: flex-start;
+  height: 100%;
+  .title {
+    color: #707070;
+    font-weight: 800;
+    font-size: 3.33vw;
+    margin: 0;
+    line-height: 5.78vw;
+  }
+  .text {
+    font-weight: 400;
+    font-size: 1.66vw;
+    line-height: 2.86vw;
+    text-align: justify;
+    color: #707070;
+    margin: 0;
+  }
+  .identity {
+    display: flex;
+    .user {
+      padding-right: 40px;
+      padding-left: 10px;
+      position: relative;
+      color: #9f9f9f;
+      font-weight: 700;
+      font-size: 1.25vw;
+      margin: 0;
+      border-left: 1px solid #9f9f9f;
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        background-image: url(${profile});
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 30px;
+        height: 30px;
+        right: 0px;
+        top: 2px;
+      }
+    }
+    .date {
+      font-weight: 500;
+      font-size: 1.25vw;
+      color: rgba(0, 0, 0, 0.2);
+      padding-right: 10px;
+      margin:0;
+    }
+  }
 `;
 
 const Button = styled.div`
@@ -88,6 +139,7 @@ const Button = styled.div`
 
 export default function Carousel() {
   const items = data.newspaper;
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   function carouselInfiniteScroll() {
@@ -114,12 +166,12 @@ export default function Carousel() {
     );
   });
 
-  //   style={{transform:`translate(${currentIndex*100}%)`}}
+  //   
   return (
     <Container>
       {items.map((x, i) => {
         return (
-          <Slide key={i}>
+          <Slide key={i} style={{transform:`translate(${currentIndex*100}%)`}}>
             <PicWraper>
               <img src={x.img} alt="poster" />
             </PicWraper>
@@ -130,8 +182,8 @@ export default function Carousel() {
                 <p className="user">{x.user}</p>
                 <p className="date">{x.date}</p>
               </div>
-              <Button>
-                <p className="text-button">ادامه مطلب</p>{" "}
+              <Button onClick={()=>{navigate(`/blog/${x.title}`)}}>
+                <p className="text-button" >ادامه مطلب</p>{" "}
               </Button>
             </Content>
           </Slide>
