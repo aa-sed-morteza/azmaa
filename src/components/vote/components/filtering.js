@@ -7,6 +7,13 @@ const FilterBox = styled.div`
   padding: 8px;
   display: flex;
   gap: 10px;
+  @media(min-width:480px){
+    max-width:1080px;
+    margin:auto;
+    padding:10px 13px;
+    margin-top:60px;
+    margin-bottom:45px;
+  }
 `;
 
 const FilterItem = styled.p`
@@ -22,6 +29,11 @@ padding: 5px 7px;
   color:#FFFFFF;
   font-weight:700;
 }
+@media(min-width:480px){
+  font-size:1.250vw;
+  font-weight:700;
+  width:254px;
+  text-align:center;
 }
 `;
 
