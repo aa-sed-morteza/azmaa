@@ -1,9 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import Header from "./components/header";
+import symbol from "../../assets/vote-logo.png";
+import vote from "../../assets/vote.png";
+import DetailsVotes from "./components/detailsvotes";
+import Census from "./components/census";
+import VotesCensus from "./components/votesCensus";
+import ControlStatus from "./components/controlStatus";
 
 export default function Presentation() {
-  const {title} =useParams();
+  const { title } = useParams();
   return (
     <Container>
       <Title>
@@ -11,7 +18,11 @@ export default function Presentation() {
         <p className="component"> {title} </p>
       </Title>
       <Content>
-
+        <Header img={symbol} icon={vote} type="رای گیری"/>
+        <DetailsVotes/>
+        <Census/>
+        <VotesCensus/>
+        <ControlStatus/>
       </Content>
     </Container>
   );
@@ -51,7 +62,8 @@ const Title = styled.div`
   }
 `;
 
-
-const Content =styled.div`
-
-`
+const Content = styled.div`
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 21px 11px 0;
+`;
