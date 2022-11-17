@@ -4,77 +4,131 @@ import check from "../../../assets/check.png";
 import line from "../../../assets/Line.png";
 import ActionCard from "../../home/components/actionCard";
 import upArrow from "../../../assets/arrow.png";
-
+import useWidth from "../../../hook/useWidth";
 
 const Container = styled.section`
   margin-top: 10px;
   border-right: 1px dashed #cbcbcb;
   margin-right: -5px;
   padding-right: 5px;
+  @media (min-width: 480px) {
+    background-color: #f3f3f3;
+    margin-inline: -1.5%;
+    padding-inline: 10%;
+    padding-bottom: 130px;
+    position: relative;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 4px;
+      height: 94%;
+      border-right: 3px dashed #cbcbcb;
+      right: 7%;
+      top: 18px;
+    }
+  }
 `;
 
 const SubTitile = styled.h2`
-  font-weight:700;
-  font-size:3.721vw;
-  color:#9F9F9F;
-  padding-right:40px;
-  position:relative;
-  margin-bottom:5px;
-  &:before{
-    content:"";
-    display:block;
-    position:absolute;
+  font-weight: 700;
+  font-size: 3.721vw;
+  color: #9f9f9f;
+  padding-right: 40px;
+  position: relative;
+  margin-bottom: 5px;
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
     background-image: url(${check});
     background-size: cover;
     background-repeat: no-repeat;
-    width:18px;
-    height:18px;
-    right:16px;
-    top:2px;
+    width: 18px;
+    height: 18px;
+    right: 16px;
+    top: 2px;
   }
-  &:after{
-    content:"";
-    display:block;
-    position:absolute;
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
     background-image: url(${line});
     background-size: cover;
     background-repeat: no-repeat;
-    width:16px;
-    height:1px;
+    width: 16px;
+    height: 1px;
     right: -3px;
     top: 10px;
-  
+  }
+  @media (min-width: 480px) {
+    font-size: 1.667vw;
+    margin-bottom: 20px;
+    padding-top: 45px;
+    &:before {
+      width: 30px;
+      height: 30px;
+      right: -3px;
+      top: 53px;
+    }
+    &:after {
+      width: 38px;
+      height: 3px;
+      right: -44px;
+      top: 66px;
+    }
+  }
 `;
 
 const Title = styled.div`
   border: 1px solid #d8d8d8;
   border-radius: 4px;
   background-color: #ffffff;
-  padding:1px 16px;
-  width:fit-content;
-  margin:auto;
-  font-size:3.721vw;
-  font-weight:700;
-  color:#9F9F9F;
-  position:relative;
-  margin-top:24px;
-  &:before{
-    content:"";
-    display:flex;
+  padding: 1px 16px;
+  width: fit-content;
+  margin: auto;
+  font-size: 3.721vw;
+  font-weight: 700;
+  color: #9f9f9f;
+  position: relative;
+  margin-top: 24px;
+  &:before {
+    content: "";
+    display: flex;
     position: absolute;
-    border-bottom: 1px dashed #CBCBCB;
+    border-bottom: 1px dashed #cbcbcb;
     width: 140px;
     right: -142px;
     top: 11px;
   }
-  &:after{
-    content:"";
-    display:flex;
+  &:after {
+    content: "";
+    display: flex;
     position: absolute;
-    border-bottom: 1px dashed #CBCBCB;
+    border-bottom: 1px dashed #cbcbcb;
     width: 140px;
     left: -142px;
     top: 11px;
+  }
+
+  @media (min-width: 480px) {
+    border-radius: 8px;
+    width: 500px;
+    text-align: center;
+    color: #707070;
+    font-size: 1.667vw;
+    font-weight: 400;
+    padding: 11px;
+    background-color: inherit;
+    &:after {
+      display: none;
+    }
+    &:before {
+      border-bottom: 2px dashed #cbcbcb;
+      width: 107%;
+      right: -107%;
+      top: 27px;
+    }
   }
 `;
 
@@ -83,7 +137,7 @@ const ShowMore = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 8px;
-  margin-top:16px;
+  margin-top: 16px;
   p {
     margin: auto;
     color: #9f9f9f;
@@ -112,6 +166,7 @@ const ShowMore = styled.div`
     align-items: center;
     margin: auto;
     padding: 13px;
+    margin-top: 78px;
     p {
       font-size: 1.25vw;
       font-weight: 400;
@@ -124,20 +179,57 @@ const ShowMore = styled.div`
   }
 `;
 
+const List = styled.div`
+  @media (min-width: 480px) {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+`;
 
+export default function Calendar() {
+  const width = useWidth();
+  return (
+    <Container>
+      <SubTitile>مرداد ۱۴۰۱</SubTitile>
+      <List>
+        {width < 480 ? (
+          <ActionCard />
+        ) : (
+          <>
+            <ActionCard />
+            <ActionCard />
+            <ActionCard />
+          </>
+        )}
+      </List>
+      <SubTitile style={{ marginTop: "20px" }}> تیر ۱۴۰۱</SubTitile>
+      <List>
+        {width < 480 ? (
+          <ActionCard />
+        ) : (
+          <>
+            <ActionCard />
+            <ActionCard />
+          </>
+        )}
+      </List>
+      <Title>سال ۱۴۰۰</Title>
+      <SubTitile style={{ marginTop: "0px" }}>مرداد ۱۴۰۰</SubTitile>
+      <List>
+        {width < 480 ? (
+          <ActionCard />
+        ) : (
+          <>
+            <ActionCard />
+           
+          </>
+        )}
+      </List>
 
-export default function Calendar(){
-    return(
-        <Container>
-        <SubTitile>مرداد ۱۴۰۱</SubTitile>
-        <ActionCard />
-        <SubTitile style={{ marginTop: "20px" }}> تیر ۱۴۰۱</SubTitile>
-        <ActionCard />
-        <Title>سال ۱۴۰۰</Title>
-        <SubTitile style={{ marginTop: "0px" }}>مرداد ۱۴۰۰</SubTitile>
-        <ActionCard />
-  
-        <ShowMore><p> نمایش بیشتر</p></ShowMore>
-      </Container>
-    )
+      <ShowMore>
+        <p> نمایش بیشتر</p>
+      </ShowMore>
+    </Container>
+  );
 }

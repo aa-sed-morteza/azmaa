@@ -7,6 +7,7 @@ import faild from "../../../assets/faild.png";
 import not from "../../../assets/not.png";
 import data from "../../../data.json";
 import left from ".././../../assets/left.png";
+import { useNavigate } from "react-router-dom";
 
 const VCContainer = styled.div`
   background-color: #ffffff;
@@ -407,6 +408,7 @@ export default function VoteCard() {
   const [color, SetColor] = useState("#DFF5F0");
   const [bColor, setBColor] = useState("#6cbba9");
   const envoyData = data.envoy;
+  const navigate =useNavigate();
 
   const envoyList = envoyData.map((x, i) => {
     return (
@@ -468,10 +470,10 @@ export default function VoteCard() {
       <EnvoyGallery color={color}>{envoyList}</EnvoyGallery>
 
       <ButtonWraper>
-        <LargButton>
+        <LargButton onClick={()=>{navigate(`presentation/${"کلیات لایحۀ بودجۀ سال ۱۴۰۱"}`)}}>
           <p className="content">جزئیات</p>
         </LargButton>
-        <SmallButton>
+        <SmallButton >
           <p className="content">بازنشر</p>
         </SmallButton>
       </ButtonWraper>

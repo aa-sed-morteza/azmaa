@@ -9,10 +9,13 @@ const Container = styled.section`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 10px;
+  @media (min-width: 480px) {
+    margin-top: 25%;
+  }
 `;
 
 const Title = styled.h1`
-  color: #9F9F9F;
+  color: #9f9f9f;
   font-size: 4.65vw;
   font-weight: 300;
   overflow: hidden;
@@ -28,24 +31,25 @@ const Title = styled.h1`
     width: 59%;
   }
   @media (min-width: 480px) {
-    margin-top: 47px;
+    margin-top: 75px;
     font-size: 1.87vw;
-    margin-bottom: 24px;
+    margin-bottom: 45px;
     &:after {
       width: 81%;
     }
-  
   }
 `;
 
 const NewsWraper = styled.div`
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  justify-content:space-between;
-  margin-bottom:10px;
- 
-`
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  @media (min-width: 480px) {
+    margin-bottom: 45px;
+  }
+`;
 
 const Paper = styled.div`
   display: flex;
@@ -54,7 +58,7 @@ const Paper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
- 
+
   .cover {
     width: 160px;
     height: 120px;
@@ -103,8 +107,8 @@ const Paper = styled.div`
     margin: 0;
   }
 
-  &:nth-child(5){
-    display:none;
+  &:nth-child(5) {
+    display: none;
   }
 
   @media (min-width: 480px) {
@@ -129,6 +133,7 @@ const Paper = styled.div`
     .content {
       font-size: 1.25vw;
       margin-bottom: 36px;
+      max-width: 306px;
     }
     .date {
       font-size: 1.042vw;
@@ -142,8 +147,8 @@ const ShowMore = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 8px;
-  background-color:#FFFFFF;
-  margin-bottom:10px;
+  background-color: #ffffff;
+  margin-bottom: 10px;
   p {
     margin: auto;
     color: #9f9f9f;
@@ -184,12 +189,21 @@ const ShowMore = styled.div`
   }
 `;
 
+const ChangeBack = styled.div`
+  @media (min-width: 480px) {
+    background-color: #f3f3f3;
+    margin-inline: -13%;
+    padding-inline: 13%;
+    padding-bottom: 75px;
+    padding-top: 1px;
+    margin-top: 54px;
+  }
+`;
 
 export default function SelectNews() {
-
   const magPaper = data.magazine.map((x, i) => {
     return (
-      <Paper>
+      <Paper key={i}>
         <div className="cover">
           <img src={x.img} alt={x.date} />
         </div>
@@ -206,20 +220,18 @@ export default function SelectNews() {
     <Container>
       <Control />
       <Title> پربازدیدترین مطالب</Title>
-      <NewsWraper>
-      {magPaper}
-      </NewsWraper>
+      <NewsWraper>{magPaper}</NewsWraper>
       <ShowMore>
         <p>نمایش بیشتر</p>
       </ShowMore>
 
-      <Title>  آخرین مطالب</Title>
-      <NewsWraper>
-      {magPaper}
-      </NewsWraper>
-      <ShowMore>
-        <p>نمایش بیشتر</p>
-      </ShowMore>
+      <ChangeBack>
+        <Title> آخرین مطالب</Title>
+        <NewsWraper>{magPaper}</NewsWraper>
+        <ShowMore>
+          <p>نمایش بیشتر</p>
+        </ShowMore>
+      </ChangeBack>
     </Container>
   );
 }

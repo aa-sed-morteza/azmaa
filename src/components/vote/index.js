@@ -10,6 +10,10 @@ const Container = styled.section`
   flex-direction: column;
   padding: 10px 20px;
   overflow: hidden;
+  @media(min-width:480px){
+    background-color:#ffffff;
+    padding-bottom:0;
+  }
 `;
 
 const Title = styled.div`
@@ -42,7 +46,8 @@ const Content = styled.div`
   border-radius: 4px;
   padding: 10px;
   @media (min-width: 480px) {
-    
+    margin-top:25vh;
+    padding-bottom:0;
   }
 `;
 

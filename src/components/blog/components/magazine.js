@@ -17,6 +17,8 @@ const MagazineContainer = styled.section`
     padding: 36px 0 50px;
     // margin-top:70px;
     margin-top: 0;
+    padding-left:30px;
+    margin-inline:-12.5%;
   }
 `;
 
@@ -171,7 +173,7 @@ const Paper = styled.div`
 export default function Magazine() {
     const magPaper = data.magazine.map((x, i) => {
         return (
-          <Paper>
+          <Paper key={i}>
             <div className="cover">
               <img src={x.img} alt={x.date} />
             </div>
