@@ -22,6 +22,9 @@ const Container = styled.div`
   padding: 0px 24px;
   justify-content: space-between;
   margin-bottom:20px;
+  @media(min-width:480px){
+    padding:0;
+  }
 `;
 
 const Symbol = styled.div`
@@ -32,12 +35,19 @@ const Symbol = styled.div`
     height: auto;
     object-fit: contain;
   }
+  @media(min-width:480px){
+    width:130px;
+    height:130px;
+  }
 `;
 
 const Content = styled.div`
   display:flex;
   flex-direction:column;
   gap:10px;
+  @media(min-width:480px){
+    width: 67%;
+  }
 `
 
 const Type = styled.p`
@@ -59,6 +69,17 @@ const Type = styled.p`
     right:0;
     top:2px;
   }
+  @media(min-width:480px){
+    padding-right:35px;
+    font-size:1.250vw;
+    font-weight:300;
+    &:before{
+      width:30px;
+      height:30px;
+      top:3px;
+      right:3px;
+    }
+  }
 `
 
 const Ttile = styled.h3`
@@ -66,6 +87,10 @@ font-weight: 400;
 font-size: 4.651vw;
 color: #707070;
 margin:0;
+@media(min-width:480px){
+  font-size:1.667vw;
+  font-weight:700;
+}
 `
 
 const Date =styled.p`
@@ -73,4 +98,8 @@ margin:0;
 color:rgba(0, 0, 0, 0.2);
 font-size:2.791vw;
 font-weight:700;
+@media(min-width:480px){
+  font-size:1.250vw;
+  font-weight:500;
+}
 `

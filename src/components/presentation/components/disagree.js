@@ -2,13 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import BestEnvoy from "../../home/components/bestEnvoy";
 import upArrow from "../../../assets/arrow.png";
+import icon from "../../../assets/disagree.png";
 
 export default function Disagree() {
   return (
     <Container>
-      <BestEnvoy />
-      <BestEnvoy />
-      <BestEnvoy />
+       <Title> نمایندگان مخالف</Title>
+       <Gallery>
+        <BestEnvoy />
+        <BestEnvoy />
+        <BestEnvoy />
+      </Gallery>
 
       <ShowMore>
         <p>نمایش بیشتر </p>
@@ -18,9 +22,14 @@ export default function Disagree() {
 }
 
 const Container = styled.div`
-  background-color: #FFA5A5;
+  background-color: #FFD5D5;
   padding: 18px 12px 9px 8px;
   border-radius: 0 0 4px 4px;
+  @media (min-width: 480px) {
+    padding: 40px 50px;
+    border-radius: 0px 8px 8px 0px;
+    margin-bottom:50px;
+  }
 `;
 
 const ShowMore = styled.div`
@@ -50,21 +59,39 @@ const ShowMore = styled.div`
   }
 
   @media (min-width: 480px) {
-    border: 2px solid #9f9f9f;
-    border-radius: 8px;
-    max-width: 500px;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    padding: 13px;
-    p {
-      font-size: 1.25vw;
-      font-weight: 400;
-      &:after {
-        width: 15px;
-        height: 8px;
-        left: -37px;
-      }
+    display: none;
+  }
+`;
+
+const Title = styled.h2`
+  display: none;
+  @media (min-width: 480px) {
+    display: block;
+    padding-right: 70px;
+    font-size: 1.875vw;
+    font-weight: 300;
+    color: #FF5A5A;
+    position: relative;
+    margin-bottom: 30px;
+    &:before {
+      content: "";
+      display: flex;
+      position: absolute;
+      background-image: url(${icon});
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 50px;
+      height: 50px;
+      right: 0;
     }
   }
 `;
+
+const Gallery =styled.div`
+  @media(min-width:480px){
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+  }
+`

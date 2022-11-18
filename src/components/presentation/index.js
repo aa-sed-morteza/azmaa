@@ -18,11 +18,13 @@ export default function Presentation() {
         <p className="component"> {title} </p>
       </Title>
       <Content>
-        <Header img={symbol} icon={vote} type="رای گیری"/>
-        <DetailsVotes/>
-        <Census/>
-        <VotesCensus/>
-        <ControlStatus/>
+        <Wraper>
+          <Header img={symbol} icon={vote} type="رای گیری" />
+          <DetailsVotes />
+          <Census />
+          <VotesCensus />
+        </Wraper>
+        <ControlStatus />
       </Content>
     </Container>
   );
@@ -30,6 +32,10 @@ export default function Presentation() {
 
 const Container = styled.section`
   padding: 10px 20px;
+  @media(min-width:480px){
+    background-color:#ffffff;
+    padding 25px 0;
+  }
 `;
 
 const Title = styled.div`
@@ -54,7 +60,9 @@ const Title = styled.div`
   }
   @media (min-width: 480px) {
     margin-bottom: 25px;
-    padding-right: 10%;
+    border-bottom: 1px solid #D8D8D8;
+    margin-right: 10%;
+    padding-bottom:25px;
     .home,
     .component {
       font-size: 1.25vw;
@@ -66,4 +74,18 @@ const Content = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 21px 11px 0;
+  @media(min-width:480px){
+    border-radius:inherit;
+    padding:0px 10% 0px 0px;
+    display:flex;
+    justify-content:space-between;
+    gap:35px;
+  }
 `;
+
+
+const Wraper =styled.div`
+  @media(min-width:480px){
+    width:26.5%;
+  }
+`
