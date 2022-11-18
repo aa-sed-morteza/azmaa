@@ -21,7 +21,9 @@ function App() {
         <Route path="/envoy" element={<Envoy />} />
         <Route path="/votes" element={<Vote />} />
         <Route path="votes/presentation/:title" element={<Presentation />} />
+        <Route path="presentation/:title" element={<Presentation />} />
         <Route path="/actions/presentation/:title" element={<ActionPresentation />} />
+        <Route path="presentation/:title" element={<ActionPresentation />} />
         <Route path="/actions" element={<Actions />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:title" element={<NewsPage/>} />
