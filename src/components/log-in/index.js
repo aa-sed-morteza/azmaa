@@ -22,7 +22,6 @@ export default function LogIn() {
         <Button
           text="ورود"
           background="#095644"
-          borderColor="inherit"
           textColor="#FFFFFF"
           icon={login}
           click={()=>{navigate('/dashboard')}}

@@ -5,8 +5,11 @@ import SetPassword from "./components/setPassword";
 import Button from "../general/button";
 import Contacts from "./components/contacts";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/userContext";
+
 
 export default function SignIn() {
+  const { state, dispatch } = useUser();
   const [step, setStep] = useState(0);
   const navigate  =useNavigate();
 
@@ -16,9 +19,12 @@ export default function SignIn() {
         <p className="home">پنل / </p>
         <p className="component"> ثبت نام </p>
       </Title>
-      <PersonalInformation />
-      {step===1 && (<SetPassword/>)}
-      {step===2 && (<><SetPassword/><Contacts/></>)}
+      
+      {state.signInLevel === 1 && <PersonalInformation />}
+      {state.signInLevel === 2 && <><PersonalInformation /><SetPassword/></>}
+      {state.signInLevel === 3 && <><PersonalInformation /><SetPassword/><Contacts/></>}
+      
+     
       
 
     </Container>

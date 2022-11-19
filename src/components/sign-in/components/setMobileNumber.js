@@ -74,7 +74,6 @@ export default function SetMobileNumber() {
     validationSchema: phoneSchema,
     onSubmit,
   });
-  console.log("setmobile",state.timeOut)
 
   return (
     <Container>

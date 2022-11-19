@@ -12,6 +12,7 @@ export default function Button({text, background, textColor, borderColor, icon,c
       width={width}
       type={type}
       disabled={disabled}
+      className={disabled ? 'disable' : ""}
     >
       <p className="text">{text}</p>
     </Container>
@@ -27,6 +28,9 @@ const Container = styled.button`
   box-shadow: 0px 6px 8px -2px rgba(0, 0, 0, 0.3);
   background-color: ${(props) => props.bgColor};
   border: ${(props) => props.border ? `1px solid ${props.border}` : "none"};
+  &.disable{
+    background-color:gray;
+  }
   .text {
     text-align:center;
     font-weight: 700;

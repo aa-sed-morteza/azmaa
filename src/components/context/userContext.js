@@ -4,18 +4,18 @@ const initialState = {
   userName: "",
   sms:"123456",
   timeOut:false,
-  // firstName: "",
-  // lastName: "",
+  firstName: "",
+  lastName: "",
   // image: "",
-  // age: "",
-  // sex: "",
-  // mobileNumber: "",
-  // phoneNubmer: "",
-  // email: "",
-  // personalCode: "",
-  // address: [],
-  // orders: [],
-  // purchases: [],
+   birthDay: "",
+   birthPlace: "",
+   mobileNumber: "",
+   phoneNubmer: "",
+   email: "",
+   personalCode: "",
+   signInLevel: 1,
+   password: "",
+   address: "",
   // transactions: [],
   // recommendations: [],
   // supports: [],
@@ -39,32 +39,32 @@ const reducer = (state, action) => {
     //   return { ...state, loggedIn: action.payload };
     // case "SET_HAS_CART":
     //   return { ...state, hasCart: action.payload };
-    // case "SET_PAYMENT":
-    //   return { ...state, payment: action.payload };
-    // case "SET_CONFIRM_ORDER":
-    //   return { ...state, confirmOrder: action.payload };
-    // case "SET_FNAME":
-    //   return { ...state, firstName: action.payload };
-    // case "SET_LNAME":
-    //   return { ...state, lastName: action.payload };
+    case "SET_PASSWORD":
+      return { ...state, password: action.payload };
+    case "SET_SIGN_LEVEL":
+      return { ...state, signInLevel: action.payload };
+    case "SET_FNAME":
+      return { ...state, firstName: action.payload };
+    case "SET_LNAME":
+      return { ...state, lastName: action.payload };
     case "SET_USERNAME":
       return { ...state, userName: action.payload };
     case "SET_TIME_OUT":
       return { ...state, timeOut: action.payload };
-    // case "SET_MOBILEN":
-    //   return { ...state, mobileNumber: action.payload };
-    // case "SET_PHONEN":
-    //   return { ...state, phoneNubmer: action.payload };
-    // case "SET_SEX":
-    //   return { ...state, sex: action.payload };
-    // case "SET_CURRENTPRICE":
-    //   return { ...state, currentPrice: action.payload };
-    // case "SET_MAIL":
-    //   return { ...state, email: action.payload };
-    // case "SET_PERSONALCODE":
-    //   return { ...state, personalCode: action.payload };
-    // case "SET_ADDRESS":
-    //   return { ...state, address: action.payload };
+    case "SET_MOBILEN":
+      return { ...state, mobileNumber: action.payload };
+    case "SET_PHONEN":
+      return { ...state, phoneNubmer: action.payload };
+    case "SET_BIRTH_DAY":
+      return { ...state, birthDay: action.payload };
+    case "SET_BIRTH_PLACE":
+      return { ...state, birthPlace: action.payload };
+    case "SET_MAIL":
+      return { ...state, email: action.payload };
+    case "SET_PERSONALCODE":
+      return { ...state, personalCode: action.payload };
+    case "SET_ADDRESS":
+      return { ...state, address: action.payload };
     // case "SET_ORDERS":
     //   return { ...state, orders: action.payload };
     // case "SET_PURCHASES":
