@@ -1,9 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import CustomInput from "../../general/customInput";
+import Button from "../../general/button";
+import { useNavigate } from "react-router-dom";
 
 export default function PersonalInformation() {
+  const navigate =useNavigate();
+
   return (
+    <>
     <Container>
       <Title>۱. اطلاعات شخصی خود را بنویسید:</Title>
       <Form>
@@ -14,6 +19,23 @@ export default function PersonalInformation() {
         <CustomInput label="تاریخ تولد" back="#ffffff" />
       </Form>
     </Container>
+    <Box>
+        <Button
+          text="لغو"
+          textColor="#095644"
+          borderColor="#095644"
+          width="35%"
+          click={()=>{navigate('/')}}
+        />
+        <Button
+          text="ثبت"
+          textColor="#FFFFFF"
+          background= "#095644"
+          width="62%"
+          // click={()=>{setStep(step +1)}}
+        />
+      </Box>
+    </>
   );
 }
 
@@ -36,3 +58,8 @@ const Form =styled.form`
   flex-direction:column;
   gap:15px;
 `
+const Box = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+`;

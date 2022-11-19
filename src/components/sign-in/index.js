@@ -19,23 +19,7 @@ export default function SignIn() {
       <PersonalInformation />
       {step===1 && (<SetPassword/>)}
       {step===2 && (<><SetPassword/><Contacts/></>)}
-      <Box>
-        <Button
-          text="لغو"
-          textColor="#095644"
-          borderColor="#095644"
-          width="35%"
-          click={()=>{navigate(-1)}}
-        />
-        <Button
-          text="ثبت"
-          textColor="#FFFFFF"
-          background= "#095644"
-          borderColor="1234"
-          width="62%"
-          click={()=>{setStep(step +1)}}
-        />
-      </Box>
+      
 
     </Container>
   );
@@ -72,8 +56,4 @@ const Title = styled.div`
   }
 `;
 
-const Box = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-`;
+

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function CustomInput({ type, label, icon ,back}) {
+export default function CustomInput({ type, label, icon ,back,value,onChange,id}) {
   return (
     <Container icon={icon} text={label} back={back}>
       <span></span>
-      <input type={type} />
+      <input type={type}  value={value}  onChange={onChange} id={id}/>
     </Container>
   );
 }

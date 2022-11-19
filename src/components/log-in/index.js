@@ -25,6 +25,7 @@ export default function LogIn() {
           borderColor="inherit"
           textColor="#FFFFFF"
           icon={login}
+          click={()=>{navigate('/dashboard')}}
         />
         <Button
           text="ثبت‌نام"
