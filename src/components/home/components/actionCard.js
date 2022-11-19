@@ -7,6 +7,7 @@ import faild from "../../../assets/dislike.png";
 import not from "../../../assets/not.png";
 import data from "../../../data.json";
 import left from ".././../../assets/left.png";
+import { useNavigate } from "react-router-dom";
 
 const VCContainer = styled.div`
   background-color: #ffffff;
@@ -410,6 +411,7 @@ export default function ActionCard() {
   const [color, SetColor] = useState("#DFF5F0");
   const [bColor, setBColor] = useState("#6cbba9");
   const envoyData = data.envoy;
+  const navigate =useNavigate();
 
   const envoyList = envoyData.map((x, i) => {
     return (
@@ -472,7 +474,7 @@ export default function ActionCard() {
 
       <ButtonWraper>
         <LargButton>
-          <p className="content">جزئیات</p>
+          <p className="content" onClick={()=>{navigate(`presentation/ دریافت خودرو دناپلاس `)}}>جزئیات</p>
         </LargButton>
         <SmallButton>
           <p className="content">بازنشر</p>

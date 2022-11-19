@@ -11,6 +11,8 @@ import LogIn from "./components/log-in";
 import Footer from"./components/footer";
 import NewsPage from "./components/blog/components/newsPage";
 import Presentation from "./components/presentation";
+import ActionPresentation from "./components/action-presentation";
+import SignIn from "./components/sign-in";
 function App() {
   return (
     <div className="App">
@@ -20,11 +22,15 @@ function App() {
         <Route path="/envoy" element={<Envoy />} />
         <Route path="/votes" element={<Vote />} />
         <Route path="votes/presentation/:title" element={<Presentation />} />
+        <Route path="presentation/:title" element={<Presentation />} />
+        <Route path="/actions/presentation/:title" element={<ActionPresentation />} />
+        <Route path="presentation/:title" element={<ActionPresentation />} />
         <Route path="/actions" element={<Actions />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:title" element={<NewsPage/>} />
         <Route path="/about-me" element={<AboutMe />} />
         <Route path="/log-in" element={<LogIn />} />
+        <Route path="/sign-in" element={<SignIn/>} />
       </Routes>
       <Footer/>
     </div>

@@ -2,27 +2,28 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./components/header";
-import symbol from "../../assets/vote-logo.png";
-import vote from "../../assets/vote.png";
-import DetailsVotes from "./components/detailsvotes";
+import DetailsAction from "./components/detailsAction";
+import ActionsCensus from "./components/actionCensus";
 import Census from "./components/census";
-import VotesCensus from "./components/votesCensus";
 import ControlStatus from "./components/controlStatus";
+import action from "../../assets/act.png";
+import symbol from "../../assets/action-rate.png";
 
-export default function Presentation() {
+
+export default function ActionPresentation() {
   const { title } = useParams();
   return (
     <Container>
       <Title>
-        <p className="home">خانه / رای گیری /</p>
+        <p className="home">خانه /  عملکردها /</p>
         <p className="component"> {title} </p>
       </Title>
       <Content>
         <Wraper>
-          <Header img={symbol} icon={vote} type="رای گیری" />
-          <DetailsVotes />
+          <Header img={symbol} icon={action} type="عملکرد" />
+          <DetailsAction />
           <Census />
-          <VotesCensus />
+          <ActionsCensus />
         </Wraper>
         <ControlStatus />
       </Content>
