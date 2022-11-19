@@ -12,6 +12,7 @@ import Footer from"./components/footer";
 import NewsPage from "./components/blog/components/newsPage";
 import Presentation from "./components/presentation";
 import ActionPresentation from "./components/action-presentation";
+import SignIn from "./components/sign-in";
 function App() {
   return (
     <div className="App">
@@ -29,6 +30,7 @@ function App() {
         <Route path="/blog/:title" element={<NewsPage/>} />
         <Route path="/about-me" element={<AboutMe />} />
         <Route path="/log-in" element={<LogIn />} />
+        <Route path="/sign-in" element={<SignIn/>} />
       </Routes>
       <Footer/>
     </div>
