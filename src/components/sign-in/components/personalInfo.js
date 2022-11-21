@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useUser } from "../../context/userContext";
 import { infoSchema } from "../../schema";
+import CustomDatePicker from "../../general/datePicker";
+import calendar from "../../../assets/calendar.png";
 
 export default function PersonalInformation() {
   const navigate = useNavigate();
@@ -20,6 +22,7 @@ export default function PersonalInformation() {
     dispatch({ type: "SET_BIRTH_DAY", payload: values.birthDay });
     dispatch({ type: "SET_SIGN_LEVEL", payload: 2 });
     actions.resetForm();
+    console.log('ther',values)
   };
 
   const {
@@ -30,6 +33,7 @@ export default function PersonalInformation() {
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue
   } = useFormik({
     initialValues: {
       firstName: "",
@@ -42,128 +46,131 @@ export default function PersonalInformation() {
     onSubmit,
   });
 
+  console.log('ther',values)
+
   return (
     <>
-    {state.signInLevel ===1 ?(
-      <form onSubmit={handleSubmit} autoComplete="off">
-      <Container>
-        <Title>۱. اطلاعات شخصی خود را بنویسید:</Title>
-        <Form>
-          <CustomInput
-            label="نام"
-            back="#ffffff"
-            value={values.firstName}
-            onChange={handleChange}
-            id="firstName"
-          />
-          {errors.firstName && touched.firstName && (
-            <ErrorText>{errors.firstName}</ErrorText>
-          )}
-          <CustomInput
-            label="نام خانوادگی"
-            back="#ffffff"
-            value={values.lastName}
-            onChange={handleChange}
-            id="lastName"
-          />
-          {errors.lastName && touched.lastName && (
-            <ErrorText>{errors.lastName}</ErrorText>
-          )}
-          <CustomInput
-            label="محل تولد"
-            back="#ffffff"
-            value={values.birthPlace}
-            onChange={handleChange}
-            id="birthPlace"
-          />
-          {errors.birthPlace && touched.birthPlace && (
-            <ErrorText>{errors.birthPlace}</ErrorText>
-          )}
-          <CustomInput
-            label="کد ملی"
-            back="#ffffff"
-            value={values.personalCode}
-            onChange={handleChange}
-            id="personalCode"
-          />
-          {errors.personalCode && touched.personalCode && (
-            <ErrorText>{errors.personalCode}</ErrorText>
-          )}
-          <CustomInput
-            label="تاریخ تولد"
-            back="#ffffff"
-            value={values.birthDay}
-            onChange={handleChange}
-            id="birthDay"
-          />
-          {errors.birthDay && touched.birthDay && (
-            <ErrorText>{errors.birthDay}</ErrorText>
-          )}
-        </Form>
-      </Container>
-      <Box>
-        <Button
-          text="لغو"
-          textColor="#095644"
-          borderColor="#095644"
-          width="35%"
-          click={() => {
-            navigate("/");
-          }}
-        />
-        <Button
-          text="ثبت"
-          textColor="#FFFFFF"
-          background="#095644"
-          width="62%"
-          type="submit"
-        />
-      </Box>
-    </form>
-    ):(
-      <Container>
-        <Title>۱. اطلاعات شخصی خود را بنویسید:</Title>
-        <Form>
-          <CustomInput
-            label="نام"
-            back="#ffffff"
-            value={state.firstName}
-            id="firstName"
-          />
-         
-          <CustomInput
-            label="نام خانوادگی"
-            back="#ffffff"
-            value={state.lastName}
-            id="lastName"
-          />
-         
-          <CustomInput
-            label="محل تولد"
-            back="#ffffff"
-            value={state.birthPlace}
-            id="birthPlace"
-          />
-         
-          <CustomInput
-            label="کد ملی"
-            back="#ffffff"
-            value={state.personalCode}
-            id="personalCode"
-          />
-         
-          <CustomInput
-            label="تاریخ تولد"
-            back="#ffffff"
-            value={state.birthDay}
-            id="birthDay"
-          />
-        
-        </Form>
-      </Container>
-    
-    )}
-   </>
+      {state.signInLevel === 1 ? (
+        <form onSubmit={handleSubmit} autoComplete="off">
+          <Container>
+            <Title>۱. اطلاعات شخصی خود را بنویسید:</Title>
+            <Form>
+              <CustomInput
+                label="نام"
+                back="#ffffff"
+                value={values.firstName}
+                onChange={handleChange}
+                id="firstName"
+              />
+              {errors.firstName && touched.firstName && (
+                <ErrorText>{errors.firstName}</ErrorText>
+              )}
+              <CustomInput
+                label="نام خانوادگی"
+                back="#ffffff"
+                value={values.lastName}
+                onChange={handleChange}
+                id="lastName"
+              />
+              {errors.lastName && touched.lastName && (
+                <ErrorText>{errors.lastName}</ErrorText>
+              )}
+              <CustomInput
+                label="محل تولد"
+                back="#ffffff"
+                value={values.birthPlace}
+                onChange={handleChange}
+                id="birthPlace"
+              />
+              {errors.birthPlace && touched.birthPlace && (
+                <ErrorText>{errors.birthPlace}</ErrorText>
+              )}
+              <CustomInput
+                label="کد ملی"
+                back="#ffffff"
+                value={values.personalCode}
+                onChange={handleChange}
+                id="personalCode"
+              />
+              {errors.personalCode && touched.personalCode && (
+                <ErrorText>{errors.personalCode}</ErrorText>
+              )}
+          
+              <CustomDatePicker
+                label="از تاریخ "
+                background="#FFFFFF"
+                icon={calendar}
+                placeholder="انتخاب کنید"
+                id="birthDay"
+                value={values.birthDay}
+                onChange={setFieldValue}
+              />
+              {errors.birthDay && touched.birthDay && (
+                <ErrorText>{errors.birthDay}</ErrorText>
+              )}
+            </Form>
+          </Container>
+          <Box>
+            <Button
+              text="لغو"
+              textColor="#095644"
+              borderColor="#095644"
+              width="35%"
+              click={() => {
+                navigate("/");
+              }}
+            />
+            <Button
+              text="ثبت"
+              textColor="#FFFFFF"
+              background="#095644"
+              width="62%"
+              type="submit"
+            />
+          </Box>
+        </form>
+      ) : (
+        <Container>
+          <Title>۱. اطلاعات شخصی خود را بنویسید:</Title>
+          <Form>
+            <CustomInput
+              label="نام"
+              back="#ffffff"
+              value={state.firstName}
+              id="firstName"
+            />
+
+            <CustomInput
+              label="نام خانوادگی"
+              back="#ffffff"
+              value={state.lastName}
+              id="lastName"
+            />
+
+            <CustomInput
+              label="محل تولد"
+              back="#ffffff"
+              value={state.birthPlace}
+              id="birthPlace"
+            />
+
+            <CustomInput
+              label="کد ملی"
+              back="#ffffff"
+              value={state.personalCode}
+              id="personalCode"
+            />
+
+            <CustomInput
+              label="تاریخ تولد"
+              back="#ffffff"
+              value={state.birthDay}
+              id="birthDay"
+            />
+          </Form>
+        </Container>
+      )}
+    </>
   );
 }
 

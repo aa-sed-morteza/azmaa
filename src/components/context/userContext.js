@@ -16,10 +16,10 @@ const initialState = {
    signInLevel: 1,
    password: "",
    address: "",
-  // transactions: [],
-  // recommendations: [],
-  // supports: [],
-  // cart: [],
+   areaName: "",
+   commission: "",
+   voteNumber: 0,
+   dutieHistory: [],
   // currentPrice: 0,
   // systemDiscount: 20000,
   // balance: 200000,
@@ -37,8 +37,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     // case "SET_LOGGED_IN":
     //   return { ...state, loggedIn: action.payload };
-    // case "SET_HAS_CART":
-    //   return { ...state, hasCart: action.payload };
+    case "SET_AREA_NAME":
+      return { ...state, areaName: action.payload };
     case "SET_PASSWORD":
       return { ...state, password: action.payload };
     case "SET_SIGN_LEVEL":
@@ -65,12 +65,12 @@ const reducer = (state, action) => {
       return { ...state, personalCode: action.payload };
     case "SET_ADDRESS":
       return { ...state, address: action.payload };
-    // case "SET_ORDERS":
-    //   return { ...state, orders: action.payload };
-    // case "SET_PURCHASES":
-    //   return { ...state, purchases: action.payload };
-    // case "SET_TRANSACTIONS":
-    //   return { ...state, transactions: action.payload };
+    case "SET_COMMISSION":
+      return { ...state, commission: action.payload };
+    case "SET_VOTE_NUMBER":
+      return { ...state, voteNumber: action.payload };
+    case "SET_DUTIE_HISTORY":
+      return { ...state, dutieHistory: action.payload };
     // case "SET_RECOMMENDATIONS":
     //   return { ...state, recommendations: action.payload };
     // case "SET_SUPPORT":
