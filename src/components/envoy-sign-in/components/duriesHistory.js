@@ -35,9 +35,9 @@ export default function DutiesHistory() {
   const onSubmit = async (values, actions) => {
     dispatch({ type: "SET_DUTIE_HISTORY", payload: values });
     dispatch({ type: "SET_SIGN_LEVEL", payload: 1 });
+    dispatch({ type: "SET_LOGGED_IN", payload: true });
     actions.resetForm();
     navigate("/dashboard");
-    console.log('state',state.dutieHistory);
   };
 
   const {

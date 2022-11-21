@@ -42,6 +42,14 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/sign-in/supervisor" element={<SignIn />} />
           <Route path="/sign-in/envoy" element={<EnvoySignIn />} />
+          
+          {/* dashboard routing */}
+          <Route path="/dashboard/myEnvoy" element={EnvoySignIn} />
+          <Route path="/dashboard/myActions" element={<EnvoySignIn />} />
+          <Route path="/dashboard/mySection" element={<EnvoySignIn />} />
+          <Route path="/dashboard/suggestion" element={<EnvoySignIn />} />
+          <Route path="/dashboard/inbox" element={<EnvoySignIn />} />
+          <Route path="/dashboard/history" element={<EnvoySignIn />} />
         </Routes>
         <Footer />
       </UserState>

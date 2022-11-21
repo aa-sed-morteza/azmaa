@@ -17,6 +17,7 @@ export default function Contacts() {
     dispatch({ type: "SET_ADDRESS", payload: values.address });
     dispatch({ type: "SET_PHONEN", payload: values.phoneNubmer });
     dispatch({ type: "SET_SIGN_LEVEL", payload: 1 });
+    dispatch({ type: "SET_LOGGED_IN", payload: true });
     actions.resetForm();
     navigate("/dashboard");
   };

@@ -43,6 +43,56 @@
       "active_icon": "../../assets/panel.png"
     }
   ],
+  "dashboardSuperviser": [
+    {
+      "title": "اطلاعات کاربری",
+      "path": "/dashboard",
+      "icon": "../../assets/account-light.png",
+      "active_icon": "../../assets/account.png"
+    },
+    {
+      "title": "نمایندگان من",
+      "path": "/dashboard/myEnvoy",
+      "icon": "../../assets/envoys.png",
+      "active_icon": "../../assets/envoys-active.png"
+    },
+    {
+      "title": "فعالیت‌ها",
+      "path": "/dashboard/myActions",
+      "icon": "../../assets/actions.png",
+      "active_icon": "../../assets/actions-active.png"
+    },
+    {
+      "title": "مطالب من",
+      "path": "/dashboard/mySection",
+      "icon": "../../assets/section.png",
+      "active_icon": "../../assets/section-active.png"
+    },
+    {
+      "title": "درخواست‌ها",
+      "path": "/dashboard/suggestion",
+      "icon": "../../assets/suggestion.png",
+      "active_icon": "../../assets/suggestion-active.png"
+    },
+    {
+      "title": " صندوق",
+      "path": "/dashboard/inbox",
+      "icon": "../../assets/inbox.png",
+      "active_icon": "../../assets/inbox-active.png"
+    },
+    {
+      "title": " سابقۀ عملکرد",
+      "path": "/dashboard/history",
+      "icon": "../../assets/history.png",
+      "active_icon": "../../assets/history-active.png"
+    },
+    {
+      "title": "خروج از پنل",
+      "path": "/",
+      "icon": "../../assets/exit.png",
+      "active_icon": "../../assets/exit.png"
+    }
+  ],
   "footer": [
     {
       "contact": "WWW.AZMAA.NET",

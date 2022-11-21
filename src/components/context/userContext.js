@@ -20,11 +20,12 @@ const initialState = {
    commission: "",
    voteNumber: 0,
    dutieHistory: [],
+   loggedIn:true,
   // currentPrice: 0,
   // systemDiscount: 20000,
   // balance: 200000,
   // id: 1,
-  // loggedIn: false,
+ 
   // hasCart: false,
   // payment: false,
   // confirmOrder: false,
@@ -35,8 +36,8 @@ export const userContext = React.createContext({});
 
 const reducer = (state, action) => {
   switch (action.type) {
-    // case "SET_LOGGED_IN":
-    //   return { ...state, loggedIn: action.payload };
+    case "SET_LOGGED_IN":
+      return { ...state, loggedIn: action.payload };
     case "SET_AREA_NAME":
       return { ...state, areaName: action.payload };
     case "SET_PASSWORD":

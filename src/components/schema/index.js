@@ -45,3 +45,10 @@ export const dutieHistoryAreaSchema = yup.object().shape({
   dateTo: yup.date().required("لطفا تاریخ پایان فعالیت  خود را انتخاب کنید"),
 
 });
+
+export const logInSchema = yup.object().shape({
+  userName: yup.string().required("لطفا نام کاربری خود را وارد کنید"),
+  password: yup.string().required("لطفا رمز عبور خود را انتخاب کنید"),
+});
+
+
