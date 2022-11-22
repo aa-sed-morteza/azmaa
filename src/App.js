@@ -17,6 +17,7 @@ import Dashboard from "./components/dashboard";
 import { UserState } from "./components/context/userContext";
 import SetMobileNumber from "./components/sign-in/components/setMobileNumber";
 import EnvoySignIn from "./components/envoy-sign-in";
+import MyEnvoys from "./components/dashboard/superviser/pages/myEnvoys";
 function App() {
   return (
     <div className="App">
@@ -44,7 +45,7 @@ function App() {
           <Route path="/sign-in/envoy" element={<EnvoySignIn />} />
           
           {/* dashboard routing */}
-          <Route path="/dashboard/myEnvoy" element={EnvoySignIn} />
+          <Route path="/dashboard/myEnvoy" element={<MyEnvoys/>} />
           <Route path="/dashboard/myActions" element={<EnvoySignIn />} />
           <Route path="/dashboard/mySection" element={<EnvoySignIn />} />
           <Route path="/dashboard/suggestion" element={<EnvoySignIn />} />
