@@ -32,6 +32,7 @@ const Container = styled.button`
     background-color:gray;
   }
   .text {
+    font-family:YekanBakh;
     text-align:center;
     font-weight: 700;
     font-size: 3.721vw;

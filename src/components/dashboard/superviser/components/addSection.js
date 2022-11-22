@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../../general/button";
 import text from "../../../../assets/text.png";
-import greenText from ""
+// import greenText from ""
 
 export default function AddSection() {
   const navigate = useNavigate();
