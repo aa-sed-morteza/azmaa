@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { LinkSchema } from "../../../schema";
+import { LinkSchema} from "../../../../../schema/index" ;
 
-import Button from "../../../general/button";
+import Button from "../../../../../general/button";
 
-import { useUser } from "../../../context/userContext";
-import FileUploadInput from "../../../general/fileUploadInput";
-import CustomInput from "../../../general/customInput";
+import { useUser } from "../../../../../context/userContext";
+import FileUploadInput from "../../../../../general/fileUploadInput";
+import CustomInput from "../../../../../general/customInput";
 
 export default function AddDocument() {
   const { state, dispatch } = useUser();

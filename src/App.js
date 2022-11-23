@@ -23,7 +23,8 @@ import MySection from "./components/dashboard/superviser/pages/mySection";
 import MySuggest from "./components/dashboard/superviser/pages/mySuggest";
 import Inbox from "./components/dashboard/superviser/pages/inbox";
 import MyHistory from "./components/dashboard/superviser/pages/myHistory";
-import News from "./components/dashboard/superviser/components/news";
+import News from "./components/dashboard/superviser/components/sectionRoom/components/news";
+import NewAction from "./components/dashboard/superviser/components/newAction";
 function App() {
   return (
     <div className="App">
@@ -53,6 +54,7 @@ function App() {
           {/* dashboard routing */}
           <Route path="/dashboard/myEnvoy" element={<MyEnvoys/>} />
           <Route path="/dashboard/myActions" element={<MyActions />} />
+          <Route path="/dashboard/myActions/:title" element={<NewAction />} />
           <Route path="/dashboard/mySection" element={<MySection />} />
           <Route path="/dashboard/suggestion" element={<MySuggest />} />
           <Route path="/dashboard/inbox" element={<Inbox />} />

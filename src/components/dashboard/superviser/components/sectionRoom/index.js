@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import data from "../../../../data.json";
-import user from "../../../../assets/profile.png";
-import upArrow from "../../../../assets/arrow.png";
+import data from "../../../../../data.json";
+import user from "../../../../../assets/profile.png";
+import upArrow from "../../../../../assets/arrow.png";
 import { useNavigate } from "react-router-dom";
-
 
 export default function SectionRoom() {
   const [select, setSelect] = useState();
-  const navigate =useNavigate();
+  const navigate = useNavigate();
 
   const magPaper = data.magazine.map((x, i) => {
     return (
-      <Paper onClick={()=>{navigate(`${x.content}`)}} key={i}>
-        <div className="cover" >
+      <Paper
+        onClick={() => {
+          navigate(`${x.content}`);
+        }}
+        key={i}
+      >
+        <div className="cover">
           <img src={x.img} alt={x.date} />
         </div>
 
@@ -27,7 +31,11 @@ export default function SectionRoom() {
   });
   return (
     <Container>
-      <AddSection onClick={()=>{navigate("مطلب جدید")}}>
+      <AddSection
+        onClick={() => {
+          navigate("مطلب جدید");
+        }}
+      >
         <p className="text">ثبت مطلب جدید</p>
       </AddSection>
       <FilterBox>
@@ -66,8 +74,8 @@ export default function SectionRoom() {
       </FilterBox>
       <CardContainer>{magPaper}</CardContainer>
       <ShowMore>
-              <p>نمایش بیشتر</p>
-            </ShowMore>
+        <p>نمایش بیشتر</p>
+      </ShowMore>
     </Container>
   );
 }
@@ -240,7 +248,6 @@ const Paper = styled.div`
   }
 `;
 
-
 const ShowMore = styled.div`
   border: 1px solid #9f9f9f;
   border-radius: 4px;
@@ -275,7 +282,7 @@ const ShowMore = styled.div`
     align-items: center;
     margin: auto;
     padding: 13px;
-    margin-top:78px;
+    margin-top: 78px;
     p {
       font-size: 1.25vw;
       font-weight: 400;

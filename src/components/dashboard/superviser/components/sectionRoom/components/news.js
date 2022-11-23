@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import source from "../../../../data.json";
-import user from "../../../../assets/text.png";
+import source from "../../../../../../data.json";
+import user from "../../../../../../assets/text.png";
 import AddSection from "./addSection";
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../../../context/userContext";
 
 export default function News() {
   const {state,dispatch}=useUser();

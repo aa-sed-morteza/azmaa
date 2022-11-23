@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { contentSchema } from "../../../schema";
+import { contentSchema } from "../../../../../schema";
 
-import Button from "../../../general/button";
-import CustomInput from "../../../general/customInput";
+import Button from "../../../../../general/button";
+import CustomInput from "../../../../../general/customInput";
 
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../../../context/userContext";
 
 export default function ContentSection() {
   const { state, dispatch } = useUser();

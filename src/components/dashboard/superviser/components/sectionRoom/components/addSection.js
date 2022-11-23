@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../../../context/userContext";
 import AddDocument from "./addDocument";
 import ContentSection from "./contentSection";
 import ImageSection from "./imageSection";

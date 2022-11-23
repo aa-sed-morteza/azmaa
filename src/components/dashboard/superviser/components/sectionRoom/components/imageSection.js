@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { UploadPictSchema } from "../../../schema";
+import { UploadPictSchema } from "../../../../../schema";
 
-import Button from "../../../general/button";
+import Button from "../../../../../general/button";
 
-import { useUser } from "../../../context/userContext";
-import FileUploadInput from "../../../general/fileUploadInput";
+import { useUser } from "../../../../../context/userContext";
+import FileUploadInput from "../../../../../general/fileUploadInput";
 
 export default function ImageSection() {
   const { state, dispatch } = useUser();

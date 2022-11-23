@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { typeSchema } from "../../../schema";
+import { typeSchema } from "../../../../../schema";
 
-import Button from "../../../general/button";
-import text from "../../../../assets/text1.png";
-import textGreen from "../../../../assets/text-green.png";
-import news from "../../../../assets/news.png";
-import newsGreen from "../../../../assets/news-green.png";
-import article from "../../../../assets/article.svg";
-import atricleGreen from "../../../../assets/article-green.png";
-import report from "../../../../assets/report.png";
-import reportGreen from "../../../../assets/report-green.svg";
+import Button from "../../../../../general/button";
+import text from "../../../../../../assets/text1.png";
+import textGreen from "../../../../../../assets/text-green.png";
+import news from "../../../../../../assets/news.png";
+import newsGreen from "../../../../../../assets/news-green.png";
+import article from "../../../../../../assets/article.svg";
+import atricleGreen from "../../../../../../assets/article-green.png";
+import report from "../../../../../../assets/report.png";
+import reportGreen from "../../../../../../assets/report-green.svg";
 
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../../../context/userContext";
 
 export default function TypeSection() {
   const { state, dispatch } = useUser();
