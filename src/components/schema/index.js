@@ -51,4 +51,23 @@ export const logInSchema = yup.object().shape({
   password: yup.string().required("لطفا رمز عبور خود را انتخاب کنید"),
 });
 
+export const typeSchema = yup.object().shape({
+  type: yup.string().required("لطفا نوع مطلب  خود را انتخاب کنید"),
+});
+
+export const contentSchema = yup.object().shape({
+  title: yup.string().required("لطفا عنوان مطلب  خود را وارد  کنید"),
+  expand:yup.string().required("لطفا متن مطلب  خود را وارد  کنید"),
+});
+
+export const UploadPictSchema = yup.object().shape({
+  picOne: yup.string().required("لطفا تصویر ابتدایی مطلب خود را  بارگزاری کنید"),
+  picTwo:yup.string().required("لطفا   تصویر دوم مطلب  خود را  بارگزاری کنید"),
+});
+
+export const LinkSchema = yup.object().shape({
+  document: yup.string().required("لطفا سند مطلب خود را بارگزاری کنید"),
+  link:yup.string().required("لطفا لینک مطلب خودرا وارد کنید"),
+});
+
 

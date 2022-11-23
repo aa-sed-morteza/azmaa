@@ -14,12 +14,17 @@ const initialState = {
    email: "",
    personalCode: "",
    signInLevel: 1,
+   addArticleLevel:1,
    password: "",
    address: "",
    areaName: "",
    commission: "",
    voteNumber: 0,
    dutieHistory: [],
+   typeArticle:"",
+   contentArticle:{},
+   imageArticle:{},
+   documentArticle:{},
    loggedIn:true,
   // currentPrice: 0,
   // systemDiscount: 20000,
@@ -72,14 +77,16 @@ const reducer = (state, action) => {
       return { ...state, voteNumber: action.payload };
     case "SET_DUTIE_HISTORY":
       return { ...state, dutieHistory: action.payload };
-    // case "SET_RECOMMENDATIONS":
-    //   return { ...state, recommendations: action.payload };
-    // case "SET_SUPPORT":
-    //   return { ...state, supports: action.payload };
-    // case "SET_BALANCE":
-    //   return { ...state, balance: action.payload };
-    // case "SET_CART":
-    //   return { ...state, cart: action.payload };
+    case "SET_ADD_ARTICLE":
+      return { ...state, addArticleLevel: action.payload };
+    case "SET_TYPE_ARTICLE":
+      return { ...state, typeArticle: action.payload };
+    case "SET_CONTENT_ARTICLE":
+      return { ...state, contentArticle: action.payload };
+    case "SET_IMG_ARTICLE":
+      return { ...state, imageArticle: action.payload };
+      case "SET_DOC_ARTICLE":
+      return { ...state, documentArticle: action.payload };
     // case "SET_DATA":
     //   return { ...state, ...action.payload };
     // case "SET_TOKEN":

@@ -4,19 +4,28 @@ import styled from "styled-components";
 import source from "../../../../data.json";
 import user from "../../../../assets/text.png";
 import AddSection from "./addSection";
+import { useUser } from "../../../context/userContext";
 
 export default function News() {
+  const {state,dispatch}=useUser();
   const { title } = useParams();
   const [data, setData] = useState({});
 
   useEffect(() => {
     if (title === "مطلب جدید") {
       setData({});
-    } else {
+    } else if(source.news.find((x) => x.title == title)){
       setData(source.news.find((x) => x.title == title));
+    }else{
+      setData({
+        img:state.imageArticle.picOne.file,
+        user:state.firstName,
+        date:"1401/08/30",
+        title:state.contentArticle.title,
+        expand:state.contentArticle.expand,
+      })
     }
   }, []);
-  console.log("title", title);
 
   return (
     <Container>
