@@ -49,13 +49,13 @@ const ShowMore = styled.div`
       content: "";
       display: flex;
       position: absolute;
-      left: -25px;
-      bottom: 8px;
+      left: -5.814vw;
+      bottom: 1.860vw;
       background-image: url(${upArrow});
       background-size: cover;
       background-repeat: no-repeat;
-      width: 9px;
-      height: 5px;
+      width: 2.093vw;
+      height: 1.163vw;
     }
   }
   @media (min-width: 480px) {
@@ -80,8 +80,8 @@ const Title = styled.h2`
       background-image: url(${ok});
       background-size: cover;
       background-repeat: no-repeat;
-      width: 50px;
-      height: 50px;
+      width: 2.604vw;
+      height: 2.604vw;
       right: 0;
     }
   }

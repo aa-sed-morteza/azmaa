@@ -17,15 +17,15 @@ const EnvoyCard = styled.div`
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     padding: 31px 27px;
-    min-width: 460px;
+    min-width: 23.958vw;
     align-items: center;
   }
 `;
 
 const EnvoyImage = styled.div`
-  width: 87px;
-  height: 90px;
-  border-radius: 87px;
+  width: 20.233vw;
+  height: 20.930vw;
+  border-radius: 50%;
   border: 3px solid #9f9f9f;
   img {
     width: 100%;
@@ -33,8 +33,8 @@ const EnvoyImage = styled.div`
     object-fit: contain;
   }
   @media(min-width:480px){
-    width:140px;
-    height:145px;
+    width:7.292vw;
+    height:7.552vw;
   }
 `;
 
