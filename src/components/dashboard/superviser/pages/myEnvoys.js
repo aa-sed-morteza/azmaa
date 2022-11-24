@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import EnvoyCard from "../../../general/envoyCard";
-import pic from "../../../../assets/hamidreza.jpeg";
+import pic from "../../../../assets/hamidreza.webp";
 
 export default function MyEnvoys() {
   return (

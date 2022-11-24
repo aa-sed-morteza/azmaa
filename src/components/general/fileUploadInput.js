@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import upload from "../../assets/upload.png";
+import upload from "../../assets/upload.webp";
 
 export default function FileUploadInput({ placeholder, value, onChange, id }) {
   return (

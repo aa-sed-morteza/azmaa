@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import background from "../../../../assets/back-controll.png";
-import vote from "../../../../assets/vote-light.png";
-import voteAction from "../../../../assets/vote-active.png";
-import action from "../../../../assets/act-light.png";
+import background from "../../../../assets/back-controll.webp";
+import vote from "../../../../assets/vote-light.webp";
+import voteAction from "../../../../assets/vote-active.webp";
+import action from "../../../../assets/act-light.webp";
 import ActionCard from "../components/actions/actionCard";
 
 export default function MyActions() {

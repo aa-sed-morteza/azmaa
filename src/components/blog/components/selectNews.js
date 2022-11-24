@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Control from "../../vote/components/controler";
 import data from "../../../data.json";
-import user from "../../../assets/profile.png";
-import upArrow from "../../../assets/arrow.png";
+import user from "../../../assets/profile.webp";
+import upArrow from "../../../assets/arrow.webp";
 
 const Container = styled.section`
   background-color: #ffffff;

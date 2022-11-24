@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ok from "../../../assets/ok.png";
-import disagree from "../../../assets/disagree.png";
-import info from "../../../assets/info.png";
-import absent from "../../../assets/absent.png";
-import noVote from "../../../assets/noVote.png";
+import ok from "../../../assets/ok.webp";
+import disagree from "../../../assets/disagree.webp";
+import info from "../../../assets/info.webp";
+import absent from "../../../assets/absent.webp";
+import noVote from "../../../assets/noVote.webp";
 
 export default function VotesCensus() {
   const [envoy, setEnvoy] = useState(267);

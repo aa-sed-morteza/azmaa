@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import upArrow from "../../../assets/arrow.png";
+import upArrow from "../../../assets/arrow.webp";
 import BestEnvoy from "../../home/components/bestEnvoy";
 
 const Container = styled.section`

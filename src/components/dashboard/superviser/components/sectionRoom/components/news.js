@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import source from "../../../../../../data.json";
-import user from "../../../../../../assets/text.png";
+import user from "../../../../../../assets/text.webp";
 import AddSection from "./addSection";
 import { useUser } from "../../../../../context/userContext";
 

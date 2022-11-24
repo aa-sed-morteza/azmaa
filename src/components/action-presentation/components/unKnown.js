@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import BestEnvoy from "../../home/components/bestEnvoy";
-import upArrow from "../../../assets/arrow.png";
-import icon from "../../../assets/info.png";
+import upArrow from "../../../assets/arrow.webp";
+import icon from "../../../assets/info.webp";
 
 export default function UnKnown() {
   return (

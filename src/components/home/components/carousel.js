@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import data from "../../../data.json";
-import leftArrow from "../../../assets/lightArrow.png";
+import leftArrow from "../../../assets/lightArrow.webp";
 import SelectState from "./selectState";
 
 const Wraper = styled.section`

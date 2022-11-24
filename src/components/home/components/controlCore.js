@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import profile from "../../../assets/g-profile.png";
-import location from "../../../assets/g-location.png";
+import profile from "../../../assets/g-profile.webp";
+import location from "../../../assets/g-location.webp";
 import BestEnvoy from "./bestEnvoy";
-import upArrow from "../../../assets/arrow.png";
+import upArrow from "../../../assets/arrow.webp";
 
 const Container = styled.section`
   display: flex;

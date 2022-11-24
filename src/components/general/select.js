@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import arrow from "../../assets/green-arrow.png";
+import arrow from "../../assets/green-arrow.webp";
 
 export default function Select({ label, background, options ,value,onChange,id}) {
   const option = options.map((x, i) => {

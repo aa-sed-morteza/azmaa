@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import pic from "../../../../assets/yazdan.png";
+import pic from "../../../../assets/yazdan.webp";
 import ContactInfo from "./contactInfo";
 import LogInInfo from "./logInInfo";
 import PersonalInfo from "./personalInfo";

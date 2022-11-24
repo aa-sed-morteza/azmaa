@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import BestEnvoy from "../../home/components/bestEnvoy";
-import upArrow from "../../../assets/arrow.png";
-import ok from "../../../assets/ok.png";
+import upArrow from "../../../assets/arrow.webp";
+import ok from "../../../assets/ok.webp";
 
 export default function Agree() {
   return (

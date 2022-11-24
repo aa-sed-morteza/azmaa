@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import CustomInput from "../../general/customInput";
-import mobile from "../../../assets/mobile.png";
+import mobile from "../../../assets/mobile.webp";
 import Button from "../../general/button";
 import { useFormik } from "formik";
 import { useUser } from "../../context/userContext";

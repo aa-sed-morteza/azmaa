@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import wellcome from "../../assets/welcome.png";
+import wellcome from "../../assets/welcome.webp";
 import Button from "../general/button";
-import login from "../../assets/log.png";
-import signin from "../../assets/signin.png";
+import login from "../../assets/log.webp";
+import signin from "../../assets/signin.webp";
 import CustomInput from "../general/customInput";
-import profile from "../../assets/profile.png";
-import lock from "../../assets/lock.png";
+import profile from "../../assets/profile.webp";
+import lock from "../../assets/lock.webp";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useUser } from "../context/userContext";

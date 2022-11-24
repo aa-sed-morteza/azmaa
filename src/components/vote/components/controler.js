@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import data from "../../../data.json";
-import background from "../../../assets/back-controll.png";
+import background from "../../../assets/back-controll.webp";
 
 const Container = styled.div`
   background-image: url(${background});

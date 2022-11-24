@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import { useUser } from "../../context/userContext";
 import { infoSchema } from "../../schema";
 import CustomDatePicker from "../../general/datePicker";
-import calendar from "../../../assets/calendar.png";
+import calendar from "../../../assets/calendar.webp";
 
 export default function PersonalInformation() {
   const navigate = useNavigate();

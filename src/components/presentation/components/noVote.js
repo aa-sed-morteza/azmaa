@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import BestEnvoy from "../../home/components/bestEnvoy";
-import upArrow from "../../../assets/arrow.png";
+import upArrow from "../../../assets/arrow.webp";
 
 export default function NoVote() {
   return (

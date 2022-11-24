@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CustomDatePicker from "../../general/datePicker";
-import calendar from "../../../assets/calendar.png";
+import calendar from "../../../assets/calendar.webp";
 import CustomInput from "../../general/customInput";
 
 export default function DutieForm({ id, value, onChange,errors,touched,setDate }) {

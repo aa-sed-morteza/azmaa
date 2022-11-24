@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import action from "../../../assets/action-rate.png";
-import act from "../../../assets/act.png";
-import success from "../../../assets/like.png";
-import faild from "../../../assets/dislike.png";
-import not from "../../../assets/not.png";
+import action from "../../../assets/action-rate.webp";
+import act from "../../../assets/act.webp";
+import success from "../../../assets/like.webp";
+import faild from "../../../assets/dislike.webp";
+import not from "../../../assets/not.webp";
 import data from "../../../data.json";
-import left from ".././../../assets/left.png";
+import left from ".././../../assets/left.webp";
 import { useNavigate } from "react-router-dom";
 
 const VCContainer = styled.div`

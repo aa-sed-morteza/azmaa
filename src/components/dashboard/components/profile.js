@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import pic from "../../../assets/yazdan.png";
+import pic from "../../../assets/yazdan.webp";
 
 export default function Profile() {
   return (

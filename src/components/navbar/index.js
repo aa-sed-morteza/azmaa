@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import data from "../../data.json";
-import LOGO from "../../assets/azmaa-logo.png";
-import menu from "../../assets/menu.png";
-import search from "../../assets/search.png";
-import close from "../../assets/close.png";
-import signIn from "../../assets/Sign_in.png";
+import LOGO from "../../assets/azmaa-logo.webp";
+import menu from "../../assets/menu.webp";
+import search from "../../assets/search.webp";
+import close from "../../assets/close.webp";
+import signIn from "../../assets/Sign_in.webp";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import useWidth from "../../hook/useWidth";
 import { useUser } from "../context/userContext";
-import exit from "../../assets/exit.png";
+import exit from "../../assets/exit.webp";
 import Profile from "../dashboard/components/profile";
 
 // styled

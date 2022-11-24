@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import pic from "../../../assets/poster.png";
-import icon from "../../../assets/text.png";
-import more from "../../../assets/more.png";
+import pic from "../../../assets/poster.webp";
+import icon from "../../../assets/text.webp";
+import more from "../../../assets/more.webp";
 
 const Container = styled.div`
   background: #ffffff;

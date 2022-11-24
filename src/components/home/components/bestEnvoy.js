@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import pic from "../../../assets/pic.png";
-import profile from "../../../assets/profile.png";
+import pic from "../../../assets/pic.webp";
+import profile from "../../../assets/profile.webp";
 
 const EnvoyCard = styled.div`
   display: flex;

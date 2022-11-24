@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import check from "../../../assets/check.png";
-import line from "../../../assets/Line.png";
+import check from "../../../assets/check.webp";
+import line from "../../../assets/Line.webp";
 import VoteCard from "../../home/components/voteCard";
-import upArrow from "../../../assets/arrow.png";
+import upArrow from "../../../assets/arrow.webp";
 import useWidth from "../../../hook/useWidth";
 
 const Container = styled.section`

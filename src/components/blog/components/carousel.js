@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import data from "../../../data.json";
-import leftArrow from "../../../assets/lightArrow.png";
-import profile from "../../../assets/profile.png";
+import leftArrow from "../../../assets/lightArrow.webp";
+import profile from "../../../assets/profile.webp";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.section`

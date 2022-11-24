@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import data from "../../../../../data.json";
-import user from "../../../../../assets/profile.png";
-import upArrow from "../../../../../assets/arrow.png";
+import user from "../../../../../assets/profile.webp";
+import upArrow from "../../../../../assets/arrow.webp";
 import { useNavigate } from "react-router-dom";
 
 export default function SectionRoom() {

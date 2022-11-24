@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import profile from "../../assets/profile.png";
+import profile from "../../assets/profile.webp";
 
 export default function EnvoyCard({name,state,commission,img,persantage,id}) {
   const [color, setColor] = useState("#FFAA00");

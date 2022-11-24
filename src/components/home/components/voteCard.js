@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import symbol from "../../../assets/vote-logo.png";
-import vote from "../../../assets/vote.png";
-import success from "../../../assets/success.png";
-import faild from "../../../assets/faild.png";
-import not from "../../../assets/not.png";
+import symbol from "../../../assets/vote-logo.webp";
+import vote from "../../../assets/vote.webp";
+import success from "../../../assets/success.webp";
+import faild from "../../../assets/faild.webp";
+import not from "../../../assets/not.webp";
 import data from "../../../data.json";
-import left from ".././../../assets/left.png";
+import left from ".././../../assets/left.webp";
 import { useNavigate } from "react-router-dom";
 
 const VCContainer = styled.div`

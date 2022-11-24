@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import background from "../../../assets/back-controll.png";
+import background from "../../../assets/back-controll.webp";
 
 const Container = styled.div`
   background-image: url(${background});
