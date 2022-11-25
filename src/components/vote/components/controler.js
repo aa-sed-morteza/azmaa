@@ -13,8 +13,8 @@ const Container = styled.div`
   @media (min-width: 480px) {
     padding: 44px 50px 19px;
     border-radius: 8px;
-    max-width: 1000px;
-    min-width: 1000px;
+    max-width: 52.083vw;
+    min-width: 52.083vw;
     margin: auto;
     margin-top: -19%;
   }
