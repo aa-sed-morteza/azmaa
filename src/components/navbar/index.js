@@ -57,7 +57,7 @@ const Menu = styled.div`
 `;
 
 const MenuList = styled.ul`
-  overflow: hidden;
+  // overflow: hidden;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -134,7 +134,6 @@ const List = styled.li`
       }
     }
   }
- 
 
   &:nth-last-child(1) {
     position: absolute;
@@ -315,7 +314,7 @@ export default function Navbar() {
         {width < 480 ? <Menu onClick={handelClick} open={open}></Menu> : ""}
         {width < 480 ? (
           <MenuList open={open} back={state.loggedIn}>
-            <Profile />
+            {state.loggedIn ? <Profile /> : ""}
             {state.loggedIn ? dashboardItem : menuItem}{" "}
           </MenuList>
         ) : (
