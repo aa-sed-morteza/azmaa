@@ -2,35 +2,39 @@ import React, { useReducer, useContext, useEffect } from "react";
 
 const initialState = {
   userName: "",
-  sms:"123456",
-  timeOut:false,
+  sms: "123456",
+  timeOut: false,
   firstName: "",
   lastName: "",
   // image: "",
-   birthDay: "",
-   birthPlace: "",
-   mobileNumber: "",
-   phoneNubmer: "",
-   email: "",
-   personalCode: "",
-   signInLevel: 1,
-   addArticleLevel:1,
-   password: "",
-   address: "",
-   areaName: "",
-   commission: "",
-   voteNumber: 0,
-   dutieHistory: [],
-   typeArticle:"",
-   contentArticle:{},
-   imageArticle:{},
-   documentArticle:{},
-   loggedIn:true,
+  birthDay: "",
+  birthPlace: "",
+  mobileNumber: "",
+  phoneNubmer: "",
+  email: "",
+  personalCode: "",
+  signInLevel: 1,
+  addArticleLevel: 1,
+  password: "",
+  address: "",
+  areaName: "",
+  commission: "",
+  voteNumber: 0,
+  dutieHistory: [],
+  typeArticle: "",
+  contentArticle: {},
+  imageArticle: {},
+  documentArticle: {},
+  addActionLevel: 1,
+  typeAction: {},
+  selectEnvoy: {},
+  voteEnvoy: "",
+  loggedIn: true,
   // currentPrice: 0,
   // systemDiscount: 20000,
   // balance: 200000,
   // id: 1,
- 
+
   // hasCart: false,
   // payment: false,
   // confirmOrder: false,
@@ -85,8 +89,16 @@ const reducer = (state, action) => {
       return { ...state, contentArticle: action.payload };
     case "SET_IMG_ARTICLE":
       return { ...state, imageArticle: action.payload };
-      case "SET_DOC_ARTICLE":
+    case "SET_DOC_ARTICLE":
       return { ...state, documentArticle: action.payload };
+    case "SET_ADD_ACT_LEVEL":
+      return { ...state, addActionLevel: action.payload };
+    case "SET_TYPE_ACTION":
+      return { ...state, typeAction: action.payload };
+    case "SET_SELECT_ENVOUY":
+      return { ...state, selectEnvoy: action.payload };
+    case "SET_VOTE_ENVOY":
+      return { ...state, voteEnvoy: action.payload };
     // case "SET_DATA":
     //   return { ...state, ...action.payload };
     // case "SET_TOKEN":

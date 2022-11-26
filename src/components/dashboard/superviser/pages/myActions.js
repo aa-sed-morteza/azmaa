@@ -6,10 +6,65 @@ import vote from "../../../../assets/vote-light.webp";
 import voteAction from "../../../../assets/vote-active.webp";
 import action from "../../../../assets/act-light.webp";
 import ActionCard from "../components/actions/actionCard";
+import pic from "../../../../assets/vote-logo.webp";
+import icon from "../../../../assets/vote.webp";
+import pic2 from "../../../../assets/action-rate.webp";
 
 export default function MyActions() {
   const navigate = useNavigate();
   const [select, setSelect] = useState(0);
+  //mock data for generate envoys card in actions card section
+  const envoys = [
+    {
+      name: "مهدی اسماعیلی",
+      state: "دماوند و فیروزکوه",
+      commission: " امنیت ملی",
+      id: "1",
+      persantage: "99",
+      img: "../../assets/abol.webp",
+      action: "موافق",
+    },
+    {
+      name: "حسن اسماعیلی",
+      state: " پردیس ",
+      commission: " امنیت اجتماعی",
+      id: "2",
+      persantage: "20",
+      img: "../../assets/ali.webp",
+      action: "ممتنع",
+    },
+    {
+      name: "حامد هایون",
+      state: " البرز ",
+      commission: " امنیت اجتماعی",
+      id: "3",
+      persantage: "50",
+      img: "../../assets/jafi.webp",
+      action: "مخالف",
+    },
+  ];
+
+  const secondEnvoys =[
+    {
+      name: "حسن اسماعیلی",
+      state: " پردیس ",
+      commission: " امنیت اجتماعی",
+      id: "2",
+      persantage: "20",
+      img: "../../assets/ali.webp",
+      action: "همراه",
+    },
+    {
+      name: "حامد هایون",
+      state: " البرز ",
+      commission: " امنیت اجتماعی",
+      id: "3",
+      persantage: "50",
+      img: "../../assets/jafi.webp",
+      action: "ناهمراه",
+    },
+  ]
+
   return (
     <Container>
       <Title>
@@ -56,7 +111,22 @@ export default function MyActions() {
           </Items>
         </Filtering>
 
-        <ActionCard/>
+        <ActionCard
+          img={pic}
+          titr="رأی‌گیری"
+          title="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
+          date="۲۹ اسفند ۱۴۰۰"
+          icon={icon}
+          envoys={envoys}
+        />
+         <ActionCard
+          img={pic2}
+          titr="عملکرد"
+          title="دریافت خودرو دناپلاس"
+          date="۲۹ اسفند ۱۴۰۰"
+          icon={icon}
+          envoys={secondEnvoys}
+        />
       </Wraper>
     </Container>
   );

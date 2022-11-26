@@ -36,14 +36,12 @@ export const selectAreaSchema = yup.object().shape({
   voteNumber: yup.number().required("لطفا تعداد آرا خود را وارد کنید"),
   areaName: yup.string().required("لطفا  حوزه انتخابی خود را انتخاب کنید"),
   commission: yup.string().required("لطفا نام کمیسیون  خود را انتخاب کنید"),
-
 });
 
 export const dutieHistoryAreaSchema = yup.object().shape({
   dutie: yup.string().required("لطفا موضوع سابقه خود را وارد کنید"),
   dateFrom: yup.date().required("لطفا  تاریخ شروع فعالیت خود را انتخاب کنید"),
   dateTo: yup.date().required("لطفا تاریخ پایان فعالیت  خود را انتخاب کنید"),
-
 });
 
 export const logInSchema = yup.object().shape({
@@ -57,17 +55,39 @@ export const typeSchema = yup.object().shape({
 
 export const contentSchema = yup.object().shape({
   title: yup.string().required("لطفا عنوان مطلب  خود را وارد  کنید"),
-  expand:yup.string().required("لطفا متن مطلب  خود را وارد  کنید"),
+  expand: yup.string().required("لطفا متن مطلب  خود را وارد  کنید"),
 });
 
 export const UploadPictSchema = yup.object().shape({
-  picOne: yup.string().required("لطفا تصویر ابتدایی مطلب خود را  بارگزاری کنید"),
-  picTwo:yup.string().required("لطفا   تصویر دوم مطلب  خود را  بارگزاری کنید"),
+  picOne: yup
+    .string()
+    .required("لطفا تصویر ابتدایی مطلب خود را  بارگزاری کنید"),
+  picTwo: yup.string().required("لطفا   تصویر دوم مطلب  خود را  بارگزاری کنید"),
 });
 
 export const LinkSchema = yup.object().shape({
   document: yup.string().required("لطفا سند مطلب خود را بارگزاری کنید"),
-  link:yup.string().required("لطفا لینک مطلب خودرا وارد کنید"),
+  link: yup.string().required("لطفا لینک مطلب خودرا وارد کنید"),
 });
 
+export const selectActionTypeSchema = yup.object().shape({
+  type: yup.string().required("لطفا عنوان فعالیت  خود را انتخاب  کنید"),
+  description: yup
+    .string()
+    .required("لطفا فعالیت مورد نظر  خود را انتخاب  کنید"),
+});
 
+export const selectEnvoyTypeSchema = yup.object().shape({
+  type: yup.string().required("لطفا دسته نماینده خود را انتخاب  کنید"),
+  envoy: yup
+    .string()
+    .required("لطفا نماینده مورد نظر  خود را انتخاب  کنید"),
+});
+
+export const voteSchema = yup.object().shape({
+  vote: yup.string().required("لطفا رای نماینده را انتخاب کنید"),
+});
+
+export const documentSchema = yup.object().shape({
+  document: yup.string().required("لطفا سند خود را بارگزاری کنید"),
+});
