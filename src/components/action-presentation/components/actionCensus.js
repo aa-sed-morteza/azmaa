@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ok from "../../../assets/like.png";
-import disagree from "../../../assets/dislike.png";
-import info from "../../../assets/info.png";
+import ok from "../../../assets/like.webp";
+import disagree from "../../../assets/dislike.webp";
+import info from "../../../assets/info.webp";
 
 
 export default function ActionsCensus() {
@@ -61,7 +61,7 @@ const Title = styled.h4`
   font-weight: 300;
   font-size: 4.651vw;
   color: #9f9f9f;
-  transform: translateY(-16px);
+  transform: translateY(-3.023vw);
   background: #ffffff;
   width: 35%;
   margin: 0;
@@ -69,7 +69,7 @@ const Title = styled.h4`
   margin-right: -5%;
   @media (min-width: 480px) {
     font-size: 1.875vw;
-    transform: translateY(-31px);
+    transform: translateY(-1.615vw);
     width: 40%;
   }
 `;
@@ -114,19 +114,19 @@ const Type = styled.p`
     background-image: url(${(props) => props.icon});
     background-size: contain;
     background-repeat: no-repeat;
-    width: 15px;
-    height: 15px;
+    width: 3.488vw;
+    height: 3.488vw;
     right: 0;
-    top: 5px;
+    top: 1.163vw;
   }
   @media (min-width: 480px) {
     font-size: 1.25vw;
     font-weight: 300;
     padding-right: 40px;
     &:before {
-      width: 30px;
-      height: 30px;
-      top:2px;
+      width: 1.563vw;
+      height: 1.563vw;
+      top:0.104vw;
     }
   }
 `;

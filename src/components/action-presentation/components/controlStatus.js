@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ok from "../../../assets/like.png";
-import disagree from "../../../assets/dislike.png";
-import info from "../../../assets/info.png";
+import ok from "../../../assets/like.webp";
+import disagree from "../../../assets/dislike.webp";
+import info from "../../../assets/info.webp";
 
 import Agree from "./agree";
 import Disagree from "./disagree";

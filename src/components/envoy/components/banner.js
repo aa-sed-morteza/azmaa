@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import pic from "../../../assets/banner5.png";
+import pic from "../../../assets/banner5.webp";
 
 const Container = styled.section`
 margin-right:-12%;

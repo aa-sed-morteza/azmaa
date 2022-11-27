@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import eye from "../../../assets/eye.png";
+import eye from "../../../assets/eye.webp";
 import BestEnvoy from "../../home/components/bestEnvoy";
 
 const Container = styled.div`

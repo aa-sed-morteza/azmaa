@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import useWidth from "../../../hook/useWidth";
-import background from "../../../assets/back-controll.png";
-import upArrow from "../../../assets/arrow.png";
+import background from "../../../assets/back-controll.webp";
+import upArrow from "../../../assets/arrow.webp";
 import data from "../../../data.json";
 import VoteCard from "./voteCard";
 import ActionCard from "./actionCard";
 import BestEnvoy from "./bestEnvoy";
-import tik from "../../../assets/vote.png";
+import tik from "../../../assets/vote.webp";
 import ControlCore from "./controlCore";
 
 const ControllContainer = styled.section`

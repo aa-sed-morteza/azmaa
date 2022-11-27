@@ -3,60 +3,110 @@
     {
       "title": "خانه",
       "path": "/",
-      "icon": "../../assets/home.png",
-      "active_icon": "../../assets/Home-active.png"
+      "icon": "../../assets/home.webp",
+      "active_icon": "../../assets/Home-active.webp"
     },
     {
       "title": "نمایندگان",
       "path": "/envoy",
-      "icon": "../../assets/profile.png",
-      "active_icon": "../../assets/profile-active.png"
+      "icon": "../../assets/profile.webp",
+      "active_icon": "../../assets/profile-active.webp"
     },
     {
       "title": "رأی‌گیری‌ها",
       "path": "/votes",
-      "icon": "../../assets/vote.png",
-      "active_icon": "../../assets/vote-active.png"
+      "icon": "../../assets/vote.webp",
+      "active_icon": "../../assets/vote-active.webp"
     },
     {
       "title": "عملکردها",
       "path": "/actions",
-      "icon": "../../assets/action.png",
-      "active_icon": "../../assets/action-active.png"
+      "icon": "../../assets/action.webp",
+      "active_icon": "../../assets/action-active.webp"
     },
     {
       "title": "بلاگ",
       "path": "/blog",
-      "icon": "../../assets/blog.png",
-      "active_icon": "../../assets/blog-active.png"
+      "icon": "../../assets/blog.webp",
+      "active_icon": "../../assets/blog-active.webp"
     },
     {
       "title": " دربارۀ ما",
       "path": "/about-me",
-      "icon": "../../assets/about.png",
-      "active_icon": "../../assets/about-active.png"
+      "icon": "../../assets/about.webp",
+      "active_icon": "../../assets/about-active.webp"
     },
     {
       "title": "ورود به پنل",
       "path": "/log-in",
-      "icon": "../../assets/panel.png",
-      "active_icon": "../../assets/panel.png"
+      "icon": "../../assets/panel.webp",
+      "active_icon": "../../assets/panel.webp"
+    }
+  ],
+  "dashboardSuperviser": [
+    {
+      "title": "اطلاعات کاربری",
+      "path": "/dashboard",
+      "icon": "../../assets/account-light.webp",
+      "active_icon": "../../assets/account.webp"
+    },
+    {
+      "title": "نمایندگان من",
+      "path": "/dashboard/myEnvoy",
+      "icon": "../../assets/envoys.webp",
+      "active_icon": "../../assets/envoys-active.webp"
+    },
+    {
+      "title": "فعالیت‌ها",
+      "path": "/dashboard/myActions",
+      "icon": "../../assets/actions.webp",
+      "active_icon": "../../assets/actions-active.webp"
+    },
+    {
+      "title": "مطالب من",
+      "path": "/dashboard/mySection",
+      "icon": "../../assets/section.webp",
+      "active_icon": "../../assets/section-active.webp"
+    },
+    {
+      "title": "درخواست‌ها",
+      "path": "/dashboard/suggestion",
+      "icon": "../../assets/suggestion.webp",
+      "active_icon": "../../assets/suggestion-active.webp"
+    },
+    {
+      "title": " صندوق",
+      "path": "/dashboard/inbox",
+      "icon": "../../assets/inbox.webp",
+      "active_icon": "../../assets/inbox-active.webp"
+    },
+    {
+      "title": " سابقۀ عملکرد",
+      "path": "/dashboard/history",
+      "icon": "../../assets/history.webp",
+      "active_icon": "../../assets/history-active.webp"
+    },
+    {
+      "title": "خروج از پنل",
+      "path": "/",
+      "icon": "../../assets/exit.webp",
+      "active_icon": "../../assets/exit.webp"
     }
   ],
   "footer": [
     {
       "contact": "WWW.AZMAA.NET",
-      "icon": "../../assets/site.png",
+      "icon": "../../assets/site.webp",
       "href": ""
     },
     {
       "contact": " +989108993642",
-      "icon": "../../assets/phone.png",
+      "icon": "../../assets/phone.webp",
       "href": ""
     },
     {
       "contact": " @AZMAA_NET",
-      "icon": "../../assets/insta.png",
+      "icon": "../../assets/insta.webp",
       "href": ""
     }
   ],
@@ -185,103 +235,103 @@
     },
     {
       "name": "نمایندگان",
-      "icon": "../../assets/user.png"
+      "icon": "../../assets/user.webp"
     },
     {
       "name": "حوزه‌ها",
-      "icon": "../../assets/location.png"
+      "icon": "../../assets/location.webp"
     },
     {
       "name": "رأی‌گیری‌ها",
-      "icon": "../../assets/tik.png"
+      "icon": "../../assets/tik.webp"
     },
     {
       "name": "عملکردها",
-      "icon": "../../assets/act.png"
+      "icon": "../../assets/act.webp"
     }
   ],
   "envoy": [
     {
       "name": "ابوالفضل ابوترابی",
       "state": "نجف‌آباد و تیران",
-      "picture": "../../assets/abol.png"
+      "picture": "../../assets/abol.webp"
     },
     {
       "name": "علیرضا پاکفطرت",
       "state": "شیراز و ورزقان",
-      "picture": "../../assets/ali.png"
+      "picture": "../../assets/ali.webp"
     },
     {
       "name": "جعفر قادری",
       "state": "شیراز و ورزقان",
-      "picture": "../../assets/jafi.png"
+      "picture": "../../assets/jafi.webp"
     },
     {
       "name": "ابوالفضل ابوترابی",
       "state": "نجف‌آباد و تیران",
-      "picture": "../../assets/abol.png"
+      "picture": "../../assets/abol.webp"
     },
     {
       "name": "علیرضا پاکفطرت",
       "state": "شیراز و ورزقان",
-      "picture": "../../assets/ali.png"
+      "picture": "../../assets/ali.webp"
     },
     {
       "name": "جعفر قادری",
       "state": "شیراز و ورزقان",
-      "picture": "../../assets/jafi.png"
+      "picture": "../../assets/jafi.webp"
     }
   ],
   "magazine": [
     {
       "name": "سهیل داناچیان",
-      "img": "../../assets/img-1.png",
+      "img": "../../assets/img-1.webp",
       "content": "مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود کدام شرکت‌هاست؟",
       "date": "۲۹ اسفند ۱۴۰۰"
     },
     {
       "name": "سهیل داناچیان",
-      "img": "../../assets/img-2.png",
+      "img": "../../assets/img-2.webp",
       "content": "مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود کدام شرکت‌هاست؟",
       "date": "۲۹ اسفند ۱۴۰۰"
     },
     {
       "name": "سهیل داناچیان",
-      "img": "../../assets/img-3.png",
+      "img": "../../assets/img-3.webp",
       "content": "مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود کدام شرکت‌هاست؟",
       "date": "۲۹ اسفند ۱۴۰۰"
     },
     {
       "name": "سهیل داناچیان",
-      "img": "../../assets/img-4.png",
+      "img": "../../assets/img-4.webp",
       "content": "مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود کدام شرکت‌هاست؟",
       "date": "۲۹ اسفند ۱۴۰۰"
     },
     {
       "name": "سهیل داناچیان",
-      "img": "../../assets/img-1.png",
+      "img": "../../assets/img-1.webp",
       "content": "مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود کدام شرکت‌هاست؟",
       "date": "۲۹ اسفند ۱۴۰۰"
     }
   ],
   "slider": [
     {
-      "image": "../../assets/slider.png",
+      "image": "../../assets/slider.webp",
       "title": "شفافیت در مجلس رویکردها و راهبردها",
       "content": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد."
     },
     {
-      "image": "../../assets/slider.png",
+      "image": "../../assets/slider.webp",
       "title": "شفافیت در مجلس رویکردها و راهبردها",
       "content": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد."
     },
     {
-      "image": "../../assets/slider.png",
+      "image": "../../assets/slider.webp",
       "title": "شفافیت در مجلس رویکردها و راهبردها",
       "content": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد."
     },
     {
-      "image": "../../assets/slider.png",
+      "image": "../../assets/slider.webp",
       "title": "شفافیت در مجلس رویکردها و راهبردها",
       "content": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد."
     }
@@ -293,19 +343,19 @@
     },
     {
       "name": "اقتصادی",
-      "icon": "../../assets/user.png"
+      "icon": "../../assets/user.webp"
     },
     {
       "name": "سیاسی",
-      "icon": "../../assets/flag.png"
+      "icon": "../../assets/flag.webp"
     },
     {
       "name": "اجتماعی",
-      "icon": "../../assets/user.png"
+      "icon": "../../assets/user.webp"
     },
     {
       "name": "فرهنگی",
-      "icon": "../../assets/art.png"
+      "icon": "../../assets/art.webp"
     }
   ],
   "newspaper": [
@@ -314,28 +364,37 @@
       "date": "۲۹ اسفند ۱۴۰۰",
       "title": "شفافیت در مجلس رویکردها و راهبردها",
       "expand": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
-      "img": "../../assets/poster1.png"
+      "img": "../../assets/poster1.webp"
     },
     {
       "user": "اکبر داناچیان",
       "date": "۲۹ اسفند ۱۴۰۰",
       "title": "شفافیت در مجلس رویکردها و راهبردها",
       "expand": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
-      "img": "../../assets/poster1.png"
+      "img": "../../assets/poster1.webp"
     },
     {
       "user": "صابر داناچیان",
       "date": "۲۹ اسفند ۱۴۰۰",
       "title": "شفافیت در مجلس رویکردها و راهبردها",
       "expand": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
-      "img": "../../assets/poster1.png"
+      "img": "../../assets/poster1.webp"
     },
     {
       "user": "حمید داناچیان",
       "date": "۲۹ اسفند ۱۴۰۰",
       "title": "شفافیت در مجلس رویکردها و راهبردها",
       "expand": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
-      "img": "../../assets/poster1.png"
+      "img": "../../assets/poster1.webp"
+    }
+  ],
+  "news":[
+    {
+      "user":"اکبر داناچیان",
+      "date":"۲۹ اسفند ۱۴۰۰",
+      "title":"مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود کدام شرکت‌هاست؟",
+      "expand":"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
+      "img":"../../assets/poster1.webp"
     }
   ]
 }

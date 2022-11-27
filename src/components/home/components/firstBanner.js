@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import banner1 from "../../../assets/banner1.png";
-import banner2 from "../../../assets/banner2.png";
+import banner1 from "../../../assets/banner1.webp";
+import banner2 from "../../../assets/banner2.webp";
 
 const Wraper=styled.div`
   display:flex;

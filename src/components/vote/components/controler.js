@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import data from "../../../data.json";
-import background from "../../../assets/back-controll.png";
+import background from "../../../assets/back-controll.webp";
 
 const Container = styled.div`
   background-image: url(${background});
@@ -13,8 +13,8 @@ const Container = styled.div`
   @media (min-width: 480px) {
     padding: 44px 50px 19px;
     border-radius: 8px;
-    max-width: 1000px;
-    min-width: 1000px;
+    max-width: 52.083vw;
+    min-width: 52.083vw;
     margin: auto;
     margin-top: -19%;
   }

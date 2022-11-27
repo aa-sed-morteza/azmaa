@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import data from "../../data.json";
-import LOGO from "../../assets/azmaa-logo.png";
-import menu from "../../assets/menu.png";
-import search from "../../assets/search.png";
-import close from "../../assets/close.png";
-import signIn from "../../assets/Sign_in.png";
+import LOGO from "../../assets/azmaa-logo.webp";
+import menu from "../../assets/menu.webp";
+import search from "../../assets/search.webp";
+import close from "../../assets/close.webp";
+import signIn from "../../assets/Sign_in.webp";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import useWidth from "../../hook/useWidth";
+import { useUser } from "../context/userContext";
+import exit from "../../assets/exit.webp";
+import Profile from "../dashboard/components/profile";
 
 // styled
 const TopBar = styled.section`
@@ -16,7 +19,7 @@ const TopBar = styled.section`
   padding: 20px 30px;
   display: flex;
   justify-content: space-between;
-  
+
   @media (min-width: 480px) {
     padding: 16px 10%;
   }
@@ -51,10 +54,10 @@ const Menu = styled.div`
   background-size: contain;
   width: 20px;
   height: 20px;
-  
 `;
 
 const MenuList = styled.ul`
+  // overflow: hidden;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -63,11 +66,11 @@ const MenuList = styled.ul`
   left: 0;
   right: 0;
   top: 67px;
-  background-color: #ffffff;
+  background-color: ${(props) => (props.back ? "#095644" : "#FFFFFF")};
   flex-direction: column;
   padding: 51px 81px;
   gap: 10px;
-  z-index:40;
+  z-index: 40;
 `;
 
 const List = styled.li`
@@ -77,7 +80,7 @@ const List = styled.li`
   align-items: center;
   gap: 10px;
   position: relative;
-  color: #095644;
+  color: ${(props) => (props.active ? "#FFFFFF" : "#095644")};
   font-size: 4.65vw;
   font-weight: light;
   &.active {
@@ -85,7 +88,7 @@ const List = styled.li`
     &:before {
       content: "";
       display: "flex";
-      background-color: #095644;
+      background-color: ${(props) => (props.active ? "#FFAA00" : "#095644")};
       border-radius: 4px 0px 0px 4px;
       right: -81px;
       position: absolute;
@@ -135,12 +138,15 @@ const List = styled.li`
   &:nth-last-child(1) {
     position: absolute;
     bottom: -66px;
-    color: #ffaa00;
+    color: ${(props) => (props.active ? "#FF5A5A" : "#ffaa00")};
     font-size: 4.65vw;
     font-weight: bold;
     right: 20px;
-    @media(min-width: 480px){
-      display:none;
+    span {
+      background-color: ${(props) => (props.active ? "#FF5A5A" : "#f3f3f3")};
+    }
+    @media (min-width: 480px) {
+      display: none;
     }
   }
 `;
@@ -161,8 +167,9 @@ const Panel = styled.div`
   position: relative;
   cursor: pointer;
   & > .icon {
-    background-image: url(${signIn});
+    background-image: url(${(props) => props.icon});
     background-size: contain;
+    background-repeat: no-repeat;
     width: 45px;
     height: 45px;
   }
@@ -172,7 +179,7 @@ const Panel = styled.div`
     top: -16px;
     right: -171px;
     padding: 11px 22px;
-    color: #095644;
+    color: ${(props) => props.color};
     font-size: 1.25vw;
     font-weight: bold;
     border-radius: 0px 0px 8px 8px;
@@ -225,6 +232,7 @@ const Category = styled.ul`
 `;
 
 export default function Navbar() {
+  const { state, dispatch } = useUser();
   const width = useWidth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -241,6 +249,22 @@ export default function Navbar() {
           <img src={active === i ? x.active_icon : x.icon} alt={x.title} />
         </span>{" "}
         {x.title}
+      </List>
+    );
+  });
+
+  const dashboardItem = data.dashboardSuperviser.map((g, i) => {
+    return (
+      <List
+        key={i}
+        onClick={() => choiseItem(i, g.path)}
+        className={i === active ? "active" : ""}
+        active={state.loggedIn}
+      >
+        <span>
+          <img src={active === i ? g.active_icon : g.icon} alt={g.title} />
+        </span>{" "}
+        {g.title}
       </List>
     );
   });
@@ -271,15 +295,31 @@ export default function Navbar() {
         {width < 480 ? (
           ""
         ) : (
-          <Panel onClick={() => navigate("/log-in")}>
-            <div className="content">ورود به پنل</div>{" "}
+          <Panel
+            icon={state.loggedIn ? exit : signIn}
+            color={state.loggedIn ? "#FF5A5A" : "#095644"}
+            onClick={() => {
+              state.loggedIn ? navigate("/") : navigate("/log-in");
+            }}
+          >
+            <div className="content">
+              {" "}
+              {state.loggedIn ? "خروج از پنل" : "ورود به پنل"}{" "}
+            </div>{" "}
             <div className="icon"></div>
           </Panel>
         )}
 
         <Search></Search>
         {width < 480 ? <Menu onClick={handelClick} open={open}></Menu> : ""}
-        {width < 480 ? <MenuList open={open}>{menuItem}</MenuList> : ""}
+        {width < 480 ? (
+          <MenuList open={open} back={state.loggedIn}>
+            {state.loggedIn ? <Profile /> : ""}
+            {state.loggedIn ? dashboardItem : menuItem}{" "}
+          </MenuList>
+        ) : (
+          ""
+        )}
       </LeftSection>
     </TopBar>
   );

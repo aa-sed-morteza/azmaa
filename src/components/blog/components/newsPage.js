@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import pic from "../../../assets/poster.png";
-import profile from "../../../assets/profile.png";
-import like from "../../../assets/like1.png";
-import dislike from "../../../assets/dislike1.png";
+import pic from "../../../assets/poster.webp";
+import profile from "../../../assets/profile.webp";
+import like from "../../../assets/like1.webp";
+import dislike from "../../../assets/dislike1.webp";
 import data from "../../../data.json";
-import user from "../../../assets/profile.png";
-import text from "../../../assets/text.png";
+import user from "../../../assets/profile.webp";
+import text from "../../../assets/text.webp";
 import useWidth from "../../../hook/useWidth";
-import upArrow from "../../../assets/arrow.png";
+import upArrow from "../../../assets/arrow.webp";
 
 export default function NewsPage() {
   const { title } = useParams();

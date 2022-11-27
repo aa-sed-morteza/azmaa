@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import BestEnvoy from "../../home/components/bestEnvoy";
-import upArrow from "../../../assets/arrow.png";
-import icon from "../../../assets/disagree.png";
+import upArrow from "../../../assets/arrow.webp";
+import icon from "../../../assets/disagree.webp";
 
 export default function Disagree() {
   return (
@@ -80,8 +80,8 @@ const Title = styled.h2`
       background-image: url(${icon});
       background-size: cover;
       background-repeat: no-repeat;
-      width: 50px;
-      height: 50px;
+      width: 2.604vw;
+      height: 2.604vw;
       right: 0;
     }
   }

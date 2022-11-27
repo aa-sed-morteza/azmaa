@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import symbol from "../../../assets/vote-logo.png";
-import vote from "../../../assets/vote.png";
-import success from "../../../assets/success.png";
-import faild from "../../../assets/faild.png";
-import not from "../../../assets/not.png";
+import symbol from "../../../assets/vote-logo.webp";
+import vote from "../../../assets/vote.webp";
+import success from "../../../assets/success.webp";
+import faild from "../../../assets/faild.webp";
+import not from "../../../assets/not.webp";
 import data from "../../../data.json";
-import left from ".././../../assets/left.png";
+import left from ".././../../assets/left.webp";
 import { useNavigate } from "react-router-dom";
 
 const VCContainer = styled.div`
@@ -33,13 +33,13 @@ const CardHeader = styled.div`
   justify-content: space-between;
   & > .vote-logo {
     background-image: url(${symbol});
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
-    width: 89px;
-    height: 89px;
+    width: 20.698vw;
+    height: 17.674vw;
     @media (min-width: 480px) {
-      width: 130px;
-      height: 130px;
+      width: 6.771vw;
+      height: 6.771vw;
     }
   }
 
@@ -57,13 +57,13 @@ const CardHeader = styled.div`
         content: "";
         display: flex;
         position: absolute;
-        width: 32px;
-        height: 32px;
+        width: 7.442vw;
+        height: 7.442vw;
         background-image: url(${vote});
         background-size: contain;
         background-repeat: no-repeat;
-        right: -10px;
-        top: -3px;
+        right: -1.395vw;
+        top: 0.233vw;
       }
     }
     h2 {
@@ -83,9 +83,11 @@ const CardHeader = styled.div`
       .title {
         font-size: 1.25vw;
         font-weight: 300;
-        &:beffore {
-          width: 36px;
-          height: 36px;
+        &:before {
+          width: 1.875vw;
+          height: 1.875vw;
+          right: -1vw;
+          top: 0;
         }
       }
       h2{
@@ -110,7 +112,7 @@ const Statistics = styled.div`
   justify-content: center;
   padding-bottom: 13px;
   @media(min-width:480px){
-    gap:90px;
+    gap: 4.688vw;
 
   }
 `;
@@ -124,13 +126,13 @@ const Success = styled.div`
     content: "";
     display: block;
     position: absolute;
-    width: 41px;
-    height: 41px;
+    width: 9.535vw;
+    height: 9.535vw;
     background-image: url(${success});
     background-size: contain;
     background-repeat: no-repeat;
-    right: -50px;
-    top: -6px;
+    right: -11.628vw;
+    top: -1.395vw;
   }
   &.active {
     font-weight: bold;
@@ -138,11 +140,11 @@ const Success = styled.div`
       content: "";
       display: block;
       position: absolute;
-      width: 80px;
-      height: 4px;
+      width: 18.605vw;
+      height: 0.93vw;
       background-color: #6cbba9;
-      bottom: -13px;
-      right: -50px;
+      bottom: -3.023vw;
+      right: -11.628vw;
     }
   }
   @media(min-width:480px){
@@ -150,12 +152,16 @@ const Success = styled.div`
     font-weight:400;
     padding-bottom:10px;
     &:before{
-      width:56px;
-      height:56px;
-      right:-65px;
+      width: 2.917vw;
+      height: 2.917vw;
+      right: -3.385vw;
+      top: -0.26vw;
     }
     &:after{
-      width:100px;
+      width: 5.208vw !important;
+      bottom: -0.7vh !important;
+      height: 0.208vw !important;
+      right: -3.031vw !important;
     }
   }
 `;
@@ -169,13 +175,13 @@ const Faild = styled.div`
     content: "";
     display: block;
     position: absolute;
-    width: 41px;
-    height: 41px;
+    width: 9.535vw;
+    height: 9.535vw;
     background-image: url(${faild});
     background-size: contain;
     background-repeat: no-repeat;
-    right: -50px;
-    top: -6px;
+    right: -11.628vw;
+    top: -1.395vw;
   }
   &.active {
     font-weight: bold;
@@ -183,11 +189,11 @@ const Faild = styled.div`
       content: "";
       display: block;
       position: absolute;
-      width: 80px;
-      height: 4px;
+      width: 18.605vw;
+      height: 0.93vw;
       background-color: #ffa5a5;
-      bottom: -13px;
-      right: -50px;
+      bottom: -3.023vw;
+      right: -11.628vw;
     }
   }
   @media(min-width:480px){
@@ -195,12 +201,16 @@ const Faild = styled.div`
     font-weight:400;
     padding-bottom:10px;
     &:before{
-      width:56px;
-      height:56px;
-      right:-65px;
+      width: 2.917vw;
+      height: 2.917vw;
+      right: -3.385vw;
+      top: -0.26vw;
     }
     &:after{
-      width:100px;
+      width: 5.208vw !important;
+      bottom: -0.7vh !important;
+      height: 0.208vw !important;
+      right: -3.031vw !important;
     }
   }
 `;
@@ -215,13 +225,13 @@ const Not = styled.div`
     content: "";
     display: block;
     position: absolute;
-    width: 41px;
-    height: 41px;
+    width: 9.535vw;
+    height: 9.535vw;
     background-image: url(${not});
     background-size: contain;
     background-repeat: no-repeat;
-    right: -50px;
-    top: -6px;
+    bottom: -3.023vw;
+    right: -11.628vw;
   }
 
   &.active {
@@ -230,11 +240,11 @@ const Not = styled.div`
       content: "";
       display: block;
       position: absolute;
-      width: 80px;
-      height: 4px;
+      width: 18.605vw;
+      height: 0.93vw;
       background-color: #d8d8d8;
-      bottom: -13px;
-      right: -50px;
+      bottom: -3.023vw;
+      right: -11.628vw;
     }
   }
   @media(min-width:480px){
@@ -242,12 +252,16 @@ const Not = styled.div`
     font-weight:400;
     padding-bottom:10px;
     &:before{
-      width:56px;
-      height:56px;
-      right:-65px;
+      width: 2.917vw;
+      height: 2.917vw;
+      right: -3.385vw;
+      top: -0.26vw;
     }
     &:after{
-      width:100px;
+      width: 5.208vw !important;
+      bottom: -0.7vh !important;
+      height: 0.208vw !important;
+      right: -3.031vw !important;
     }
   }
 `;
@@ -276,12 +290,12 @@ const Card = styled.div`
   justify-content: center;
   align-items: center;
   padding: 4px;
-  min-width: 90px;
+  min-width: 20.930vw;
   border-left: 1px solid white;
   .picture {
-    width: 47px;
-    height: 47px;
-    border-radius: 47px;
+    width: 10.930vw;
+    height: 10.930vw;
+    border-radius: 10.930vw;
     margin-bottom: 10px;
     border: 3px solid ${(props) => props.color};
     img {
@@ -307,15 +321,15 @@ const Card = styled.div`
   }
   @media(min-width:480px){
     flex-wrap:wrap;
-    max-height:144px;
+    max-height: 7.500vw;
     padding:19px 30px 10px;
     border-left:none;
     border-bottom:1px solid #FFFFFF;
     .picture{
-      width: 96px;
-      height: 96px;
-      border-radius: 96px;
-      border-width:9px;
+      width: 5vw;
+      height: 5vw;
+      border-radius: 5vw;
+      border-width:0.469vw;;
     }
     .name{
       font-size:1.458vw;

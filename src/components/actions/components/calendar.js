@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import check from "../../../assets/check.png";
-import line from "../../../assets/Line.png";
+import check from "../../../assets/check.webp";
+import line from "../../../assets/Line.webp";
 import ActionCard from "../../home/components/actionCard";
-import upArrow from "../../../assets/arrow.png";
+import upArrow from "../../../assets/arrow.webp";
 import useWidth from "../../../hook/useWidth";
 
 const Container = styled.section`
@@ -13,7 +13,7 @@ const Container = styled.section`
   padding-right: 5px;
   @media (min-width: 480px) {
     background-color: #f3f3f3;
-    margin-inline: -1.5%;
+    margin-inline: -2.5vw;
     padding-inline: 10%;
     padding-bottom: 130px;
     position: relative;
@@ -21,11 +21,11 @@ const Container = styled.section`
       content: "";
       display: block;
       position: absolute;
-      width: 4px;
+      width: 0.208vw;
       height: 94%;
       border-right: 3px dashed #cbcbcb;
       right: 7%;
-      top: 18px;
+      top: 0.938vw;
     }
   }
 `;
@@ -44,10 +44,10 @@ const SubTitile = styled.h2`
     background-image: url(${check});
     background-size: cover;
     background-repeat: no-repeat;
-    width: 18px;
-    height: 18px;
-    right: 16px;
-    top: 2px;
+    width: 4.186vw;
+    height: 4.186vw;
+    right: 3.721vw;
+    top: 0.465vw;
   }
   &:after {
     content: "";
@@ -56,26 +56,26 @@ const SubTitile = styled.h2`
     background-image: url(${line});
     background-size: cover;
     background-repeat: no-repeat;
-    width: 16px;
+    width: 3.721vw;
     height: 1px;
-    right: -3px;
-    top: 10px;
+    right: -0.698vw;
+    top: 2.326vw;
   }
   @media (min-width: 480px) {
     font-size: 1.667vw;
     margin-bottom: 20px;
     padding-top: 45px;
     &:before {
-      width: 30px;
-      height: 30px;
-      right: -3px;
-      top: 53px;
+      width: 1.563vw;
+      height: 1.563vw;
+      right: -0.156vw;
+      top: 2.76vw;
     }
     &:after {
-      width: 38px;
-      height: 3px;
+      width: 1.979vw;
+      height: 0.156vw;
       right: -44px;
-      top: 66px;
+      top: 3.438vw;
     }
   }
 `;
@@ -97,18 +97,18 @@ const Title = styled.div`
     display: flex;
     position: absolute;
     border-bottom: 1px dashed #cbcbcb;
-    width: 140px;
-    right: -142px;
-    top: 11px;
+    width: 32.558vw;
+    right: -33.023vw;
+    top: 2.558vw;
   }
   &:after {
     content: "";
     display: flex;
     position: absolute;
     border-bottom: 1px dashed #cbcbcb;
-    width: 140px;
-    left: -142px;
-    top: 11px;
+    width: 32.558vw;
+    left: -33.023vw;
+    top: 2.558vw;
   }
 
   @media (min-width: 480px) {
@@ -125,8 +125,8 @@ const Title = styled.div`
     }
     &:before {
       border-bottom: 2px dashed #cbcbcb;
-      width: 107%;
-      right: -107%;
+      width: 29vw;
+      right: -29vw;
       top: 27px;
     }
   }
@@ -222,7 +222,6 @@ export default function Calendar() {
         ) : (
           <>
             <ActionCard />
-           
           </>
         )}
       </List>

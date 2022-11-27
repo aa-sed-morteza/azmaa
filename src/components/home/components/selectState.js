@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import iran from "../../../assets/iran.svg";
+import iran from "../../../assets/iran.webp";
 import data from "../../../data.json";
 
 const StateContainer = styled.section`

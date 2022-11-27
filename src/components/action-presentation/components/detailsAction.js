@@ -36,7 +36,7 @@ const Title = styled.h4`
   font-weight: 300;
   font-size: 4.651vw;
   color: #9f9f9f;
-  transform: translateY(-16px);
+  transform: translateY(-3.721vw);
   background: #ffffff;
   width: 45%;
   margin: 0;
@@ -44,7 +44,7 @@ const Title = styled.h4`
   margin-right: -5%;
   @media(min-width:480px){
     font-size:1.875vw;
-    transform: translateY(-31px);
+    transform: translateY(-1.615vw);
     width: 64%;
   }
 `;
