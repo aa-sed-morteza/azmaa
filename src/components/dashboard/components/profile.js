@@ -20,8 +20,8 @@ export default function Profile() {
 
 const Container = styled.div`
 background: #F3F3F3;
-margin-inline: -29%;
-margin-top: -18%;
+margin-inline: -30%;
+margin-top: -19%;
 padding: 18px;
 }
 `;

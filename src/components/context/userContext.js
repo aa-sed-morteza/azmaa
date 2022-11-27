@@ -29,6 +29,8 @@ const initialState = {
   typeAction: {},
   selectEnvoy: {},
   voteEnvoy: "",
+  addSuggestLevel: 1,
+  suggestType:"",
   loggedIn: true,
   // currentPrice: 0,
   // systemDiscount: 20000,
@@ -99,6 +101,10 @@ const reducer = (state, action) => {
       return { ...state, selectEnvoy: action.payload };
     case "SET_VOTE_ENVOY":
       return { ...state, voteEnvoy: action.payload };
+    case "SET_SUGGEST_LEVEL":
+      return { ...state, addSuggestLevel: action.payload };
+      case "SET_SUGGET_TYPE":
+        return { ...state, suggestType: action.payload };
     // case "SET_DATA":
     //   return { ...state, ...action.payload };
     // case "SET_TOKEN":
