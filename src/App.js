@@ -53,7 +53,9 @@ function App() {
           <Route path="/sign-in/envoy" element={<EnvoySignIn />} />
           
           {/* dashboard routing */}
-          <Route path="/dashboard/myEnvoy" element={<MyEnvoys/>} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
+
+          {/* <Route path="/dashboard/myEnvoy" element={<MyEnvoys/>} />
           <Route path="/dashboard/myActions" element={<MyActions />} />
           <Route path="/dashboard/myActions/:title" element={<NewAction />} />
           <Route path="/dashboard/mySection" element={<MySection />} />
@@ -61,7 +63,7 @@ function App() {
           <Route path="/dashboard/suggestion/:title" element={<AddNewSuggets />} />
           <Route path="/dashboard/inbox" element={<Inbox />} />
           <Route path="/dashboard/history" element={<MyHistory />} />
-          <Route path="/dashboard/mySection/:title" element={<News />} />
+          <Route path="/dashboard/mySection/:title" element={<News />} /> */}
         </Routes>
         <Footer />
       </UserState>
