@@ -13,7 +13,7 @@ export default function SelectionArea() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const areaName = ["تهران", "پردیس", "دماوند", "شهر ری"];
-  const commission = ["امنیت ملی", "شیادی", "اختلاس", "بی شرف بودن"];
+  const commission = ["امنیت ملی", "سلامت", "ورزش", "عمران"];
 
   const onSubmit = async (values, actions) => {
     dispatch({ type: "SET_AREA_NAME", payload: values.areaName });
@@ -41,7 +41,7 @@ export default function SelectionArea() {
     onSubmit,
   });
 
-  console.log('cal',values)
+  console.log("cal", values);
   return (
     <>
       {state.signInLevel === 4 ? (
@@ -120,7 +120,6 @@ export default function SelectionArea() {
               label="تعداد آراء"
               background="#FFFFFF"
               value={state.voteNumber}
-             
             />
 
             <Select
