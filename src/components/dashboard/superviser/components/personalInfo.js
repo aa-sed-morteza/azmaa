@@ -33,10 +33,10 @@ const Container = styled.div`
   border: 1px solid #cbcbcb;
   border-radius: 4px;
   padding: 0px 29px 20px;
-  margin-top:15px;
+  margin-top: 15px;
   @media (min-width: 480px) {
-    padding: 0px 45px 30px 40px;
-    margin-top: 60px;
+    padding:0 2.292vw 1.875vw ;
+    margin-top: 2.083vw;
   }
 `;
 
@@ -52,8 +52,10 @@ const Title = styled.h4`
   margin-right: -5%;
   @media (min-width: 480px) {
     font-size: 1.875vw;
-    transform: translateY(-31px);
-    width: 40%;
+    transform: translateY(-1.615vw);
+    width: 27%;
+    margin-right:1.646vw;
+    margin-bottom:-1.042vw;
   }
 `;
 
@@ -76,11 +78,15 @@ const Row = styled.div`
     padding-right: 10px;
   }
   @media (min-width: 480px) {
+    margin-bottom:10px;
+    align-items:center;
     gap: 10px;
-    .type,
+    .type{
+      padding-bottom:0;
+      font-size:1.458vw;
+    }
     .expand {
-      font-size: 1.25vw;
-      width: fit-content;
+      font-size: 1.667vw;
     }
   }
 `;

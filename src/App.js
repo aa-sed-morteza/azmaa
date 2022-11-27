@@ -17,15 +17,7 @@ import Dashboard from "./components/dashboard";
 import { UserState } from "./components/context/userContext";
 import SetMobileNumber from "./components/sign-in/components/setMobileNumber";
 import EnvoySignIn from "./components/envoy-sign-in";
-import MyEnvoys from "./components/dashboard/superviser/pages/myEnvoys";
-import MyActions from "./components/dashboard/superviser/pages/myActions";
-import MySection from "./components/dashboard/superviser/pages/mySection";
-import MySuggest from "./components/dashboard/superviser/pages/mySuggest";
-import Inbox from "./components/dashboard/superviser/pages/inbox";
-import MyHistory from "./components/dashboard/superviser/pages/myHistory";
-import News from "./components/dashboard/superviser/components/sectionRoom/components/news";
-import NewAction from "./components/dashboard/superviser/components/newAction";
-import AddNewSuggets from "./components/dashboard/superviser/components/newSuggest";
+
 function App() {
   return (
     <div className="App">
@@ -55,15 +47,7 @@ function App() {
           {/* dashboard routing */}
           <Route path="/dashboard/*" element={<Dashboard />} />
 
-          {/* <Route path="/dashboard/myEnvoy" element={<MyEnvoys/>} />
-          <Route path="/dashboard/myActions" element={<MyActions />} />
-          <Route path="/dashboard/myActions/:title" element={<NewAction />} />
-          <Route path="/dashboard/mySection" element={<MySection />} />
-          <Route path="/dashboard/suggestion" element={<MySuggest />} />
-          <Route path="/dashboard/suggestion/:title" element={<AddNewSuggets />} />
-          <Route path="/dashboard/inbox" element={<Inbox />} />
-          <Route path="/dashboard/history" element={<MyHistory />} />
-          <Route path="/dashboard/mySection/:title" element={<News />} /> */}
+        
         </Routes>
         <Footer />
       </UserState>
