@@ -102,14 +102,14 @@ const Container = styled.div`
   justify-content: space-between;
   padding: 15px;
   direction: rtl;
-  @media (min-width: 480px) {
-    margin: 0;
-    box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
-    padding: 31px 27px;
-    min-width: 460px;
-    align-items: center;
-  }
+  // @media (min-width: 480px) {
+  //   margin: 0;
+  //   box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);
+  //   border-radius: 8px;
+  //   padding: 31px 27px;
+  //   min-width: 460px;
+  //   align-items: center;
+  // }
 `;
 
 const EnvoyImage = styled.div`
@@ -119,8 +119,11 @@ const EnvoyImage = styled.div`
   position: relative;
   float: left;
   overflow: hidden;
-  transform: rotate(0deg);
   background: #f9f9f9;
+  @media(min-width:480px){
+    width:7.292vw;
+    height:7.552vw;
+  }
   &:before {
     content: "";
     width: 90px;
@@ -133,6 +136,10 @@ const EnvoyImage = styled.div`
     z-index: 2;
     left: -50%;
     background: #f9f9f9;
+    @media(min-width:480px){
+      width:7.292vw;
+      height:7.552vw;
+    }
   }
   &:after {
     content: "";
@@ -142,6 +149,10 @@ const EnvoyImage = styled.div`
     position: absolute;
     left: 0;
     top: 0;
+    @media(min-width:480px){
+      width:7.292vw;
+      height:7.552vw;
+    }
   }
   b {
     &:before {
@@ -162,6 +173,10 @@ const EnvoyImage = styled.div`
       z-index: 4;
       animation: 3s ${(props) => "span2" + props.id} linear forwards 3s;
       opacity: 0;
+      @media(min-width:480px){
+        width:7.292vw;
+        height:7.552vw;
+      }
     }
     &:after {
       content: "";
@@ -180,6 +195,10 @@ const EnvoyImage = styled.div`
       z-index: 1;
       animation: 3s ${(props) => "span" + props.id} linear forwards;
       animation-delay: 4s;
+      @media(min-width:480px){
+        width:7.292vw;
+        height:7.552vw;
+      }
     }
   }
 
@@ -193,6 +212,10 @@ const EnvoyImage = styled.div`
     z-index: 5;
     border-radius: 50%;
     object-fit: contain;
+    @media(min-width:480px){
+      width:6.979vw;
+      height:7.083vw;
+    }
   }
 
   @keyframes ${(props) => "span" + props.id} {
@@ -299,6 +322,11 @@ const Content = styled.div`
       }
       @media (min-width: 480px) {
         font-size: 1.042vw;
+        &:before{
+          width:1.354vw;
+          height:1.354vw;
+        }
+       
       }
     }
   }

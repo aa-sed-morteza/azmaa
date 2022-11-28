@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import arrow from "../../../../../assets/arrow.webp";
+import useWidth from "../../../../../hook/useWidth";
 import SecondEnvoyCard from "./secondEnvoyCard";
 
 export default function ActionCard(props) {
   const [open, setopen] = useState(false);
+  const width = useWidth();
   const envoys = props.envoys;
-   
 
   const envoyGallery = envoys.map((x, i) => {
     return (
@@ -24,8 +25,17 @@ export default function ActionCard(props) {
   });
 
   const handdleClick = () => {
-    setopen(!open);
+    if (width < 480) {
+      setopen(!open);
+    }
   };
+
+  useEffect(() => {
+    if (width > 480) {
+      setopen(true);
+    }
+  }, []);
+
   return (
     <Wraper>
       <Container onClick={handdleClick} className={open ? "active" : ""}>
@@ -58,6 +68,12 @@ const Wraper = styled.div`
   box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.25);
   background-color: #ffffff;
   border-radius: 4px;
+  @media (min-width: 480px) {
+    border-radius: 8px;
+    width: 49%;
+    height:fit-content;
+    box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.15);
+  }
 `;
 
 const Container = styled.div`
@@ -91,12 +107,22 @@ const Container = styled.div`
       transform: rotate(180deg);
     }
   }
+  @media (min-width: 480px) {
+    padding: 0;
+    &:after {
+      display: none;
+    }
+  }
 `;
 
 const Header = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  @media (min-width: 480px) {
+    gap: 1.458vw;
+    padding: 0.781vw 0.521vw;
+  }
 `;
 
 const Symbol = styled.div`
@@ -106,6 +132,10 @@ const Symbol = styled.div`
     width:100%;
     height:100%
     object-fit:contain;
+  }
+  @media(min-width:480px){
+    width:6.771vw;
+    height:6.771vw;
   }
 `;
 
@@ -143,12 +173,31 @@ const Content = styled.div`
     font-weight: 700;
     font-size: 2.791vw;
   }
+  @media (min-width: 480px) {
+    .titr {
+      font-size: 1.25vw;
+      font-weight: 300;
+      &:before {
+        width: 1.25vw;
+        height: 1.25vw;
+      }
+    }
+    .title {
+      font-size: 1.667vw;
+      font-weight: 700;
+    }
+    .date {
+      font-size: 1.25vw;
+      font-weight: 500;
+    }
+  }
 `;
 
 const Details = styled.div`
   background-color: #ffffff;
   padding: 15px 10px 13px;
   border-top: 1px solid #f5f5f5;
+
 `;
 
 const Edit = styled.div`
@@ -161,5 +210,15 @@ const Edit = styled.div`
     font-size: 3.721vw;
     margin: 0;
     text-align: center;
+  }
+  @media (min-width: 480px) {
+    border: 2px solid #095644;
+    border-radius: 8px;
+    width: 87%;
+    margin: auto;
+    padding:10px;
+    .text {
+      font-size: 1.25vw;
+    }
   }
 `;
