@@ -125,6 +125,13 @@ const Wraper = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 22px 10px 14px;
+  @media (min-width: 480px) {
+    padding: 0;
+    border-radius: 8px;
+    width: 48%;
+    height: fit-content;
+    box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.15);
+  }
 `;
 
 const Container = styled.div`
@@ -158,6 +165,14 @@ const Container = styled.div`
       transform: rotate(180deg);
     }
   }
+  @media (min-width: 480px) {
+    padding: 0;
+    &:after {
+      width: 0.521vw;
+      height: 0.26vw;
+      left: 3.385vw;
+    }
+  }
 `;
 
 const Header = styled.div`
@@ -165,6 +180,10 @@ const Header = styled.div`
   flex-direction: column;
   gap: 7px;
   margin-bottom: ${(props) => (!props.space ? "30px" : "")};
+  @media (min-width: 480px) {
+    padding: 1.563vw 2.604vw;
+    gap: 0.521vw;
+  }
 `;
 
 const Type = styled.p`
@@ -185,6 +204,13 @@ const Type = styled.p`
     background-size: contain;
     background-repeat: no-repeat;
   }
+  @media (min-width: 480px) {
+    font-size: 1.25vw;
+    &:before {
+      width: 1.563vw;
+      height: 1.563vw;
+    }
+  }
 `;
 
 const Title = styled.h2`
@@ -192,6 +218,9 @@ const Title = styled.h2`
   font-weight: 400;
   font-size: 4.651vw;
   margin: 0;
+  @media (min-width: 480px) {
+    font-size: 1.667vw;
+  }
 `;
 
 const Date = styled.p`
@@ -199,6 +228,9 @@ const Date = styled.p`
   color: rgba(0, 0, 0, 0.2);
   font-weight: 700;
   font-size: 2.791vw;
+  @media (min-width: 480px) {
+    font-size: 1.25vw;
+  }
 `;
 
 const Creator = styled.p`
@@ -209,12 +241,19 @@ const Creator = styled.p`
   span {
     color: #ffaa00;
   }
+  @media (min-width: 480px) {
+    display: none;
+  }
 `;
 
 const ButtonWraper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (min-width: 480px) {
+    margin: 0 1.771vw 2.396vw;
+    flex-direction: row-reverse;
+  }
 `;
 
 const VoteCard = styled.div`
@@ -263,6 +302,32 @@ const VoteCard = styled.div`
       font-weight: 700;
       font-size: 2.791vw;
       color: rgba(0, 0, 0, 0.2);
+    }
+  }
+  @media(min-width:480px){
+    padding:0.521vw 1.302vw;
+    .symbol{
+      width:6.771vw;
+      height:6.771vw;
+    }
+    .content{
+      gap:0.521vw;
+      .titr{
+        font-size:1.250vw;
+        font-weight:300;
+        &:before{
+          width:1.250vw;
+          height:1.250vw;
+        }
+      }
+      .title{
+        font-size:1.667vw;
+        font-weight:700;
+      }
+      .date{
+        font-size:1.250vw;
+        font-weight:500;
+      }
     }
   }
 `;
@@ -332,17 +397,5 @@ const ActionCard = styled.div`
       font-size: 2.791vw;
       color: rgba(0, 0, 0, 0.2);
     }
-  }
-`;
-
-const Gallery = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  width: 100%;
-  & > * {
-    width: 100%;
-    box-shadow: none;
   }
 `;

@@ -8,6 +8,7 @@ import activeFailed from "../../../../assets/active-failed.svg";
 import invalid from "../../../../assets/invalid.svg";
 import activeInvalid from "../../../../assets/active-invalid.svg";
 import InboxItem from "../components/inbox/inboxItem";
+import title from "../../../../assets/suggest.svg";
 
 export default function Inbox() {
   const [select, setSelect] = useState(1);
@@ -121,7 +122,8 @@ export default function Inbox() {
           </Items>
         </Filtering>
         {select == 1 && (
-          <>
+          <Gallery>
+            <GalleryTitle>آخرین پیام‌ها</GalleryTitle>
             <InboxItem
               type="دردست‌بررسی"
               title="ثبت فعالیت جدید"
@@ -143,10 +145,11 @@ export default function Inbox() {
               detailDate="۲۹ اسفند ۱۴۰۰"
               envoys={envoys_second}
             />
-          </>
+          </Gallery>
         )}
         {select == 2 && (
-          <>
+          <Gallery>
+            <GalleryTitle>آخرین پیام‌ها</GalleryTitle>
             <InboxItem
               type="دردست‌بررسی"
               title="ثبت فعالیت جدید"
@@ -168,7 +171,7 @@ export default function Inbox() {
               detailDate="۲۹ اسفند ۱۴۰۰"
               envoys={envoys_second}
             />
-          </>
+          </Gallery>
         )}
         {select == 3 && ""}
         {select == 4 && ""}
@@ -184,8 +187,8 @@ const Container = styled.section`
   padding: 10px;
   overflow: hidden;
   @media (min-width: 480px) {
-    background-color: #ffffff;
-    padding: 25px 10% 0;
+    background-color: #f5f5f5;
+    padding: 0;
   }
 `;
 
@@ -206,11 +209,7 @@ const Title = styled.div`
     color: rgba(112, 112, 112, 1);
   }
   @media (min-width: 480px) {
-    margin-bottom: 25px;
-    .home,
-    .component {
-      font-size: 1.25vw;
-    }
+    display: none;
   }
 `;
 
@@ -221,6 +220,11 @@ const Wraper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  @media (min-width: 480px) {
+    padding: 0;
+    background-color: #f5f5f5;
+    gap: 2.604vw;
+  }
 `;
 
 const Filtering = styled.div`
@@ -237,6 +241,15 @@ const Filtering = styled.div`
     margin-bottom: 13px;
     &::placeholder {
       color: #d8d8d8;
+    }
+  }
+  @media (min-width: 480px) {
+    width: 74%;
+    padding: 2.292vw 2.604vw 0.885vw;
+    input {
+      width: 97%;
+      font-size: 1.563vw;
+      margin-bottom: 1.563vw;
     }
   }
 `;
@@ -280,5 +293,55 @@ const Item = styled.p`
     top: 0;
     left: 50%;
     transform: translate(-50%, 0%);
+  }
+  @media (min-width: 480px) {
+    font-size: 1.458vw;
+    padding-top: 2.604vw;
+    &:after {
+      height: 5px !important;
+      bottom: -0.885vw !important;
+    }
+    &:before {
+      width: 2.135vw;
+      height: 2.135vw;
+    }
+  }
+`;
+
+const Gallery = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  @media (min-width: 480px) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1.302vw 1.302vw 2.604vw 6.25vw;
+    background-color: #ffffff;
+    border-radius: 0px 8px 8px 0px;
+  }
+`;
+
+const GalleryTitle = styled.h2`
+  display: none;
+  @media (min-width: 480px) {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #707070;
+    font-weight: 300;
+    font-size: 1.875vw;
+    margin: 0;
+    margin-bottom: 1.302vw;
+    &:before {
+      content: "";
+      display: flex;
+      width: 1.25vw;
+      height: 1.719vw;
+      background-image: url(${title});
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
   }
 `;

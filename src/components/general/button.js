@@ -53,4 +53,10 @@ const Container = styled.button`
       
     }
   }
+  @media(min-width:480px){
+    .text{
+      font-size:1.250vw;
+      font-weight:400;
+    }
+  }
 `;
