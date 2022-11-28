@@ -5,7 +5,7 @@ import useWidth from "../../../../../hook/useWidth";
 import SecondEnvoyCard from "./secondEnvoyCard";
 
 export default function ActionCard(props) {
-  const [open, setopen] = useState(false);
+  const [open, setOpen] = useState(false);
   const width = useWidth();
   const envoys = props.envoys;
 
@@ -26,13 +26,13 @@ export default function ActionCard(props) {
 
   const handdleClick = () => {
     if (width < 480) {
-      setopen(!open);
+      setOpen(!open);
     }
   };
 
   useEffect(() => {
     if (width > 480) {
-      setopen(true);
+      setOpen(true);
     }
   }, []);
 
