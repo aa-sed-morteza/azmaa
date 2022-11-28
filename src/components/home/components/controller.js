@@ -25,8 +25,8 @@ const FilterContainer = styled.div`
   @media (min-width: 480px) {
     padding: 44px 50px 19px;
     border-radius: 8px;
-    max-width: 1000px;
-    min-width: 1000px;
+   
+    width:58%;
     margin: auto;
     margin-top: -19%;
   }
@@ -57,8 +57,8 @@ const TabContainer = styled.div`
   gap: 20px;
   align-items: flex-end;
   @media(min-width:480px){
-    gap:93px;
-    justify-content:center;
+    
+    justify-content: space-evenly;
   }
 }
 `;

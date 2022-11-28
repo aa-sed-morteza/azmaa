@@ -14,6 +14,17 @@ const Wraper = styled.section`
   margin-right: -2%;
   margin-top: -6%;
   position: relative;
+  @media (max-width: 1600px) {
+    margin-left: -2%;
+    margin-top: -7%;
+  }
+  @media (max-width: 1600px) {
+    margin-top: -8%;
+  }
+  @media (max-width: 992px) {
+    margin-left: -3%;
+    margin-top: -9%;
+  }
 `;
 
 const ShowIndex = styled.div`
@@ -119,16 +130,25 @@ export default function Carousel() {
   });
 
   const index = items.map((x, i) => {
-    return <div key={i} className={i===currentIndex? "item active" : "item"}  ></div>;
+    return (
+      <div
+        key={i}
+        className={i === currentIndex ? "item active" : "item"}
+      ></div>
+    );
   });
 
-//   
+  //
 
   return (
     <Wraper>
       {items.map((x, i) => {
         return (
-          <Slide key={i} photo={x.image} style={{transform:`translate(${currentIndex*100}%)`}}>
+          <Slide
+            key={i}
+            photo={x.image}
+            style={{ transform: `translate(${currentIndex * 100}%)` }}
+          >
             <div className="content">
               <h1>{x.title}</h1>
               <p>{x.content}</p>
@@ -138,8 +158,7 @@ export default function Carousel() {
         );
       })}
       <ShowIndex>{index}</ShowIndex>
-    <SelectState/>
-      
+      <SelectState />
     </Wraper>
   );
 }
