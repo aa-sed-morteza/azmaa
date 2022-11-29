@@ -35,13 +35,8 @@
       "path": "/about-me",
       "icon": "../../assets/about.webp",
       "active_icon": "../../assets/about-active.webp"
-    },
-    {
-      "title": "ورود به پنل",
-      "path": "/dashboard",
-      "icon": "../../assets/panel.webp",
-      "active_icon": "../../assets/panel.webp"
     }
+   
   ],
   "dashboardSuperviser": [
     {
@@ -85,13 +80,8 @@
       "path": "/dashboard/history",
       "icon": "../../assets/history.webp",
       "active_icon": "../../assets/history-active.webp"
-    },
-    {
-      "title": "خروج از پنل",
-      "path": "/",
-      "icon": "../../assets/exit.webp",
-      "active_icon": "../../assets/exit.webp"
     }
+  
   ],
   "footer": [
     {
@@ -398,3 +388,7 @@
     }
   ]
 }
+
+
+
+

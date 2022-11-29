@@ -61,7 +61,6 @@ const Menu = styled.div`
 `;
 
 const MenuList = styled.ul`
-  // overflow: hidden;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -139,21 +138,38 @@ const List = styled.li`
     }
   }
 
-  &:nth-last-child(1) {
-    position: absolute;
-    bottom: -66px;
-    color: ${(props) => (props.active ? "#FF5A5A" : "#ffaa00")};
-    font-size: 4.65vw;
-    font-weight: bold;
-    right: 20px;
-    span {
-      background-color: ${(props) => (props.active ? "#FF5A5A" : "#f3f3f3")};
-    }
-    @media (min-width: 480px) {
-      display: none;
-    }
-  }
 `;
+
+const MobilePanel = styled.div`
+position:absolute;
+display:flex;
+align-items: center;
+gap:3.488vw;
+padding-right:4.186vw;
+bottom:-16.279vw;
+right:0;
+.icon{
+  display:flex;
+  border-radius:4px;
+  width:11.628vw;
+  height:11.163vw;
+  background-color:${props=>props.color};
+  img{
+    margin:auto;
+    width:90%;
+    height:90%;
+    object-fit:contain;
+  }
+}
+.content{
+  margin:0;
+  padding:0;
+  font-size:5.581vw;
+  font-weight:700;
+  color:${props=>props.color}
+}
+
+`
 
 const Search = styled.div`
   background-image: url(${search});
@@ -242,6 +258,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
+  const [dashboard,setDashboard]=useState(false);
 
   const menuItem = data.navbar.map((x, i) => {
     return (
@@ -274,6 +291,18 @@ export default function Navbar() {
     );
   });
 
+  const goDashboard = ()=>{
+    setDashboard(!dashboard);
+    setOpen(false);
+    if(!dashboard){
+      navigate("/dashboard")
+    }else{
+      navigate("/")
+      
+    }
+   
+  }
+
   function choiseItem(num, path) {
     setActive(num);
     navigate(path);
@@ -301,15 +330,13 @@ export default function Navbar() {
           ""
         ) : (
           <Panel
-            icon={state.loggedIn ? exit : signIn}
-            color={state.loggedIn ? "#FF5A5A" : "#095644"}
-            onClick={() => {
-              state.loggedIn ? navigate("/") : navigate("/log-in");
-            }}
+            icon={dashboard ? exit : signIn}
+            color={dashboard ? "#FF5A5A" : "#095644"}
+            onClick={goDashboard}
           >
             <div className="content">
               {" "}
-              {state.loggedIn ? "خروج از پنل" : "ورود به پنل"}{" "}
+              {dashboard ? "خروج از پنل" : "ورود به پنل"}{" "}
             </div>{" "}
             <div className="icon"></div>
           </Panel>
@@ -318,10 +345,28 @@ export default function Navbar() {
         <Search></Search>
         {width < 480 ? <Menu onClick={handelClick} open={open}></Menu> : ""}
         {width < 480 ? (
-          <MenuList open={open} back={state.loggedIn}>
-            {state.loggedIn ? <Profile /> : ""}
-            {state.loggedIn ? dashboardItem : menuItem}{" "}
+          
+          <MenuList open={open} back={dashboard}>
+            {dashboard ? <Profile /> : ""}
+            {dashboard ? dashboardItem : menuItem}{" "}
+
+            <MobilePanel
+            color={dashboard ? "#FF5A5A" : "#FFAA00"}
+            onClick={goDashboard}
+          >
+            <div className="icon">
+              <img src={dashboard ?exit :signIn }/>
+            </div>
+            <p className="content">
+              {" "}
+              {dashboard ? "خروج از پنل" : "ورود به پنل"}{" "}
+            </p>{" "}
+            
+          </MobilePanel>
           </MenuList>
+
+         
+          
         ) : (
           ""
         )}
