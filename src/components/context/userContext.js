@@ -29,7 +29,7 @@ const initialState = {
   typeAction: {},
   selectEnvoy: {},
   voteEnvoy: "",
-  loggedIn: true,
+  loggedIn: false,
   // currentPrice: 0,
   // systemDiscount: 20000,
   // balance: 200000,

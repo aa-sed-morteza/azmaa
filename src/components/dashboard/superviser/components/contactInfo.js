@@ -1,26 +1,37 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import edit from "../../../../assets/left.svg";
+import { useUser } from "../../../context/userContext";
 
 export default function ContactInfo() {
+  const { state, dispatch } = useUser();
+  const navigate = useNavigate();
+
   return (
     <Container>
+      <Edit
+        onClick={() => {
+          navigate("edit-contact-info");
+        }}
+      ></Edit>
       <Title> اطلاعات تماس</Title>
       <Row>
         <p className="type"> شمارۀ همراه: </p>
-        <p className="expand">۰۹۱۲۳۵۴۶۵۴۳</p>
+        <p className="expand">{state.mobileNumber}</p>
       </Row>
       <Row>
         <p className="type">ایمیل : </p>
-        <p className="expand">noorimotlagh@gmail.com</p>
+        <p className="expand">{state.email}</p>
       </Row>
 
       <Row>
         <p className="type">نشانی دفتر : </p>
-        <p className="expand">تهران، بلوار فردوس</p>
+        <p className="expand"> {state.address}</p>
       </Row>
       <Row>
         <p className="type">شمارۀ ثابت:: </p>
-        <p className="expand">۰۲۱-۲۲۹‍۱۳۸۸۹</p>
+        <p className="expand">{state.phoneNubmer}</p>
       </Row>
     </Container>
   );
@@ -30,10 +41,10 @@ const Container = styled.div`
   border: 1px solid #cbcbcb;
   border-radius: 4px;
   padding: 0px 29px 20px;
-  margin-top:15px;
-
+  margin-top: 15px;
+  position: relative;
   @media (min-width: 480px) {
-    padding:0 2.292vw 1.875vw ;
+    padding: 0 2.292vw 1.875vw;
     margin-top: 2.083vw;
   }
 `;
@@ -52,8 +63,8 @@ const Title = styled.h4`
     font-size: 1.875vw;
     transform: translateY(-1.615vw);
     width: 27%;
-    margin-right:1.646vw;
-    margin-bottom:-1.042vw;
+    margin-right: 1.646vw;
+    margin-bottom: -1.042vw;
   }
 `;
 
@@ -76,15 +87,26 @@ const Row = styled.div`
     padding-right: 10px;
   }
   @media (min-width: 480px) {
-    margin-bottom:10px;
-    align-items:center;
+    margin-bottom: 10px;
+    align-items: center;
     gap: 10px;
-    .type{
-      padding-bottom:0;
-      font-size:1.458vw;
+    .type {
+      padding-bottom: 0;
+      font-size: 1.458vw;
     }
     .expand {
       font-size: 1.667vw;
     }
   }
+`;
+
+const Edit = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 5.885vw;
+  height: 2.326vw;
+  width: 1.163vw;
+  background-repeat: no-repeat;
+  background-image: url(${edit});
+  background-size: contain;
 `;

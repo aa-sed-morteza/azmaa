@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import { useUser } from "../context/userContext";
 import SuperviserDashboard from "./superviser";
 import EnvoyDashboard from "./envoy";
@@ -17,10 +17,21 @@ import MyHistory from "./superviser/pages/myHistory";
 import News from "./superviser/components/sectionRoom/components/news";
 import NewAction from "./superviser/components/newAction";
 import AddNewSuggets from "./superviser/components/newSuggest";
+import EditPersonalInformation from "./superviser/components/editProfile/EditPersonalInformation";
+import EditLogInformation from "./superviser/components/editProfile/editLogInInfo";
+import EditContactInformation from "./superviser/components/editProfile/editContactInfo";
 
 export default function Dashboard() {
   const { state, dispatch } = useUser();
+  const navigate = useNavigate();
   const width = useWidth();
+
+  useEffect(()=>{
+    if(state.userName == ""){
+      navigate('/log-in')
+    }
+  },[])
+
   return (
     <Container>
       {width < 480 ? (
@@ -38,6 +49,11 @@ export default function Dashboard() {
 
           <Routes>
             <Route path="/" element={<SuperviserDashboard />} />
+            <Route path="/edit-personal-info" element={<EditPersonalInformation />} />
+            <Route path="/edit-log-info" element={<EditLogInformation/>}/>
+            <Route path="/edit-contact-info" element={<EditContactInformation/>}/>
+
+
             <Route path="/myEnvoy" element={<MyEnvoys />} />
             <Route path="/myActions" element={<MyActions />} />
             <Route path="/myActions/:title" element={<NewAction />} />

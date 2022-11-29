@@ -38,7 +38,7 @@
     },
     {
       "title": "ورود به پنل",
-      "path": "/log-in",
+      "path": "/dashboard",
       "icon": "../../assets/panel.webp",
       "active_icon": "../../assets/panel.webp"
     }

@@ -1,17 +1,24 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import edit from "../../../../assets/left.svg";
+import { useUser } from "../../../context/userContext";
+
 
 export default function LogInInfo() {
+  const {state,dispatch}=useUser();
+  const navigate =useNavigate();
   return (
     <Container>
+       <Edit onClick={()=>{navigate('edit-log-info')}}></Edit>
       <Title> اطلاعات ورود</Title>
       <Row>
         <p className="type">نام کاربری : </p>
-        <p className="expand">۰۹۱۲۳۵۴۶۵۴۳</p>
+        <p className="expand">{state.userName}</p>
       </Row>
       <Row>
         <p className="type">رمز ورود: </p>
-        <p className="expand">**********</p>
+        <input type="password" className="expand" value={state.password}/>
       </Row>
     </Container>
   );
@@ -22,6 +29,7 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 0px 29px 20px;
   margin-top:15px;
+  position:relative;
 
   @media (min-width: 480px) {
     padding:0 2.292vw 1.875vw ;
@@ -65,6 +73,9 @@ const Row = styled.div`
     font-size: 4.651vw;
     margin: 0;
     padding-right: 10px;
+    border:none;
+    outline:none;
+    pointer-events: none;
   }
   @media (min-width: 480px) {
     margin-bottom:10px;
@@ -78,4 +89,15 @@ const Row = styled.div`
       color:#FFA5A5;
     }
   }
+`;
+
+const Edit = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 5.885vw;
+  height:2.326vw;
+  width:1.163vw;
+  background-repeat: no-repeat;
+  background-image: url(${edit});
+  background-size: contain;
 `;
