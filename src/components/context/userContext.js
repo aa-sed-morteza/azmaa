@@ -29,6 +29,8 @@ const initialState = {
   typeAction: {},
   selectEnvoy: {},
   voteEnvoy: "",
+  addSuggestLevel:1,
+  suggestType:"",
   loggedIn: false,
   // currentPrice: 0,
   // systemDiscount: 20000,

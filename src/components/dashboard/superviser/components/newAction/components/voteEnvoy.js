@@ -136,7 +136,7 @@ export default function VoteEnvoy() {
               borderColor="#095644"
               width="35%"
               click={() => {
-                navigate("/");
+                navigate(-1);
               }}
             />
             <Button

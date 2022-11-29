@@ -15,7 +15,7 @@ import actionsymbol from "../../../../../../assets/action-rate.webp";
 
 export default function SelectActionType() {
   const navigate = useNavigate();
-  const [select, setSelect] = useState(0);
+  const [select, setSelect] = useState(1);
   const [check, setCheck] = useState(-1);
   const { state, dispatch } = useUser();
 
@@ -75,7 +75,7 @@ export default function SelectActionType() {
         className={check === i ? "active" : ""}
         onClick={() => {
           setCheck(i);
-          setFieldValue("description", x.title);
+          setFieldValue("description", x);
         }}
       >
         <div className="symbol"></div>
@@ -109,6 +109,7 @@ export default function SelectActionType() {
     dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 2 });
     actions.resetForm();
     console.log("submit");
+    
   };
 
   const {
@@ -123,7 +124,7 @@ export default function SelectActionType() {
   } = useFormik({
     initialValues: {
       type: "",
-      description: "",
+      description: {},
     },
     validationSchema: selectActionTypeSchema,
     onSubmit,
@@ -184,7 +185,7 @@ export default function SelectActionType() {
               borderColor="#095644"
               width="35%"
               click={() => {
-                navigate("/");
+                navigate(-1);
               }}
             />
             <Button
