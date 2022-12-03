@@ -38,6 +38,15 @@ export const selectAreaSchema = yup.object().shape({
   commission: yup.string().required("لطفا نام کمیسیون  خود را انتخاب کنید"),
 });
 
+export const AreaSchema = yup.object().shape({
+  voteNumber: yup.number().required("لطفا تعداد آرا خود را وارد کنید"),
+  areaName: yup.string().required("لطفا  حوزه انتخابی خود را انتخاب کنید"),
+});
+
+export const commissionSchema = yup.object().shape({
+  commission: yup.string().required("لطفا نام کمیسیون  خود را انتخاب کنید"),
+});
+
 export const dutieHistoryAreaSchema = yup.object().shape({
   dutie: yup.string().required("لطفا موضوع سابقه خود را وارد کنید"),
   dateFrom: yup.date().required("لطفا  تاریخ شروع فعالیت خود را انتخاب کنید"),

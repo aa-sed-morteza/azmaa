@@ -20,6 +20,9 @@ import AddNewSuggets from "./superviser/components/newSuggest";
 import EditPersonalInformation from "./superviser/components/editProfile/EditPersonalInformation";
 import EditLogInformation from "./superviser/components/editProfile/editLogInInfo";
 import EditContactInformation from "./superviser/components/editProfile/editContactInfo";
+import EditCommission from "./envoy/components/edit/editCommission";
+import EditHistoryEnvoy from "./envoy/components/edit/editHistoryEnvoy";
+import EditEnvoyState from "./envoy/components/edit/editEnvoyState";
 
 export default function Dashboard() {
   const { state, dispatch } = useUser();
@@ -65,7 +68,29 @@ export default function Dashboard() {
             <Route path="/mySection/:title" element={<News />} />
           </Routes>
         ) : (
-          <EnvoyDashboard />
+
+          <Routes>
+            <Route path="/" element={<EnvoyDashboard />} />
+            <Route path="/edit-personal-info" element={<EditPersonalInformation />} />
+            <Route path="/edit-log-info" element={<EditLogInformation/>}/>
+            <Route path="/edit-contact-info" element={<EditContactInformation/>}/>
+            <Route path="/edit-commission-info" element={<EditCommission/>}/>
+            <Route path="/edit-history-info" element={<EditHistoryEnvoy/>}/>
+            <Route path="/edit-envoy-state" element={<EditEnvoyState/>}/>
+
+            <Route path="/myEnvoy" element={<MyEnvoys />} />
+            <Route path="/myActions" element={<MyActions />} />
+            <Route path="/myActions/:title" element={<NewAction />} />
+            <Route path="/mySection" element={<MySection />} />
+            <Route path="/suggestion" element={<MySuggest />} />
+            <Route path="/suggestion/:title" element={<AddNewSuggets />} />
+            <Route path="/inbox" element={<Inbox />} />
+            <Route path="/history" element={<MyHistory />} />
+            <Route path="/mySection/:title" element={<News />} />
+
+           
+          </Routes>
+          
         )}
       </PageWraper>
     </Container>

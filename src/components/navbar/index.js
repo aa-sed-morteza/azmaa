@@ -275,7 +275,9 @@ export default function Navbar() {
     );
   });
 
-  const dashboardItem = data.dashboardSuperviser.map((g, i) => {
+
+
+  const dashboardSuperviserItem = data.dashboardSuperviser.map((g, i) => {
     return (
       <List
         key={i}
@@ -290,6 +292,30 @@ export default function Navbar() {
       </List>
     );
   });
+
+  const dashboardEnvoyItem = data.dashboardEnvoy.map((g, i) => {
+    return (
+      <List
+        key={i}
+        onClick={() => choiseItem(i, g.path)}
+        className={i === active ? "active" : ""}
+        active={state.loggedIn}
+      >
+        <span>
+          <img src={active === i ? g.active_icon : g.icon} alt={g.title} />
+        </span>{" "}
+        {g.title}
+      </List>
+    );
+  });
+
+  const checkUserMenu = ()=>{
+    if(state.userType=="envoy"){
+      return dashboardEnvoyItem
+    }else{
+      return dashboardSuperviserItem
+    }
+  }
 
   const goDashboard = ()=>{
     setDashboard(!dashboard);
@@ -346,16 +372,17 @@ export default function Navbar() {
         {width < 480 ? <Menu onClick={handelClick} open={open}></Menu> : ""}
         {width < 480 ? (
           
-          <MenuList open={open} back={dashboard}>
-            {dashboard ? <Profile /> : ""}
-            {dashboard ? dashboardItem : menuItem}{" "}
+          <MenuList open={open} back={dashboard && state.loggedIn}>
+            {dashboard && state.loggedIn? <Profile /> : ""}
+            
+            {dashboard && state.loggedIn ? (checkUserMenu()) : menuItem}{" "}
 
             <MobilePanel
             color={dashboard ? "#FF5A5A" : "#FFAA00"}
             onClick={goDashboard}
           >
             <div className="icon">
-              <img src={dashboard ?exit :signIn }/>
+              <img src={dashboard  ?exit :signIn }/>
             </div>
             <p className="content">
               {" "}

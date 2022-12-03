@@ -29,11 +29,13 @@ export default function SetMobileNumber() {
 
     if (code === state.sms && state.userName === "09126897522") {
       setValidate(0);
+      dispatch({ type: "SET_TYPE_USER", payload: "superviser" });
       navigate("/sign-in/supervisor");
     }
 
     if (code === state.sms && state.userName === "09191089781") {
       setValidate(0);
+      dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
       navigate("/sign-in/envoy");
     }
   };
