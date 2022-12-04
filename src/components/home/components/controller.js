@@ -9,6 +9,7 @@ import ActionCard from "./actionCard";
 import BestEnvoy from "./bestEnvoy";
 import tik from "../../../assets/vote.webp";
 import ControlCore from "./controlCore";
+import SelectArea from "./selectArea";
 
 const ControllContainer = styled.section`
   display: flex;
@@ -25,8 +26,8 @@ const FilterContainer = styled.div`
   @media (min-width: 480px) {
     padding: 44px 50px 19px;
     border-radius: 8px;
-   
-    width:58%;
+
+    width: 58%;
     margin: auto;
     margin-top: -19%;
   }
@@ -155,7 +156,7 @@ const Title = styled.h1`
     height: 1px;
     position: relative;
     // vertical-align: middle;
-    width: 59%;
+    width: 58%;
   }
   @media (min-width: 480px) {
     margin-top: 47px;
@@ -233,16 +234,47 @@ const VoterContainer = styled.div`
   }
 `;
 
-const ActionContainer =styled.div`
-@media (min-width: 480px) {
-  display: flex;
-  gap: 20px;
-}
-`
+const ActionContainer = styled.div`
+  @media (min-width: 480px) {
+    display: flex;
+    gap: 20px;
+  }
+`;
+
+const EnvoyGalley = styled.div`
+  padding-top: 2.326vw;
+`;
 
 export default function Controller() {
   const [select, setSelect] = useState(0);
   const width = useWidth();
+
+  const envoys = [
+    {
+      name: "مهدی اسماعیلی",
+      state: "دماوند و فیروزکوه",
+      commission: " امنیت ملی",
+      id: "1",
+      persantage: "99",
+      img: "../../assets/abol.webp",
+    },
+    {
+      name: "حسن اسماعیلی",
+      state: " پردیس ",
+      commission: " امنیت اجتماعی",
+      id: "2",
+      persantage: "20",
+      img: "../../assets/ali.webp",
+    },
+    {
+      name: "حامد هایون",
+      state: " البرز ",
+      commission: " امنیت اجتماعی",
+      id: "3",
+      persantage: "50",
+      img: "../../assets/jafi.webp",
+    },
+  ];
 
   const controllItem = data.controlPanel.map((x, i) => {
     return (
@@ -270,70 +302,144 @@ export default function Controller() {
         <TabContainer>{controllItem}</TabContainer>
       </FilterContainer>
 
-      <LastVotes>
-        <Title>آخرین رأی‌گیری‌ها</Title>
-        <VoterContainer>
+      {/* all */}
+      {select == 0 && (
+        <>
+          <LastVotes>
+            <Title>آخرین رأی‌گیری‌ها</Title>
+            <VoterContainer>
+              {width < 480 ? (
+                <VoteCard />
+              ) : (
+                <>
+                  {" "}
+                  <VoteCard />
+                  <VoteCard />
+                  <VoteCard />
+                </>
+              )}
+            </VoterContainer>
+
+            <ShowMore>
+              <p>نمایش بیشتر</p>{" "}
+            </ShowMore>
+          </LastVotes>
+
           {width < 480 ? (
-            <VoteCard />
+            <>
+              <LastActions>
+                <Title> آخرین عملکردها</Title>
+                <ActionCard />
+                <ShowMore>
+                  <p>نمایش بیشتر</p>{" "}
+                </ShowMore>
+              </LastActions>
+
+              <BestEnvoyContainer>
+                <Title>شفاف‌ترین نمایندگان</Title>
+                <BestEnvoy />
+                <ShowMore>
+                  <p>نمایش بیشتر</p>{" "}
+                </ShowMore>
+              </BestEnvoyContainer>
+            </>
           ) : (
             <>
-              {" "}
-              <VoteCard />
-              <VoteCard />
-              <VoteCard />
+              <ControlCore />
+
+              <LastActions>
+                <Title> آخرین عملکردها</Title>
+                <ActionContainer>
+                  {width < 480 ? (
+                    <ActionCard />
+                  ) : (
+                    <>
+                      {" "}
+                      <ActionCard />
+                      <ActionCard />
+                      <ActionCard />
+                    </>
+                  )}
+                </ActionContainer>
+
+                <ShowMore>
+                  <p>نمایش بیشتر</p>{" "}
+                </ShowMore>
+              </LastActions>
             </>
           )}
-        </VoterContainer>
-
-        <ShowMore>
-          <p>نمایش بیشتر</p>{" "}
-        </ShowMore>
-      </LastVotes>
-
-      {width < 480 ? (
-        <>
-          <LastActions>
-            <Title> آخرین عملکردها</Title>
-            <ActionCard />
-            <ShowMore>
-              <p>نمایش بیشتر</p>{" "}
-            </ShowMore>
-          </LastActions>
-
-          <BestEnvoyContainer>
-            <Title>شفاف‌ترین نمایندگان</Title>
-            <BestEnvoy />
-            <ShowMore>
-              <p>نمایش بیشتر</p>{" "}
-            </ShowMore>
-          </BestEnvoyContainer>
-        </>
-      ) : (
-        <>
-          <ControlCore/>
-
-          <LastActions>
-            <Title> آخرین عملکردها</Title>
-            <ActionContainer>
-            {width < 480 ? (
-            <ActionCard />
-          ) : (
-            <>
-              {" "}
-              <ActionCard />
-              <ActionCard />
-              <ActionCard />
-            </>
-          )}
-            </ActionContainer>
-            
-            <ShowMore>
-              <p>نمایش بیشتر</p>{" "}
-            </ShowMore>
-          </LastActions>
-
         </>
       )}
+
+      {/* just envoys */}
+      {select == 1 && (
+        <EnvoyGalley>
+          <BestEnvoy />
+          <BestEnvoy />
+          <BestEnvoy />
+          <BestEnvoy />
+          <BestEnvoy />
+          <ShowMore>
+            <p>نمایش بیشتر</p>{" "}
+          </ShowMore>
+        </EnvoyGalley>
+      )}
+
+      {/* just state */}
+      {select==2 && (
+        <>
+        <SelectArea area="تهران، ری و شمیرانات" envoys={envoys}/>
+        <SelectArea area="فیروزکوه و دماوند" envoys={envoys}/>
+        </>
+      )}
+
+      {/* just vote */}
+      {select ==3 && (
+         <LastVotes>
+         <Title>آخرین رأی‌گیری‌ها</Title>
+         <VoterContainer>
+           {width < 480 ? (
+             <VoteCard />
+           ) : (
+             <>
+               {" "}
+               <VoteCard />
+               <VoteCard />
+               <VoteCard />
+             </>
+           )}
+         </VoterContainer>
+
+         <ShowMore>
+           <p>نمایش بیشتر</p>{" "}
+         </ShowMore>
+       </LastVotes>
+      )}
+
+      {/* just actions */}
+      {select==4 && (
+         <LastActions>
+         <Title> آخرین عملکردها</Title>
+         <ActionContainer>
+           {width < 480 ? (
+             <ActionCard />
+           ) : (
+             <>
+               {" "}
+               <ActionCard />
+               <ActionCard />
+               <ActionCard />
+             </>
+           )}
+         </ActionContainer>
+
+         <ShowMore>
+           <p>نمایش بیشتر</p>{" "}
+         </ShowMore>
+       </LastActions>
+      )}
+
+      
     </ControllContainer>
   );
 }

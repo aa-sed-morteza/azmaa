@@ -206,7 +206,7 @@ const IranMap = () => {
 export default IranMap;
 
 const Container = styled.div`
-  border: 1px solid black;
+  border: 1px solid #CBCBCB;
   border-radius: 4px;
 
   .input {
