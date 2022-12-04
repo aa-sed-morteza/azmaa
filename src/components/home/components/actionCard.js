@@ -8,6 +8,7 @@ import not from "../../../assets/not.webp";
 import data from "../../../data.json";
 import left from ".././../../assets/left.webp";
 import { useNavigate } from "react-router-dom";
+import ShareButton from "../../general/shareButton.js"
 
 const VCContainer = styled.div`
   background-color: #ffffff;
@@ -494,9 +495,10 @@ export default function ActionCard() {
             جزئیات
           </p>
         </LargButton>
-        <SmallButton>
+        {/* <SmallButton>
           <p className="content">بازنشر</p>
-        </SmallButton>
+        </SmallButton> */}
+        <ShareButton text="دریافت خودرو دناپلاس " title="اطلاع رسانی نماینده"/>
       </ButtonWraper>
     </VCContainer>
   );

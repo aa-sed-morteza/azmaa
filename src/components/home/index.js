@@ -13,8 +13,10 @@ const HomeContainer = styled.section`
   overflow-x: hidden;
 `;
 
+
 export default function Home() {
   const width = useWidth();
+
   return (
     <HomeContainer>
       {width > 480 ? (

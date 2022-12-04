@@ -100,6 +100,7 @@ const IranMap = () => {
                   <>
                     <input
                       type="checkbox"
+                      key={city}
                       value={values.city}
                       name={city}
                       onChange={() => {
