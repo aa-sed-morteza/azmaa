@@ -7,10 +7,10 @@ export default function Tehran() {
     const [select, setSelect] = useState(0);
 
     const place = [
-        { id: 12, name: "خراسان شمالی" },
-        { id: 13, name: " همدان" },
-        { id: 14, name: " گلستان" },
-        { id: 15, name: " سیستان و بلوچستان" },
+        // { id: 12, name: "خراسان شمالی" },
+        // { id: 13, name: " همدان" },
+        // { id: 14, name: " گلستان" },
+        // { id: 15, name: " سیستان و بلوچستان" },
     
       ];
     

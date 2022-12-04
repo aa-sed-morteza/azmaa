@@ -104,3 +104,9 @@ export const documentSchema = yup.object().shape({
 export const suggestSchema = yup.object().shape({
   type: yup.string().required("لطفا نوع فعالیت خود را انتخاب کنید"),
 });
+
+export const provinceSchema = yup.object().shape({
+  province: yup.string().required("لطفا استان مورد خود را انتخاب کنید"),
+  city: yup.string().required("لطفا شهر مورد خود را انتخاب کنید"),
+
+});
