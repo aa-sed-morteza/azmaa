@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import data from "../../../data.json";
-import leftArrow from "../../../assets/lightArrow.png";
-import profile from "../../../assets/profile.png";
+import leftArrow from "../../../assets/lightArrow.webp";
+import profile from "../../../assets/profile.webp";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.section`
@@ -143,7 +143,7 @@ export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   function carouselInfiniteScroll() {
-    if (currentIndex === data.envoy.length - 1) {
+    if (currentIndex === data.newspaper.length - 1) {
       return setCurrentIndex(0);
     }
     return setCurrentIndex(currentIndex + 1);

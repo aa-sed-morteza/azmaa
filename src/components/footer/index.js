@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import data from "../../data.json";
-import azmma from "../../assets/azmaa.svg";
+import azmma from "../../assets/azmaa.webp";
 
 const FooterContainer = styled.section`
   background-color: #095644;

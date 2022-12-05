@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import icon from "../../../assets/down.png";
-import arrow from "../../../assets/arrowUp.png";
+import icon from "../../../assets/down.webp";
+import arrow from "../../../assets/arrowUp.webp";
 
 const Container = styled.section`
   border: 1px solid #cbcbcb;

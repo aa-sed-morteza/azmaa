@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import action from "../../../assets/action-rate.png";
-import act from "../../../assets/act.png";
-import success from "../../../assets/like.png";
-import faild from "../../../assets/dislike.png";
-import not from "../../../assets/not.png";
+import action from "../../../assets/action-rate.webp";
+import act from "../../../assets/act.webp";
+import success from "../../../assets/like.webp";
+import faild from "../../../assets/dislike.webp";
+import not from "../../../assets/not.webp";
 import data from "../../../data.json";
-import left from ".././../../assets/left.png";
+import left from ".././../../assets/left.webp";
 import { useNavigate } from "react-router-dom";
+import ShareButton from "../../general/shareButton.js"
 
 const VCContainer = styled.div`
   background-color: #ffffff;
@@ -22,10 +23,10 @@ const VCContainer = styled.div`
     border-radius: 8px;
     margin-bottom: 34px;
     max-width: 31%;
-    padding:20px 17px;
-    height:43.229vw;
-    min-height:0;
-    width:500px;
+    padding: 20px 17px;
+    height: 43.229vw;
+    min-height: 0;
+    width: 26.042vw;
   }
 `;
 
@@ -36,11 +37,11 @@ const CardHeader = styled.div`
     background-image: url(${action});
     background-size: cover;
     background-repeat: no-repeat;
-    width: 89px;
-    height: 76px;
+    width: 20.698vw;
+    height: 17.674vw;
     @media (min-width: 480px) {
-      width: 121px;
-      height: 104px;
+      width: 6.302vw;
+      height: 5.417vw;
     }
   }
 
@@ -58,13 +59,13 @@ const CardHeader = styled.div`
         content: "";
         display: flex;
         position: absolute;
-        width: 32px;
-        height: 32px;
+        width: 7.442vw;
+        height: 7.442vw;
         background-image: url(${act});
         background-size: contain;
         background-repeat: no-repeat;
-        right: -6px;
-        top: 1px;
+        right: -1.395vw;
+        top: 0.233vw;
       }
     }
     h2 {
@@ -81,24 +82,24 @@ const CardHeader = styled.div`
       font-weight: bold;
     }
     @media (min-width: 480px) {
-      width:67%;
+      width: 67%;
       .title {
         font-size: 1.25vw;
         font-weight: 300;
         padding-right: 30px;
         &:before {
-          width: 40px;
-          height: 30px;
-          top:5px;
+          width: 2.083vw;
+          height: 1.563vw;
+          top: 0.26vw;
         }
       }
-      h2{
-        font-size:1.667vw;
-        font-weight:700;
+      h2 {
+        font-size: 1.667vw;
+        font-weight: 700;
       }
-      .date{
-        font-size:1.250vw;
-        font-weight:500;
+      .date {
+        font-size: 1.25vw;
+        font-weight: 500;
       }
     }
   }
@@ -113,8 +114,8 @@ const Statistics = styled.div`
   margin-top: 17px;
   justify-content: center;
   padding-bottom: 13px;
-  @media(min-width:480px){
-    gap:90px;
+  @media (min-width: 480px) {
+    gap: 4.688vw;
   }
 `;
 
@@ -127,13 +128,13 @@ const Success = styled.div`
     content: "";
     display: block;
     position: absolute;
-    width: 41px;
-    height: 41px;
+    width: 9.535vw;
+    height: 9.535vw;
     background-image: url(${success});
     background-size: contain;
     background-repeat: no-repeat;
-    right: -50px;
-    top: -6px;
+    right: -11.628vw;
+    top: -1.395vw;
   }
   &.active {
     font-weight: bold;
@@ -141,24 +142,28 @@ const Success = styled.div`
       content: "";
       display: block;
       position: absolute;
-      width: 80px;
-      height: 4px;
+      width: 18.605vw;
+      height: 0.93vw;
       background-color: #6cbba9;
-      bottom: -13px;
-      right: -50px;
+      bottom: -3.023vw;
+      right: -11.628vw;
     }
   }
-  @media(min-width:480px){
-    font-size:1.458vw;
-    font-weight:400;
-    padding-bottom:10px;
-    &:before{
-      width:56px;
-      height:56px;
-      right:-65px;
+  @media (min-width: 480px) {
+    font-size: 1.458vw;
+    font-weight: 400;
+    padding-bottom: 10px;
+    &:before {
+      width: 2.917vw;
+      height: 2.917vw;
+      right: -3.385vw;
+      top: -0.26vw;
     }
-    &:after{
-      width:100px;
+    &:after {
+      width: 5.208vw !important;
+      bottom: -0.7vh !important;
+      height: 0.208vw !important;
+      right: -3.031vw !important;
     }
   }
 `;
@@ -172,13 +177,13 @@ const Faild = styled.div`
     content: "";
     display: block;
     position: absolute;
-    width: 41px;
-    height: 41px;
+    width: 9.535vw;
+    height: 9.535vw;
     background-image: url(${faild});
     background-size: contain;
     background-repeat: no-repeat;
-    right: -50px;
-    top: -6px;
+    right: -11.628vw;
+    top: -1.395vw;
   }
   &.active {
     font-weight: bold;
@@ -186,24 +191,28 @@ const Faild = styled.div`
       content: "";
       display: block;
       position: absolute;
-      width: 80px;
-      height: 4px;
+      width: 18.605vw;
+      height: 0.93vw;
       background-color: #ffa5a5;
-      bottom: -13px;
-      right: -50px;
+      bottom: -3.023vw;
+      right: -11.628vw;
     }
   }
-  @media(min-width:480px){
-    font-size:1.458vw;
-    font-weight:400;
-    padding-bottom:10px;
-    &:before{
-      width:56px;
-      height:56px;
-      right:-65px;
+  @media (min-width: 480px) {
+    font-size: 1.458vw;
+    font-weight: 400;
+    padding-bottom: 10px;
+    &:before {
+      width: 2.917vw;
+      height: 2.917vw;
+      right: -3.385vw;
+      top: -0.26vw;
     }
-    &:after{
-      width:100px;
+    &:after {
+      width: 5.208vw !important;
+      bottom: -0.7vh !important;
+      height: 0.208vw !important;
+      right: -3.031vw !important;
     }
   }
 `;
@@ -218,13 +227,13 @@ const Not = styled.div`
     content: "";
     display: block;
     position: absolute;
-    width: 41px;
-    height: 41px;
+    width: 9.535vw;
+    height: 9.535vw;
     background-image: url(${not});
     background-size: contain;
     background-repeat: no-repeat;
-    right: -50px;
-    top: -6px;
+    bottom: -3.023vw;
+    right: -11.628vw;
   }
 
   &.active {
@@ -233,24 +242,28 @@ const Not = styled.div`
       content: "";
       display: block;
       position: absolute;
-      width: 80px;
-      height: 4px;
+      width: 18.605vw;
+      height: 0.93vw;
       background-color: #d8d8d8;
-      bottom: -13px;
-      right: -50px;
+      bottom: -3.023vw;
+      right: -11.628vw;
     }
   }
-  @media(min-width:480px){
-    font-size:1.458vw;
-    font-weight:400;
-    padding-bottom:10px;
-    &:before{
-      width:56px;
-      height:56px;
-      right:-65px;
+  @media (min-width: 480px) {
+    font-size: 1.458vw;
+    font-weight: 400;
+    padding-bottom: 10px;
+    &:before {
+      width: 2.917vw;
+      height: 2.917vw;
+      right: -3.385vw;
+      top: -0.26vw;
     }
-    &:after{
-      width:100px;
+    &:after {
+      width: 5.208vw !important;
+      bottom: -0.7vh !important;
+      height: 0.208vw !important;
+      right: -3.031vw !important;
     }
   }
 `;
@@ -261,15 +274,14 @@ const EnvoyGallery = styled.div`
   padding: 18px 0 12px;
   display: flex;
   overflow-x: scroll;
-  @media(min-width:480px){
-    border-radius:8px;
-    flex-direction:column;
-    padding-inline:15px;
-  
-   margin-bottom:10px;
-   flex:1;
-   overflow-y: auto;
-   
+  @media (min-width: 480px) {
+    border-radius: 8px;
+    flex-direction: column;
+    padding-inline: 15px;
+
+    margin-bottom: 10px;
+    flex: 1;
+    overflow-y: auto;
   }
 `;
 
@@ -279,12 +291,12 @@ const Card = styled.div`
   justify-content: center;
   align-items: center;
   padding: 4px;
-  min-width: 90px;
+  min-width: 20.930vw;
   border-left: 1px solid white;
   .picture {
-    width: 47px;
-    height: 47px;
-    border-radius: 47px;
+    width: 10.930vw;
+    height: 10.930vw;
+    border-radius: 10.930vw;
     margin-bottom: 10px;
     border: 3px solid ${(props) => props.color};
     img {
@@ -308,30 +320,30 @@ const Card = styled.div`
     font-weight: bold;
     margin: 0;
   }
-  @media(min-width:480px){
-    flex-wrap:wrap;
-    max-height:144px;
-    padding:19px 30px 10px;
-    border-left:none;
-    border-bottom:1px solid #FFFFFF;
-    .picture{
-      width: 96px;
-      height: 96px;
-      border-radius: 96px;
-      border-width:9px;
+  @media (min-width: 480px) {
+    flex-wrap: wrap;
+    max-height: 7.500vw;
+    padding: 19px 30px 10px;
+    border-left: none;
+    border-bottom: 1px solid #ffffff;
+    .picture {
+      width: 5vw;
+      height: 5vw;
+      border-radius: 5vw;
+      border-width: 0.469vw;
     }
-    .name{
-      font-size:1.458vw;
-      text-align:start;
-      width:60%;
-      margin-bottom:10px;
-      margin-top:-4%;
+    .name {
+      font-size: 1.458vw;
+      text-align: start;
+      width: 60%;
+      margin-bottom: 10px;
+      margin-top: -4%;
     }
-    .state{
-      font-size:1.042vw;
-      font-weight:300;
-      text-align:start;
-      width:60%;
+    .state {
+      font-size: 1.042vw;
+      font-weight: 300;
+      text-align: start;
+      width: 60%;
     }
   }
 `;
@@ -340,9 +352,9 @@ const ButtonWraper = styled.div`
   display: flex;
   margin-top: 10px;
   justify-content: space-between;
-  @media(min-width:480px){
-    border-top:1px solid #D8D8D8;
-    padding-top:14px;
+  @media (min-width: 480px) {
+    border-top: 1px solid #d8d8d8;
+    padding-top: 14px;
     flex-direction: row-reverse;
   }
 `;
@@ -360,24 +372,24 @@ const LargButton = styled.div`
     font-weight: bold;
     color: #ffffff;
   }
-  @media(min-width:480px){
+  @media (min-width: 480px) {
     border-radius: 8px;
-    padding:10px;
-    position:relative;
-    .content{
-      font-size:1.250vw;
-      margin:auto;
-      &:after{
+    padding: 10px;
+    position: relative;
+    .content {
+      font-size: 1.25vw;
+      margin: auto;
+      &:after {
         content: "";
         display: block;
         position: absolute;
-        width: 10px;
-        height: 15px;
+        width: 0.521vw;
+        height: 0.781vw;
         background-image: url(${left});
         background-size: contain;
         background-repeat: no-repeat;
-        top: 20px;
-        left: 33px;
+        top: 1.042vw;
+        left: 1.719vw;
       }
     }
   }
@@ -396,12 +408,12 @@ const SmallButton = styled.div`
     font-weight: 300;
     color: #095644;
   }
-  @media(min-width:480px){
+  @media (min-width: 480px) {
     border-radius: 8px;
-    padding:10px;
-    .content{
-      font-size:1.250vw;
-      margin:auto;
+    padding: 10px;
+    .content {
+      font-size: 1.25vw;
+      margin: auto;
     }
   }
 `;
@@ -411,7 +423,7 @@ export default function ActionCard() {
   const [color, SetColor] = useState("#DFF5F0");
   const [bColor, setBColor] = useState("#6cbba9");
   const envoyData = data.envoy;
-  const navigate =useNavigate();
+  const navigate = useNavigate();
 
   const envoyList = envoyData.map((x, i) => {
     return (
@@ -445,8 +457,8 @@ export default function ActionCard() {
         <div className="action-logo"></div>
         <div className="title-card">
           <p className="title">عملکرد</p>
-          <h2> دریافت خودرو دناپلاس   </h2>
-          <p className="date">۲۹ اسفند ۱۴۰۰  </p>
+          <h2> دریافت خودرو دناپلاس </h2>
+          <p className="date">۲۹ اسفند ۱۴۰۰ </p>
         </div>
       </CardHeader>
       <Statistics>
@@ -474,11 +486,19 @@ export default function ActionCard() {
 
       <ButtonWraper>
         <LargButton>
-          <p className="content" onClick={()=>{navigate(`presentation/ دریافت خودرو دناپلاس `)}}>جزئیات</p>
+          <p
+            className="content"
+            onClick={() => {
+              navigate(`presentation/ دریافت خودرو دناپلاس `);
+            }}
+          >
+            جزئیات
+          </p>
         </LargButton>
-        <SmallButton>
+        {/* <SmallButton>
           <p className="content">بازنشر</p>
-        </SmallButton>
+        </SmallButton> */}
+        <ShareButton text="دریافت خودرو دناپلاس " title="اطلاع رسانی نماینده"/>
       </ButtonWraper>
     </VCContainer>
   );

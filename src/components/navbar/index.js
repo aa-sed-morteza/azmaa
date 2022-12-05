@@ -1,24 +1,29 @@
 import React, { useState } from "react";
 import data from "../../data.json";
-import LOGO from "../../assets/azmaa-logo.png";
-import menu from "../../assets/menu.png";
-import search from "../../assets/search.png";
-import close from "../../assets/close.png";
-import signIn from "../../assets/Sign_in.png";
+import LOGO from "../../assets/azmaa-logo.webp";
+import menu from "../../assets/menu.webp";
+import search from "../../assets/search.webp";
+import close from "../../assets/close.webp";
+import signIn from "../../assets/Sign_in.webp";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import useWidth from "../../hook/useWidth";
+import { useUser } from "../context/userContext";
+import exit from "../../assets/exit.webp";
+import Profile from "../dashboard/components/profile";
 
 // styled
 const TopBar = styled.section`
-  overflow-x: hidden;
+  overflow: hidden;
   background-color: #095644;
   padding: 20px 30px;
   display: flex;
   justify-content: space-between;
-  
+
   @media (min-width: 480px) {
-    padding: 16px 10%;
+    padding: 0.3vw 10%;
+    justify-content: flex-start;
+    align-items: center;
   }
 `;
 
@@ -31,8 +36,9 @@ const Logo = styled.div`
     object-fit: contain;
   }
   @media (min-width: 480px) {
-    width: 58px;
-    height: 48px;
+    margin-left: 7.292vw;
+    width: 3.021vw;
+    height: 2.500vw;
   }
 `;
 
@@ -42,6 +48,7 @@ const LeftSection = styled.div`
   gap: 29px;
   @media (min-width: 480px) {
     gap: 19px;
+    margin-right: auto;
   }
 `;
 
@@ -51,7 +58,6 @@ const Menu = styled.div`
   background-size: contain;
   width: 20px;
   height: 20px;
-  
 `;
 
 const MenuList = styled.ul`
@@ -63,11 +69,11 @@ const MenuList = styled.ul`
   left: 0;
   right: 0;
   top: 67px;
-  background-color: #ffffff;
+  background-color: ${(props) => (props.back ? "#095644" : "#FFFFFF")};
   flex-direction: column;
   padding: 51px 81px;
   gap: 10px;
-  z-index:40;
+  z-index: 40;
 `;
 
 const List = styled.li`
@@ -77,7 +83,7 @@ const List = styled.li`
   align-items: center;
   gap: 10px;
   position: relative;
-  color: #095644;
+  color: ${(props) => (props.active ? "#FFFFFF" : "#095644")};
   font-size: 4.65vw;
   font-weight: light;
   &.active {
@@ -85,7 +91,7 @@ const List = styled.li`
     &:before {
       content: "";
       display: "flex";
-      background-color: #095644;
+      background-color: ${(props) => (props.active ? "#FFAA00" : "#095644")};
       border-radius: 4px 0px 0px 4px;
       right: -81px;
       position: absolute;
@@ -132,18 +138,38 @@ const List = styled.li`
     }
   }
 
-  &:nth-last-child(1) {
-    position: absolute;
-    bottom: -66px;
-    color: #ffaa00;
-    font-size: 4.65vw;
-    font-weight: bold;
-    right: 20px;
-    @media(min-width: 480px){
-      display:none;
-    }
-  }
 `;
+
+const MobilePanel = styled.div`
+position:absolute;
+display:flex;
+align-items: center;
+gap:3.488vw;
+padding-right:4.186vw;
+bottom:-16.279vw;
+right:0;
+.icon{
+  display:flex;
+  border-radius:4px;
+  width:11.628vw;
+  height:11.163vw;
+  background-color:${props=>props.color};
+  img{
+    margin:auto;
+    width:90%;
+    height:90%;
+    object-fit:contain;
+  }
+}
+.content{
+  margin:0;
+  padding:0;
+  font-size:5.581vw;
+  font-weight:700;
+  color:${props=>props.color}
+}
+
+`
 
 const Search = styled.div`
   background-image: url(${search});
@@ -151,8 +177,8 @@ const Search = styled.div`
   width: 20px;
   height: 20px;
   @media (min-width: 480px) {
-    width: 45px;
-    height: 45px;
+    width: 2.344vw;
+    height: 2.344vw;
   }
 `;
 
@@ -161,28 +187,46 @@ const Panel = styled.div`
   position: relative;
   cursor: pointer;
   & > .icon {
-    background-image: url(${signIn});
+    background-image: url(${(props) => props.icon});
     background-size: contain;
-    width: 45px;
-    height: 45px;
+    background-repeat: no-repeat;
+    width: 2.344vw;
+    height: 2.344vw;
   }
   & > .content {
     background: #f3f3f3;
     position: absolute;
-    top: -16px;
-    right: -171px;
+    right: -8.5vw;
+    top:-0.885vw;
     padding: 11px 22px;
-    color: #095644;
+    color: ${(props) => props.color};
     font-size: 1.25vw;
     font-weight: bold;
     border-radius: 0px 0px 8px 8px;
+  }
+  @media(max-width:1400px){
+    .content{
+      right: -9.5vw;
+      top: -1.2vw;
+    }
+  }
+  @media(max-width:992px){
+    .content{
+      right: -10.5vw;
+      top: -2.2vw;
+      padding-top:14px;
+    }
+  }
+  @media(max-width:768px){
+    .content{
+      right: -12.5vw;
+    }
   }
 `;
 
 const Category = styled.ul`
   display: flex;
-  gap: 40px;
-  margin-right: -27%;
+  gap: 2.083vw;
   li {
     color: #ffffff;
     font-size: 1.25vw;
@@ -206,29 +250,15 @@ const Category = styled.ul`
       }
     }
   }
-  @media (max-width: 1300px) {
-    gap: 20px;
-    max-width: 350px;
-    overflow-x: scroll;
-    li {
-      // font-size: 12px;
-    }
-  }
-  @media (max-width: 800px) {
-    gap: 20px;
-    width: 20%;
-    overflow-x: scroll;
-    li {
-      // font-size: 12px;
-    }
-  }
 `;
 
 export default function Navbar() {
+  const { state, dispatch } = useUser();
   const width = useWidth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
+  const [dashboard,setDashboard]=useState(false);
 
   const menuItem = data.navbar.map((x, i) => {
     return (
@@ -244,6 +274,60 @@ export default function Navbar() {
       </List>
     );
   });
+
+
+
+  const dashboardSuperviserItem = data.dashboardSuperviser.map((g, i) => {
+    return (
+      <List
+        key={i}
+        onClick={() => choiseItem(i, g.path)}
+        className={i === active ? "active" : ""}
+        active={state.loggedIn}
+      >
+        <span>
+          <img src={active === i ? g.active_icon : g.icon} alt={g.title} />
+        </span>{" "}
+        {g.title}
+      </List>
+    );
+  });
+
+  const dashboardEnvoyItem = data.dashboardEnvoy.map((g, i) => {
+    return (
+      <List
+        key={i}
+        onClick={() => choiseItem(i, g.path)}
+        className={i === active ? "active" : ""}
+        active={state.loggedIn}
+      >
+        <span>
+          <img src={active === i ? g.active_icon : g.icon} alt={g.title} />
+        </span>{" "}
+        {g.title}
+      </List>
+    );
+  });
+
+  const checkUserMenu = ()=>{
+    if(state.userType=="envoy"){
+      return dashboardEnvoyItem
+    }else{
+      return dashboardSuperviserItem
+    }
+  }
+
+  const goDashboard = ()=>{
+    setDashboard(!dashboard);
+    setOpen(false);
+    if(!dashboard){
+      navigate("/dashboard")
+    }else{
+      navigate("/")
+      
+    }
+   
+  }
 
   function choiseItem(num, path) {
     setActive(num);
@@ -271,15 +355,48 @@ export default function Navbar() {
         {width < 480 ? (
           ""
         ) : (
-          <Panel onClick={() => navigate("/log-in")}>
-            <div className="content">ورود به پنل</div>{" "}
+          <Panel
+            icon={dashboard ? exit : signIn}
+            color={dashboard ? "#FF5A5A" : "#095644"}
+            onClick={goDashboard}
+          >
+            <div className="content">
+              {" "}
+              {dashboard ? "خروج از پنل" : "ورود به پنل"}{" "}
+            </div>{" "}
             <div className="icon"></div>
           </Panel>
         )}
 
         <Search></Search>
         {width < 480 ? <Menu onClick={handelClick} open={open}></Menu> : ""}
-        {width < 480 ? <MenuList open={open}>{menuItem}</MenuList> : ""}
+        {width < 480 ? (
+          
+          <MenuList open={open} back={dashboard && state.loggedIn}>
+            {dashboard && state.loggedIn? <Profile /> : ""}
+            
+            {dashboard && state.loggedIn ? (checkUserMenu()) : menuItem}{" "}
+
+            <MobilePanel
+            color={dashboard ? "#FF5A5A" : "#FFAA00"}
+            onClick={goDashboard}
+          >
+            <div className="icon">
+              <img src={dashboard  ?exit :signIn }/>
+            </div>
+            <p className="content">
+              {" "}
+              {dashboard ? "خروج از پنل" : "ورود به پنل"}{" "}
+            </p>{" "}
+            
+          </MobilePanel>
+          </MenuList>
+
+         
+          
+        ) : (
+          ""
+        )}
       </LeftSection>
     </TopBar>
   );

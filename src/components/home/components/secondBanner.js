@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import banner03 from "../../../assets/banner03.png";
+import banner03 from "../../../assets/banner03.webp";
 import useWidth from "../../../hook/useWidth";
 
 const Wraper=styled.section`

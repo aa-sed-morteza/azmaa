@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ok from "../../../assets/ok.png";
-import disagree from "../../../assets/disagree.png";
-import info from "../../../assets/info.png";
-import noVote from "../../../assets/noVote.png";
-import absent from "../../../assets/absent.png";
+import ok from "../../../assets/ok.webp";
+import disagree from "../../../assets/disagree.webp";
+import info from "../../../assets/info.webp";
+import noVote from "../../../assets/noVote.webp";
+import absent from "../../../assets/absent.webp";
 import Agree from "./agree";
 import Disagree from "./disagree";
 import NoComment from "./noComment";

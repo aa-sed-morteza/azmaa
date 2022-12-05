@@ -28,16 +28,16 @@ const Container = styled.div`
 `;
 
 const Symbol = styled.div`
-  width: 89px;
-  height: 89px;
+  width: 20.698vw;
+  height: 20.698vw;
   img {
     width: 100%;
     height: auto;
     object-fit: contain;
   }
   @media(min-width:480px){
-    width:130px;
-    height:130px;
+    width:6.771vw;
+    height:6.771vw;
   }
 `;
 
@@ -64,20 +64,20 @@ const Type = styled.p`
     background-image: url(${props=>props.icon});
     background-size: contain;
     background-repeat: no-repeat;
-    width:27px;
-    height:21px;
+    width:6.279vw;
+    height:4.884vw;
     right:0;
-    top:4px;
+    top:0.930vw;
   }
   @media(min-width:480px){
     padding-right:35px;
     font-size:1.250vw;
     font-weight:300;
     &:before{
-      width:30px;
-      height:30px;
-      top:3px;
-      right:3px;
+      width:1.563vw;
+      height:1.563vw;
+      top:0.156vw;
+      right:0.156vw;
     }
   }
 `

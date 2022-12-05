@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import mag from "../../../assets/mag.png";
-import leftArrow from "../../../assets/leftArrow.png";
-import user from "../../../assets/profile.png";
+import mag from "../../../assets/mag.webp";
+import leftArrow from "../../../assets/leftArrow.webp";
+import user from "../../../assets/profile.webp";
 import data from "../../../data.json";
 
 const MagazineContainer = styled.section`

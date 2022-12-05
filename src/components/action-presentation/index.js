@@ -6,8 +6,8 @@ import DetailsAction from "./components/detailsAction";
 import ActionsCensus from "./components/actionCensus";
 import Census from "./components/census";
 import ControlStatus from "./components/controlStatus";
-import action from "../../assets/act.png";
-import symbol from "../../assets/action-rate.png";
+import action from "../../assets/act.webp";
+import symbol from "../../assets/action-rate.webp";
 
 
 export default function ActionPresentation() {

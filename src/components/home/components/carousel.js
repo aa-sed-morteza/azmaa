@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import data from "../../../data.json";
-import leftArrow from "../../../assets/lightArrow.png";
+import leftArrow from "../../../assets/lightArrow.webp";
 import SelectState from "./selectState";
+import IranMap from "../../pluginIranMap/IranMap";
 
 const Wraper = styled.section`
   overflow: hidden;
@@ -14,6 +15,17 @@ const Wraper = styled.section`
   margin-right: -2%;
   margin-top: -6%;
   position: relative;
+  @media (max-width: 1600px) {
+    margin-left: -2%;
+    margin-top: -7%;
+  }
+  @media (max-width: 1600px) {
+    margin-top: -8%;
+  }
+  @media (max-width: 992px) {
+    margin-left: -3%;
+    margin-top: -9%;
+  }
 `;
 
 const ShowIndex = styled.div`
@@ -104,7 +116,7 @@ export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   function carouselInfiniteScroll() {
-    if (currentIndex === data.envoy.length - 1) {
+    if (currentIndex === data.slider.length - 1) {
       return setCurrentIndex(0);
     }
     return setCurrentIndex(currentIndex + 1);
@@ -119,16 +131,25 @@ export default function Carousel() {
   });
 
   const index = items.map((x, i) => {
-    return <div key={i} className={i===currentIndex? "item active" : "item"}  ></div>;
+    return (
+      <div
+        key={i}
+        className={i === currentIndex ? "item active" : "item"}
+      ></div>
+    );
   });
 
-//   
+  //
 
   return (
     <Wraper>
       {items.map((x, i) => {
         return (
-          <Slide key={i} photo={x.image} style={{transform:`translate(${currentIndex*100}%)`}}>
+          <Slide
+            key={i}
+            photo={x.image}
+            style={{ transform: `translate(${currentIndex * 100}%)` }}
+          >
             <div className="content">
               <h1>{x.title}</h1>
               <p>{x.content}</p>
@@ -138,8 +159,8 @@ export default function Carousel() {
         );
       })}
       <ShowIndex>{index}</ShowIndex>
-    <SelectState/>
-      
+      {/* <SelectState /> */}
+      <IranMap/>
     </Wraper>
   );
 }

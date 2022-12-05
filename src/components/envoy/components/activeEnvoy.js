@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import profile from "../../../assets/profile.png";
-import upArrow from "../../../assets/arrow.png";
+import profile from "../../../assets/profile.webp";
+import upArrow from "../../../assets/arrow.webp";
 import BestEnvoy from "../../home/components/bestEnvoy";
 
 const Container = styled.section`
