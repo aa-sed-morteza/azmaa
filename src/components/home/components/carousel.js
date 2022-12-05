@@ -116,7 +116,7 @@ export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   function carouselInfiniteScroll() {
-    if (currentIndex === data.envoy.length - 1) {
+    if (currentIndex === data.slider.length - 1) {
       return setCurrentIndex(0);
     }
     return setCurrentIndex(currentIndex + 1);
