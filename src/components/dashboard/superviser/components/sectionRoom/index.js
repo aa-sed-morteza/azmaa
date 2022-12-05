@@ -4,6 +4,7 @@ import data from "../../../../../data.json";
 import user from "../../../../../assets/profile.webp";
 import upArrow from "../../../../../assets/arrow.webp";
 import { useNavigate } from "react-router-dom";
+import title from "../../../../../assets/text.webp";
 
 export default function SectionRoom() {
   const [select, setSelect] = useState();
@@ -72,10 +73,13 @@ export default function SectionRoom() {
           محبوب‌ترین
         </FilterItem>
       </FilterBox>
-      <CardContainer>{magPaper}</CardContainer>
-      <ShowMore>
-        <p>نمایش بیشتر</p>
-      </ShowMore>
+      <Gallery>
+        <GalleryTitle>آخرین مطالب من</GalleryTitle>
+        <CardContainer>{magPaper}</CardContainer>
+        <ShowMore>
+          <p>نمایش بیشتر</p>
+        </ShowMore>
+      </Gallery>
     </Container>
   );
 }
@@ -87,6 +91,10 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  @media (min-width: 480px) {
+    background-color: #f5f5f5;
+    padding: 0;
+  }
 `;
 
 const AddSection = styled.div`
@@ -112,6 +120,19 @@ const AddSection = styled.div`
       color: #ffffff;
     }
   }
+  @media (min-width: 480px) {
+    box-shadow: 0px 6px 8px -2px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 0.052vw;
+    width: 26%;
+    margin-bottom:2.604vw;
+    .text {
+      font-size: 1.25vw;
+      &:before {
+        font-size: 2vw;
+      }
+    }
+  }
 `;
 
 const FilterBox = styled.div`
@@ -121,11 +142,7 @@ const FilterBox = styled.div`
   display: flex;
   gap: 10px;
   @media (min-width: 480px) {
-    max-width: 1080px;
-    margin: auto;
-    padding: 10px 13px;
-    margin-top: 60px;
-    margin-bottom: 45px;
+    display: none;
   }
 `;
 
@@ -155,6 +172,9 @@ const CardContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+  @media (min-width: 480px) {
+    gap: 1.042vw;
+  }
 `;
 
 const Paper = styled.div`
@@ -277,7 +297,7 @@ const ShowMore = styled.div`
   @media (min-width: 480px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
-    max-width: 500px;
+    width:61%;
     justify-content: center;
     align-items: center;
     margin: auto;
@@ -291,6 +311,44 @@ const ShowMore = styled.div`
         height: 8px;
         left: -37px;
       }
+    }
+  }
+`;
+
+const Gallery = styled.div`
+  // display: flex;
+  // flex-direction: column;
+  // gap: 10px;
+  @media (min-width: 480px) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1.302vw 1.302vw 2.604vw 22.396vw;
+    background-color: #ffffff;
+    border-radius: 0px 8px 8px 0px;
+  }
+`;
+
+const GalleryTitle = styled.h2`
+  display: none;
+  @media (min-width: 480px) {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #707070;
+    font-weight: 300;
+    font-size: 1.875vw;
+    margin: 0;
+    margin-bottom: 1.302vw;
+    &:before {
+      content: "";
+      display: flex;
+      width: 1.25vw;
+      height: 1.719vw;
+      background-image: url(${title});
+      background-size: contain;
+      background-repeat: no-repeat;
     }
   }
 `;

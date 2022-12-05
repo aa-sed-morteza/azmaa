@@ -2,6 +2,7 @@ import React, { useReducer, useContext, useEffect } from "react";
 
 const initialState = {
   userName: "",
+  userType: "",
   sms: "123456",
   timeOut: false,
   firstName: "",
@@ -29,6 +30,11 @@ const initialState = {
   typeAction: {},
   selectEnvoy: {},
   voteEnvoy: "",
+  addSuggestLevel: 1,
+  suggestType: "",
+  mapLevel: 1,
+  provinceSearch: {},
+  citySearch:{},
   loggedIn: false,
   // currentPrice: 0,
   // systemDiscount: 20000,
@@ -49,6 +55,8 @@ const reducer = (state, action) => {
       return { ...state, loggedIn: action.payload };
     case "SET_AREA_NAME":
       return { ...state, areaName: action.payload };
+    case "SET_TYPE_USER":
+      return { ...state, userType: action.payload };
     case "SET_PASSWORD":
       return { ...state, password: action.payload };
     case "SET_SIGN_LEVEL":
@@ -99,6 +107,16 @@ const reducer = (state, action) => {
       return { ...state, selectEnvoy: action.payload };
     case "SET_VOTE_ENVOY":
       return { ...state, voteEnvoy: action.payload };
+    case "SET_SUGGEST_LEVEL":
+      return { ...state, addSuggestLevel: action.payload };
+    case "SET_SUGGET_TYPE":
+      return { ...state, suggestType: action.payload };
+    case "SET_MAP_LEVEL":
+      return { ...state, mapLevel: action.payload };
+    case "SET_PROVINCE_SEARCH":
+      return { ...state, provinceSearch: action.payload };
+      case "SET_CITY_SEARCH":
+        return { ...state, citySearch: action.payload };
     // case "SET_DATA":
     //   return { ...state, ...action.payload };
     // case "SET_TOKEN":

@@ -35,13 +35,8 @@
       "path": "/about-me",
       "icon": "../../assets/about.webp",
       "active_icon": "../../assets/about-active.webp"
-    },
-    {
-      "title": "ورود به پنل",
-      "path": "/log-in",
-      "icon": "../../assets/panel.webp",
-      "active_icon": "../../assets/panel.webp"
     }
+   
   ],
   "dashboardSuperviser": [
     {
@@ -85,13 +80,47 @@
       "path": "/dashboard/history",
       "icon": "../../assets/history.webp",
       "active_icon": "../../assets/history-active.webp"
+    }
+  
+  ],
+  "dashboardEnvoy": [
+    {
+      "title": "اطلاعات کاربری",
+      "path": "/dashboard",
+      "icon": "../../assets/account-light.webp",
+      "active_icon": "../../assets/account.webp"
     },
     {
-      "title": "خروج از پنل",
-      "path": "/",
-      "icon": "../../assets/exit.webp",
-      "active_icon": "../../assets/exit.webp"
+      "title": "فعالیت‌ها",
+      "path": "/dashboard/myActions",
+      "icon": "../../assets/actions.webp",
+      "active_icon": "../../assets/actions-active.webp"
+    },
+    {
+      "title": "مطالب من",
+      "path": "/dashboard/mySection",
+      "icon": "../../assets/section.webp",
+      "active_icon": "../../assets/section-active.webp"
+    },
+    {
+      "title": "درخواست‌ها",
+      "path": "/dashboard/suggestion",
+      "icon": "../../assets/suggestion.webp",
+      "active_icon": "../../assets/suggestion-active.webp"
+    },
+    {
+      "title": " صندوق",
+      "path": "/dashboard/inbox",
+      "icon": "../../assets/inbox.webp",
+      "active_icon": "../../assets/inbox-active.webp"
+    },
+    {
+      "title": " سابقۀ عملکرد",
+      "path": "/dashboard/history",
+      "icon": "../../assets/history.webp",
+      "active_icon": "../../assets/history-active.webp"
     }
+  
   ],
   "footer": [
     {
@@ -398,3 +427,7 @@
     }
   ]
 }
+
+
+
+

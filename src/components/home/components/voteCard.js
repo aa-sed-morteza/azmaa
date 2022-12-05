@@ -8,6 +8,7 @@ import not from "../../../assets/not.webp";
 import data from "../../../data.json";
 import left from ".././../../assets/left.webp";
 import { useNavigate } from "react-router-dom";
+import ShareButton from "../../general/shareButton";
 
 const VCContainer = styled.div`
   background-color: #ffffff;
@@ -487,9 +488,7 @@ export default function VoteCard() {
         <LargButton onClick={()=>{navigate(`presentation/${"کلیات لایحۀ بودجۀ سال ۱۴۰۱"}`)}}>
           <p className="content">جزئیات</p>
         </LargButton>
-        <SmallButton >
-          <p className="content">بازنشر</p>
-        </SmallButton>
+       <ShareButton text="کلیات لایحۀ بودجۀ سال ۱۴۰۱" title="رای گیری"/>
       </ButtonWraper>
     </VCContainer>
   );

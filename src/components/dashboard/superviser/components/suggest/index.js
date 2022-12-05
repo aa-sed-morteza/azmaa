@@ -4,6 +4,7 @@ import arrow from "../../../../../assets/arrow.webp";
 import confirm from "../../../../../assets/ok.webp";
 import disAgree from "../../../../../assets/disagree.webp";
 import info from "../../../../../assets/not.webp";
+import useWidth from "../../../../../hook/useWidth";
 
 export default function Suggest(props) {
   const [open, setOpen] = useState(false);
@@ -14,8 +15,11 @@ export default function Suggest(props) {
   const [secondIcon, setSecondIcon] = useState([]);
 
   const handdleClick = () => {
-    setOpen(!open);
+      setOpen(!open);
+    
   };
+
+
 
   useEffect(() => {
     if (props.type === "تأییدشده") {
@@ -81,6 +85,13 @@ const Wraper = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 22px 10px 14px;
+  @media (min-width: 480px) {
+    padding:0;
+    border-radius: 8px;
+    width: 47%;
+    height:fit-content;
+    box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.15);
+  }
 `;
 
 const Container = styled.div`
@@ -114,6 +125,14 @@ const Container = styled.div`
       transform: rotate(180deg);
     }
   }
+  @media (min-width: 480px) {
+    padding: 0;
+    &:after {
+      width:0.521vw;
+      height:0.260vw;
+      left:3.385vw;
+    }
+  }
 `;
 
 const Header = styled.div`
@@ -121,6 +140,10 @@ const Header = styled.div`
   flex-direction: column;
   gap: 7px;
   margin-bottom: ${(props) => (!props.space ? "30px" : "")};
+  @media(min-width:480px){
+    padding:2.396vw 3.385vw 1.563vw 3.385vw;
+    gap:0.521vw;
+  }
 `;
 
 const Type = styled.p`
@@ -141,6 +164,13 @@ const Type = styled.p`
     background-size: contain;
     background-repeat: no-repeat;
   }
+  @media(min-width:480px){
+    font-size:1.250vw;
+    &:before{
+      width:1.563vw;
+      height:1.563vw;
+    }
+  }
 `;
 
 const Title = styled.h2`
@@ -148,6 +178,9 @@ const Title = styled.h2`
   font-weight: 400;
   font-size: 4.651vw;
   margin: 0;
+  @media(min-width:480px){
+    font-size:1.667vw;
+  }
 `;
 
 const Date = styled.p`
@@ -155,6 +188,9 @@ const Date = styled.p`
   color: rgba(0, 0, 0, 0.2);
   font-weight: 700;
   font-size: 2.791vw;
+  @media(min-width:480px){
+    font-size:1.250vw;
+  }
 `;
 
 const Content = styled.div`
@@ -219,6 +255,20 @@ const Content = styled.div`
       background-repeat: no-repeat;
     }
   }
+  @media(min-width:480px){
+    padding:1.563vw 3.594vw;
+    margin-bottom:1.563vw;
+    .superviser,.manager{
+      font-size:1.250vw;
+      &:after{
+        font-size:1.250vw;
+      }
+      &:before{
+        width:3.125vw;
+        height:3.125vw;
+      }
+    }
+  }
 `;
 
 const Edit = styled.div`
@@ -238,6 +288,13 @@ const Edit = styled.div`
       color: #eaeaea;
     }
   }
+  @media(min-width:480px){
+    margin:0 1.823vw;
+    margin-bottom:2.396vw;
+    .text{
+      font-size:1.250vw;
+    }
+  }
 `;
 
 const Expand = styled.div`
@@ -254,5 +311,11 @@ const Expand = styled.div`
     color: #707070;
     font-weight: 300;
     font-size: 3.721vw;
+  }
+  @media(min-width:480px){
+    padding:0.781vw 2.604vw;
+    .title,.expand{
+      font-size:1.250vw;
+    }
   }
 `;

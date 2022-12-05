@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Controller from "./controller";
 import SelectState from "./selectState";
 import useWidth from "../../../hook/useWidth";
+import IranMap from "../../pluginIranMap/IranMap";
 
 const HomeContainer = styled.section`
   background-color: #ffffff;
@@ -22,8 +23,8 @@ export default function HomeDetails() {
   const width = useWidth();
   return (
     <HomeContainer>
-      {width<480?( <SelectState />):""}
-     
+      {width<480?(<IranMap/>):""}
+     {/* <SelectState /> */}
       <Controller/>
       
     </HomeContainer>

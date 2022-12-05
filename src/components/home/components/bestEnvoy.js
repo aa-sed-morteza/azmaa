@@ -113,9 +113,9 @@ const Content = styled.div`
   }
 `;
 
-export default function BestEnvoy() {
+export default function BestEnvoy({onClick}) {
   return (
-    <EnvoyCard>
+    <EnvoyCard onClick={onClick}>
       <EnvoyImage>
         <img src={pic} />
       </EnvoyImage>

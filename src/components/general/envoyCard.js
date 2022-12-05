@@ -91,6 +91,10 @@ const EnvoyImage = styled.div`
   overflow: hidden;
   transform: rotate(0deg);
   background: #f9f9f9;
+  @media(min-width:480px){
+    width:7.552vw;
+    height:7.552vw;
+  }
   &:before {
     content: "";
     width: 90px;
@@ -103,6 +107,10 @@ const EnvoyImage = styled.div`
     z-index: 2;
     left: -50%;
     background: #f9f9f9;
+    @media(min-width:480px){
+      width:7.552vw;
+      height:7.552vw;
+    }
   }
   &:after {
     content: "";
@@ -112,6 +120,10 @@ const EnvoyImage = styled.div`
     position: absolute;
     left: 0;
     top: 0;
+    @media(min-width:480px){
+      width:7.552vw;
+      height:7.552vw;
+    }
   }
   b {
     &:before {
@@ -132,6 +144,10 @@ const EnvoyImage = styled.div`
       z-index: 4;
       animation: 3s ${props=>'span2'+props.id} linear forwards 3s;
       opacity: 0;
+      @media(min-width:480px){
+        width:7.552vw;
+        height:7.552vw;
+      }
     }
     &:after {
       content: "";
@@ -150,6 +166,10 @@ const EnvoyImage = styled.div`
       z-index: 1;
       animation: 3s ${props=>'span'+props.id} linear forwards;
       animation-delay: 4s;
+      @media(min-width:480px){
+        width:7.552vw;
+        height:7.552vw;
+      }
     }
   }
 
@@ -163,6 +183,11 @@ const EnvoyImage = styled.div`
     z-index: 5;
     border-radius: 50%;
     object-fit: contain;
+    @media(min-width:480px){
+      width:7.292vw;
+      height:7.292vw;
+      margin: 1.5px auto;
+    }
   }
 
   @keyframes ${props=>'span'+props.id} {

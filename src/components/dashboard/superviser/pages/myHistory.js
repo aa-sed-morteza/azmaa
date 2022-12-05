@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import upArrow from "../../../../assets/arrow.webp";
+import title from "../../../../assets/history.svg";
 
 export default function MyHistory() {
   return (
@@ -10,6 +11,7 @@ export default function MyHistory() {
         <p className="component"> سابقه عملکرد </p>
       </Title>
       <HistoryWraper>
+        <GalleryTitle>آخرین رویدادها </GalleryTitle>
         <HistoryCard>
           <h4 className="title">ورود به پنل</h4>
           <p className="date">۲۹ اسفند ۱۴۰۰ | ۱۹:۳۱</p>
@@ -45,8 +47,8 @@ const Container = styled.section`
   padding: 10px;
   overflow: hidden;
   @media (min-width: 480px) {
-    background-color: #ffffff;
-    padding: 25px 10% 0;
+    background-color: #f5f5f5;
+    padding: 0;
   }
 `;
 
@@ -67,11 +69,7 @@ const Title = styled.div`
     color: rgba(112, 112, 112, 1);
   }
   @media (min-width: 480px) {
-    margin-bottom: 25px;
-    .home,
-    .component {
-      font-size: 1.25vw;
-    }
+   display:none;
   }
 `;
 
@@ -97,12 +95,25 @@ const HistoryWraper = styled.div`
     font-weight: 700;
     font-size: 2.791vw;
   }
+  @media(min-width:480px){
+    padding:1.302vw 1.302vw 2.604vw 9.896vw;
+    gap:1.042vw;
+    .title{
+      font-size:1.667vw;
+    }
+    .date{
+      font-size:1.250vw;
+    }
+  }
 `;
 
 const HistoryCard = styled.div`
   border: 1px solid #eaeaea;
   border-radius: 4px;
   padding: 14px 50px 13px;
+  @media(min-width:480px){
+    padding:1.042vw 4.167vw;
+  }
 `;
 
 const ShowMore = styled.div`
@@ -134,7 +145,7 @@ const ShowMore = styled.div`
   @media (min-width: 480px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
-    max-width: 500px;
+    width: 47%;
     justify-content: center;
     align-items: center;
     margin: auto;
@@ -151,3 +162,27 @@ const ShowMore = styled.div`
     }
   }
 `;
+
+const GalleryTitle=styled.h2`
+  display:none;
+  @media(min-width:480px){
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    color:#707070;
+    font-weight:300;
+    font-size:1.875vw;
+    margin:0;
+    margin-bottom:1.302vw;
+    &:before{
+      content:'';
+      display:flex;
+      width:1.563vw;
+      height:1.563vw;
+      background-image: url(${title});
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+`

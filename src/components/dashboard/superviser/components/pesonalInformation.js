@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import pic from "../../../../assets/yazdan.webp";
+import { useUser } from "../../../context/userContext";
 import ContactInfo from "./contactInfo";
 import LogInInfo from "./logInInfo";
 import PersonalInfo from "./personalInfo";
 
 export default function PersonalInformation() {
+  const {state,dispatch}=useUser();
+  
   return (
     <Container>
       <Content>
@@ -14,7 +17,7 @@ export default function PersonalInformation() {
         </Image>
         <Label>
           <p className="title">ناظر نمایندگان</p>
-          <p className="name">سید مرتضی یزدان‌پرست</p>
+          <p className="name">{`${state.firstName}   ${state.lastName}`}</p>
           <p className="edit">ویرایش تصویر</p>
         </Label>
       </Content>
@@ -35,6 +38,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  @media(min-width:480px){
+    padding:0;
+  }
+
 `;
 
 const Content = styled.div`
@@ -42,6 +49,9 @@ const Content = styled.div`
   align-items: center;
   gap: 10px;
   padding-right: 10px;
+  @media(min-width:480px){
+    display:none;
+  }
 `;
 
 const Image = styled.div`
@@ -92,5 +102,8 @@ const Edit = styled.div`
     font-weight: 300;
     font-size: 3.721vw;
     color: #095644;
+  }
+  @media(min-width:480px){
+    display:none;
   }
 `;

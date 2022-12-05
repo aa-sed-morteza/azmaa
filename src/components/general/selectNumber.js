@@ -23,7 +23,7 @@ export default function SelectNumber({
       </span>
       <input
         className="result"
-        value={voteNumber}
+        value={value}
         onChange={onChange}
         id={id}
         name={name}

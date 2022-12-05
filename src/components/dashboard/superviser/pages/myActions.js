@@ -9,10 +9,11 @@ import ActionCard from "../components/actions/actionCard";
 import pic from "../../../../assets/vote-logo.webp";
 import icon from "../../../../assets/vote.webp";
 import pic2 from "../../../../assets/action-rate.webp";
+import title from "../../../../assets/title.svg";
 
 export default function MyActions() {
   const navigate = useNavigate();
-  const [select, setSelect] = useState(0);
+  const [select, setSelect] = useState(1);
   //mock data for generate envoys card in actions card section
   const envoys = [
     {
@@ -44,7 +45,7 @@ export default function MyActions() {
     },
   ];
 
-  const secondEnvoys =[
+  const secondEnvoys = [
     {
       name: "حسن اسماعیلی",
       state: " پردیس ",
@@ -63,7 +64,7 @@ export default function MyActions() {
       img: "../../assets/jafi.webp",
       action: "ناهمراه",
     },
-  ]
+  ];
 
   return (
     <Container>
@@ -110,23 +111,53 @@ export default function MyActions() {
             </Item>
           </Items>
         </Filtering>
-
-        <ActionCard
-          img={pic}
-          titr="رأی‌گیری"
-          title="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
-          date="۲۹ اسفند ۱۴۰۰"
-          icon={icon}
-          envoys={envoys}
-        />
-         <ActionCard
-          img={pic2}
-          titr="عملکرد"
-          title="دریافت خودرو دناپلاس"
-          date="۲۹ اسفند ۱۴۰۰"
-          icon={icon}
-          envoys={secondEnvoys}
-        />
+        {select == 1 && (
+          <ActionGallery>
+            <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
+            <ActionCard
+              img={pic}
+              titr="رأی‌گیری"
+              title="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
+              date="۲۹ اسفند ۱۴۰۰"
+              icon={icon}
+              envoys={envoys}
+            />
+            <ActionCard
+              img={pic2}
+              titr="عملکرد"
+              title="دریافت خودرو دناپلاس"
+              date="۲۹ اسفند ۱۴۰۰"
+              icon={icon}
+              envoys={secondEnvoys}
+            />
+          </ActionGallery>
+        )}
+        {select == 2 && (
+          <ActionGallery>
+          <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
+          <ActionCard
+            img={pic}
+            titr="رأی‌گیری"
+            title="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
+            date="۲۹ اسفند ۱۴۰۰"
+            icon={icon}
+            envoys={envoys}
+          />
+          </ActionGallery>
+        )}
+        {select == 3 && (
+          <ActionGallery>
+          <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
+          <ActionCard
+            img={pic2}
+            titr="عملکرد"
+            title="دریافت خودرو دناپلاس"
+            date="۲۹ اسفند ۱۴۰۰"
+            icon={icon}
+            envoys={secondEnvoys}
+          />
+          </ActionGallery>
+        )}
       </Wraper>
     </Container>
   );
@@ -139,8 +170,8 @@ const Container = styled.section`
   padding: 10px 20px;
   overflow: hidden;
   @media (min-width: 480px) {
-    background-color: #ffffff;
-    padding: 25px 10% 0;
+    background-color: #f5f5f5;
+    padding: 0;
   }
 `;
 
@@ -161,11 +192,7 @@ const Title = styled.div`
     color: rgba(112, 112, 112, 1);
   }
   @media (min-width: 480px) {
-    margin-bottom: 25px;
-    .home,
-    .component {
-      font-size: 1.25vw;
-    }
+    display: none;
   }
 `;
 
@@ -176,6 +203,11 @@ const Wraper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  @media (min-width: 480px) {
+    padding: 0;
+    background-color: #f5f5f5;
+    gap: 1.302vw;
+  }
 `;
 
 const AddnewAction = styled.div`
@@ -201,6 +233,18 @@ const AddnewAction = styled.div`
       color: #ffffff;
     }
   }
+  @media (min-width: 480px) {
+    box-shadow: 0px 6px 8px -2px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 0.052vw;
+    width: 26%;
+    .text {
+      font-size: 1.25vw;
+      &:before {
+        font-size: 2vw;
+      }
+    }
+  }
 `;
 
 const Filtering = styled.div`
@@ -219,6 +263,15 @@ const Filtering = styled.div`
       color: #d8d8d8;
     }
   }
+  @media (min-width: 480px) {
+    width: 74%;
+    padding: 2.292vw 2.604vw 0.885vw;
+    input {
+      width: 97%;
+      font-size: 1.563vw;
+      margin-bottom: 1.563vw;
+    }
+  }
 `;
 
 const Items = styled.div`
@@ -226,6 +279,9 @@ const Items = styled.div`
   justify-content: center;
   align-items: center;
   gap: 50px;
+  @media (min-width: 480px) {
+    gap: 6.406vw;
+  }
 `;
 const Item = styled.p`
   color: #dff5f0;
@@ -265,4 +321,52 @@ const Item = styled.p`
       top: 9px;
     }
   }
+  @media (min-width: 480px) {
+    font-size: 1.458vw;
+    &:after {
+      height: 5px !important;
+      bottom: -0.885vw !important;
+    }
+    &:before {
+      right: 35px;
+    }
+  }
 `;
+
+const ActionGallery = styled.div`
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+@media(min-width:480px){
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  padding:1.302vw 1.302vw 2.604vw 6.667vw;
+  background-color: #FFFFFF;
+  border-radius: 0px 8px 8px 0px;
+}
+`;
+
+const GalleryTitle=styled.h2`
+  display:none;
+  @media(min-width:480px){
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    color:#707070;
+    font-weight:300;
+    font-size:1.875vw;
+    margin:0;
+    margin-bottom:1.302vw;
+    &:before{
+      content:'';
+      display:flex;
+      width:1.250vw;
+      height:1.719vw;
+      background-image: url(${title});
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+`
