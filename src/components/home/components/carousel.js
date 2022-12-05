@@ -3,6 +3,7 @@ import styled from "styled-components";
 import data from "../../../data.json";
 import leftArrow from "../../../assets/lightArrow.webp";
 import SelectState from "./selectState";
+import IranMap from "../../pluginIranMap/IranMap";
 
 const Wraper = styled.section`
   overflow: hidden;
@@ -158,7 +159,8 @@ export default function Carousel() {
         );
       })}
       <ShowIndex>{index}</ShowIndex>
-      <SelectState />
+      {/* <SelectState /> */}
+      <IranMap/>
     </Wraper>
   );
 }

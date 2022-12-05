@@ -208,7 +208,6 @@ export default IranMap;
 const Container = styled.div`
   border: 1px solid #CBCBCB;
   border-radius: 4px;
-
   .input {
     display: flex;
     align-items: center;
@@ -251,6 +250,32 @@ const Container = styled.div`
         font-size: 6.977vw;
         font-weight: 300;
         padding-left: 5px;
+      }
+    }
+  }
+  @media(min-width:480px){
+    position: absolute;
+    top: 14%;
+    left: 8%;
+    width: 46%;
+    background-color: rgba(255, 255, 255, 0.5);
+    .input{
+      font-size:1.458vw;
+      padding-right:6.563vw;
+      padding-top:2.240vw;
+      &:after{
+        width:0.938vw;
+        height:0.521vw;
+      }
+    }
+    .select{
+      padding-top:2.240vw;
+      padding-right:6.563vw;
+      font-size:1.458vw;
+      span{
+        &:before{
+          font-size:1.563vw;
+        }
       }
     }
   }
