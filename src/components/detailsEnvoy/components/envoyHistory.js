@@ -68,15 +68,13 @@ const Container = styled.div`
     }
   }
   @media (min-width: 480px) {
-    padding: 0;
-    &:after {
-      display: none;
-    }
-  }
-
-  @media (min-width: 480px) {
-    padding: 0 2.292vw 1.875vw;
+    padding: 0 2.292vw 1.875vw !important;
     margin-top: 2.083vw;
+    &:after{
+      width: 1.042vw;
+      height: 0.521vw;
+      left: 1.823vw;
+    }
   }
 `;
 
@@ -93,8 +91,8 @@ const Title = styled.h4`
   @media (min-width: 480px) {
     font-size: 1.875vw;
     transform: translateY(-1.615vw);
-    width: 27%;
-    margin-right: 1.646vw;
+    width: 60%;
+    margin-right: -0.354vw;
     margin-bottom: -1.042vw;
   }
 `;
@@ -108,6 +106,12 @@ const History = styled.div`
     margin: 0;
     font-weight: 700;
     font-size: 3.721vw;
+  }
+  @media(min-width:480px){
+    gap:0.781vw;
+    .text{
+      font-size:1.250vw;
+    }
   }
 `;
 

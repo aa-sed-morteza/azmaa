@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import useWidth from "../../hook/useWidth";
 import styled from "styled-components";
 import EnvoyCard from "../general/envoyCard";
 import Census from "./components/census";
@@ -10,10 +11,11 @@ import SocialNetwork from "./components/socialNetwork";
 
 export default function DetailsEnvoy() {
   const { title } = useParams();
+  const width = useWidth();
   return (
     <Container>
       <Title>
-        <p className="home"> / خانه / نمایندگان </p>
+        <p className="home"> خانه / نمایندگان /</p>
         <p className="component"> {title} </p>
       </Title>
       {/* personal info */}
@@ -29,6 +31,7 @@ export default function DetailsEnvoy() {
         <Census/>
         <EnvoyArea/>
         <EnvoyHistory/>
+        {width>480 ? ( <SocialNetwork/>):""}
       </FirstSection>
       {/* filtering */}
       <SecondSection>
@@ -51,6 +54,9 @@ const Container = styled.section`
   @media (min-width: 480px) {
     padding: 20px 0;
     background-color: #ffffff;
+    gap:0;
+    flex-direction:row;
+    flex-wrap:wrap;
   }
 `;
 
@@ -70,8 +76,11 @@ const Title = styled.div`
     color: rgba(112, 112, 112, 1);
   }
   @media (min-width: 480px) {
-    margin-bottom: 25px;
-    padding-right: 10%;
+    width:100%;
+    padding-bottom: 1.302vw;
+    margin-right: 10%;
+    border-bottom:1px solid #D8D8D8;
+
     .home,
     .component {
       font-size: 1.25vw;
@@ -89,15 +98,33 @@ const FirstSection = styled.div`
   & > * {
     box-shadow: none;
   }
+  @media(min-width:480px){
+    width: 23%;
+    padding-right: 10%;
+    padding-top:1.302vw;
+    padding-left:0.521vw;
+    gap:0.781vw;
+    & > * {
+      padding:0;
+    }
+  }
 `;
 
 const SecondSection = styled.div`
 background-color: #ffffff;
 border-radius: 4px;
-padding: 2.326vw;`;
+padding: 2.326vw;
+  @media(min-width:480px){
+    width: 65%;
+    padding:0.990vw 1.302vw 0 0;
+  }
+`;
 
 const ThirdSection = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 1.628vw 2.558vw 2.093vw;
+  @media(min-width:480px){
+    display:none;
+  }
 `;

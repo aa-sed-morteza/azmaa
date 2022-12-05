@@ -73,16 +73,16 @@ const Container = styled.div`
       transform: rotate(180deg);
     }
   }
-  @media (min-width: 480px) {
-    padding: 0;
-    &:after {
-      display: none;
-    }
-  }
+ 
 
   @media (min-width: 480px) {
-    padding: 0 2.292vw 1.875vw;
+    padding: 0 2.292vw 1.875vw !important;
     margin-top: 2.083vw;
+    &:after{
+      width: 1.042vw;
+      height: 0.521vw;
+      left: 1.823vw;
+    }
   }
 `;
 
@@ -99,8 +99,8 @@ const Title = styled.h4`
   @media (min-width: 480px) {
     font-size: 1.875vw;
     transform: translateY(-1.615vw);
-    width: 27%;
-    margin-right: 1.646vw;
+    width: 51%;
+    margin-right: -0.354vw;
     margin-bottom: -1.042vw;
   }
 `;
@@ -163,6 +163,22 @@ const State = styled.div`
       color: #6cbba9;
       font-weight: 400;
       font-size: 3.256vw;
+    }
+  }
+  @media(min-width:480px){
+    gap:1.094vw;
+    margin-bottom:0.781vw;
+    span{
+      width:4.479vw;
+      height:5vw;
+    }
+    .content{
+      .title{
+        font-size:1.250vw;
+      }
+      .persentage{
+        font-size:1.042vw;
+      }
     }
   }
 `;

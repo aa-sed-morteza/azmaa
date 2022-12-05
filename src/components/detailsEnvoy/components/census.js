@@ -52,7 +52,7 @@ const Container = styled.div`
   padding: 0px 29px 20px;
   margin-top: 40px;
   @media(min-width:480px){
-    padding:0px 45px 30px 40px;
+    padding:0px 45px 30px 40px !important;
     margin-top:60px;
   }
 `;
@@ -114,8 +114,10 @@ const Progress = styled.div`
     }
   }
   @media(min-width:480px){
+    width:40%;
     .number{
       font-size:1.250vw;
+      white-space: nowrap;
     }
     .line{
       height:5px;

@@ -10,6 +10,7 @@ import GeneralActionCard from "./generalActionCard";
 import upArrow from "../../../assets/arrow.webp";
 import check from "../../../assets/check.webp";
 import line from "../../../assets/Line.webp";
+import title from "../../../assets/title1.svg";
 
 // import actionActive from "../../../assets/action-active.webp";
 
@@ -60,61 +61,75 @@ export default function Filtering() {
 
       {select == 1 && (
         <Calendar>
+          <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
           <SubTitile>مرداد ۱۴۰۱</SubTitile>
-          <GeneralActionCard
-            act="vote"
-            content="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
-            action="موافق"
-          />
+          <Gallery>
+            <GeneralActionCard
+              act="vote"
+              content="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
+              action="موافق"
+            />
+          </Gallery>
           <SubTitile>مرداد ۱۴۰۱</SubTitile>
-          <GeneralActionCard
-            act="vote"
-            content="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
-            action="مخالف"
-          />
-          <GeneralActionCard
-            act="action"
-            content="دریافت خودرو دناپلاس"
-            action="همراه"
-          />
+          <Gallery>
+            <GeneralActionCard
+              act="vote"
+              content="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
+              action="مخالف"
+            />
+            <GeneralActionCard
+              act="action"
+              content="دریافت خودرو دناپلاس"
+              action="همراه"
+            />
+          </Gallery>
+
           <Title>سال ۱۴۰۰</Title>
           <SubTitile>مرداد ۱۴۰۰</SubTitile>
-          <GeneralActionCard
-            act="action"
-            content="دریافت خودرو دناپلاس"
-            action="ناهمراه"
-          />
+          <Gallery>
+            <GeneralActionCard
+              act="action"
+              content="دریافت خودرو دناپلاس"
+              action="ناهمراه"
+            />
+          </Gallery>
         </Calendar>
       )}
       {select == 2 && <>همه با فعالیت ها چه فرقی داره ؟</>}
       {select == 3 && (
         <Calendar>
+          <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
           <SubTitile>مرداد ۱۴۰۰</SubTitile>
-          <GeneralActionCard
-            act="vote"
-            content="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
-            action="موافق"
-          />
-          <GeneralActionCard
-            act="vote"
-            content="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
-            action="مخالف"
-          />
+          <Gallery>
+            <GeneralActionCard
+              act="vote"
+              content="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
+              action="موافق"
+            />
+            <GeneralActionCard
+              act="vote"
+              content="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
+              action="مخالف"
+            />
+          </Gallery>
         </Calendar>
       )}
       {select == 4 && (
         <Calendar>
+          <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
           <SubTitile>مرداد ۱۴۰۰</SubTitile>
-          <GeneralActionCard
-            act="action"
-            content="دریافت خودرو دناپلاس"
-            action="همراه"
-          />
-          <GeneralActionCard
-            act="action"
-            content="دریافت خودرو دناپلاس"
-            action="ناهمراه"
-          />
+          <Gallery>
+            <GeneralActionCard
+              act="action"
+              content="دریافت خودرو دناپلاس"
+              action="همراه"
+            />
+            <GeneralActionCard
+              act="action"
+              content="دریافت خودرو دناپلاس"
+              action="ناهمراه"
+            />
+          </Gallery>
         </Calendar>
       )}
 
@@ -141,6 +156,17 @@ const FilteringWraper = styled.div`
     margin-bottom: 13px;
     &::placeholder {
       color: #d8d8d8;
+    }
+  }
+  @media (min-width: 480px) {
+    width: 74%;
+    padding: 1.875vw 1.927vw 0.938vw;
+    border-radius: 8px;
+    input {
+      width: 96%;
+      font-size: 1.563vw;
+      padding: 0.833vw;
+      margin-bottom: 1.823vw;
     }
   }
 `;
@@ -196,6 +222,20 @@ const Item = styled.p`
       top: 9px;
     }
   }
+  @media (min-width: 480px) {
+    font-size: 1.458vw;
+    &.active {
+      &:after {
+        height: 5px;
+        bottom: -0.938vw;
+      }
+    }
+    &:before {
+      width: 1.875vw;
+      height: 1.875vw;
+      right: 1.771vw;
+    }
+  }
 `;
 
 const ShowMore = styled.div`
@@ -232,6 +272,44 @@ const Calendar = styled.div`
   margin-top: 10px;
   border-right: 1px dashed #cbcbcb;
   padding-right: 2%;
+  @media (min-width: 480px) {
+    margin-top: 1.563vw;
+    background-color: #f3f3f3;
+    border-radius: 0px 8px 8px 0px;
+    padding: 2.083vw 2.083vw 1.042vw 0;
+    position: relative;
+    overflow: hidden;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 1.198vw;
+      height: 90%;
+      border-right: 3px dashed #cbcbcb;
+      top: 8.854vw;
+    }
+  }
+`;
+
+const CalendarTitle = styled.h2`
+  display: none;
+  @media (min-width: 480px) {
+    display: flex;
+    align-items: center;
+    color: #707070;
+    gap: 10px;
+    font-weight: 300;
+    font-size: 1.875vw;
+    &:before {
+      content: "";
+      display: inline-flex;
+      width: 2.396vw;
+      height: 2.604vw;
+      background-image: url(${title});
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  }
 `;
 
 const SubTitile = styled.h2`
@@ -266,20 +344,22 @@ const SubTitile = styled.h2`
     top: 2.326vw;
   }
   @media (min-width: 480px) {
+    width: 100%;
     font-size: 1.667vw;
-    margin-bottom: 20px;
-    padding-top: 45px;
+    margin: 0;
+    padding-right: 2.604vw;
+
     &:before {
       width: 1.563vw;
       height: 1.563vw;
-      right: -0.156vw;
-      top: 2.76vw;
+      right: 0.781vw;
+      top: 0.365vw;
     }
     &:after {
-      width: 1.979vw;
+      width: 1.042vw;
       height: 0.156vw;
-      right: -44px;
-      top: 3.438vw;
+      right: -0.313vw;
+      top: 1.198vw;
     }
   }
 `;
@@ -329,9 +409,18 @@ const Title = styled.div`
     }
     &:before {
       border-bottom: 2px dashed #cbcbcb;
-      width: 29vw;
-      right: -29vw;
-      top: 27px;
+      width: 17vw;
+      right: -17vw;
+      top: 1.667vw;
     }
+  }
+`;
+
+const Gallery = styled.div`
+  @media (min-width: 480px) {
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 1.198vw;
+    gap: 1.042vw;
   }
 `;
