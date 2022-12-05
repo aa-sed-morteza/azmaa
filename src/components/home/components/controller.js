@@ -10,6 +10,7 @@ import BestEnvoy from "./bestEnvoy";
 import tik from "../../../assets/vote.webp";
 import ControlCore from "./controlCore";
 import SelectArea from "./selectArea";
+import { useNavigate } from "react-router-dom";
 
 const ControllContainer = styled.section`
   display: flex;
@@ -247,6 +248,7 @@ const EnvoyGalley = styled.div`
 
 export default function Controller() {
   const [select, setSelect] = useState(0);
+  const navigate = useNavigate();
   const width = useWidth();
 
   const envoys = [
@@ -374,7 +376,7 @@ export default function Controller() {
       {/* just envoys */}
       {select == 1 && (
         <EnvoyGalley>
-          <BestEnvoy />
+          <BestEnvoy  onClick={()=>{navigate('/envoy/علیرضا پاکفطرت')}}/>
           <BestEnvoy />
           <BestEnvoy />
           <BestEnvoy />
