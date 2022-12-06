@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function CustomInput({ type, label, icon ,back,value,onChange,id}) {
+export default function CustomInput({
+  type,
+  label,
+  icon,
+  back,
+  value,
+  onChange,
+  id,
+}) {
   return (
     <Container icon={icon} text={label} back={back} type={type}>
       <span></span>
-      <input type={type}  value={value}  onChange={onChange} id={id}/>
+      <input type={type} value={value} onChange={onChange} id={id} />
     </Container>
   );
 }
@@ -26,7 +34,7 @@ const Container = styled.div`
     right: 40px;
     top: -13px;
     color: #707070;
-    background: ${props=>props.back}  ;
+    background: ${(props) => props.back};
   }
   span {
     position: absolute;
@@ -49,6 +57,25 @@ const Container = styled.div`
     background: inherit;
     border-radius: 4px;
     padding-right: 40px;
-    height:${props=>props.type==="textarea" ? "80px":""};
+    height: ${(props) => (props.type === "textarea" ? "80px" : "")};
+  }
+  @media (min-width: 480px) {
+    max-width: none;
+    &:before {
+      font-size: 1.25vw;
+      top: -1.042vw;
+    }
+    span {
+      width: 1.563vw;
+      height: 1.563vw;
+      right: 0.781vw;
+      top: 0.781vw;
+    }
+    input {
+      font-size: 1.25vw;
+
+      padding: 0.885vw;
+      padding-right: 3.125vw;
+    }
   }
 `;

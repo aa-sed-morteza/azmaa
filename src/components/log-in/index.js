@@ -65,6 +65,7 @@ export default function LogIn() {
           {errors.password && touched.password && (
             <ErrorText>{errors.password}</ErrorText>
           )}
+          <Box>
           <Button
             text="ورود"
             background="#095644"
@@ -82,6 +83,7 @@ export default function LogIn() {
               navigate("/sign-in");
             }}
           />
+          </Box>
         </Form>
         <Link>رمز عبور خود را فراموش کرده‌اید؟</Link>
       </Content>
@@ -104,6 +106,10 @@ const Content = styled.div`
   flex-direction: column;
   gap: 15px;
   align-items: center;
+  @media(min-width:480px){
+    width:40%;
+    gap:1.302vw;
+  }
 `;
 
 const Header = styled.div`
@@ -113,6 +119,10 @@ const Header = styled.div`
   width: 192px;
   height: 41px;
   margin-bottom: 4px;
+  @media(min-width:480px){
+    width:13.333vw;
+    height:2.865vw;
+  }
 `;
 
 const Form = styled.form`
@@ -120,6 +130,9 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  @media(min-width:480px){
+    gap:1.302vw;
+  }
 `;
 
 const Link = styled.p`
@@ -127,6 +140,9 @@ const Link = styled.p`
   color: #ffaa00;
   font-weight: 300;
   font-size: 3.721vw;
+  @media(min-width:480px){
+    font-size:1.250vw;
+  }
 `;
 
 const ErrorText = styled.p`
@@ -137,4 +153,18 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
+  @media(min-width:480px){
+    margin-top:0;
+  }
 `;
+
+
+const Box =styled.div`
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  @media(min-width:480px){
+    flex-direction:row-reverse;
+    justify-content:space-between;
+  }
+`
