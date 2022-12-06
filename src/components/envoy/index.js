@@ -9,6 +9,7 @@ import HonestEnvoy from "./components/honestEnvoy";
 import Map from "./components/map";
 import NewEnvoy from "./components/newEnvoy";
 import Search from "./components/search";
+import IranMap from "../pluginIranMap/IranMap";
 
 const Container = styled.section`
   display: flex;
@@ -62,6 +63,8 @@ const Wraper = styled.div`
   margin-bottom: 70px;
 `;
 
+
+
 export default function Envoy() {
   const width = useWidth();
   return (
@@ -72,19 +75,25 @@ export default function Envoy() {
       </Title>
       <Content>
         {width < 480 ? (
-          <Map />
+          // <Map />
+          <IranMap />
         ) : (
           <Wraper>
-            <Map /> <HonestEnvoy />
+            {/* <Map />  */}
+            <IranMap />
+            <HonestEnvoy />
           </Wraper>
         )}
 
         <Search />
         <AdvanceSearch />
-        {width<480 &&<EnvoyFiltering />}
-        {width>480 && <> <ActiveEnvoy/> <Banner/>  <NewEnvoy/></>}
-
-        
+        {width < 480 && <EnvoyFiltering />}
+        {width > 480 && (
+          <>
+            {" "}
+            <ActiveEnvoy /> <Banner /> <NewEnvoy />
+          </>
+        )}
       </Content>
     </Container>
   );

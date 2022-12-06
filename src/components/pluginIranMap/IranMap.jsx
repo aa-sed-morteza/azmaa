@@ -25,7 +25,7 @@ const useMouse = () => {
   return mousePosition;
 };
 
-const IranMap = () => {
+const IranMap = ({position}) => {
   const { x, y } = useMouse();
   const [provinces] = useState(() => iranProvinces);
   const [provinceName, setProvinceName] = useState("");
@@ -62,10 +62,9 @@ const IranMap = () => {
     onSubmit,
   });
 
-  console.log("city", values);
 
   return (
-    <Container>
+    <Container position={position}>
       {values.province == "" && <p className="input">{input}</p>}
       {values.province !== "" && (
         <p className="select">
@@ -254,7 +253,7 @@ const Container = styled.div`
     }
   }
   @media(min-width:480px){
-    position: absolute;
+    position: ${props=>props.position};
     top: 14%;
     left: 8%;
     width: 46%;

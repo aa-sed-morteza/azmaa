@@ -8,6 +8,7 @@ const Container = styled.div`
   background-repeat: no-repeat;
   padding: 19px;
   border-radius: 4px;
+  margin-top:10px;
   input {
     width:95%;
     background: #ffffff;
