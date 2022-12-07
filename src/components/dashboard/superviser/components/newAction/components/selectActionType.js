@@ -109,7 +109,6 @@ export default function SelectActionType() {
     dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 2 });
     actions.resetForm();
     console.log("submit");
-    
   };
 
   const {
@@ -243,12 +242,21 @@ const Title = styled.h2`
   font-size: 4.651vw;
   font-weight: 400;
   margin-bottom: 10px;
+  @media (min-width: 480px) {
+    font-size: 1.458vw;
+    margin-bottom: 1.458vw;
+  }
 `;
 
 const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
+  @media(min-width:480px){
+    width:100%;
+    justify-content:center;
+    margin: 1.302vw auto;
+  }
 `;
 
 const ErrorText = styled.p`
@@ -259,6 +267,10 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
+  @media(min-width:480px){
+    margin-top:0;
+    font-size:1.042vw
+  }
 `;
 
 const Filtering = styled.div`
@@ -275,6 +287,16 @@ const Filtering = styled.div`
     margin-bottom: 13px;
     &::placeholder {
       color: #d8d8d8;
+    }
+  }
+  @media (min-width: 480px) {
+    width: 74%;
+    padding: 2.292vw 2.604vw 0.885vw;
+    margin: auto;
+    input {
+      width: 97%;
+      font-size: 1.563vw;
+      margin-bottom: 1.563vw;
     }
   }
 `;
@@ -321,6 +343,16 @@ const Item = styled.p`
   &:nth-child(2) {
     &:before {
       top: 9px;
+    }
+  }
+  @media (min-width: 480px) {
+    font-size: 1.458vw;
+    &:after {
+      height: 5px !important;
+      bottom: -0.885vw !important;
+    }
+    &:before {
+      right: 35px;
     }
   }
 `;
@@ -377,10 +409,38 @@ const SelectItem = styled.div`
       color: rgba(0, 0, 0, 0.2);
     }
   }
+  @media (min-width: 480px) {
+    .symbol {
+      width: 6.771vw;
+      height: 6.771vw;
+    }
+    .content {
+      .titr {
+        font-size: 1.25vw;
+        &:after {
+          width: 1.563vw;
+          height: 1.563vw;
+        }
+      }
+      .title {
+        font-size: 1.458vw;
+      }
+      .date {
+        font-size: 1.25vw;
+      }
+    }
+  }
 `;
 
 const Gallery = styled.div`
   margin-top: 10px;
+  @media (min-width: 480px) {
+    display:flex;
+    flex-direction:column;
+    gap:1.302vw;
+    width: 84%;
+    margin: 1.302vw auto;
+  }
 `;
 
 const ActiveOrder = styled.div`
@@ -433,6 +493,27 @@ const ActiveOrder = styled.div`
       font-weight: 700;
       font-size: 2.791vw;
       color: rgba(0, 0, 0, 0.2);
+    }
+  }
+  @media (min-width: 480px) {
+    .symbol {
+      width: 6.771vw;
+      height: 6.771vw;
+    }
+    .content {
+      .titr {
+        font-size: 1.25vw;
+        &:after {
+          width: 1.563vw;
+          height: 1.563vw;
+        }
+      }
+      .title {
+        font-size: 1.458vw;
+      }
+      .date {
+        font-size: 1.25vw;
+      }
     }
   }
 `;
