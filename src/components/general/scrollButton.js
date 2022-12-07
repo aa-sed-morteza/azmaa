@@ -3,10 +3,11 @@ import styled from "styled-components";
 import scroll from "../../assets/scroll.svg";
 
 export default function ScrollButton({ container }) {
-  const root = document.getElementById(container);
+ 
   const [active,setActive]=useState(false);
 
   const scroll = (scrollOffset) => {
+    const root = document.getElementById(container);
     root.scrollLeft += scrollOffset;
     setActive(true);
   };
@@ -15,8 +16,8 @@ export default function ScrollButton({ container }) {
 
   return (
     <Container>
-      <Left className={active?"active":""} onClick={() => scroll(200)}></Left>
-      <Right className="active" onClick={() => scroll(-200)}></Right>
+      <Left className={active?"active":""} onClick={() => {scroll(300)}}></Left>
+      <Right className="active" onClick={() => {scroll(-300)}}></Right>
     </Container>
   );
 }
