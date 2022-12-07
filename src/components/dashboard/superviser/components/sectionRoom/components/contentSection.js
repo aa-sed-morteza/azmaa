@@ -38,6 +38,7 @@ export default function ContentSection() {
           <Container>
             <h2>۲. محتوای مطلب را بنویسید:</h2>
 
+            
             <CustomInput
               label="درج عنوان"
               id="title"
@@ -115,12 +116,25 @@ const Container = styled.div`
     margin: 0;
     margin-bottom: 10px;
   }
+  @media(min-width:480px){
+    padding:2.083vw 2.604vw;
+    h2{
+      font-size: 1.458vw;
+      margin-bottom: 1.458vw;
+    }
+ 
+  }
 `;
 
 const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
+  @media(min-width:480px){
+    width:100%;
+    justify-content:center;
+    margin: 1.302vw auto;
+  }
 `;
 
 const ErrorText = styled.p`
@@ -131,4 +145,8 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
+  @media(min-width:480px){
+    margin-top:0;
+    font-size:1.042vw
+  }
 `;
