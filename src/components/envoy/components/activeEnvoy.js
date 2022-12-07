@@ -27,7 +27,7 @@ const Title = styled.h1`
     height: 2px;
     position: relative;
     vertical-align: middle;
-    width: 80%;
+    width: 78%;
   }
 
   &:before {
