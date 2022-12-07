@@ -3,10 +3,17 @@ import styled from "styled-components";
 import DatePicker from "react-multi-date-picker";
 import persian_fa from "react-date-object/locales/persian_fa";
 import persian from "react-date-object/calendars/persian";
-import transition from "react-element-popper/animations/transition"
+import transition from "react-element-popper/animations/transition";
 
-
-export default function CustomDatePicker({label,background,icon,placeholder,id,value,onChange}) {
+export default function CustomDatePicker({
+  label,
+  background,
+  icon,
+  placeholder,
+  id,
+  value,
+  onChange,
+}) {
   const language = "fa";
   return (
     <Container text={label} back={background} icon={icon}>
@@ -17,7 +24,7 @@ export default function CustomDatePicker({label,background,icon,placeholder,id,v
             from: 35,
             transition: "all 400ms cubic-bezier(0.335, 0.010, 0.030, 1.360)",
           }),
-        ]} 
+        ]}
         calendar={persian}
         locale={persian_fa}
         format={language === "en" ? "MM/DD/YYYY" : "YYYY/MM/DD"}
@@ -25,11 +32,10 @@ export default function CustomDatePicker({label,background,icon,placeholder,id,v
         placeholder={placeholder}
         id={id}
         value={value}
-        onChange={val => {
-          console.log(val)
+        onChange={(val) => {
+          console.log(val);
           onChange(id, `${val.year}/${val.month}/${val.day}`);
-      }}
-        
+        }}
       />
     </Container>
   );
@@ -46,10 +52,10 @@ const Container = styled.div`
     right: 40px;
     top: -13px;
     color: #6cbba9;
-    background: ${props=>props.back}  ;
+    background: ${(props) => props.back};
   }
-  &:after{
-    content:"";
+  &:after {
+    content: "";
     position: absolute;
     background-image: url(${(props) => props.icon});
     background-size: contain;
@@ -76,10 +82,31 @@ const Container = styled.div`
       border: 1px solid #0c8af8;
       box-shadow: 0 0 10px 2px #0074d9;
     }
-    &::placeholder{
+    &::placeholder {
       color: #6cbba9;
-    font-weight: 400;
-    font-size: 3.721vw;
+      font-weight: 400;
+      font-size: 3.721vw;
+    }
+  }
+  @media (min-width: 480px) {
+    &:before {
+      font-size: 1.25vw;
+      top: -1.042vw;
+    }
+    &:after {
+      width:1.563vw;
+      height:1.563vw;
+      top:0.677vw;
+    }
+    .rmdp-container {
+      width: 97%;
+    }
+    .custom-input {
+      font-size: 1.25vw;
+      padding: 0.885vw;
+      &::placeholder {
+        font-size: 1.25vw;
+      }
     }
   }
 `;

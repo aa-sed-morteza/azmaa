@@ -44,4 +44,7 @@ const Swatch = styled.div`
   font-size: 5.581vw;
   font-weight: 300;
   margin: auto;
+  @media(min-width:480px){
+    font-size:1.563vw;
+  }
 `;

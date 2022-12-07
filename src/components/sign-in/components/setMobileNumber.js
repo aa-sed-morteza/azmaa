@@ -93,6 +93,7 @@ export default function SetMobileNumber() {
           {errors.phoneNember && touched.phoneNember && (
             <ErrorText>{errors.phoneNember}</ErrorText>
           )}
+          <Box>
           <Button
             text="ثبت"
             textColor="#FFFFFF"
@@ -100,6 +101,7 @@ export default function SetMobileNumber() {
             disabled={isSubmitting}
             type="submit"
           />
+          </Box>
         </Form>
       ) : (
         <Form onSubmit={checkCode} autoComplete="off">
@@ -124,6 +126,7 @@ export default function SetMobileNumber() {
           )}
 
           {update ? (
+            <Box>
             <Button
               text="ارسال کد"
               textColor="#FFFFFF"
@@ -131,13 +134,16 @@ export default function SetMobileNumber() {
               type="submit"
               click={()=>{dispatch({ type: "SET_TIME_OUT", payload: false });}}
             />
+            </Box>
           ) : (
+            <Box>
             <Button
               text="ثبت"
               textColor="#FFFFFF"
               background="#095644"
               type="submit"
             />
+            </Box>
           )}
 
           <Timer />
@@ -168,6 +174,16 @@ const Form = styled.form`
     max-width: 278px;
     text-align: center;
   }
+  @media(min-width:480px){
+    width: 20%;
+    max-width: none;
+    gap:1.302vw;
+    h1{
+      font-size:1.250vw;
+      max-width:none;
+      margin-bottom:1.302vw;
+    }
+  }
 `;
 
 const ErrorText = styled.p`
@@ -178,4 +194,17 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
+  @media(min-width:480px){
+    margin-top:0;
+    font-size:1.042vw;
+  }
 `;
+
+const Box=styled.div`
+  @media(min-width:480px){
+    display:flex;
+    &>*{
+      margin:auto;
+    }
+  }
+`

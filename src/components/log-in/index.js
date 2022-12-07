@@ -155,6 +155,7 @@ const ErrorText = styled.p`
   margin-top: 2%;
   @media(min-width:480px){
     margin-top:0;
+    font-size:1.042vw;
   }
 `;
 

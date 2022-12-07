@@ -46,7 +46,6 @@ export default function PersonalInformation() {
     onSubmit,
   });
 
-  console.log('ther',values)
 
   return (
     <>
@@ -97,7 +96,7 @@ export default function PersonalInformation() {
               )}
           
               <CustomDatePicker
-                label="از تاریخ "
+                label="تاریخ تولد"
                 background="#FFFFFF"
                 icon={calendar}
                 placeholder="انتخاب کنید"
@@ -178,6 +177,9 @@ const Container = styled.div`
   background: #ffffff;
   border-radius: 4px;
   padding: 14px 10px 11px;
+  @media(min-width:480px){
+    padding:2.604vw;
+  }
 `;
 const Title = styled.h2`
   padding-right: 36px;
@@ -186,17 +188,30 @@ const Title = styled.h2`
   font-size: 4.651vw;
   font-weight: 300;
   margin-bottom: 10px;
+  @media(min-width:480px){
+    font-size:1.458vw;
+    margin-bottom:1.302vw;
+  }
 `;
 
 const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  @media(min-width:480px){
+    width:65%;
+    gap:1.302vw;
+  }
 `;
 const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
+  @media(min-width:480px){
+    width:65%;
+    gap:1.042vw;
+    margin:1.042vw auto ;
+  }
 `;
 
 const ErrorText = styled.p`
@@ -207,4 +222,8 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
+  @media(min-width:480px){
+    margin-top:0;
+    font-size:1.042vw;
+  }
 `;
