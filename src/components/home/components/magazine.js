@@ -4,6 +4,7 @@ import mag from "../../../assets/mag.webp";
 import leftArrow from "../../../assets/leftArrow.webp";
 import user from "../../../assets/profile.webp";
 import data from "../../../data.json";
+import ScrollButton from "../../general/scrollButton";
 
 const MagazineContainer = styled.section`
   background-color: #ffaa00;
@@ -12,6 +13,7 @@ const MagazineContainer = styled.section`
   margin-right: -20px;
   margin-left: -20px;
   display: flex;
+  position:relative;
   @media (min-width: 480px) {
     padding: 36px 0 50px;
     // margin-top:70px;
@@ -77,11 +79,21 @@ const Wraper = styled.div`
   overflow-x: scroll;
   gap: 10px;
   padding-right: 50px;
+  scroll-behavior: smooth;
   @media (min-width: 480px) {
     padding-right: 90px;
     gap: 28px;
   }
 `;
+
+const Curtain =styled.div`
+  position:absolute;
+  width:45%;
+  height:100%;
+  background: linear-gradient(to left, rgba(250, 183, 50, 0) 63.02%, #FAB732 100%);
+  top:0;
+  left:0;
+`
 
 const Paper = styled.div`
   display: flex;
@@ -190,7 +202,11 @@ export default function () {
         <span></span>
         <h1> پیشنهاد سردبیر</h1>
       </Ttitle>
-      <Wraper>{magPaper}</Wraper>
+      <Wraper id="magazine">{magPaper}
+      <ScrollButton container="magazine"/>
+      </Wraper>
+      <Curtain></Curtain>
+      
     </MagazineContainer>
   );
 }
