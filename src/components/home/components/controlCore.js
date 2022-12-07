@@ -4,6 +4,7 @@ import profile from "../../../assets/g-profile.webp";
 import location from "../../../assets/g-location.webp";
 import BestEnvoy from "./bestEnvoy";
 import upArrow from "../../../assets/arrow.webp";
+import SelectArea from "./selectArea";
 
 const Container = styled.section`
   display: flex;
@@ -92,8 +93,43 @@ p {
 }
 `;
 
+const AreaContainer =styled.div`
+  @media(min-width:480px){
+    display:flex;
+    flex-wrap:wrap;
+    gap:1.042vw;
+  }
+`
+
 export default function ControlCore() {
   const [select, setSelect] = useState("");
+
+  const envoys = [
+    {
+      name: "مهدی اسماعیلی",
+      state: "دماوند و فیروزکوه",
+      commission: " امنیت ملی",
+      id: "1",
+      persantage: "99",
+      img: "../../assets/abol.webp",
+    },
+    {
+      name: "حسن اسماعیلی",
+      state: " پردیس ",
+      commission: " امنیت اجتماعی",
+      id: "2",
+      persantage: "20",
+      img: "../../assets/ali.webp",
+    },
+    {
+      name: "حامد هایون",
+      state: " البرز ",
+      commission: " امنیت اجتماعی",
+      id: "3",
+      persantage: "50",
+      img: "../../assets/jafi.webp",
+    },
+  ];
   return (
     <Container>
       <Selector>
@@ -132,7 +168,12 @@ export default function ControlCore() {
             </ShowMore>
           </>
         )}
-        {select === "area" && <h1>area</h1>}
+        {select === "area" && (<AreaContainer>
+        <SelectArea area="تهران، ری و شمیرانات" envoys={envoys}/>
+        <SelectArea area="فیروزکوه و دماوند" envoys={envoys}/>
+        <SelectArea area="فیروزکوه و دماوند" envoys={envoys}/>
+
+        </AreaContainer>)}
       </Content>
     </Container>
   );

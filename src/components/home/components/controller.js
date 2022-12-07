@@ -207,7 +207,7 @@ const ShowMore = styled.div`
   @media (min-width: 480px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
-    max-width: 500px;
+    width: 31%;
     justify-content: center;
     align-items: center;
     margin: auto;
@@ -244,6 +244,20 @@ const ActionContainer = styled.div`
 
 const EnvoyGalley = styled.div`
   padding-top: 2.326vw;
+  @media (min-width: 480px) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.042vw;
+   width:103%;
+  }
+`;
+
+const AreaContainer = styled.div`
+  @media (min-width: 480px) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.042vw;
+  }
 `;
 
 export default function Controller() {
@@ -375,73 +389,78 @@ export default function Controller() {
 
       {/* just envoys */}
       {select == 1 && (
-        <EnvoyGalley>
-          <BestEnvoy  onClick={()=>{navigate('/envoy/علیرضا پاکفطرت')}}/>
-          <BestEnvoy />
-          <BestEnvoy />
-          <BestEnvoy />
-          <BestEnvoy />
-          <ShowMore>
+        <>
+          <EnvoyGalley>
+            <BestEnvoy
+              onClick={() => {
+                navigate("/envoy/علیرضا پاکفطرت");
+              }}
+            />
+            <BestEnvoy />
+            <BestEnvoy />
+            <BestEnvoy />
+            <BestEnvoy />
+          </EnvoyGalley>
+          <ShowMore style={{marginTop:'20px'}}>
             <p>نمایش بیشتر</p>{" "}
           </ShowMore>
-        </EnvoyGalley>
-      )}
-
-      {/* just state */}
-      {select==2 && (
-        <>
-        <SelectArea area="تهران، ری و شمیرانات" envoys={envoys}/>
-        <SelectArea area="فیروزکوه و دماوند" envoys={envoys}/>
         </>
       )}
 
-      {/* just vote */}
-      {select ==3 && (
-         <LastVotes>
-         <Title>آخرین رأی‌گیری‌ها</Title>
-         <VoterContainer>
-           {width < 480 ? (
-             <VoteCard />
-           ) : (
-             <>
-               {" "}
-               <VoteCard />
-               <VoteCard />
-               <VoteCard />
-             </>
-           )}
-         </VoterContainer>
+      {/* just state */}
+      {select == 2 && (
+        <AreaContainer>
+          <SelectArea area="تهران، ری و شمیرانات" envoys={envoys} />
+          <SelectArea area="فیروزکوه و دماوند" envoys={envoys} />
+          <SelectArea area="فیروزکوه و دماوند" envoys={envoys} />
+        </AreaContainer>
+      )}
 
-         <ShowMore>
-           <p>نمایش بیشتر</p>{" "}
-         </ShowMore>
-       </LastVotes>
+      {/* just vote */}
+      {select == 3 && (
+        <LastVotes>
+          <Title>آخرین رأی‌گیری‌ها</Title>
+          <VoterContainer>
+            {width < 480 ? (
+              <VoteCard />
+            ) : (
+              <>
+                {" "}
+                <VoteCard />
+                <VoteCard />
+                <VoteCard />
+              </>
+            )}
+          </VoterContainer>
+
+          <ShowMore>
+            <p>نمایش بیشتر</p>{" "}
+          </ShowMore>
+        </LastVotes>
       )}
 
       {/* just actions */}
-      {select==4 && (
-         <LastActions>
-         <Title> آخرین عملکردها</Title>
-         <ActionContainer>
-           {width < 480 ? (
-             <ActionCard />
-           ) : (
-             <>
-               {" "}
-               <ActionCard />
-               <ActionCard />
-               <ActionCard />
-             </>
-           )}
-         </ActionContainer>
+      {select == 4 && (
+        <LastActions>
+          <Title> آخرین عملکردها</Title>
+          <ActionContainer>
+            {width < 480 ? (
+              <ActionCard />
+            ) : (
+              <>
+                {" "}
+                <ActionCard />
+                <ActionCard />
+                <ActionCard />
+              </>
+            )}
+          </ActionContainer>
 
-         <ShowMore>
-           <p>نمایش بیشتر</p>{" "}
-         </ShowMore>
-       </LastActions>
+          <ShowMore>
+            <p>نمایش بیشتر</p>{" "}
+          </ShowMore>
+        </LastActions>
       )}
-
-      
     </ControllContainer>
   );
 }
