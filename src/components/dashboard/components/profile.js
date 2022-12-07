@@ -78,6 +78,11 @@ const Image = styled.div`
     width: 7.292vw;
     height: 7.552vw;
     padding: 4px;
+    &:after{
+      width:1.042vw;
+      height:1.042vw;
+      left: -0.837vw;
+    }
     img {
       object-fit: cover;
     }

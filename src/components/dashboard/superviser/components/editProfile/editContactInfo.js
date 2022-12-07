@@ -151,6 +151,9 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 14px 10px 11px;
   margin-top: 15px;
+  @media(min-width:480px){
+    padding:2.083vw 2.604vw;
+  }
 `;
 const Title = styled.h2`
   padding-right: 36px;
@@ -159,12 +162,20 @@ const Title = styled.h2`
   font-size: 4.651vw;
   font-weight: 300;
   margin-bottom: 10px;
+  @media(min-width:480px){
+    font-size:1.250vw;
+    margin-bottom:1.042vw;
+  }
 `;
 
 const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  @media(min-width:480px){
+    width:90%;
+    gap:1.302vw;
+  }
 `;
 
 const Box = styled.div`
