@@ -7,7 +7,7 @@ const initialState = {
   timeOut: false,
   firstName: "",
   lastName: "",
-  // image: "",
+  image: "",
   birthDay: "",
   birthPlace: "",
   mobileNumber: "",
@@ -34,16 +34,8 @@ const initialState = {
   suggestType: "",
   mapLevel: 1,
   provinceSearch: {},
-  citySearch:{},
+  citySearch: {},
   loggedIn: false,
-  // currentPrice: 0,
-  // systemDiscount: 20000,
-  // balance: 200000,
-  // id: 1,
-
-  // hasCart: false,
-  // payment: false,
-  // confirmOrder: false,
   // token: null,
 };
 
@@ -115,8 +107,10 @@ const reducer = (state, action) => {
       return { ...state, mapLevel: action.payload };
     case "SET_PROVINCE_SEARCH":
       return { ...state, provinceSearch: action.payload };
-      case "SET_CITY_SEARCH":
-        return { ...state, citySearch: action.payload };
+    case "SET_CITY_SEARCH":
+      return { ...state, citySearch: action.payload };
+    case "SET_IMAGE":
+      return { ...state, image: action.payload };
     // case "SET_DATA":
     //   return { ...state, ...action.payload };
     // case "SET_TOKEN":
