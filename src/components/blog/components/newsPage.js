@@ -10,6 +10,7 @@ import user from "../../../assets/profile.webp";
 import text from "../../../assets/text.webp";
 import useWidth from "../../../hook/useWidth";
 import upArrow from "../../../assets/arrow.webp";
+import ShareButton from "../../general/shareButton";
 
 export default function NewsPage() {
   const { title } = useParams();
@@ -75,9 +76,11 @@ export default function NewsPage() {
                 <Button color="#FFA5A5" icon={dislike}>
                   ۱۰
                 </Button>
-                <Share>
+                {/* <Share>
                   <p className="text">بازنشر</p>
-                </Share>
+                </Share> */}
+                <ShareButton right={true} text="  مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود ک " title="اطلاع رسانی نماینده" />
+
               </Feedback>
             </Content>
           </NewsContainer>
@@ -127,9 +130,10 @@ export default function NewsPage() {
                     <Button color="#FFA5A5" icon={dislike}>
                       ۱۰
                     </Button>
-                    <Share>
+                    {/* <Share>
                       <p className="text">بازنشر</p>
-                    </Share>
+                    </Share> */}
+                    <ShareButton right={true} text="  مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود ک " title="اطلاع رسانی نماینده" />
                   </Feedback>
                 </Content>
               </NewsContainer>
@@ -166,6 +170,9 @@ const News = styled.div`
   background-color: #f3f3f3;
   border-radius: 8px 0px 0px 8px;
   width: 54%;
+  @media(max-width:1000px){
+    width:44%;
+  }
 `;
 
 const RelatedContainer = styled.div`
@@ -381,23 +388,27 @@ const Button = styled.div`
   }
 `;
 
-const Share = styled.div`
-  padding: 6px 15px;
-  border: 1px solid #095644;
-  border-radius: 4px;
-  margin-right: auto;
-  .text {
-    color: #095644;
-    font-size: 4.65vw;
-    font-weight: 300;
-    margin: 0;
-  }
-  @media (min-width: 480px) {
-    width: 200px;
-    .text {
-      font-size: 1.042vw;
-      text-align: center;
-    }
+const Share = styled(ShareButton)`
+  // padding: 6px 15px;
+  // border: 1px solid #095644;
+  // border-radius: 4px;
+  // margin-right: auto;
+  // .text {
+  //   color: #095644;
+  //   font-size: 4.65vw;
+  //   font-weight: 300;
+  //   margin: 0;
+  // }
+  // @media (min-width: 480px) {
+  //   width: 200px;
+  //   .text {
+  //     font-size: 1.042vw;
+  //     text-align: center;
+  //   }
+  // }
+  &>*{
+    margin-right:auto;
+
   }
 `;
 
@@ -445,6 +456,9 @@ const CardContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 10px;
+  @media(min-width:480px){
+    justify-content:flex-start;
+  }
 `;
 
 const Paper = styled.div`
@@ -512,8 +526,8 @@ const Paper = styled.div`
     box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     .cover {
-      width: 330px;
-      height: 253px;
+      width: 17.188vw;
+      height: 13.177vw;
       border-radius: 4px;
       margin-bottom: 18px;
     }
@@ -529,11 +543,24 @@ const Paper = styled.div`
     .content {
       font-size: 1.25vw;
       margin-bottom: 36px;
-      max-width: 306px;
+      max-width: 15.938vw;
     }
     .date {
       font-size: 1.042vw;
       font-weight: 500;
+    }
+  }
+  @media(max-width:1600px){
+    .cover{
+      width:16vw;
+    }
+  }
+  @media(max-width:1200px){
+    .cover{
+      width:15vw;
+    }
+    .content{
+      max-width:14vw;
     }
   }
 `;
