@@ -21,8 +21,10 @@ const Title = styled.div`
   font-size: 1.875vw;
   font-weight: 300;
   position: relative;
-  padding-right: 60px;
   padding-bottom: 20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
   &.active {
     font-weight: 500;
     &:after {
@@ -38,14 +40,12 @@ const Title = styled.div`
   }
   &:before {
     content: "";
-    display: block;
-    position: absolute;
-    width: 53px;
-    height: 53px;
+    display: inline-flex;
+    width: 2.604vw;
+    height: 2.604vw;
     background-image: url(${(props) => props.icon});
     background-size: contain;
     background-repeat: no-repeat;
-    right: 0;
   }
 `;
 

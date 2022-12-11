@@ -4,6 +4,7 @@ import leftArrow from "../../../assets/leftArrow.webp";
 import mag from "../../../assets/blog.webp"
 import user from "../../../assets/profile.webp";
 import data from "../../../data.json";
+import ScrollButton from "../../general/scrollButton";
 
 const MagazineContainer = styled.section`
   background-color: #ffaa00;
@@ -13,6 +14,7 @@ const MagazineContainer = styled.section`
   margin-left: -10px;
   display: flex;
   margin-bottom:15px;
+  position:relative;
   @media (min-width: 480px) {
     padding: 36px 0 50px;
     // margin-top:70px;
@@ -170,6 +172,14 @@ const Paper = styled.div`
   }
 `;
 
+const Curtain =styled.div`
+  position:absolute;
+  width:45%;
+  height:100%;
+  background: linear-gradient(to left, rgba(250, 183, 50, 0) 63.02%, #FAB732 100%);
+  top:0;
+  left:0;
+`
 export default function Magazine() {
     const magPaper = data.magazine.map((x, i) => {
         return (
@@ -192,8 +202,10 @@ export default function Magazine() {
         <span></span>
         <h1>جدیدترین مطالب</h1>
       </Ttitle>
-      <Wraper>{magPaper}</Wraper>
-      
+      <Wraper id="magazine">{magPaper}
+      <ScrollButton container="magazine"/>
+      </Wraper>
+      <Curtain></Curtain>
     </MagazineContainer>
   );
 }

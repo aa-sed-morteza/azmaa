@@ -172,9 +172,19 @@ const Title = styled.h1`
       background-image: url(${tik});
       background-size: cover;
       background-repeat: no-repeat;
-      width: 59px;
-      height: 59px;
+      width: 3.073vw;
+      height: 3.073vw;
       margin-bottom: -1%;
+    }
+  }
+  @media(max-width:1400px){
+    &:after{
+      width:79%;
+    }
+  }
+  @media(max-width:1000px){
+    &:after{
+      width:70%;
     }
   }
 `;
@@ -232,6 +242,7 @@ const VoterContainer = styled.div`
   @media (min-width: 480px) {
     display: flex;
     gap: 20px;
+    justify-content:center;
   }
 `;
 
@@ -239,6 +250,7 @@ const ActionContainer = styled.div`
   @media (min-width: 480px) {
     display: flex;
     gap: 20px;
+    justify-content:center;
   }
 `;
 

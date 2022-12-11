@@ -48,6 +48,7 @@ const NewsWraper = styled.div`
   margin-bottom: 10px;
   @media (min-width: 480px) {
     margin-bottom: 45px;
+    justify-content:flex-start;
   }
 `;
 
@@ -116,8 +117,8 @@ const Paper = styled.div`
     box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     .cover {
-      width: 330px;
-      height: 253px;
+      width: 17.188vw;
+      height: 13.177vw;
       border-radius: 4px;
       margin-bottom: 18px;
     }
@@ -133,11 +134,24 @@ const Paper = styled.div`
     .content {
       font-size: 1.25vw;
       margin-bottom: 36px;
-      max-width: 306px;
+      max-width: 15.938vw;
     }
     .date {
       font-size: 1.042vw;
       font-weight: 500;
+    }
+  }
+  @media(max-width:1600px){
+    .cover{
+      width:16vw;
+    }
+  }
+  @media(max-width:1200px){
+    .cover{
+      width:15vw;
+    }
+    .content{
+      max-width:14vw;
     }
   }
 `;

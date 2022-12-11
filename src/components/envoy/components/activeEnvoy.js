@@ -36,9 +36,14 @@ const Title = styled.h1`
     background-image: url(${profile});
     background-size: cover;
     background-repeat: no-repeat;
-    width: 59px;
-    height: 59px;
+    width: 3.073vw;
+    height: 3.073vw;
     margin-bottom: -1%;
+  }
+  @media(max-width:1200px){
+    &:after{
+      width:75%;
+    }
   }
 `;
 
