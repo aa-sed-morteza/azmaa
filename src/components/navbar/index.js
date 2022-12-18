@@ -242,7 +242,7 @@ const Category = styled.ul`
         content: "";
         display: "flex";
         background-color: white;
-        bottom: -32px;
+        bottom: -1.094vw;
         position: absolute;
         width: 100%;
         height: 5px;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import useWidth from "../../../hook/useWidth";
 import arrow from "../../../assets/arrow.webp";
@@ -30,6 +30,12 @@ export default function SelectArea(props) {
     }
   };
 
+  useEffect(()=>{
+    if(width>480){
+      setOpen(true);
+    }
+  },[])
+
   return (
     <Wraper>
       <Container onClick={handdleClick} className={open ? "active" : ""}>
@@ -51,8 +57,9 @@ const Wraper = styled.div`
   border-radius: 4px;
   margin-top:2.326vw;
   @media (min-width: 480px) {
+    overflow:hidden;
     border-radius: 8px;
-    width: 49%;
+    width: 32%;
     height: fit-content;
     box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.15);
   }
@@ -109,9 +116,16 @@ const Container = styled.div`
     }
   }
   @media (min-width: 480px) {
-    padding: 0;
+    padding: 1.042vw;
     &:after {
       display: none;
+    }
+    h2{
+      font-size:1.563vw;
+      &:before{
+        width:8.333vw;
+        height:8.333vw;
+      }
     }
   }
 `;
@@ -121,6 +135,7 @@ const Details = styled.div`
   
   border-top: 1px solid #f5f5f5;
   &>*{
-    box-shadow:none;
+     box-shadow:none;
+    // width:100%;
   }
 `;

@@ -160,7 +160,7 @@ export default function Carousel() {
       })}
       <ShowIndex>{index}</ShowIndex>
       {/* <SelectState /> */}
-      <IranMap/>
+      <IranMap position="absolute"/>
     </Wraper>
   );
 }

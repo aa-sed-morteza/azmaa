@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import pic from "../../../../assets/yazdan.webp";
 import { useUser } from "../../../context/userContext";
 import ContactInfo from "../../superviser/components/contactInfo";
 import LogInInfo from "../../superviser/components/logInInfo";
@@ -8,29 +7,95 @@ import PersonalInfo from "../../superviser/components/personalInfo";
 import CommissinInfo from "./commissonInfo";
 import EnvoyState from "./envoyState";
 import HistoryEnvoy from "./history";
+import remove from "../../../../assets/remove.svg";
+import camera from "../../../../assets/camera.svg";
+import gallery from "../../../../assets/gallery.svg";
+import Button from "../../../general/button";
+import Modal from "../../../general/modal";
+import useModal from "../../../../hook/useModal";
 
 export default function PersonalInformation() {
-  const {state,dispatch}=useUser();
-  console.log('his',state.dutieHistory)
-  
+  const { state, dispatch } = useUser();
+  const { isShowing, toggle } = useModal();
+  const [selectedFile, setSelectedFile] = useState();
+  const [preview, setPreview] = useState();
+  const inputRef = useRef();
+
+  useEffect(() => {
+    if (!selectedFile) {
+      setPreview(undefined);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setPreview(objectUrl);
+    // dispatch({ type: "SET_IMAGE", payload: preview });
+
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedFile]);
+
+  const onSelectFile = (e) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
+    }
+
+    // I've kept this example simple by using the first image instead of multiple
+    setSelectedFile(e.target.files[0]);
+  };
+
   return (
     <Container>
       <Content>
-        <Image>
-          <img src={pic} alt="profile-picture" />
+        <Image onClick={toggle}>
+          {selectedFile && <img src={preview} alt="profile-picture" />}
         </Image>
         <Label>
           <p className="title">نمایندۀ مجلس شورای اسلامی</p>
           <p className="name">{`${state.firstName}   ${state.lastName}`}</p>
-          <p className="edit">ویرایش تصویر</p>
+          <p className="edit" onClick={toggle}>
+            ویرایش تصویر
+          </p>
         </Label>
       </Content>
+      <Modal isShowing={isShowing} hide={toggle} title="انتخاب عکس پروفایل ">
+        <Input icon={gallery} text="انتخاب از گالری">
+          <input type="file" onChange={onSelectFile} />
+          <span></span>
+        </Input>
+        <Input icon={camera} text="عکاسی با دوربین">
+          <input type="file" onChange={onSelectFile} />
+          <span></span>
+        </Input>
+        <Input icon={remove}>
+          <p className="text">حذف عکس</p>
+          <span></span>
+        </Input>
+
+        <Box>
+          <Button
+            text="لغو"
+            textColor="#095644"
+            borderColor="#095644"
+            width="35%"
+            click={toggle}
+          />
+          <Button
+            text="ثبت"
+            textColor="#FFFFFF"
+            background="#095644"
+            width="62%"
+            click={toggle}
+          />
+        </Box>
+      </Modal>
       <PersonalInfo />
       <LogInInfo />
       <ContactInfo />
-      <EnvoyState/>
-      <CommissinInfo/>
-      <HistoryEnvoy/>
+      <EnvoyState />
+      <CommissinInfo />
+      <HistoryEnvoy />
       <Edit>
         <p className="text">ویرایش حساب کاربری</p>
       </Edit>
@@ -45,10 +110,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  @media(min-width:480px){
-    padding:0;
+  @media (min-width: 480px) {
+    padding: 0;
   }
-
 `;
 
 const Content = styled.div`
@@ -56,8 +120,8 @@ const Content = styled.div`
   align-items: center;
   gap: 10px;
   padding-right: 10px;
-  @media(min-width:480px){
-    display:none;
+  @media (min-width: 480px) {
+    display: none;
   }
 `;
 
@@ -110,7 +174,79 @@ const Edit = styled.div`
     font-size: 3.721vw;
     color: #095644;
   }
-  @media(min-width:480px){
-    display:none;
+  @media (min-width: 480px) {
+    display: none;
+  }
+`;
+
+const Input = styled.div`
+  background: #eaeaea;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4.651vw;
+  margin-bottom: 2.326vw;
+  input {
+    &::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+    &:before {
+      content: "${(props) => props.text}";
+      display: inline-block;
+      color: #9f9f9f;
+      text-align: center;
+      outline: none;
+      white-space: nowrap;
+      -webkit-user-select: none;
+      cursor: pointer;
+      font-weight: 300;
+      font-size: 4.651vw;
+    }
+  }
+  input[type="file"] {
+    color: rgba(0, 0, 0, 0);
+    width: 100%;
+  }
+
+  .text {
+    margin: 0;
+    color: #9f9f9f;
+    font-weight: 300;
+    font-size: 4.651vw;
+  }
+  span {
+    width: 6.977vw;
+    height: 6.977vw;
+    background-image: url(${(props) => props.icon});
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  @media (min-width: 480px) {
+    padding: 1.302vw;
+    margin-bottom: 1.302vw;
+    input {
+      &:before {
+        font-size: 1.458vw;
+      }
+    }
+    .text {
+      font-size: 1.458vw;
+    }
+    span {
+      width: 1.823vw;
+      height: 1.823vw;
+    }
+  }
+`;
+
+const Box = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  @media (min-width: 480px) {
+    justify-content: center;
+    gap: 1.563vw;
   }
 `;

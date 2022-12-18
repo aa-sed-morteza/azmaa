@@ -33,18 +33,19 @@ const Container = styled.button`
   }
   .text {
     font-family:YekanBakh;
+    display: flex;
+    align-items:center;
     text-align:center;
     font-weight: 700;
     font-size: 3.721vw;
     color: ${(props) => props.color};
     margin:0 auto;
     padding:7px;
-    display: flex;
+    
     gap: 5px;
     &:after {
       content: "";
       display: ${props=>props.icon ? "inline-flex" :"none"} ;
-      align-items:center;
       background-image: url(${(props) => props.icon});
       background-size: contain;
       background-repeat: no-repeat;

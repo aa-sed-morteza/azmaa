@@ -210,12 +210,25 @@ const Container = styled.div`
     margin: 0;
     margin-bottom: 10px;
   }
+  @media(min-width:480px){
+    padding:2.083vw 2.604vw;
+    h2{
+      font-size: 1.458vw;
+      margin-bottom: 1.458vw;
+    }
+ 
+  }
 `;
 
 const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
+  @media(min-width:480px){
+    width:100%;
+    justify-content:center;
+    margin: 1.302vw auto;
+  }
 `;
 
 const RadioButton = styled.div`
@@ -251,6 +264,21 @@ const RadioButton = styled.div`
       font-weight: 400;
     }
   }
+  @media(min-width:480px){
+    width:67%;
+    margin:1.042vw auto;
+    input{
+      width:1.563vw;
+      height:1.563vw;
+    }
+    label{
+      font-size:1.563vw;
+    }
+    img{
+      width:2.604vw;
+      height:2.604vw;
+    }
+  }
 `;
 
 const ErrorText = styled.p`
@@ -261,4 +289,8 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
+  @media(min-width:480px){
+    margin-top:0;
+    font-size:1.042vw
+  }
 `;

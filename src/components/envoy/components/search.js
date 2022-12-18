@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import background from "../../../assets/back-controll.webp";
 
+
 const Container = styled.div`
   background-image: url(${background});
   background-size: cover;
   background-repeat: no-repeat;
   padding: 19px;
   border-radius: 4px;
+  margin-top:10px;
   input {
     width:95%;
     background: #ffffff;
@@ -20,6 +22,7 @@ const Container = styled.div`
     font-family: FontAwesome;
     ::placeholder{
       color:#D8D8D8;
+      font-family: FontAwesome;
       
     }
   }
@@ -41,7 +44,7 @@ const Container = styled.div`
 export default function Search() {
   return (
     <Container>
-      <input type="text"  placeholder="&#xF002; جستجو کن..."/>
+      <input type="text"  placeholder="&#xF002; جستجو کن..."/>      
     </Container>
   );
 }

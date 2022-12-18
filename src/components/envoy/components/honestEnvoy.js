@@ -19,18 +19,16 @@ const Title =styled.h1`
   color:#707070;
   font-weight:300;
   font-size:1.875vw;
-  position:relative;
-  padding-right:100px;
   margin-bottom:50px;
   margin-top:0;
+  display:flex;
+  align-items:center;
+  gap:10px;
   &:before{
     content:"";
-    display:block;
+    display:inline-flex;
     width:47px;
     height:32px;
-    right:36px;
-    bottom: 1px;
-    position: absolute;
     background-image: url(${eye});
     background-size: cover;
     background-repeat: no-repeat;

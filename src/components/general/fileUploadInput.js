@@ -53,5 +53,22 @@ const Container = styled.div`
     width: 40%;
 
   }    
+  @media(min-width:480px){
+    padding:0.990vw;
+    span{
+      width:1.042vw;
+      height:1.042vw;
+    }
+    input{
+      &:before{
+        font-size:1.354vw;
+      }
+    }
+    input[type='file'] {
+      width: 20%;
+  
+    } 
+    
+  }
 
 `;

@@ -4,6 +4,7 @@ import profile from "../../../assets/g-profile.webp";
 import location from "../../../assets/g-location.webp";
 import BestEnvoy from "./bestEnvoy";
 import upArrow from "../../../assets/arrow.webp";
+import SelectArea from "./selectArea";
 
 const Container = styled.section`
   display: flex;
@@ -20,8 +21,10 @@ const Title = styled.div`
   font-size: 1.875vw;
   font-weight: 300;
   position: relative;
-  padding-right: 60px;
   padding-bottom: 20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
   &.active {
     font-weight: 500;
     &:after {
@@ -37,14 +40,12 @@ const Title = styled.div`
   }
   &:before {
     content: "";
-    display: block;
-    position: absolute;
-    width: 53px;
-    height: 53px;
+    display: inline-flex;
+    width: 2.604vw;
+    height: 2.604vw;
     background-image: url(${(props) => props.icon});
     background-size: contain;
     background-repeat: no-repeat;
-    right: 0;
   }
 `;
 
@@ -92,8 +93,43 @@ p {
 }
 `;
 
+const AreaContainer =styled.div`
+  @media(min-width:480px){
+    display:flex;
+    flex-wrap:wrap;
+    gap:1.042vw;
+  }
+`
+
 export default function ControlCore() {
   const [select, setSelect] = useState("");
+
+  const envoys = [
+    {
+      name: "مهدی اسماعیلی",
+      state: "دماوند و فیروزکوه",
+      commission: " امنیت ملی",
+      id: "1",
+      persantage: "99",
+      img: "../../assets/abol.webp",
+    },
+    {
+      name: "حسن اسماعیلی",
+      state: " پردیس ",
+      commission: " امنیت اجتماعی",
+      id: "2",
+      persantage: "20",
+      img: "../../assets/ali.webp",
+    },
+    {
+      name: "حامد هایون",
+      state: " البرز ",
+      commission: " امنیت اجتماعی",
+      id: "3",
+      persantage: "50",
+      img: "../../assets/jafi.webp",
+    },
+  ];
   return (
     <Container>
       <Selector>
@@ -132,7 +168,12 @@ export default function ControlCore() {
             </ShowMore>
           </>
         )}
-        {select === "area" && <h1>area</h1>}
+        {select === "area" && (<AreaContainer>
+        <SelectArea area="تهران، ری و شمیرانات" envoys={envoys}/>
+        <SelectArea area="فیروزکوه و دماوند" envoys={envoys}/>
+        <SelectArea area="فیروزکوه و دماوند" envoys={envoys}/>
+
+        </AreaContainer>)}
       </Content>
     </Container>
   );
