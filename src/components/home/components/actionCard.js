@@ -8,7 +8,7 @@ import not from "../../../assets/not.webp";
 import data from "../../../data.json";
 import left from ".././../../assets/left.webp";
 import { useNavigate } from "react-router-dom";
-import ShareButton from "../../general/shareButton.js"
+import ShareButton from "../../general/shareButton.js";
 
 const VCContainer = styled.div`
   background-color: #ffffff;
@@ -137,7 +137,8 @@ const Success = styled.div`
     right: -11.628vw;
     top: -1.395vw;
   }
-  &.active ,&:hover{
+  &.active,
+  &:hover {
     font-weight: bold;
     &:after {
       content: "";
@@ -187,7 +188,8 @@ const Faild = styled.div`
     right: -11.628vw;
     top: -1.395vw;
   }
-  &.active ,&:hover{
+  &.active,
+  &:hover {
     font-weight: bold;
     &:after {
       content: "";
@@ -238,7 +240,8 @@ const Not = styled.div`
     right: -11.628vw;
   }
 
-  &.active ,&:hover{
+  &.active,
+  &:hover {
     font-weight: bold;
     &:after {
       content: "";
@@ -276,11 +279,14 @@ const EnvoyGallery = styled.div`
   padding: 18px 0 12px;
   display: flex;
   overflow-x: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   @media (min-width: 480px) {
     border-radius: 8px;
     flex-direction: column;
     padding-inline: 15px;
-
+    overflow-x: hidden;
     margin-bottom: 10px;
     flex: 1;
     overflow-y: auto;
@@ -293,12 +299,12 @@ const Card = styled.div`
   justify-content: center;
   align-items: center;
   padding: 4px;
-  min-width: 20.930vw;
+  min-width: 20.93vw;
   border-left: 1px solid white;
   .picture {
-    width: 10.930vw;
-    height: 10.930vw;
-    border-radius: 10.930vw;
+    width: 10.93vw;
+    height: 10.93vw;
+    border-radius: 10.93vw;
     margin-bottom: 10px;
     border: 3px solid ${(props) => props.color};
     img {
@@ -324,7 +330,7 @@ const Card = styled.div`
   }
   @media (min-width: 480px) {
     flex-wrap: wrap;
-    max-height: 7.500vw;
+    max-height: 7.5vw;
     padding: 19px 30px 10px;
     border-left: none;
     border-bottom: 1px solid #ffffff;
@@ -332,7 +338,7 @@ const Card = styled.div`
       width: 5vw;
       height: 5vw;
       border-radius: 5vw;
-      border-width: 0.469vw;
+      border-width:0.2vw;;
     }
     .name {
       font-size: 1.458vw;
@@ -500,7 +506,7 @@ export default function ActionCard() {
         {/* <SmallButton>
           <p className="content">بازنشر</p>
         </SmallButton> */}
-        <ShareButton text="دریافت خودرو دناپلاس " title="اطلاع رسانی نماینده"/>
+        <ShareButton text="دریافت خودرو دناپلاس " title="اطلاع رسانی نماینده" />
       </ButtonWraper>
     </VCContainer>
   );

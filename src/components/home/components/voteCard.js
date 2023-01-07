@@ -275,11 +275,14 @@ const EnvoyGallery = styled.div`
   padding: 18px 0 12px;
   display: flex;
   overflow-x: scroll;
+  ::-webkit-scrollbar{
+    display: none; 
+  }
   @media(min-width:480px){
     border-radius:8px;
     flex-direction:column;
     padding-inline:15px;
-  
+    overflow-x:hidden;
    margin-bottom:10px;
    flex:1;
    overflow-y: auto;
@@ -332,7 +335,7 @@ const Card = styled.div`
       width: 5vw;
       height: 5vw;
       border-radius: 5vw;
-      border-width:0.469vw;;
+      border-width:0.2vw;;
     }
     .name{
       font-size:1.458vw;
