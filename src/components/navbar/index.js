@@ -38,7 +38,7 @@ const Logo = styled.div`
   @media (min-width: 480px) {
     margin-left: 7.292vw;
     width: 3.021vw;
-    height: 2.500vw;
+    height: 2.5vw;
   }
 `;
 
@@ -137,39 +137,37 @@ const List = styled.li`
       }
     }
   }
-
 `;
 
 const MobilePanel = styled.div`
-position:absolute;
-display:flex;
-align-items: center;
-gap:3.488vw;
-padding-right:4.186vw;
-bottom:-16.279vw;
-right:0;
-.icon{
-  display:flex;
-  border-radius:4px;
-  width:11.628vw;
-  height:11.163vw;
-  background-color:${props=>props.color};
-  img{
-    margin:auto;
-    width:90%;
-    height:90%;
-    object-fit:contain;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 3.488vw;
+  padding-right: 4.186vw;
+  bottom: -16.279vw;
+  right: 0;
+  .icon {
+    display: flex;
+    border-radius: 4px;
+    width: 11.628vw;
+    height: 11.163vw;
+    background-color: ${(props) => props.color};
+    img {
+      margin: auto;
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+    }
   }
-}
-.content{
-  margin:0;
-  padding:0;
-  font-size:5.581vw;
-  font-weight:700;
-  color:${props=>props.color}
-}
-
-`
+  .content {
+    margin: 0;
+    padding: 0;
+    font-size: 5.581vw;
+    font-weight: 700;
+    color: ${(props) => props.color};
+  }
+`;
 
 const Search = styled.div`
   background-image: url(${search});
@@ -197,28 +195,28 @@ const Panel = styled.div`
     background: #f3f3f3;
     position: absolute;
     right: -8.5vw;
-    top:-0.885vw;
+    top: -0.885vw;
     padding: 11px 22px;
     color: ${(props) => props.color};
     font-size: 1.25vw;
     font-weight: bold;
     border-radius: 0px 0px 8px 8px;
   }
-  @media(max-width:1400px){
-    .content{
+  @media (max-width: 1400px) {
+    .content {
       right: -9.5vw;
       top: -1.2vw;
     }
   }
-  @media(max-width:992px){
-    .content{
+  @media (max-width: 992px) {
+    .content {
       right: -10.5vw;
       top: -2.2vw;
-      padding-top:14px;
+      padding-top: 14px;
     }
   }
-  @media(max-width:768px){
-    .content{
+  @media (max-width: 768px) {
+    .content {
       right: -12.5vw;
     }
   }
@@ -236,7 +234,7 @@ const Category = styled.ul`
     span {
       display: none;
     }
-    &.active {
+    &.active,&:hover {
       font-weight: bolder;
       &:before {
         content: "";
@@ -258,7 +256,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
-  const [dashboard,setDashboard]=useState(false);
+  const [dashboard, setDashboard] = useState(false);
 
   const menuItem = data.navbar.map((x, i) => {
     return (
@@ -274,8 +272,6 @@ export default function Navbar() {
       </List>
     );
   });
-
-
 
   const dashboardSuperviserItem = data.dashboardSuperviser.map((g, i) => {
     return (
@@ -309,25 +305,23 @@ export default function Navbar() {
     );
   });
 
-  const checkUserMenu = ()=>{
-    if(state.userType=="envoy"){
-      return dashboardEnvoyItem
-    }else{
-      return dashboardSuperviserItem
+  const checkUserMenu = () => {
+    if (state.userType == "envoy") {
+      return dashboardEnvoyItem;
+    } else {
+      return dashboardSuperviserItem;
     }
-  }
+  };
 
-  const goDashboard = ()=>{
+  const goDashboard = () => {
     setDashboard(!dashboard);
     setOpen(false);
-    if(!dashboard){
-      navigate("/dashboard")
-    }else{
-      navigate("/")
-      
+    if (!dashboard) {
+      navigate("/dashboard");
+    } else {
+      navigate("/");
     }
-   
-  }
+  };
 
   function choiseItem(num, path) {
     setActive(num);
@@ -371,29 +365,22 @@ export default function Navbar() {
         <Search></Search>
         {width < 480 ? <Menu onClick={handelClick} open={open}></Menu> : ""}
         {width < 480 ? (
-          
           <MenuList open={open} back={dashboard && state.loggedIn}>
-            {dashboard && state.loggedIn? <Profile /> : ""}
-            
-            {dashboard && state.loggedIn ? (checkUserMenu()) : menuItem}{" "}
-
+            {dashboard && state.loggedIn ? <Profile /> : ""}
+            {dashboard && state.loggedIn ? checkUserMenu() : menuItem}{" "}
             <MobilePanel
-            color={dashboard ? "#FF5A5A" : "#FFAA00"}
-            onClick={goDashboard}
-          >
-            <div className="icon">
-              <img src={dashboard  ?exit :signIn }/>
-            </div>
-            <p className="content">
-              {" "}
-              {dashboard ? "خروج از پنل" : "ورود به پنل"}{" "}
-            </p>{" "}
-            
-          </MobilePanel>
+              color={dashboard ? "#FF5A5A" : "#FFAA00"}
+              onClick={goDashboard}
+            >
+              <div className="icon">
+                <img src={dashboard ? exit : signIn} />
+              </div>
+              <p className="content">
+                {" "}
+                {dashboard ? "خروج از پنل" : "ورود به پنل"}{" "}
+              </p>{" "}
+            </MobilePanel>
           </MenuList>
-
-         
-          
         ) : (
           ""
         )}
