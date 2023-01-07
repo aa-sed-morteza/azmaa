@@ -124,6 +124,7 @@ const Success = styled.div`
   font-weight: 300;
   font-size: 5.58vw;
   position: relative;
+  cursor: pointer;
   &:before {
     content: "";
     display: block;
@@ -136,7 +137,7 @@ const Success = styled.div`
     right: -11.628vw;
     top: -1.395vw;
   }
-  &.active {
+  &.active ,&:hover{
     font-weight: bold;
     &:after {
       content: "";
@@ -173,6 +174,7 @@ const Faild = styled.div`
   font-weight: 300;
   font-size: 5.58vw;
   position: relative;
+  cursor: pointer;
   &:before {
     content: "";
     display: block;
@@ -185,7 +187,7 @@ const Faild = styled.div`
     right: -11.628vw;
     top: -1.395vw;
   }
-  &.active {
+  &.active ,&:hover{
     font-weight: bold;
     &:after {
       content: "";
@@ -222,7 +224,7 @@ const Not = styled.div`
   font-weight: 300;
   font-size: 5.58vw;
   position: relative;
-
+  cursor: pointer;
   &:before {
     content: "";
     display: block;
@@ -236,7 +238,7 @@ const Not = styled.div`
     right: -11.628vw;
   }
 
-  &.active {
+  &.active ,&:hover{
     font-weight: bold;
     &:after {
       content: "";
