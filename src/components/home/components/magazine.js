@@ -80,6 +80,9 @@ const Wraper = styled.div`
   gap: 10px;
   padding-right: 50px;
   scroll-behavior: smooth;
+  ::-webkit-scrollbar{
+    display: none; 
+  }
   @media (min-width: 480px) {
     padding-right: 90px;
     gap: 28px;

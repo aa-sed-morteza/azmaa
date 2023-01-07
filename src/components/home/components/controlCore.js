@@ -25,7 +25,8 @@ const Title = styled.div`
   display:flex;
   align-items:center;
   gap:10px;
-  &.active {
+  cursor: pointer;
+  &.active ,&:hover{
     font-weight: 500;
     &:after {
       content: "";

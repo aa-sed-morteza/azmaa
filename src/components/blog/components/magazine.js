@@ -82,6 +82,9 @@ const Wraper = styled.div`
   overflow-x: scroll;
   gap: 10px;
   padding-right: 50px;
+  ::-webkit-scrollbar{
+    display: none; 
+  }
   @media (min-width: 480px) {
     padding-right: 90px;
     gap: 28px;
