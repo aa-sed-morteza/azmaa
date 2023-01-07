@@ -69,7 +69,8 @@ const Tab = styled.div`
   displey: flex;
   flex-direction: column;
   position: relative;
-  &.select {
+  cursor: pointer;
+  &.select,&:hover {
     &:before {
       content: "";
       display: flex;
