@@ -1,5 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/navbar";
 import Envoy from "./components/envoy";
 import Vote from "./components/vote";
@@ -46,13 +48,12 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/sign-in/supervisor" element={<SignIn />} />
           <Route path="/sign-in/envoy" element={<EnvoySignIn />} />
-          
+
           {/* dashboard routing */}
           <Route path="/dashboard/*" element={<Dashboard />} />
-
-        
         </Routes>
         <Footer />
+        <ToastContainer />
       </UserState>
     </div>
   );

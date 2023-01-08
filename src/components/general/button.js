@@ -28,6 +28,7 @@ const Container = styled.button`
   box-shadow: 0px 6px 8px -2px rgba(0, 0, 0, 0.3);
   background-color: ${(props) => props.bgColor};
   border: ${(props) => props.border ? `1px solid ${props.border}` : "none"};
+  cursor:pointer;
   &.disable{
     background-color:gray;
   }
