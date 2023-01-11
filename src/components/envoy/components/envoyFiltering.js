@@ -56,7 +56,8 @@ const ShowMore = styled.div`
       display: flex;
       position: absolute;
       left: -25px;
-      bottom: 8px;
+      top: 50%;
+      transform:translate(0,-50%);
       background-image: url(${upArrow});
       background-size: cover;
       background-repeat: no-repeat;
@@ -65,7 +66,7 @@ const ShowMore = styled.div`
     }
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
     max-width: 500px;
@@ -79,7 +80,6 @@ const ShowMore = styled.div`
       &:after {
         width: 15px;
         height: 8px;
-        left: -37px;
       }
     }
   }

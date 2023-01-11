@@ -102,12 +102,13 @@ const Container = styled.section`
   padding: 10px;
   margin-top: 10px;
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     width: 50.5%;
     margin: auto;
     margin-top: 25px;
     padding: 14px;
     border-radius: 8px;
+ 
   }
 `;
 
@@ -131,7 +132,7 @@ const SearchButton = styled.div`
     margin: 0;
     color: #9f9f9f;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     &:after {
       width: 15px;
       height: 9px;
@@ -162,7 +163,7 @@ const DropDown = styled.div`
     margin: 0;
     margin-right: auto;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 15px;
     border-radius: 4px;
     &:after {

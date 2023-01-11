@@ -16,7 +16,7 @@ const Container = styled.section`
   flex-direction: column;
   padding: 10px 20px;
   overflow: hidden;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 20px 0;
     background-color: #ffffff;
   }
@@ -37,7 +37,7 @@ const Title = styled.div`
     margin: 0;
     color: rgba(112, 112, 112, 1);
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-bottom: 25px;
     padding-right: 10%;
     .home,
@@ -51,7 +51,7 @@ const Content = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 10px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 0;
     padding-right: 10%;
   }
@@ -74,7 +74,7 @@ export default function Envoy() {
         <p className="component"> نمایندگان </p>
       </Title>
       <Content>
-        {width < 480 ? (
+        {width < 481 ? (
           // <Map />
           <IranMap />
         ) : (
@@ -87,8 +87,8 @@ export default function Envoy() {
 
         <Search />
         <AdvanceSearch />
-        {width < 480 && <EnvoyFiltering />}
-        {width > 480 && (
+        {width < 481 && <EnvoyFiltering />}
+        {width > 481 && (
           <>
             {" "}
             <ActiveEnvoy /> <Banner /> <NewEnvoy />
