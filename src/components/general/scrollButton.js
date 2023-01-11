@@ -7,7 +7,7 @@ export default function ScrollButton({ container }) {
   const [active,setActive]=useState(false);
 
   const scroll = (scrollOffset) => {
-    const root = document.getElementById(container);
+    const root = document.getElementById(container) ;
     root.scrollLeft += scrollOffset;
     setActive(true);
   };

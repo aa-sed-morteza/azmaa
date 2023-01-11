@@ -7,7 +7,7 @@ import like from "../../../assets/like1.webp";
 import dislike from "../../../assets/dislike1.webp";
 import data from "../../../data.json";
 import user from "../../../assets/profile.webp";
-import text from "../../../assets/text.webp";
+import Text from "../../../assets/text.webp";
 import useWidth from "../../../hook/useWidth";
 import upArrow from "../../../assets/arrow.webp";
 import ShareButton from "../../general/shareButton";
@@ -39,7 +39,7 @@ export default function NewsPage() {
         <p className="component"> {title} </p>
       </Title>
 
-      {width < 480 ? (
+      {width < 481 ? (
         <>
           <NewsContainer>
             <Picture>
@@ -79,8 +79,11 @@ export default function NewsPage() {
                 {/* <Share>
                   <p className="text">بازنشر</p>
                 </Share> */}
-                <ShareButton right={true} text="  مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود ک " title="اطلاع رسانی نماینده" />
-
+                <ShareButton
+                  right={true}
+                  text="  مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود ک "
+                  title="اطلاع رسانی نماینده"
+                />
               </Feedback>
             </Content>
           </NewsContainer>
@@ -133,7 +136,11 @@ export default function NewsPage() {
                     {/* <Share>
                       <p className="text">بازنشر</p>
                     </Share> */}
-                    <ShareButton right={true} text="  مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود ک " title="اطلاع رسانی نماینده" />
+                    <ShareButton
+                      right={true}
+                      text="  مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود ک "
+                      title="اطلاع رسانی نماینده"
+                    />
                   </Feedback>
                 </Content>
               </NewsContainer>
@@ -160,19 +167,21 @@ export default function NewsPage() {
 const DesktopContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  min-height: 1700px;
-  max-height: 1700px;
+  // min-height: 1700px;
+  // max-height: 1700px;
   overflow: hidden;
 `;
 
 const News = styled.div`
-  padding: 49px 200px 42px 54px;
+  padding:40px;
   background-color: #f3f3f3;
   border-radius: 8px 0px 0px 8px;
-  width: 54%;
-  @media(max-width:1000px){
-    width:44%;
+  width: 55%;
+  @media(min-width:769px){
+    width:54%;
+    padding: 49px 200px 42px 54px;
   }
+ 
 `;
 
 const RelatedContainer = styled.div`
@@ -187,30 +196,37 @@ const RelatedContainer = styled.div`
   padding-bottom: 10px;
   padding-left: 10%;
   h3 {
+    display:flex;
+    align-items:center;
+    gap:7px;
     font-weight: 300;
     font-size: 1.875vw;
     color: #707070;
-    padding-right: 50px;
-    position: relative;
     margin: 0;
+   
     &:before {
       content: "";
-      display: block;
-      background-image: url(${text});
+      display: inline-flex;
+      background-image: url(${Text});
       background-size: cover;
       background-repeat: no-repeat;
-      position: absolute;
-      width: 30px;
-      height: 36px;
-      right: 0;
-      top: 6px;
+      width: 15px;
+      height: 18px;
+    }
+  }
+  @media(min-width:769px){
+    h3{
+      &:before{
+        width: 1.563vw;
+        height: 1.823vw;
+      }
     }
   }
 `;
 
 const Container = styled.section`
   padding: 10px 20px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 25px 0;
     background-color: #ffffff;
   }
@@ -236,7 +252,7 @@ const Title = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-bottom: 25px;
     padding-right: 10%;
     .home,
@@ -250,7 +266,7 @@ const NewsContainer = styled.div`
   background: #ffffff;
   border-radius: 4px;
   margin-bottom: 12px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border-radius: 8px;
     height: 100%;
     display: flex;
@@ -272,7 +288,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 20px 40px 36px;
     gap: 20px;
     height: 100%;
@@ -303,7 +319,7 @@ const Type = styled.p`
     right: 0;
     top: 2px;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.25vw;
     padding-right: 40px;
     &:before {
@@ -317,7 +333,7 @@ const Date = styled.p`
   font-weight: 700;
   font-size: 3.256vw;
   color: rgba(0, 0, 0, 0.2);
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.042vw;
   }
 `;
@@ -328,7 +344,7 @@ const SubTitle = styled.h1`
   font-weight: 400;
   font-size: 4.651vw;
   line-height: 8.14vw;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.875vw;
     line-height: 3.229vw;
   }
@@ -342,7 +358,7 @@ const Paragraph = styled.p`
   font-weight: 300;
   color: #707070;
   text-align: justify;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.25vw;
     line-height: 2.135vw;
     font-weight: 400;
@@ -357,7 +373,7 @@ const Feedback = styled.div`
   background-color: #f3f3f3;
   border-radius: 4px;
   margin-top: 15px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 20px 30px;
     margin-top: auto;
   }
@@ -383,7 +399,7 @@ const Button = styled.div`
     top: -7px;
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.042vw;
   }
 `;
@@ -399,16 +415,15 @@ const Share = styled(ShareButton)`
   //   font-weight: 300;
   //   margin: 0;
   // }
-  // @media (min-width: 480px) {
+  // @media (min-width: 481px) {
   //   width: 200px;
   //   .text {
   //     font-size: 1.042vw;
   //     text-align: center;
   //   }
   // }
-  &>*{
-    margin-right:auto;
-
+  & > * {
+    margin-right: auto;
   }
 `;
 
@@ -416,7 +431,7 @@ const Related = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 13px 10px 17px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 20px 10%;
   }
 `;
@@ -438,14 +453,14 @@ const Header = styled.h2`
     vertical-align: middle;
     width: 59%;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-top: 47px;
     font-size: 1.87vw;
     margin-bottom: 24px;
-    color:#707070;
+    color: #707070;
     &:after {
       background-color: #707070;
-      height:2px;
+      height: 2px;
       width: 88%;
     }
   }
@@ -456,8 +471,8 @@ const CardContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 10px;
-  @media(min-width:480px){
-    justify-content:flex-start;
+  @media (min-width: 481px) {
+    justify-content: flex-start;
   }
 `;
 
@@ -521,7 +536,7 @@ const Paper = styled.div`
     display: none;
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 20px 19px 25px 19px;
     box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
@@ -550,17 +565,17 @@ const Paper = styled.div`
       font-weight: 500;
     }
   }
-  @media(max-width:1600px){
-    .cover{
-      width:16vw;
+  @media (max-width: 1600px) {
+    .cover {
+      width: 16vw;
     }
   }
-  @media(max-width:1200px){
-    .cover{
-      width:15vw;
+  @media (max-width: 1200px) {
+    .cover {
+      width: 15vw;
     }
-    .content{
-      max-width:14vw;
+    .content {
+      max-width: 14vw;
     }
   }
 `;
@@ -577,7 +592,7 @@ const ShowMore = styled.div`
   align-items: center;
   margin: auto;
   padding: 13px;
-  margin-top:45px;
+  margin-top: 45px;
   p {
     margin: auto;
     color: #9f9f9f;

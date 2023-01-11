@@ -76,10 +76,12 @@ const Content = styled.div`
   }
   .identity {
     display: flex;
+    align-items:center;
     .user {
-      padding-right: 40px;
       padding-left: 10px;
-      position: relative;
+      display:flex;
+      align-items:center;
+      gap:7px;
       color: #9f9f9f;
       font-weight: 700;
       font-size: 1.25vw;
@@ -87,15 +89,13 @@ const Content = styled.div`
       border-left: 1px solid #9f9f9f;
       &:before {
         content: "";
-        display: block;
-        position: absolute;
+        display: inline-flex;
         background-image: url(${profile});
         background-size: cover;
         background-repeat: no-repeat;
         width: 30px;
         height: 30px;
-        right: 0px;
-        top: 2px;
+        
       }
     }
     .date {
@@ -123,8 +123,9 @@ const Button = styled.div`
     background-repeat: no-repeat;
     width: 9px;
     height: 15px;
-    left: 30px;
-    top: 25px;
+    left: 9%;
+    top: 50%;
+    transform:translate(0,-50%);
 }
    
   }

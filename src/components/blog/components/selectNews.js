@@ -9,7 +9,7 @@ const Container = styled.section`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 10px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-top: 25%;
   }
 `;
@@ -30,7 +30,7 @@ const Title = styled.h1`
     vertical-align: middle;
     width: 59%;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-top: 75px;
     font-size: 1.87vw;
     margin-bottom: 45px;
@@ -46,7 +46,7 @@ const NewsWraper = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 10px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-bottom: 45px;
     justify-content:flex-start;
   }
@@ -112,7 +112,7 @@ const Paper = styled.div`
     display: none;
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 20px 19px 25px 19px;
     box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
@@ -183,7 +183,7 @@ const ShowMore = styled.div`
     }
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
     max-width: 500px;
@@ -204,7 +204,7 @@ const ShowMore = styled.div`
 `;
 
 const ChangeBack = styled.div`
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     background-color: #f3f3f3;
     margin-inline: -13%;
     padding-inline: 13%;

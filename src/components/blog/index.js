@@ -12,7 +12,7 @@ const Container = styled.section`
   flex-direction: column;
   padding: 10px ;
   overflow: hidden;
-  @media(min-width:480px){
+  @media(min-width:481px){
     background-color:#FFFFFF;
     padding:25px 10% 0;
   }
@@ -34,7 +34,7 @@ const Title = styled.div`
     margin: 0;
     color: rgba(112, 112, 112, 1);
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-bottom: 25px;
     .home,
     .component {
@@ -51,7 +51,7 @@ export default function Blog() {
         <p className="home">خانه / </p>
         <p className="component"> بلاگ </p>
       </Title>
-      {width<480 ? <Poster/> : <Carousel/>}
+      {width<481 ? <Poster/> : <Carousel/>}
       
       <Magazine/>
       <SelectNews/>
