@@ -9,7 +9,20 @@ const HomeContainer = styled.section`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 14px 10px;
-  @media(min-width:480px){
+  @media(min-width:481px){
+    padding:10%;
+    margin-top:50px;
+    margin-left:-2.5%;
+    margin-right:-2.5%;
+    position:relative;
+    padding-bottom:76px;
+  }
+  @media(min-width:769px){
+    margin-top:90px;
+    margin-left:-2%;
+    margin-right:-2%;
+  }
+  @media(min-width:1025px){
     padding:10%;
     margin-top:219px;
     margin-left:-1%;
@@ -23,7 +36,7 @@ export default function HomeDetails() {
   const width = useWidth();
   return (
     <HomeContainer>
-      {width<480?(<IranMap/>):""}
+      {width<481?(<IranMap/>):""}
      {/* <SelectState /> */}
       <Controller/>
       

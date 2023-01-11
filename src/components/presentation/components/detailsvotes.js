@@ -26,8 +26,15 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 0px 29px 20px;
   margin-top: 40px;
-  @media(min-width:480px){
+  @media(min-width:481px){
+    padding:0px 20px 0px 10px;
+    margin-top:20px;
+  }
+  @media(min-width:769px){
     padding:0px 45px 30px 40px;
+    margin-top:40px;
+  }
+  @media(min-width:1200px){
     margin-top:60px;
   }
 `;
@@ -42,10 +49,18 @@ const Title = styled.h4`
   margin: 0;
   text-align: center;
   margin-right: -5%;
-  @media(min-width:480px){
+  @media(min-width:481px){
     font-size:1.875vw;
-    transform: translateY(-31px);
+    transform: translateY(-10px);
     width: 64%;
+  }
+  @media(min-width:769px){
+    font-size:1.875vw;
+    transform: translateY(-14px);
+    width: 74%;
+  }
+  @media(min-width:1200px){
+    transform: translateY(-31px);
   }
 `;
 
@@ -67,7 +82,7 @@ const Row = styled.div`
     font-size: 3.721vw;
     margin: 0;
   }
-  @media(min-width:480px){
+  @media(min-width:481px){
     gap:10px;
     .type,.expand{
       font-size:1.250vw;

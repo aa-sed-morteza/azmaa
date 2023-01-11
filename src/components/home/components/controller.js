@@ -24,10 +24,16 @@ const FilterContainer = styled.div`
   padding: 19px;
   border-radius: 2px;
   margin-top: 10px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
+    padding: 20px;
+    border-radius: 8px;
+    width: 58%;
+    margin: auto;
+    margin-top: -19%;
+  }
+  @media (min-width: 769px) {
     padding: 44px 50px 19px;
     border-radius: 8px;
-
     width: 58%;
     margin: auto;
     margin-top: -19%;
@@ -45,10 +51,16 @@ const SearchInput = styled.input`
   &:placeholder {
     // color:#D8D8D8;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
+    width:90%;
     border-radius: 4px;
-    font-size: 1.563vw;
+    font-size: 1.2vw;
     font-weight: 400;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  @media (min-width: 769px) {
+    font-size: 1.563vw;
     padding: 25px;
     margin-bottom: 30px;
   }
@@ -58,7 +70,7 @@ const TabContainer = styled.div`
   display: flex;
   gap: 20px;
   align-items: flex-end;
-  @media(min-width:480px){
+  @media(min-width:481px){
     
     justify-content: space-evenly;
   }
@@ -69,7 +81,9 @@ const Tab = styled.div`
   displey: flex;
   flex-direction: column;
   position: relative;
-  &.select {
+  cursor: pointer;
+  &.select,
+  &:hover {
     &:before {
       content: "";
       display: flex;
@@ -113,7 +127,7 @@ const Tab = styled.div`
       width: 37px;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     p {
       font-size: 1.458vw;
       font-weight: 300;
@@ -138,7 +152,7 @@ const Tab = styled.div`
 `;
 
 const LastVotes = styled.div`
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-bottom: 90px;
   }
 `;
@@ -159,12 +173,12 @@ const Title = styled.h1`
     // vertical-align: middle;
     width: 58%;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-top: 47px;
     font-size: 1.87vw;
     margin-bottom: 24px;
     &:after {
-      width: 81%;
+      width: 75%;
     }
     &:before {
       content: "";
@@ -177,16 +191,16 @@ const Title = styled.h1`
       margin-bottom: -1%;
     }
   }
-  @media(max-width:1400px){
-    &:after{
-      width:79%;
-    }
-  }
-  @media(max-width:1000px){
-    &:after{
-      width:70%;
-    }
-  }
+  // @media(max-width:1400px){
+  //   &:after{
+  //     width:79%;
+  //   }
+  // }
+  // @media(max-width:1000px){
+  //   &:after{
+  //     width:70%;
+  //   }
+  // }
 `;
 
 const ShowMore = styled.div`
@@ -214,7 +228,7 @@ const ShowMore = styled.div`
     }
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
     width: 31%;
@@ -239,33 +253,45 @@ const LastActions = styled.div``;
 const BestEnvoyContainer = styled.div``;
 
 const VoterContainer = styled.div`
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     display: flex;
     gap: 20px;
-    justify-content:center;
+    justify-content: center;
+    flex-wrap:wrap;
+    // margin-left:-7%;
+    // margin-right:-7%;
+  }
+  @media(min-width:769px){
+    justify-content: center;
   }
 `;
 
 const ActionContainer = styled.div`
-  @media (min-width: 480px) {
-    display: flex;
-    gap: 20px;
-    justify-content:center;
-  }
+@media (min-width: 481px) {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap:wrap;
+  // margin-left:-7%;
+  // margin-right:-7%;
+}
+@media(min-width:769px){
+  justify-content: center;
+}
 `;
 
 const EnvoyGalley = styled.div`
   padding-top: 2.326vw;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     display: flex;
     flex-wrap: wrap;
     gap: 1.042vw;
-   width:103%;
+    width: 103%;
   }
 `;
 
 const AreaContainer = styled.div`
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     display: flex;
     flex-wrap: wrap;
     gap: 1.042vw;
@@ -336,7 +362,7 @@ export default function Controller() {
           <LastVotes>
             <Title>آخرین رأی‌گیری‌ها</Title>
             <VoterContainer>
-              {width < 480 ? (
+              {width < 481 ? (
                 <VoteCard />
               ) : (
                 <>
@@ -353,7 +379,7 @@ export default function Controller() {
             </ShowMore>
           </LastVotes>
 
-          {width < 480 ? (
+          {width < 481 ? (
             <>
               <LastActions>
                 <Title> آخرین عملکردها</Title>
@@ -378,7 +404,7 @@ export default function Controller() {
               <LastActions>
                 <Title> آخرین عملکردها</Title>
                 <ActionContainer>
-                  {width < 480 ? (
+                  {width < 481 ? (
                     <ActionCard />
                   ) : (
                     <>
@@ -413,7 +439,7 @@ export default function Controller() {
             <BestEnvoy />
             <BestEnvoy />
           </EnvoyGalley>
-          <ShowMore style={{marginTop:'20px'}}>
+          <ShowMore style={{ marginTop: "20px" }}>
             <p>نمایش بیشتر</p>{" "}
           </ShowMore>
         </>
@@ -433,7 +459,7 @@ export default function Controller() {
         <LastVotes>
           <Title>آخرین رأی‌گیری‌ها</Title>
           <VoterContainer>
-            {width < 480 ? (
+            {width < 481 ? (
               <VoteCard />
             ) : (
               <>
@@ -456,7 +482,7 @@ export default function Controller() {
         <LastActions>
           <Title> آخرین عملکردها</Title>
           <ActionContainer>
-            {width < 480 ? (
+            {width < 481 ? (
               <ActionCard />
             ) : (
               <>

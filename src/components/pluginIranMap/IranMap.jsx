@@ -6,6 +6,8 @@ import styled from "styled-components";
 import arrow from "../../assets/ggArrow.svg";
 import { useFormik } from "formik";
 import { provinceSchema } from "../schema/index";
+import axios from "axios";
+import { BaseBackURL } from "../../constant/api";
 
 const useMouse = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -25,15 +27,59 @@ const useMouse = () => {
   return mousePosition;
 };
 
-const IranMap = ({position}) => {
+const IranMap = ({ position }) => {
   const { x, y } = useMouse();
-  const [provinces] = useState(() => iranProvinces);
+  const [provinces, setProvinces] = useState(iranProvinces);
+  const [data, setData] = useState([]);
   const [provinceName, setProvinceName] = useState("");
   const [provinceNameOnClick, setProvinceNameOnClick] = useState("");
   const [mapZoom, setMapZoom] = useState(false);
   const [provinceSelected, setProvinceSelected] = useState(false);
   const [cities, setCities] = useState(["تمام ایران"]);
   const [input, setInput] = useState("استان خود را انتخاب کنید");
+
+  //get provinces of iran
+  const getProvince = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/city/`,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        // const dbProvinces =iranProvinces.find(x=>x.name==response.data.province_name);
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getProvince();
+
+    let box = [];
+    data.map((item) => {
+      iranProvinces.map((x) => {
+        if (x.name === item.province_name) {
+          box.push(x);
+        }
+      });
+    });
+
+    setProvinces([...new Set(box)]);
+
+    provinces.map((item, index) => {
+      for (let i = 0; i < data.length; i++) {
+        if (item.name === data[i].province_name) {
+          item.cities.push(data[i].name);
+        }
+      }
+    });
+
+    console.log(provinces);
+  }, []);
 
   const onSubmit = async (values, actions) => {
     // dispatch({ type: "SET_PASSWORD", payload: values.password });
@@ -61,7 +107,6 @@ const IranMap = ({position}) => {
     validationSchema: provinceSchema,
     onSubmit,
   });
-
 
   return (
     <Container position={position}>
@@ -205,7 +250,7 @@ const IranMap = ({position}) => {
 export default IranMap;
 
 const Container = styled.div`
-  border: 1px solid #CBCBCB;
+  border: 1px solid #cbcbcb;
   border-radius: 4px;
   .input {
     display: flex;
@@ -252,28 +297,28 @@ const Container = styled.div`
       }
     }
   }
-  @media(min-width:480px){
-    position: ${props=>props.position};
+  @media (min-width: 481px) {
+    position: ${(props) => props.position};
     top: 14%;
     left: 8%;
     width: 46%;
     background-color: rgba(255, 255, 255, 0.5);
-    .input{
-      font-size:1.458vw;
-      padding-right:6.563vw;
-      padding-top:2.240vw;
-      &:after{
-        width:0.938vw;
-        height:0.521vw;
+    .input {
+      font-size: 1.458vw;
+      padding-right: 6.563vw;
+      padding-top: 2.24vw;
+      &:after {
+        width: 0.938vw;
+        height: 0.521vw;
       }
     }
-    .select{
-      padding-top:2.240vw;
-      padding-right:6.563vw;
-      font-size:1.458vw;
-      span{
-        &:before{
-          font-size:1.563vw;
+    .select {
+      padding-top: 2.24vw;
+      padding-right: 6.563vw;
+      font-size: 1.458vw;
+      span {
+        &:before {
+          font-size: 1.563vw;
         }
       }
     }

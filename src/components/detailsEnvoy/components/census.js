@@ -51,7 +51,7 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 0px 29px 20px;
   margin-top: 40px;
-  @media(min-width:480px){
+  @media(min-width:481px){
     padding:0px 45px 30px 40px !important;
     margin-top:60px;
   }
@@ -67,7 +67,7 @@ const Title = styled.h4`
   margin: 0;
   text-align: center;
   margin-right: -5%;
-  @media(min-width:480px){
+  @media(min-width:481px){
     font-size:1.875vw;
     transform: translateY(-1.615vw);
     width: 55%;
@@ -87,7 +87,7 @@ const Row = styled.div`
     margin: 0;
     padding-bottom: 5px;
   }
-  @media(min-width:480px){
+  @media(min-width:481px){
     .type{
       font-size:1.250vw;
     }
@@ -113,7 +113,7 @@ const Progress = styled.div`
       right: 0;
     }
   }
-  @media(min-width:480px){
+  @media(min-width:481px){
     width:40%;
     .number{
       font-size:1.250vw;

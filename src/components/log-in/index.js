@@ -11,14 +11,46 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useUser } from "../context/userContext";
 import { logInSchema } from "../schema";
+import axios from "axios";
+import { BaseBackURL } from "../../constant/api";
+import { toast } from "react-toastify";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
 
-  const onSubmit = async () => {
-    dispatch({ type: "SET_LOGGED_IN", payload: true });
-    navigate("/dashboard");
+  const onSubmit = (values) => {
+    const data = new FormData();
+    data.append("username", values.userName);
+    data.append("password", values.password);
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/v1/accounts/login/`,
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        toast.success("ورود با موفقیت انجام شد!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_LOGGED_IN", payload: true });
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.data.msg === "authentication failed") {
+          toast.error("احراز هویت ناموفق بود", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        } else {
+          toast.error("ایمیل یا رمز عبور اشتباه است!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+      });
   };
 
   const {
@@ -66,23 +98,23 @@ export default function LogIn() {
             <ErrorText>{errors.password}</ErrorText>
           )}
           <Box>
-          <Button
-            text="ورود"
-            background="#095644"
-            textColor="#FFFFFF"
-            icon={login}
-            type="submit"
-          />
-          <Button
-            text="ثبت‌نام"
-            background="#inherit"
-            borderColor="#095644"
-            textColor="#095644"
-            icon={signin}
-            click={() => {
-              navigate("/sign-in");
-            }}
-          />
+            <Button
+              text="ورود"
+              background="#095644"
+              textColor="#FFFFFF"
+              icon={login}
+              type="submit"
+            />
+            <Button
+              text="ثبت‌نام"
+              background="#inherit"
+              borderColor="#095644"
+              textColor="#095644"
+              icon={signin}
+              click={() => {
+                navigate("/sign-in");
+              }}
+            />
           </Box>
         </Form>
         <Link>رمز عبور خود را فراموش کرده‌اید؟</Link>
@@ -106,9 +138,9 @@ const Content = styled.div`
   flex-direction: column;
   gap: 15px;
   align-items: center;
-  @media(min-width:480px){
-    width:40%;
-    gap:1.302vw;
+  @media (min-width: 480px) {
+    width: 40%;
+    gap: 1.302vw;
   }
 `;
 
@@ -119,9 +151,9 @@ const Header = styled.div`
   width: 192px;
   height: 41px;
   margin-bottom: 4px;
-  @media(min-width:480px){
-    width:13.333vw;
-    height:2.865vw;
+  @media (min-width: 480px) {
+    width: 13.333vw;
+    height: 2.865vw;
   }
 `;
 
@@ -130,8 +162,8 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  @media(min-width:480px){
-    gap:1.302vw;
+  @media (min-width: 480px) {
+    gap: 1.302vw;
   }
 `;
 
@@ -140,8 +172,8 @@ const Link = styled.p`
   color: #ffaa00;
   font-weight: 300;
   font-size: 3.721vw;
-  @media(min-width:480px){
-    font-size:1.250vw;
+  @media (min-width: 480px) {
+    font-size: 1.25vw;
   }
 `;
 
@@ -153,19 +185,18 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
-  @media(min-width:480px){
-    margin-top:0;
-    font-size:1.042vw;
+  @media (min-width: 480px) {
+    margin-top: 0;
+    font-size: 1.042vw;
   }
 `;
 
-
-const Box =styled.div`
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  @media(min-width:480px){
-    flex-direction:row-reverse;
-    justify-content:space-between;
+const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  @media (min-width: 480px) {
+    flex-direction: row-reverse;
+    justify-content: space-between;
   }
-`
+`;

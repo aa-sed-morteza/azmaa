@@ -11,21 +11,28 @@ const Wraper = styled.section`
   display: flex;
   padding: 0;
   margin: 0;
-  margin-left: -1%;
-  margin-right: -2%;
-  margin-top: -6%;
+  margin-left: -3%;
+  margin-right: -3%;
+  margin-top: -10%;
   position: relative;
-  @media (max-width: 1600px) {
-    margin-left: -2%;
-    margin-top: -7%;
+  @media(min-width:1025px){
+    margin-top:-9%;
   }
-  @media (max-width: 1600px) {
-    margin-top: -8%;
+  @media(min-width:1201px){
+    margin-top:-7%;
   }
-  @media (max-width: 992px) {
-    margin-left: -3%;
-    margin-top: -9%;
-  }
+  
+  // @media (max-width: 1600px) {
+  //   margin-left: -2%;
+  //   margin-top: -7%;
+  // }
+  // @media (max-width: 1600px) {
+  //   margin-top: -8%;
+  // }
+  // @media (max-width: 992px) {
+  //   margin-left: -3%;
+  //   margin-top: -9%;
+  // }
 `;
 
 const ShowIndex = styled.div`
@@ -104,8 +111,9 @@ const Slide = styled.div`
         background-image: url(${leftArrow});
         background-size: contain;
         background-repeat: no-repeat;
-        top: 18px;
+        top: 50%;
         left: 25px;
+        transform:translate(0,-50%);
       }
     }
   }

@@ -28,6 +28,7 @@
   .map {
     position: relative;
     display: block;
+    width: 100%;
   }
   
   .map .svg {

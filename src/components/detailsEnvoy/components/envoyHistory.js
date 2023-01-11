@@ -67,7 +67,7 @@ const Container = styled.div`
       transform: rotate(180deg);
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 0 2.292vw 1.875vw !important;
     margin-top: 2.083vw;
     &:after{
@@ -88,7 +88,7 @@ const Title = styled.h4`
   margin: 0;
   text-align: center;
   margin-right: -5%;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.875vw;
     transform: translateY(-1.615vw);
     width: 60%;
@@ -107,7 +107,7 @@ const History = styled.div`
     font-weight: 700;
     font-size: 3.721vw;
   }
-  @media(min-width:480px){
+  @media(min-width:481px){
     gap:0.781vw;
     .text{
       font-size:1.250vw;

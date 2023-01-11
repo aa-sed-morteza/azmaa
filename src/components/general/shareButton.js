@@ -37,7 +37,7 @@ const SmallButton = styled.div`
     font-weight: 300;
     color: #095644;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border-radius: 8px;
     padding: 10px;
     .content {

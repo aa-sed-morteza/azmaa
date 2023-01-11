@@ -11,7 +11,7 @@ const Container = styled.section`
   border-right: 1px dashed #cbcbcb;
   margin-right: -5px;
   padding-right: 5px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     background-color: #f3f3f3;
     margin-inline: -2.5vw;
     padding-inline: 10%;
@@ -62,7 +62,7 @@ const SubTitile = styled.h2`
     right: -0.698vw;
     top: 2.326vw;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.667vw;
     margin-bottom: 20px;
     padding-top: 45px;
@@ -112,7 +112,7 @@ const Title = styled.div`
     top: 2.558vw;
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border-radius: 8px;
     width: 26.042vw;
     text-align: center;
@@ -159,7 +159,7 @@ const ShowMore = styled.div`
     }
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
     max-width: 500px;
@@ -181,7 +181,7 @@ const ShowMore = styled.div`
 `;
 
 const List = styled.div`
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     display: flex;
     justify-content: flex-start;
     gap: 20px;
@@ -193,7 +193,7 @@ export default function Calendar() {
     <Container>
       <SubTitile>مرداد ۱۴۰۱</SubTitile>
       <List>
-        {width < 480 ? (
+        {width < 481 ? (
           <VoteCard />
         ) : (
           <>
@@ -206,7 +206,7 @@ export default function Calendar() {
 
       <SubTitile style={{ marginTop: "20px" }}> تیر ۱۴۰۱</SubTitile>
       <List>
-        {width < 480 ? (
+        {width < 481 ? (
           <VoteCard />
         ) : (
           <>
@@ -218,7 +218,7 @@ export default function Calendar() {
       <Title>سال ۱۴۰۰</Title>
       <SubTitile style={{ marginTop: "0px" }}>مرداد ۱۴۰۰</SubTitile>
       <List>
-        {width < 480 ? (
+        {width < 481 ? (
           <VoteCard />
         ) : (
           <>

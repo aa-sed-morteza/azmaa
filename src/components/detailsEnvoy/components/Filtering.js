@@ -158,7 +158,7 @@ const FilteringWraper = styled.div`
       color: #d8d8d8;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     width: 74%;
     padding: 1.875vw 1.927vw 0.938vw;
     border-radius: 8px;
@@ -169,6 +169,7 @@ const FilteringWraper = styled.div`
       margin-bottom: 1.823vw;
     }
   }
+
 `;
 
 const Items = styled.div`
@@ -222,8 +223,9 @@ const Item = styled.p`
       top: 9px;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.458vw;
+    padding-top:20px;
     &.active {
       &:after {
         height: 5px;
@@ -231,11 +233,27 @@ const Item = styled.p`
       }
     }
     &:before {
-      width: 1.875vw;
-      height: 1.875vw;
+      width: 20px;
+      height: 20px;
       right: 1.771vw;
+      top:-2px;
+    }
+    &:nth-child(2) {
+      &:before {
+        width: 17px;
+        height: 17px;
+        top: 0;
+      }
+    }
+    &:nth-child(4) {
+      &:before {
+        width: 24px;
+        height: 24px;
+        top: 0;
+      }
     }
   }
+ 
 `;
 
 const ShowMore = styled.div`
@@ -263,7 +281,7 @@ const ShowMore = styled.div`
       height: 1.163vw;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     display: none;
   }
 `;
@@ -272,13 +290,14 @@ const Calendar = styled.div`
   margin-top: 10px;
   border-right: 1px dashed #cbcbcb;
   padding-right: 2%;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-top: 1.563vw;
     background-color: #f3f3f3;
     border-radius: 0px 8px 8px 0px;
     padding: 2.083vw 2.083vw 1.042vw 0;
     position: relative;
     overflow: hidden;
+    border-right:none;
     &:before {
       content: "";
       display: block;
@@ -293,7 +312,7 @@ const Calendar = styled.div`
 
 const CalendarTitle = styled.h2`
   display: none;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     display: flex;
     align-items: center;
     color: #707070;
@@ -343,7 +362,7 @@ const SubTitile = styled.h2`
     right: -0.698vw;
     top: 2.326vw;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     width: 100%;
     font-size: 1.667vw;
     margin: 0;
@@ -395,9 +414,9 @@ const Title = styled.div`
     top: 2.558vw;
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border-radius: 8px;
-    width: 500px;
+    width: 35%;
     text-align: center;
     color: #707070;
     font-size: 1.667vw;
@@ -414,10 +433,14 @@ const Title = styled.div`
       top: 1.667vw;
     }
   }
+  @media (min-width: 769px) {
+   
+    width: 500px;
+  
 `;
 
 const Gallery = styled.div`
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     display: flex;
     flex-wrap: wrap;
     padding-right: 1.198vw;

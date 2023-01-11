@@ -27,11 +27,12 @@ export default function DetailsEnvoy() {
           img="../../assets/abol.webp"
           persantage="65"
           id="1"
+          inBox={true}
         />
         <Census/>
         <EnvoyArea/>
         <EnvoyHistory/>
-        {width>480 ? ( <SocialNetwork/>):""}
+        {width>481 ? ( <SocialNetwork/>):""}
       </FirstSection>
       {/* filtering */}
       <SecondSection>
@@ -51,7 +52,7 @@ const Container = styled.section`
   padding: 10px 20px;
   overflow: hidden;
   gap:3.488vw;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 20px 0;
     background-color: #ffffff;
     gap:0;
@@ -75,7 +76,7 @@ const Title = styled.div`
     margin: 0;
     color: rgba(112, 112, 112, 1);
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     width:100%;
     padding-bottom: 1.302vw;
     margin-right: 10%;
@@ -98,7 +99,7 @@ const FirstSection = styled.div`
   & > * {
     box-shadow: none;
   }
-  @media(min-width:480px){
+  @media(min-width:481px){
     width: 23%;
     padding-right: 10%;
     padding-top:1.302vw;
@@ -114,7 +115,7 @@ const SecondSection = styled.div`
 background-color: #ffffff;
 border-radius: 4px;
 padding: 2.326vw;
-  @media(min-width:480px){
+  @media(min-width:481px){
     width: 65%;
     padding:0.990vw 1.302vw 0 0;
   }
@@ -124,7 +125,7 @@ const ThirdSection = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 1.628vw 2.558vw 2.093vw;
-  @media(min-width:480px){
+  @media(min-width:481px){
     display:none;
   }
 `;

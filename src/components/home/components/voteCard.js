@@ -18,14 +18,21 @@ const VCContainer = styled.div`
   flex-direction: column;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   margin-bottom: 14px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     margin-bottom: 34px;
-    max-width: 31%;
+    width: 25%;
     padding:20px 17px;
     height:43.229vw;
     min-height:0;
+  }
+
+  @media(min-width:1025px){
+    width:28%;
+  }
+  @media(min-width:1600px){
+    width:30%;
   }
 `;
 
@@ -38,7 +45,7 @@ const CardHeader = styled.div`
     background-repeat: no-repeat;
     width: 20.698vw;
     height: 17.674vw;
-    @media (min-width: 480px) {
+    @media (min-width: 481px) {
       width: 6.771vw;
       height: 6.771vw;
     }
@@ -51,20 +58,19 @@ const CardHeader = styled.div`
       color: #707070;
       font-size: 3.72vw;
       font-weight: 200;
-      position: relative;
-      padding-right: 20px;
       margin-bottom: 10px;
+      display:flex;
+      align-items:center;
+      gap:5px;
       &:before {
         content: "";
-        display: flex;
-        position: absolute;
+        display: inline-flex;
         width: 7.442vw;
         height: 7.442vw;
         background-image: url(${vote});
         background-size: contain;
         background-repeat: no-repeat;
-        right: -1.395vw;
-        top: 0.233vw;
+       
       }
     }
     h2 {
@@ -80,15 +86,14 @@ const CardHeader = styled.div`
       font-size: 2.79vw;
       font-weight: bold;
     }
-    @media (min-width: 480px) {
+    @media (min-width: 481px) {
       .title {
         font-size: 1.25vw;
         font-weight: 300;
         &:before {
           width: 1.875vw;
           height: 1.875vw;
-          right: -1vw;
-          top: 0;
+         
         }
       }
       h2{
@@ -112,7 +117,7 @@ const Statistics = styled.div`
   margin-top: 17px;
   justify-content: center;
   padding-bottom: 13px;
-  @media(min-width:480px){
+  @media(min-width:481px){
     gap: 4.688vw;
 
   }
@@ -123,6 +128,7 @@ const Success = styled.div`
   font-weight: 300;
   font-size: 5.58vw;
   position: relative;
+  cursor: pointer;
   &:before {
     content: "";
     display: block;
@@ -135,7 +141,7 @@ const Success = styled.div`
     right: -11.628vw;
     top: -1.395vw;
   }
-  &.active {
+  &.active,&:hover {
     font-weight: bold;
     &:after {
       content: "";
@@ -148,7 +154,7 @@ const Success = styled.div`
       right: -11.628vw;
     }
   }
-  @media(min-width:480px){
+  @media(min-width:481px){
     font-size:1.458vw;
     font-weight:400;
     padding-bottom:10px;
@@ -172,6 +178,7 @@ const Faild = styled.div`
   font-weight: 300;
   font-size: 5.58vw;
   position: relative;
+  cursor: pointer;
   &:before {
     content: "";
     display: block;
@@ -184,7 +191,7 @@ const Faild = styled.div`
     right: -11.628vw;
     top: -1.395vw;
   }
-  &.active {
+  &.active,&:hover {
     font-weight: bold;
     &:after {
       content: "";
@@ -197,7 +204,7 @@ const Faild = styled.div`
       right: -11.628vw;
     }
   }
-  @media(min-width:480px){
+  @media(min-width:481px){
     font-size:1.458vw;
     font-weight:400;
     padding-bottom:10px;
@@ -221,7 +228,7 @@ const Not = styled.div`
   font-weight: 300;
   font-size: 5.58vw;
   position: relative;
-
+  cursor: pointer;
   &:before {
     content: "";
     display: block;
@@ -235,7 +242,7 @@ const Not = styled.div`
     right: -11.628vw;
   }
 
-  &.active {
+  &.active,&:hover {
     font-weight: bold;
     &:after {
       content: "";
@@ -248,7 +255,7 @@ const Not = styled.div`
       right: -11.628vw;
     }
   }
-  @media(min-width:480px){
+  @media(min-width:481px){
     font-size:1.458vw;
     font-weight:400;
     padding-bottom:10px;
@@ -273,15 +280,18 @@ const EnvoyGallery = styled.div`
   padding: 18px 0 12px;
   display: flex;
   overflow-x: scroll;
-  @media(min-width:480px){
+  ::-webkit-scrollbar{
+    display: none; 
+  }
+  @media(min-width:481px){
     border-radius:8px;
     flex-direction:column;
     padding-inline:15px;
-  
+    overflow-x:hidden;
    margin-bottom:10px;
    flex:1;
    overflow-y: auto;
-   
+  //  min-height:100px;
   }
 `;
 
@@ -320,17 +330,18 @@ const Card = styled.div`
     font-weight: bold;
     margin: 0;
   }
-  @media(min-width:480px){
+  @media(min-width:481px){
     flex-wrap:wrap;
     max-height: 7.500vw;
-    padding:19px 30px 10px;
+    padding:5px 0px;
     border-left:none;
     border-bottom:1px solid #FFFFFF;
+    min-width: inherit;
     .picture{
       width: 5vw;
       height: 5vw;
       border-radius: 5vw;
-      border-width:0.469vw;;
+      border-width:0.2vw;;
     }
     .name{
       font-size:1.458vw;
@@ -352,7 +363,7 @@ const ButtonWraper = styled.div`
   display: flex;
   margin-top: 10px;
   justify-content: space-between;
-  @media(min-width:480px){
+  @media(min-width:481px){
     border-top:1px solid #D8D8D8;
     padding-top:14px;
     flex-direction: row-reverse;
@@ -372,7 +383,7 @@ const LargButton = styled.div`
     font-weight: bold;
     color: #ffffff;
   }
-  @media(min-width:480px){
+  @media(min-width:481px){
     border-radius: 8px;
     padding:10px;
     position:relative;
@@ -388,8 +399,9 @@ const LargButton = styled.div`
         background-image: url(${left});
         background-size: contain;
         background-repeat: no-repeat;
-        top: 20px;
-        left: 33px;
+        top: 50%;
+        left: 9%;
+        transform:translate(0,-50%);
       }
     }
   }
@@ -408,7 +420,7 @@ const SmallButton = styled.div`
     font-weight: 300;
     color: #095644;
   }
-  @media(min-width:480px){
+  @media(min-width:481px){
     border-radius: 8px;
     padding:10px;
     .content{

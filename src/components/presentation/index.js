@@ -32,7 +32,7 @@ export default function Presentation() {
 
 const Container = styled.section`
   padding: 10px 20px;
-  @media(min-width:480px){
+  @media(min-width:481px){
     background-color:#ffffff;
     padding 25px 0;
   }
@@ -58,7 +58,7 @@ const Title = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-bottom: 25px;
     border-bottom: 1px solid #d8d8d8;
     margin-right: 10%;
@@ -74,7 +74,7 @@ const Content = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 21px 11px 0;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border-radius: inherit;
     padding: 0px 10% 0px 0px;
     display: flex;
@@ -84,7 +84,7 @@ const Content = styled.div`
 `;
 
 const Wraper = styled.div`
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     width: 26.5%;
   }
 `;
