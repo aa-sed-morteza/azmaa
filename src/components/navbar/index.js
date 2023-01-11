@@ -20,8 +20,12 @@ const TopBar = styled.section`
   display: flex;
   justify-content: space-between;
 
-  @media (min-width: 480px) {
-    padding: 0.3vw 10%;
+  @media (min-width: 481px) {
+    justify-content: flex-start;
+    align-items: center;
+  }
+  @media (min-width: 769px) {
+    padding: 1.2vw 10%;
     justify-content: flex-start;
     align-items: center;
   }
@@ -35,7 +39,7 @@ const Logo = styled.div`
     height: 100%;
     object-fit: contain;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-left: 7.292vw;
     width: 3.021vw;
     height: 2.5vw;
@@ -46,7 +50,7 @@ const LeftSection = styled.div`
   display: flex;
   flex-direction: row;
   gap: 29px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     gap: 19px;
     margin-right: auto;
   }
@@ -174,7 +178,11 @@ const Search = styled.div`
   background-size: contain;
   width: 20px;
   height: 20px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
+    width: 3vw;
+    height: 3vw;
+  }
+  @media (min-width: 769px) {
     width: 2.344vw;
     height: 2.344vw;
   }
@@ -184,40 +192,43 @@ const Panel = styled.div`
   display: flex;
   position: relative;
   cursor: pointer;
-  & > .icon {
+  .icon {
     background-image: url(${(props) => props.icon});
     background-size: contain;
     background-repeat: no-repeat;
-    width: 2.344vw;
-    height: 2.344vw;
+    width: 3vw;
+    height: 3vw;
   }
-  & > .content {
+  .content {
     background: #f3f3f3;
     position: absolute;
-    right: -8.5vw;
-    top: -0.885vw;
-    padding: 11px 22px;
+    right: -15.5vw;
+    top: -2.885vw;
+    padding: 11px;
     color: ${(props) => props.color};
-    font-size: 1.25vw;
+    font-size: 2.25vw;
     font-weight: bold;
     border-radius: 0px 0px 8px 8px;
   }
-  @media (max-width: 1400px) {
+
+  @media (min-width: 769px) {
+    .icon {
+      width: 2.344vw;
+      height: 2.344vw;
+    }
     .content {
+      font-size: 1.25vw;
       right: -9.5vw;
-      top: -1.2vw;
+      top: -1.885vw;
     }
   }
-  @media (max-width: 992px) {
+
+  @media (min-width: 1201px) {
     .content {
+      padding: 11px 22px;
+      font-size: 1.55vw;
       right: -10.5vw;
-      top: -2.2vw;
-      padding-top: 14px;
-    }
-  }
-  @media (max-width: 768px) {
-    .content {
-      right: -12.5vw;
+      top: -1.2vw;
     }
   }
 `;
@@ -225,26 +236,50 @@ const Panel = styled.div`
 const Category = styled.ul`
   display: flex;
   gap: 2.083vw;
+  margin: 0;
+  padding: 0;
   li {
     color: #ffffff;
-    font-size: 1.25vw;
+    font-size: 2.25vw;
     font-weight: light;
     cursor: pointer;
     white-space: nowrap;
     span {
       display: none;
     }
-    &.active,&:hover {
+    &.active,
+    &:hover {
       font-weight: bolder;
       &:before {
         content: "";
         display: "flex";
         background-color: white;
-        bottom: -1.094vw;
+        bottom: -3.2vw;
         position: absolute;
         width: 100%;
         height: 5px;
         right: 0;
+      }
+    }
+  }
+  @media (min-width: 769px) {
+    li {
+      font-size: 1.25vw;
+      &.active,
+      &:hover {
+        &:before {
+          bottom: -1.7vw;
+        }
+      }
+    }
+  }
+  @media(min-width:1201px){
+    li {
+      &.active,
+      &:hover {
+        &:before {
+          bottom: -1.4vw;
+        }
       }
     }
   }
@@ -363,8 +398,8 @@ export default function Navbar() {
         )}
 
         <Search></Search>
-        {width < 480 ? <Menu onClick={handelClick} open={open}></Menu> : ""}
-        {width < 480 ? (
+        {width < 481 ? <Menu onClick={handelClick} open={open}></Menu> : ""}
+        {width < 481 ? (
           <MenuList open={open} back={dashboard && state.loggedIn}>
             {dashboard && state.loggedIn ? <Profile /> : ""}
             {dashboard && state.loggedIn ? checkUserMenu() : menuItem}{" "}
