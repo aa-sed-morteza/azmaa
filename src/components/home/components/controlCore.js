@@ -26,6 +26,7 @@ const Title = styled.div`
   align-items:center;
   gap:10px;
   cursor: pointer;
+  
   &.active ,&:hover{
     font-weight: 500;
     &:after {
@@ -103,7 +104,7 @@ const AreaContainer =styled.div`
 `
 
 export default function ControlCore() {
-  const [select, setSelect] = useState("");
+  const [select, setSelect] = useState("transparent");
 
   const envoys = [
     {

@@ -6,10 +6,14 @@ import banner2 from "../../../assets/banner2.webp";
 const Wraper=styled.div`
   display:flex;
   flex-direction:column;
-  @media(min-width:480px){
+  @media(min-width:481px){
     flex-direction:row;
     padding:0px 10%;
     gap:27px;
+    margin-top:20px;
+    
+  }
+  @media(min-width:769px){
     margin-top:81px;
   }
 `

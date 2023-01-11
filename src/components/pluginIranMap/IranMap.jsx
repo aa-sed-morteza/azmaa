@@ -297,7 +297,7 @@ const Container = styled.div`
       }
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     position: ${(props) => props.position};
     top: 14%;
     left: 8%;

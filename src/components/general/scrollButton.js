@@ -24,7 +24,7 @@ export default function ScrollButton({ container }) {
 
 const Container = styled.div`
   display: none;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     position: absolute;
     width: 72%;
     display: flex;
@@ -33,6 +33,9 @@ const Container = styled.div`
     top: 50%;
     transform: translate(0, -50%);
     z-index: 1000;
+  }
+  @media(min-width:769px){
+    width:67%;
   }
 `;
 

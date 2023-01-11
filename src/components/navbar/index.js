@@ -240,7 +240,7 @@ const Category = styled.ul`
   padding: 0;
   li {
     color: #ffffff;
-    font-size: 2.25vw;
+    font-size: 2vw;
     font-weight: light;
     cursor: pointer;
     white-space: nowrap;
@@ -381,7 +381,7 @@ export default function Navbar() {
 
       {width > 480 ? <Category>{menuItem}</Category> : ""}
       <LeftSection>
-        {width < 480 ? (
+        {width < 481 ? (
           ""
         ) : (
           <Panel

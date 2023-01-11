@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import profile from "../../assets/profile.webp";
 
-export default function EnvoyCard({name,state,commission,img,persantage,id}) {
+export default function EnvoyCard({name,state,commission,img,persantage,id,inBox}) {
   const [color, setColor] = useState("#FFAA00");
   const [firstHalf, setFirstHalf] = useState(0);
   const [secondHalf, setSecondHalf] = useState(0);
@@ -38,7 +38,7 @@ export default function EnvoyCard({name,state,commission,img,persantage,id}) {
 
 
   return (
-    <Container >
+    <Container width={inBox}>
       <EnvoyImage
         coloring={color}
         firstFill={firstHalf}
@@ -72,14 +72,17 @@ const Container = styled.div`
   box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   direction: rtl;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin: 0;
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
-    padding: 31px 27px;
-    min-width: 460px;
+    // padding: 31px 27px;
+    min-width:${props=>props.width?"inhiret":"460px"} ;
     align-items: center;
   }
+  @media (min-width: 769px) {
+    padding: 31px 27px;
+    }
 `;
 
 const EnvoyImage = styled.div`
@@ -91,7 +94,7 @@ const EnvoyImage = styled.div`
   overflow: hidden;
   transform: rotate(0deg);
   background: #f9f9f9;
-  @media(min-width:480px){
+  @media(min-width:481px){
     width:7.552vw;
     height:7.552vw;
   }
@@ -107,7 +110,7 @@ const EnvoyImage = styled.div`
     z-index: 2;
     left: -50%;
     background: #f9f9f9;
-    @media(min-width:480px){
+    @media(min-width:481px){
       width:7.552vw;
       height:7.552vw;
     }
@@ -120,7 +123,7 @@ const EnvoyImage = styled.div`
     position: absolute;
     left: 0;
     top: 0;
-    @media(min-width:480px){
+    @media(min-width:481px){
       width:7.552vw;
       height:7.552vw;
     }
@@ -144,7 +147,7 @@ const EnvoyImage = styled.div`
       z-index: 4;
       animation: 3s ${props=>'span2'+props.id} linear forwards 3s;
       opacity: 0;
-      @media(min-width:480px){
+      @media(min-width:481px){
         width:7.552vw;
         height:7.552vw;
       }
@@ -166,7 +169,7 @@ const EnvoyImage = styled.div`
       z-index: 1;
       animation: 3s ${props=>'span'+props.id} linear forwards;
       animation-delay: 4s;
-      @media(min-width:480px){
+      @media(min-width:481px){
         width:7.552vw;
         height:7.552vw;
       }
@@ -183,7 +186,7 @@ const EnvoyImage = styled.div`
     z-index: 5;
     border-radius: 50%;
     object-fit: contain;
-    @media(min-width:480px){
+    @media(min-width:481px){
       width:7.292vw;
       height:7.292vw;
       margin: 1.5px auto;
@@ -208,7 +211,7 @@ const EnvoyImage = styled.div`
       opacity: 1;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
   }
 `;
 
@@ -216,7 +219,7 @@ const Content = styled.div`
   width: 65%;
   display: flex;
   flex-direction: column;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     width: 62%;
   }
 
@@ -226,26 +229,24 @@ const Content = styled.div`
     font-weight: bold;
     margin: 0;
     margin-bottom: 10px;
-    @media (min-width: 480px) {
+    @media (min-width: 481px) {
       font-size: 1.667vw;
     }
   }
   .status {
     display: flex;
-    position: relative;
-    padding-right: 20px;
+    align-items:center;
+    gap:7px;
     margin-bottom: 10px;
     &:before {
       content: "";
-      display: block;
-      position: absolute;
+      display: inline-flex;
       width: 28px;
       height: 28px;
       background-image: url(${profile});
       background-size: contain;
       background-repeat: no-repeat;
-      right: -8px;
-      top: -2px;
+     
     }
     .state {
       color: #707070;
@@ -260,7 +261,7 @@ const Content = styled.div`
       padding-right: 7px;
       margin: 0;
     }
-    @media (min-width: 480px) {
+    @media (min-width: 481px) {
       align-items: center;
       &:before {
         right: -11px;
@@ -280,7 +281,7 @@ const Content = styled.div`
       font-size: 3.25vw;
       font-weight: 400;
       margin: 0;
-      @media (min-width: 480px) {
+      @media (min-width: 481px) {
         font-size: 1.042vw;
       }
     }
