@@ -6,18 +6,20 @@ import azmma from "../../assets/azmaa.webp";
 const FooterContainer = styled.section`
   background-color: #095644;
   padding: 19px 20px;
-  @media (min-width: 480px) {
-    padding: 30px 10%;
+  @media (min-width: 481px) {
     display: flex;
     justify-content: space-between;
+  }
+  @media (min-width: 769px) {
+    padding: 30px 10%;
   }
 `;
 
 const AboutUs = styled.div`
   display: none;
-  @media (min-width: 480px) {
+  @media(min-width:481px){
     display: flex;
-    width: 65%;
+    width: 50%;
     flex-direction: column;
     h4 {
       color: #dff5f0;
@@ -37,8 +39,18 @@ const AboutUs = styled.div`
       -webkit-line-clamp: 4;
       line-clamp: 4;
       -webkit-box-orient: vertical;
-      margin-top:5px;
-      margin-bottom:0;
+      margin-top: 5px;
+      margin-bottom: 0;
+    }
+  }
+
+  @media (min-width: 769px) {
+    width: 55%;
+    h4 {
+      font-size: 1.87vw;
+    }
+    p {
+      font-size: 1.25vw;
     }
   }
 `;
@@ -48,6 +60,7 @@ const ContactUs = styled.div`
     display: flex;
     margin-bottom: 10px;
     gap: 17px;
+    align-items:center;
 
     span {
       width: 45px;
@@ -64,6 +77,7 @@ const ContactUs = styled.div`
       background-color: #f3f3f3;
       border-radius: 4px;
       display: flex;
+     
       a {
         margin: auto 10px;
         color: #095644;
@@ -77,19 +91,46 @@ const ContactUs = styled.div`
     }
   }
 
-  @media (min-width: 480px) {
-    width: 30%;
+  @media (min-width: 481px) {
+    width: 45%;
     & > .item {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
+      span {
+        width: 50px;
+        height: 50px;
+      }
+      .content {
+        width: 70%;
+        height:43px;
+        a {
+          font-size: 1.87vw;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 769px) {
+    width: 40%;
+    & > .item {
+      // margin-bottom: 20px;
       span {
         width: 76px;
         height: 67px;
       }
       .content {
         width: 80%;
+        height:55px;
         a {
           font-size: 1.87vw;
         }
+      }
+    }
+  }
+  @media (min-width: 1025px) {
+    & > .item {
+      .content {
+        height:67px;
+       
       }
     }
   }
