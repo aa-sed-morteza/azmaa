@@ -18,7 +18,7 @@ export default function ControlStatus() {
 
   return (
     <Container>
-      {width < 480 ? (
+      {width < 481 ? (
         <>
           <Filtering>
             <Item
@@ -93,7 +93,7 @@ export default function ControlStatus() {
 
 const Container = styled.div`
   margin-top: 20px;
-  @media(min-width:480px){
+  @media(min-width:481px){
     margin:0;
     width:72%;
   }

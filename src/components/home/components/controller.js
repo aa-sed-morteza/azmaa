@@ -258,8 +258,8 @@ const VoterContainer = styled.div`
     gap: 20px;
     justify-content: center;
     flex-wrap:wrap;
-    margin-left:-7%;
-    margin-right:-7%;
+    // margin-left:-7%;
+    // margin-right:-7%;
   }
   @media(min-width:769px){
     justify-content: center;
@@ -272,8 +272,8 @@ const ActionContainer = styled.div`
   gap: 20px;
   justify-content: center;
   flex-wrap:wrap;
-  margin-left:-7%;
-  margin-right:-7%;
+  // margin-left:-7%;
+  // margin-right:-7%;
 }
 @media(min-width:769px){
   justify-content: center;

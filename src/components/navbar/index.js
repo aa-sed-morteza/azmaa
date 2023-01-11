@@ -379,7 +379,7 @@ export default function Navbar() {
         <img src={LOGO} alt="logo" />
       </Logo>
 
-      {width > 480 ? <Category>{menuItem}</Category> : ""}
+      {width > 481 ? <Category>{menuItem}</Category> : ""}
       <LeftSection>
         {width < 481 ? (
           ""
