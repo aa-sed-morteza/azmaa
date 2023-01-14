@@ -35,6 +35,9 @@ const initialState = {
   mapLevel: 1,
   provinceSearch: {},
   citySearch: {},
+  province: "", //province selected in IranMap
+  city: "", //city selected in IranMap
+  electoralDistrict: "", //electoralDistrict selected in IranMap
   loggedIn: false,
   // token: null,
 };
@@ -111,6 +114,12 @@ const reducer = (state, action) => {
       return { ...state, citySearch: action.payload };
     case "SET_IMAGE":
       return { ...state, image: action.payload };
+    case "SET_PROVICE":
+      return { ...state, province: action.payload };
+    case "SET_CITY":
+      return { ...state, city: action.payload };
+    case "SET_ELECTORAL_DISTRICT":
+      return { ...state, electoralDistrict: action.payload };
     // case "SET_DATA":
     //   return { ...state, ...action.payload };
     // case "SET_TOKEN":

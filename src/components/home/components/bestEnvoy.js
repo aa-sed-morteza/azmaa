@@ -134,21 +134,21 @@ const Content = styled.div`
   }
 `;
 
-export default function BestEnvoy({onClick}) {
+export default function BestEnvoy({onClick,name,district,commission,transparency}) {
   return (
     <EnvoyCard onClick={onClick}>
       <EnvoyImage>
         <img src={pic} />
       </EnvoyImage>
       <Content>
-        <h3>علیرضا پاکفطرت</h3>
+        <h3>{name}</h3>
         <div className="status">
-          <p className="state">دماوند و فیروزکوه</p>
-          <p className="position"> امنیت ملی</p>
+          <p className="state">{district}</p>
+          <p className="position">{commission}</p>
         </div>
         <div className="persantage">
           <p className="text">شفافیت: ٪</p>
-          <p className="content">۷۵</p>
+          <p className="content">{transparency}</p>
         </div>
       </Content>
     </EnvoyCard>

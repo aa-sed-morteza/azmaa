@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import useWidth from "../../../hook/useWidth";
 import background from "../../../assets/back-controll.webp";
@@ -11,6 +11,9 @@ import tik from "../../../assets/vote.webp";
 import ControlCore from "./controlCore";
 import SelectArea from "./selectArea";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BaseBackURL } from "../../../constant/api";
+import EnvoyCard from "../../general/envoyCard";
 
 const ControllContainer = styled.section`
   display: flex;
@@ -52,7 +55,7 @@ const SearchInput = styled.input`
     // color:#D8D8D8;
   }
   @media (min-width: 481px) {
-    width:90%;
+    width: 90%;
     border-radius: 4px;
     font-size: 1.2vw;
     font-weight: 400;
@@ -257,27 +260,27 @@ const VoterContainer = styled.div`
     display: flex;
     gap: 20px;
     justify-content: center;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     // margin-left:-7%;
     // margin-right:-7%;
   }
-  @media(min-width:769px){
+  @media (min-width: 769px) {
     justify-content: center;
   }
 `;
 
 const ActionContainer = styled.div`
-@media (min-width: 481px) {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap:wrap;
-  // margin-left:-7%;
-  // margin-right:-7%;
-}
-@media(min-width:769px){
-  justify-content: center;
-}
+  @media (min-width: 481px) {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    // margin-left:-7%;
+    // margin-right:-7%;
+  }
+  @media (min-width: 769px) {
+    justify-content: center;
+  }
 `;
 
 const EnvoyGalley = styled.div`
@@ -302,34 +305,73 @@ export default function Controller() {
   const [select, setSelect] = useState(0);
   const navigate = useNavigate();
   const width = useWidth();
+  const [envoys, setEnvoys] = useState([]);
+  const [district, setDistrict] = useState([]);
 
-  const envoys = [
-    {
-      name: "مهدی اسماعیلی",
-      state: "دماوند و فیروزکوه",
-      commission: " امنیت ملی",
-      id: "1",
-      persantage: "99",
-      img: "../../assets/abol.webp",
-    },
-    {
-      name: "حسن اسماعیلی",
-      state: " پردیس ",
-      commission: " امنیت اجتماعی",
-      id: "2",
-      persantage: "20",
-      img: "../../assets/ali.webp",
-    },
-    {
-      name: "حامد هایون",
-      state: " البرز ",
-      commission: " امنیت اجتماعی",
-      id: "3",
-      persantage: "50",
-      img: "../../assets/jafi.webp",
-    },
-  ];
 
+
+
+  const getEnvoys = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        setEnvoys(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getDistrict = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        setDistrict(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getEnvoys();
+    getDistrict();
+  }, []);
+
+  const justEnvoys = envoys.map((item, index) => {
+    return (
+      <EnvoyCard
+        key={index}
+        name={item.first_name + " " + item.last_name}
+        state={item.electoral_district_name}
+        // img={x.img}
+        commission={item.fraction_name}
+        persantage={item.transparency}
+        id={index}
+        inBox={true}
+      />
+    );
+  });
+
+  const justDistrict = district.map((item, index) => {
+    return (
+      <SelectArea
+        key={index}
+        area={item.name}
+        envoys={envoys.find((x) => x.electoral_district_name == item.name)}
+      />
+    );
+  });
   const controllItem = data.controlPanel.map((x, i) => {
     return (
       <Tab
@@ -429,15 +471,12 @@ export default function Controller() {
       {select == 1 && (
         <>
           <EnvoyGalley>
-            <BestEnvoy
+            {/* <BestEnvoy
               onClick={() => {
                 navigate("/envoy/علیرضا پاکفطرت");
               }}
-            />
-            <BestEnvoy />
-            <BestEnvoy />
-            <BestEnvoy />
-            <BestEnvoy />
+            /> */}
+            {justEnvoys}
           </EnvoyGalley>
           <ShowMore style={{ marginTop: "20px" }}>
             <p>نمایش بیشتر</p>{" "}
@@ -448,9 +487,7 @@ export default function Controller() {
       {/* just state */}
       {select == 2 && (
         <AreaContainer>
-          <SelectArea area="تهران، ری و شمیرانات" envoys={envoys} />
-          <SelectArea area="فیروزکوه و دماوند" envoys={envoys} />
-          <SelectArea area="فیروزکوه و دماوند" envoys={envoys} />
+          {justDistrict}
         </AreaContainer>
       )}
 

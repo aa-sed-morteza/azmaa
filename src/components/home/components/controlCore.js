@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import profile from "../../../assets/g-profile.webp";
 import location from "../../../assets/g-location.webp";
 import BestEnvoy from "./bestEnvoy";
 import upArrow from "../../../assets/arrow.webp";
 import SelectArea from "./selectArea";
+import axios from "axios";
+import { BaseBackURL } from "../../../constant/api";
+import EnvoyCard from "../../general/envoyCard";
 
 const Container = styled.section`
   display: flex;
@@ -22,12 +25,13 @@ const Title = styled.div`
   font-weight: 300;
   position: relative;
   padding-bottom: 20px;
-  display:flex;
-  align-items:center;
-  gap:10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   cursor: pointer;
-  
-  &.active ,&:hover{
+
+  &.active,
+  &:hover {
     font-weight: 500;
     &:after {
       content: "";
@@ -95,43 +99,86 @@ p {
 }
 `;
 
-const AreaContainer =styled.div`
-  @media(min-width:480px){
-    display:flex;
-    flex-wrap:wrap;
-    gap:1.042vw;
+const AreaContainer = styled.div`
+  @media (min-width: 480px) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.042vw;
   }
-`
+`;
 
 export default function ControlCore() {
   const [select, setSelect] = useState("transparent");
+  const [envoys, setEnvoys] = useState([]);
+  const [district, setDistrict] = useState([]);
+  const [notTransparency, setNotTransparency] = useState(0);
 
-  const envoys = [
-    {
-      name: "مهدی اسماعیلی",
-      state: "دماوند و فیروزکوه",
-      commission: " امنیت ملی",
-      id: "1",
-      persantage: "99",
-      img: "../../assets/abol.webp",
-    },
-    {
-      name: "حسن اسماعیلی",
-      state: " پردیس ",
-      commission: " امنیت اجتماعی",
-      id: "2",
-      persantage: "20",
-      img: "../../assets/ali.webp",
-    },
-    {
-      name: "حامد هایون",
-      state: " البرز ",
-      commission: " امنیت اجتماعی",
-      id: "3",
-      persantage: "50",
-      img: "../../assets/jafi.webp",
-    },
-  ];
+  const getEnvoys = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        setEnvoys(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getDistrict = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        setDistrict(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getEnvoys();
+    getDistrict();
+  }, []);
+
+  const justDistrict = district.map((item, index) => {
+    return (
+      <SelectArea
+        key={index}
+        area={item.name}
+        envoys={envoys.find((x) => x.electoral_district_name == item.name)}
+      />
+    );
+  });
+
+  const justEnvoys = envoys.map((item, index) => {
+    if (item.transparency >= 70) {
+      return (
+        <EnvoyCard
+          key={index}
+          name={item.first_name + " " + item.last_name}
+          state={item.electoral_district_name}
+          // img={x.img}
+          commission={item.fraction_name}
+          persantage={item.transparency}
+          id={index}
+          inBox={true}
+        />
+      );
+    } 
+  });
+
+
+
   return (
     <Container>
       <Selector>
@@ -157,25 +204,13 @@ export default function ControlCore() {
       <Content>
         {select === "transparent" && (
           <>
-            <EnvoyContainer>
-              <BestEnvoy />
-              <BestEnvoy />
-              <BestEnvoy />
-              <BestEnvoy />
-              <BestEnvoy />
-              <BestEnvoy />
-            </EnvoyContainer>
+            <EnvoyContainer>{justEnvoys}</EnvoyContainer>
             <ShowMore>
               <p>نمایش بیشتر</p>{" "}
             </ShowMore>
           </>
         )}
-        {select === "area" && (<AreaContainer>
-        <SelectArea area="تهران، ری و شمیرانات" envoys={envoys}/>
-        <SelectArea area="فیروزکوه و دماوند" envoys={envoys}/>
-        <SelectArea area="فیروزکوه و دماوند" envoys={envoys}/>
-
-        </AreaContainer>)}
+        {select === "area" && <AreaContainer>{justDistrict}</AreaContainer>}
       </Content>
     </Container>
   );
