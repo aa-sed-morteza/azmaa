@@ -40,7 +40,7 @@ export default function Blog() {
       </Title>
       {width < 481 ? <Poster posts={posts} /> : <Carousel posts={posts} />}
 
-      <Magazine />
+      <Magazine posts={posts} />
       <SelectNews />
     </Container>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import leftArrow from "../../../assets/leftArrow.webp";
-import mag from "../../../assets/blog.webp"
+import mag from "../../../assets/blog.webp";
 import user from "../../../assets/profile.webp";
 import data from "../../../data.json";
 import ScrollButton from "../../general/scrollButton";
@@ -13,14 +13,14 @@ const MagazineContainer = styled.section`
   margin-right: -10px;
   margin-left: -10px;
   display: flex;
-  margin-bottom:15px;
-  position:relative;
+  margin-bottom: 15px;
+  position: relative;
   @media (min-width: 481px) {
     padding: 20px;
     // margin-top:70px;
     margin-top: 0;
-    padding-left:30px;
-    margin-inline:-12.5%;
+    padding-left: 30px;
+    margin-inline: -12.5%;
   }
   @media (min-width: 769px) {
     padding: 36px 0 50px;
@@ -63,7 +63,7 @@ const Ttitle = styled.div`
   @media (min-width: 481px) {
     margin-right: 5%;
     max-width: 150px;
-    padding-left:7%;
+    padding-left: 7%;
     span {
       width: 50px;
       height: 50px;
@@ -104,10 +104,10 @@ const Wraper = styled.div`
   overflow-x: scroll;
   gap: 10px;
   padding-right: 50px;
-  ::-webkit-scrollbar{
-    display: none; 
+  ::-webkit-scrollbar {
+    display: none;
   }
- 
+
   @media (min-width: 481px) {
     // padding-right: 90px;
     gap: 28px;
@@ -137,9 +137,9 @@ const Paper = styled.div`
     color: #707070;
     font-weight: 300;
     font-size: 3.72vw;
-    display:flex;
-    align-items:center;
-    gap:7px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
     margin-bottom: 10px;
     &:before {
       content: "";
@@ -149,7 +149,6 @@ const Paper = styled.div`
       background-repeat: no-repeat;
       width: 15px;
       height: 15px;
-     
     }
   }
   .content {
@@ -221,38 +220,43 @@ const Paper = styled.div`
   }
 `;
 
-const Curtain =styled.div`
-  position:absolute;
-  width:45%;
-  height:100%;
-  background: linear-gradient(to left, rgba(250, 183, 50, 0) 63.02%, #FAB732 100%);
-  top:0;
-  left:0;
-`
-export default function Magazine() {
-    const magPaper = data.magazine.map((x, i) => {
-        return (
-          <Paper key={i}>
-            <div className="cover">
-              <img src={x.img} alt={x.date} />
-            </div>
-    
-            <p className="user">{x.name}</p>
-    
-            <p className="content">{x.content}</p>
-    
-            <p className="date">{x.date}</p>
-          </Paper>
-        );
-      });
+const Curtain = styled.div`
+  position: absolute;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    to left,
+    rgba(250, 183, 50, 0) 63.02%,
+    #fab732 100%
+  );
+  top: 0;
+  left: 0;
+`;
+export default function Magazine({ posts }) {
+  const magPaper = posts.map((x, i) => {
+    return (
+      <Paper key={i}>
+        <div className="cover">
+          <img src={x.img} alt={x.date} />
+        </div>
+
+        <p className="user">{x.writer}</p>
+
+        <p className="content">{x.description.slice(0, 245) + " ..."}</p>
+
+        <p className="date">{x.date}</p>
+      </Paper>
+    );
+  });
   return (
     <MagazineContainer>
       <Ttitle>
         <span></span>
         <h1>جدیدترین مطالب</h1>
       </Ttitle>
-      <Wraper id="magazine">{magPaper}
-      <ScrollButton container="magazine"/>
+      <Wraper id="magazine">
+        {magPaper}
+        <ScrollButton container="magazine" />
       </Wraper>
       <Curtain></Curtain>
     </MagazineContainer>
