@@ -11,6 +11,8 @@ import useWidth from "../../hook/useWidth";
 import { useUser } from "../context/userContext";
 import exit from "../../assets/exit.webp";
 import Profile from "../dashboard/components/profile";
+import axios from "axios";
+import { BaseBackURL } from "../../constant/api";
 
 // styled
 const TopBar = styled.section`
@@ -273,7 +275,7 @@ const Category = styled.ul`
       }
     }
   }
-  @media(min-width:1201px){
+  @media (min-width: 1201px) {
     li {
       &.active,
       &:hover {
@@ -355,6 +357,14 @@ export default function Navbar() {
       navigate("/dashboard");
     } else {
       navigate("/");
+      let config = {
+        method: "post",
+        url: `${BaseBackURL}api/v1/accounts/logout/`,
+      };
+      axios(config).then((res) => {
+        console.log(res);
+        dispatch({ type: "SET_LOGGED_IN", payload: false });
+      });
     }
   };
 

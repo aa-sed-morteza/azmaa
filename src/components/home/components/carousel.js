@@ -4,6 +4,83 @@ import data from "../../../data.json";
 import leftArrow from "../../../assets/lightArrow.webp";
 import SelectState from "./selectState";
 import IranMap from "../../pluginIranMap/IranMap";
+import { BaseBackURL } from "../../../constant/api";
+import axios from "axios";
+
+export default function Carousel() {
+  const items = data.slider;
+  const [posts, setPosts] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  function carouselInfiniteScroll() {
+    if (currentIndex === data.slider.length - 1) {
+      return setCurrentIndex(0);
+    }
+    return setCurrentIndex(currentIndex + 1);
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      carouselInfiniteScroll();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  });
+
+  const getPosts = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/blog/?writer__id&tag__id&is_suggested=True, False&ordering=created`,
+    };
+
+    axios(config).then((res) => {
+      console.log(res);
+      if (res.data.length > 0) {
+        setPosts([...res.data.slice(0, 4)]);
+      }
+    });
+  };
+
+  console.log(posts);
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
+  const index = items.map((x, i) => {
+    return (
+      <div
+        key={i}
+        className={i === currentIndex ? "item active" : "item"}
+      ></div>
+    );
+  });
+
+  //
+
+  return (
+    <Wraper>
+      {posts.map((item, i) => {
+        return (
+          <Slide
+            key={i}
+            photo={item.image}
+            style={{ transform: `translate(${currentIndex * 100}%)` }}
+          >
+            <div className="content">
+              <h1>{item.title}</h1>
+              <p>{item.description}</p>
+              <div className="show-more">ادامه مطلب</div>
+            </div>
+          </Slide>
+        );
+      })}
+      <ShowIndex>{index}</ShowIndex>
+      {/* <SelectState /> */}
+      <IranMap position="absolute" />
+    </Wraper>
+  );
+}
 
 const Wraper = styled.section`
   overflow: hidden;
@@ -15,13 +92,13 @@ const Wraper = styled.section`
   margin-right: -3%;
   margin-top: -10%;
   position: relative;
-  @media(min-width:1025px){
-    margin-top:-9%;
+  @media (min-width: 1025px) {
+    margin-top: -9%;
   }
-  @media(min-width:1201px){
-    margin-top:-7%;
+  @media (min-width: 1201px) {
+    margin-top: -7%;
   }
-  
+
   // @media (max-width: 1600px) {
   //   margin-left: -2%;
   //   margin-top: -7%;
@@ -113,62 +190,8 @@ const Slide = styled.div`
         background-repeat: no-repeat;
         top: 50%;
         left: 25px;
-        transform:translate(0,-50%);
+        transform: translate(0, -50%);
       }
     }
   }
 `;
-
-export default function Carousel() {
-  const items = data.slider;
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  function carouselInfiniteScroll() {
-    if (currentIndex === data.slider.length - 1) {
-      return setCurrentIndex(0);
-    }
-    return setCurrentIndex(currentIndex + 1);
-  }
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      carouselInfiniteScroll();
-    }, 3000);
-
-    return () => clearInterval(interval);
-  });
-
-  const index = items.map((x, i) => {
-    return (
-      <div
-        key={i}
-        className={i === currentIndex ? "item active" : "item"}
-      ></div>
-    );
-  });
-
-  //
-
-  return (
-    <Wraper>
-      {items.map((x, i) => {
-        return (
-          <Slide
-            key={i}
-            photo={x.image}
-            style={{ transform: `translate(${currentIndex * 100}%)` }}
-          >
-            <div className="content">
-              <h1>{x.title}</h1>
-              <p>{x.content}</p>
-              <div className="show-more">ادامه مطلب</div>
-            </div>
-          </Slide>
-        );
-      })}
-      <ShowIndex>{index}</ShowIndex>
-      {/* <SelectState /> */}
-      <IranMap position="absolute"/>
-    </Wraper>
-  );
-}
