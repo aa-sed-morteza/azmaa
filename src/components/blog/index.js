@@ -41,7 +41,7 @@ export default function Blog() {
       {width < 481 ? <Poster posts={posts} /> : <Carousel posts={posts} />}
 
       <Magazine posts={posts} />
-      <SelectNews />
+      <SelectNews posts={posts} />
     </Container>
   );
 }

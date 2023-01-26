@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Control from "../../vote/components/controler";
 import data from "../../../data.json";
@@ -48,7 +48,7 @@ const NewsWraper = styled.div`
   margin-bottom: 10px;
   @media (min-width: 481px) {
     margin-bottom: 45px;
-    justify-content:flex-start;
+    justify-content: flex-start;
   }
 `;
 
@@ -141,17 +141,17 @@ const Paper = styled.div`
       font-weight: 500;
     }
   }
-  @media(max-width:1600px){
-    .cover{
-      width:16vw;
+  @media (max-width: 1600px) {
+    .cover {
+      width: 16vw;
     }
   }
-  @media(max-width:1200px){
-    .cover{
-      width:15vw;
+  @media (max-width: 1200px) {
+    .cover {
+      width: 15vw;
     }
-    .content{
-      max-width:14vw;
+    .content {
+      max-width: 14vw;
     }
   }
 `;
@@ -214,25 +214,32 @@ const ChangeBack = styled.div`
   }
 `;
 
-export default function SelectNews() {
-  const magPaper = data.magazine.map((x, i) => {
+export default function SelectNews({ posts }) {
+  const [selectedTag, setSelectedTag] = useState("همه");
+  const [filteredPosts, setFilteredPosts] = useState(posts);
+  const magPaper = filteredPosts.map((x, i) => {
     return (
       <Paper key={i}>
         <div className="cover">
           <img src={x.img} alt={x.date} />
         </div>
 
-        <p className="user">{x.name}</p>
+        <p className="user">{x.writer}</p>
 
-        <p className="content">{x.content}</p>
+        <p className="content">{x.description.slice(0, 180) + " ..."}</p>
 
         <p className="date">{x.date}</p>
       </Paper>
     );
   });
+
+  useEffect(() => {
+    let newPosts = posts.filter((post) => post.tag[0].name === selectedTag);
+    setFilteredPosts([...newPosts]);
+  }, [selectedTag]);
   return (
     <Container>
-      <Control />
+      <Control selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
       <Title> پربازدیدترین مطالب</Title>
       <NewsWraper>{magPaper}</NewsWraper>
       <ShowMore>
