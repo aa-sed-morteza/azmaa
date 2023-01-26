@@ -65,7 +65,10 @@ export default function Carousel() {
           <Slide
             key={i}
             photo={item.image}
-            style={{ transform: `translate(${currentIndex * 100}%)` }}
+            style={{
+              transform: `translate(${currentIndex * 100}%)`,
+              backgroundColor: "#5e5e5e",
+            }}
           >
             <div className="content">
               <h1>{item.title}</h1>

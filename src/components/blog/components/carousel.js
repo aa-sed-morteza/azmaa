@@ -76,12 +76,12 @@ const Content = styled.div`
   }
   .identity {
     display: flex;
-    align-items:center;
+    align-items: center;
     .user {
       padding-left: 10px;
-      display:flex;
-      align-items:center;
-      gap:7px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
       color: #9f9f9f;
       font-weight: 700;
       font-size: 1.25vw;
@@ -95,7 +95,6 @@ const Content = styled.div`
         background-repeat: no-repeat;
         width: 30px;
         height: 30px;
-        
       }
     }
     .date {
@@ -103,7 +102,7 @@ const Content = styled.div`
       font-size: 1.25vw;
       color: rgba(0, 0, 0, 0.2);
       padding-right: 10px;
-      margin:0;
+      margin: 0;
     }
   }
 `;
@@ -138,8 +137,8 @@ const Button = styled.div`
   }
 `;
 
-export default function Carousel() {
-  const items = data.newspaper;
+export default function Carousel({ posts }) {
+  const items = posts;
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -167,24 +166,31 @@ export default function Carousel() {
     );
   });
 
-  //   
+  //
   return (
     <Container>
       {items.map((x, i) => {
         return (
-          <Slide key={i} style={{transform:`translate(${currentIndex*100}%)`}}>
+          <Slide
+            key={i}
+            style={{ transform: `translate(${currentIndex * 100}%)` }}
+          >
             <PicWraper>
               <img src={x.img} alt="poster" />
             </PicWraper>
             <Content>
-              <h1 className="title">{x.title}</h1>
-              <p className="text">{x.expand} </p>
+              <h1 className="title">{x.title.slice(0, 50) + "..."}</h1>
+              <p className="text">{x.description.slice(0, 250) + "..."} </p>
               <div className="identity">
-                <p className="user">{x.user}</p>
-                <p className="date">{x.date}</p>
+                <p className="user">{x.writer}</p>
+                <p className="date">{x.created}</p>
               </div>
-              <Button onClick={()=>{navigate(`/blog/${x.title}`)}}>
-                <p className="text-button" >ادامه مطلب</p>{" "}
+              <Button
+                onClick={() => {
+                  navigate(`/blog/${x.title}`);
+                }}
+              >
+                <p className="text-button">ادامه مطلب</p>{" "}
               </Button>
             </Content>
           </Slide>

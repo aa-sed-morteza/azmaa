@@ -106,17 +106,17 @@ const ShowMore = styled.p`
   }
 `;
 
-export default function Poster() {
+export default function Poster({ posts }) {
   const navigate = useNavigate();
-  const [report, setReport] = useState({
+
+  const report = {
     img: pic,
-    type: "یادداشت",
-    user:"سهیل داناچیان",
-    date: "۲۹ اسفند ۱۴۰۰",
-    title: "مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود کدام شرکت‌هاست؟",
-    expand:
-      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.",
-  });
+    type: posts[0]?.type,
+    user: posts[0]?.writer,
+    date: posts[0]?.created,
+    title: posts[0]?.title,
+    expand: posts[0]?.description,
+  };
   return (
     <Container>
       <Picture>
@@ -127,13 +127,15 @@ export default function Poster() {
           <Type>{report.type}</Type>
           <Date>{report.date}</Date>
         </HeadContent>
-        <Title>
-          {report.title}
-        </Title>
-        <Paragraph>
-          {report.expand}
-        </Paragraph>
-        <ShowMore onClick={()=>{navigate(`/blog/${report.title}`)}} >ادامۀ مطلب</ShowMore>
+        <Title>{report.title?.slice(0, 50) + " ..."}</Title>
+        <Paragraph>{report.expand?.slice(0, 250) + " ..."}</Paragraph>
+        <ShowMore
+          onClick={() => {
+            navigate(`/blog/${report.title}`);
+          }}
+        >
+          ادامۀ مطلب
+        </ShowMore>
       </Content>
     </Container>
   );
