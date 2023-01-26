@@ -47,7 +47,7 @@ const IranMap = ({ position }) => {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        console.log(JSON.stringify(response.data.city));
         // const dbProvinces =iranProvinces.find(x=>x.name==response.data.province_name);
         setData(response.data);
       })

@@ -20,18 +20,17 @@ export default function Blog() {
     };
 
     axios(config).then((res) => {
-      console.log(res);
+      console.log("response" ,res)
       if (res.data.length > 0) {
         setPosts([...res.data]);
       }
     });
   };
-
+  
   useEffect(() => {
     getPosts();
   }, []);
 
-  console.log(posts);
   return (
     <Container>
       <Title>
@@ -40,8 +39,8 @@ export default function Blog() {
       </Title>
       {width < 481 ? <Poster posts={posts} /> : <Carousel posts={posts} />}
 
-      <Magazine />
-      <SelectNews />
+      <Magazine posts={posts} />
+      <SelectNews posts={posts} />
     </Container>
   );
 }

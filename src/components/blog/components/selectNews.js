@@ -4,6 +4,7 @@ import Control from "../../vote/components/controler";
 import data from "../../../data.json";
 import user from "../../../assets/profile.webp";
 import upArrow from "../../../assets/arrow.webp";
+import mag from "../../../assets/blog.webp"
 
 const Container = styled.section`
   background-color: #ffffff;
@@ -214,19 +215,30 @@ const ChangeBack = styled.div`
   }
 `;
 
-export default function SelectNews() {
-  const magPaper = data.magazine.map((x, i) => {
+export default function SelectNews({ posts }) {
+  const magPaper = posts.map((x, i) => {
+
+    const report = {
+      img: mag,
+      type: x.type,
+      user: x.writer,
+      date: x.created,
+      title: x.title,
+      expand: x.description,
+    };
+
+
     return (
       <Paper key={i}>
         <div className="cover">
-          <img src={x.img} alt={x.date} />
+          <img src={report.img} alt={report.date} />
         </div>
 
-        <p className="user">{x.name}</p>
+        <p className="user">{report.user}</p>
 
-        <p className="content">{x.content}</p>
+        <p className="content">{report.expand &&report.expand.length >= 100 ? report.expand.slice(0, 100) + " ..." : report.expand }</p>
 
-        <p className="date">{x.date}</p>
+        <p className="date">{report.date}</p>
       </Paper>
     );
   });

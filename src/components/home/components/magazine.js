@@ -226,19 +226,29 @@ const Paper = styled.div`
   }
 `;
 
-export default function () {
-  const magPaper = data.magazine.map((x, i) => {
+export default function ({posts}) {
+  const magPaper = posts.map((x, i) => {
+
+    const report = {
+      img: mag,
+      type: x.type,
+      user: x.writer,
+      date: x.created,
+      title: x.title,
+      expand: x.description,
+    };
+
     return (
       <Paper>
         <div className="cover">
           <img src={x.img} alt={x.date} />
         </div>
 
-        <p className="user">{x.name}</p>
+        <p className="user">{report.user}</p>
 
-        <p className="content">{x.content}</p>
+        <p className="content">{report.expand && report.expand.length >= 100 ? report.expand.slice(0, 100) + " ..." : report.expand }</p>
 
-        <p className="date">{x.date}</p>
+        <p className="date">{report.date}</p>
       </Paper>
     );
   });
