@@ -44,7 +44,7 @@ export const userContext = React.createContext({});
 const reducer = (state, action) => {
   switch (action.type) {
     case "SET_ID":
-      return { ...state, loggedIn: action.payload };
+      return { ...state, userId: action.payload };
     case "SET_LOGGED_IN":
       return { ...state, loggedIn: action.payload };
     case "SET_AREA_NAME":

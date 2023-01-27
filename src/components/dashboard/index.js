@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import { useUser } from "../context/userContext";
 import SuperviserDashboard from "./superviser";
 import EnvoyDashboard from "./envoy";
@@ -29,11 +34,11 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const width = useWidth();
 
-  useEffect(()=>{
-    if(state.userName == ""){
-      navigate('/log-in')
+  useEffect(() => {
+    if (state.loggedIn === false) {
+      navigate("/log-in");
     }
-  },[])
+  }, []);
 
   return (
     <Container>
@@ -52,10 +57,15 @@ export default function Dashboard() {
 
           <Routes>
             <Route path="/" element={<SuperviserDashboard />} />
-            <Route path="/edit-personal-info" element={<EditPersonalInformation />} />
-            <Route path="/edit-log-info" element={<EditLogInformation/>}/>
-            <Route path="/edit-contact-info" element={<EditContactInformation/>}/>
-
+            <Route
+              path="/edit-personal-info"
+              element={<EditPersonalInformation />}
+            />
+            <Route path="/edit-log-info" element={<EditLogInformation />} />
+            <Route
+              path="/edit-contact-info"
+              element={<EditContactInformation />}
+            />
 
             <Route path="/myEnvoy" element={<MyEnvoys />} />
             <Route path="/myActions" element={<MyActions />} />
@@ -68,15 +78,20 @@ export default function Dashboard() {
             <Route path="/mySection/:title" element={<News />} />
           </Routes>
         ) : (
-
           <Routes>
             <Route path="/" element={<EnvoyDashboard />} />
-            <Route path="/edit-personal-info" element={<EditPersonalInformation />} />
-            <Route path="/edit-log-info" element={<EditLogInformation/>}/>
-            <Route path="/edit-contact-info" element={<EditContactInformation/>}/>
-            <Route path="/edit-commission-info" element={<EditCommission/>}/>
-            <Route path="/edit-history-info" element={<EditHistoryEnvoy/>}/>
-            <Route path="/edit-envoy-state" element={<EditEnvoyState/>}/>
+            <Route
+              path="/edit-personal-info"
+              element={<EditPersonalInformation />}
+            />
+            <Route path="/edit-log-info" element={<EditLogInformation />} />
+            <Route
+              path="/edit-contact-info"
+              element={<EditContactInformation />}
+            />
+            <Route path="/edit-commission-info" element={<EditCommission />} />
+            <Route path="/edit-history-info" element={<EditHistoryEnvoy />} />
+            <Route path="/edit-envoy-state" element={<EditEnvoyState />} />
 
             <Route path="/myEnvoy" element={<MyEnvoys />} />
             <Route path="/myActions" element={<MyActions />} />
@@ -87,10 +102,7 @@ export default function Dashboard() {
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/history" element={<MyHistory />} />
             <Route path="/mySection/:title" element={<News />} />
-
-           
           </Routes>
-          
         )}
       </PageWraper>
     </Container>
