@@ -50,7 +50,7 @@ export default function Actions() {
       <Content>
         <Controler selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
         <Filtering />
-        <Calendar activities={activities} />
+        <Calendar activities={filteredActivities} />
       </Content>
     </Container>
   );
