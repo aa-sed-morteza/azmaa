@@ -10,7 +10,7 @@ const Container = styled.section`
   gap: 30px;
   padding-left: 9%;
   margin-top: 70px;
-  margin-bottom:70px;
+  margin-bottom: 70px;
 `;
 
 const Title = styled.h1`
@@ -40,9 +40,9 @@ const Title = styled.h1`
     height: 3.073vw;
     margin-bottom: -1%;
   }
-  @media(max-width:1600px){
-    &:after{
-      width:75%;
+  @media (max-width: 1600px) {
+    &:after {
+      width: 75%;
     }
   }
 `;
@@ -85,22 +85,18 @@ p {
 }
 `;
 
-
-export default function NewEnvoy(){
-    return(
-        <Container>
+export default function NewEnvoy({ envoys }) {
+  return (
+    <Container>
       <Title> جدیدترین نمایندگان</Title>
       <EnvoyContainer>
-        <BestEnvoy/>
-        <BestEnvoy/>
-        <BestEnvoy/>
-        <BestEnvoy/>
-        <BestEnvoy/>
-        <BestEnvoy/>
+        {envoys.map((item) => (
+          <BestEnvoy envoy={item} />
+        ))}
       </EnvoyContainer>
       <ShowMore>
         <p>نمایش بیشتر</p>{" "}
       </ShowMore>
     </Container>
-    )
+  );
 }

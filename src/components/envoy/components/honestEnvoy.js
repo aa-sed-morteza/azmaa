@@ -3,6 +3,21 @@ import styled from "styled-components";
 import eye from "../../../assets/eye.webp";
 import BestEnvoy from "../../home/components/bestEnvoy";
 
+export default function HonestEnvoy({ envoys }) {
+  const newList = envoys.sort((a, b) => a.transparency > b.transparency);
+
+  return (
+    <Container>
+      <Title>شفاف‌ترین نمایندگان</Title>
+      <Gallery>
+        {newList.map((item) => (
+          <BestEnvoy envoy={item} />
+        ))}
+      </Gallery>
+    </Container>
+  );
+}
+
 const Container = styled.div`
   background-color: #f3f3f3;
   border: 1px solid #cbcbcb;
@@ -53,13 +68,12 @@ const Gallery = styled.div`
   ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    background-color: #EAEAEA;
-    
+    background-color: #eaeaea;
   }
 
   ::-webkit-scrollbar {
     width: 5px;
-    background-color: #EAEAEA;
+    background-color: #eaeaea;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -71,18 +85,3 @@ const Gallery = styled.div`
     width: 100%;
   }
 `;
-
-export default function HonestEnvoy() {
-  return (
-    <Container>
-      <Title>شفاف‌ترین نمایندگان</Title>
-      <Gallery>
-        <BestEnvoy />
-        <BestEnvoy />
-        <BestEnvoy />
-        <BestEnvoy />
-        <BestEnvoy />
-      </Gallery>
-    </Container>
-  );
-}
