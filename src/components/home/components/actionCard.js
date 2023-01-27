@@ -29,7 +29,9 @@ export default function ActionCard({ activity }) {
           <img src={x.voter.image} alt={x.voter.last_name} />
         </div>
 
-        <p className="name">{x.voter.first_name}</p>
+        <p className="name">
+          {x.voter.first_name} {x.voter.last_name}
+        </p>
         <p className="state">{x.voter.electoral_district_name}</p>
       </Card>
     );

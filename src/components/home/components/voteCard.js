@@ -23,16 +23,16 @@ const VCContainer = styled.div`
     border-radius: 8px;
     margin-bottom: 34px;
     width: 25%;
-    padding:20px 17px;
-    height:43.229vw;
-    min-height:0;
+    padding: 20px 17px;
+    height: 43.229vw;
+    min-height: 0;
   }
 
-  @media(min-width:1025px){
-    width:28%;
+  @media (min-width: 1025px) {
+    width: 28%;
   }
-  @media(min-width:1600px){
-    width:30%;
+  @media (min-width: 1600px) {
+    width: 30%;
   }
 `;
 
@@ -59,9 +59,9 @@ const CardHeader = styled.div`
       font-size: 3.72vw;
       font-weight: 200;
       margin-bottom: 10px;
-      display:flex;
-      align-items:center;
-      gap:5px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
       &:before {
         content: "";
         display: inline-flex;
@@ -70,7 +70,6 @@ const CardHeader = styled.div`
         background-image: url(${vote});
         background-size: contain;
         background-repeat: no-repeat;
-       
       }
     }
     h2 {
@@ -93,16 +92,15 @@ const CardHeader = styled.div`
         &:before {
           width: 1.875vw;
           height: 1.875vw;
-         
         }
       }
-      h2{
-        font-size:1.667vw;
-        font-weight:700;
+      h2 {
+        font-size: 1.667vw;
+        font-weight: 700;
       }
-      .date{
-        font-size:1.250vw;
-        font-weight:500;
+      .date {
+        font-size: 1.25vw;
+        font-weight: 500;
       }
     }
   }
@@ -117,9 +115,8 @@ const Statistics = styled.div`
   margin-top: 17px;
   justify-content: center;
   padding-bottom: 13px;
-  @media(min-width:481px){
+  @media (min-width: 481px) {
     gap: 4.688vw;
-
   }
 `;
 
@@ -141,7 +138,8 @@ const Success = styled.div`
     right: -11.628vw;
     top: -1.395vw;
   }
-  &.active,&:hover {
+  &.active,
+  &:hover {
     font-weight: bold;
     &:after {
       content: "";
@@ -154,17 +152,17 @@ const Success = styled.div`
       right: -11.628vw;
     }
   }
-  @media(min-width:481px){
-    font-size:1.458vw;
-    font-weight:400;
-    padding-bottom:10px;
-    &:before{
+  @media (min-width: 481px) {
+    font-size: 1.458vw;
+    font-weight: 400;
+    padding-bottom: 10px;
+    &:before {
       width: 2.917vw;
       height: 2.917vw;
       right: -3.385vw;
       top: -0.26vw;
     }
-    &:after{
+    &:after {
       width: 5.208vw !important;
       bottom: -0.7vh !important;
       height: 0.208vw !important;
@@ -191,7 +189,8 @@ const Faild = styled.div`
     right: -11.628vw;
     top: -1.395vw;
   }
-  &.active,&:hover {
+  &.active,
+  &:hover {
     font-weight: bold;
     &:after {
       content: "";
@@ -204,17 +203,17 @@ const Faild = styled.div`
       right: -11.628vw;
     }
   }
-  @media(min-width:481px){
-    font-size:1.458vw;
-    font-weight:400;
-    padding-bottom:10px;
-    &:before{
+  @media (min-width: 481px) {
+    font-size: 1.458vw;
+    font-weight: 400;
+    padding-bottom: 10px;
+    &:before {
       width: 2.917vw;
       height: 2.917vw;
       right: -3.385vw;
       top: -0.26vw;
     }
-    &:after{
+    &:after {
       width: 5.208vw !important;
       bottom: -0.7vh !important;
       height: 0.208vw !important;
@@ -242,7 +241,8 @@ const Not = styled.div`
     right: -11.628vw;
   }
 
-  &.active,&:hover {
+  &.active,
+  &:hover {
     font-weight: bold;
     &:after {
       content: "";
@@ -255,17 +255,17 @@ const Not = styled.div`
       right: -11.628vw;
     }
   }
-  @media(min-width:481px){
-    font-size:1.458vw;
-    font-weight:400;
-    padding-bottom:10px;
-    &:before{
+  @media (min-width: 481px) {
+    font-size: 1.458vw;
+    font-weight: 400;
+    padding-bottom: 10px;
+    &:before {
       width: 2.917vw;
       height: 2.917vw;
       right: -3.385vw;
       top: -0.26vw;
     }
-    &:after{
+    &:after {
       width: 5.208vw !important;
       bottom: -0.7vh !important;
       height: 0.208vw !important;
@@ -280,18 +280,18 @@ const EnvoyGallery = styled.div`
   padding: 18px 0 12px;
   display: flex;
   overflow-x: scroll;
-  ::-webkit-scrollbar{
-    display: none; 
+  ::-webkit-scrollbar {
+    display: none;
   }
-  @media(min-width:481px){
-    border-radius:8px;
-    flex-direction:column;
-    padding-inline:15px;
-    overflow-x:hidden;
-   margin-bottom:10px;
-   flex:1;
-   overflow-y: auto;
-  //  min-height:100px;
+  @media (min-width: 481px) {
+    border-radius: 8px;
+    flex-direction: column;
+    padding-inline: 15px;
+    overflow-x: hidden;
+    margin-bottom: 10px;
+    flex: 1;
+    overflow-y: auto;
+    //  min-height:100px;
   }
 `;
 
@@ -301,12 +301,12 @@ const Card = styled.div`
   justify-content: center;
   align-items: center;
   padding: 4px;
-  min-width: 20.930vw;
+  min-width: 20.93vw;
   border-left: 1px solid white;
   .picture {
-    width: 10.930vw;
-    height: 10.930vw;
-    border-radius: 10.930vw;
+    width: 10.93vw;
+    height: 10.93vw;
+    border-radius: 10.93vw;
     margin-bottom: 10px;
     border: 3px solid ${(props) => props.color};
     img {
@@ -330,31 +330,31 @@ const Card = styled.div`
     font-weight: bold;
     margin: 0;
   }
-  @media(min-width:481px){
-    flex-wrap:wrap;
-    max-height: 7.500vw;
-    padding:5px 0px;
-    border-left:none;
-    border-bottom:1px solid #FFFFFF;
+  @media (min-width: 481px) {
+    flex-wrap: wrap;
+    max-height: 7.5vw;
+    padding: 5px 0px;
+    border-left: none;
+    border-bottom: 1px solid #ffffff;
     min-width: inherit;
-    .picture{
+    .picture {
       width: 5vw;
       height: 5vw;
       border-radius: 5vw;
-      border-width:0.2vw;;
+      border-width: 0.2vw;
     }
-    .name{
-      font-size:1.458vw;
-      text-align:start;
-      width:60%;
-      margin-bottom:10px;
-      margin-top:-4%;
+    .name {
+      font-size: 1.458vw;
+      text-align: start;
+      width: 60%;
+      margin-bottom: 10px;
+      margin-top: -4%;
     }
-    .state{
-      font-size:1.042vw;
-      font-weight:300;
-      text-align:start;
-      width:60%;
+    .state {
+      font-size: 1.042vw;
+      font-weight: 300;
+      text-align: start;
+      width: 60%;
     }
   }
 `;
@@ -363,9 +363,9 @@ const ButtonWraper = styled.div`
   display: flex;
   margin-top: 10px;
   justify-content: space-between;
-  @media(min-width:481px){
-    border-top:1px solid #D8D8D8;
-    padding-top:14px;
+  @media (min-width: 481px) {
+    border-top: 1px solid #d8d8d8;
+    padding-top: 14px;
     flex-direction: row-reverse;
   }
 `;
@@ -383,14 +383,14 @@ const LargButton = styled.div`
     font-weight: bold;
     color: #ffffff;
   }
-  @media(min-width:481px){
+  @media (min-width: 481px) {
     border-radius: 8px;
-    padding:10px;
-    position:relative;
-    .content{
-      font-size:1.250vw;
-      margin:auto;
-      &:after{
+    padding: 10px;
+    position: relative;
+    .content {
+      font-size: 1.25vw;
+      margin: auto;
+      &:after {
         content: "";
         display: block;
         position: absolute;
@@ -401,7 +401,7 @@ const LargButton = styled.div`
         background-repeat: no-repeat;
         top: 50%;
         left: 9%;
-        transform:translate(0,-50%);
+        transform: translate(0, -50%);
       }
     }
   }
@@ -420,32 +420,35 @@ const SmallButton = styled.div`
     font-weight: 300;
     color: #095644;
   }
-  @media(min-width:481px){
+  @media (min-width: 481px) {
     border-radius: 8px;
-    padding:10px;
-    .content{
-      font-size:1.250vw;
-      margin:auto;
+    padding: 10px;
+    .content {
+      font-size: 1.25vw;
+      margin: auto;
     }
   }
 `;
 
-export default function VoteCard() {
+export default function VoteCard({ bill }) {
   const [active, setActive] = useState(0);
   const [color, SetColor] = useState("#DFF5F0");
   const [bColor, setBColor] = useState("#6cbba9");
-  const envoyData = data.envoy;
-  const navigate =useNavigate();
+  const [envoyData, setEnvoyData] = useState(bill.positive_vote);
+
+  const navigate = useNavigate();
 
   const envoyList = envoyData.map((x, i) => {
     return (
       <Card key={i} color={bColor}>
         <div className="picture">
-          <img src={x.picture} alt={x.name} />
+          <img src={x.voter.image} alt={x.voter.last_name} />
         </div>
 
-        <p className="name">{x.name}</p>
-        <p className="state">{x.state}</p>
+        <p className="name">
+          {x.voter.first_name} {x.voter.last_name}
+        </p>
+        <p className="state">{x.voter.electoral_district_name}</p>
       </Card>
     );
   });
@@ -454,12 +457,15 @@ export default function VoteCard() {
     if (active === 1) {
       SetColor("#FFD5D5");
       setBColor("#ffa5a5");
+      setEnvoyData([...bill.negative_vote]);
     } else if (active === 2) {
       SetColor("#EAEAEA");
       setBColor("#d8d8d8");
+      setEnvoyData([...bill.without_vote]);
     } else if (active === 0) {
       SetColor("#DFF5F0");
       setBColor("#6cbba9");
+      setEnvoyData([...bill.positive_vote]);
     }
   }, [active]);
 
@@ -469,8 +475,8 @@ export default function VoteCard() {
         <div className="vote-logo"></div>
         <div className="title-card">
           <p className="title">رأی‌گیری</p>
-          <h2>کلیات لایحۀ بودجۀ سال ۱۴۰۱</h2>
-          <p className="date">۲۹ اسفند ۱۴۰۰</p>
+          <h2>{bill.name}</h2>
+          <p className="date">{bill.date}</p>
         </div>
       </CardHeader>
       <Statistics>
@@ -478,29 +484,33 @@ export default function VoteCard() {
           onClick={() => setActive(0)}
           className={active === 0 ? "active" : ""}
         >
-          ۱۲۴
+          {bill.vote_number.positive}
         </Success>
         <Faild
           onClick={() => setActive(1)}
           className={active === 1 ? "active" : ""}
         >
-          ۶۵
+          {bill.vote_number.negative}
         </Faild>
         <Not
           onClick={() => setActive(2)}
           className={active === 2 ? "active" : ""}
         >
-          ۲۳
+          {bill.vote_number.without_vote}
         </Not>
       </Statistics>
 
       <EnvoyGallery color={color}>{envoyList}</EnvoyGallery>
 
       <ButtonWraper>
-        <LargButton onClick={()=>{navigate(`presentation/${"کلیات لایحۀ بودجۀ سال ۱۴۰۱"}`)}}>
+        <LargButton
+          onClick={() => {
+            navigate(`presentation/${"کلیات لایحۀ بودجۀ سال ۱۴۰۱"}`);
+          }}
+        >
           <p className="content">جزئیات</p>
         </LargButton>
-       <ShareButton text="کلیات لایحۀ بودجۀ سال ۱۴۰۱" title="رای گیری"/>
+        <ShareButton text="کلیات لایحۀ بودجۀ سال ۱۴۰۱" title="رای گیری" />
       </ButtonWraper>
     </VCContainer>
   );
