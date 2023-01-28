@@ -29,6 +29,7 @@ export default function Vote() {
     getActivities();
   }, []);
 
+  
   useEffect(() => {
     let newData = bills.filter((item) => item.tag[0].name === selectedTag);
     if (selectedTag === "همه") {
@@ -38,7 +39,9 @@ export default function Vote() {
     }
   }, [selectedTag]);
 
-  console.log(filteredBills);
+  console.log('123',bills)
+
+  
   return (
     <Container>
       <Title>
