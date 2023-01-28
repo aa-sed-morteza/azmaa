@@ -83,20 +83,20 @@ const IranMap = ({ position }) => {
     });
   };
 
-  useEffect(() => {
-    getProvince();
-  }, []);
+  // useEffect(() => {
+  //   getProvince();
+  // }, []);
 
-  useEffect(() => {
-    if (provinces.length == 0) {
-      selectProvinces();
-      setChange(!change);
-    } else {
-      if (provinces.map((item) => item.cities.length == 0)) {
-        addCities();
-      }
-    }
-  }, [change]);
+  // useEffect(() => {
+  //   if (provinces.length == 0) {
+  //     selectProvinces();
+  //     setChange(!change);
+  //   } else {
+  //     if (provinces.map((item) => item.cities.length == 0)) {
+  //       addCities();
+  //     }
+  //   }
+  // }, [change]);
 
   const onSubmit = async (values, actions) => {
     setProvinceSelected(false);
