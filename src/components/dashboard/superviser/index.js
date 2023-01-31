@@ -9,7 +9,7 @@ export default function SuperviserDashboard() {
         <p className="home">پنل / </p>
         <p className="component"> اطلاعات کاربری </p>
       </Title>
-      <PersonalInformation/>
+      <PersonalInformation />
     </Container>
   );
 }
@@ -22,7 +22,7 @@ const Container = styled.section`
   overflow: hidden;
   @media (min-width: 480px) {
     background-color: #ffffff;
-    padding: 1.042vw 2.604vw 2.083vw 11.458vw; 
+    padding: 1.042vw 2.604vw 2.083vw 11.458vw;
   }
 `;
 
@@ -43,6 +43,6 @@ const Title = styled.div`
     color: rgba(112, 112, 112, 1);
   }
   @media (min-width: 480px) {
-   display:none;
+    display: none;
   }
 `;

@@ -56,16 +56,18 @@ export default function Dashboard() {
     let config = {
       method: "get",
       url: `${BaseBackURL}api/v1/accounts/member/${userId}`,
+      withCredentials: true,
     };
 
     axios(config).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.data.id) {
         Cookies.set("userId", res.data.id);
         dispatch({ type: "SET_LOGGED_IN", payload: true });
         dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
         dispatch({ type: "SET_USERNAME", payload: Cookies.get("userName") });
         dispatch({ type: "SET_TYPE_USER", payload: Cookies.get("userType") });
+        getPersonalInfo(userId);
         navigate("/dashboard");
       } else if (res.data.code === -1) {
         console.log(res);
@@ -74,6 +76,23 @@ export default function Dashboard() {
         Cookies.remove("userType");
       }
     });
+  };
+
+  const getPersonalInfo = (userId) => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
+      withCredentials: true,
+    };
+
+    axios(config)
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -88,7 +107,7 @@ export default function Dashboard() {
       )}
 
       <PageWraper>
-        {state.voteNumber === 0 ? (
+        {state.userType === "superviser" ? (
           // <SuperviserDashboard />
 
           <Routes>

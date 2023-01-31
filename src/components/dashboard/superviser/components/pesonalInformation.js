@@ -18,8 +18,6 @@ export default function PersonalInformation() {
   const [preview, setPreview] = useState();
   const inputRef = useRef();
 
- 
-
   useEffect(() => {
     if (!selectedFile) {
       setPreview(undefined);
@@ -29,7 +27,6 @@ export default function PersonalInformation() {
     const objectUrl = URL.createObjectURL(selectedFile);
     setPreview(objectUrl);
     // dispatch({ type: "SET_IMAGE", payload: preview });
-
 
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
@@ -61,17 +58,11 @@ export default function PersonalInformation() {
       </Content>
       <Modal isShowing={isShowing} hide={toggle} title="انتخاب عکس پروفایل ">
         <Input icon={gallery} text="انتخاب از گالری">
-          <input
-            type="file"
-            onChange={onSelectFile}
-          />
+          <input type="file" onChange={onSelectFile} />
           <span></span>
         </Input>
         <Input icon={camera} text="عکاسی با دوربین">
-          <input
-            type="file"
-            onChange={onSelectFile}
-          />
+          <input type="file" onChange={onSelectFile} />
           <span></span>
         </Input>
         <Input icon={remove}>
@@ -197,7 +188,7 @@ const Input = styled.div`
   align-items: center;
   padding: 4.651vw;
   margin-bottom: 2.326vw;
-  input{
+  input {
     &::-webkit-file-upload-button {
       visibility: hidden;
     }
@@ -214,11 +205,10 @@ const Input = styled.div`
       font-size: 4.651vw;
     }
   }
-  input[type='file'] {
+  input[type="file"] {
     color: rgba(0, 0, 0, 0);
     width: 100%;
-
-  } 
+  }
 
   .text {
     margin: 0;
@@ -233,31 +223,30 @@ const Input = styled.div`
     background-size: contain;
     background-repeat: no-repeat;
   }
-  @media(min-width:480px){
-    padding:1.302vw;
-    margin-bottom:1.302vw;
-    input{
-      &:before{
-        font-size:1.458vw;
+  @media (min-width: 480px) {
+    padding: 1.302vw;
+    margin-bottom: 1.302vw;
+    input {
+      &:before {
+        font-size: 1.458vw;
       }
     }
-    .text{
-      font-size:1.458vw;
+    .text {
+      font-size: 1.458vw;
     }
-    span{
-      width:1.823vw;
-      height:1.823vw;
+    span {
+      width: 1.823vw;
+      height: 1.823vw;
     }
   }
 `;
-
 
 const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
-  @media(min-width:480px){
-    justify-content:center;
-    gap:1.563vw;
+  @media (min-width: 480px) {
+    justify-content: center;
+    gap: 1.563vw;
   }
 `;

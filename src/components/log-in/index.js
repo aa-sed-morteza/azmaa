@@ -28,6 +28,7 @@ export default function LogIn() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/v1/accounts/login/`,
+      withCredentials: true,
       data: data,
     };
 
