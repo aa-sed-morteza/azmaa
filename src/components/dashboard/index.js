@@ -28,6 +28,10 @@ import EditContactInformation from "./superviser/components/editProfile/editCont
 import EditCommission from "./envoy/components/edit/editCommission";
 import EditHistoryEnvoy from "./envoy/components/edit/editHistoryEnvoy";
 import EditEnvoyState from "./envoy/components/edit/editEnvoyState";
+import Cookies from "js-cookie";
+import { BaseBackURL } from "../../constant/api";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function Dashboard() {
   const { state, dispatch } = useUser();
@@ -35,10 +39,42 @@ export default function Dashboard() {
   const width = useWidth();
 
   useEffect(() => {
-    if (state.loggedIn === false) {
+    // if (state.loggedIn === false) {
+    //   navigate("/log-in");
+    // }
+    if (Cookies.get("userId")) {
+      dispatch({ type: "SET_LOGGED_IN", payload: true });
+      handleAutoLogin(Cookies.get("userId"));
+    } else {
+      dispatch({ type: "SET_LOGGED_IN", payload: false });
       navigate("/log-in");
     }
-  }, []);
+  }, [state.loggedIn]);
+
+  const handleAutoLogin = (userId) => {
+    dispatch({ type: "SET_LOGGED_IN", payload: true });
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/accounts/member/${userId}`,
+    };
+
+    axios(config).then((res) => {
+      console.log(res);
+      if (res.data.id) {
+        Cookies.set("userId", res.data.id);
+        dispatch({ type: "SET_LOGGED_IN", payload: true });
+        dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
+        dispatch({ type: "SET_USERNAME", payload: Cookies.get("userName") });
+        dispatch({ type: "SET_TYPE_USER", payload: Cookies.get("userType") });
+        navigate("/dashboard");
+      } else if (res.data.code === -1) {
+        console.log(res);
+        Cookies.remove("userId");
+        Cookies.remove("userName");
+        Cookies.remove("userType");
+      }
+    });
+  };
 
   return (
     <Container>

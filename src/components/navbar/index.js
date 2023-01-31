@@ -13,6 +13,7 @@ import exit from "../../assets/exit.webp";
 import Profile from "../dashboard/components/profile";
 import axios from "axios";
 import { BaseBackURL } from "../../constant/api";
+import Cookies from "js-cookie";
 
 // styled
 const TopBar = styled.section`
@@ -351,21 +352,28 @@ export default function Navbar() {
   };
 
   const goDashboard = () => {
-    setDashboard(!dashboard);
-    setOpen(false);
-    if (!dashboard) {
-      navigate("/dashboard");
+    if (state.loggedIn) {
+      Cookies.remove("userId");
+      Cookies.remove("userName");
+      dispatch({ type: "SET_LOGGED_IN", payload: false });
     } else {
-      navigate("/");
-      let config = {
-        method: "post",
-        url: `${BaseBackURL}api/v1/accounts/logout/`,
-      };
-      axios(config).then((res) => {
-        console.log(res);
-        dispatch({ type: "SET_LOGGED_IN", payload: false });
-      });
+      navigate("/dashboard");
     }
+    // setDashboard(!dashboard);
+    // setOpen(false);
+    // if (!dashboard) {
+    //   navigate("/dashboard");
+    // } else {
+    //   navigate("/");
+    //   let config = {
+    //     method: "post",
+    //     url: `${BaseBackURL}api/v1/accounts/logout/`,
+    //   };
+    //   axios(config).then((res) => {
+    //     console.log(res);
+    //     dispatch({ type: "SET_LOGGED_IN", payload: false });
+    //   });
+    // }
   };
 
   function choiseItem(num, path) {
@@ -395,13 +403,13 @@ export default function Navbar() {
           ""
         ) : (
           <Panel
-            icon={dashboard ? exit : signIn}
-            color={dashboard ? "#FF5A5A" : "#095644"}
+            icon={state.loggedIn ? exit : signIn}
+            color={state.loggedIn ? "#FF5A5A" : "#095644"}
             onClick={goDashboard}
           >
             <div className="content">
               {" "}
-              {dashboard ? "خروج از پنل" : "ورود به پنل"}{" "}
+              {state.loggedIn ? "خروج از پنل" : "ورود به پنل"}{" "}
             </div>{" "}
             <div className="icon"></div>
           </Panel>

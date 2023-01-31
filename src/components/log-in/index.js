@@ -14,6 +14,7 @@ import { logInSchema } from "../schema";
 import axios from "axios";
 import { BaseBackURL } from "../../constant/api";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
@@ -31,13 +32,31 @@ export default function LogIn() {
     };
 
     axios(config)
-      .then((response) => {
-        toast.success("ورود با موفقیت انجام شد!", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_LOGGED_IN", payload: true });
-        navigate("/dashboard");
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.id) {
+          toast.success("ورود با موفقیت انجام شد!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+          Cookies.set("userId", res.data.id);
+          Cookies.set("userName", values.userName);
+
+          dispatch({ type: "SET_LOGGED_IN", payload: true });
+          dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
+          dispatch({ type: "SET_USERNAME", payload: values.userName });
+          if (res.data.electoral_district_name === null) {
+            dispatch({ type: "SET_TYPE_USER", payload: "superviser" });
+            Cookies.set("userType", "superviser");
+          } else {
+            dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
+            Cookies.set("userType", "envoy");
+          }
+          navigate("/dashboard");
+        } else if (res.data.code === -1) {
+          toast.error("نام کاربری یا رمز عبور اشتباه است!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
       })
       .catch((error) => {
         console.log(error);
