@@ -18,7 +18,10 @@ import Cookies from "js-cookie";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
+  const [sess, setSess] = useState("");
   const navigate = useNavigate();
+
+  console.log("sessionid:", Cookies.get());
 
   const onSubmit = (values) => {
     const data = new FormData();
@@ -28,17 +31,24 @@ export default function LogIn() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/v1/accounts/login/`,
-      withCredentials: true,
+
+      // withCredentials: true,
       data: data,
     };
 
-    axios(config)
+    axios(config, { withCredentials: true })
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         if (res.data.id) {
           toast.success("ورود با موفقیت انجام شد!", {
             position: toast.POSITION.TOP_RIGHT,
           });
+          console.log('coolie',res.request.getAllResponseHeaders())
+          // const cookies = res.request.getAllResponseHeaders().match(/set-cookie: ([^\n]+)/g);
+          // const sessionCookie = cookies.find(cookie => cookie.includes("sessionId"));
+          // const sessionId = sessionCookie ? sessionCookie.match(/sessionId=([^;]+)/)[1] : "";
+          // setSess(sessionId);
+          // Cookies.set("sessionId", sessionId);
           Cookies.set("userId", res.data.id);
           Cookies.set("userName", values.userName);
 

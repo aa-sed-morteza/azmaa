@@ -1,32 +1,61 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useUser } from "../../context/userContext";
 import arrow from "../../../assets/arrow.webp";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BaseBackURL } from "../../../constant/api";
 
-export default function EnvoyHistory() {
+export default function EnvoyHistory({id}) {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const [open, setOpen] = useState(false);
+  const [experiences,setExperiences]=useState();
 
   const handleClick = () => {
     setOpen(!open);
   };
 
+  const getEnvoyHistory = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/accounts/member/${id}`,
+    };
+
+    axios(config)
+      .then(function (res) {
+        console.log(JSON.stringify(res.data));
+        
+        setExperiences([res.data.experiences]);
+        
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(()=>{
+    getEnvoyHistory();
+  },[])
+
+  console.log(experiences)
+
   return (
     <Container onClick={handleClick} className={open ? "active" : ""}>
       <Title>سوابق نماینده</Title>
       <History>
-        <p className="text">نمایندۀ دماوند و فیروزکوه | ۱۴۰۱-۱۳۹۸</p>
-        <p className="text">استاندار خوزستان | ۱۳۹۸-۱۳۹۶</p>
+        <p className="text">{experiences ?experiences[0][0].title :""} </p>
+        {/* <p className="text">{experiences[0][1] ?experiences[0][1].title :""} </p> */}
       </History>
 
       <Content className={open ? "open" : ""}>
         <History>
-          <p className="text">استاندار خوزستان | ۱۳۹۸-۱۳۹۶</p>
-          <p className="text">استاندار خوزستان | ۱۳۹۸-۱۳۹۶</p>
-          <p className="text">استاندار خوزستان | ۱۳۹۸-۱۳۹۶</p>
-          <p className="text">استاندار خوزستان | ۱۳۹۸-۱۳۹۶</p>
+          {experiences && experiences[0].map((item,i)=>{
+            return(
+              <p className="text" key={i}> {item.title}</p>
+            )
+          })}
+        
         </History>
       </Content>
     </Container>
@@ -70,7 +99,7 @@ const Container = styled.div`
   @media (min-width: 481px) {
     padding: 0 2.292vw 1.875vw !important;
     margin-top: 2.083vw;
-    &:after{
+    &:after {
       width: 1.042vw;
       height: 0.521vw;
       left: 1.823vw;
@@ -107,10 +136,10 @@ const History = styled.div`
     font-weight: 700;
     font-size: 3.721vw;
   }
-  @media(min-width:481px){
-    gap:0.781vw;
-    .text{
-      font-size:1.250vw;
+  @media (min-width: 481px) {
+    gap: 0.781vw;
+    .text {
+      font-size: 1.25vw;
     }
   }
 `;

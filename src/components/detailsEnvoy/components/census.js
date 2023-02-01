@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function Census() {
-  const [envoy, setEnvoy] = useState(276);
-  const [complete, setComplete] = useState(167);
-  const [select, setSelect] = useState(167);
+export default function Census({select,complete,envoy}) {
+ 
 
   const checkCensus = (num1, num2) => {
     let bgColor;
-    if (num2 / num1 > 0.5) {
+    if ( num2 / num1 > 0.5) {
       bgColor = "#6CBBA9";
     } else {
       bgColor = "#FFA5A5";
     }
 
     let persentage = (num2 / num1) * 100;
+    console.log('num',num1)
     return (
       <Progress>
         <div className="number">
@@ -36,7 +35,7 @@ export default function Census() {
       <Title> آمار شفافیت</Title>
       <Row>
         <p className="type">آراء ثبت‌شده:</p>
-        {checkCensus(867, complete)}
+        {checkCensus("?", select)}
       </Row>
       <Row>
         <p className="type">عملکردهای ثبت‌شده:</p>

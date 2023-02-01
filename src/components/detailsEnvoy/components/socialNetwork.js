@@ -15,19 +15,23 @@ export default function SocialNetwork() {
         <NetworkRow icon={web}>
           <span></span>
           <div className="text-wraper">
-            <p className="text">WWW.Alireza.Pakfetrat.NET</p>
+            {/* <p className="text">WWW.Alireza.Pakfetrat.NET</p> */}
+            <p className="text">؟</p>
           </div>
         </NetworkRow>
         <NetworkRow icon={telegram}>
           <span></span>
           <div className="text-wraper">
-            <p className="text">Alireza.Pakfetrat</p>
+            <p className="text">؟</p>
+            {/* <p className="text">Alireza.Pakfetrat</p> */}
           </div>
         </NetworkRow>
         <NetworkRow icon={instagram}>
           <span></span>
           <div className="text-wraper">
-            <p className="text">@Alireza.Pakfetrat</p>
+            {/* <p className="text">@Alireza.Pakfetrat</p> */}
+            <p className="text">؟</p>
+
           </div>
         </NetworkRow>
       </Content>

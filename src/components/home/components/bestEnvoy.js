@@ -45,6 +45,7 @@ const EnvoyImage = styled.div`
   img {
     width: 100%;
     height: 100%;
+    border-radius:50%;
     object-fit: contain;
   }
   @media (min-width: 481px) {
@@ -139,7 +140,7 @@ export default function BestEnvoy({ envoy ,click}) {
   console.log('reza',envoy)
   return (
     <EnvoyCard onClick={click}>
-      <EnvoyImage>{/* <img src={envoy} /> */}</EnvoyImage>
+      <EnvoyImage><img src={envoy.image} /></EnvoyImage>
       <Content>
         <h3>
           {envoy.first_name} {envoy.last_name}

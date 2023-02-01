@@ -79,10 +79,17 @@ export default function Dashboard() {
   };
 
   const getPersonalInfo = (userId) => {
+    let data = new FormData();
+
     let config = {
       method: "get",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
+      headers: { 
+        'Cookie': 'sessionid=5ngelxtr33w7rszxslk8bw7k1jsig1x2', 
+        ...data.getHeaders()
+      },
       withCredentials: true,
+    
     };
 
     axios(config)

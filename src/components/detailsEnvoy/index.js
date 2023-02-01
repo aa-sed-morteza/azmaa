@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import useWidth from "../../hook/useWidth";
 import styled from "styled-components";
@@ -8,35 +8,68 @@ import EnvoyArea from "./components/envoyArea";
 import EnvoyHistory from "./components/envoyHistory";
 import Filtering from "./components/Filtering";
 import SocialNetwork from "./components/socialNetwork";
+import axios from "axios";
+import {BaseBackURL}from "../../constant/api";
 
 export default function DetailsEnvoy() {
   const { title } = useParams();
   const width = useWidth();
+  const [envoys, setEnvoys] = useState([]);
+  const [envoy,setEnvoy]=useState({})
+
+
+  const getEnvoys = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
+    };
+
+    axios(config).then((res) => {
+      console.log(res.data);
+      if (res.data.length > 0) {
+        setEnvoys([...res.data]);
+      }
+    });
+  };
+
+  useEffect(()=>{
+    getEnvoys();
+    
+    if(envoys.length>0){
+      setEnvoy(envoys.find(x=>x.id=== parseInt(title) ))
+    }
+  },[]);
+
+  
+
   return (
     <Container>
       <Title>
         <p className="home"> خانه / نمایندگان /</p>
-        <p className="component"> {title} </p>
+        <p className="component"> {envoy && envoy.first_name+" "+envoy.last_name}</p>
       </Title>
       {/* personal info */}
       <FirstSection>
-        <EnvoyCard
-          name="علیرضا پاکفطرت"
-          state="دماوند و فیروزکوه"
-          commission="امنیت ملی"
-          img="../../assets/abol.webp"
-          persantage="65"
-          id="1"
-          inBox={true}
-        />
-        <Census/>
-        <EnvoyArea/>
-        <EnvoyHistory/>
+        {envoy&& 
+         <EnvoyCard
+         name={envoy.first_name+" "+envoy.last_name}
+         state={envoy.electoral_district_name}
+         commission={envoy.fraction_name}
+         img={envoy.image}
+         persantage={envoy.transparency}
+         id={envoy.id}
+         inBox={true}
+       />
+        }
+       
+        <Census select={"?"} complete={"?"} envoy={"?"}/>
+        <EnvoyArea votes={"?"}/>
+        <EnvoyHistory id={title} />
         {width>481 ? ( <SocialNetwork/>):""}
       </FirstSection>
       {/* filtering */}
       <SecondSection>
-        <Filtering/>
+        <Filtering id={title} />
       </SecondSection>
       {/* socialNetwork */}
       <ThirdSection>
