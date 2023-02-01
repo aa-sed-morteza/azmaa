@@ -80,7 +80,11 @@ export default function GeneralActionCard(props) {
           <p
             className="content"
             onClick={() => {
-              navigate(`/presentation/${props.content}`);
+              if(props.act == "vote"){
+                navigate(`/presentation/${props.item.id}`);
+              }else if(props.act == "action"){
+                navigate(`/actions/presentation/${props.item.id}`);
+              }
             }}
           >
             جزئیات

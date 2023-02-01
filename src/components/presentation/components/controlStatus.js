@@ -12,9 +12,14 @@ import Absent from "./absent";
 import NoVote from "./noVote";
 import useWidth from "../../../hook/useWidth";
 
-export default function ControlStatus() {
+export default function ControlStatus({ bill }) {
   const [select, setSelect] = useState(1);
   const width = useWidth();
+  const envoysAgree = bill.positive_vote.map((x) => x.voter);
+  const envoysDisagree = bill.negative_vote.map((x) => x.voter);
+  const envoysNoComment = bill.none_vote.map((x) => x.voter);
+  const envoysAbsent = bill.absent_vote.map((x) => x.voter);
+  const envoysNotVote = bill.without_vote.map((x) => x.voter);
 
   return (
     <Container>
@@ -73,18 +78,18 @@ export default function ControlStatus() {
             </Item>
           </Filtering>
           <ShowResult>
-            {select === 1 && <Agree />}
-            {select === 2 && <Disagree />}
-            {select === 3 && <NoComment />}
-            {select === 4 && <NoVote />}
-            {select === 5 && <Absent />}
+            {select === 1 && <Agree envoys={envoysAgree} />}
+            {select === 2 && <Disagree envoys={envoysDisagree} />}
+            {select === 3 && <NoComment envoys={envoysNoComment} />}
+            {select === 4 && <NoVote envoys={envoysNotVote} />}
+            {select === 5 && <Absent envoys={envoysAbsent} />}
           </ShowResult>
         </>
       ) : (
         <>
-          <Agree/>
-          <Disagree />
-          <NoComment />
+          <Agree envoys={envoysAgree} />
+          <Disagree envoys={envoysDisagree} />
+          <NoComment envoys={envoysNoComment} />
         </>
       )}
     </Container>
@@ -93,9 +98,9 @@ export default function ControlStatus() {
 
 const Container = styled.div`
   margin-top: 20px;
-  @media(min-width:481px){
-    margin:0;
-    width:72%;
+  @media (min-width: 481px) {
+    margin: 0;
+    width: 72%;
   }
 `;
 const Filtering = styled.div`

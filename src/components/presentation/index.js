@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./components/header";
@@ -8,23 +8,66 @@ import DetailsVotes from "./components/detailsvotes";
 import Census from "./components/census";
 import VotesCensus from "./components/votesCensus";
 import ControlStatus from "./components/controlStatus";
+import axios from "axios";
+import { BaseBackURL } from "../../constant/api";
 
 export default function Presentation() {
   const { title } = useParams();
+  const [bill, setBill] = useState({});
+
+  const getBill = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/bill/${title}/`,
+    };
+    axios(config)
+      .then((res) => {
+        console.log(JSON.stringify(res.data));
+        setBill(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getBill();
+  }, []);
+
   return (
     <Container>
       <Title>
         <p className="home">خانه / رای گیری /</p>
-        <p className="component"> {title} </p>
+        <p className="component"> {bill && bill.name} </p>
       </Title>
       <Content>
-        <Wraper>
-          <Header img={symbol} icon={vote} type="رای گیری" />
-          <DetailsVotes />
-          <Census />
-          <VotesCensus />
-        </Wraper>
-        <ControlStatus />
+        {bill.name && (
+          <Wraper>
+            <Header
+              img={symbol}
+              icon={vote}
+              type="رای گیری"
+              date={bill.date}
+              title={bill.name}
+            />
+            <DetailsVotes title={bill.name} fraction={bill.fraction.name} />
+            <Census
+              total={bill.vote_number.total}
+              complete={"?"}
+              select={"?"}
+            />
+            <VotesCensus
+              total={bill.vote_number.total}
+              positive={bill.vote_number.positive}
+              negative={bill.vote_number.negative}
+              none={bill.vote_number.none}
+              absent={bill.vote_number.absent}
+              without={bill.vote_number.without_vote}
+            />
+          </Wraper>
+        )}
+
+        {bill.id && <ControlStatus bill={bill} />}
       </Content>
     </Container>
   );

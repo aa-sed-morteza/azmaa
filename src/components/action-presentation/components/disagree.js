@@ -3,15 +3,28 @@ import styled from "styled-components";
 import BestEnvoy from "../../home/components/bestEnvoy";
 import upArrow from "../../../assets/arrow.webp";
 import icon from "../../../assets/disagree.webp";
+import { useNavigate } from "react-router-dom";
 
-export default function Disagree() {
+
+export default function Disagree({envoys}) {
+  const navigate = useNavigate();
+
+  const envoysList = envoys.map((item, i) => {
+    return (
+      <BestEnvoy
+        key={i}
+        envoy={item.voter}
+        click={() => {
+          navigate(`/envoy/${item.voter.id}`);
+        }}
+      />
+    );
+  });
   return (
     <Container>
        <Title> نمایندگان مخالف</Title>
        <Gallery>
-        <BestEnvoy />
-        <BestEnvoy />
-        <BestEnvoy />
+        {envoysList}
       </Gallery>
 
       <ShowMore>
@@ -88,10 +101,16 @@ const Title = styled.h2`
 `;
 
 const Gallery =styled.div`
-  @media(min-width:480px){
-    width:100%;
-    display:flex;
-    flex-wrap:wrap;
-    gap:15px;
+@media (min-width: 481px) {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  & > div {
+    width: 45%;
   }
+}
+@media (min-width: 769px) {
+  gap: 15px;
+}
 `

@@ -137,7 +137,7 @@ const Content = styled.div`
 
 export default function BestEnvoy({ envoy ,click}) {
 
-  console.log('reza',envoy)
+  
   return (
     <EnvoyCard onClick={click}>
       <EnvoyImage><img src={envoy.image} /></EnvoyImage>

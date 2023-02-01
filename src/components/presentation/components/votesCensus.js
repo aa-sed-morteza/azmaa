@@ -6,8 +6,8 @@ import info from "../../../assets/info.webp";
 import absent from "../../../assets/absent.webp";
 import noVote from "../../../assets/noVote.webp";
 
-export default function VotesCensus() {
-  const [envoy, setEnvoy] = useState(267);
+export default function VotesCensus({total,positive,negative,none,absent,without}) {
+  
   return (
     <Container>
       <Title> آمار آراء</Title>
@@ -17,8 +17,8 @@ export default function VotesCensus() {
             موافق:
           </Type>
           <Number color="#6CBBA9">
-            <span>167/</span>
-            {envoy}
+            <span>{positive}/</span>
+            {total}
           </Number>
         </Item>
 
@@ -27,8 +27,8 @@ export default function VotesCensus() {
             مخالف:
           </Type>
           <Number color="#FFA5A5">
-            <span>57/</span>
-            {envoy}
+            <span>{negative}/</span>
+            {total}
           </Number>
         </Item>
 
@@ -37,8 +37,8 @@ export default function VotesCensus() {
             ممتنع:
           </Type>
           <Number color="#CBCBCB">
-            <span>21/</span>
-            {envoy}
+            <span>{none}/</span>
+            {total}
           </Number>
         </Item>
 
@@ -47,8 +47,8 @@ export default function VotesCensus() {
             غایب:
           </Type>
           <Number color="#9F9F9F">
-            <span>34/</span>
-            {envoy}
+            <span>{absent}/</span>
+            {total}
           </Number>
         </Item>
 
@@ -57,8 +57,8 @@ export default function VotesCensus() {
             بدون‌رأی:
           </Type>
           <Number color="#9F9F9F">
-            <span>167/</span>
-            {envoy}
+            <span>{without}/</span>
+            {total}
           </Number>
         </Item>
       </Row>

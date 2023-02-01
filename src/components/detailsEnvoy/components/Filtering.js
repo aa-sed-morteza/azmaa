@@ -73,6 +73,7 @@ export default function Filtering({ id }) {
           content={item.name}
           action={x.vote}
           date={item.date}
+          item={item}
         />
         )
        
@@ -84,6 +85,7 @@ export default function Filtering({ id }) {
   const positiveVote = billEnvoy.map((item, i) => {
     return item.positive_vote.map((positive, i) => {
       if (positive.voter.id === parseInt(id)) {
+       
         return (
           <GeneralActionCard
             key={i}
@@ -91,6 +93,7 @@ export default function Filtering({ id }) {
             content={item.name}
             action="موافق"
             date={item.date}
+            item={item}
           />
         );
       }
@@ -107,6 +110,7 @@ export default function Filtering({ id }) {
             content={item.name}
             action={absent.vote}
             date={item.date}
+            item={item}
           />
         );
       }
@@ -123,6 +127,7 @@ export default function Filtering({ id }) {
             content={item.name}
             action={negative.vote}
             date={item.date}
+            item={item}
           />
         );
       }
@@ -139,6 +144,7 @@ export default function Filtering({ id }) {
             content={item.name}
             action={none.vote}
             date={item.date}
+            item={item}
           />
         );
       }
@@ -155,6 +161,7 @@ export default function Filtering({ id }) {
             content={item.name}
             action={without.vote}
             date={item.date}
+            item={item}
           />
         );
       }

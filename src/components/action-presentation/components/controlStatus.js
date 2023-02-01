@@ -12,9 +12,14 @@ import UnKnown from "./unKnown";
 // import NoVote from "./noVote";
 import useWidth from "../../../hook/useWidth";
 
-export default function ControlStatus() {
+export default function ControlStatus({ envoys }) {
   const [select, setSelect] = useState(1);
   const width = useWidth();
+  const agree = envoys.filter((x) => x.vote == "همراه");
+  const disagree = envoys.filter((x) => x.vote == "ناهمراه");
+  const another = envoys.filter(
+    (x) => x.vote !== "ناهمراه" && x.vote !== "همراه"
+  );
 
   return (
     <Container>
@@ -51,21 +56,18 @@ export default function ControlStatus() {
             >
               نامشخص
             </Item>
-            
-            
           </Filtering>
           <ShowResult>
-            {select === 1 && <Agree />}
-            {select === 2 && <Disagree />}
-            {select === 3 && <UnKnown />}
-           
+            {select === 1 && <Agree envoys={agree} />}
+            {select === 2 && <Disagree envoys={disagree} />}
+            {select === 3 && <UnKnown envoys={another} />}
           </ShowResult>
         </>
       ) : (
         <>
-          <Agree/>
-          <Disagree />
-          <UnKnown />
+          <Agree envoys={agree} />
+          <Disagree envoys={disagree} />
+          <UnKnown envoys={another} />
         </>
       )}
     </Container>
@@ -74,16 +76,16 @@ export default function ControlStatus() {
 
 const Container = styled.div`
   margin-top: 20px;
-  @media(min-width:480px){
-    margin:0;
-    width:72%;
+  @media (min-width: 480px) {
+    margin: 0;
+    width: 72%;
   }
 `;
 const Filtering = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-inline:20px;
+  padding-inline: 20px;
 `;
 
 const Item = styled.div`
