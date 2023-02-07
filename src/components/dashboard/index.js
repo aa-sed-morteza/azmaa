@@ -80,13 +80,14 @@ export default function Dashboard() {
 
   const getPersonalInfo = (userId) => {
     let data = new FormData();
+   
 
     let config = {
       method: "get",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
       headers: { 
-        'Cookie': 'sessionid=5ngelxtr33w7rszxslk8bw7k1jsig1x2', 
-        ...data.getHeaders()
+        // 'Access-Control-Allow-Origin': 'http://localhost:3001',
+        'Authorization': `Bearer ${state.token}`, 
       },
       withCredentials: true,
     
@@ -94,13 +95,16 @@ export default function Dashboard() {
 
     axios(config)
       .then((res) => {
-        console.log(res.data);
+        console.log('data;', res.data);
         dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
       })
       .catch((err) => {
-        console.log(err);
+        console.log('khata',err);
+        console.log('tes')
       });
   };
+
+  console.log('state user:',state)
 
   return (
     <Container>

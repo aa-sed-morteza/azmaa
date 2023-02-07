@@ -36,7 +36,7 @@ const initialState = {
   provinceSearch: {},
   citySearch: {},
   loggedIn: false,
-  // token: null,
+  token: null,
 };
 
 export const userContext = React.createContext({});
@@ -119,8 +119,8 @@ const reducer = (state, action) => {
       return { ...state, image: action.payload };
     // case "SET_DATA":
     //   return { ...state, ...action.payload };
-    // case "SET_TOKEN":
-    //   return { ...state, token: action.payload };
+    case "SET_TOKEN":
+      return { ...state, token: action.payload };
     case "CLEAR_DATA":
       return initialState;
     default:

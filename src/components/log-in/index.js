@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import wellcome from "../../assets/welcome.webp";
 import Button from "../general/button";
@@ -18,10 +18,9 @@ import Cookies from "js-cookie";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
-  const [sess, setSess] = useState("");
   const navigate = useNavigate();
 
-  console.log("sessionid:", Cookies.get());
+ 
 
   const onSubmit = (values) => {
     const data = new FormData();
@@ -43,18 +42,12 @@ export default function LogIn() {
           toast.success("ورود با موفقیت انجام شد!", {
             position: toast.POSITION.TOP_RIGHT,
           });
-          console.log('coolie',res.request.getAllResponseHeaders())
-          // const cookies = res.request.getAllResponseHeaders().match(/set-cookie: ([^\n]+)/g);
-          // const sessionCookie = cookies.find(cookie => cookie.includes("sessionId"));
-          // const sessionId = sessionCookie ? sessionCookie.match(/sessionId=([^;]+)/)[1] : "";
-          // setSess(sessionId);
-          // Cookies.set("sessionId", sessionId);
           Cookies.set("userId", res.data.id);
           Cookies.set("userName", values.userName);
-
           dispatch({ type: "SET_LOGGED_IN", payload: true });
           dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
           dispatch({ type: "SET_USERNAME", payload: values.userName });
+          getToken(values);
           if (res.data.electoral_district_name === null) {
             dispatch({ type: "SET_TYPE_USER", payload: "superviser" });
             Cookies.set("userType", "superviser");
@@ -80,6 +73,29 @@ export default function LogIn() {
             position: toast.POSITION.TOP_RIGHT,
           });
         }
+      });
+  };
+
+  const getToken = (values) => {
+    const data = new FormData();
+    data.append("username", values.userName);
+    data.append("password", values.password);
+
+    console.log('user:',values.userName)
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/`,
+      data: data,
+    };
+
+    axios(config)
+      .then((response)=> {
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+      })
+      .catch((error)=> {
+        console.log(error);
       });
   };
 
@@ -157,7 +173,7 @@ const Container = styled.section`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  jusctify-content: center;
+  justify-content: center;
   overflow: hidden;
 `;
 
