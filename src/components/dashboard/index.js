@@ -83,10 +83,9 @@ export default function Dashboard() {
    
 
     let config = {
-      method: "get",
+      method: "put",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
       headers: { 
-        // 'Access-Control-Allow-Origin': 'http://localhost:3001',
         'Authorization': `Bearer ${state.token}`, 
       },
       withCredentials: true,
@@ -104,7 +103,7 @@ export default function Dashboard() {
       });
   };
 
-  console.log('state user:',state)
+  
 
   return (
     <Container>
