@@ -93,6 +93,7 @@ export default function LogIn() {
       .then((response)=> {
         console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
       })
       .catch((error)=> {
         console.log(error);

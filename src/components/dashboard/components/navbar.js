@@ -60,6 +60,7 @@ const List = styled.li`
   color: #ffffff;
   font-size: 1.25vw;
   font-weight: 400;
+  cursor: pointer;
   &.active {
     font-weight: 900;
     &:before {
@@ -70,7 +71,7 @@ const List = styled.li`
       right: -4vw;
       position: absolute;
       width: 2.708vw;
-      height: 2.5vw;
+      height: 100%;
     }
   }
 

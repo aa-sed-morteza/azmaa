@@ -27,14 +27,14 @@ export default function CustomDatePicker({
         ]}
         calendar={persian}
         locale={persian_fa}
-        format={language === "en" ? "MM/DD/YYYY" : "YYYY/MM/DD"}
+        format={language === "en" ? "MM-DD-YYYY" : "YYYY-MM-DD"}
         calendarPosition="top-center"
         placeholder={placeholder}
         id={id}
         value={value}
         onChange={(val) => {
           console.log(val);
-          onChange(id, `${val.year}/${val.month}/${val.day}`);
+          onChange(id, `${val.year}-${val.month}-${val.day}`);
         }}
       />
     </Container>

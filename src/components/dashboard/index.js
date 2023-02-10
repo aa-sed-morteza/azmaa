@@ -99,7 +99,6 @@ export default function Dashboard() {
       })
       .catch((err) => {
         console.log('khata',err);
-        console.log('tes')
       });
   };
 

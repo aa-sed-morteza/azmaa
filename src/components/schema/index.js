@@ -19,7 +19,7 @@ export const infoSchema = yup.object().shape({
 });
 
 export const passSchema = yup.object().shape({
-  password: yup.number().required("لطفا رمز عبور خود را وارد کنید"),
+  password: yup.string().required("لطفا رمز عبور خود را وارد کنید"),
 });
 
 export const contactSchema = yup.object().shape({

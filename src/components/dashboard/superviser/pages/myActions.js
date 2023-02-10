@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import background from "../../../../assets/back-controll.webp";
@@ -10,61 +10,88 @@ import pic from "../../../../assets/vote-logo.webp";
 import icon from "../../../../assets/vote.webp";
 import pic2 from "../../../../assets/action-rate.webp";
 import title from "../../../../assets/title.svg";
+import { useUser } from "../../../context/userContext";
+import axios from "axios";
+import { BaseBackURL } from "../../../../constant/api";
+
 
 export default function MyActions() {
+  const { state, dispatch } = useUser();
   const navigate = useNavigate();
   const [select, setSelect] = useState(1);
-  //mock data for generate envoys card in actions card section
-  const envoys = [
-    {
-      name: "مهدی اسماعیلی",
-      state: "دماوند و فیروزکوه",
-      commission: " امنیت ملی",
-      id: "1",
-      persantage: "99",
-      img: "../../assets/abol.webp",
-      action: "موافق",
-    },
-    {
-      name: "حسن اسماعیلی",
-      state: " پردیس ",
-      commission: " امنیت اجتماعی",
-      id: "2",
-      persantage: "20",
-      img: "../../assets/ali.webp",
-      action: "ممتنع",
-    },
-    {
-      name: "حامد هایون",
-      state: " البرز ",
-      commission: " امنیت اجتماعی",
-      id: "3",
-      persantage: "50",
-      img: "../../assets/jafi.webp",
-      action: "مخالف",
-    },
-  ];
+  const [bills, setBills] = useState([]);
+  const [activities, setActivities] = useState([]);
+  const [envoys, setEnvoys] = useState([]);
 
-  const secondEnvoys = [
-    {
-      name: "حسن اسماعیلی",
-      state: " پردیس ",
-      commission: " امنیت اجتماعی",
-      id: "2",
-      persantage: "20",
-      img: "../../assets/ali.webp",
-      action: "همراه",
-    },
-    {
-      name: "حامد هایون",
-      state: " البرز ",
-      commission: " امنیت اجتماعی",
-      id: "3",
-      persantage: "50",
-      img: "../../assets/jafi.webp",
-      action: "ناهمراه",
-    },
-  ];
+  const refreshToken = () => {
+    const data = new FormData();
+    data.append("refresh", state.refreshToken);
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/refresh/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const billVoteUnconfirmed = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/vote/bill/unconfirmed/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+    };
+
+    axios(config).then((res) => {
+      console.log(res.data);
+      if (res.data.length > 0) {
+        setBills(res.data.filter((x) => x.voter.id == state.id));
+      }
+    }).catch((err)=>{
+      if (err.response.status == 401) {
+        refreshToken();
+      }
+    });
+  };
+
+  const activityVoteUnconfirmed = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/vote/activity/unconfirmed/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+    };
+
+    axios(config).then((res) => {
+      console.log(res.data);
+      if (res.data.length > 0) {
+        setActivities(res.data.filter((x) => x.voter.id == state.id));
+      }
+    }).catch((err)=>{
+      if (err.response.status == 401) {
+        refreshToken();
+      }
+    });
+  };
+
+  useEffect(() => {
+    billVoteUnconfirmed();
+    activityVoteUnconfirmed();
+  }, [state.token]);
 
   return (
     <Container>
@@ -114,48 +141,70 @@ export default function MyActions() {
         {select == 1 && (
           <ActionGallery>
             <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
-            <ActionCard
-              img={pic}
-              titr="رأی‌گیری"
-              title="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
-              date="۲۹ اسفند ۱۴۰۰"
-              icon={icon}
-              envoys={envoys}
-            />
-            <ActionCard
-              img={pic2}
-              titr="عملکرد"
-              title="دریافت خودرو دناپلاس"
-              date="۲۹ اسفند ۱۴۰۰"
-              icon={icon}
-              envoys={secondEnvoys}
-            />
+            {bills.map((item, i) => {
+              return (
+                <ActionCard
+                  img={pic}
+                  titr="رأی‌گیری"
+                  title={item.bill}
+                  date="?"
+                  icon={icon}
+                  envoys={item.voter}
+                  action={item.vote}
+                />
+              );
+            })}
+             {activities.map((item, i) => {
+              return (
+                <ActionCard
+                  img={pic2}
+                  titr="عملکرد"
+                  title={item.activity}
+                  date="?"
+                  icon={icon}
+                  envoys={item.voter}
+                  action={item.vote}
+                />
+              );
+            })}
           </ActionGallery>
         )}
         {select == 2 && (
           <ActionGallery>
-          <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
-          <ActionCard
-            img={pic}
-            titr="رأی‌گیری"
-            title="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
-            date="۲۹ اسفند ۱۴۰۰"
-            icon={icon}
-            envoys={envoys}
-          />
+            <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
+
+            {bills.map((item, i) => {
+              return (
+                <ActionCard
+                  img={pic}
+                  titr="رأی‌گیری"
+                  title={item.bill}
+                  date="?"
+                  icon={icon}
+                  envoys={item.voter}
+                  action={item.vote}
+                />
+              );
+            })}
           </ActionGallery>
         )}
         {select == 3 && (
           <ActionGallery>
-          <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
-          <ActionCard
-            img={pic2}
-            titr="عملکرد"
-            title="دریافت خودرو دناپلاس"
-            date="۲۹ اسفند ۱۴۰۰"
-            icon={icon}
-            envoys={secondEnvoys}
-          />
+            <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
+        
+            {activities.map((item, i) => {
+              return (
+                <ActionCard
+                  img={pic2}
+                  titr="عملکرد"
+                  title={item.activity}
+                  date="?"
+                  icon={icon}
+                  envoys={item.voter}
+                  action={item.vote}
+                />
+              );
+            })}
           </ActionGallery>
         )}
       </Wraper>
@@ -334,39 +383,39 @@ const Item = styled.p`
 `;
 
 const ActionGallery = styled.div`
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-@media(min-width:480px){
-  display:flex;
-  flex-direction:row;
-  flex-wrap:wrap;
-  padding:1.302vw 1.302vw 2.604vw 6.667vw;
-  background-color: #FFFFFF;
-  border-radius: 0px 8px 8px 0px;
-}
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  @media (min-width: 480px) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1.302vw 1.302vw 2.604vw 6.667vw;
+    background-color: #ffffff;
+    border-radius: 0px 8px 8px 0px;
+  }
 `;
 
-const GalleryTitle=styled.h2`
-  display:none;
-  @media(min-width:480px){
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:20px;
-    color:#707070;
-    font-weight:300;
-    font-size:1.875vw;
-    margin:0;
-    margin-bottom:1.302vw;
-    &:before{
-      content:'';
-      display:flex;
-      width:1.250vw;
-      height:1.719vw;
+const GalleryTitle = styled.h2`
+  display: none;
+  @media (min-width: 480px) {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #707070;
+    font-weight: 300;
+    font-size: 1.875vw;
+    margin: 0;
+    margin-bottom: 1.302vw;
+    &:before {
+      content: "";
+      display: flex;
+      width: 1.25vw;
+      height: 1.719vw;
       background-image: url(${title});
       background-size: contain;
       background-repeat: no-repeat;
     }
   }
-`
+`;

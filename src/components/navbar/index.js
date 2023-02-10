@@ -356,6 +356,7 @@ export default function Navbar() {
       Cookies.remove("userId");
       Cookies.remove("userName");
       dispatch({ type: "SET_LOGGED_IN", payload: false });
+      dispatch({ type: "SET_TOKEN", payload: null });
     } else {
       navigate("/dashboard");
     }

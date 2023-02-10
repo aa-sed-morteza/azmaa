@@ -37,6 +37,7 @@ const initialState = {
   citySearch: {},
   loggedIn: false,
   token: null,
+  refreshToken:null,
 };
 
 export const userContext = React.createContext({});
@@ -121,6 +122,8 @@ const reducer = (state, action) => {
     //   return { ...state, ...action.payload };
     case "SET_TOKEN":
       return { ...state, token: action.payload };
+      case "SET_REFRESH_TOKEN":
+        return { ...state, refreshToken: action.payload };
     case "CLEAR_DATA":
       return initialState;
     default:

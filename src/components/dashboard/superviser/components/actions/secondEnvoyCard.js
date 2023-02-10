@@ -21,6 +21,7 @@ export default function SecondEnvoyCard({
   const [secondHalf, setSecondHalf] = useState(0);
   const [actIcon, setActIcon] = useState([]);
   const [actColor, setActColor] = useState("");
+  const [actionWord,setActionWord]=useState("");
 
   const generateColor = () => {
     if (!persantage) {
@@ -46,9 +47,10 @@ export default function SecondEnvoyCard({
   };
 
   const checkAction = () => {
-    if (action === "موافق") {
+    if (action === "موافق" || 'positive') {
       setActColor("#6CBBA9");
       setActIcon([like]);
+      setActionWord('موافق')
     } else if (action === "مخالف") {
       setActColor("#FFA5A5");
       setActIcon([dislike]);

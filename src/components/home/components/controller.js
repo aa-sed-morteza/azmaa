@@ -77,7 +77,7 @@ const TabContainer = styled.div`
     
     justify-content: space-evenly;
   }
-}
+
 `;
 
 const Tab = styled.div`
@@ -358,7 +358,7 @@ export default function Controller() {
     getActivities();
   }, []);
 
-  console.log("rezas", bills);
+  
 
   const newList = envoys.sort((a, b) => a.transparency > b.transparency);
 

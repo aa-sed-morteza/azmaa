@@ -15,23 +15,23 @@ export default function PersonalInfo() {
       <Title >اطلاعات شخصی</Title>
       <Row>
         <p className="type">نام : </p>
-        <p className="expand">{state.firstName}</p>
+        <p className="expand">{state.first_name}</p>
       </Row>
       <Row>
         <p className="type">نام خانوادگی : </p>
-        <p className="expand">{state.lastName}</p>
+        <p className="expand">{state.last_name}</p>
       </Row>
       <Row>
         <p className="type"> محل تولد : </p>
-        <p className="expand">{state.birthPlace}</p>
+        <p className="expand">{state.birth_place}</p>
       </Row>
       <Row>
         <p className="type"> تاریخ تولد: </p>
-        <p className="expand">{state.birthDay}</p>
+        <p className="expand">{state.birth_date}</p>
       </Row>
       <Row>
         <p className="type"> کد ملی: </p>
-        <p className="expand">{state.personalCode}</p>
+        <p className="expand">{state.national_code}</p>
       </Row>
     </Container>
   );
@@ -109,4 +109,5 @@ const Edit = styled.div`
   background-repeat: no-repeat;
   background-image: url(${edit});
   background-size: contain;
+  cursor: pointer;
 `;
