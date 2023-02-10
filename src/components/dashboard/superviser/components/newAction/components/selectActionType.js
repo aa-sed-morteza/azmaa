@@ -12,20 +12,40 @@ import background from "../../../../../../assets/back-controll.webp";
 import voteIcon from "../../../../../../assets/vote.webp";
 import symbol from "../../../../../../assets/vote-logo.webp";
 import actionsymbol from "../../../../../../assets/action-rate.webp";
+import axios from "axios";
+import { BaseBackURL } from "../../../../../../constant/api";
 
 export default function SelectActionType() {
   const navigate = useNavigate();
   const [select, setSelect] = useState(1);
   const [check, setCheck] = useState(-1);
   const { state, dispatch } = useUser();
+  const [voteItems, setVoteItems] = useState([]);
+  const [actionItems,setActionItems]=useState([]);
 
-  const voteItems = [
-    { title: "کلیات لایحۀ بودجۀ سال ۱۴۰۱", date: "۲۹ اسفند ۱۴۰۰" },
-    { title: "کلیات لایحۀ بودجه", date: "۲۹ اسفند ۱۴۰۰" },
-    { title: "کلیات لایحه", date: "۲۹ اسفند ۱۴۰۰" },
-    { title: "کلیات لایحۀ بودجۀ سال ۱۴۰۰", date: "۲۹ اسفند ۱۴۰۰" },
-    { title: "کلیات لایحۀ بودجۀ سال ۱۳۹۹", date: "۲۹ اسفند ۱۴۰۰" },
-  ];
+  const getVoteItems = () => {
+    var config = {
+      method: "get",
+
+      url: `${BaseBackURL}api/v1/bill/?ordering=name, date&name&tag__id&vote__voter`,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setVoteItems([...response.data]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const getActionsItems =()
+
+  useEffect(()=>{
+    getVoteItems();
+  },[])
+
 
   const voteList = voteItems.map((x, i) => {
     return (
@@ -34,13 +54,13 @@ export default function SelectActionType() {
         className={check === i ? "active" : ""}
         onClick={() => {
           setCheck(i);
-          setFieldValue("description", x.title);
+          setFieldValue("description", x.id);
         }}
       >
         <div className="symbol"></div>
         <div className="content">
           <p className="titr">رأی‌گیری</p>
-          <h2 className="title">{x.title}</h2>
+          <h2 className="title">{x.name}</h2>
           <p className="date">{x.date}</p>
         </div>
       </SelectItem>
@@ -62,11 +82,11 @@ export default function SelectActionType() {
     );
   });
 
-  const actionItems = [
-    { title: " خرید خوردو دنا پلاس", date: "۲۹ اسفند ۱۴۰۰" },
-    { title: "هدیه خرید جهیزیه از کانادا", date: "۲۹ اسفند ۱۴۰۰" },
-    { title: " استفاده از موقعیت اختلاس", date: "۲۹ اسفند ۱۴۰۰" },
-  ];
+  // const actionItems = [
+  //   { title: " خرید خوردو دنا پلاس", date: "۲۹ اسفند ۱۴۰۰" },
+  //   { title: "هدیه خرید جهیزیه از کانادا", date: "۲۹ اسفند ۱۴۰۰" },
+  //   { title: " استفاده از موقعیت اختلاس", date: "۲۹ اسفند ۱۴۰۰" },
+  // ];
 
   const actionList = actionItems.map((x, i) => {
     return (
@@ -111,6 +131,8 @@ export default function SelectActionType() {
     console.log("submit");
   };
 
+  
+
   const {
     values,
     errors,
@@ -123,12 +145,13 @@ export default function SelectActionType() {
   } = useFormik({
     initialValues: {
       type: "",
-      description: {},
+      description: "",
     },
     validationSchema: selectActionTypeSchema,
     onSubmit,
   });
 
+  console.log('status',values)
   useEffect(() => {
     if (select === 1) {
       setFieldValue("type", "vote");
@@ -252,9 +275,9 @@ const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
-  @media(min-width:480px){
-    width:100%;
-    justify-content:center;
+  @media (min-width: 480px) {
+    width: 100%;
+    justify-content: center;
     margin: 1.302vw auto;
   }
 `;
@@ -267,9 +290,9 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
-  @media(min-width:480px){
-    margin-top:0;
-    font-size:1.042vw
+  @media (min-width: 480px) {
+    margin-top: 0;
+    font-size: 1.042vw;
   }
 `;
 
@@ -435,9 +458,9 @@ const SelectItem = styled.div`
 const Gallery = styled.div`
   margin-top: 10px;
   @media (min-width: 480px) {
-    display:flex;
-    flex-direction:column;
-    gap:1.302vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.302vw;
     width: 84%;
     margin: 1.302vw auto;
   }
