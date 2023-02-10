@@ -98,7 +98,7 @@ export const voteSchema = yup.object().shape({
 });
 
 export const documentSchema = yup.object().shape({
-  document: yup.string().required("لطفا سند خود را بارگزاری کنید"),
+  // document: yup.string().required("لطفا سند خود را بارگزاری کنید"),
 });
 
 export const suggestSchema = yup.object().shape({

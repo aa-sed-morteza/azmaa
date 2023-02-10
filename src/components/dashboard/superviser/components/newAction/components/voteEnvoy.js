@@ -159,7 +159,7 @@ export default function VoteEnvoy() {
               value={state.voteEnvoy}
               checked={state.voteEnvoy == "موافق"}
             />
-            <label htmlFor="text">یادداشت</label>
+            <label htmlFor="text">موافق</label>
             <img src={state.voteEnvoy == "موافق" ? activeAgree : agree} />
           </RadioButton>
 

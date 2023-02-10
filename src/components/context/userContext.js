@@ -21,6 +21,7 @@ const initialState = {
   areaName: "",
   commission: "",
   voteNumber: 0,
+  
   dutieHistory: [],
   typeArticle: "",
   contentArticle: {},
@@ -118,6 +119,7 @@ const reducer = (state, action) => {
       return { ...state, citySearch: action.payload };
     case "SET_IMAGE":
       return { ...state, image: action.payload };
+     
     // case "SET_DATA":
     //   return { ...state, ...action.payload };
     case "SET_TOKEN":

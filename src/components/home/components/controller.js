@@ -306,6 +306,7 @@ export default function Controller() {
   const [bills, setBills] = useState([]);
   const [envoys, setEnvoys] = useState([]);
   const [activities, setActivities] = useState([]);
+  const [areas, setAreas] = useState([]);
 
   const navigate = useNavigate();
   const width = useWidth();
@@ -352,44 +353,33 @@ export default function Controller() {
     });
   };
 
+  const getElectoralDistrict = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setAreas([...response.data]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     getBills();
     getEnvoys();
     getActivities();
+    getElectoralDistrict();
   }, []);
 
   
 
   const newList = envoys.sort((a, b) => a.transparency > b.transparency);
 
-  // const envoys = [
-  //   {
-  //     name: "مهدی اسماعیلی",
-  //     state: "دماوند و فیروزکوه",
-  //     commission: " امنیت ملی",
-  //     id: "1",
-  //     persantage: "99",
-  //     img: "../../assets/abol.webp",
-  //   },
-  //   {
-  //     name: "حسن اسماعیلی",
-  //     state: " پردیس ",
-  //     commission: " امنیت اجتماعی",
-  //     id: "2",
-  //     persantage: "20",
-  //     img: "../../assets/ali.webp",
-  //   },
-  //   {
-  //     name: "حامد هایون",
-  //     state: " البرز ",
-  //     commission: " امنیت اجتماعی",
-  //     id: "3",
-  //     persantage: "50",
-  //     img: "../../assets/jafi.webp",
-  //   },
-  // ];
-
- 
 
   const controllItem = data.controlPanel.map((x, i) => {
     return (
@@ -525,9 +515,11 @@ export default function Controller() {
       {/* just state */}
       {select == 2 && (
         <AreaContainer>
-          <SelectArea area="تهران، ری و شمیرانات" envoys={envoys} />
-          <SelectArea area="فیروزکوه و دماوند" envoys={envoys} />
-          <SelectArea area="فیروزکوه و دماوند" envoys={envoys} />
+            {areas.map((item,i)=>{
+              return(
+                <SelectArea area={item.name} envoys={item.agent} key={i} />
+              )
+            })}
         </AreaContainer>
       )}
 

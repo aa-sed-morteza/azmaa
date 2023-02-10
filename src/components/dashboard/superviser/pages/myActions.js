@@ -264,6 +264,7 @@ const AddnewAction = styled.div`
   box-shadow: 0px 6px 8px -2px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   padding: 4px;
+  cursor: pointer;
   .text {
     margin: 0;
     color: #ffffff;
@@ -340,6 +341,7 @@ const Item = styled.p`
   font-weight: 300;
   padding-top: 35px;
   position: relative;
+  cursor: pointer;
   &.active {
     font-weight: 700;
     &:after {
@@ -355,7 +357,7 @@ const Item = styled.p`
   }
   &:before {
     content: "";
-    display: block;
+    display: flex;
     position: absolute;
     background-image: url(${(props) => props.icon});
     background-size: contain;
@@ -363,7 +365,9 @@ const Item = styled.p`
     width: 35px;
     height: 35px;
     top: 0;
-    right: 15px;
+    left: 50%;
+    transform: translate(-50%,0%);
+
   }
   &:nth-child(3) {
     &:before {
@@ -377,7 +381,7 @@ const Item = styled.p`
       bottom: -0.885vw !important;
     }
     &:before {
-      right: 35px;
+      /* right: 35px; */
     }
   }
 `;

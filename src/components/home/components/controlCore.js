@@ -68,35 +68,34 @@ const EnvoyContainer = styled.div`
 `;
 
 const ShowMore = styled.div`
-border: 2px solid #9f9f9f;
-border-radius: 8px;
-max-width: 500px;
-display:flex;
-justify-content: center;
-align-items: center;
-margin: auto;
-padding: 13px;
-margin-top:43px;
-p {
-  font-size: 1.25vw;
-  font-weight: 400;
-  color: #9f9f9f;
-  position: relative;
-  margin:0;
-  &:after {
-    content: "";
-    display: flex;
-    position: absolute;
-    background-image: url(${upArrow});
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 8px;
-    left: -37px;
-    bottom: 8px;
+  border: 2px solid #9f9f9f;
+  border-radius: 8px;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 13px;
+  margin-top: 43px;
+  p {
+    font-size: 1.25vw;
+    font-weight: 400;
+    color: #9f9f9f;
+    position: relative;
+    margin: 0;
+    &:after {
+      content: "";
+      display: flex;
+      position: absolute;
+      background-image: url(${upArrow});
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 15px;
+      height: 8px;
+      left: -37px;
+      bottom: 8px;
+    }
   }
-}
-}
 `;
 
 const AreaContainer = styled.div`
@@ -110,6 +109,7 @@ const AreaContainer = styled.div`
 export default function ControlCore() {
   const [select, setSelect] = useState("transparent");
   const [envoys, setEnvoys] = useState([]);
+  const [areas, setAreas] = useState([]);
 
   const getEnvoys = () => {
     let config = {
@@ -124,11 +124,33 @@ export default function ControlCore() {
       }
     });
   };
+
+
+  const getElectoralDistrict = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setAreas([...response.data]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+
   useEffect(() => {
     getEnvoys();
+    getElectoralDistrict();
   }, []);
+
   const newList = envoys.sort((a, b) => a.transparency > b.transparency);
 
+  
 
   return (
     <Container>
@@ -157,15 +179,8 @@ export default function ControlCore() {
           <>
             <EnvoyContainer>
               {newList.map((item, i) => {
-                return( <BestEnvoy envoy={item} key={i} />)
-               ;
+                return <BestEnvoy envoy={item} key={i} />;
               })}
-              {/* <BestEnvoy />
-              <BestEnvoy />
-              <BestEnvoy />
-              <BestEnvoy />
-              <BestEnvoy />
-              <BestEnvoy /> */}
             </EnvoyContainer>
             <ShowMore>
               <p>نمایش بیشتر</p>{" "}
@@ -174,9 +189,12 @@ export default function ControlCore() {
         )}
         {select === "area" && (
           <AreaContainer>
-            <SelectArea area="تهران، ری و شمیرانات" envoys={envoys} />
-            <SelectArea area="فیروزکوه و دماوند" envoys={envoys} />
-            <SelectArea area="فیروزکوه و دماوند" envoys={envoys} />
+        
+            {areas.map((item,i)=>{
+              return(
+                <SelectArea area={item.name} envoys={item.agent} key={i} />
+              )
+            })}
           </AreaContainer>
         )}
       </Content>

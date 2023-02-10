@@ -13,13 +13,13 @@ export default function SelectArea(props) {
   const envoyGallery = envoys.map((x, i) => {
     return (
       <EnvoyCard
-        name={x.name}
+        name={x.first_name+""+x.last_name}
         key={i}
-        state={x.state}
-        img={x.img}
-        commission={x.commission}
-        persantage={x.persantage}
-        id={i}
+        state={x.electoral_district_name}
+        img={x.image}
+        commission={x.fraction_name}
+        persantage={x.transparency}
+        id={x.id}
         inBox={true}
 
       />

@@ -24,9 +24,8 @@ export default function SelectActionType() {
   const [actionItems,setActionItems]=useState([]);
 
   const getVoteItems = () => {
-    var config = {
+    let config = {
       method: "get",
-
       url: `${BaseBackURL}api/v1/bill/?ordering=name, date&name&tag__id&vote__voter`,
     };
 
@@ -40,10 +39,24 @@ export default function SelectActionType() {
       });
   };
 
-  // const getActionsItems =()
+  const getActionsItems =()=>{
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter=`,
+    };
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      setActionItems([...response.data]);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   useEffect(()=>{
     getVoteItems();
+    getActionsItems();
   },[])
 
 
@@ -70,23 +83,19 @@ export default function SelectActionType() {
     return (
       <SelectItem
         key={i}
-        className={x.title === state.typeAction.description ? "active" : ""}
+        className={x.id === state.typeAction.description ? "active" : ""}
       >
         <div className="symbol"></div>
         <div className="content">
           <p className="titr">رأی‌گیری</p>
-          <h2 className="title">{x.title}</h2>
+          <h2 className="title">{x.name}</h2>
           <p className="date">{x.date}</p>
         </div>
       </SelectItem>
     );
   });
 
-  // const actionItems = [
-  //   { title: " خرید خوردو دنا پلاس", date: "۲۹ اسفند ۱۴۰۰" },
-  //   { title: "هدیه خرید جهیزیه از کانادا", date: "۲۹ اسفند ۱۴۰۰" },
-  //   { title: " استفاده از موقعیت اختلاس", date: "۲۹ اسفند ۱۴۰۰" },
-  // ];
+
 
   const actionList = actionItems.map((x, i) => {
     return (
@@ -95,13 +104,13 @@ export default function SelectActionType() {
         className={check === i ? "active" : ""}
         onClick={() => {
           setCheck(i);
-          setFieldValue("description", x);
+          setFieldValue("description", x.id);
         }}
       >
         <div className="symbol"></div>
         <div className="content">
           <p className="titr">عملکرد ها</p>
-          <h2 className="title">{x.title}</h2>
+          <h2 className="title">{x.name}</h2>
           <p className="date">{x.date}</p>
         </div>
       </ActiveOrder>
@@ -112,12 +121,12 @@ export default function SelectActionType() {
     return (
       <ActiveOrder
         key={i}
-        className={x.title === state.typeAction.description ? "active" : ""}
+        className={x.id === state.typeAction.description ? "active" : ""}
       >
         <div className="symbol"></div>
         <div className="content">
           <p className="titr">عملکرد ها</p>
-          <h2 className="title">{x.title}</h2>
+          <h2 className="title">{x.name}</h2>
           <p className="date">{x.date}</p>
         </div>
       </ActiveOrder>
@@ -336,14 +345,19 @@ const Item = styled.p`
   padding: 0;
   font-size: 3.721vw;
   font-weight: 300;
-  padding-top: 35px;
+  /* padding-top: 35px; */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* gap:10px; */
   position: relative;
+  cursor: pointer;
   &.active {
     font-weight: 700;
     &:after {
       content: "";
       display: block;
-      position: absolute;
+      position:absolute;
       width: 100%;
       height: 3px;
       background-color: #dff5f0;
@@ -354,14 +368,14 @@ const Item = styled.p`
   &:before {
     content: "";
     display: block;
-    position: absolute;
+    display: inline-flex;
     background-image: url(${(props) => props.icon});
     background-size: contain;
     background-repeat: no-repeat;
     width: 35px;
     height: 35px;
-    top: 0;
-    right: 15px;
+    /* top: 0;
+    right: 15px; */
   }
   &:nth-child(2) {
     &:before {
@@ -385,6 +399,7 @@ const SelectItem = styled.div`
   gap: 10px;
   align-items: center;
   padding: 13px 19px 18px 30px;
+  cursor: pointer;
   &.active {
     background-color: #dff5f0;
     border: 1px solid #6cbba9;
@@ -471,6 +486,7 @@ const ActiveOrder = styled.div`
   gap: 10px;
   align-items: center;
   padding: 13px 19px 18px 30px;
+  cursor: pointer;
   &.active {
     background-color: #dff5f0;
     border: 1px solid #6cbba9;
