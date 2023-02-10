@@ -40,7 +40,7 @@ export default function SelectActionType() {
       });
   };
 
-  const getActionsItems =()
+  // const getActionsItems =()
 
   useEffect(()=>{
     getVoteItems();
