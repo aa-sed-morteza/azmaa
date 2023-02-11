@@ -53,7 +53,7 @@ export default function VoteEnvoy() {
             <Title>۳. رأی نماینده را انتخاب کنید:</Title>
             <RadioButton
               onClick={() => {
-                setFieldValue("vote", "موافق");
+                setFieldValue("vote", "positive");
                 setSelect(1);
               }}
             >
@@ -62,16 +62,16 @@ export default function VoteEnvoy() {
                 name="vote"
                 value={values.vote}
                 onChange={() => {
-                  setFieldValue("vote", "موافق");
+                  setFieldValue("vote", "positive");
                 }}
-                checked={values.vote == "موافق"}
+                checked={values.vote == "positive"}
               />
               <label htmlFor="vote">موافق</label>
               <img src={select == 1 ? activeAgree : agree} />
             </RadioButton>
             <RadioButton
               onClick={() => {
-                setFieldValue("vote", "مخالف");
+                setFieldValue("vote", "negative");
                 setSelect(2);
               }}
             >
@@ -80,9 +80,9 @@ export default function VoteEnvoy() {
                 name="vote"
                 value={values.vote}
                 onChange={() => {
-                  setFieldValue("vote", "مخالف");
+                  setFieldValue("vote", "negative");
                 }}
-                checked={values.vote == "مخالف"}
+                checked={values.vote == "negative"}
               />
               <label htmlFor="vote">مخالف</label>
               <img src={select == 2 ? activeDisagree : disagree} />
@@ -157,10 +157,10 @@ export default function VoteEnvoy() {
               type="radio"
               name="vote"
               value={state.voteEnvoy}
-              checked={state.voteEnvoy == "موافق"}
+              checked={state.voteEnvoy == "positive"}
             />
             <label htmlFor="text">موافق</label>
-            <img src={state.voteEnvoy == "موافق" ? activeAgree : agree} />
+            <img src={state.voteEnvoy == "positive" ? activeAgree : agree} />
           </RadioButton>
 
           <RadioButton>
@@ -168,10 +168,10 @@ export default function VoteEnvoy() {
               type="radio"
               name="vote"
               value={state.voteEnvoy}
-              checked={state.voteEnvoy == "مخالف"}
+              checked={state.voteEnvoy == "negative"}
             />
             <label htmlFor="text">مخالف</label>
-            <img src={state.voteEnvoy == "مخالف" ? activeDisagree : disagree} />
+            <img src={state.voteEnvoy == "negative" ? activeDisagree : disagree} />
           </RadioButton>
 
           <RadioButton>

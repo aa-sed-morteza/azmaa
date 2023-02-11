@@ -38,6 +38,36 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const width = useWidth();
 
+  const getPersonalInfo = (userId) => {
+    let data = new FormData();
+   
+
+    let config = {
+      method: "put",
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
+      headers: { 
+        'Authorization': `Bearer ${state.token}`, 
+      },
+      withCredentials: true,
+    
+    };
+
+    axios(config)
+      .then((res) => {
+        console.log('data;', res.data);
+        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+      })
+      .catch((err) => {
+        console.log('khata',err);
+      });
+  };
+
+  
+
+  useEffect(()=>{
+    getPersonalInfo(Cookies.get('userId'));
+  },[])
+
   useEffect(() => {
     // if (state.loggedIn === false) {
     //   navigate("/log-in");
@@ -78,29 +108,7 @@ export default function Dashboard() {
     });
   };
 
-  const getPersonalInfo = (userId) => {
-    let data = new FormData();
-   
-
-    let config = {
-      method: "put",
-      url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
-      headers: { 
-        'Authorization': `Bearer ${state.token}`, 
-      },
-      withCredentials: true,
-    
-    };
-
-    axios(config)
-      .then((res) => {
-        console.log('data;', res.data);
-        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
-      })
-      .catch((err) => {
-        console.log('khata',err);
-      });
-  };
+ 
 
   
 

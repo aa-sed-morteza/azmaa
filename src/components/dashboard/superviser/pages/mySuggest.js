@@ -10,10 +10,19 @@ import invalid from "../../../../assets/invalid.svg";
 import activeInvalid from "../../../../assets/active-invalid.svg";
 import Suggest from "../components/suggest";
 import title from "../../../../assets/suggest.svg";
+import axios from "axios";
+import { BaseBackURL } from "../../../../constant/api";
 
 export default function MySuggest() {
   const navigate = useNavigate();
   const [select, setSelect] = useState(1);
+  const [confirmBills,setConfirmBills]=useState([]);
+
+  const getConfirmBills = ()=>{
+    
+  }
+
+
   return (
     <Container>
       <Title>
@@ -187,6 +196,7 @@ const AddnewAction = styled.div`
   box-shadow: 0px 6px 8px -2px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   padding: 4px;
+  cursor: pointer;
   .text {
     margin: 0;
     color: #ffffff;
@@ -259,6 +269,7 @@ const Item = styled.p`
   font-weight: 300;
   padding-top: 10.465vw;
   position: relative;
+  cursor: pointer;
   &.active {
     font-weight: 700;
     &:after {
@@ -282,7 +293,8 @@ const Item = styled.p`
     width: 9.302vw;
     height: 9.302vw;
     top: 0;
-    right: 8px;
+    left: 50%;
+    transform: translate(-50%,0%);
   }
   @media (min-width: 480px) {
     font-size: 1.458vw;
@@ -292,7 +304,7 @@ const Item = styled.p`
       bottom: -0.885vw !important;
     }
     &:before {
-      right: 35px;
+      /* right: 35px; */
       width: 2.135vw;
       height: 2.135vw;
     }

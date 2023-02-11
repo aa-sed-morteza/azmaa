@@ -38,7 +38,7 @@ export default function Document() {
       });
   };
 
-  console.log(state.voteEnvoy)
+  console.log(state.typeAction.description)
 
   
 
@@ -47,6 +47,8 @@ export default function Document() {
       const data = new FormData();
       data.append("bill_id", state.typeAction.description);
       data.append("vote", state.voteEnvoy);
+      
+
 
       let config = {
         method: "post",
@@ -79,7 +81,9 @@ export default function Document() {
     else{
       const data = new FormData();
       data.append("activity_id", state.typeAction.description);
-      data.append("activity_choice_id", state.voteEnvoy);
+      // data.append("activity_choice_id", state.voteEnvoy);
+       data.append("activity_choice_id", 1);
+
 
       let config = {
         method: "post",

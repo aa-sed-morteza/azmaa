@@ -71,7 +71,7 @@ export default function HistoryEnvoy() {
       ></Edit>
       <Title>سوابق نماینده</Title>
       <Row>
-        {hisroty ==[] && hisroty.map((item, i) => {
+        {hisroty  && hisroty.map((item, i) => {
           return <p className="text-history">{item.title}</p>;
         })}
       </Row>

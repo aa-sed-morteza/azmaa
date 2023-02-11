@@ -75,8 +75,8 @@ export const UploadPictSchema = yup.object().shape({
 });
 
 export const LinkSchema = yup.object().shape({
-  document: yup.string().required("لطفا سند مطلب خود را بارگزاری کنید"),
-  link: yup.string().required("لطفا لینک مطلب خودرا وارد کنید"),
+  // document: yup.string().required("لطفا سند مطلب خود را بارگزاری کنید"),
+  // link: yup.string().required("لطفا لینک مطلب خودرا وارد کنید"),
 });
 
 export const selectActionTypeSchema = yup.object().shape({
