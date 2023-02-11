@@ -36,6 +36,7 @@ const initialState = {
   mapLevel: 1,
   provinceSearch: {},
   citySearch: {},
+  city:"",
   loggedIn: false,
   token: null,
   refreshToken:null,
@@ -119,6 +120,8 @@ const reducer = (state, action) => {
       return { ...state, provinceSearch: action.payload };
     case "SET_CITY_SEARCH":
       return { ...state, citySearch: action.payload };
+      case "SET_CITY":
+        return { ...state, city: action.payload };
     case "SET_IMAGE":
       return { ...state, image: action.payload };
      

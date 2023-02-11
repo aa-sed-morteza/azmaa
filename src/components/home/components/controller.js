@@ -14,6 +14,7 @@ import SelectArea from "./selectArea";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
+import { useUser } from "../../context/userContext";
 
 const ControllContainer = styled.section`
   display: flex;
@@ -302,6 +303,7 @@ const AreaContainer = styled.div`
 `;
 
 export default function Controller() {
+  const {state,dispatch}=useUser();
   const [select, setSelect] = useState(0);
   const [bills, setBills] = useState([]);
   const [envoys, setEnvoys] = useState([]);
@@ -310,6 +312,17 @@ export default function Controller() {
 
   const navigate = useNavigate();
   const width = useWidth();
+
+  const filterEnvoyByCity = ()=>{
+    const selectEnvoys =  envoys.filter(x=>x.electoral_district_name == state.city);
+    setEnvoys([...selectEnvoys])
+   
+  }
+  
+
+  useEffect(()=>{
+    filterEnvoyByCity();
+  },[state.city])
 
   const getBills = () => {
     let config = {
