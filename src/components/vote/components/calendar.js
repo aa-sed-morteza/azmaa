@@ -213,7 +213,7 @@ export default function Calendar({ bills }) {
   ];
 
   const elements = [];
-  console.log(bills);
+  
 
   for (let i = parseInt(month) - 1; i > 0; i--) {
     const newList = [];

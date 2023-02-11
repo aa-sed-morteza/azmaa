@@ -41,7 +41,7 @@ export default function SelectionArea() {
     onSubmit,
   });
 
-  console.log("cal", values);
+  
   return (
     <>
       {state.signInLevel === 4 ? (

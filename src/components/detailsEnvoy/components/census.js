@@ -13,7 +13,7 @@ export default function Census({select,complete,envoy}) {
     }
 
     let persentage = (num2 / num1) * 100;
-    console.log('num',num1)
+    
     return (
       <Progress>
         <div className="number">

@@ -26,7 +26,7 @@ export default function SetMobileNumber() {
     if (code.length === 0) {
       setValidate(2);
     } else {
-      console.log(state);
+      
       const data = new FormData();
       data.append("phone", state.userName);
       data.append("type", "parliament_member");

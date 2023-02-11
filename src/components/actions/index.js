@@ -38,7 +38,6 @@ export default function Actions() {
     }
   }, [selectedTag]);
 
-  console.log(filteredActivities);
 
   return (
     <Container>

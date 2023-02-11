@@ -31,7 +31,7 @@ export default function Envoy() {
     });
   };
 
-  console.log(envoys);
+ 
 
   useEffect(() => {
     getEnvoys();

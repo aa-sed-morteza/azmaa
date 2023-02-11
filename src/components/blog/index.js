@@ -31,7 +31,6 @@ export default function Blog() {
     getPosts();
   }, []);
 
-  console.log(posts);
   return (
     <Container>
       <Title>

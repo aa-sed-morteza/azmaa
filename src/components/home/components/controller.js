@@ -496,15 +496,7 @@ export default function Controller() {
             {newList.map((item, i) => {
               return <BestEnvoy envoy={item} key={i} click={()=>{navigate(`/envoy/${item.id}`)}}/>;
             })}
-            {/* <BestEnvoy
-              onClick={() => {
-                navigate("/envoy/علیرضا پاکفطرت");
-              }}
-            />
-            <BestEnvoy />
-            <BestEnvoy />
-            <BestEnvoy />
-            <BestEnvoy /> */}
+          
           </EnvoyGalley>
           <ShowMore style={{ marginTop: "20px" }}>
             <p>نمایش بیشتر</p>{" "}

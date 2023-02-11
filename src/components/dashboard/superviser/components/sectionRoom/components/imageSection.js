@@ -36,7 +36,7 @@ export default function ImageSection() {
     onSubmit,
   });
 
-  console.log(state.imageArticle);
+  
 
   return (
     <>

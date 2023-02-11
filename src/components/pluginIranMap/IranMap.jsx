@@ -83,7 +83,7 @@ const IranMap = ({ position }) => {
     });
   };
 
-  console.log(provinces)
+
   useEffect(() => {
     getProvince();
   }, []);

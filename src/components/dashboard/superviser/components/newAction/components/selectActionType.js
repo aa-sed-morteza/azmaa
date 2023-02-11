@@ -96,7 +96,7 @@ export default function SelectActionType() {
     );
   });
 
-  console.log(state.activityChoice)
+ 
 
 
 
@@ -141,7 +141,7 @@ export default function SelectActionType() {
     dispatch({ type: "SET_TYPE_ACTION", payload: values });
     dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 2 });
     actions.resetForm();
-    console.log("submit");
+   
   };
 
   
@@ -164,7 +164,7 @@ export default function SelectActionType() {
     onSubmit,
   });
 
-  console.log('status',values)
+  
   useEffect(() => {
     if (select === 1) {
       setFieldValue("type", "vote");
@@ -173,7 +173,7 @@ export default function SelectActionType() {
       setFieldValue("type", "action");
     }
   }, [select]);
-  console.log(state.typeAction);
+ 
 
   return (
     <>

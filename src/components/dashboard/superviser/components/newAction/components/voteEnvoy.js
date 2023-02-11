@@ -95,7 +95,7 @@ export default function VoteEnvoy() {
     );
   });
 
-  console.log(votes);
+  
 
   const voteItems = votes.map((item, i) => {
     return(

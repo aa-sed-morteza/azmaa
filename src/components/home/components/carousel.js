@@ -41,7 +41,7 @@ export default function Carousel() {
     });
   };
 
-  console.log(posts);
+ 
 
   useEffect(() => {
     getPosts();

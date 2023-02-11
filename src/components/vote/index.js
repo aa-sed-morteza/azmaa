@@ -39,7 +39,7 @@ export default function Vote() {
     }
   }, [selectedTag]);
 
-  console.log('123',bills)
+  
 
   
   return (

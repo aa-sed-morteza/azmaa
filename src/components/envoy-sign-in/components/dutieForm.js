@@ -5,7 +5,7 @@ import calendar from "../../../assets/calendar.webp";
 import CustomInput from "../../general/customInput";
 
 export default function DutieForm({ id, value, onChange,errors,touched,setDate }) {
-  console.log("form", value);
+ 
   return (
     <Form>
       <CustomInput

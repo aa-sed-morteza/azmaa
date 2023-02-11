@@ -20,7 +20,7 @@ export default function ActionCard({ activity }) {
   const envoyData = data.envoy;
   const navigate = useNavigate();
 
-  console.log(activity);
+ 
 
   const envoyList = votes.map((x, i) => {
     return (

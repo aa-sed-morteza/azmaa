@@ -65,7 +65,6 @@ export default function SecondEnvoyCard({
       setActIcon([dislike1]);
     }
   };
-  console.log("photo", actIcon);
 
   useEffect(() => {
     calculateFillCircle();

@@ -61,7 +61,7 @@ export default function Filtering({ id }) {
     getEnvoyActivity();
   }, []);
 
-  console.log("act", activityEnvoy);
+ 
   //generate card for activity envoy
   const activity = activityEnvoy.map((item, i) => {
     return item.vote.map((x, j) => {
