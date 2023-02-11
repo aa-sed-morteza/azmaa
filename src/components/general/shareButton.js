@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { RWebShare } from "react-web-share";
 import styled from "styled-components";
 
-const ShareButton = ({title,text}) => {
+const ShareButton = ({title,text,right}) => {
   const url = window.location.href;
 
   return (
@@ -13,8 +13,9 @@ const ShareButton = ({title,text}) => {
         title: title,
       }}
       onClick={() => console.log("shared successfully!")}
+      className='custom'
     >
-      <SmallButton><p className="content">بازنشر</p></SmallButton>
+      <SmallButton right={right}><p className="content">بازنشر</p></SmallButton>
     </RWebShare>
   );
 };
@@ -29,13 +30,14 @@ const SmallButton = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 5px;
+  margin-right:${props=>props.right ? "auto" : ""};
   .content {
     margin: 0 auto;
     font-size: 4.65vw;
     font-weight: 300;
     color: #095644;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border-radius: 8px;
     padding: 10px;
     .content {

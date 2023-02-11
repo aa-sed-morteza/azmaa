@@ -10,7 +10,7 @@ const Container = styled.section`
   gap: 30px;
   padding-left: 9%;
   margin-top: 70px;
-  margin-bottom:70px;
+  margin-bottom: 70px;
 `;
 
 const Title = styled.h1`
@@ -27,7 +27,7 @@ const Title = styled.h1`
     height: 2px;
     position: relative;
     vertical-align: middle;
-    width: 80%;
+    width: 78%;
   }
 
   &:before {
@@ -36,9 +36,14 @@ const Title = styled.h1`
     background-image: url(${profile});
     background-size: cover;
     background-repeat: no-repeat;
-    width: 59px;
-    height: 59px;
+    width: 3.073vw;
+    height: 3.073vw;
     margin-bottom: -1%;
+  }
+  @media (max-width: 1200px) {
+    &:after {
+      width: 75%;
+    }
   }
 `;
 
@@ -80,17 +85,14 @@ p {
 }
 `;
 
-export default function ActiveEnvoy() {
+export default function ActiveEnvoy({ envoys }) {
   return (
     <Container>
       <Title>فعال‌ترین نمایندگان</Title>
       <EnvoyContainer>
-        <BestEnvoy/>
-        <BestEnvoy/>
-        <BestEnvoy/>
-        <BestEnvoy/>
-        <BestEnvoy/>
-        <BestEnvoy/>
+        {envoys.map((item) => (
+          <BestEnvoy envoy={item} />
+        ))}
       </EnvoyContainer>
       <ShowMore>
         <p>نمایش بیشتر</p>{" "}

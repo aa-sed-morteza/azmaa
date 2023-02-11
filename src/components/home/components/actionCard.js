@@ -8,7 +8,114 @@ import not from "../../../assets/not.webp";
 import data from "../../../data.json";
 import left from ".././../../assets/left.webp";
 import { useNavigate } from "react-router-dom";
-import ShareButton from "../../general/shareButton.js"
+import ShareButton from "../../general/shareButton.js";
+import { BaseBackURL } from "../../../constant/api";
+import axios from "axios";
+
+export default function ActionCard({ activity }) {
+  const [active, setActive] = useState(0);
+  const [color, SetColor] = useState("#DFF5F0");
+  const [bColor, setBColor] = useState("#6cbba9");
+  const [votes, setVotes] = useState(activity.vote);
+  const envoyData = data.envoy;
+  const navigate = useNavigate();
+
+ 
+
+  const envoyList = votes.map((x, i) => {
+    return (
+      <Card key={i} color={bColor}>
+        <div className="picture">
+          <img src={x.voter.image} alt={x.voter.last_name} />
+        </div>
+
+        <p className="name">
+          {x.voter.first_name} {x.voter.last_name}
+        </p>
+        <p className="state">{x.voter.electoral_district_name}</p>
+      </Card>
+    );
+  });
+
+  let positive = 0;
+  let negative = 0;
+  let noChoice = 0;
+
+  for (const item of activity.vote) {
+    if (item.vote === "positive") {
+      positive = positive + 1;
+    } else if (item.vote === "negative") {
+      negative = negative + 1;
+    } else {
+      noChoice = noChoice + 1;
+    }
+  }
+
+  useEffect(() => {
+    if (active === 1) {
+      SetColor("#FFD5D5");
+      setBColor("#ffa5a5");
+    } else if (active === 2) {
+      SetColor("#EAEAEA");
+      setBColor("#d8d8d8");
+    } else if (active === 0) {
+      SetColor("#DFF5F0");
+      setBColor("#6cbba9");
+    }
+  }, [active]);
+
+  return (
+    <VCContainer>
+      <CardHeader>
+        <div className="action-logo"></div>
+        <div className="title-card">
+          <p className="title">عملکرد</p>
+          <h2> {activity.name}</h2>
+          <p className="date">{activity.date}</p>
+        </div>
+      </CardHeader>
+      <Statistics>
+        <Success
+          onClick={() => setActive(0)}
+          className={active === 0 ? "active" : ""}
+        >
+          {positive}
+        </Success>
+        <Faild
+          onClick={() => setActive(1)}
+          className={active === 1 ? "active" : ""}
+        >
+          {negative}
+        </Faild>
+        <Not
+          onClick={() => setActive(2)}
+          className={active === 2 ? "active" : ""}
+        >
+          {noChoice}
+        </Not>
+      </Statistics>
+
+      <EnvoyGallery color={color}>{envoyList}</EnvoyGallery>
+
+      <ButtonWraper>
+        <LargButton>
+          <p
+            className="content"
+            onClick={() => {
+              navigate(`presentation/ دریافت خودرو دناپلاس `);
+            }}
+          >
+            جزئیات
+          </p>
+        </LargButton>
+        {/* <SmallButton>
+          <p className="content">بازنشر</p>
+        </SmallButton> */}
+        <ShareButton text="دریافت خودرو دناپلاس " title="اطلاع رسانی نماینده" />
+      </ButtonWraper>
+    </VCContainer>
+  );
+}
 
 const VCContainer = styled.div`
   background-color: #ffffff;
@@ -18,15 +125,20 @@ const VCContainer = styled.div`
   flex-direction: column;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   margin-bottom: 14px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     margin-bottom: 34px;
-    max-width: 31%;
+    width: 25%;
     padding: 20px 17px;
     height: 43.229vw;
     min-height: 0;
-    width: 26.042vw;
+  }
+  @media (min-width: 1025px) {
+    width: 28%;
+  }
+  @media (min-width: 1600px) {
+    width: 30%;
   }
 `;
 
@@ -39,7 +151,7 @@ const CardHeader = styled.div`
     background-repeat: no-repeat;
     width: 20.698vw;
     height: 17.674vw;
-    @media (min-width: 480px) {
+    @media (min-width: 481px) {
       width: 6.302vw;
       height: 5.417vw;
     }
@@ -52,20 +164,18 @@ const CardHeader = styled.div`
       color: #707070;
       font-size: 3.72vw;
       font-weight: 200;
-      position: relative;
-      padding-right: 20px;
       margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
       &:before {
         content: "";
-        display: flex;
-        position: absolute;
+        display: inline-flex;
         width: 7.442vw;
         height: 7.442vw;
         background-image: url(${act});
         background-size: contain;
         background-repeat: no-repeat;
-        right: -1.395vw;
-        top: 0.233vw;
       }
     }
     h2 {
@@ -81,16 +191,14 @@ const CardHeader = styled.div`
       font-size: 2.79vw;
       font-weight: bold;
     }
-    @media (min-width: 480px) {
+    @media (min-width: 481px) {
       width: 67%;
       .title {
         font-size: 1.25vw;
         font-weight: 300;
-        padding-right: 30px;
         &:before {
           width: 2.083vw;
           height: 1.563vw;
-          top: 0.26vw;
         }
       }
       h2 {
@@ -114,7 +222,7 @@ const Statistics = styled.div`
   margin-top: 17px;
   justify-content: center;
   padding-bottom: 13px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     gap: 4.688vw;
   }
 `;
@@ -124,6 +232,7 @@ const Success = styled.div`
   font-weight: 300;
   font-size: 5.58vw;
   position: relative;
+  cursor: pointer;
   &:before {
     content: "";
     display: block;
@@ -136,7 +245,8 @@ const Success = styled.div`
     right: -11.628vw;
     top: -1.395vw;
   }
-  &.active {
+  &.active,
+  &:hover {
     font-weight: bold;
     &:after {
       content: "";
@@ -149,7 +259,7 @@ const Success = styled.div`
       right: -11.628vw;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.458vw;
     font-weight: 400;
     padding-bottom: 10px;
@@ -173,6 +283,7 @@ const Faild = styled.div`
   font-weight: 300;
   font-size: 5.58vw;
   position: relative;
+  cursor: pointer;
   &:before {
     content: "";
     display: block;
@@ -185,7 +296,8 @@ const Faild = styled.div`
     right: -11.628vw;
     top: -1.395vw;
   }
-  &.active {
+  &.active,
+  &:hover {
     font-weight: bold;
     &:after {
       content: "";
@@ -198,7 +310,7 @@ const Faild = styled.div`
       right: -11.628vw;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.458vw;
     font-weight: 400;
     padding-bottom: 10px;
@@ -222,7 +334,7 @@ const Not = styled.div`
   font-weight: 300;
   font-size: 5.58vw;
   position: relative;
-
+  cursor: pointer;
   &:before {
     content: "";
     display: block;
@@ -236,7 +348,8 @@ const Not = styled.div`
     right: -11.628vw;
   }
 
-  &.active {
+  &.active,
+  &:hover {
     font-weight: bold;
     &:after {
       content: "";
@@ -249,7 +362,7 @@ const Not = styled.div`
       right: -11.628vw;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.458vw;
     font-weight: 400;
     padding-bottom: 10px;
@@ -274,11 +387,14 @@ const EnvoyGallery = styled.div`
   padding: 18px 0 12px;
   display: flex;
   overflow-x: scroll;
-  @media (min-width: 480px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  @media (min-width: 481px) {
     border-radius: 8px;
     flex-direction: column;
     padding-inline: 15px;
-
+    overflow-x: hidden;
     margin-bottom: 10px;
     flex: 1;
     overflow-y: auto;
@@ -291,18 +407,19 @@ const Card = styled.div`
   justify-content: center;
   align-items: center;
   padding: 4px;
-  min-width: 20.930vw;
+  min-width: 20.93vw;
   border-left: 1px solid white;
   .picture {
-    width: 10.930vw;
-    height: 10.930vw;
-    border-radius: 10.930vw;
+    width: 10.93vw;
+    height: 10.93vw;
+    border-radius: 10.93vw;
     margin-bottom: 10px;
     border: 3px solid ${(props) => props.color};
     img {
       width: 100%;
       height: 100%;
       object-fit: contain;
+      border-radius: 100%;
     }
   }
 
@@ -320,17 +437,18 @@ const Card = styled.div`
     font-weight: bold;
     margin: 0;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     flex-wrap: wrap;
-    max-height: 7.500vw;
-    padding: 19px 30px 10px;
+    max-height: 7.5vw;
+    padding: 5px 0px;
     border-left: none;
     border-bottom: 1px solid #ffffff;
+    min-width: inherit;
     .picture {
       width: 5vw;
       height: 5vw;
       border-radius: 5vw;
-      border-width: 0.469vw;
+      border-width: 0.2vw;
     }
     .name {
       font-size: 1.458vw;
@@ -346,13 +464,16 @@ const Card = styled.div`
       width: 60%;
     }
   }
+  @media (min-width: 1200px) {
+    padding: 19px 5px;
+  }
 `;
 
 const ButtonWraper = styled.div`
   display: flex;
   margin-top: 10px;
   justify-content: space-between;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border-top: 1px solid #d8d8d8;
     padding-top: 14px;
     flex-direction: row-reverse;
@@ -372,7 +493,7 @@ const LargButton = styled.div`
     font-weight: bold;
     color: #ffffff;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border-radius: 8px;
     padding: 10px;
     position: relative;
@@ -388,8 +509,9 @@ const LargButton = styled.div`
         background-image: url(${left});
         background-size: contain;
         background-repeat: no-repeat;
-        top: 1.042vw;
-        left: 1.719vw;
+        top: 50%;
+        left: 9%;
+        transform: translate(0, -50%);
       }
     }
   }
@@ -408,7 +530,7 @@ const SmallButton = styled.div`
     font-weight: 300;
     color: #095644;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border-radius: 8px;
     padding: 10px;
     .content {
@@ -417,89 +539,3 @@ const SmallButton = styled.div`
     }
   }
 `;
-
-export default function ActionCard() {
-  const [active, setActive] = useState(0);
-  const [color, SetColor] = useState("#DFF5F0");
-  const [bColor, setBColor] = useState("#6cbba9");
-  const envoyData = data.envoy;
-  const navigate = useNavigate();
-
-  const envoyList = envoyData.map((x, i) => {
-    return (
-      <Card key={i} color={bColor}>
-        <div className="picture">
-          <img src={x.picture} alt={x.name} />
-        </div>
-
-        <p className="name">{x.name}</p>
-        <p className="state">{x.state}</p>
-      </Card>
-    );
-  });
-
-  useEffect(() => {
-    if (active === 1) {
-      SetColor("#FFD5D5");
-      setBColor("#ffa5a5");
-    } else if (active === 2) {
-      SetColor("#EAEAEA");
-      setBColor("#d8d8d8");
-    } else if (active === 0) {
-      SetColor("#DFF5F0");
-      setBColor("#6cbba9");
-    }
-  }, [active]);
-
-  return (
-    <VCContainer>
-      <CardHeader>
-        <div className="action-logo"></div>
-        <div className="title-card">
-          <p className="title">عملکرد</p>
-          <h2> دریافت خودرو دناپلاس </h2>
-          <p className="date">۲۹ اسفند ۱۴۰۰ </p>
-        </div>
-      </CardHeader>
-      <Statistics>
-        <Success
-          onClick={() => setActive(0)}
-          className={active === 0 ? "active" : ""}
-        >
-          ۱۲۴
-        </Success>
-        <Faild
-          onClick={() => setActive(1)}
-          className={active === 1 ? "active" : ""}
-        >
-          ۶۵
-        </Faild>
-        <Not
-          onClick={() => setActive(2)}
-          className={active === 2 ? "active" : ""}
-        >
-          ۲۳
-        </Not>
-      </Statistics>
-
-      <EnvoyGallery color={color}>{envoyList}</EnvoyGallery>
-
-      <ButtonWraper>
-        <LargButton>
-          <p
-            className="content"
-            onClick={() => {
-              navigate(`presentation/ دریافت خودرو دناپلاس `);
-            }}
-          >
-            جزئیات
-          </p>
-        </LargButton>
-        {/* <SmallButton>
-          <p className="content">بازنشر</p>
-        </SmallButton> */}
-        <ShareButton text="دریافت خودرو دناپلاس " title="اطلاع رسانی نماینده"/>
-      </ButtonWraper>
-    </VCContainer>
-  );
-}

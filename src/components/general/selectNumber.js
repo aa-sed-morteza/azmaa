@@ -70,4 +70,16 @@ const Container = styled.div`
     border: none;
     text-align: center;
   }
+  @media (min-width: 480px) {
+    // font-size: 1.25vw;
+    padding: 0.885vw;
+    &:before {
+      font-size: 1.25vw;
+      top: -1.042vw;
+    }
+    .Increase,
+    .Decrease {
+      font-size: 1.563vw;
+    }
+  }
 `;

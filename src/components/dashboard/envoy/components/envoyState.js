@@ -20,14 +20,15 @@ export default function EnvoyState() {
       <State>
         <span></span>
         <div className="content">
-          <p className="title">{state.areaName}</p>
+          {state.electoral_district &&  <p className="title">{state.electoral_district.name  }</p>}
+         
           <p className="persentage">درصد آراء: ۳۵٪</p>
         </div>
       </State>
 
       <Row>
         <p className="type"> تعداد آراء: </p>
-        <p className="expand">{state.voteNumber}</p>
+        <p className="expand">{state.vote_number}</p>
       </Row>
       <Row>
         <p className="type"> تعداد کل آراء صندوق : </p>
@@ -109,6 +110,7 @@ const Edit = styled.div`
   background-repeat: no-repeat;
   background-image: url(${edit});
   background-size: contain;
+  cursor: pointer;
 `;
 
 const State = styled.div`

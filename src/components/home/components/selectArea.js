@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import useWidth from "../../../hook/useWidth";
 import arrow from "../../../assets/arrow.webp";
@@ -13,22 +13,30 @@ export default function SelectArea(props) {
   const envoyGallery = envoys.map((x, i) => {
     return (
       <EnvoyCard
-        name={x.name}
+        name={x.first_name+""+x.last_name}
         key={i}
-        state={x.state}
-        img={x.img}
-        commission={x.commission}
-        persantage={x.persantage}
-        id={i}
+        state={x.electoral_district_name}
+        img={x.image}
+        commission={x.fraction_name}
+        persantage={x.transparency}
+        id={x.id}
+        inBox={true}
+
       />
     );
   });
 
   const handdleClick = () => {
-    if (width < 480) {
+    if (width > 480) {
       setOpen(!open);
     }
   };
+
+  useEffect(()=>{
+    if(width<480){
+      setOpen(true);
+    }
+  },[])
 
   return (
     <Wraper>
@@ -50,12 +58,14 @@ const Wraper = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   margin-top:2.326vw;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
+    overflow:hidden;
     border-radius: 8px;
-    width: 49%;
+    width: 32%;
     height: fit-content;
     box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.15);
   }
+ 
 `;
 
 const Container = styled.div`
@@ -68,9 +78,9 @@ const Container = styled.div`
     background-image: url(${arrow});
     background-size: contain;
     background-repeat: no-repeat;
-    width: 3.488vw;
-    height: 2.326vw;
-    left: 5.581vw;
+    width: 1vw;
+    height: 1vw;
+    left: 1%;
     top: 50%;
   }
   &.active {
@@ -88,7 +98,7 @@ const Container = styled.div`
     color: #707070;
     font-weight: 400;
     font-size: 4.651vw;
-    gap:3.953vw;
+    gap:2vw;
     &:before {
       content: "";
       display: flex;
@@ -108,10 +118,27 @@ const Container = styled.div`
       transform: rotate(180deg);
     }
   }
-  @media (min-width: 480px) {
-    padding: 0;
+  @media (min-width: 481px) {
+    padding: 1.042vw;
     &:after {
       display: none;
+    }
+    h2{
+      font-size:1.563vw;
+      &:before{
+        width:8.333vw;
+        height:8.333vw;
+      }
+    }
+  }
+  @media(min-width:769px){
+    &:after {
+      display: block;
+    }
+  }
+  @media(min-width:1200px){
+    &:after {
+      left:5%;
     }
   }
 `;
@@ -121,6 +148,8 @@ const Details = styled.div`
   
   border-top: 1px solid #f5f5f5;
   &>*{
-    box-shadow:none;
+     box-shadow:none;
+     padding:15px;
+    //  width:100%;
   }
 `;

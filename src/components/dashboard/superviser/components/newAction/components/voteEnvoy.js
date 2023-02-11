@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { voteSchema } from "../../../../../schema/index";
 import Button from "../../../../../general/button";
@@ -12,13 +12,26 @@ import disagree from "../../../../../../assets/disagree.svg";
 import not from "../../../../../../assets/not.svg";
 import activeNot from "../../../../../../assets/not1.svg";
 
-
-
-
 export default function VoteEnvoy() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
   const [select, setSelect] = useState(0);
+  const [actions, setActions] = useState([]);
+  const [votes, setVotes] = useState([
+    { name: "positive", text: "موافق" },
+    { name: "negative", text: "مخالف" },
+    { name: "none", text: "ممتنع" },
+    { name: "without_vote", text: "بدون رای" },
+    { name: "absent", text: "غایب" },
+  ]);
+
+  useEffect(() => {
+    if (state.typeAction !== "vote") {
+      if (state.activityChoice) {
+        setActions([...state.activityChoice]);
+      }
+    } 
+  }, []);
 
   const onSubmit = async (values, actions) => {
     dispatch({ type: "SET_VOTE_ENVOY", payload: values.vote });
@@ -43,7 +56,88 @@ export default function VoteEnvoy() {
     onSubmit,
   });
 
-  console.log('value',values)
+  const actionsItems = actions.map((item, i) => {
+    return (
+      <RadioButton
+        key={i}
+        onClick={() => {
+          setFieldValue("vote", item.id);
+          setSelect(i + 1);
+        }}
+      >
+        <input
+          type="radio"
+          name="vote"
+          value={values.vote}
+          onChange={() => {
+            setFieldValue("vote", item.id);
+          }}
+          checked={values.vote == item.id}
+        />
+        <label htmlFor="vote">{item.name}</label>
+        <img src={select == i + 1 ? activeAgree : agree} />
+      </RadioButton>
+    );
+  });
+
+  const checkActionsItems = actions.map((item, i) => {
+    return (
+      <RadioButton key={i}>
+        <input
+          type="radio"
+          name="vote"
+          value={state.voteEnvoy}
+          checked={state.voteEnvoy == item.id}
+        />
+        <label htmlFor="text">{item.name}</label>
+        <img src={state.voteEnvoy == item.id ? activeAgree : agree} />
+      </RadioButton>
+    );
+  });
+
+  
+
+  const voteItems = votes.map((item, i) => {
+    return(
+      <RadioButton
+      key={i}
+      onClick={() => {
+        setFieldValue("vote", item.name);
+        setSelect(i + 1);
+      }}
+    >
+      <input
+        type="radio"
+        name="vote"
+        value={values.vote}
+        onChange={() => {
+          setFieldValue("vote", item.name);
+        }}
+        checked={values.vote == item.name}
+      />
+      <label htmlFor="vote">{item.text}</label>
+      <img src={select == i + 1 ? activeAgree : agree} />
+    </RadioButton>
+    )
+   
+  });
+
+  const checkVoteItems = votes.map((item, i) => {
+    return (
+      <RadioButton key={i}>
+        <input
+          type="radio"
+          name="vote"
+          value={state.voteEnvoy}
+          checked={state.voteEnvoy == item.name}
+        />
+        <label htmlFor="text">{item.text}</label>
+        <img src={state.voteEnvoy == item.name ? activeAgree : agree} />
+      </RadioButton>
+    );
+  });
+
+  console.log(state.typeAction);
 
   return (
     <>
@@ -51,9 +145,11 @@ export default function VoteEnvoy() {
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <Title>۳. رأی نماینده را انتخاب کنید:</Title>
-            <RadioButton
+            {state.typeAction.type == "vote" ? voteItems : actionsItems}
+
+            {/* <RadioButton
               onClick={() => {
-                setFieldValue("vote", "موافق");
+                setFieldValue("vote", "positive");
                 setSelect(1);
               }}
             >
@@ -62,16 +158,16 @@ export default function VoteEnvoy() {
                 name="vote"
                 value={values.vote}
                 onChange={() => {
-                  setFieldValue("vote", "موافق");
+                  setFieldValue("vote", "positive");
                 }}
-                checked={values.vote == "موافق"}
+                checked={values.vote == "positive"}
               />
               <label htmlFor="vote">موافق</label>
               <img src={select == 1 ? activeAgree : agree} />
             </RadioButton>
             <RadioButton
               onClick={() => {
-                setFieldValue("vote", "مخالف");
+                setFieldValue("vote", "negative");
                 setSelect(2);
               }}
             >
@@ -80,9 +176,9 @@ export default function VoteEnvoy() {
                 name="vote"
                 value={values.vote}
                 onChange={() => {
-                  setFieldValue("vote", "مخالف");
+                  setFieldValue("vote", "negative");
                 }}
-                checked={values.vote == "مخالف"}
+                checked={values.vote == "negative"}
               />
               <label htmlFor="vote">مخالف</label>
               <img src={select == 2 ? activeDisagree : disagree} />
@@ -123,7 +219,7 @@ export default function VoteEnvoy() {
                 checked={values.vote == "نامشخص"}
               />
               <label htmlFor="vote">نامشخص</label>
-            </RadioButton>
+            </RadioButton> */}
 
             {errors.vote && touched.vote && (
               <ErrorText>{errors.vote}</ErrorText>
@@ -151,30 +247,31 @@ export default function VoteEnvoy() {
       ) : (
         <Container>
           <Title>۳. رأی نماینده را انتخاب کنید:</Title>
+          {state.typeAction.type == "vote" ? checkVoteItems : checkActionsItems}
 
-          <RadioButton>
+          {/* <RadioButton>
             <input
               type="radio"
               name="vote"
               value={state.voteEnvoy}
-              checked={state.voteEnvoy == "موافق"}
+              checked={state.voteEnvoy == "positive"}
             />
-            <label htmlFor="text">یادداشت</label>
-            <img src={state.voteEnvoy == "موافق" ? activeAgree : agree} />
-          </RadioButton>
+            <label htmlFor="text">موافق</label>
+            <img src={state.voteEnvoy == "positive" ? activeAgree : agree} />
+          </RadioButton> */}
 
-          <RadioButton>
+          {/* <RadioButton>
             <input
               type="radio"
               name="vote"
               value={state.voteEnvoy}
-              checked={state.voteEnvoy == "مخالف"}
+              checked={state.voteEnvoy == "negative"}
             />
             <label htmlFor="text">مخالف</label>
-            <img src={state.voteEnvoy == "مخالف" ? activeDisagree : disagree} />
-          </RadioButton>
+            <img src={state.voteEnvoy == "negative" ? activeDisagree : disagree} />
+          </RadioButton> */}
 
-          <RadioButton>
+          {/* <RadioButton>
             <input
               type="radio"
               name="vote"
@@ -183,9 +280,9 @@ export default function VoteEnvoy() {
             />
             <label htmlFor="text">ممتنع</label>
             <img src={state.voteEnvoy == "ممتنع" ? activeNot : not} />
-          </RadioButton>
+          </RadioButton> */}
 
-          <RadioButton>
+          {/* <RadioButton>
             <input
               type="radio"
               name="vote"
@@ -193,7 +290,7 @@ export default function VoteEnvoy() {
               checked={state.voteEnvoy == "نامشخص"}
             />
             <label htmlFor="text">نامشخص</label>
-          </RadioButton>
+          </RadioButton> */}
         </Container>
       )}
     </>
@@ -213,12 +310,21 @@ const Title = styled.h2`
   font-size: 4.651vw;
   font-weight: 400;
   margin-bottom: 10px;
+  @media (min-width: 480px) {
+    font-size: 1.458vw;
+    margin-bottom: 1.458vw;
+  }
 `;
 
 const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
+  @media (min-width: 480px) {
+    width: 100%;
+    justify-content: center;
+    margin: 1.302vw auto;
+  }
 `;
 
 const ErrorText = styled.p`
@@ -229,6 +335,10 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
+  @media (min-width: 480px) {
+    margin-top: 0;
+    font-size: 1.042vw;
+  }
 `;
 
 const RadioButton = styled.div`
@@ -262,6 +372,21 @@ const RadioButton = styled.div`
     label {
       color: #095644;
       font-weight: 400;
+    }
+  }
+  @media (min-width: 480px) {
+    width: 80%;
+    margin: 1.042vw auto;
+    input {
+      width: 1.563vw;
+      height: 1.563vw;
+    }
+    label {
+      font-size: 1.563vw;
+    }
+    img {
+      width: 2.604vw;
+      height: 2.604vw;
     }
   }
 `;

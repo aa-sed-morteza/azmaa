@@ -6,8 +6,8 @@ import info from "../../../assets/info.webp";
 import absent from "../../../assets/absent.webp";
 import noVote from "../../../assets/noVote.webp";
 
-export default function VotesCensus() {
-  const [envoy, setEnvoy] = useState(267);
+export default function VotesCensus({total,positive,negative,none,absent,without}) {
+  
   return (
     <Container>
       <Title> آمار آراء</Title>
@@ -17,8 +17,8 @@ export default function VotesCensus() {
             موافق:
           </Type>
           <Number color="#6CBBA9">
-            <span>167/</span>
-            {envoy}
+            <span>{positive}/</span>
+            {total}
           </Number>
         </Item>
 
@@ -27,8 +27,8 @@ export default function VotesCensus() {
             مخالف:
           </Type>
           <Number color="#FFA5A5">
-            <span>57/</span>
-            {envoy}
+            <span>{negative}/</span>
+            {total}
           </Number>
         </Item>
 
@@ -37,8 +37,8 @@ export default function VotesCensus() {
             ممتنع:
           </Type>
           <Number color="#CBCBCB">
-            <span>21/</span>
-            {envoy}
+            <span>{none}/</span>
+            {total}
           </Number>
         </Item>
 
@@ -47,8 +47,8 @@ export default function VotesCensus() {
             غایب:
           </Type>
           <Number color="#9F9F9F">
-            <span>34/</span>
-            {envoy}
+            <span>{absent}/</span>
+            {total}
           </Number>
         </Item>
 
@@ -57,8 +57,8 @@ export default function VotesCensus() {
             بدون‌رأی:
           </Type>
           <Number color="#9F9F9F">
-            <span>167/</span>
-            {envoy}
+            <span>{without}/</span>
+            {total}
           </Number>
         </Item>
       </Row>
@@ -71,9 +71,16 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 0px 29px 20px;
   margin-top: 40px;
-  @media (min-width: 480px) {
-    padding: 0px 45px 30px 40px;
-    margin-top: 60px;
+  @media(min-width:481px){
+    padding:0px 20px 30px 10px;
+    margin-top:20px;
+  }
+  @media(min-width:769px){
+    padding:0px 45px 30px 40px;
+    margin-top:40px;
+  }
+  @media(min-width:1200px){
+    margin-top:60px;
   }
 `;
 
@@ -87,10 +94,15 @@ const Title = styled.h4`
   margin: 0;
   text-align: center;
   margin-right: -5%;
-  @media (min-width: 480px) {
-    font-size: 1.875vw;
+  @media(min-width:481px){
+    font-size:1.875vw;
+    transform: translateY(-10px);
+  }
+  @media(min-width:769px){
+    transform: translateY(-14px);
+  }
+  @media(min-width:1200px){
     transform: translateY(-31px);
-    width: 40%;
   }
 `;
 
@@ -99,23 +111,31 @@ const Row = styled.div`
   flex-wrap: wrap;
   margin-bottom: 5px;
   gap: 10px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     flex-direction: column;
     gap:15px;
   }
 `;
 
 const Item = styled.div`
-  width: 48%;
+  width: 90%;
   display: flex;
   gap: 7px;
   align-items: center;
-  @media (min-width: 480px) {
-    width: 100%;
+  @media (min-width: 481px) {
+    // width: 80%;
     &.active {
       background-color: #dff5f0;
       border-radius: 8px;
       padding: 5px;
+    }
+  }
+  @media (min-width: 769px) {
+    // width: 100%;
+    &.active {
+      background-color: #dff5f0;
+      border-radius: 8px;
+      padding: 5px 10px;
     }
   }
 `;
@@ -125,28 +145,26 @@ const Type = styled.p`
   font-size: 3.721vw;
   font-weight: 400;
   color: ${(props) => props.color};
-  position: relative;
-  padding-right: 20px;
+  display:flex;
+  align-items:center;
+  gap:7px;
   &:before {
     content: "";
-    display: block;
-    position: absolute;
+    display: inline-flex;
     background-image: url(${(props) => props.icon});
     background-size: contain;
     background-repeat: no-repeat;
     width: 15px;
     height: 15px;
-    right: 0;
-    top: 5px;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.25vw;
     font-weight: 300;
-    padding-right: 40px;
-    &:before {
-      width: 30px;
-      height: 30px;
-      top:2px;
+  }
+  @media(min-width:769px){
+    &:before{
+      width:1.563vw;
+      height:1.563vw;
     }
   }
 `;
@@ -159,7 +177,7 @@ const Number = styled.div`
     color: ${(props) => props.color};
     font-weight: 700;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.667vw;
   }
 `;

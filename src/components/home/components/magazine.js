@@ -4,6 +4,7 @@ import mag from "../../../assets/mag.webp";
 import leftArrow from "../../../assets/leftArrow.webp";
 import user from "../../../assets/profile.webp";
 import data from "../../../data.json";
+import ScrollButton from "../../general/scrollButton";
 
 const MagazineContainer = styled.section`
   background-color: #ffaa00;
@@ -12,10 +13,13 @@ const MagazineContainer = styled.section`
   margin-right: -20px;
   margin-left: -20px;
   display: flex;
-  @media (min-width: 480px) {
-    padding: 36px 0 50px;
-    // margin-top:70px;
+  position:relative;
+  @media (min-width: 481px) {
+    padding: 20px;
     margin-top: 0;
+  }
+  @media (min-width: 769px) {
+    padding: 36px 0 50px;
   }
 `;
 
@@ -52,7 +56,27 @@ const Ttitle = styled.div`
     left: -8px;
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
+    margin-right: 5%;
+    max-width: 150px;
+    padding-left:7%;
+    span {
+      width: 50px;
+      height: 50px;
+    }
+    h1 {
+      font-size: 1.875vw;
+      white-space: nowrap;
+    }
+    &:after {
+      width: 10px;
+      height: 20px;
+      left: 25px;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+  }
+  @media (min-width: 769px) {
     margin-right: 12%;
     max-width: 200px;
     span {
@@ -66,8 +90,7 @@ const Ttitle = styled.div`
     &:after {
       width: 15px;
       height: 30px;
-      left: -45px;
-      bottom: 37.4%;
+      left: 45px;
     }
   }
 `;
@@ -76,12 +99,25 @@ const Wraper = styled.div`
   display: flex;
   overflow-x: scroll;
   gap: 10px;
-  padding-right: 50px;
-  @media (min-width: 480px) {
-    padding-right: 90px;
+  // padding-right: 50px;
+  scroll-behavior: smooth;
+  ::-webkit-scrollbar{
+    display: none; 
+  }
+  @media (min-width: 481px) {
+    // padding-right: 90px;
     gap: 28px;
   }
 `;
+
+const Curtain =styled.div`
+  position:absolute;
+  width:45%;
+  height:100%;
+  background: linear-gradient(to left, rgba(250, 183, 50, 0) 63.02%, #FAB732 100%);
+  top:0;
+  left:0;
+`
 
 const Paper = styled.div`
   display: flex;
@@ -106,20 +142,19 @@ const Paper = styled.div`
     color: #707070;
     font-weight: 300;
     font-size: 3.72vw;
-    padding-right: 20px;
-    position: relative;
     margin-bottom: 10px;
+    display:flex;
+    align-items:center;
+    gap:7px;
     &:before {
       content: "";
-      display: flex;
-      position: absolute;
+      display: inline-flex;
       background-image: url(${user});
       background-size: cover;
       background-repeat: no-repeat;
       width: 15px;
       height: 15px;
-      right: 2px;
-      top: 5px;
+    
     }
   }
   .content {
@@ -137,14 +172,38 @@ const Paper = styled.div`
     margin: 0;
   }
 
-  @media (min-width: 480px) {
-    padding: 20px 19px 25px 19px;
+  @media (min-width: 481px) {
+    padding: 20px;
     box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     .cover {
+      width: 200px;
+      height: 150px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .user {
+      font-size: 1.042vw;
+      margin-bottom: 15px;
+      &:before {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    .content {
+      font-size: 1.25vw;
+      margin-bottom: 15px;
+    }
+    .date {
+      font-size: 1.042vw;
+      font-weight: 500;
+    }
+  }
+  @media (min-width: 1200px) {
+    padding: 20px 19px 25px 19px;
+    .cover {
       width: 330px;
       height: 253px;
-      border-radius: 4px;
       margin-bottom: 18px;
     }
     .user {
@@ -190,7 +249,11 @@ export default function () {
         <span></span>
         <h1> پیشنهاد سردبیر</h1>
       </Ttitle>
-      <Wraper>{magPaper}</Wraper>
+      <Wraper id="magazine">{magPaper}
+      <ScrollButton container="magazine"/>
+      </Wraper>
+      <Curtain></Curtain>
+      
     </MagazineContainer>
   );
 }

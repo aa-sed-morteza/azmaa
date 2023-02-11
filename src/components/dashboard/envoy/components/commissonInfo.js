@@ -13,7 +13,8 @@ export default function CommissinInfo() {
        <Edit onClick={()=>{navigate('edit-commission-info')}}></Edit>
       <Title> کمیسیون</Title>
       <Row>
-        <p className="text">{state.commission}</p>
+        {state.fraction && <p className="text">{state.fraction.name}</p>}
+        
       </Row>
     </Container>
   );
@@ -67,7 +68,9 @@ const Edit = styled.div`
   left: 5.885vw;
   height:2.326vw;
   width:1.163vw;
+  transform: translate(0%,-50%);
   background-repeat: no-repeat;
   background-image: url(${edit});
   background-size: contain;
+  cursor: pointer;
 `;

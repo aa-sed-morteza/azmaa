@@ -7,7 +7,7 @@ const FilterBox = styled.div`
   padding: 8px;
   display: flex;
   gap: 10px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     max-width: 56.25vw;
     margin: auto;
     padding: 10px 13px;
@@ -29,7 +29,7 @@ const FilterItem = styled.p`
     color: #ffffff;
     font-weight: 700;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.25vw;
     font-weight: 700;
     width: 254px;

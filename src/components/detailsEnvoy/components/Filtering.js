@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import vote from "../../../assets/vote-light.webp";
 import voteAction from "../../../assets/vote-active.webp";
@@ -11,11 +11,163 @@ import upArrow from "../../../assets/arrow.webp";
 import check from "../../../assets/check.webp";
 import line from "../../../assets/Line.webp";
 import title from "../../../assets/title1.svg";
+import axios from "axios";
+import { BaseBackURL } from "../../../constant/api";
 
 // import actionActive from "../../../assets/action-active.webp";
 
-export default function Filtering() {
+export default function Filtering({ id }) {
   const [select, setSelect] = useState(1);
+  const [billEnvoy, setBillEnvoy] = useState([]);
+  const [activityEnvoy, setActivityEnvoy] = useState([]);
+
+  // get vote envoy for bill from api
+  const getEnvoyBills = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/bill/?ordering=name, date&name&tag__id&vote__voter=${id}`,
+    };
+
+    axios(config)
+      .then(function (res) {
+        console.log(JSON.stringify(res.data));
+        setBillEnvoy([res.data[0]]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // get activity envoy from api
+  const getEnvoyActivity = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter=${id}`,
+    };
+
+    axios(config)
+      .then(function (res) {
+        console.log(JSON.stringify(res.data));
+
+        setActivityEnvoy([...res.data]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getEnvoyBills();
+    getEnvoyActivity();
+  }, []);
+
+ 
+  //generate card for activity envoy
+  const activity = activityEnvoy.map((item, i) => {
+    return item.vote.map((x, j) => {
+      if (x.voter.id === parseInt(id)) {
+        return(
+          <GeneralActionCard
+          key={j}
+          act="action"
+          content={item.name}
+          action={x.vote}
+          date={item.date}
+          item={item}
+        />
+        )
+       
+      }
+    });
+  });
+
+  // get votes envoy for bills
+  const positiveVote = billEnvoy.map((item, i) => {
+    return item.positive_vote.map((positive, i) => {
+      if (positive.voter.id === parseInt(id)) {
+       
+        return (
+          <GeneralActionCard
+            key={i}
+            act="vote"
+            content={item.name}
+            action="موافق"
+            date={item.date}
+            item={item}
+          />
+        );
+      }
+    });
+  });
+
+  const absentVote = billEnvoy.map((item, i) => {
+    return item.absent_vote.map((absent, i) => {
+      if (absent.voter.id === id) {
+        return (
+          <GeneralActionCard
+            key={i}
+            act="vote"
+            content={item.name}
+            action={absent.vote}
+            date={item.date}
+            item={item}
+          />
+        );
+      }
+    });
+  });
+
+  const negativeVote = billEnvoy.map((item, i) => {
+    return item.negative_vote.map((negative, i) => {
+      if (negative.voter.id === id) {
+        return (
+          <GeneralActionCard
+            key={i}
+            act="vote"
+            content={item.name}
+            action={negative.vote}
+            date={item.date}
+            item={item}
+          />
+        );
+      }
+    });
+  });
+
+  const noneVote = billEnvoy.map((item, i) => {
+    return item.none_vote.map((none, i) => {
+      if (none.voter.id === id) {
+        return (
+          <GeneralActionCard
+            key={i}
+            act="vote"
+            content={item.name}
+            action={none.vote}
+            date={item.date}
+            item={item}
+          />
+        );
+      }
+    });
+  });
+
+  const withoutVote = billEnvoy.map((item, i) => {
+    return item.without_vote.map((without, i) => {
+      if (without.voter.id === id) {
+        return (
+          <GeneralActionCard
+            key={i}
+            act="vote"
+            content={item.name}
+            action={without.vote}
+            date={item.date}
+            item={item}
+          />
+        );
+      }
+    });
+  });
+
   return (
     <Container>
       <FilteringWraper>
@@ -64,34 +216,21 @@ export default function Filtering() {
           <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
           <SubTitile>مرداد ۱۴۰۱</SubTitile>
           <Gallery>
-            <GeneralActionCard
-              act="vote"
-              content="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
-              action="موافق"
-            />
+            {positiveVote}
+            {absentVote}
+            {negativeVote}
+            {noneVote}
+            {withoutVote}
           </Gallery>
           <SubTitile>مرداد ۱۴۰۱</SubTitile>
           <Gallery>
-            <GeneralActionCard
-              act="vote"
-              content="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
-              action="مخالف"
-            />
-            <GeneralActionCard
-              act="action"
-              content="دریافت خودرو دناپلاس"
-              action="همراه"
-            />
+           
           </Gallery>
 
           <Title>سال ۱۴۰۰</Title>
           <SubTitile>مرداد ۱۴۰۰</SubTitile>
           <Gallery>
-            <GeneralActionCard
-              act="action"
-              content="دریافت خودرو دناپلاس"
-              action="ناهمراه"
-            />
+          {activity}
           </Gallery>
         </Calendar>
       )}
@@ -101,16 +240,11 @@ export default function Filtering() {
           <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
           <SubTitile>مرداد ۱۴۰۰</SubTitile>
           <Gallery>
-            <GeneralActionCard
-              act="vote"
-              content="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
-              action="موافق"
-            />
-            <GeneralActionCard
-              act="vote"
-              content="کلیات لایحۀ بودجۀ سال ۱۴۰۱"
-              action="مخالف"
-            />
+            {positiveVote}
+            {absentVote}
+            {negativeVote}
+            {noneVote}
+            {withoutVote}
           </Gallery>
         </Calendar>
       )}
@@ -119,16 +253,7 @@ export default function Filtering() {
           <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
           <SubTitile>مرداد ۱۴۰۰</SubTitile>
           <Gallery>
-            <GeneralActionCard
-              act="action"
-              content="دریافت خودرو دناپلاس"
-              action="همراه"
-            />
-            <GeneralActionCard
-              act="action"
-              content="دریافت خودرو دناپلاس"
-              action="ناهمراه"
-            />
+            {activity}
           </Gallery>
         </Calendar>
       )}
@@ -158,7 +283,7 @@ const FilteringWraper = styled.div`
       color: #d8d8d8;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     width: 74%;
     padding: 1.875vw 1.927vw 0.938vw;
     border-radius: 8px;
@@ -222,8 +347,9 @@ const Item = styled.p`
       top: 9px;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.458vw;
+    padding-top: 20px;
     &.active {
       &:after {
         height: 5px;
@@ -231,9 +357,24 @@ const Item = styled.p`
       }
     }
     &:before {
-      width: 1.875vw;
-      height: 1.875vw;
+      width: 20px;
+      height: 20px;
       right: 1.771vw;
+      top: -2px;
+    }
+    &:nth-child(2) {
+      &:before {
+        width: 17px;
+        height: 17px;
+        top: 0;
+      }
+    }
+    &:nth-child(4) {
+      &:before {
+        width: 24px;
+        height: 24px;
+        top: 0;
+      }
     }
   }
 `;
@@ -263,7 +404,7 @@ const ShowMore = styled.div`
       height: 1.163vw;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     display: none;
   }
 `;
@@ -272,13 +413,14 @@ const Calendar = styled.div`
   margin-top: 10px;
   border-right: 1px dashed #cbcbcb;
   padding-right: 2%;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-top: 1.563vw;
     background-color: #f3f3f3;
     border-radius: 0px 8px 8px 0px;
     padding: 2.083vw 2.083vw 1.042vw 0;
     position: relative;
     overflow: hidden;
+    border-right: none;
     &:before {
       content: "";
       display: block;
@@ -293,7 +435,7 @@ const Calendar = styled.div`
 
 const CalendarTitle = styled.h2`
   display: none;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     display: flex;
     align-items: center;
     color: #707070;
@@ -343,7 +485,7 @@ const SubTitile = styled.h2`
     right: -0.698vw;
     top: 2.326vw;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     width: 100%;
     font-size: 1.667vw;
     margin: 0;
@@ -395,9 +537,9 @@ const Title = styled.div`
     top: 2.558vw;
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border-radius: 8px;
-    width: 500px;
+    width: 35%;
     text-align: center;
     color: #707070;
     font-size: 1.667vw;
@@ -414,10 +556,14 @@ const Title = styled.div`
       top: 1.667vw;
     }
   }
+  @media (min-width: 769px) {
+   
+    width: 500px;
+  
 `;
 
 const Gallery = styled.div`
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     display: flex;
     flex-wrap: wrap;
     padding-right: 1.198vw;

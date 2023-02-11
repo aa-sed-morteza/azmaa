@@ -100,12 +100,21 @@ const Title = styled.h2`
   font-size: 4.651vw;
   font-weight: 400;
   margin-bottom: 10px;
+  @media (min-width: 480px) {
+    font-size: 1.458vw;
+    margin-bottom: 1.458vw;
+  }
 `;
 
 const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
+  @media(min-width:480px){
+    width:100%;
+    justify-content:center;
+    margin: 1.302vw auto;
+  }
 `;
 
 const ErrorText = styled.p`
@@ -116,12 +125,21 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
+  @media(min-width:480px){
+    margin-top:0;
+    font-size:1.042vw
+  }
 `;
 
 const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  @media(min-width:480px){
+    width:84%;
+    margin:auto;
+    gap:1.302vw;
+  }
 `;
 
 

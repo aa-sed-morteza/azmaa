@@ -18,7 +18,7 @@ export default function ContactInfo() {
       <Title> اطلاعات تماس</Title>
       <Row>
         <p className="type"> شمارۀ همراه: </p>
-        <p className="expand">{state.mobileNumber}</p>
+        <p className="expand">{state.userName}</p>
       </Row>
       <Row>
         <p className="type">ایمیل : </p>
@@ -31,7 +31,7 @@ export default function ContactInfo() {
       </Row>
       <Row>
         <p className="type">شمارۀ ثابت:: </p>
-        <p className="expand">{state.phoneNubmer}</p>
+        <p className="expand">{state.telephone}</p>
       </Row>
     </Container>
   );
@@ -109,4 +109,5 @@ const Edit = styled.div`
   background-repeat: no-repeat;
   background-image: url(${edit});
   background-size: contain;
+  cursor: pointer;
 `;

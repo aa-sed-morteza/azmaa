@@ -2,7 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import arrow from "../../assets/green-arrow.webp";
 
-export default function Select({ label, background, options ,value,onChange,id}) {
+export default function Select({
+  label,
+  background,
+  options,
+  value,
+  onChange,
+  id,
+}) {
   const option = options.map((x, i) => {
     return (
       <option value={x} key={i}>
@@ -12,7 +19,7 @@ export default function Select({ label, background, options ,value,onChange,id})
   });
 
   return (
-    <Wraper text={label} back={background} >
+    <Wraper text={label} back={background}>
       <Container value={value} onChange={onChange} id={id}>
         <option value="" disabled selected hidden>
           انتخاب کنید
@@ -49,6 +56,19 @@ const Wraper = styled.div`
     color: #6cbba9;
     background: ${(props) => (props.back ? props.back : "#F5F5F5")};
   }
+  @media (min-width: 480px) {
+    &:after {
+      width: 1.302vw;
+      height: 0.781vw;
+      top: 50%;
+      left: 1.302vw;
+      transform:translate(0,-50%);
+    }
+    &:before {
+      font-size: 1.25vw;
+      top: -1.042vw;
+    }
+  }
 `;
 
 const Container = styled.select`
@@ -62,4 +82,8 @@ const Container = styled.select`
   font-size: 3.721vw;
   font-weight: 400;
   appearance: none;
+  @media (min-width: 480px) {
+    font-size: 1.25vw;
+    padding: 0.885vw;
+  }
 `;

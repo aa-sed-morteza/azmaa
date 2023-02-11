@@ -5,7 +5,7 @@ import calendar from "../../../assets/calendar.webp";
 import CustomInput from "../../general/customInput";
 
 export default function DutieForm({ id, value, onChange,errors,touched,setDate }) {
-  console.log("form", value);
+ 
   return (
     <Form>
       <CustomInput
@@ -56,4 +56,8 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
+  @media(min-width:480px){
+    margin-top:0;
+    font-size:1.042vw;
+  }
 `;

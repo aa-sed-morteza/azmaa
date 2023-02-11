@@ -6,16 +6,69 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../../context/userContext";
 import { useFormik } from "formik";
 import { commissionSchema } from "../../../../schema";
+import axios from "axios";
+import { BaseBackURL } from "../../../../../constant/api";
+import { toast } from "react-toastify";
 
 export default function EditCommission() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
 
-  const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_COMMISSION", payload: values.commission });
-    navigate("/dashboard");
+  const refreshToken = () => {
+    const data = new FormData();
+    data.append("refresh", state.refreshToken);
 
-    actions.resetForm();
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/refresh/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const onSubmit = async (values, actions) => {
+    const data = new FormData();
+    data.append('fraction',values.commission)
+
+    let config = {
+      method: "put",
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+    .then((res) => {
+      console.log(JSON.stringify(res.data));
+      dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+      navigate("/dashboard");
+      actions.resetForm();
+      toast.success(" اصلاح با موفقیت انجام شد!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    })
+    .catch((error) => {
+      console.log("sagError", error);
+      if (error.response.status == 401) {
+        refreshToken();
+        toast.error("لطفا مجدد تلاش کنید", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+    });
   };
 
   const {
@@ -117,6 +170,9 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 14px 10px 11px;
   margin-top: 15px;
+  @media(min-width:480px){
+    padding:2.083vw 2.604vw;
+  }
 `;
 const Title = styled.h2`
   padding-right: 36px;
@@ -125,12 +181,20 @@ const Title = styled.h2`
   font-size: 4.651vw;
   font-weight: 300;
   margin-bottom: 10px;
+  @media(min-width:480px){
+    font-size:1.250vw;
+    margin-bottom:1.042vw;
+  }
 `;
 
 const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  @media(min-width:480px){
+    width:90%;
+    gap:1.302vw;
+  }
 `;
 
 const Box = styled.div`

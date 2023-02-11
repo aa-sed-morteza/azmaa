@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../../../../general/button";
 import { useNavigate } from "react-router-dom";
@@ -7,17 +7,89 @@ import { useFormik } from "formik";
 import { AreaSchema } from "../../../../schema";
 import Select from "../../../../general/select";
 import SelectNumber from "../../../../general/selectNumber";
+import axios from "axios";
+import { BaseBackURL } from "../../../../../constant/api";
+import { toast } from "react-toastify";
 
 export default function EditEnvoyState() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
-  const areaName = ["تهران", "پردیس", "دماوند", "شهر ری"];
+  const [areaName,setAreaName]=useState([]);
+  // const areaName = ["تهران", "پردیس", "دماوند", "شهر ری"];
+
+  const getElectoralDistrict = ()=>{
+    let config = {
+      method: 'get',
+      url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
+    
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      response.data.map(x=>{setAreaName([...areaName,x.name])})
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  const refreshToken = () => {
+    const data = new FormData();
+    data.append("refresh", state.refreshToken);
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/refresh/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_AREA_NAME", payload: values.areaName });
-    dispatch({ type: "SET_VOTE_NUMBER", payload: values.voteNumber });
-    navigate('/dashboard')
-    actions.resetForm();
+    const data = new FormData();
+    data.append('electoral_district.name',values.areaName);
+    data.append('vote_number',values.voteNumber)
+
+    let config = {
+      method: "put",
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+    .then((res) => {
+      console.log(JSON.stringify(res.data));
+      dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+      navigate("/dashboard");
+      actions.resetForm();
+      toast.success(" اصلاحات با موفقیت انجام شد!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    })
+    .catch((error) => {
+      console.log("sagError", error);
+      if (error.response.status == 401) {
+        refreshToken();
+        toast.error("لطفا مجدد تلاش کنید", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+    });
   };
 
   const {
@@ -30,14 +102,18 @@ export default function EditEnvoyState() {
     handleSubmit,
   } = useFormik({
     initialValues: {
-      areaName: state.areaName,
-      voteNumber: state.voteNumber,
+      areaName: state.electoral_district_name,
+      voteNumber: state.vote_number,
     },
     validationSchema: AreaSchema,
     onSubmit,
   });
 
-  console.log("cal", values);
+  useEffect(()=>{
+    getElectoralDistrict();
+  },[])
+
+ 
   return (
     <Wraper>
     <FirstTitle>
@@ -134,6 +210,9 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 14px 10px 11px;
   margin-top: 15px;
+  @media(min-width:480px){
+    padding:2.083vw 2.604vw;
+  }
 `;
 const Title = styled.h2`
   padding-right: 36px;
@@ -142,12 +221,20 @@ const Title = styled.h2`
   font-size: 4.651vw;
   font-weight: 300;
   margin-bottom: 10px;
+  @media(min-width:480px){
+    font-size:1.250vw;
+    margin-bottom:1.042vw;
+  }
 `;
 
 const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  @media(min-width:480px){
+    width:90%;
+    gap:1.302vw;
+  }
 `;
 
 const Box = styled.div`

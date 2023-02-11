@@ -6,6 +6,9 @@ import styled from "styled-components";
 import arrow from "../../assets/ggArrow.svg";
 import { useFormik } from "formik";
 import { provinceSchema } from "../schema/index";
+import axios from "axios";
+import { BaseBackURL } from "../../constant/api";
+import { useUser } from "../context/userContext";
 
 const useMouse = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -25,9 +28,12 @@ const useMouse = () => {
   return mousePosition;
 };
 
-const IranMap = () => {
+const IranMap = ({ position }) => {
+  const {state,dispatch}=useUser();
   const { x, y } = useMouse();
-  const [provinces] = useState(() => iranProvinces);
+  const [provinces, setProvinces] = useState(iranProvinces);
+  const [data, setData] = useState([]);
+  const [change, setChange] = useState(false);
   const [provinceName, setProvinceName] = useState("");
   const [provinceNameOnClick, setProvinceNameOnClick] = useState("");
   const [mapZoom, setMapZoom] = useState(false);
@@ -35,11 +41,70 @@ const IranMap = () => {
   const [cities, setCities] = useState(["تمام ایران"]);
   const [input, setInput] = useState("استان خود را انتخاب کنید");
 
+  //get provinces of iran
+  const getProvince = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/city/`,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        setData(response.data);
+        selectProvinces();
+        setChange(!change);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const selectProvinces = () => {
+    let box = [];
+    data.map((item) => {
+      iranProvinces.map((x) => {
+        if (x.name === item.province_name) {
+          box.push(x);
+        }
+      });
+    });
+
+    setProvinces([...new Set(box)]);
+  };
+
+  const addCities = () => {
+    provinces.map((item) => {
+      for (let i = 0; i < data.length; i++) {
+        if (item.name === data[i].province_name) {
+          item.cities.push(data[i].name);
+        }
+      }
+    });
+  };
+
+
+  useEffect(() => {
+    getProvince();
+  }, []);
+
+  useEffect(() => {
+    if (provinces.length == 0) {
+      selectProvinces();
+      setChange(!change);
+    } else {
+      if (provinces.map((item) => item.cities.length == 0)) {
+        addCities();
+      }
+    }
+  }, [change]);
+
   const onSubmit = async (values, actions) => {
-    // dispatch({ type: "SET_PASSWORD", payload: values.password });
-    // dispatch({ type: "SET_SIGN_LEVEL", payload: 3 });
     setProvinceSelected(false);
     setCities(values.city);
+    dispatch({ type: "SET_PROVICE", payload: values.province });
+    dispatch({ type: "SET_CITY", payload: values.city });
+    // dispatch({ type: "SET_ELECTORAL_DISTRICT", payload: values.password });
     // setProvinceName(values.province);
     // setProvinceNameOnClick(values.province);
   };
@@ -62,10 +127,8 @@ const IranMap = () => {
     onSubmit,
   });
 
-  console.log("city", values);
-
   return (
-    <Container>
+    <Container position={position}>
       {values.province == "" && <p className="input">{input}</p>}
       {values.province !== "" && (
         <p className="select">
@@ -206,7 +269,7 @@ const IranMap = () => {
 export default IranMap;
 
 const Container = styled.div`
-  border: 1px solid #CBCBCB;
+  border: 1px solid #cbcbcb;
   border-radius: 4px;
   .input {
     display: flex;
@@ -253,28 +316,28 @@ const Container = styled.div`
       }
     }
   }
-  @media(min-width:480px){
-    position: absolute;
+  @media (min-width: 481px) {
+    position: ${(props) => props.position};
     top: 14%;
     left: 8%;
     width: 46%;
     background-color: rgba(255, 255, 255, 0.5);
-    .input{
-      font-size:1.458vw;
-      padding-right:6.563vw;
-      padding-top:2.240vw;
-      &:after{
-        width:0.938vw;
-        height:0.521vw;
+    .input {
+      font-size: 1.458vw;
+      padding-right: 6.563vw;
+      padding-top: 2.24vw;
+      &:after {
+        width: 0.938vw;
+        height: 0.521vw;
       }
     }
-    .select{
-      padding-top:2.240vw;
-      padding-right:6.563vw;
-      font-size:1.458vw;
-      span{
-        &:before{
-          font-size:1.563vw;
+    .select {
+      padding-top: 2.24vw;
+      padding-right: 6.563vw;
+      font-size: 1.458vw;
+      span {
+        &:before {
+          font-size: 1.563vw;
         }
       }
     }

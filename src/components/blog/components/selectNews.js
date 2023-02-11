@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Control from "../../vote/components/controler";
 import data from "../../../data.json";
@@ -9,7 +9,7 @@ const Container = styled.section`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 10px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-top: 25%;
   }
 `;
@@ -30,7 +30,7 @@ const Title = styled.h1`
     vertical-align: middle;
     width: 59%;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-top: 75px;
     font-size: 1.87vw;
     margin-bottom: 45px;
@@ -46,8 +46,9 @@ const NewsWraper = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 10px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-bottom: 45px;
+    justify-content: flex-start;
   }
 `;
 
@@ -111,13 +112,13 @@ const Paper = styled.div`
     display: none;
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 20px 19px 25px 19px;
     box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     .cover {
-      width: 330px;
-      height: 253px;
+      width: 17.188vw;
+      height: 13.177vw;
       border-radius: 4px;
       margin-bottom: 18px;
     }
@@ -133,11 +134,24 @@ const Paper = styled.div`
     .content {
       font-size: 1.25vw;
       margin-bottom: 36px;
-      max-width: 306px;
+      max-width: 15.938vw;
     }
     .date {
       font-size: 1.042vw;
       font-weight: 500;
+    }
+  }
+  @media (max-width: 1600px) {
+    .cover {
+      width: 16vw;
+    }
+  }
+  @media (max-width: 1200px) {
+    .cover {
+      width: 15vw;
+    }
+    .content {
+      max-width: 14vw;
     }
   }
 `;
@@ -169,7 +183,7 @@ const ShowMore = styled.div`
     }
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
     max-width: 500px;
@@ -190,7 +204,7 @@ const ShowMore = styled.div`
 `;
 
 const ChangeBack = styled.div`
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     background-color: #f3f3f3;
     margin-inline: -13%;
     padding-inline: 13%;
@@ -200,25 +214,32 @@ const ChangeBack = styled.div`
   }
 `;
 
-export default function SelectNews() {
-  const magPaper = data.magazine.map((x, i) => {
+export default function SelectNews({ posts }) {
+  const [selectedTag, setSelectedTag] = useState("همه");
+  const [filteredPosts, setFilteredPosts] = useState(posts);
+  const magPaper = filteredPosts.map((x, i) => {
     return (
       <Paper key={i}>
         <div className="cover">
           <img src={x.img} alt={x.date} />
         </div>
 
-        <p className="user">{x.name}</p>
+        <p className="user">{x.writer}</p>
 
-        <p className="content">{x.content}</p>
+        <p className="content">{x.description.slice(0, 180) + " ..."}</p>
 
         <p className="date">{x.date}</p>
       </Paper>
     );
   });
+
+  useEffect(() => {
+    let newPosts = posts.filter((post) => post.tag[0].name === selectedTag);
+    setFilteredPosts([...newPosts]);
+  }, [selectedTag]);
   return (
     <Container>
-      <Control />
+      <Control selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
       <Title> پربازدیدترین مطالب</Title>
       <NewsWraper>{magPaper}</NewsWraper>
       <ShowMore>

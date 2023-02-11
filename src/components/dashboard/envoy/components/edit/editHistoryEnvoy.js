@@ -6,6 +6,9 @@ import { useUser } from "../../../../context/userContext";
 import { useFormik } from "formik";
 import { dutieHistoryAreaSchema } from "../../../../schema";
 import DutieForm from "../../../../envoy-sign-in/components/dutieForm";
+import axios from "axios";
+import { BaseBackURL } from "../../../../../constant/api";
+import { toast } from "react-toastify";
 
 export default function EditHistoryEnvoy() {
   const navigate = useNavigate();
@@ -22,18 +25,72 @@ export default function EditHistoryEnvoy() {
     setCkeck(false);
   };
 
-  const ddd = ()=>{
-    return <DutieForm id={count} key={count}/>;
-  }
+  const ddd = () => {
+    return <DutieForm id={count} key={count} />;
+  };
 
   useEffect(() => {
     abs();
   }, [count]);
 
+  const refreshToken = () => {
+    const data = new FormData();
+    data.append("refresh", state.refreshToken);
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/refresh/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_DUTIE_HISTORY", payload: values });
-    actions.resetForm();
-    navigate("/dashboard");
+    console.log('date',values.dateFrom)
+    const data = new FormData();
+    data.append("title", values.dutie);
+    data.append("from_date", values.dateFrom);
+    data.append("to_date", values.dateTo);
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/v1/accounts/experiences/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((res) => {
+        console.log(JSON.stringify(res.data));
+        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        navigate("/dashboard");
+        actions.resetForm();
+        toast.success(" ایجاد سابقه با موفقیت انجام شد!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      })
+      .catch((error) => {
+        console.log("sagError", error);
+        if (error.response.status == 401) {
+          refreshToken();
+          toast.error("لطفا مجدد تلاش کنید", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+      });
   };
 
   const {
@@ -57,42 +114,46 @@ export default function EditHistoryEnvoy() {
 
   return (
     <Wraper>
-    <FirstTitle>
-      <p className="home">پنل / </p>
-      <p className="component"> ویرایش سابقه </p>
-    </FirstTitle>
+      <FirstTitle>
+        <p className="home">پنل / </p>
+        <p className="component"> ویرایش سابقه </p>
+      </FirstTitle>
 
-  
-        <form onSubmit={handleSubmit} autoComplete="off">
-          <Container>
-            <Title>۵. سوابق و مسئولیت‌های پیشین خود را بنویسید:</Title>
-            <Form>
-              <DutieForm id={1} value={values} onChange={handleChange} errors={errors} touched={touched} setDate={setFieldValue} />
-              {/* {ddd()} */}
-            
-             
-            </Form>
-          </Container>
-          <Box>
-            <Button
-              text="لغو"
-              textColor="#095644"
-              borderColor="#095644"
-              width="35%"
-              click={() => {
-                navigate(-1);
-              }}
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <Container>
+          <Title>۵. سوابق و مسئولیت‌های پیشین خود را بنویسید:</Title>
+          <Form>
+            <DutieForm
+              id={1}
+              value={values}
+              onChange={handleChange}
+              errors={errors}
+              touched={touched}
+              setDate={setFieldValue}
             />
-            <Button
-              text="ثبت"
-              textColor="#FFFFFF"
-              background="#095644"
-              width="62%"
-              type="submit"
-            />
-          </Box>
-        </form>
- </Wraper>
+            {/* {ddd()} */}
+          </Form>
+        </Container>
+        <Box>
+          <Button
+            text="لغو"
+            textColor="#095644"
+            borderColor="#095644"
+            width="35%"
+            click={() => {
+              navigate(-1);
+            }}
+          />
+          <Button
+            text="ثبت"
+            textColor="#FFFFFF"
+            background="#095644"
+            width="62%"
+            type="submit"
+          />
+        </Box>
+      </form>
+    </Wraper>
   );
 }
 
@@ -133,6 +194,9 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 14px 10px 11px;
   margin-top: 15px;
+  @media (min-width: 480px) {
+    padding: 2.083vw 2.604vw;
+  }
 `;
 const Title = styled.h2`
   padding-right: 36px;
@@ -141,12 +205,20 @@ const Title = styled.h2`
   font-size: 4.651vw;
   font-weight: 300;
   margin-bottom: 10px;
+  @media (min-width: 480px) {
+    font-size: 1.25vw;
+    margin-bottom: 1.042vw;
+  }
 `;
 
 const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  @media (min-width: 480px) {
+    width: 90%;
+    gap: 1.302vw;
+  }
 `;
 
 const Box = styled.div`
@@ -154,8 +226,6 @@ const Box = styled.div`
   gap: 10px;
   margin-top: 15px;
 `;
-
-
 
 const AddHistory = styled.div`
   border: 1px solid #9f9f9f;

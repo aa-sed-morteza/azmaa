@@ -5,17 +5,18 @@ import line from "../../../assets/Line.webp";
 import VoteCard from "../../home/components/voteCard";
 import upArrow from "../../../assets/arrow.webp";
 import useWidth from "../../../hook/useWidth";
+import { ChangeToPersianDate, fixNumbers } from "../../../utils";
 
 const Container = styled.section`
   margin-top: 10px;
   border-right: 1px dashed #cbcbcb;
   margin-right: -5px;
   padding-right: 5px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     background-color: #f3f3f3;
     margin-inline: -2.5vw;
     padding-inline: 10%;
-    padding-bottom:130px;
+    padding-bottom: 130px;
     position: relative;
     border-right: none;
     &:before {
@@ -62,7 +63,7 @@ const SubTitile = styled.h2`
     right: -0.698vw;
     top: 2.326vw;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.667vw;
     margin-bottom: 20px;
     padding-top: 45px;
@@ -70,7 +71,7 @@ const SubTitile = styled.h2`
       width: 1.563vw;
       height: 1.563vw;
       right: -0.156vw;
-      top: 2.760vw;
+      top: 2.76vw;
     }
     &:after {
       width: 1.979vw;
@@ -112,7 +113,7 @@ const Title = styled.div`
     top: 2.558vw;
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border-radius: 8px;
     width: 26.042vw;
     text-align: center;
@@ -159,7 +160,7 @@ const ShowMore = styled.div`
     }
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
     max-width: 500px;
@@ -167,7 +168,7 @@ const ShowMore = styled.div`
     align-items: center;
     margin: auto;
     padding: 13px;
-    margin-top:78px;
+    margin-top: 78px;
     p {
       font-size: 1.25vw;
       font-weight: 400;
@@ -181,51 +182,73 @@ const ShowMore = styled.div`
 `;
 
 const List = styled.div`
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     display: flex;
     justify-content: flex-start;
     gap: 20px;
   }
 `;
-export default function Calendar() {
+export default function Calendar({ bills }) {
   const width = useWidth();
+  let today = new Date().toLocaleDateString("fa-IR", {
+    year: "numeric",
+    month: "numeric",
+  });
+  const year = today.slice(0, 4);
+  const month = fixNumbers(today.slice(5));
+
+  const monthArray = [
+    "فروردین",
+    "اردیبهشت",
+    "خرداد",
+    "تیر",
+    "مرداد",
+    "شهریور",
+    "مهر",
+    "آبان",
+    "آذر",
+    "دی",
+    "بهمن",
+    "اسفند",
+  ];
+
+  const elements = [];
+  
+
+  for (let i = parseInt(month) - 1; i > 0; i--) {
+    const newList = [];
+    for (const item of bills) {
+      const itemDate = ChangeToPersianDate(item.date);
+      const itemYear = itemDate.slice(0, 4);
+      const itmeMonth = fixNumbers(itemDate.slice(5));
+
+      if (itemYear === year && parseInt(itmeMonth) === i + 1) {
+        newList.push(item);
+      }
+    }
+
+    elements.push(
+      <>
+        <SubTitile>
+          {monthArray[i]} {year}
+        </SubTitile>
+        <List>
+          {width < 480 ? (
+            <VoteCard />
+          ) : (
+            <>
+              {newList.map((item) => (
+                <VoteCard bill={item} />
+              ))}
+            </>
+          )}
+        </List>
+      </>
+    );
+  }
   return (
     <Container>
-      <SubTitile>مرداد ۱۴۰۱</SubTitile>
-      <List>
-        {width < 480 ? (
-          <VoteCard />
-        ) : (
-          <>
-            <VoteCard />
-            <VoteCard />
-            <VoteCard />
-          </>
-        )}
-      </List>
-
-      <SubTitile style={{ marginTop: "20px" }}> تیر ۱۴۰۱</SubTitile>
-      <List>
-        {width < 480 ? (
-          <VoteCard />
-        ) : (
-          <>
-            <VoteCard />
-            <VoteCard />
-          </>
-        )}
-      </List>
-      <Title>سال ۱۴۰۰</Title>
-      <SubTitile style={{ marginTop: "0px" }}>مرداد ۱۴۰۰</SubTitile>
-      <List>
-        {width < 480 ? (
-          <VoteCard />
-        ) : (
-          <>
-            <VoteCard />
-          </>
-        )}
-      </List>
+      {elements}
 
       <ShowMore>
         <p> نمایش بیشتر</p>

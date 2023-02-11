@@ -2,15 +2,25 @@ import React from "react";
 import styled from "styled-components";
 import BestEnvoy from "../../home/components/bestEnvoy";
 import upArrow from "../../../assets/arrow.webp";
+import { useNavigate } from "react-router-dom";
 
-export default function Absent() {
+export default function Absent({envoys}) {
+  const navigate = useNavigate();
+
+  const envoysList = envoys.map((item, i) => {
+    return (
+      <BestEnvoy
+        key={i}
+        envoy={item}
+        click={() => {
+          navigate(`/envoy/${item.id}`);
+        }}
+      />
+    );
+  });
   return (
     <Container>
-      <BestEnvoy />
-      <BestEnvoy />
-      <BestEnvoy />
-      <BestEnvoy />
-      <BestEnvoy />
+     
 
       <ShowMore>
         <p>نمایش بیشتر </p>
@@ -20,7 +30,7 @@ export default function Absent() {
 }
 
 const Container = styled.div`
-  background-color: #9F9F9F;
+  background-color: #f3f3f3;
   padding: 18px 12px 9px 8px;
   border-radius: 0 0 4px 4px;
 `;
@@ -51,7 +61,7 @@ const ShowMore = styled.div`
     }
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
     max-width: 500px;

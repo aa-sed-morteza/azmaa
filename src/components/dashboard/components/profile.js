@@ -1,16 +1,102 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import pic from "../../../assets/yazdan.webp";
 import { useUser } from "../../context/userContext";
+import remove from "../../../assets/remove.svg";
+import camera from "../../../assets/camera.svg";
+import gallery from "../../../assets/gallery.svg";
+import Button from "../../general/button";
+import Modal from "../../general/modal";
+import useModal from "../../../hook/useModal";
+import axios from "axios";
+import { BaseBackURL } from "../../../constant/api";
 
 export default function Profile() {
   const { state, dispatch } = useUser();
+  const { isShowing, toggle } = useModal();
+  const [selectedFile, setSelectedFile] = useState();
+  const [preview, setPreview] = useState();
+
+  useEffect(() => {
+    if (!selectedFile) {
+      setPreview(undefined);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setPreview(objectUrl);
+    // dispatch({ type: "SET_IMAGE", payload: preview });
+
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedFile]);
+
+  const onSelectFile = (e) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
+    }
+
+    // I've kept this example simple by using the first image instead of multiple
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const refreshToken = () => {
+    const data = new FormData();
+    data.append("refresh", state.refreshToken);
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/refresh/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const changePicture = () => {
+    const data = new FormData();
+    data.append("image", selectedFile);
+
+    let config = {
+      method: "put",
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+        if (error.response.status == 401) {
+          refreshToken();
+        }
+      });
+  };
 
   return (
     <Container>
       <Content>
-        <Image show={state.userType}>
-          <img src={pic} alt="profile-picture" />
+        <Image show={state.userType} onClick={toggle}>
+          {selectedFile ? (
+            <img src={preview} alt="profile-picture" />
+          ) : (
+            <img src={state.image} alt="profile-picture" />
+          )}
         </Image>
         <Label color={state.userType}>
           <p className="title">
@@ -18,10 +104,46 @@ export default function Profile() {
               ? "نمایندۀ مجلس شورای اسلامی"
               : " ناظر نمایندگان"}{" "}
           </p>
-          <p className="name">{`${state.firstName}   ${state.lastName}`}</p>
-          <p className="edit">ویرایش تصویر</p>
+          <p className="name">{`${state.first_name}   ${state.last_name}`}</p>
+          <p className="edit" onClick={toggle}>
+            ویرایش تصویر
+          </p>
         </Label>
       </Content>
+      <Modal isShowing={isShowing} hide={toggle} title="انتخاب عکس پروفایل ">
+        <Input icon={gallery} text="انتخاب از گالری">
+          <input type="file" onChange={onSelectFile} />
+          <span></span>
+        </Input>
+        <Input icon={camera} text="عکاسی با دوربین">
+          <input type="file" onChange={onSelectFile} />
+          <span></span>
+        </Input>
+        <Input icon={remove}>
+          <p className="text">حذف عکس</p>
+          <span></span>
+        </Input>
+
+        <Box>
+          <Button
+            text="لغو"
+            textColor="#095644"
+            borderColor="#095644"
+            width="35%"
+            click={toggle}
+          />
+          <Button
+            text="ثبت"
+            textColor="#FFFFFF"
+            background="#095644"
+            width="62%"
+            click={() => {
+              toggle();
+              changePicture();
+            }}
+          />
+        </Box>
+      </Modal>
     </Container>
   );
 }
@@ -78,6 +200,11 @@ const Image = styled.div`
     width: 7.292vw;
     height: 7.552vw;
     padding: 4px;
+    &:after {
+      width: 1.042vw;
+      height: 1.042vw;
+      left: -0.837vw;
+    }
     img {
       object-fit: cover;
     }
@@ -120,5 +247,77 @@ const Label = styled.div`
       font-size: 1.25vw;
       margin: 0;
     }
+  }
+`;
+
+const Input = styled.div`
+  background: #eaeaea;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4.651vw;
+  margin-bottom: 2.326vw;
+  input {
+    &::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+    &:before {
+      content: "${(props) => props.text}";
+      display: inline-block;
+      color: #9f9f9f;
+      text-align: center;
+      outline: none;
+      white-space: nowrap;
+      -webkit-user-select: none;
+      cursor: pointer;
+      font-weight: 300;
+      font-size: 4.651vw;
+    }
+  }
+  input[type="file"] {
+    color: rgba(0, 0, 0, 0);
+    width: 100%;
+  }
+
+  .text {
+    margin: 0;
+    color: #9f9f9f;
+    font-weight: 300;
+    font-size: 4.651vw;
+  }
+  span {
+    width: 6.977vw;
+    height: 6.977vw;
+    background-image: url(${(props) => props.icon});
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  @media (min-width: 480px) {
+    padding: 1.302vw;
+    margin-bottom: 1.302vw;
+    input {
+      &:before {
+        font-size: 1.458vw;
+      }
+    }
+    .text {
+      font-size: 1.458vw;
+    }
+    span {
+      width: 1.823vw;
+      height: 1.823vw;
+    }
+  }
+`;
+
+const Box = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  @media (min-width: 480px) {
+    justify-content: center;
+    gap: 1.563vw;
   }
 `;

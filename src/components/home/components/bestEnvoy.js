@@ -11,30 +11,50 @@ const EnvoyCard = styled.div`
   box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   margin-bottom: 10px;
-  direction:rtl;
-  @media (min-width: 480px) {
+  direction: rtl;
+  @media (min-width: 481px) {
     margin: 0;
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
-    padding: 31px 27px;
-    min-width: 23.958vw;
+    padding: 10px 5px;
+    width: 25%;
     align-items: center;
+    justify-content: space-between;
+  }
+  @media (min-width: 769px) {
+    width: 30%;
+  }
+  @media (min-width: 1200px) {
+    width: 28%;
+    padding: 15px;
+  }
+  @media (min-width: 1400px) {
+    width: 29%;
+    padding: 31px 15px;
+  }
+  @media (min-width: 1600px) {
+    width: 30%;
   }
 `;
 
 const EnvoyImage = styled.div`
   width: 20.233vw;
-  height: 20.930vw;
+  height: 20.93vw;
   border-radius: 50%;
   border: 3px solid #9f9f9f;
   img {
     width: 100%;
     height: 100%;
+    border-radius:50%;
     object-fit: contain;
   }
-  @media(min-width:480px){
-    width:7.292vw;
-    height:7.552vw;
+  @media (min-width: 481px) {
+    width: 6vw;
+    height: 6vw;
+  }
+  @media (min-width: 769px) {
+    width: 7.292vw;
+    height: 7.552vw;
   }
 `;
 
@@ -42,8 +62,8 @@ const Content = styled.div`
   width: 65%;
   display: flex;
   flex-direction: column;
-  @media(min-width:480px){
-    width:62%;
+  @media (min-width: 481px) {
+    width: 62%;
   }
 
   h3 {
@@ -52,27 +72,28 @@ const Content = styled.div`
     font-weight: bold;
     margin: 0;
     margin-bottom: 10px;
-    @media(min-width:480px){
-      font-size:1.667vw;
-
+    @media (min-width: 481px) {
+      font-size: 1.667vw;
     }
   }
   .status {
     display: flex;
-    position: relative;
-    padding-right: 20px;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
     &:before {
       content: "";
-      display: block;
-      position: absolute;
-      width: 28px;
-      height: 28px;
+      display: inline-flex;
+      width: 20px;
+      height: 20px;
       background-image: url(${profile});
       background-size: contain;
       background-repeat: no-repeat;
-      right: -8px;
-      top: -2px;
+      @media (min-width: 1200px) {
+        width: 28px;
+        height: 28px;
+      }
     }
     .state {
       color: #707070;
@@ -87,14 +108,15 @@ const Content = styled.div`
       padding-right: 7px;
       margin: 0;
     }
-    @media(min-width:480px){
-      align-items:center;
-      &:before{
-        right: -11px;
+    @media (min-width: 481px) {
+      align-items: center;
+      &:before {
+        // right: -11px;
         top: 0px;
       }
-      .state,.position{
-        font-size:1.042vw;
+      .state,
+      .position {
+        font-size: 1.042vw;
       }
     }
   }
@@ -106,28 +128,30 @@ const Content = styled.div`
       font-size: 3.25vw;
       font-weight: 400;
       margin: 0;
-      @media(min-width:480px){
-        font-size:1.042vw
+      @media (min-width: 481px) {
+        font-size: 1.042vw;
       }
     }
   }
 `;
 
-export default function BestEnvoy({onClick}) {
+export default function BestEnvoy({ envoy ,click}) {
+
+  
   return (
-    <EnvoyCard onClick={onClick}>
-      <EnvoyImage>
-        <img src={pic} />
-      </EnvoyImage>
+    <EnvoyCard onClick={click}>
+      <EnvoyImage><img src={envoy.image} /></EnvoyImage>
       <Content>
-        <h3>علیرضا پاکفطرت</h3>
+        <h3>
+          {envoy.first_name} {envoy.last_name}
+        </h3>
         <div className="status">
-          <p className="state">دماوند و فیروزکوه</p>
-          <p className="position"> امنیت ملی</p>
+          <p className="state">{envoy.electoral_district_name}</p>
+          <p className="position">{envoy.fraction_name}</p>
         </div>
         <div className="persantage">
           <p className="text">شفافیت: ٪</p>
-          <p className="content">۷۵</p>
+          <p className="content">{envoy.transparency}</p>
         </div>
       </Content>
     </EnvoyCard>

@@ -1,8 +1,59 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Controler from "../vote/components/controler";
 import Filtering from "../vote/components/filtering";
 import Calendar from "./components/calendar";
+import { BaseBackURL } from "../../constant/api";
+
+export default function Actions() {
+  const [selectedTag, setSelectedTag] = useState("همه");
+  const [activities, setActivities] = useState([]);
+  const [filteredActivities, setFilteredActivities] = useState([]);
+
+  const getActivities = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter`,
+    };
+
+    axios(config).then((res) => {
+      console.log(res.data);
+      if (res.data.length > 0) {
+        setActivities([...res.data]);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getActivities();
+  }, []);
+
+  useEffect(() => {
+    let newData = activities.filter((item) => item.tag[0].name === selectedTag);
+    if (selectedTag === "همه") {
+      setFilteredActivities([...activities]);
+    } else {
+      setFilteredActivities([...newData]);
+    }
+  }, [selectedTag]);
+
+
+  return (
+    <Container>
+      <Title>
+        <p className="home">خانه / </p>
+        <p className="component"> عملکردها </p>
+      </Title>
+
+      <Content>
+        <Controler selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
+        <Filtering />
+        <Calendar activities={filteredActivities} />
+      </Content>
+    </Container>
+  );
+}
 
 const Container = styled.section`
   background-color: #f5f5f5;
@@ -10,9 +61,9 @@ const Container = styled.section`
   flex-direction: column;
   padding: 10px 20px;
   overflow: hidden;
-  @media(min-width:480px){
-    background-color:#ffffff;
-    padding-bottom:0;
+  @media (min-width: 480px) {
+    background-color: #ffffff;
+    padding-bottom: 0;
   }
 `;
 
@@ -46,25 +97,7 @@ const Content = styled.div`
   border-radius: 4px;
   padding: 10px;
   @media (min-width: 480px) {
-    margin-top:25vh;
-    padding-bottom:0;
+    margin-top: 25vh;
+    padding-bottom: 0;
   }
 `;
-
-
-export default function Actions(){
-    return (
-        <Container>
-        <Title>
-          <p className="home">خانه / </p>
-          <p className="component">  عملکردها </p>
-        </Title>
-  
-        <Content>
-          <Controler/>
-          <Filtering/>
-          <Calendar/>
-        </Content>
-      </Container>
-    )
-}

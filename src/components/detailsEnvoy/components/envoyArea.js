@@ -5,7 +5,7 @@ import arrow from "../../../assets/arrow.webp";
 import { useNavigate } from "react-router-dom";
 import box from "../../../assets/state.svg";
 
-export default function EnvoyArea() {
+export default function EnvoyArea({votes}) {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const [open, setOpen] = useState(false);
@@ -28,11 +28,11 @@ export default function EnvoyArea() {
       <Content className={open ? "open" : ""}>
         <Row>
           <p className="type"> تعداد آراء: </p>
-          <p className="expand">{state.voteNumber}</p>
+          <p className="expand">{votes}</p>
         </Row>
         <Row>
           <p className="type"> تعداد کل آراء صندوق : </p>
-          <p className="expand">۸۰۶۹۸</p>
+          <p className="expand">?</p>
         </Row>
       </Content>
     </Container>
@@ -75,7 +75,7 @@ const Container = styled.div`
   }
  
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 0 2.292vw 1.875vw !important;
     margin-top: 2.083vw;
     &:after{
@@ -96,7 +96,7 @@ const Title = styled.h4`
   margin: 0;
   text-align: center;
   margin-right: -5%;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.875vw;
     transform: translateY(-1.615vw);
     width: 51%;
@@ -123,7 +123,7 @@ const Row = styled.div`
     margin: 0;
     padding-right: 10px;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     margin-bottom: 10px;
     align-items: center;
     gap: 10px;
@@ -165,7 +165,7 @@ const State = styled.div`
       font-size: 3.256vw;
     }
   }
-  @media(min-width:480px){
+  @media(min-width:481px){
     gap:1.094vw;
     margin-bottom:0.781vw;
     span{

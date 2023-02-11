@@ -69,7 +69,7 @@ export default function GeneralActionCard(props) {
         <div className="content">
           <p className="act">{act}</p>
           <p className="title">{props.content}</p>
-          <p className="date">۲۹ اسفند ۱۴۰۰</p>
+          <p className="date">{props.date}</p>
         </div>
       </Header>
       <Action background={background} operation={operation} color={color}>
@@ -80,7 +80,11 @@ export default function GeneralActionCard(props) {
           <p
             className="content"
             onClick={() => {
-              navigate(`/presentation/${props.content}`);
+              if(props.act == "vote"){
+                navigate(`/presentation/${props.item.id}`);
+              }else if(props.act == "action"){
+                navigate(`/actions/presentation/${props.item.id}`);
+              }
             }}
           >
             جزئیات
@@ -101,7 +105,7 @@ const Container = styled.div`
   flex-direction: column;
   gap: 2.558vw;
   margin-top: 1.628vw;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     width: 38%;
     padding: 0.99vw 1.198vw;
     gap: 1.302vw;
@@ -115,7 +119,7 @@ const ButtonWraper = styled.div`
   display: flex;
   margin-top: 10px;
   justify-content: space-between;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding-top: 14px;
     flex-direction: row-reverse;
   }
@@ -135,7 +139,7 @@ const LargButton = styled.div`
     font-weight: bold;
     color: #ffffff;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     width: 67%;
     border-radius: 8px;
     padding: 10px;
@@ -202,7 +206,7 @@ const Header = styled.div`
       display: none;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     gap: 1.458vw;
     padding: 0;
     span {
@@ -255,7 +259,7 @@ const Action = styled.div`
       background-repeat: no-repeat;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 1.823vw;
     .text {
       font-size: 1.875vw;

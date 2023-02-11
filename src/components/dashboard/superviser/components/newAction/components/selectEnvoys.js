@@ -13,55 +13,37 @@ import locationActive from "../../../../../../assets/location-active.svg";
 import background from "../../../../../../assets/back-controll.webp";
 import symbol from "../../../../../../assets/state.svg";
 import EnvoyCard from "../../../../../general/envoyCard";
+import SelectArea from "../../../../../home/components/selectArea"
+import axios from "axios";
+import { BaseBackURL } from "../../../../../../constant/api";
 
 export default function SelectEnvoys() {
   const navigate = useNavigate();
-  const [select, setSelect] = useState(0);
+  const [select, setSelect] = useState(1);
   const [check, setCheck] = useState(-1);
   const { state, dispatch } = useUser();
+  const [envoys,setEnvoys]=useState([]);
+  const [states,setStates]=useState([]);
 
-  const envoys = [
-    {
-      name: "علیرضا پاکفطرت",
-      state: "دماوند و فیروزکوه",
-      commission: "امنیت ملی",
-      img: "../../assets/ali.webp",
-      persantage: "75",
-      id: "1",
-    },
-    {
-      name: "یوسف داوودی سراب",
-      state: "دماوند و فیروزکوه",
-      commission: "امنیت ملی",
-      img: "../../assets/jafi.webp",
-      persantage: "25",
-      id: "2",
-    },
-    {
-      name: "مهدی اسماعیلی",
-      state: "دماوند و فیروزکوه",
-      commission: "امنیت ملی",
-      img: "../../assets/abol.webp",
-      persantage: "95",
-      id: "3",
-    },
-    {
-      name: "جعفر قادری",
-      state: "دماوند و فیروزکوه",
-      commission: "امنیت ملی",
-      img: "../../assets/jafi.webp",
-      persantage: "15",
-      id: "4",
-    },
-    {
-      name: "احمد محرم‌زاده یخ‌فروزان ",
-      state: "دماوند و فیروزکوه",
-      commission: "امنیت ملی",
-      img: "../../assets/abol.webp",
-      persantage: "85",
-      id: "5",
-    },
-  ];
+  const getEnvoys = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
+    };
+
+    axios(config).then((res) => {
+      console.log(res.data);
+      if (res.data.length > 0) {
+        setEnvoys([...res.data]);
+      }
+    });
+  };
+
+  useEffect(()=>{
+    getEnvoys();
+  },[])
+
+
 
   const envoyList = envoys.map((x, i) => {
     return (
@@ -70,16 +52,16 @@ export default function SelectEnvoys() {
         className={check === i ? "active" : ""}
         onClick={() => {
           setCheck(i);
-          setFieldValue("envoy", x.name);
+          setFieldValue("envoy", x.id);
         }}
       >
         <EnvoyCard
           key={i}
-          name={x.name}
-          state={x.state}
-          commission={x.commission}
-          img={x.img}
-          persantage={x.persantage}
+          name={x.first_name+""+x.last_name}
+          state={x.electoral_district_name}
+          commission={x.fraction_name}
+          img={x.image}
+          persantage={x.transparency}
           id={x.id}
         />
       </SelectItem>
@@ -89,41 +71,58 @@ export default function SelectEnvoys() {
     return (
       <SelectItem
         key={i}
-        className={x.name === state.selectEnvoy.envoy ? "active" : ""}
+        className={x.id === state.selectEnvoy.envoy ? "active" : ""}
       >
-        <EnvoyCard
+       <EnvoyCard
           key={i}
-          name={x.name}
-          state={x.state}
-          commission={x.commission}
-          img={x.img}
-          persantage={x.persantage}
+          name={x.first_name+""+x.last_name}
+          state={x.electoral_district_name}
+          commission={x.fraction_name}
+          img={x.image}
+          persantage={x.transparency}
           id={x.id}
         />
       </SelectItem>
     );
   });
 
-  const states = [
-    { city: "دماوند وفیروزکوه", province: "تهران" },
-    { city: " شهرری", province: "تهران" },
-    { city: "پردیس و بومهن", province: "تهران" },
-  ];
+
+  const getElectoralDistrict = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setStates([...response.data]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(()=>{
+    getElectoralDistrict();
+  },[])
 
   const stateList = states.map((x, i) => {
     return (
+      // <SelectArea area={x.name} envoys={x.agent} key={i} />
+
       <ActiveOrder
         key={i}
         className={check === i ? "active" : ""}
         onClick={() => {
           setCheck(i);
-          setFieldValue("envoy", x.city);
+          setFieldValue("envoy", x.id);
         }}
       >
         <div className="symbol"></div>
         <div className="content">
-          <h2 className="title">{x.city}</h2>
-          <p className="date">{x.province}</p>
+          <h2 className="title">{x.name}</h2>
+          <p className="date">{x.city_name[0].name}</p>
         </div>
       </ActiveOrder>
     );
@@ -133,12 +132,12 @@ export default function SelectEnvoys() {
     return (
       <ActiveOrder
         key={i}
-        className={x.city === state.selectEnvoy.envoy ? "active" : ""}
+        className={x.id === state.selectEnvoy.envoy ? "active" : ""}
       >
         <div className="symbol"></div>
         <div className="content">
-          <h2 className="title">{x.city}</h2>
-          <p className="date">{x.province}</p>
+          <h2 className="title">{x.name}</h2>
+          <p className="date">{x.city_name[0].name}</p>
         </div>
       </ActiveOrder>
     );
@@ -167,6 +166,8 @@ export default function SelectEnvoys() {
     validationSchema: selectEnvoyTypeSchema,
     onSubmit,
   });
+
+ 
 
   useEffect(() => {
     if (select === 1) {
@@ -284,12 +285,21 @@ const Title = styled.h2`
   font-size: 4.651vw;
   font-weight: 400;
   margin-bottom: 10px;
+  @media (min-width: 480px) {
+    font-size: 1.458vw;
+    margin-bottom: 1.458vw;
+  }
 `;
 
 const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
+  @media (min-width: 480px) {
+    width: 100%;
+    justify-content: center;
+    margin: 1.302vw auto;
+  }
 `;
 
 const ErrorText = styled.p`
@@ -300,6 +310,10 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
+  @media (min-width: 480px) {
+    margin-top: 0;
+    font-size: 1.042vw;
+  }
 `;
 
 const Filtering = styled.div`
@@ -318,6 +332,16 @@ const Filtering = styled.div`
       color: #d8d8d8;
     }
   }
+  @media (min-width: 480px) {
+    width: 74%;
+    padding: 2.292vw 2.604vw 0.885vw;
+    margin: auto;
+    input {
+      width: 97%;
+      font-size: 1.563vw;
+      margin-bottom: 1.563vw;
+    }
+  }
 `;
 
 const Items = styled.div`
@@ -334,6 +358,7 @@ const Item = styled.p`
   font-weight: 300;
   padding-top: 35px;
   position: relative;
+  cursor: pointer;
   &.active {
     font-weight: 700;
     &:after {
@@ -357,11 +382,22 @@ const Item = styled.p`
     width: 35px;
     height: 35px;
     top: 0;
-    right: 15px;
+    left: 50%;
+    transform: translate(-50%,0%);
   }
   &:nth-child(2) {
     &:before {
-      right: 4px;
+      /* right: 4px; */
+    }
+  }
+  @media (min-width: 480px) {
+    font-size: 1.458vw;
+    &:after {
+      height: 5px !important;
+      bottom: -0.885vw !important;
+    }
+    &:before {
+      /* right: 35px; */
     }
   }
 `;
@@ -370,7 +406,7 @@ const SelectItem = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
-
+  cursor: pointer;
   &.active {
     border: 1px solid #6cbba9;
     border-radius: 4px;
@@ -381,11 +417,23 @@ const SelectItem = styled.div`
   & > * {
     width: 100%;
     box-shadow: none;
+    min-width: initial;
   }
 `;
 
 const Gallery = styled.div`
   margin-top: 10px;
+  /* & > * {
+    width: 100%;
+   
+  } */
+  @media (min-width: 480px) {
+    display: flex;
+    flex-direction: column;
+    gap: 1.302vw;
+    width: 84%;
+    margin: 1.302vw auto;
+  }
 `;
 
 const ActiveOrder = styled.div`
@@ -412,15 +460,31 @@ const ActiveOrder = styled.div`
     .title{
         color:#707070;
         margin:0;
-        font-weight400;
+        font-weight:400;
         font-size:4.651vw;
     }
     .date{
         color:#707070;
         margin:0;
-        font-700;
+        font-weight:700;
         font-size:3.256vw;
     }
+  }
+
+@media (min-width: 480px) {
+  .symbol {
+    width: 6.771vw;
+    height: 6.771vw;
+  }
+  .content {
+   
+    .title {
+      font-size: 1.458vw;
+    }
+    .date {
+      font-size: 1.25vw;
+    }
+  }
 }
 
 `;

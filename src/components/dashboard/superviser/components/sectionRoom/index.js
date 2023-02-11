@@ -1,32 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import data from "../../../../../data.json";
 import user from "../../../../../assets/profile.webp";
 import upArrow from "../../../../../assets/arrow.webp";
 import { useNavigate } from "react-router-dom";
 import title from "../../../../../assets/text.webp";
+import axios from "axios";
+import { BaseBackURL } from "../../../../../constant/api";
+import { useUser } from "../../../../context/userContext";
 
 export default function SectionRoom() {
+  const { state, dispatch } = useUser();
   const [select, setSelect] = useState();
+  const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
 
-  const magPaper = data.magazine.map((x, i) => {
+  const getBlogs = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/blog/?writer__id=${state.id}&tag__id&is_suggested=True, False&ordering=created`,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setBlogs([...response.data]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getBlogs();
+  }, []);
+
+  const magPaper = blogs.map((x, i) => {
     return (
       <Paper
         onClick={() => {
-          navigate(`${x.content}`);
+          navigate(`${x.id}`);
         }}
         key={i}
       >
         <div className="cover">
-          <img src={x.img} alt={x.date} />
+          <img src={x.main_image} alt={x.date} />
         </div>
 
-        <p className="user">{x.name}</p>
+        <p className="user">{x.writer}</p>
 
-        <p className="content">{x.content}</p>
+        <p className="content">{x.title}</p>
 
-        <p className="date">{x.date}</p>
+        <p className="date">{x.created}</p>
       </Paper>
     );
   });
@@ -102,6 +127,7 @@ const AddSection = styled.div`
   box-shadow: 0px 6px 8px -2px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   padding: 4px;
+  cursor: pointer;
   .text {
     margin: 0;
     color: #ffffff;
@@ -125,7 +151,7 @@ const AddSection = styled.div`
     border-radius: 8px;
     padding: 0.052vw;
     width: 26%;
-    margin-bottom:2.604vw;
+    margin-bottom: 2.604vw;
     .text {
       font-size: 1.25vw;
       &:before {
@@ -184,7 +210,7 @@ const Paper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
-
+  cursor: pointer;
   .cover {
     width: 160px;
     height: 120px;
@@ -201,20 +227,20 @@ const Paper = styled.div`
     color: #707070;
     font-weight: 300;
     font-size: 3.72vw;
-    padding-right: 20px;
-    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
     margin-bottom: 10px;
     &:before {
       content: "";
-      display: flex;
-      position: absolute;
+      display: inline-flex;
+
       background-image: url(${user});
       background-size: cover;
       background-repeat: no-repeat;
       width: 15px;
       height: 15px;
-      right: 2px;
-      top: 5px;
     }
   }
   .content {
@@ -250,11 +276,11 @@ const Paper = styled.div`
     .user {
       font-size: 1.042vw;
       margin-bottom: 36px;
-      padding-right: 30px;
-      &:before {
+      /* padding-right: 30px; */
+      /* &:before {
         width: 20px;
         height: 20px;
-      }
+      } */
     }
     .content {
       font-size: 1.25vw;
@@ -297,7 +323,7 @@ const ShowMore = styled.div`
   @media (min-width: 480px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
-    width:61%;
+    width: 61%;
     justify-content: center;
     align-items: center;
     margin: auto;

@@ -5,6 +5,77 @@ import line from "../../../assets/Line.webp";
 import ActionCard from "../../home/components/actionCard";
 import upArrow from "../../../assets/arrow.webp";
 import useWidth from "../../../hook/useWidth";
+import { ChangeToPersianDate, fixNumbers } from "../../../utils";
+
+export default function Calendar({ activities }) {
+  const width = useWidth();
+
+  let today = new Date().toLocaleDateString("fa-IR", {
+    year: "numeric",
+    month: "numeric",
+  });
+  const year = today.slice(0, 4);
+  const month = fixNumbers(today.slice(5));
+
+  const monthArray = [
+    "فروردین",
+    "اردیبهشت",
+    "خرداد",
+    "تیر",
+    "مرداد",
+    "شهریور",
+    "مهر",
+    "آبان",
+    "آذر",
+    "دی",
+    "بهمن",
+    "اسفند",
+  ];
+
+  const elements = [];
+
+  for (let i = parseInt(month) - 1; i > 0; i--) {
+    const newList = [];
+    for (const item of activities) {
+      const itemDate = ChangeToPersianDate(item.date);
+      const itemYear = itemDate.slice(0, 4);
+      const itmeMonth = fixNumbers(itemDate.slice(5));
+
+      if (itemYear === year && parseInt(itmeMonth) === i + 1) {
+        newList.push(item);
+      }
+    }
+
+    elements.push(
+      <>
+        <SubTitile>
+          {monthArray[i]} {year}
+        </SubTitile>
+        <List>
+          {width < 480 ? (
+            <ActionCard />
+          ) : (
+            <>
+              {newList.map((item) => (
+                <ActionCard activity={item} />
+              ))}
+            </>
+          )}
+        </List>
+      </>
+    );
+  }
+
+  return (
+    <Container>
+      {elements}
+
+      <ShowMore>
+        <p> نمایش بیشتر</p>
+      </ShowMore>
+    </Container>
+  );
+}
 
 const Container = styled.section`
   margin-top: 10px;
@@ -186,49 +257,3 @@ const List = styled.div`
     gap: 20px;
   }
 `;
-
-export default function Calendar() {
-  const width = useWidth();
-  return (
-    <Container>
-      <SubTitile>مرداد ۱۴۰۱</SubTitile>
-      <List>
-        {width < 480 ? (
-          <ActionCard />
-        ) : (
-          <>
-            <ActionCard />
-            <ActionCard />
-            <ActionCard />
-          </>
-        )}
-      </List>
-      <SubTitile style={{ marginTop: "20px" }}> تیر ۱۴۰۱</SubTitile>
-      <List>
-        {width < 480 ? (
-          <ActionCard />
-        ) : (
-          <>
-            <ActionCard />
-            <ActionCard />
-          </>
-        )}
-      </List>
-      <Title>سال ۱۴۰۰</Title>
-      <SubTitile style={{ marginTop: "0px" }}>مرداد ۱۴۰۰</SubTitile>
-      <List>
-        {width < 480 ? (
-          <ActionCard />
-        ) : (
-          <>
-            <ActionCard />
-          </>
-        )}
-      </List>
-
-      <ShowMore>
-        <p> نمایش بیشتر</p>
-      </ShowMore>
-    </Container>
-  );
-}

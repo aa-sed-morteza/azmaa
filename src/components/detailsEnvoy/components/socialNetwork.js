@@ -15,19 +15,23 @@ export default function SocialNetwork() {
         <NetworkRow icon={web}>
           <span></span>
           <div className="text-wraper">
-            <p className="text">WWW.Alireza.Pakfetrat.NET</p>
+            {/* <p className="text">WWW.Alireza.Pakfetrat.NET</p> */}
+            <p className="text">؟</p>
           </div>
         </NetworkRow>
         <NetworkRow icon={telegram}>
           <span></span>
           <div className="text-wraper">
-            <p className="text">Alireza.Pakfetrat</p>
+            <p className="text">؟</p>
+            {/* <p className="text">Alireza.Pakfetrat</p> */}
           </div>
         </NetworkRow>
         <NetworkRow icon={instagram}>
           <span></span>
           <div className="text-wraper">
-            <p className="text">@Alireza.Pakfetrat</p>
+            {/* <p className="text">@Alireza.Pakfetrat</p> */}
+            <p className="text">؟</p>
+
           </div>
         </NetworkRow>
       </Content>
@@ -41,7 +45,7 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 0px 2.791vw 3.953vw;
   margin-top: 15px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 0 1.302vw 1.875vw !important;
     margin-top: 2.083vw;
   }
@@ -56,7 +60,7 @@ const Title = styled.h4`
   width: 60%;
   margin: 0;
   text-align: center;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.875vw;
     transform: translateY(-1.615vw);
     width: 100%;
@@ -70,7 +74,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.558vw;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     gap: 0.781vw;
   }
 `;
@@ -101,7 +105,7 @@ const NetworkRow = styled.div`
       text-align: end;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     gap: 0.781vw;
     span {
       width: 3.125vw;

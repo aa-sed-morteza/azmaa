@@ -10,7 +10,14 @@ const Container = styled.div`
   padding: 19px;
   border-radius: 2px;
   margin-bottom: 10px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
+    padding: 20;
+    border-radius: 8px;
+    width: 60%;
+    margin: auto;
+    margin-top: -19%;
+  }
+  @media (min-width: 769px) {
     padding: 44px 50px 19px;
     border-radius: 8px;
     max-width: 52.083vw;
@@ -31,12 +38,20 @@ const SearchInput = styled.input`
   ::placeholder {
     color: #d8d8d8;
   }
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     border-radius: 4px;
     font-size: 1.563vw;
     font-weight: 400;
-    padding: 25px;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+  @media (min-width: 769px) {
+    width: 92%;
+    padding: 15px;
     margin-bottom: 30px;
+  }
+  @media (min-width: 1200px) {
+    padding: 25px;
   }
 `;
 
@@ -44,7 +59,9 @@ const Tab = styled.div`
   displey: flex;
   flex-direction: column;
   position: relative;
-  &.select {
+  cursor: pointer;
+  &.select,
+  &:hover {
     &:before {
       content: "";
       display: flex;
@@ -77,14 +94,24 @@ const Tab = styled.div`
     font-weight: 300;
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     p {
       font-size: 1.458vw;
       font-weight: 300;
     }
     div {
-      width: 35px;
-      height: 35px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+  @media (min-width: 769px) {
+    p {
+      font-size: 1.458vw;
+      font-weight: 300;
+    }
+    div {
+      width: 1.823vw;
+      height: 1.823vw;
     }
   }
 `;
@@ -93,22 +120,18 @@ const TabContainer = styled.div`
   display: flex;
   gap: 25px;
   align-items: flex-end;
-  @media(min-width:480px){
-    gap:93px;
-    justify-content:center;
+  @media (min-width: 481px) {
+    justify-content: space-between;
   }
-}
 `;
 
-export default function Controler() {
-  const [select, setSelect] = useState(0);
-
+export default function Controler({ selectedTag, setSelectedTag }) {
   const controllItem = data.controlItem.map((x, i) => {
     return (
       <Tab
         key={i}
-        onClick={() => setSelect(i)}
-        className={select === i ? "select" : ""}
+        onClick={() => setSelectedTag(x.name)}
+        className={selectedTag === x.name ? "select" : ""}
       >
         {x.icon ? (
           <div>

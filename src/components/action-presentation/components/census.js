@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function Census() {
-  const [envoy, setEnvoy] = useState(276);
-  const [complete, setComplete] = useState(167);
-  const [select, setSelect] = useState(167);
+export default function Census({total,complete,select}) {
+  
 
   const checkCensus = (num1, num2) => {
     let bgColor;
@@ -36,11 +34,11 @@ export default function Census() {
       <Title> آمار شفافیت</Title>
       <Row>
         <p className="type">کامل:</p>
-        {checkCensus(867, complete)}
+        {checkCensus(total, complete)}
       </Row>
       <Row>
         <p className="type">گزینشی:</p>
-        {checkCensus(envoy, complete)}
+        {checkCensus(total, select)}
       </Row>
     </Container>
   );
