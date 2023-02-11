@@ -46,7 +46,7 @@ export default function PersonalInformation() {
     <Container>
       <Content>
         <Image onClick={toggle}>
-          {selectedFile && <img src={preview} alt="profile-picture" />}
+          {selectedFile ? <img src={preview} alt="profile-picture" /> : <img src={state.image} alt="profile-picture" />}
         </Image>
         <Label>
           <p className="title">ناظر نمایندگان</p>

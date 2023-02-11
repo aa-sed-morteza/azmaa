@@ -7,6 +7,8 @@ import gallery from "../../../assets/gallery.svg";
 import Button from "../../general/button";
 import Modal from "../../general/modal";
 import useModal from "../../../hook/useModal";
+import axios from "axios";
+import { BaseBackURL } from "../../../constant/api";
 
 export default function Profile() {
   const { state, dispatch } = useUser();
@@ -36,6 +38,54 @@ export default function Profile() {
 
     // I've kept this example simple by using the first image instead of multiple
     setSelectedFile(e.target.files[0]);
+  };
+
+  const refreshToken = () => {
+    const data = new FormData();
+    data.append("refresh", state.refreshToken);
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/refresh/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const changePicture = () => {
+    const data = new FormData();
+    data.append("image", selectedFile);
+
+    let config = {
+      method: "put",
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+        if (error.response.status == 401) {
+          refreshToken();
+        }
+      });
   };
 
   return (
@@ -87,7 +137,10 @@ export default function Profile() {
             textColor="#FFFFFF"
             background="#095644"
             width="62%"
-            click={toggle}
+            click={() => {
+              toggle();
+              changePicture();
+            }}
           />
         </Box>
       </Modal>

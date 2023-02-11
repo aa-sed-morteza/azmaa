@@ -66,7 +66,7 @@ export default function Dashboard() {
 
   useEffect(()=>{
     getPersonalInfo(Cookies.get('userId'));
-  },[])
+  },[state.token])
 
   useEffect(() => {
     // if (state.loggedIn === false) {

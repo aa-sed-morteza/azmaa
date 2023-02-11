@@ -45,7 +45,7 @@ export default function EditPersonalInformation() {
     data.append("first_name", values.firstName);
     data.append("last_name", values.lastName);
     data.append("birth_place", values.birthPlace);
-    // data.append("birth_date", values.birthDay);
+    data.append("birth_date", values.birthDay);
     data.append("national_code", values.personalCode);
     
 

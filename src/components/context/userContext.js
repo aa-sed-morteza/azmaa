@@ -21,7 +21,7 @@ const initialState = {
   areaName: "",
   commission: "",
   voteNumber: 0,
-  
+  activityChoice:[],
   dutieHistory: [],
   typeArticle: "",
   contentArticle: {},
@@ -95,6 +95,8 @@ const reducer = (state, action) => {
       return { ...state, typeArticle: action.payload };
     case "SET_CONTENT_ARTICLE":
       return { ...state, contentArticle: action.payload };
+      case "SET_ACTIVITY_CHOICE":
+      return { ...state, activityChoice: action.payload };
     case "SET_IMG_ARTICLE":
       return { ...state, imageArticle: action.payload };
     case "SET_DOC_ARTICLE":

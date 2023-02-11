@@ -68,6 +68,7 @@ export default function SelectActionType() {
         onClick={() => {
           setCheck(i);
           setFieldValue("description", x.id);
+
         }}
       >
         <div className="symbol"></div>
@@ -95,6 +96,8 @@ export default function SelectActionType() {
     );
   });
 
+  console.log(state.activityChoice)
+
 
 
   const actionList = actionItems.map((x, i) => {
@@ -105,6 +108,7 @@ export default function SelectActionType() {
         onClick={() => {
           setCheck(i);
           setFieldValue("description", x.id);
+          dispatch({ type: "SET_ACTIVITY_CHOICE", payload: x.activity_choice });
         }}
       >
         <div className="symbol"></div>
