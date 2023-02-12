@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import CustomInput from "../../general/customInput";
 import Button from "../../general/button";
@@ -8,19 +8,104 @@ import { useFormik } from "formik";
 import { selectAreaSchema } from "../../schema";
 import Select from "../../general/select";
 import SelectNumber from "../../general/selectNumber";
+import axios from "axios";
+import { BaseBackURL } from "../../../constant/api";
+import { toast } from "react-toastify";
 
 export default function SelectionArea() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
-  const areaName = ["تهران", "پردیس", "دماوند", "شهر ری"];
+  const [areaName,setAreaName]=useState([]);
   const commission = ["امنیت ملی", "سلامت", "ورزش", "عمران"];
 
+  const refreshToken = () => {
+    const data = new FormData();
+    data.append("refresh", state.refreshToken);
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/refresh/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const getDistrict =()=>{
+    var config = {
+      method: 'get',
+      url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
+     
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      setAreaName([...response.data.map(x=>x.name)])
+
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  useEffect(()=>{
+    getDistrict();
+  },[])
+
   const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_AREA_NAME", payload: values.areaName });
-    dispatch({ type: "SET_COMMISSION", payload: values.commission });
-    dispatch({ type: "SET_VOTE_NUMBER", payload: values.voteNumber });
-    dispatch({ type: "SET_SIGN_LEVEL", payload: 5 });
+    const data = new FormData();
+    data.append("electoral_district", 1);
+    data.append("fraction", 1);
+    data.append("vote_number", values.voteNumber);
+
+    let config = {
+      method: "put",
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${state.userId}`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+    .then((res) => {
+      console.log(JSON.stringify(res.data));
+      dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+      dispatch({ type: "SET_SIGN_LEVEL", payload: 4 });
     actions.resetForm();
+      toast.success(" ثبت با موفقیت انجام شد!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    })
+    .catch((error) => {
+      console.log("sagError", error);
+      if (error.response.status == 401) {
+        refreshToken();
+        toast.error("لطفا مجدد تلاش کنید", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+      // if (error.response.data.telephone == "شماره تلفن معتبر نیست.") {
+      //   toast.error("شماره تلفن معتبر نیست.", {
+      //     position: toast.POSITION.TOP_RIGHT,
+      //   });
+      // }
+    
+    });
+
+  
+   
   };
 
   const {
@@ -44,10 +129,10 @@ export default function SelectionArea() {
   
   return (
     <>
-      {state.signInLevel === 4 ? (
+      {state.signInLevel === 3 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
-            <Title>۴. اطلاعات حوزۀ انتخابیه را وارد کنید:</Title>
+            <Title>۳. اطلاعات حوزۀ انتخابیه را وارد کنید:</Title>
             <Form>
               <Select
                 label="نام حوزه"
@@ -107,25 +192,25 @@ export default function SelectionArea() {
         </form>
       ) : (
         <Container>
-          <Title>۴. اطلاعات حوزۀ انتخابیه را وارد کنید:</Title>
+          <Title>۳. اطلاعات حوزۀ انتخابیه را وارد کنید:</Title>
           <Form>
             <Select
               label="نام حوزه"
               background="#FFFFFF"
-              value={state.areaName}
+              value={state.electoral_district}
               options={areaName}
             />
 
             <SelectNumber
               label="تعداد آراء"
               background="#FFFFFF"
-              value={state.voteNumber}
+              value={state.vote_number}
             />
 
             <Select
               label="نام کمیسیون"
               background="#FFFFFF"
-              value={state.commission}
+              value={state.fraction.name}
               options={commission}
             />
           </Form>

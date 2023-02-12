@@ -11,6 +11,7 @@ import Timer from "../../general/countdown";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { toast } from "react-toastify";
+import Select from "../../general/select";
 
 export default function SetMobileNumber() {
   const { state, dispatch } = useUser();
@@ -19,6 +20,8 @@ export default function SetMobileNumber() {
   const [validate, setValidate] = useState(0);
   const [code, setCode] = useState("");
   const [update, setUpdate] = useState(false);
+  const [type, setType] = useState(["نماینده", "ناظر"]);
+  const [password, setPassword] = useState("");
 
   const checkCode = (e) => {
     e.preventDefault();
@@ -26,12 +29,16 @@ export default function SetMobileNumber() {
     if (code.length === 0) {
       setValidate(2);
     } else {
-      
       const data = new FormData();
       data.append("phone", state.userName);
-      data.append("type", "parliament_member");
+      if (state.userType == "envoy") {
+        data.append("type", "parliament_member");
+      } else {
+        data.append("type", state.userType);
+      }
+
       data.append("code", code);
-      data.append("password", "Hamid09134509545");
+      data.append("password", password);
 
       let config = {
         method: "post",
@@ -44,8 +51,9 @@ export default function SetMobileNumber() {
           console.log(res);
           setValidate(0);
           dispatch({ type: "SET_ID", payload: res.data.id });
-          dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
-          navigate("/sign-in/supervisor");
+          navigate(`/sign-in/${state.userType}`);
+          setStep(1);
+          getToken(password, state.userName);
         })
         .catch((err) => {
           console.log(err.response.data);
@@ -67,25 +75,32 @@ export default function SetMobileNumber() {
           }
         });
     }
-    // if (code !== state.sms) {
-    //   setValidate(1);
-    // }
+  };
 
-    // if (code === state.sms && state.userName === "09126897522") {
-    //   setValidate(0);
-    //   dispatch({ type: "SET_TYPE_USER", payload: "superviser" });
-    //   navigate("/sign-in/supervisor");
-    // }
+  const getToken = (pass, user) => {
+    const data = new FormData();
+    data.append("username", user);
+    data.append("password", pass);
 
-    // if (code === state.sms && state.userName === "09191089781") {
-    //   setValidate(0);
-    //   dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
-    //   navigate("/sign-in/envoy");
-    // }
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/`,
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   useEffect(() => {
-    if (state.userName === "") {
+    if (state.loggedIn === false) {
       setStep(1);
     }
   }, []);
@@ -100,6 +115,11 @@ export default function SetMobileNumber() {
 
   const onSubmit = async (values, actions) => {
     dispatch({ type: "SET_USERNAME", payload: values.phoneNember });
+    if (values.type == "نماینده") {
+      dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
+    } else {
+      dispatch({ type: "SET_TYPE_USER", payload: "supervisor" });
+    }
     dispatch({ type: "SET_TIME_OUT", payload: false });
 
     const data = new FormData();
@@ -146,14 +166,14 @@ export default function SetMobileNumber() {
   } = useFormik({
     initialValues: {
       phoneNember: "",
-      type:"",
+      type: "",
     },
     validationSchema: phoneSchema,
     onSubmit,
   });
 
-   // Convert persianNumber to englishNumber
-   useEffect(() => {
+  // Convert persianNumber to englishNumber
+  useEffect(() => {
     setFieldValue(
       "phoneNember",
       values.phoneNember
@@ -178,7 +198,15 @@ export default function SetMobileNumber() {
           {errors.phoneNember && touched.phoneNember && (
             <ErrorText>{errors.phoneNember}</ErrorText>
           )}
-          
+          <Select
+            label="نوع کاربر"
+            background="#FFFFFF"
+            value={values.type}
+            onChange={handleChange}
+            options={type}
+            id="type"
+          />
+          {errors.type && touched.type && <ErrorText>{errors.type}</ErrorText>}
           <Box>
             <Button
               text="ثبت"
@@ -204,6 +232,15 @@ export default function SetMobileNumber() {
             value={code}
             onChange={(e) => {
               setCode(e.target.value);
+            }}
+          />
+          <CustomInput
+            label="رمز عبور"
+            // icon={mobile}
+            back="#F5F5F5"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
             }}
           />
           {validate === 1 && <ErrorText>کد وارد شده صحیح نیست.</ErrorText>}

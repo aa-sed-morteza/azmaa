@@ -13,7 +13,18 @@ export default function CustomInput({
   return (
     <Container icon={icon} text={label} back={back} type={type}>
       <span></span>
-      <input type={type} value={value} onChange={onChange} id={id} />
+      {type == "textarea" ? (
+        <textarea
+          type={type}
+          value={value}
+          onChange={onChange}
+          id={id}
+          rows="4"
+          cols="100"
+        ></textarea>
+      ) : (
+        <input type={type} value={value} onChange={onChange} id={id} />
+      )}
     </Container>
   );
 }

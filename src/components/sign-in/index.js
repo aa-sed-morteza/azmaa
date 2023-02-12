@@ -21,8 +21,7 @@ export default function SignIn() {
       </Title>
       
       {state.signInLevel === 1 && <PersonalInformation />}
-      {state.signInLevel === 2 && <><PersonalInformation /><SetPassword/></>}
-      {state.signInLevel === 3 && <><PersonalInformation /><SetPassword/><Contacts/></>}
+      {state.signInLevel === 2 && <><PersonalInformation /><Contacts/></>}
       
      
       

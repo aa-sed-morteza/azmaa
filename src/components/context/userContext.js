@@ -3,6 +3,7 @@ import React, { useReducer, useContext, useEffect } from "react";
 const initialState = {
   userName: "",
   userType: "",
+  userId:0,
   sms: "123456",
   timeOut: false,
   firstName: "",
