@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import styled from "styled-components";
 import CustomInput from "../../../../general/customInput";
 import Button from "../../../../general/button";
@@ -81,6 +81,7 @@ export default function EditContactInformation() {
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue,
   } = useFormik({
     initialValues: {
       mobileNumber: state.mobileNumber,
@@ -91,6 +92,27 @@ export default function EditContactInformation() {
     validationSchema: contactSchema,
     onSubmit,
   });
+
+   // Convert persianNumber to englishNumber
+   useEffect(() => {
+    setFieldValue(
+      "mobileNumber",
+      values.mobileNumber
+        .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+        .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    );
+  }, [values.mobileNumber]);
+
+   // Convert persianNumber to englishNumber
+   useEffect(() => {
+    setFieldValue(
+      "phoneNubmer",
+      values.phoneNubmer
+        .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+        .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    );
+  }, [values.phoneNubmer]);
+
   return (
     <Wraper>
       <FirstTitle>

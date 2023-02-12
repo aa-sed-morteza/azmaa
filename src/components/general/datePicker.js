@@ -27,7 +27,7 @@ export default function CustomDatePicker({
         ]}
         calendar={persian}
         locale={persian_fa}
-        format={language === "en" ? "MM-DD-YYYY" : "YYYY-MM-DD"}
+        format={language === "en" ? "MM/DD/YYYY" : "YYYY/MM/DD"}
         calendarPosition="top-center"
         placeholder={placeholder}
         id={id}

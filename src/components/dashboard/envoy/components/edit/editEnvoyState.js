@@ -15,7 +15,6 @@ export default function EditEnvoyState() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const [areaName,setAreaName]=useState([]);
-  // const areaName = ["تهران", "پردیس", "دماوند", "شهر ری"];
 
   const getElectoralDistrict = ()=>{
     let config = {
@@ -100,6 +99,7 @@ export default function EditEnvoyState() {
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue,
   } = useFormik({
     initialValues: {
       areaName: state.electoral_district_name,
@@ -109,9 +109,23 @@ export default function EditEnvoyState() {
     onSubmit,
   });
 
+   
+
   useEffect(()=>{
     getElectoralDistrict();
   },[])
+
+  // Convert persianNumber to englishNumber
+//   useEffect(() => {
+//     setFieldValue(
+//       "voteNumber",
+//       values.voteNumber
+//         .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+//         .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+//     );
+  
+ 
+// }, [values.voteNumber]);
 
  
   return (

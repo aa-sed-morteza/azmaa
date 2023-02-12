@@ -5,6 +5,7 @@ import * as yup from "yup";
 
 export const phoneSchema = yup.object().shape({
   phoneNember: yup.number().required("لطفا شماره همراه خود را وارد کنید"),
+  type :yup.string().required("لطفا نوع کاربری خود را انتخاب کنید"),
 });
 
 export const infoSchema = yup.object().shape({

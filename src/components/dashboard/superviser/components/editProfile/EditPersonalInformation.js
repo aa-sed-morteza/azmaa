@@ -100,6 +100,16 @@ export default function EditPersonalInformation() {
     onSubmit,
   });
 
+   // Convert persianNumber to englishNumber
+   useEffect(() => {
+    setFieldValue(
+      "personalCode",
+      values.personalCode
+        .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+        .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    );
+  }, [values.personalCode]);
+
   return (
     <Wraper>
       <FirstTitle>
@@ -153,7 +163,7 @@ export default function EditPersonalInformation() {
             )}
 
             <CustomDatePicker
-              label="از تاریخ "
+              label=" تاریخ تولد "
               background="#FFFFFF"
               icon={calendar}
               placeholder="انتخاب کنید"

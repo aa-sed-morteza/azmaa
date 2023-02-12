@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import wellcome from "../../assets/welcome.webp";
 import Button from "../general/button";
@@ -19,8 +19,6 @@ import Cookies from "js-cookie";
 export default function LogIn() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
-
- 
 
   const onSubmit = (values) => {
     const data = new FormData();
@@ -81,7 +79,7 @@ export default function LogIn() {
     data.append("username", values.userName);
     data.append("password", values.password);
 
-    console.log('user:',values.userName)
+    console.log("user:", values.userName);
 
     let config = {
       method: "post",
@@ -90,12 +88,12 @@ export default function LogIn() {
     };
 
     axios(config)
-      .then((response)=> {
+      .then((response) => {
         console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
         dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
       })
-      .catch((error)=> {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -108,6 +106,7 @@ export default function LogIn() {
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue,
   } = useFormik({
     initialValues: {
       userName: "",
@@ -116,6 +115,19 @@ export default function LogIn() {
     validationSchema: logInSchema,
     onSubmit,
   });
+
+
+  // Convert persianNumber to englishNumber
+  useEffect(() => {
+    setFieldValue(
+      "userName",
+      values.userName
+        .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+        .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    );
+  }, [values.userName]);
+
+  
 
   return (
     <Container>
