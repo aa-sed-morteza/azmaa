@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import styled from "styled-components";
 import CustomInput from "../../../../general/customInput";
 import Button from "../../../../general/button";
@@ -6,20 +6,71 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../../context/userContext";
 import { useFormik } from "formik";
 import { contactSchema } from "../../../../schema";
+import axios from "axios";
+import { BaseBackURL } from "../../../../../constant/api";
+import { toast } from "react-toastify";
 
 export default function EditContactInformation() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
 
+  const refreshToken = () => {
+    const data = new FormData();
+    data.append("refresh", state.refreshToken);
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/refresh/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_MOBILEN", payload: values.mobileNumber });
-    dispatch({ type: "SET_MAIL", payload: values.email });
-    dispatch({ type: "SET_ADDRESS", payload: values.address });
-    dispatch({ type: "SET_PHONEN", payload: values.phoneNubmer });
-    dispatch({ type: "SET_SIGN_LEVEL", payload: 1 });
-    dispatch({ type: "SET_LOGGED_IN", payload: true });
-    actions.resetForm();
-    navigate("/dashboard");
+    const data = new FormData();
+    data.append('mobileNumber',values.mobileNumber);
+    data.append('email',values.email)
+    data.append('address',values.address );
+    data.append('telephone',values.phoneNubmer )
+  
+    let config = {
+      method: "put",
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+    axios(config)
+    .then((res) => {
+      console.log(JSON.stringify(res.data));
+      dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+      navigate("/dashboard");
+      actions.resetForm();
+      toast.success(" اصلاحات با موفقیت انجام شد!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    })
+    .catch((error) => {
+      console.log("sagError", error);
+      if (error.response.status == 401) {
+        refreshToken();
+        toast.error("لطفا مجدد تلاش کنید", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+    });
   };
 
   const {
@@ -30,6 +81,7 @@ export default function EditContactInformation() {
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue,
   } = useFormik({
     initialValues: {
       mobileNumber: state.mobileNumber,
@@ -40,6 +92,27 @@ export default function EditContactInformation() {
     validationSchema: contactSchema,
     onSubmit,
   });
+
+   // Convert persianNumber to englishNumber
+   useEffect(() => {
+    setFieldValue(
+      "mobileNumber",
+      values.mobileNumber
+        .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+        .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    );
+  }, [values.mobileNumber]);
+
+   // Convert persianNumber to englishNumber
+   useEffect(() => {
+    setFieldValue(
+      "phoneNubmer",
+      values.phoneNubmer
+        .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+        .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    );
+  }, [values.phoneNubmer]);
+
   return (
     <Wraper>
       <FirstTitle>

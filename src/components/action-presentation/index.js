@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./components/header";
@@ -8,24 +8,70 @@ import Census from "./components/census";
 import ControlStatus from "./components/controlStatus";
 import action from "../../assets/act.webp";
 import symbol from "../../assets/action-rate.webp";
-
+import axios from "axios";
+import { BaseBackURL } from "../../constant/api";
 
 export default function ActionPresentation() {
   const { title } = useParams();
+  const [action, setAction] = useState({});
+
+  const getAction = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/activity/${title}/`,
+    };
+    axios(config)
+      .then((res) => {
+        console.log(JSON.stringify(res.data));
+        setAction(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  let positiveAction = [];
+  let negativeAction = [];
+  let anotherAction = [];
+  useEffect(() => {
+    getAction();
+
+    if (action.id) {
+      positiveAction = action.vote.filter((x) => x.vote == "همراه");
+      negativeAction = action.vote.filter((x) => x.vote == "ناهمراه");
+      anotherAction = action.vote.filter(
+        (x) => x.vote !== "ناهمراه" && x.vote !== "همراه"
+      );
+    }
+  }, []);
+
   return (
     <Container>
       <Title>
-        <p className="home">خانه /  عملکردها /</p>
-        <p className="component"> {title} </p>
+        <p className="home">خانه / عملکردها /</p>
+        <p className="component">{action && action.name} </p>
       </Title>
       <Content>
-        <Wraper>
-          <Header img={symbol} icon={action} type="عملکرد" />
-          <DetailsAction />
-          <Census />
-          <ActionsCensus />
-        </Wraper>
-        <ControlStatus />
+        {action.name && (
+          <Wraper>
+            <Header
+              img={symbol}
+              icon={action}
+              type="عملکرد"
+              title={action.name}
+              date={action.date}
+            />
+            <DetailsAction title={action.name} />
+            <Census total={action.vote.length} complete={"?"} select={"?"} />
+            <ActionsCensus
+              total={action.vote.length}
+              positive={positiveAction.length}
+              negative={negativeAction.length}
+              another={anotherAction.length}
+            />
+          </Wraper>
+        )}
+        {action.id && <ControlStatus envoys={action.vote} />}
       </Content>
     </Container>
   );

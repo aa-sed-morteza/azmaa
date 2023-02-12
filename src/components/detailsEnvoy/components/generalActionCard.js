@@ -69,7 +69,7 @@ export default function GeneralActionCard(props) {
         <div className="content">
           <p className="act">{act}</p>
           <p className="title">{props.content}</p>
-          <p className="date">۲۹ اسفند ۱۴۰۰</p>
+          <p className="date">{props.date}</p>
         </div>
       </Header>
       <Action background={background} operation={operation} color={color}>
@@ -80,7 +80,11 @@ export default function GeneralActionCard(props) {
           <p
             className="content"
             onClick={() => {
-              navigate(`/presentation/${props.content}`);
+              if(props.act == "vote"){
+                navigate(`/presentation/${props.item.id}`);
+              }else if(props.act == "action"){
+                navigate(`/actions/presentation/${props.item.id}`);
+              }
             }}
           >
             جزئیات

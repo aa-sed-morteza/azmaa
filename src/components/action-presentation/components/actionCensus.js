@@ -4,8 +4,7 @@ import ok from "../../../assets/like.webp";
 import disagree from "../../../assets/dislike.webp";
 import info from "../../../assets/info.webp";
 
-
-export default function ActionsCensus() {
+export default function ActionsCensus({ total, positive, negative, another }) {
   const [envoy, setEnvoy] = useState(267);
   return (
     <Container>
@@ -13,34 +12,33 @@ export default function ActionsCensus() {
       <Row>
         <Item className="active">
           <Type color="#6CBBA9" icon={ok}>
-          همراه:
+            همراه:
           </Type>
           <Number color="#6CBBA9">
-            <span>167/</span>
-            {envoy}
+            <span>{positive}/</span>
+            {total}
           </Number>
         </Item>
 
         <Item>
           <Type color="#FFA5A5" icon={disagree}>
-          غیرهمراه:
+            غیرهمراه:
           </Type>
           <Number color="#FFA5A5">
-            <span>57/</span>
-            {envoy}
+            <span>{negative}/</span>
+            {total}
           </Number>
         </Item>
 
         <Item>
           <Type color="#CBCBCB" icon={info}>
-          نامشخص:
+            نامشخص:
           </Type>
           <Number color="#CBCBCB">
-            <span>21/</span>
-            {envoy}
+            <span>{another}/</span>
+            {total}
           </Number>
         </Item>
-
       </Row>
     </Container>
   );
@@ -81,7 +79,7 @@ const Row = styled.div`
   gap: 10px;
   @media (min-width: 480px) {
     flex-direction: column;
-    gap:15px;
+    gap: 15px;
   }
 `;
 
@@ -126,7 +124,7 @@ const Type = styled.p`
     &:before {
       width: 1.563vw;
       height: 1.563vw;
-      top:0.104vw;
+      top: 0.104vw;
     }
   }
 `;

@@ -5,26 +5,46 @@ import source from "../../../../../../data.json";
 import user from "../../../../../../assets/text.webp";
 import AddSection from "./addSection";
 import { useUser } from "../../../../../context/userContext";
+import axios from "axios";
+import { BaseBackURL } from "../../../../../../constant/api";
 
 export default function News() {
   const {state,dispatch}=useUser();
   const { title } = useParams();
   const [data, setData] = useState({});
 
+  const getBlog = ()=>{
+    var config = {
+      method: 'get',
+      url: `${BaseBackURL}api/v1/blog/${title}`,
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      setData(response.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   useEffect(() => {
     if (title === "مطلب جدید") {
       setData({});
-    } else if(source.news.find((x) => x.title == title)){
-      setData(source.news.find((x) => x.title == title));
-    }else{
-      setData({
-        img:state.imageArticle.picOne.file,
-        user:state.firstName,
-        date:"1401/08/30",
-        title:state.contentArticle.title,
-        expand:state.contentArticle.expand,
-      })
+    } else{
+      getBlog();
     }
+    // else{
+    //   setData({
+    //     img:state.imageArticle.picOne.file,
+    //     user:state.firstName,
+    //     date:"1401/08/30",
+    //     title:state.contentArticle.title,
+    //     expand:state.contentArticle.expand,
+    //   })
+    // }
   }, []);
 
   return (
@@ -38,14 +58,14 @@ export default function News() {
       ) : (
         <NewsWraper>
           <Cover>
-            <img src={data.img} alt="cover" />
+            <img src={data.main_image} alt="cover" />
           </Cover>
           <Header>
-            <p className="user">{data.user}</p>
-            <p className="date">{data.date}</p>
+            <p className="user">{data.writer}</p>
+            <p className="date">{data.created}</p>
           </Header>
           <Titr>{data.title}</Titr>
-          <Content>{data.expand}</Content>
+          <Content>{data.description}</Content>
           <Edit>
             <p className="text">ویرایش مطلب</p>
           </Edit>
@@ -143,7 +163,7 @@ margin-bottom:15px;
     font-size:3.256vw;
     color:rgba(0, 0, 0, 0.2);
   }
-}
+
 @media(min-width:480px){
   .user{
     font-size:1.458vw;

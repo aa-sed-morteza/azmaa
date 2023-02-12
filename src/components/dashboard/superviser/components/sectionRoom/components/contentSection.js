@@ -13,13 +13,15 @@ export default function ContentSection() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
 
-  console.log("state12", state.typeArticle);
+  
 
   const onSubmit = async (values, actions) => {
     dispatch({ type: "SET_CONTENT_ARTICLE", payload: values });
     dispatch({ type: "SET_ADD_ARTICLE", payload: 3 });
     actions.resetForm();
   };
+
+
 
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({

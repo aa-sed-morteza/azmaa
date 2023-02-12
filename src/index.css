@@ -41,3 +41,8 @@ code {
   font-family:YekanBakh, source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.App{
+  display: flex;
+  flex-direction: column;
+}

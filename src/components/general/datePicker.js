@@ -33,8 +33,8 @@ export default function CustomDatePicker({
         id={id}
         value={value}
         onChange={(val) => {
-          console.log(val);
-          onChange(id, `${val.year}/${val.month}/${val.day}`);
+          
+          onChange(id, `${val.year}-${val.month}-${val.day}`);
         }}
       />
     </Container>

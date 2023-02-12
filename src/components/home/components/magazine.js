@@ -1,10 +1,12 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import styled from "styled-components";
 import mag from "../../../assets/mag.webp";
 import leftArrow from "../../../assets/leftArrow.webp";
 import user from "../../../assets/profile.webp";
-import data from "../../../data.json";
 import ScrollButton from "../../general/scrollButton";
+import axios from "axios";
+import { BaseBackURL } from "../../../constant/api";
+import { useNavigate } from "react-router-dom";
 
 const MagazineContainer = styled.section`
   background-color: #ffaa00;
@@ -13,7 +15,7 @@ const MagazineContainer = styled.section`
   margin-right: -20px;
   margin-left: -20px;
   display: flex;
-  position:relative;
+  position: relative;
   @media (min-width: 481px) {
     padding: 20px;
     margin-top: 0;
@@ -59,7 +61,7 @@ const Ttitle = styled.div`
   @media (min-width: 481px) {
     margin-right: 5%;
     max-width: 150px;
-    padding-left:7%;
+    padding-left: 7%;
     span {
       width: 50px;
       height: 50px;
@@ -101,8 +103,8 @@ const Wraper = styled.div`
   gap: 10px;
   // padding-right: 50px;
   scroll-behavior: smooth;
-  ::-webkit-scrollbar{
-    display: none; 
+  ::-webkit-scrollbar {
+    display: none;
   }
   @media (min-width: 481px) {
     // padding-right: 90px;
@@ -110,14 +112,18 @@ const Wraper = styled.div`
   }
 `;
 
-const Curtain =styled.div`
-  position:absolute;
-  width:45%;
-  height:100%;
-  background: linear-gradient(to left, rgba(250, 183, 50, 0) 63.02%, #FAB732 100%);
-  top:0;
-  left:0;
-`
+const Curtain = styled.div`
+  position: absolute;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    to left,
+    rgba(250, 183, 50, 0) 63.02%,
+    #fab732 100%
+  );
+  top: 0;
+  left: 0;
+`;
 
 const Paper = styled.div`
   display: flex;
@@ -143,9 +149,9 @@ const Paper = styled.div`
     font-weight: 300;
     font-size: 3.72vw;
     margin-bottom: 10px;
-    display:flex;
-    align-items:center;
-    gap:7px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
     &:before {
       content: "";
       display: inline-flex;
@@ -154,7 +160,6 @@ const Paper = styled.div`
       background-repeat: no-repeat;
       width: 15px;
       height: 15px;
-    
     }
   }
   .content {
@@ -226,19 +231,47 @@ const Paper = styled.div`
   }
 `;
 
-export default function () {
-  const magPaper = data.magazine.map((x, i) => {
+export default function Magazine() {
+  const [blogs, setBlogs] = useState([]);
+  const navigate = useNavigate()
+
+  const getBlogs = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/blog/?writer__id=&tag__id&is_suggested=True, False&ordering=created`,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setBlogs([...response.data]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getBlogs();
+  }, []);
+
+  const magPaper = blogs.map((x, i) => {
     return (
-      <Paper>
+      <Paper
+        onClick={() => {
+          navigate(`${x.id}`);
+        }}
+        key={i}
+      >
         <div className="cover">
-          <img src={x.img} alt={x.date} />
+          <img src={x.main_image} alt={x.date} />
         </div>
 
-        <p className="user">{x.name}</p>
+        <p className="user">{x.writer}</p>
 
-        <p className="content">{x.content}</p>
+        <p className="content">{x.title}</p>
 
-        <p className="date">{x.date}</p>
+        <p className="date">{x.created}</p>
       </Paper>
     );
   });
@@ -249,11 +282,11 @@ export default function () {
         <span></span>
         <h1> پیشنهاد سردبیر</h1>
       </Ttitle>
-      <Wraper id="magazine">{magPaper}
-      <ScrollButton container="magazine"/>
+      <Wraper id="magazine">
+        {magPaper}
+        <ScrollButton container="magazine" />
       </Wraper>
       <Curtain></Curtain>
-      
     </MagazineContainer>
   );
 }

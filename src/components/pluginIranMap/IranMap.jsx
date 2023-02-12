@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import { provinceSchema } from "../schema/index";
 import axios from "axios";
 import { BaseBackURL } from "../../constant/api";
+import { useUser } from "../context/userContext";
 
 const useMouse = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -28,9 +29,11 @@ const useMouse = () => {
 };
 
 const IranMap = ({ position }) => {
+  const {state,dispatch}=useUser();
   const { x, y } = useMouse();
   const [provinces, setProvinces] = useState(iranProvinces);
   const [data, setData] = useState([]);
+  const [change, setChange] = useState(false);
   const [provinceName, setProvinceName] = useState("");
   const [provinceNameOnClick, setProvinceNameOnClick] = useState("");
   const [mapZoom, setMapZoom] = useState(false);
@@ -48,17 +51,16 @@ const IranMap = ({ position }) => {
     axios(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
-        // const dbProvinces =iranProvinces.find(x=>x.name==response.data.province_name);
         setData(response.data);
+        selectProvinces();
+        setChange(!change);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  useEffect(() => {
-    getProvince();
-
+  const selectProvinces = () => {
     let box = [];
     data.map((item) => {
       iranProvinces.map((x) => {
@@ -69,23 +71,40 @@ const IranMap = ({ position }) => {
     });
 
     setProvinces([...new Set(box)]);
+  };
 
-    provinces.map((item, index) => {
+  const addCities = () => {
+    provinces.map((item) => {
       for (let i = 0; i < data.length; i++) {
         if (item.name === data[i].province_name) {
           item.cities.push(data[i].name);
         }
       }
     });
+  };
 
-    console.log(provinces);
+
+  useEffect(() => {
+    getProvince();
   }, []);
 
+  useEffect(() => {
+    if (provinces.length == 0) {
+      selectProvinces();
+      setChange(!change);
+    } else {
+      if (provinces.map((item) => item.cities.length == 0)) {
+        addCities();
+      }
+    }
+  }, [change]);
+
   const onSubmit = async (values, actions) => {
-    // dispatch({ type: "SET_PASSWORD", payload: values.password });
-    // dispatch({ type: "SET_SIGN_LEVEL", payload: 3 });
     setProvinceSelected(false);
     setCities(values.city);
+    dispatch({ type: "SET_PROVICE", payload: values.province });
+    dispatch({ type: "SET_CITY", payload: values.city });
+    // dispatch({ type: "SET_ELECTORAL_DISTRICT", payload: values.password });
     // setProvinceName(values.province);
     // setProvinceNameOnClick(values.province);
   };

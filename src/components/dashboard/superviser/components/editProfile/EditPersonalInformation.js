@@ -8,23 +8,76 @@ import { useUser } from "../../../../context/userContext";
 import { infoSchema } from "../../../../schema";
 import CustomDatePicker from "../../../../general/datePicker";
 import calendar from "../../../../../assets/calendar.webp";
+import axios from "axios";
+import { BaseBackURL } from "../../../../../constant/api";
+import { toast } from "react-toastify";
 
 export default function EditPersonalInformation() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const [order, setOrder] = useState(false);
 
-  const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_FNAME", payload: values.firstName });
-    dispatch({ type: "SET_LNAME", payload: values.lastName });
-    dispatch({ type: "SET_BIRTH_PLACE", payload: values.birthPlace });
-    dispatch({ type: "SET_PERSONALCODE", payload: values.personalCode });
-    dispatch({ type: "SET_BIRTH_DAY", payload: values.birthDay });
-    navigate("/dashboard");
-    actions.resetForm();
+  const refreshToken = () => {
+    const data = new FormData();
+    data.append("refresh", state.refreshToken);
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/refresh/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
+  const onSubmit = async (values, actions) => {
+    const data = new FormData();
+    data.append("first_name", values.firstName);
+    data.append("last_name", values.lastName);
+    data.append("birth_place", values.birthPlace);
+    data.append("birth_date", values.birthDay);
+    data.append("national_code", values.personalCode);
+    
 
+    let config = {
+      method: "put",
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((res) => {
+        console.log(JSON.stringify(res.data));
+        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        navigate("/dashboard");
+        actions.resetForm();
+        toast.success("اصلاح با موفقیت انجام شد!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      })
+      .catch((error) => {
+        console.log("sagError", error);
+        if (error.response.status == 401) {
+          refreshToken();
+          toast.error("لطفا مجدد تلاش کنید", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+      });
+  };
 
   const {
     values,
@@ -41,11 +94,21 @@ export default function EditPersonalInformation() {
       lastName: state.lastName,
       birthPlace: state.birthPlace,
       personalCode: state.personalCode,
-      birthDay: state.birthDay
+      birthDay: state.birthDay,
     },
     validationSchema: infoSchema,
     onSubmit,
   });
+
+   // Convert persianNumber to englishNumber
+   useEffect(() => {
+    setFieldValue(
+      "personalCode",
+      values.personalCode
+        .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+        .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    );
+  }, [values.personalCode]);
 
   return (
     <Wraper>
@@ -100,7 +163,7 @@ export default function EditPersonalInformation() {
             )}
 
             <CustomDatePicker
-              label="از تاریخ "
+              label=" تاریخ تولد "
               background="#FFFFFF"
               icon={calendar}
               placeholder="انتخاب کنید"
@@ -171,8 +234,8 @@ const Container = styled.div`
   background: #ffffff;
   border-radius: 4px;
   padding: 14px 10px 11px;
-  @media(min-width:480px){
-    padding:2.083vw 2.604vw;
+  @media (min-width: 480px) {
+    padding: 2.083vw 2.604vw;
   }
 `;
 const Title = styled.h2`
@@ -182,9 +245,9 @@ const Title = styled.h2`
   font-size: 4.651vw;
   font-weight: 300;
   margin-bottom: 10px;
-  @media(min-width:480px){
-    font-size:1.250vw;
-    margin-bottom:1.042vw;
+  @media (min-width: 480px) {
+    font-size: 1.25vw;
+    margin-bottom: 1.042vw;
   }
 `;
 
@@ -192,9 +255,9 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  @media(min-width:480px){
-    width:90%;
-    gap:1.302vw;
+  @media (min-width: 480px) {
+    width: 90%;
+    gap: 1.302vw;
   }
 `;
 const Box = styled.div`

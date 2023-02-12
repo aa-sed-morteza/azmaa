@@ -9,16 +9,77 @@ import Button from "../../../../../general/button";
 import { useUser } from "../../../../../context/userContext";
 import FileUploadInput from "../../../../../general/fileUploadInput";
 import CustomInput from "../../../../../general/customInput";
+import { BaseBackURL } from "../../../../../../constant/api";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function AddDocument() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
 
+  const refreshToken = () => {
+    const data = new FormData();
+    data.append("refresh", state.refreshToken);
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/refresh/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+
   const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_DOC_ARTICLE", payload: values });
-    dispatch({ type: "SET_ADD_ARTICLE", payload: 1 });
-    navigate(`/dashboard/mySection/${state.contentArticle.title}`);
-    actions.resetForm();
+    const data = new FormData();
+    data.append("type", state.typeArticle);
+    data.append("tag", "1");
+    data.append("title", state.contentArticle.title);
+    data.append("description", state.contentArticle.expand);
+    data.append("main_image", state.imageArticle.picOne);
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/v1/blog/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        // dispatch({ type: "SET_DOC_ARTICLE", payload: values });
+        dispatch({ type: "SET_ADD_ARTICLE", payload: 1 });
+        navigate(`/dashboard/mySection`);
+        actions.resetForm();
+        toast.success(" بلاگ با موفقیت ثبت شد!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+        if (error.response.status == 401) {
+          refreshToken();
+          toast.error("لطفا مجدد تلاش کنید", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+      });
+
+   
   };
 
   const {

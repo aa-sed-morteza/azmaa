@@ -13,7 +13,7 @@ const Container = styled.div`
   @media (min-width: 481px) {
     padding: 20;
     border-radius: 8px;
-    width:60%;
+    width: 60%;
     margin: auto;
     margin-top: -19%;
   }
@@ -60,7 +60,8 @@ const Tab = styled.div`
   flex-direction: column;
   position: relative;
   cursor: pointer;
-  &.select,&:hover {
+  &.select,
+  &:hover {
     &:before {
       content: "";
       display: flex;
@@ -119,21 +120,18 @@ const TabContainer = styled.div`
   display: flex;
   gap: 25px;
   align-items: flex-end;
-  @media(min-width:481px){
-    justify-content:space-between;
+  @media (min-width: 481px) {
+    justify-content: space-between;
   }
-
 `;
 
-export default function Controler() {
-  const [select, setSelect] = useState(0);
-
+export default function Controler({ selectedTag, setSelectedTag }) {
   const controllItem = data.controlItem.map((x, i) => {
     return (
       <Tab
         key={i}
-        onClick={() => setSelect(i)}
-        className={select === i ? "select" : ""}
+        onClick={() => setSelectedTag(x.name)}
+        className={selectedTag === x.name ? "select" : ""}
       >
         {x.icon ? (
           <div>

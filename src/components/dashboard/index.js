@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import { useUser } from "../context/userContext";
 import SuperviserDashboard from "./superviser";
 import EnvoyDashboard from "./envoy";
@@ -23,17 +28,89 @@ import EditContactInformation from "./superviser/components/editProfile/editCont
 import EditCommission from "./envoy/components/edit/editCommission";
 import EditHistoryEnvoy from "./envoy/components/edit/editHistoryEnvoy";
 import EditEnvoyState from "./envoy/components/edit/editEnvoyState";
+import Cookies from "js-cookie";
+import { BaseBackURL } from "../../constant/api";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function Dashboard() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
   const width = useWidth();
 
+  const getPersonalInfo = (userId) => {
+    let data = new FormData();
+   
+
+    let config = {
+      method: "put",
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
+      headers: { 
+        'Authorization': `Bearer ${state.token}`, 
+      },
+      withCredentials: true,
+    
+    };
+
+    axios(config)
+      .then((res) => {
+        console.log('data;', res.data);
+        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+      })
+      .catch((err) => {
+        console.log('khata',err);
+      });
+  };
+
+  
+
   useEffect(()=>{
-    if(state.userName == ""){
-      navigate('/log-in')
+    getPersonalInfo(Cookies.get('userId'));
+  },[state.token])
+
+  useEffect(() => {
+    // if (state.loggedIn === false) {
+    //   navigate("/log-in");
+    // }
+    if (Cookies.get("userId")) {
+      dispatch({ type: "SET_LOGGED_IN", payload: true });
+      handleAutoLogin(Cookies.get("userId"));
+    } else {
+      dispatch({ type: "SET_LOGGED_IN", payload: false });
+      navigate("/log-in");
     }
-  },[])
+  }, [state.loggedIn]);
+
+  const handleAutoLogin = (userId) => {
+    dispatch({ type: "SET_LOGGED_IN", payload: true });
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/accounts/member/${userId}`,
+      withCredentials: true,
+    };
+
+    axios(config).then((res) => {
+      // console.log(res);
+      if (res.data.id) {
+        Cookies.set("userId", res.data.id);
+        dispatch({ type: "SET_LOGGED_IN", payload: true });
+        dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
+        dispatch({ type: "SET_USERNAME", payload: Cookies.get("userName") });
+        dispatch({ type: "SET_TYPE_USER", payload: Cookies.get("userType") });
+        getPersonalInfo(userId);
+        navigate("/dashboard");
+      } else if (res.data.code === -1) {
+        console.log(res);
+        Cookies.remove("userId");
+        Cookies.remove("userName");
+        Cookies.remove("userType");
+      }
+    });
+  };
+
+ 
+
+  
 
   return (
     <Container>
@@ -47,15 +124,20 @@ export default function Dashboard() {
       )}
 
       <PageWraper>
-        {state.voteNumber === 0 ? (
+        {state.userType === "superviser" ? (
           // <SuperviserDashboard />
 
           <Routes>
             <Route path="/" element={<SuperviserDashboard />} />
-            <Route path="/edit-personal-info" element={<EditPersonalInformation />} />
-            <Route path="/edit-log-info" element={<EditLogInformation/>}/>
-            <Route path="/edit-contact-info" element={<EditContactInformation/>}/>
-
+            <Route
+              path="/edit-personal-info"
+              element={<EditPersonalInformation />}
+            />
+            <Route path="/edit-log-info" element={<EditLogInformation />} />
+            <Route
+              path="/edit-contact-info"
+              element={<EditContactInformation />}
+            />
 
             <Route path="/myEnvoy" element={<MyEnvoys />} />
             <Route path="/myActions" element={<MyActions />} />
@@ -68,15 +150,20 @@ export default function Dashboard() {
             <Route path="/mySection/:title" element={<News />} />
           </Routes>
         ) : (
-
           <Routes>
             <Route path="/" element={<EnvoyDashboard />} />
-            <Route path="/edit-personal-info" element={<EditPersonalInformation />} />
-            <Route path="/edit-log-info" element={<EditLogInformation/>}/>
-            <Route path="/edit-contact-info" element={<EditContactInformation/>}/>
-            <Route path="/edit-commission-info" element={<EditCommission/>}/>
-            <Route path="/edit-history-info" element={<EditHistoryEnvoy/>}/>
-            <Route path="/edit-envoy-state" element={<EditEnvoyState/>}/>
+            <Route
+              path="/edit-personal-info"
+              element={<EditPersonalInformation />}
+            />
+            <Route path="/edit-log-info" element={<EditLogInformation />} />
+            <Route
+              path="/edit-contact-info"
+              element={<EditContactInformation />}
+            />
+            <Route path="/edit-commission-info" element={<EditCommission />} />
+            <Route path="/edit-history-info" element={<EditHistoryEnvoy />} />
+            <Route path="/edit-envoy-state" element={<EditEnvoyState />} />
 
             <Route path="/myEnvoy" element={<MyEnvoys />} />
             <Route path="/myActions" element={<MyActions />} />
@@ -87,10 +174,7 @@ export default function Dashboard() {
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/history" element={<MyHistory />} />
             <Route path="/mySection/:title" element={<News />} />
-
-           
           </Routes>
-          
         )}
       </PageWraper>
     </Container>

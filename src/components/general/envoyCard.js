@@ -36,6 +36,8 @@ export default function EnvoyCard({name,state,commission,img,persantage,id,inBox
     generateColor();
   }, []);
 
+ 
+
 
   return (
     <Container width={inBox}>

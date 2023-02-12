@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Header({ img, type, icon }) {
+export default function Header({ img, type, icon,title,date }) {
   return (
     <Container>
       <Symbol>
@@ -9,8 +9,8 @@ export default function Header({ img, type, icon }) {
       </Symbol>
       <Content>
         <Type icon={icon}>{type}</Type>
-        <Ttile>کلیات لایحۀ بودجۀ سال ۱۴۰۱</Ttile>
-        <Date>۲۹ اسفند ۱۴۰۰</Date>
+        <Ttile>{title}</Ttile>
+        <Date>{date}</Date>
       </Content>
     </Container>
   );

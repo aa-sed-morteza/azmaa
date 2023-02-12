@@ -100,4 +100,5 @@ const Edit = styled.div`
   background-repeat: no-repeat;
   background-image: url(${edit});
   background-size: contain;
+  cursor: pointer;
 `;

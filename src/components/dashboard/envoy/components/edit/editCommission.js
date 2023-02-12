@@ -6,16 +6,69 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../../context/userContext";
 import { useFormik } from "formik";
 import { commissionSchema } from "../../../../schema";
+import axios from "axios";
+import { BaseBackURL } from "../../../../../constant/api";
+import { toast } from "react-toastify";
 
 export default function EditCommission() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
 
-  const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_COMMISSION", payload: values.commission });
-    navigate("/dashboard");
+  const refreshToken = () => {
+    const data = new FormData();
+    data.append("refresh", state.refreshToken);
 
-    actions.resetForm();
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/refresh/`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const onSubmit = async (values, actions) => {
+    const data = new FormData();
+    data.append('fraction',values.commission)
+
+    let config = {
+      method: "put",
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+    .then((res) => {
+      console.log(JSON.stringify(res.data));
+      dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+      navigate("/dashboard");
+      actions.resetForm();
+      toast.success(" اصلاح با موفقیت انجام شد!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    })
+    .catch((error) => {
+      console.log("sagError", error);
+      if (error.response.status == 401) {
+        refreshToken();
+        toast.error("لطفا مجدد تلاش کنید", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+    });
   };
 
   const {

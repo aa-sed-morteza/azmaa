@@ -3,13 +3,27 @@ import styled from "styled-components";
 import BestEnvoy from "../../home/components/bestEnvoy";
 import upArrow from "../../../assets/arrow.webp";
 import icon from "../../../assets/info.webp";
+import { useNavigate } from "react-router-dom";
 
-export default function NoComment() {
+export default function NoComment({envoys}) {
+  const navigate = useNavigate();
+
+  const envoysList = envoys.map((item, i) => {
+    return (
+      <BestEnvoy
+        key={i}
+        envoy={item}
+        click={() => {
+          navigate(`/envoy/${item.id}`);
+        }}
+      />
+    );
+  });
   return (
     <Container>
       <Title>نمایندگان ممتنع</Title>
       <Gallery>
-        <BestEnvoy />
+        {envoysList}
       </Gallery>
       <ShowMore>
         <p>نمایش بیشتر </p>

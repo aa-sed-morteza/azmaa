@@ -1,21 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function DetailsVotes() {
+export default function DetailsVotes({title,fraction}) {
   return (
     <Container>
       <Title>جزئیات رأی‌گیری</Title>
       <Row>
         <p className="type">نام طرح: </p>
-        <p className="expand">کلیات لایحۀ بودجۀ سال ۱۴۰۱</p>
+        <p className="expand">{title}</p>
       </Row>
       <Row>
         <p className="type"> فوریت: </p>
-        <p className="expand">۲ فوریت</p>
+        <p className="expand">?</p>
       </Row>
       <Row>
         <p className="type"> کمیسیون: </p>
-        <p className="expand">امنیت ملی</p>
+        <p className="expand">{fraction}</p>
       </Row>
     </Container>
   );

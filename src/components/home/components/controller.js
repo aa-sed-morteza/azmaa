@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import useWidth from "../../../hook/useWidth";
 import background from "../../../assets/back-controll.webp";
 import upArrow from "../../../assets/arrow.webp";
 import data from "../../../data.json";
 import VoteCard from "./voteCard";
+import HonestEnvoy from "../../envoy/components/honestEnvoy";
 import ActionCard from "./actionCard";
 import BestEnvoy from "./bestEnvoy";
 import tik from "../../../assets/vote.webp";
 import ControlCore from "./controlCore";
 import SelectArea from "./selectArea";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BaseBackURL } from "../../../constant/api";
+import { useUser } from "../../context/userContext";
 
 const ControllContainer = styled.section`
   display: flex;
@@ -52,7 +56,7 @@ const SearchInput = styled.input`
     // color:#D8D8D8;
   }
   @media (min-width: 481px) {
-    width:90%;
+    width: 90%;
     border-radius: 4px;
     font-size: 1.2vw;
     font-weight: 400;
@@ -74,7 +78,7 @@ const TabContainer = styled.div`
     
     justify-content: space-evenly;
   }
-}
+
 `;
 
 const Tab = styled.div`
@@ -257,27 +261,27 @@ const VoterContainer = styled.div`
     display: flex;
     gap: 20px;
     justify-content: center;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     // margin-left:-7%;
     // margin-right:-7%;
   }
-  @media(min-width:769px){
+  @media (min-width: 769px) {
     justify-content: center;
   }
 `;
 
 const ActionContainer = styled.div`
-@media (min-width: 481px) {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap:wrap;
-  // margin-left:-7%;
-  // margin-right:-7%;
-}
-@media(min-width:769px){
-  justify-content: center;
-}
+  @media (min-width: 481px) {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    // margin-left:-7%;
+    // margin-right:-7%;
+  }
+  @media (min-width: 769px) {
+    justify-content: center;
+  }
 `;
 
 const EnvoyGalley = styled.div`
@@ -299,36 +303,96 @@ const AreaContainer = styled.div`
 `;
 
 export default function Controller() {
+  const {state,dispatch}=useUser();
   const [select, setSelect] = useState(0);
+  const [bills, setBills] = useState([]);
+  const [envoys, setEnvoys] = useState([]);
+  const [activities, setActivities] = useState([]);
+  const [areas, setAreas] = useState([]);
+
   const navigate = useNavigate();
   const width = useWidth();
 
-  const envoys = [
-    {
-      name: "مهدی اسماعیلی",
-      state: "دماوند و فیروزکوه",
-      commission: " امنیت ملی",
-      id: "1",
-      persantage: "99",
-      img: "../../assets/abol.webp",
-    },
-    {
-      name: "حسن اسماعیلی",
-      state: " پردیس ",
-      commission: " امنیت اجتماعی",
-      id: "2",
-      persantage: "20",
-      img: "../../assets/ali.webp",
-    },
-    {
-      name: "حامد هایون",
-      state: " البرز ",
-      commission: " امنیت اجتماعی",
-      id: "3",
-      persantage: "50",
-      img: "../../assets/jafi.webp",
-    },
-  ];
+  const filterEnvoyByCity = ()=>{
+    const selectEnvoys =  envoys.filter(x=>x.electoral_district_name == state.city);
+    setEnvoys([...selectEnvoys])
+   
+  }
+  
+
+  useEffect(()=>{
+    filterEnvoyByCity();
+  },[state.city])
+
+  const getBills = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter&ordering=name, date`,
+    };
+
+    axios(config).then((res) => {
+      console.log(res.data);
+      if (res.data.length > 0) {
+        setBills([...res.data]);
+      }
+    });
+  };
+
+  const getEnvoys = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
+    };
+
+    axios(config).then((res) => {
+      console.log(res.data);
+      if (res.data.length > 0) {
+        setEnvoys([...res.data]);
+      }
+    });
+  };
+
+  const getActivities = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter`,
+    };
+
+    axios(config).then((res) => {
+      console.log(res.data);
+      if (res.data.length > 0) {
+        setActivities([...res.data]);
+      }
+    });
+  };
+
+  const getElectoralDistrict = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setAreas([...response.data]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getBills();
+    getEnvoys();
+    getActivities();
+    getElectoralDistrict();
+  }, []);
+
+  
+
+  const newList = envoys.sort((a, b) => a.transparency > b.transparency);
+
 
   const controllItem = data.controlPanel.map((x, i) => {
     return (
@@ -363,13 +427,16 @@ export default function Controller() {
             <Title>آخرین رأی‌گیری‌ها</Title>
             <VoterContainer>
               {width < 481 ? (
-                <VoteCard />
+                <>
+                  {bills.map((item, i) => {
+                    return <VoteCard bill={item} key={i} />;
+                  })}
+                </>
               ) : (
                 <>
-                  {" "}
-                  <VoteCard />
-                  <VoteCard />
-                  <VoteCard />
+                  {bills.map((item, i) => {
+                    return <VoteCard bill={item} key={i} />;
+                  })}
                 </>
               )}
             </VoterContainer>
@@ -383,7 +450,10 @@ export default function Controller() {
             <>
               <LastActions>
                 <Title> آخرین عملکردها</Title>
-                <ActionCard />
+                {/* <ActionCard /> */}
+                {activities.map((item, i) => {
+                  return <ActionCard activity={item} key={i} />;
+                })}
                 <ShowMore>
                   <p>نمایش بیشتر</p>{" "}
                 </ShowMore>
@@ -391,7 +461,11 @@ export default function Controller() {
 
               <BestEnvoyContainer>
                 <Title>شفاف‌ترین نمایندگان</Title>
-                <BestEnvoy />
+                {newList.map((item, i) => {
+                  return <BestEnvoy envoy={item} key={i} />;
+                })}
+
+                {/* {envoys.length > 0 && <HonestEnvoy envoys={envoys} />} */}
                 <ShowMore>
                   <p>نمایش بیشتر</p>{" "}
                 </ShowMore>
@@ -405,13 +479,16 @@ export default function Controller() {
                 <Title> آخرین عملکردها</Title>
                 <ActionContainer>
                   {width < 481 ? (
-                    <ActionCard />
+                    <>
+                      {activities.map((item, i) => {
+                        return <ActionCard activity={item} key={i} />;
+                      })}
+                    </>
                   ) : (
                     <>
-                      {" "}
-                      <ActionCard />
-                      <ActionCard />
-                      <ActionCard />
+                      {activities.map((item, i) => {
+                        return <ActionCard activity={item} key={i} />;
+                      })}
                     </>
                   )}
                 </ActionContainer>
@@ -429,15 +506,10 @@ export default function Controller() {
       {select == 1 && (
         <>
           <EnvoyGalley>
-            <BestEnvoy
-              onClick={() => {
-                navigate("/envoy/علیرضا پاکفطرت");
-              }}
-            />
-            <BestEnvoy />
-            <BestEnvoy />
-            <BestEnvoy />
-            <BestEnvoy />
+            {newList.map((item, i) => {
+              return <BestEnvoy envoy={item} key={i} click={()=>{navigate(`/envoy/${item.id}`)}}/>;
+            })}
+          
           </EnvoyGalley>
           <ShowMore style={{ marginTop: "20px" }}>
             <p>نمایش بیشتر</p>{" "}
@@ -448,9 +520,11 @@ export default function Controller() {
       {/* just state */}
       {select == 2 && (
         <AreaContainer>
-          <SelectArea area="تهران، ری و شمیرانات" envoys={envoys} />
-          <SelectArea area="فیروزکوه و دماوند" envoys={envoys} />
-          <SelectArea area="فیروزکوه و دماوند" envoys={envoys} />
+            {areas.map((item,i)=>{
+              return(
+                <SelectArea area={item.name} envoys={item.agent} key={i} />
+              )
+            })}
         </AreaContainer>
       )}
 
@@ -460,13 +534,16 @@ export default function Controller() {
           <Title>آخرین رأی‌گیری‌ها</Title>
           <VoterContainer>
             {width < 481 ? (
-              <VoteCard />
+              <>
+                {bills.map((item, i) => {
+                  return <VoteCard bill={item} key={i} />;
+                })}
+              </>
             ) : (
               <>
-                {" "}
-                <VoteCard />
-                <VoteCard />
-                <VoteCard />
+                {bills.map((item, i) => {
+                  return <VoteCard bill={item} key={i} />;
+                })}
               </>
             )}
           </VoterContainer>
@@ -483,13 +560,16 @@ export default function Controller() {
           <Title> آخرین عملکردها</Title>
           <ActionContainer>
             {width < 481 ? (
-              <ActionCard />
+              <>
+                {activities.map((item, i) => {
+                  return <ActionCard activity={item} key={i} />;
+                })}
+              </>
             ) : (
               <>
-                {" "}
-                <ActionCard />
-                <ActionCard />
-                <ActionCard />
+                {activities.map((item, i) => {
+                  return <ActionCard activity={item} key={i} />;
+                })}
               </>
             )}
           </ActionContainer>

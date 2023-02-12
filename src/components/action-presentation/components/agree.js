@@ -3,18 +3,27 @@ import styled from "styled-components";
 import BestEnvoy from "../../home/components/bestEnvoy";
 import upArrow from "../../../assets/arrow.webp";
 import ok from "../../../assets/ok.webp";
+import { useNavigate } from "react-router-dom";
 
-export default function Agree() {
+export default function Agree({ envoys }) {
+  const navigate = useNavigate();
+
+  const envoysList = envoys.map((item, i) => {
+    return (
+      <BestEnvoy
+        key={i}
+        envoy={item.voter}
+        click={() => {
+          navigate(`/envoy/${item.voter.id}`);
+        }}
+      />
+    );
+  });
+
   return (
     <Container>
       <Title>نمایندگان موافق</Title>
-      <Gallery>
-        <BestEnvoy />
-        <BestEnvoy />
-        <BestEnvoy />
-        <BestEnvoy />
-        <BestEnvoy />
-      </Gallery>
+      <Gallery>{envoysList}</Gallery>
       <ShowMore>
         <p>نمایش بیشتر </p>
       </ShowMore>
@@ -29,7 +38,7 @@ const Container = styled.div`
   @media (min-width: 480px) {
     padding: 40px 50px;
     border-radius: 0px 8px 8px 0px;
-    margin-bottom:50px;
+    margin-bottom: 50px;
   }
 `;
 
@@ -50,7 +59,7 @@ const ShowMore = styled.div`
       display: flex;
       position: absolute;
       left: -5.814vw;
-      bottom: 1.860vw;
+      bottom: 1.86vw;
       background-image: url(${upArrow});
       background-size: cover;
       background-repeat: no-repeat;
@@ -87,12 +96,17 @@ const Title = styled.h2`
   }
 `;
 
-
-const Gallery =styled.div`
-  @media(min-width:480px){
-    width:100%;
-    display:flex;
-    flex-wrap:wrap;
-    gap:15px;
+const Gallery = styled.div`
+@media (min-width: 481px) {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  & > div {
+    width: 45%;
   }
-`
+}
+@media (min-width: 769px) {
+  gap: 15px;
+}
+`;

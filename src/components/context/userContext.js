@@ -3,6 +3,7 @@ import React, { useReducer, useContext, useEffect } from "react";
 const initialState = {
   userName: "",
   userType: "",
+  userId:0,
   sms: "123456",
   timeOut: false,
   firstName: "",
@@ -21,6 +22,7 @@ const initialState = {
   areaName: "",
   commission: "",
   voteNumber: 0,
+  activityChoice:[],
   dutieHistory: [],
   typeArticle: "",
   contentArticle: {},
@@ -35,16 +37,24 @@ const initialState = {
   mapLevel: 1,
   provinceSearch: {},
   citySearch: {},
+  city:"",
   loggedIn: false,
-  // token: null,
+  token: null,
+  refreshToken:null,
 };
 
 export const userContext = React.createContext({});
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "SET_ID":
+      return { ...state, userId: action.payload };
     case "SET_LOGGED_IN":
       return { ...state, loggedIn: action.payload };
+    case "SET_LOGIN_INFO":
+      return { ...state, ...action.payload };
+    case "SET_USER_DATA":
+      return { ...state, ...action.payload };
     case "SET_AREA_NAME":
       return { ...state, areaName: action.payload };
     case "SET_TYPE_USER":
@@ -87,6 +97,8 @@ const reducer = (state, action) => {
       return { ...state, typeArticle: action.payload };
     case "SET_CONTENT_ARTICLE":
       return { ...state, contentArticle: action.payload };
+      case "SET_ACTIVITY_CHOICE":
+      return { ...state, activityChoice: action.payload };
     case "SET_IMG_ARTICLE":
       return { ...state, imageArticle: action.payload };
     case "SET_DOC_ARTICLE":
@@ -109,12 +121,17 @@ const reducer = (state, action) => {
       return { ...state, provinceSearch: action.payload };
     case "SET_CITY_SEARCH":
       return { ...state, citySearch: action.payload };
+      case "SET_CITY":
+        return { ...state, city: action.payload };
     case "SET_IMAGE":
       return { ...state, image: action.payload };
+     
     // case "SET_DATA":
     //   return { ...state, ...action.payload };
-    // case "SET_TOKEN":
-    //   return { ...state, token: action.payload };
+    case "SET_TOKEN":
+      return { ...state, token: action.payload };
+      case "SET_REFRESH_TOKEN":
+        return { ...state, refreshToken: action.payload };
     case "CLEAR_DATA":
       return initialState;
     default:

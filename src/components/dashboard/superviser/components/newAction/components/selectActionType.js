@@ -12,20 +12,53 @@ import background from "../../../../../../assets/back-controll.webp";
 import voteIcon from "../../../../../../assets/vote.webp";
 import symbol from "../../../../../../assets/vote-logo.webp";
 import actionsymbol from "../../../../../../assets/action-rate.webp";
+import axios from "axios";
+import { BaseBackURL } from "../../../../../../constant/api";
 
 export default function SelectActionType() {
   const navigate = useNavigate();
   const [select, setSelect] = useState(1);
   const [check, setCheck] = useState(-1);
   const { state, dispatch } = useUser();
+  const [voteItems, setVoteItems] = useState([]);
+  const [actionItems,setActionItems]=useState([]);
 
-  const voteItems = [
-    { title: "کلیات لایحۀ بودجۀ سال ۱۴۰۱", date: "۲۹ اسفند ۱۴۰۰" },
-    { title: "کلیات لایحۀ بودجه", date: "۲۹ اسفند ۱۴۰۰" },
-    { title: "کلیات لایحه", date: "۲۹ اسفند ۱۴۰۰" },
-    { title: "کلیات لایحۀ بودجۀ سال ۱۴۰۰", date: "۲۹ اسفند ۱۴۰۰" },
-    { title: "کلیات لایحۀ بودجۀ سال ۱۳۹۹", date: "۲۹ اسفند ۱۴۰۰" },
-  ];
+  const getVoteItems = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/bill/?ordering=name, date&name&tag__id&vote__voter`,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setVoteItems([...response.data]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const getActionsItems =()=>{
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter=`,
+    };
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      setActionItems([...response.data]);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  useEffect(()=>{
+    getVoteItems();
+    getActionsItems();
+  },[])
+
 
   const voteList = voteItems.map((x, i) => {
     return (
@@ -34,13 +67,14 @@ export default function SelectActionType() {
         className={check === i ? "active" : ""}
         onClick={() => {
           setCheck(i);
-          setFieldValue("description", x.title);
+          setFieldValue("description", x.id);
+
         }}
       >
         <div className="symbol"></div>
         <div className="content">
           <p className="titr">رأی‌گیری</p>
-          <h2 className="title">{x.title}</h2>
+          <h2 className="title">{x.name}</h2>
           <p className="date">{x.date}</p>
         </div>
       </SelectItem>
@@ -50,23 +84,21 @@ export default function SelectActionType() {
     return (
       <SelectItem
         key={i}
-        className={x.title === state.typeAction.description ? "active" : ""}
+        className={x.id === state.typeAction.description ? "active" : ""}
       >
         <div className="symbol"></div>
         <div className="content">
           <p className="titr">رأی‌گیری</p>
-          <h2 className="title">{x.title}</h2>
+          <h2 className="title">{x.name}</h2>
           <p className="date">{x.date}</p>
         </div>
       </SelectItem>
     );
   });
 
-  const actionItems = [
-    { title: " خرید خوردو دنا پلاس", date: "۲۹ اسفند ۱۴۰۰" },
-    { title: "هدیه خرید جهیزیه از کانادا", date: "۲۹ اسفند ۱۴۰۰" },
-    { title: " استفاده از موقعیت اختلاس", date: "۲۹ اسفند ۱۴۰۰" },
-  ];
+ 
+
+
 
   const actionList = actionItems.map((x, i) => {
     return (
@@ -75,13 +107,14 @@ export default function SelectActionType() {
         className={check === i ? "active" : ""}
         onClick={() => {
           setCheck(i);
-          setFieldValue("description", x);
+          setFieldValue("description", x.id);
+          dispatch({ type: "SET_ACTIVITY_CHOICE", payload: x.activity_choice });
         }}
       >
         <div className="symbol"></div>
         <div className="content">
           <p className="titr">عملکرد ها</p>
-          <h2 className="title">{x.title}</h2>
+          <h2 className="title">{x.name}</h2>
           <p className="date">{x.date}</p>
         </div>
       </ActiveOrder>
@@ -92,12 +125,12 @@ export default function SelectActionType() {
     return (
       <ActiveOrder
         key={i}
-        className={x.title === state.typeAction.description ? "active" : ""}
+        className={x.id === state.typeAction.description ? "active" : ""}
       >
         <div className="symbol"></div>
         <div className="content">
           <p className="titr">عملکرد ها</p>
-          <h2 className="title">{x.title}</h2>
+          <h2 className="title">{x.name}</h2>
           <p className="date">{x.date}</p>
         </div>
       </ActiveOrder>
@@ -108,8 +141,10 @@ export default function SelectActionType() {
     dispatch({ type: "SET_TYPE_ACTION", payload: values });
     dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 2 });
     actions.resetForm();
-    console.log("submit");
+   
   };
+
+  
 
   const {
     values,
@@ -123,12 +158,13 @@ export default function SelectActionType() {
   } = useFormik({
     initialValues: {
       type: "",
-      description: {},
+      description: "",
     },
     validationSchema: selectActionTypeSchema,
     onSubmit,
   });
 
+  
   useEffect(() => {
     if (select === 1) {
       setFieldValue("type", "vote");
@@ -137,7 +173,7 @@ export default function SelectActionType() {
       setFieldValue("type", "action");
     }
   }, [select]);
-  console.log(state.typeAction);
+ 
 
   return (
     <>
@@ -252,9 +288,9 @@ const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
-  @media(min-width:480px){
-    width:100%;
-    justify-content:center;
+  @media (min-width: 480px) {
+    width: 100%;
+    justify-content: center;
     margin: 1.302vw auto;
   }
 `;
@@ -267,9 +303,9 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
-  @media(min-width:480px){
-    margin-top:0;
-    font-size:1.042vw
+  @media (min-width: 480px) {
+    margin-top: 0;
+    font-size: 1.042vw;
   }
 `;
 
@@ -313,14 +349,19 @@ const Item = styled.p`
   padding: 0;
   font-size: 3.721vw;
   font-weight: 300;
-  padding-top: 35px;
+  /* padding-top: 35px; */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* gap:10px; */
   position: relative;
+  cursor: pointer;
   &.active {
     font-weight: 700;
     &:after {
       content: "";
       display: block;
-      position: absolute;
+      position:absolute;
       width: 100%;
       height: 3px;
       background-color: #dff5f0;
@@ -331,14 +372,14 @@ const Item = styled.p`
   &:before {
     content: "";
     display: block;
-    position: absolute;
+    display: inline-flex;
     background-image: url(${(props) => props.icon});
     background-size: contain;
     background-repeat: no-repeat;
     width: 35px;
     height: 35px;
-    top: 0;
-    right: 15px;
+    /* top: 0;
+    right: 15px; */
   }
   &:nth-child(2) {
     &:before {
@@ -362,6 +403,7 @@ const SelectItem = styled.div`
   gap: 10px;
   align-items: center;
   padding: 13px 19px 18px 30px;
+  cursor: pointer;
   &.active {
     background-color: #dff5f0;
     border: 1px solid #6cbba9;
@@ -435,9 +477,9 @@ const SelectItem = styled.div`
 const Gallery = styled.div`
   margin-top: 10px;
   @media (min-width: 480px) {
-    display:flex;
-    flex-direction:column;
-    gap:1.302vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.302vw;
     width: 84%;
     margin: 1.302vw auto;
   }
@@ -448,6 +490,7 @@ const ActiveOrder = styled.div`
   gap: 10px;
   align-items: center;
   padding: 13px 19px 18px 30px;
+  cursor: pointer;
   &.active {
     background-color: #dff5f0;
     border: 1px solid #6cbba9;

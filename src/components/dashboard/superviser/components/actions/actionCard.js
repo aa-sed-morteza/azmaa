@@ -9,17 +9,17 @@ export default function ActionCard(props) {
   const width = useWidth();
   const envoys = props.envoys;
 
-  const envoyGallery = envoys.map((x, i) => {
+  const envoyGallery = [envoys].map((x, i) => {
     return (
       <SecondEnvoyCard
         key={i}
-        name={x.name}
-        state={x.state}
-        commission={x.commission}
+        name={x.first_name+""+x.last_name}
+        state={x.electoral_district_name}
+        commission={x.fraction_name}
         id={x.id}
-        persantage={x.persantage}
-        img={x.img}
-        action={x.action}
+        persantage={x.transparency}
+        img={x.image}
+        action={props.action}
       />
     );
   });

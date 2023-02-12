@@ -48,6 +48,9 @@ export default function TypeSection() {
     }
 
   },[state.addArticleLevel !==1])
+
+  
+
   return (
     <>
       {state.addArticleLevel == 1 ? (
@@ -56,7 +59,7 @@ export default function TypeSection() {
             <h2>۱. نوع مطلب خود را انتخاب کنید:</h2>
             <RadioButton
               onClick={() => {
-                setFieldValue("type", "یادداشت");
+                setFieldValue("type", "note");
                 setSelect(1);
               }}
             >
@@ -65,16 +68,16 @@ export default function TypeSection() {
                 name="type"
                 value={values.type}
                 onChange={() => {
-                  setFieldValue("type", "یادداشت");
+                  setFieldValue("type", "note");
                 }}
-                checked={values.type == "یادداشت"}
+                checked={values.type == "note"}
               />
               <label htmlFor="text">یادداشت</label>
               <img src={select == 1 ? textGreen : text} />
             </RadioButton>
             <RadioButton
               onClick={() => {
-                setFieldValue("type", "خبر");
+                setFieldValue("type", "news");
                 setSelect(2);
               }}
             >
@@ -83,16 +86,16 @@ export default function TypeSection() {
                 name="type"
                 value={values.type}
                 onChange={() => {
-                  setFieldValue("type", "خبر");
+                  setFieldValue("type", "news");
                 }}
-                checked={values.type == "خبر"}
+                checked={values.type == "news"}
               />
               <label htmlFor="news">خبر</label>
               <img src={select == 2 ? newsGreen : news} />
             </RadioButton>
             <RadioButton
               onClick={() => {
-                setFieldValue("type", "گزارش");
+                setFieldValue("type", "report");
                 setSelect(3);
               }}
             >
@@ -101,16 +104,16 @@ export default function TypeSection() {
                 name="type"
                 value={values.type}
                 onChange={() => {
-                  setFieldValue("type", "گزارش");
+                  setFieldValue("type", "report");
                 }}
-                checked={values.type == "گزارش"}
+                checked={values.type == "report"}
               />
               <label htmlFor="report">گزارش</label>
               <img src={select == 3 ? reportGreen : article} />
             </RadioButton>
             <RadioButton
               onClick={() => {
-                setFieldValue("type", "مقاله");
+                setFieldValue("type", "article");
                 setSelect(4);
               }}
             >
@@ -119,9 +122,9 @@ export default function TypeSection() {
                 name="type"
                 value={values.type}
                 onChange={() => {
-                  setFieldValue("type", "مقاله");
+                  setFieldValue("type", "article");
                 }}
-                checked={values.type == "مقاله"}
+                checked={values.type == "article"}
               />
               <label htmlFor="article">مقاله</label>
               <img src={select == 4 ? atricleGreen : report} />
@@ -157,7 +160,7 @@ export default function TypeSection() {
               type="radio"
               name="type"
               value={state.type}
-              checked={state.typeArticle == "یادداشت"}
+              checked={state.typeArticle == "note"}
             />
             <label htmlFor="text">یادداشت</label>
             <img src={select == 1 ? textGreen : text} />
@@ -167,7 +170,7 @@ export default function TypeSection() {
               type="radio"
               name="type"
               value={state.type}
-              checked={state.typeArticle == "خبر"}
+              checked={state.typeArticle == "news"}
             />
             <label htmlFor="news">خبر</label>
             <img src={select == 2 ? newsGreen : news} />
@@ -177,7 +180,7 @@ export default function TypeSection() {
               type="radio"
               name="type"
               value={state.type}
-              checked={state.typeArticle == "گزارش"}
+              checked={state.typeArticle == "report"}
             />
             <label htmlFor="report">گزارش</label>
             <img src={select == 3 ? reportGreen : article} />
@@ -187,7 +190,7 @@ export default function TypeSection() {
               type="radio"
               name="type"
               value={state.type}
-              checked={state.typeArticle == "مقاله"}
+              checked={state.typeArticle == "article"}
             />
             <label htmlFor="article">مقاله</label>
             <img src={select == 4 ? atricleGreen : report} />
@@ -240,6 +243,7 @@ const RadioButton = styled.div`
   border: 1px solid #eaeaea;
   border-radius: 4px;
   margin-bottom: 10px;
+  cursor: pointer;
   input {
     width: 28px;
     height: 28px;

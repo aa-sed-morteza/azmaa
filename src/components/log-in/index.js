@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import wellcome from "../../assets/welcome.webp";
 import Button from "../general/button";
@@ -14,6 +14,7 @@ import { logInSchema } from "../schema";
 import axios from "axios";
 import { BaseBackURL } from "../../constant/api";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
@@ -27,17 +28,37 @@ export default function LogIn() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/v1/accounts/login/`,
+
+      // withCredentials: true,
       data: data,
     };
 
-    axios(config)
-      .then((response) => {
-        toast.success("ورود با موفقیت انجام شد!", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_LOGGED_IN", payload: true });
-        navigate("/dashboard");
+    axios(config, { withCredentials: true })
+      .then((res) => {
+        console.log(res);
+        if (res.data.id) {
+          toast.success("ورود با موفقیت انجام شد!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+          Cookies.set("userId", res.data.id);
+          Cookies.set("userName", values.userName);
+          dispatch({ type: "SET_LOGGED_IN", payload: true });
+          dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
+          dispatch({ type: "SET_USERNAME", payload: values.userName });
+          getToken(values);
+          if (res.data.electoral_district_name === null) {
+            dispatch({ type: "SET_TYPE_USER", payload: "superviser" });
+            Cookies.set("userType", "superviser");
+          } else {
+            dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
+            Cookies.set("userType", "envoy");
+          }
+          navigate("/dashboard");
+        } else if (res.data.code === -1) {
+          toast.error("نام کاربری یا رمز عبور اشتباه است!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -53,6 +74,30 @@ export default function LogIn() {
       });
   };
 
+  const getToken = (values) => {
+    const data = new FormData();
+    data.append("username", values.userName);
+    data.append("password", values.password);
+
+    console.log("user:", values.userName);
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/`,
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const {
     values,
     errors,
@@ -61,6 +106,7 @@ export default function LogIn() {
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue,
   } = useFormik({
     initialValues: {
       userName: "",
@@ -69,6 +115,19 @@ export default function LogIn() {
     validationSchema: logInSchema,
     onSubmit,
   });
+
+
+  // Convert persianNumber to englishNumber
+  useEffect(() => {
+    setFieldValue(
+      "userName",
+      values.userName
+        .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+        .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    );
+  }, [values.userName]);
+
+  
 
   return (
     <Container>
@@ -127,7 +186,7 @@ const Container = styled.section`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  jusctify-content: center;
+  justify-content: center;
   overflow: hidden;
 `;
 

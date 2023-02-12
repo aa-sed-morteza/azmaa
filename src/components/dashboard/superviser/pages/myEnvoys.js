@@ -17,31 +17,32 @@ export default function MyEnvoys() {
         </AddEnvoy>
         <CardGallery>
           <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
-          <EnvoyCard
+          {/* <EnvoyCard
             persantage={96}
             name="حمیدرضا درویش"
             state="سیستان و بلوچستان"
             commission="امنیت اخلاقی"
             img={pic}
             id={1}
-          />
-
-          <EnvoyCard
+          /> */}
+          {/* <EnvoyCard
             persantage={20}
             name=" صابر نیساز"
             state=" یزد "
             commission="امنیت اجتماعی"
             img={pic}
             id={2}
-          />
-          <EnvoyCard
+          /> */}
+          {/* <EnvoyCard
             persantage={75}
             name=" حمید روحی"
             state=" یزد "
             commission="ورزش"
             img={pic}
             id={3}
-          />
+          /> */}
+          نمایندگان من برای نماینده چه کسانی هستند و ثبت نماینده جدید در فیگما
+          طراحی نشده!!
         </CardGallery>
       </Gallery>
     </Container>

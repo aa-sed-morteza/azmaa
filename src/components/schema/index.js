@@ -5,6 +5,7 @@ import * as yup from "yup";
 
 export const phoneSchema = yup.object().shape({
   phoneNember: yup.number().required("لطفا شماره همراه خود را وارد کنید"),
+  type :yup.string().required("لطفا نوع کاربری خود را انتخاب کنید"),
 });
 
 export const infoSchema = yup.object().shape({
@@ -19,7 +20,7 @@ export const infoSchema = yup.object().shape({
 });
 
 export const passSchema = yup.object().shape({
-  password: yup.number().required("لطفا رمز عبور خود را وارد کنید"),
+  password: yup.string().required("لطفا رمز عبور خود را وارد کنید"),
 });
 
 export const contactSchema = yup.object().shape({
@@ -75,8 +76,8 @@ export const UploadPictSchema = yup.object().shape({
 });
 
 export const LinkSchema = yup.object().shape({
-  document: yup.string().required("لطفا سند مطلب خود را بارگزاری کنید"),
-  link: yup.string().required("لطفا لینک مطلب خودرا وارد کنید"),
+  // document: yup.string().required("لطفا سند مطلب خود را بارگزاری کنید"),
+  // link: yup.string().required("لطفا لینک مطلب خودرا وارد کنید"),
 });
 
 export const selectActionTypeSchema = yup.object().shape({
@@ -98,7 +99,7 @@ export const voteSchema = yup.object().shape({
 });
 
 export const documentSchema = yup.object().shape({
-  document: yup.string().required("لطفا سند خود را بارگزاری کنید"),
+  // document: yup.string().required("لطفا سند خود را بارگزاری کنید"),
 });
 
 export const suggestSchema = yup.object().shape({
