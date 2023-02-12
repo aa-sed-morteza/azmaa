@@ -159,6 +159,10 @@ const Slide = styled.div`
       line-height: 5.78vw;
       margin-top: 0;
       margin-bottom: 28px;
+      display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     }
     p {
       color: #ffffff;
