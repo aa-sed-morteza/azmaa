@@ -142,13 +142,25 @@ export default function SetMobileNumber() {
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue,
   } = useFormik({
     initialValues: {
       phoneNember: "",
+      type:"",
     },
     validationSchema: phoneSchema,
     onSubmit,
   });
+
+   // Convert persianNumber to englishNumber
+   useEffect(() => {
+    setFieldValue(
+      "phoneNember",
+      values.phoneNember
+        .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+        .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    );
+  }, [values.phoneNember]);
 
   return (
     <Container>
@@ -166,6 +178,7 @@ export default function SetMobileNumber() {
           {errors.phoneNember && touched.phoneNember && (
             <ErrorText>{errors.phoneNember}</ErrorText>
           )}
+          
           <Box>
             <Button
               text="ثبت"
