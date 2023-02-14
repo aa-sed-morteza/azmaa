@@ -4,6 +4,7 @@ import { useUser } from "../../../context/userContext";
 import edit from "../../../../assets/left.svg";
 import { useNavigate } from "react-router-dom";
 import box from "../../../../assets/state.svg";
+import {toFarsiNumber} from "../../../../utils"
 
 export default function EnvoyState() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function EnvoyState() {
 
       <Row>
         <p className="type"> تعداد آراء: </p>
-        <p className="expand">{state.vote_number}</p>
+        <p className="expand">{toFarsiNumber(state.vote_number) }</p>
       </Row>
       <Row>
         <p className="type"> تعداد کل آراء صندوق : </p>

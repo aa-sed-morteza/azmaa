@@ -74,7 +74,7 @@ const Container = styled.div`
     max-width: none;
     &:before {
       font-size: 1.25vw;
-      top: -1.042vw;
+      top: -50%;
     }
     span {
       width: 1.563vw;

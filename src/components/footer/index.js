@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import data from "../../data.json";
 import azmma from "../../assets/azmaa.webp";
+import {toFarsiNumber} from "../../utils"
 
 const FooterContainer = styled.section`
   background-color: #095644;

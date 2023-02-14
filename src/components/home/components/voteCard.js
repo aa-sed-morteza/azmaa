@@ -9,6 +9,7 @@ import data from "../../../data.json";
 import left from ".././../../assets/left.webp";
 import { useNavigate } from "react-router-dom";
 import ShareButton from "../../general/shareButton";
+import { toFarsiNumber } from "../../../utils";
 
 const VCContainer = styled.div`
   background-color: #ffffff;
@@ -486,19 +487,19 @@ export default function VoteCard({ bill }) {
           onClick={() => setActive(0)}
           className={active === 0 ? "active" : ""}
         >
-          {bill.vote_number.positive}
+          {toFarsiNumber(bill.vote_number.positive) }
         </Success>
         <Faild
           onClick={() => setActive(1)}
           className={active === 1 ? "active" : ""}
         >
-          {bill.vote_number.negative}
+          {toFarsiNumber(bill.vote_number.negative) }
         </Faild>
         <Not
           onClick={() => setActive(2)}
           className={active === 2 ? "active" : ""}
         >
-          {bill.vote_number.without_vote}
+          {toFarsiNumber(bill.vote_number.without_vote) }
         </Not>
       </Statistics>
 

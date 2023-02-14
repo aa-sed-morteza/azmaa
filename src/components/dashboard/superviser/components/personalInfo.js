@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useUser } from "../../../context/userContext";
 import edit from "../../../../assets/left.svg";
 import { useNavigate } from "react-router-dom";
+import {toFarsiNumber} from "../../../../utils"
 
 export default function PersonalInfo() {
   const navigate =useNavigate();
@@ -31,7 +32,7 @@ export default function PersonalInfo() {
       </Row>
       <Row>
         <p className="type"> کد ملی: </p>
-        <p className="expand">{state.national_code}</p>
+        <p className="expand">{toFarsiNumber(state.national_code) }</p>
       </Row>
     </Container>
   );

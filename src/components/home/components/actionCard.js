@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import ShareButton from "../../general/shareButton.js";
 import { BaseBackURL } from "../../../constant/api";
 import axios from "axios";
+import { toFarsiNumber } from "../../../utils";
 
 export default function ActionCard({ activity }) {
   const [active, setActive] = useState(0);
@@ -79,19 +80,19 @@ export default function ActionCard({ activity }) {
           onClick={() => setActive(0)}
           className={active === 0 ? "active" : ""}
         >
-          {positive}
+          {toFarsiNumber(positive) }
         </Success>
         <Faild
           onClick={() => setActive(1)}
           className={active === 1 ? "active" : ""}
         >
-          {negative}
+          {toFarsiNumber(negative) }
         </Faild>
         <Not
           onClick={() => setActive(2)}
           className={active === 2 ? "active" : ""}
         >
-          {noChoice}
+          {toFarsiNumber(noChoice) }
         </Not>
       </Statistics>
 

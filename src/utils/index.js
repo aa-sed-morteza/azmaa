@@ -42,3 +42,12 @@ export function ChangeToPersianDate(dateStr) {
 
   return persianDate;
 }
+
+
+export function toFarsiNumber(n) {
+  const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+
+  return Math.round(n)
+      .toString()
+      .replace(/\d/g, x => farsiDigits[x]);
+}

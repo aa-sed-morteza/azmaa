@@ -4,6 +4,7 @@ import data from "../../../data.json";
 import leftArrow from "../../../assets/lightArrow.webp";
 import profile from "../../../assets/profile.webp";
 import { useNavigate } from "react-router-dom";
+import {toFarsiNumber} from "../../../utils"
 
 const Container = styled.section`
   overflow: hidden;
@@ -13,14 +14,15 @@ const Container = styled.section`
   margin: 0;
   position: relative;
   padding-bottom: 82px;
+  
 `;
 
 const ShowIndex = styled.div`
   display: flex;
   gap: 10px;
   position: absolute;
-  bottom: 11%;
-  left: 30%;
+  bottom:8%;
+  left: 28%;
   .item {
     width: 15px;
     height: 15px;
@@ -65,6 +67,11 @@ const Content = styled.div`
     font-size: 3.33vw;
     margin: 0;
     line-height: 5.78vw;
+    -webkit-box-orient: vertical;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
   }
   .text {
     font-weight: 400;
@@ -73,6 +80,11 @@ const Content = styled.div`
     text-align: justify;
     color: #707070;
     margin: 0;
+    -webkit-box-orient: vertical;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 4;
   }
   .identity {
     display: flex;
@@ -127,13 +139,14 @@ const Button = styled.div`
     transform:translate(0,-50%);
 }
    
-  }
+  
   .text-button {
     margin: 0;
     padding-left: 60px;
     color: #ffffff;
     font-size: 1.25vw;
     font-weight: 700;
+
   }
 `;
 
@@ -182,7 +195,7 @@ export default function Carousel({ posts }) {
               <h1 className="title">{x.title.slice(0, 50) + "..."}</h1>
               <p className="text">{x.description.slice(0, 250) + "..."} </p>
               <div className="identity">
-                <p className="user">{x.writer}</p>
+                <p className="user">{toFarsiNumber(x.writer) }</p>
                 <p className="date">{x.created}</p>
               </div>
               <Button

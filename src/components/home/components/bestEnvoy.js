@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import pic from "../../../assets/pic.webp";
 import profile from "../../../assets/profile.webp";
+import { toFarsiNumber } from "../../../utils";
 
 const EnvoyCard = styled.div`
   display: flex;
@@ -137,6 +138,7 @@ const Content = styled.div`
 
 export default function BestEnvoy({ envoy ,click}) {
 
+
   
   return (
     <EnvoyCard onClick={click}>
@@ -151,7 +153,7 @@ export default function BestEnvoy({ envoy ,click}) {
         </div>
         <div className="persantage">
           <p className="text">شفافیت: ٪</p>
-          <p className="content">{envoy.transparency}</p>
+          <p className="content">{toFarsiNumber(envoy.transparency) }</p>
         </div>
       </Content>
     </EnvoyCard>

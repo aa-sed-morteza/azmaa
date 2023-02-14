@@ -149,6 +149,7 @@ export default function LogIn() {
           )}
           <CustomInput
             label="رمز عبور"
+            type='password'
             icon={lock}
             back="#f5f5f5"
             id="password"
@@ -224,7 +225,7 @@ const Form = styled.form`
   flex-direction: column;
   gap: 15px;
   @media (min-width: 480px) {
-    gap: 1.302vw;
+    gap: 1.5vw;
   }
 `;
 

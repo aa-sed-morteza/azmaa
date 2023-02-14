@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import edit from "../../../../assets/left.svg";
 import { useUser } from "../../../context/userContext";
+import {toFarsiNumber} from "../../../../utils"
 
 export default function ContactInfo() {
   const { state, dispatch } = useUser();
@@ -18,7 +19,7 @@ export default function ContactInfo() {
       <Title> اطلاعات تماس</Title>
       <Row>
         <p className="type"> شمارۀ همراه: </p>
-        <p className="expand">{state.userName}</p>
+        <p className="expand">{toFarsiNumber(state.userName) }</p>
       </Row>
       <Row>
         <p className="type">ایمیل : </p>
@@ -31,7 +32,7 @@ export default function ContactInfo() {
       </Row>
       <Row>
         <p className="type">شمارۀ ثابت:: </p>
-        <p className="expand">{state.telephone}</p>
+        <p className="expand">{toFarsiNumber(state.telephone) }</p>
       </Row>
     </Container>
   );

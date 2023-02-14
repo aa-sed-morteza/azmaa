@@ -7,6 +7,7 @@ import ScrollButton from "../../general/scrollButton";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { useNavigate } from "react-router-dom";
+import { toFarsiNumber } from "../../../utils";
 
 const MagazineContainer = styled.section`
   background-color: #ffaa00;
@@ -267,7 +268,7 @@ export default function Magazine() {
           <img src={x.main_image} alt={x.date} />
         </div>
 
-        <p className="user">{x.writer}</p>
+        <p className="user">{toFarsiNumber(x.writer) }</p>
 
         <p className="content">{x.title}</p>
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import profile from "../../assets/profile.webp";
+import { toFarsiNumber } from "../../utils";
 
 export default function EnvoyCard({name,state,commission,img,persantage,id,inBox}) {
   const [color, setColor] = useState("#FFAA00");
@@ -59,7 +60,7 @@ export default function EnvoyCard({name,state,commission,img,persantage,id,inBox
         </div>
         <div className="persantage">
           <p className="text">شفافیت: ٪</p>
-          <p className="content">{persantage || "0"}</p>
+          <p className="content">{toFarsiNumber(persantage)  || "0"}</p>
         </div>
       </Content>
     </Container>

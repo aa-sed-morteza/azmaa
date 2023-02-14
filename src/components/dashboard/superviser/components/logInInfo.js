@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import edit from "../../../../assets/left.svg";
 import { useUser } from "../../../context/userContext";
+import {toFarsiNumber} from "../../../../utils"
 
 
 export default function LogInInfo() {
@@ -14,7 +15,7 @@ export default function LogInInfo() {
       <Title> اطلاعات ورود</Title>
       <Row>
         <p className="type">نام کاربری : </p>
-        <p className="expand">{state.userName}</p>
+        <p className="expand">{toFarsiNumber(state.userName) }</p>
       </Row>
       <Row>
         <p className="type">رمز ورود: </p>
