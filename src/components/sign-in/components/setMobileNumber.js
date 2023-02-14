@@ -203,10 +203,11 @@ export default function SetMobileNumber() {
           )}
           <Select
             label="نوع کاربر"
-            background="#FFFFFF"
+            background="#F5F5F5"
             value={values.type}
             onChange={handleChange}
             options={type}
+            white={true}
             id="type"
           />
           {errors.type && touched.type && <ErrorText>{errors.type}</ErrorText>}
