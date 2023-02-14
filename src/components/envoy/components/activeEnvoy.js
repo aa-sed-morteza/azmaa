@@ -3,6 +3,7 @@ import styled from "styled-components";
 import profile from "../../../assets/profile.webp";
 import upArrow from "../../../assets/arrow.webp";
 import BestEnvoy from "../../home/components/bestEnvoy";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.section`
   display: flex;
@@ -54,44 +55,49 @@ const EnvoyContainer = styled.div`
 `;
 
 const ShowMore = styled.div`
-border: 2px solid #9f9f9f;
-border-radius: 8px;
-width: 500px;
-display:flex;
-justify-content: center;
-align-items: center;
-margin: auto;
-padding: 13px;
-margin-top:43px;
-p {
-  font-size: 1.25vw;
-  font-weight: 400;
-  color: #9f9f9f;
-  position: relative;
-  margin:0;
-  &:after {
-    content: "";
-    display: flex;
-    position: absolute;
-    background-image: url(${upArrow});
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 8px;
-    left: -37px;
-    bottom: 8px;
+  border: 2px solid #9f9f9f;
+  border-radius: 8px;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 13px;
+  margin-top: 43px;
+  p {
+    font-size: 1.25vw;
+    font-weight: 400;
+    color: #9f9f9f;
+    position: relative;
+    margin: 0;
+    &:after {
+      content: "";
+      display: flex;
+      position: absolute;
+      background-image: url(${upArrow});
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 15px;
+      height: 8px;
+      left: -37px;
+      bottom: 8px;
+    }
   }
-}
-}
 `;
 
 export default function ActiveEnvoy({ envoys }) {
+  const navigate = useNavigate();
   return (
     <Container>
       <Title>فعال‌ترین نمایندگان</Title>
       <EnvoyContainer>
         {envoys.map((item) => (
-          <BestEnvoy envoy={item} />
+          <BestEnvoy
+            envoy={item}
+            click={() => {
+              navigate(`/envoy/${item.id}`);
+            }}
+          />
         ))}
       </EnvoyContainer>
       <ShowMore>

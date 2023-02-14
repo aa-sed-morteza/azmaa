@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import upArrow from "../../../assets/arrow.webp";
 import BestEnvoy from "../../home/components/bestEnvoy";
@@ -31,7 +32,7 @@ padding: 5px 7px;
   color:#FFFFFF;
   font-weight:700;
 }
-}
+
 `;
 
 const Gallery = styled.div`
@@ -87,6 +88,9 @@ const ShowMore = styled.div`
 
 export default function EnvoyFiltering({ envoys }) {
   const [select, setSelect] = useState(1);
+  const navigate = useNavigate();
+
+ 
 
   return (
     <Container>
@@ -128,7 +132,12 @@ export default function EnvoyFiltering({ envoys }) {
       <Gallery>
         <Gallery>
           {envoys.map((item) => (
-            <BestEnvoy envoy={item} />
+            <BestEnvoy
+              envoy={item}
+              click={() => {
+                navigate(`/envoy/${item.id}`);
+              }}
+            />
           ))}
         </Gallery>
         <ShowMore>

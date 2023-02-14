@@ -1,17 +1,26 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import eye from "../../../assets/eye.webp";
 import BestEnvoy from "../../home/components/bestEnvoy";
 
 export default function HonestEnvoy({ envoys }) {
+  const navigate =useNavigate();
   const newList = envoys.sort((a, b) => a.transparency > b.transparency);
+
+  
 
   return (
     <Container>
       <Title>شفاف‌ترین نمایندگان</Title>
       <Gallery>
         {newList.map((item) => (
-          <BestEnvoy envoy={item} />
+          <BestEnvoy
+            envoy={item}
+            click={() => {
+              navigate(`/envoy/${item.id}`);
+            }}
+          />
         ))}
       </Gallery>
     </Container>
