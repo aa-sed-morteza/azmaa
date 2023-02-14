@@ -10,7 +10,7 @@ export default function EnvoyHistory({id}) {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const [open, setOpen] = useState(false);
-  const [experiences,setExperiences]=useState();
+  const [experiences,setExperiences]=useState([]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -26,7 +26,7 @@ export default function EnvoyHistory({id}) {
       .then(function (res) {
         console.log(JSON.stringify(res.data));
         
-        setExperiences([res.data.experiences]);
+        setExperiences([...res.data.experiences]);
         
       })
       .catch(function (error) {
@@ -38,19 +38,19 @@ export default function EnvoyHistory({id}) {
     getEnvoyHistory();
   },[])
 
- 
+
 
   return (
     <Container onClick={handleClick} className={open ? "active" : ""}>
       <Title>سوابق نماینده</Title>
       <History>
-        <p className="text">{experiences ?experiences[0][0].title :""} </p>
+        <p className="text">{experiences.length !== 0 ?experiences[0].title :""} </p>
         {/* <p className="text">{experiences[0][1] ?experiences[0][1].title :""} </p> */}
       </History>
 
       <Content className={open ? "open" : ""}>
         <History>
-          {experiences && experiences[0].map((item,i)=>{
+          {experiences.length !==0 && experiences.map((item,i)=>{
             return(
               <p className="text" key={i}> {item.title}</p>
             )

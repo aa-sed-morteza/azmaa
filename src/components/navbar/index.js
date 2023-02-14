@@ -179,6 +179,7 @@ const MobilePanel = styled.div`
 `;
 
 const Search = styled.div`
+  display: none;
   background-image: url(${search});
   background-size: contain;
   width: 20px;
@@ -433,7 +434,7 @@ export default function Navbar() {
               </div>
               <p className="content">
                 {" "}
-                {dashboard  ? "خروج از پنل" : "ورود به پنل"}{" "}
+                {dashboard ? "خروج از پنل" : "ورود به پنل"}{" "}
               </p>{" "}
             </MobilePanel>
           </MenuList>

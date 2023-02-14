@@ -30,8 +30,9 @@ export default function Filtering({ id }) {
 
     axios(config)
       .then(function (res) {
-        console.log(JSON.stringify(res.data));
-        setBillEnvoy([res.data[0]]);
+        console.log("solakh", res.data[0]);
+        // setBillEnvoy([res.data[0]]);
+        setBillEnvoy([...res.data]);
       })
       .catch(function (error) {
         console.log(error);
@@ -61,22 +62,20 @@ export default function Filtering({ id }) {
     getEnvoyActivity();
   }, []);
 
- 
   //generate card for activity envoy
   const activity = activityEnvoy.map((item, i) => {
     return item.vote.map((x, j) => {
       if (x.voter.id === parseInt(id)) {
-        return(
+        return (
           <GeneralActionCard
-          key={j}
-          act="action"
-          content={item.name}
-          action={x.vote}
-          date={item.date}
-          item={item}
-        />
-        )
-       
+            key={j}
+            act="action"
+            content={item.name}
+            action={x.vote}
+            date={item.date}
+            item={item}
+          />
+        );
       }
     });
   });
@@ -84,8 +83,7 @@ export default function Filtering({ id }) {
   // get votes envoy for bills
   const positiveVote = billEnvoy.map((item, i) => {
     return item.positive_vote.map((positive, i) => {
-      if (positive.voter.id === parseInt(id)) {
-       
+      if (positive.voter && positive.voter.id === parseInt(id)) {
         return (
           <GeneralActionCard
             key={i}
@@ -223,15 +221,11 @@ export default function Filtering({ id }) {
             {withoutVote}
           </Gallery>
           <SubTitile>مرداد ۱۴۰۱</SubTitile>
-          <Gallery>
-           
-          </Gallery>
+          <Gallery></Gallery>
 
           <Title>سال ۱۴۰۰</Title>
           <SubTitile>مرداد ۱۴۰۰</SubTitile>
-          <Gallery>
-          {activity}
-          </Gallery>
+          <Gallery>{activity}</Gallery>
         </Calendar>
       )}
       {select == 2 && <>همه با فعالیت ها چه فرقی داره ؟</>}
@@ -252,9 +246,7 @@ export default function Filtering({ id }) {
         <Calendar>
           <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
           <SubTitile>مرداد ۱۴۰۰</SubTitile>
-          <Gallery>
-            {activity}
-          </Gallery>
+          <Gallery>{activity}</Gallery>
         </Calendar>
       )}
 
@@ -557,9 +549,8 @@ const Title = styled.div`
     }
   }
   @media (min-width: 769px) {
-   
     width: 500px;
-  
+  }
 `;
 
 const Gallery = styled.div`
