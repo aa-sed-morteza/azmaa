@@ -92,6 +92,8 @@ export default function LogIn() {
         console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
         dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
+        Cookies.set('refreshToken', response.data.refresh );
+        Cookies.set('token', response.data.access  );
       })
       .catch((error) => {
         console.log(error);

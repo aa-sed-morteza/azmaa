@@ -12,6 +12,7 @@ import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { toast } from "react-toastify";
 import Select from "../../general/select";
+import Cookies from "js-cookie";
 
 export default function SetMobileNumber() {
   const { state, dispatch } = useUser();
@@ -93,6 +94,8 @@ export default function SetMobileNumber() {
         console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
         dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
+        Cookies.set('refreshToken', response.data.refresh );
+        Cookies.set('token', response.data.access  );
       })
       .catch((error) => {
         console.log(error);

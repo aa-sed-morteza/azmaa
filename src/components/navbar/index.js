@@ -5,6 +5,7 @@ import menu from "../../assets/menu.webp";
 import search from "../../assets/search.webp";
 import close from "../../assets/close.webp";
 import signIn from "../../assets/Sign_in.webp";
+import signInMobile from "../../assets/signMobile.svg";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import useWidth from "../../hook/useWidth";
@@ -165,6 +166,7 @@ const MobilePanel = styled.div`
       width: 90%;
       height: 90%;
       object-fit: contain;
+      mix-blend-mode: lighten;
     }
   }
   .content {
@@ -427,11 +429,11 @@ export default function Navbar() {
               onClick={goDashboard}
             >
               <div className="icon">
-                <img src={dashboard ? exit : signIn} />
+                <img src={dashboard ? exit : signInMobile} />
               </div>
               <p className="content">
                 {" "}
-                {dashboard ? "خروج از پنل" : "ورود به پنل"}{" "}
+                {dashboard  ? "خروج از پنل" : "ورود به پنل"}{" "}
               </p>{" "}
             </MobilePanel>
           </MenuList>
