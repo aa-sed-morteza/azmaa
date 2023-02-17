@@ -14,6 +14,7 @@ const Container = styled.section`
   margin: 0;
   position: relative;
   padding-bottom: 82px;
+  height: 100vh;
 `;
 
 const ShowIndex = styled.div`
@@ -44,6 +45,7 @@ const Slide = styled.div`
   align-items: center;
   gap: 2.6vw;
   transition: all 0.7s ease-in-out;
+  height: 100%;
 `;
 const PicWraper = styled.div`
   width: 116%;
