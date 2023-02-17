@@ -74,11 +74,9 @@ const TabContainer = styled.div`
   display: flex;
   gap: 20px;
   align-items: flex-end;
-  @media(min-width:481px){
-    
+  @media (min-width: 481px) {
     justify-content: space-evenly;
   }
-
 `;
 
 const Tab = styled.div`
@@ -212,6 +210,7 @@ const ShowMore = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 8px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;
@@ -303,7 +302,7 @@ const AreaContainer = styled.div`
 `;
 
 export default function Controller() {
-  const {state,dispatch}=useUser();
+  const { state, dispatch } = useUser();
   const [select, setSelect] = useState(0);
   const [bills, setBills] = useState([]);
   const [envoys, setEnvoys] = useState([]);
@@ -313,16 +312,16 @@ export default function Controller() {
   const navigate = useNavigate();
   const width = useWidth();
 
-  const filterEnvoyByCity = ()=>{
-    const selectEnvoys =  envoys.filter(x=>x.electoral_district_name == state.city);
-    setEnvoys([...selectEnvoys])
-   
-  }
-  
+  const filterEnvoyByCity = () => {
+    const selectEnvoys = envoys.filter(
+      (x) => x.electoral_district_name == state.city
+    );
+    setEnvoys([...selectEnvoys]);
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     filterEnvoyByCity();
-  },[state.city])
+  }, [state.city]);
 
   const getBills = () => {
     let config = {
@@ -389,10 +388,7 @@ export default function Controller() {
     getElectoralDistrict();
   }, []);
 
-  
-
   const newList = envoys.sort((a, b) => a.transparency > b.transparency);
-
 
   const controllItem = data.controlPanel.map((x, i) => {
     return (
@@ -507,9 +503,16 @@ export default function Controller() {
         <>
           <EnvoyGalley>
             {newList.map((item, i) => {
-              return <BestEnvoy envoy={item} key={i} click={()=>{navigate(`/envoy/${item.id}`)}}/>;
+              return (
+                <BestEnvoy
+                  envoy={item}
+                  key={i}
+                  click={() => {
+                    navigate(`/envoy/${item.id}`);
+                  }}
+                />
+              );
             })}
-          
           </EnvoyGalley>
           <ShowMore style={{ marginTop: "20px" }}>
             <p>نمایش بیشتر</p>{" "}
@@ -520,11 +523,9 @@ export default function Controller() {
       {/* just state */}
       {select == 2 && (
         <AreaContainer>
-            {areas.map((item,i)=>{
-              return(
-                <SelectArea area={item.name} envoys={item.agent} key={i} />
-              )
-            })}
+          {areas.map((item, i) => {
+            return <SelectArea area={item.name} envoys={item.agent} key={i} />;
+          })}
         </AreaContainer>
       )}
 

@@ -21,8 +21,6 @@ export default function ActionCard({ activity }) {
   const envoyData = data.envoy;
   const navigate = useNavigate();
 
- 
-
   const envoyList = votes.map((x, i) => {
     return (
       <Card key={i} color={bColor}>
@@ -80,19 +78,19 @@ export default function ActionCard({ activity }) {
           onClick={() => setActive(0)}
           className={active === 0 ? "active" : ""}
         >
-          {toFarsiNumber(positive) }
+          {toFarsiNumber(positive)}
         </Success>
         <Faild
           onClick={() => setActive(1)}
           className={active === 1 ? "active" : ""}
         >
-          {toFarsiNumber(negative) }
+          {toFarsiNumber(negative)}
         </Faild>
         <Not
           onClick={() => setActive(2)}
           className={active === 2 ? "active" : ""}
         >
-          {toFarsiNumber(noChoice) }
+          {toFarsiNumber(noChoice)}
         </Not>
       </Statistics>
 
@@ -488,6 +486,9 @@ const LargButton = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+
   .content {
     margin: 0 auto;
     font-size: 4.65vw;

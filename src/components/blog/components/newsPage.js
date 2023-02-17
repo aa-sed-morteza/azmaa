@@ -173,15 +173,14 @@ const DesktopContainer = styled.div`
 `;
 
 const News = styled.div`
-  padding:40px;
+  padding: 40px;
   background-color: #f3f3f3;
   border-radius: 8px 0px 0px 8px;
   width: 55%;
-  @media(min-width:769px){
-    width:54%;
+  @media (min-width: 769px) {
+    width: 54%;
     padding: 49px 200px 42px 54px;
   }
- 
 `;
 
 const RelatedContainer = styled.div`
@@ -196,14 +195,14 @@ const RelatedContainer = styled.div`
   padding-bottom: 10px;
   padding-left: 10%;
   h3 {
-    display:flex;
-    align-items:center;
-    gap:7px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
     font-weight: 300;
     font-size: 1.875vw;
     color: #707070;
     margin: 0;
-   
+
     &:before {
       content: "";
       display: inline-flex;
@@ -214,9 +213,9 @@ const RelatedContainer = styled.div`
       height: 18px;
     }
   }
-  @media(min-width:769px){
-    h3{
-      &:before{
+  @media (min-width: 769px) {
+    h3 {
+      &:before {
         width: 1.563vw;
         height: 1.823vw;
       }
@@ -593,6 +592,7 @@ const ShowMore = styled.div`
   margin: auto;
   padding: 13px;
   margin-top: 45px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;

@@ -379,6 +379,9 @@ const LargButton = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+
   .content {
     margin: 0 auto;
     font-size: 4.65vw;
@@ -437,7 +440,6 @@ export default function VoteCard({ bill }) {
   const [color, SetColor] = useState("#DFF5F0");
   const [bColor, setBColor] = useState("#6cbba9");
   const [envoyData, setEnvoyData] = useState(bill.positive_vote);
-  
 
   const navigate = useNavigate();
 
@@ -487,19 +489,19 @@ export default function VoteCard({ bill }) {
           onClick={() => setActive(0)}
           className={active === 0 ? "active" : ""}
         >
-          {toFarsiNumber(bill.vote_number.positive) }
+          {toFarsiNumber(bill.vote_number.positive)}
         </Success>
         <Faild
           onClick={() => setActive(1)}
           className={active === 1 ? "active" : ""}
         >
-          {toFarsiNumber(bill.vote_number.negative) }
+          {toFarsiNumber(bill.vote_number.negative)}
         </Faild>
         <Not
           onClick={() => setActive(2)}
           className={active === 2 ? "active" : ""}
         >
-          {toFarsiNumber(bill.vote_number.without_vote) }
+          {toFarsiNumber(bill.vote_number.without_vote)}
         </Not>
       </Statistics>
 

@@ -20,19 +20,18 @@ const FilterBox = styled.div`
 `;
 
 const FilterItem = styled.p`
-background-color: #FFFFFF;
-color:#9F9F9F;
-font-size:3.721vw;
-font-weight:300;
-border-radius: 2px;
-margin: 0;
-padding: 5px 7px;
-&.select{
-  background-color:#707070;
-  color:#FFFFFF;
-  font-weight:700;
-}
-
+  background-color: #ffffff;
+  color: #9f9f9f;
+  font-size: 3.721vw;
+  font-weight: 300;
+  border-radius: 2px;
+  margin: 0;
+  padding: 5px 7px;
+  &.select {
+    background-color: #707070;
+    color: #ffffff;
+    font-weight: 700;
+  }
 `;
 
 const Gallery = styled.div`
@@ -46,6 +45,7 @@ const ShowMore = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 8px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;
@@ -89,8 +89,6 @@ const ShowMore = styled.div`
 export default function EnvoyFiltering({ envoys }) {
   const [select, setSelect] = useState(1);
   const navigate = useNavigate();
-
- 
 
   return (
     <Container>

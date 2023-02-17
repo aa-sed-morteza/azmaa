@@ -48,6 +48,7 @@ const ShowMore = styled.div`
   display: flex;
   padding: 8px;
   margin-top: 32px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;
@@ -97,16 +98,16 @@ const Title = styled.h2`
 `;
 
 const Gallery = styled.div`
-@media (min-width: 481px) {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  & > div {
-    width: 45%;
+  @media (min-width: 481px) {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    & > div {
+      width: 45%;
+    }
   }
-}
-@media (min-width: 769px) {
-  gap: 15px;
-}
+  @media (min-width: 769px) {
+    gap: 15px;
+  }
 `;

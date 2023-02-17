@@ -148,6 +148,7 @@ const Slide = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   padding-bottom: 20%;
+  transition: all 0.7s ease-in-out;
 
   .content {
     position: absolute;
@@ -190,6 +191,8 @@ const Slide = styled.div`
       width: fit-content;
       margin-top: 30px;
       position: relative;
+      cursor: pointer;
+
       &:before {
         content: "";
         display: block;

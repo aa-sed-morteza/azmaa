@@ -5,7 +5,7 @@ import upArrow from "../../../assets/arrow.webp";
 import icon from "../../../assets/info.webp";
 import { useNavigate } from "react-router-dom";
 
-export default function NoComment({envoys}) {
+export default function NoComment({ envoys }) {
   const navigate = useNavigate();
 
   const envoysList = envoys.map((item, i) => {
@@ -22,9 +22,7 @@ export default function NoComment({envoys}) {
   return (
     <Container>
       <Title>نمایندگان ممتنع</Title>
-      <Gallery>
-        {envoysList}
-      </Gallery>
+      <Gallery>{envoysList}</Gallery>
       <ShowMore>
         <p>نمایش بیشتر </p>
       </ShowMore>
@@ -49,6 +47,7 @@ const ShowMore = styled.div`
   display: flex;
   padding: 8px;
   margin-top: 32px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;
@@ -78,8 +77,8 @@ const Title = styled.h2`
   display: none;
   @media (min-width: 481px) {
     display: flex;
-    align-items:center;
-    gap:7px;
+    align-items: center;
+    gap: 7px;
     font-size: 1.875vw;
     font-weight: 300;
     color: #9f9f9f;
@@ -94,26 +93,25 @@ const Title = styled.h2`
       height: 20px;
     }
   }
-  @media(min-width:769px){
-    &:before{
+  @media (min-width: 769px) {
+    &:before {
       width: 2.604vw;
       height: 2.604vw;
     }
-    
   }
 `;
 
 const Gallery = styled.div`
-@media(min-width:481px){
-  width:100%;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  &>div{
-    width:45%;
+  @media (min-width: 481px) {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    & > div {
+      width: 45%;
+    }
   }
-}
-@media(min-width:769px){
-  gap:15px;
-}
+  @media (min-width: 769px) {
+    gap: 15px;
+  }
 `;

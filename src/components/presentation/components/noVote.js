@@ -4,7 +4,7 @@ import BestEnvoy from "../../home/components/bestEnvoy";
 import upArrow from "../../../assets/arrow.webp";
 import { useNavigate } from "react-router-dom";
 
-export default function NoVote({envoys}) {
+export default function NoVote({ envoys }) {
   const navigate = useNavigate();
 
   const envoysList = envoys.map((item, i) => {
@@ -20,7 +20,6 @@ export default function NoVote({envoys}) {
   });
   return (
     <Container>
-      
       {envoysList}
 
       <ShowMore>
@@ -42,6 +41,7 @@ const ShowMore = styled.div`
   display: flex;
   padding: 8px;
   margin-top: 32px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;

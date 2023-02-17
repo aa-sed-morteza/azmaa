@@ -140,6 +140,7 @@ const ShowMore = styled.div`
   display: flex;
   padding: 8px;
   margin-top: 16px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;
@@ -213,7 +214,6 @@ export default function Calendar({ bills }) {
   ];
 
   const elements = [];
-  
 
   for (let i = parseInt(month) - 1; i > 0; i--) {
     const newList = [];

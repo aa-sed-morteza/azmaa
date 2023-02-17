@@ -163,6 +163,7 @@ const ShowMore = styled.div`
   padding: 8px;
   background-color: #ffffff;
   margin-bottom: 10px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;

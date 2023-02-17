@@ -69,7 +69,7 @@ const Title = styled.div`
     color: rgba(112, 112, 112, 1);
   }
   @media (min-width: 480px) {
-   display:none;
+    display: none;
   }
 `;
 
@@ -95,14 +95,14 @@ const HistoryWraper = styled.div`
     font-weight: 700;
     font-size: 2.791vw;
   }
-  @media(min-width:480px){
-    padding:1.302vw 1.302vw 2.604vw 9.896vw;
-    gap:1.042vw;
-    .title{
-      font-size:1.667vw;
+  @media (min-width: 480px) {
+    padding: 1.302vw 1.302vw 2.604vw 9.896vw;
+    gap: 1.042vw;
+    .title {
+      font-size: 1.667vw;
     }
-    .date{
-      font-size:1.250vw;
+    .date {
+      font-size: 1.25vw;
     }
   }
 `;
@@ -111,8 +111,8 @@ const HistoryCard = styled.div`
   border: 1px solid #eaeaea;
   border-radius: 4px;
   padding: 14px 50px 13px;
-  @media(min-width:480px){
-    padding:1.042vw 4.167vw;
+  @media (min-width: 480px) {
+    padding: 1.042vw 4.167vw;
   }
 `;
 
@@ -122,6 +122,7 @@ const ShowMore = styled.div`
   display: flex;
   padding: 3px;
   margin-top: 16px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;
@@ -163,26 +164,26 @@ const ShowMore = styled.div`
   }
 `;
 
-const GalleryTitle=styled.h2`
-  display:none;
-  @media(min-width:480px){
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:20px;
-    color:#707070;
-    font-weight:300;
-    font-size:1.875vw;
-    margin:0;
-    margin-bottom:1.302vw;
-    &:before{
-      content:'';
-      display:flex;
-      width:1.563vw;
-      height:1.563vw;
+const GalleryTitle = styled.h2`
+  display: none;
+  @media (min-width: 480px) {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #707070;
+    font-weight: 300;
+    font-size: 1.875vw;
+    margin: 0;
+    margin-bottom: 1.302vw;
+    &:before {
+      content: "";
+      display: flex;
+      width: 1.563vw;
+      height: 1.563vw;
       background-image: url(${title});
       background-size: contain;
       background-repeat: no-repeat;
     }
   }
-`
+`;

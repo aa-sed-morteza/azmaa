@@ -77,6 +77,7 @@ const ShowMore = styled.div`
   margin: auto;
   padding: 13px;
   margin-top: 43px;
+  cursor: pointer;
   p {
     font-size: 1.25vw;
     font-weight: 400;
@@ -125,7 +126,6 @@ export default function ControlCore() {
     });
   };
 
-
   const getElectoralDistrict = () => {
     let config = {
       method: "get",
@@ -142,15 +142,12 @@ export default function ControlCore() {
       });
   };
 
-
   useEffect(() => {
     getEnvoys();
     getElectoralDistrict();
   }, []);
 
   const newList = envoys.sort((a, b) => a.transparency > b.transparency);
-
-  
 
   return (
     <Container>
@@ -189,11 +186,10 @@ export default function ControlCore() {
         )}
         {select === "area" && (
           <AreaContainer>
-        
-            {areas.map((item,i)=>{
-              return(
+            {areas.map((item, i) => {
+              return (
                 <SelectArea area={item.name} envoys={item.agent} key={i} />
-              )
+              );
             })}
           </AreaContainer>
         )}

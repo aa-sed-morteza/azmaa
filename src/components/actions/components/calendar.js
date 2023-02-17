@@ -209,6 +209,7 @@ const ShowMore = styled.div`
   display: flex;
   padding: 8px;
   margin-top: 16px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;
