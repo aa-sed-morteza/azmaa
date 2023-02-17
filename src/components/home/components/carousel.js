@@ -41,8 +41,6 @@ export default function Carousel() {
     });
   };
 
- 
-
   useEffect(() => {
     getPosts();
   }, []);
@@ -50,6 +48,9 @@ export default function Carousel() {
   const index = items.map((x, i) => {
     return (
       <div
+        onClick={() => {
+          setCurrentIndex(i);
+        }}
         key={i}
         className={i === currentIndex ? "item active" : "item"}
       ></div>
@@ -91,6 +92,8 @@ const Wraper = styled.section`
   display: flex;
   padding: 0;
   margin: 0;
+  height: 100vh;
+  overflow: hidden;
   margin-left: -3%;
   margin-right: -3%;
   margin-top: -10%;
@@ -126,6 +129,7 @@ const ShowIndex = styled.div`
     height: 15px;
     border-radius: 15px;
     background-color: #cbcbcb;
+    cursor: pointer;
   }
   .active {
     background-color: #ffaa00;
@@ -137,13 +141,13 @@ const Slide = styled.div`
   display: flex;
   width: 100%;
   min-width: 100%;
-  height: 20rem;
+  height: 100%;
   justify-content: center;
   align-items: center;
   background-image: url(${(props) => props.photo});
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
-  padding-top: 44%;
+  padding-bottom: 20%;
 
   .content {
     position: absolute;
@@ -160,9 +164,9 @@ const Slide = styled.div`
       margin-top: 0;
       margin-bottom: 28px;
       display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     p {
       color: #ffffff;
