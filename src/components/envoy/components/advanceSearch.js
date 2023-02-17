@@ -6,32 +6,31 @@ import arrow from "../../../assets/arrowUp.webp";
 export default function AdvanceSearch() {
   const [open, setOpen] = useState(false);
   const [commission, setCommission] = useState(false);
-  const [commissionText,setCommissionText]=useState('همۀ کمیسیون‌ها')
+  const [commissionText, setCommissionText] = useState("همۀ کمیسیون‌ها");
   const [area, setArea] = useState(false);
-  const [areaText,setAreaText]=useState('همۀ حوزه‌ها')
+  const [areaText, setAreaText] = useState("همۀ حوزه‌ها");
   const [sex, setSex] = useState(false);
-  const [sexText,setSexText]=useState('مرد و زن')
+  const [sexText, setSexText] = useState("مرد و زن");
 
   const handleOpen = (e) => {
     e.preventDefault();
     setOpen(!open);
   };
 
-  const checkCommission = (e)=>{
+  const checkCommission = (e) => {
     setCommissionText(e.target.innerHTML);
     setCommission(false);
-  }
+  };
 
-  const checkArea = (e)=>{
+  const checkArea = (e) => {
     setAreaText(e.target.innerHTML);
     setArea(false);
-  }
+  };
 
-  const checkSex =(e)=>{
+  const checkSex = (e) => {
     setSexText(e.target.innerHTML);
     setSex(false);
-  }
-  
+  };
 
   return (
     <Container open={open}>
@@ -108,7 +107,6 @@ const Container = styled.section`
     margin-top: 25px;
     padding: 14px;
     border-radius: 8px;
- 
   }
 `;
 
@@ -117,6 +115,7 @@ const SearchButton = styled.div`
   align-items: center;
   justify-content: center;
   gap: 0.521vw;
+  cursor: pointer;
   &:after {
     content: "";
     width: 9px;
@@ -178,6 +177,7 @@ const Items = styled.div`
   border-radius: 2px;
   padding: 5px 15px;
   margin-bottom: 10px;
+  cursor: pointer;
 `;
 
 const Item = styled.div`

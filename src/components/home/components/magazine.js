@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import mag from "../../../assets/mag.webp";
 import leftArrow from "../../../assets/leftArrow.webp";
@@ -133,6 +133,7 @@ const Paper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
+  cursor: pointer;
   .cover {
     width: 160px;
     height: 120px;
@@ -234,7 +235,7 @@ const Paper = styled.div`
 
 export default function Magazine() {
   const [blogs, setBlogs] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const getBlogs = () => {
     let config = {
@@ -268,7 +269,7 @@ export default function Magazine() {
           <img src={x.main_image} alt={x.date} />
         </div>
 
-        <p className="user">{toFarsiNumber(x.writer) }</p>
+        <p className="user">{toFarsiNumber(x.writer)}</p>
 
         <p className="content">{x.title}</p>
 

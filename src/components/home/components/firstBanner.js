@@ -3,26 +3,25 @@ import styled from "styled-components";
 import banner1 from "../../../assets/banner1.webp";
 import banner2 from "../../../assets/banner2.webp";
 
-const Wraper=styled.div`
-  display:flex;
-  flex-direction:column;
-  @media(min-width:481px){
-    flex-direction:row;
-    padding:0px 10%;
-    gap:27px;
-    margin-top:20px;
-    
+const Wraper = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 481px) {
+    flex-direction: row;
+    padding: 0px 10%;
+    gap: 27px;
+    margin-top: 20px;
   }
-  @media(min-width:769px){
-    margin-top:81px;
+  @media (min-width: 769px) {
+    margin-top: 81px;
   }
-`
-
+`;
 
 const BannerContainer = styled.div`
   width: 100%;
   height: auto;
   margin-bottom: 20px;
+  cursor: pointer;
   img {
     width: 100%;
     height: auto;

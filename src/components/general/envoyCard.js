@@ -3,7 +3,15 @@ import styled from "styled-components";
 import profile from "../../assets/profile.webp";
 import { toFarsiNumber } from "../../utils";
 
-export default function EnvoyCard({name,state,commission,img,persantage,id,inBox}) {
+export default function EnvoyCard({
+  name,
+  state,
+  commission,
+  img,
+  persantage,
+  id,
+  inBox,
+}) {
   const [color, setColor] = useState("#FFAA00");
   const [firstHalf, setFirstHalf] = useState(0);
   const [secondHalf, setSecondHalf] = useState(0);
@@ -24,21 +32,17 @@ export default function EnvoyCard({name,state,commission,img,persantage,id,inBox
   const calculateFillCircle = () => {
     if (persantage <= 50) {
       setFirstHalf((persantage * 180) / 50);
-    }else{
-      const amount =persantage-50;
+    } else {
+      const amount = persantage - 50;
       setFirstHalf(180);
-      setSecondHalf(Math.floor((amount*180)/50));
+      setSecondHalf(Math.floor((amount * 180) / 50));
     }
-
   };
 
   useEffect(() => {
     calculateFillCircle();
     generateColor();
   }, []);
-
- 
-
 
   return (
     <Container width={inBox}>
@@ -60,7 +64,7 @@ export default function EnvoyCard({name,state,commission,img,persantage,id,inBox
         </div>
         <div className="persantage">
           <p className="text">شفافیت: ٪</p>
-          <p className="content">{toFarsiNumber(persantage)  || "0"}</p>
+          <p className="content">{toFarsiNumber(persantage) || "0"}</p>
         </div>
       </Content>
     </Container>
@@ -75,17 +79,18 @@ const Container = styled.div`
   box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   direction: rtl;
+
   @media (min-width: 481px) {
     margin: 0;
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     // padding: 31px 27px;
-    min-width:${props=>props.width?"inhiret":"460px"} ;
+    min-width: ${(props) => (props.width ? "inhiret" : "460px")};
     align-items: center;
   }
   @media (min-width: 769px) {
     padding: 31px 27px;
-    }
+  }
 `;
 
 const EnvoyImage = styled.div`
@@ -97,9 +102,9 @@ const EnvoyImage = styled.div`
   overflow: hidden;
   transform: rotate(0deg);
   background: #f9f9f9;
-  @media(min-width:481px){
-    width:7.552vw;
-    height:7.552vw;
+  @media (min-width: 481px) {
+    width: 7.552vw;
+    height: 7.552vw;
   }
   &:before {
     content: "";
@@ -113,9 +118,9 @@ const EnvoyImage = styled.div`
     z-index: 2;
     left: -50%;
     background: #f9f9f9;
-    @media(min-width:481px){
-      width:7.552vw;
-      height:7.552vw;
+    @media (min-width: 481px) {
+      width: 7.552vw;
+      height: 7.552vw;
     }
   }
   &:after {
@@ -126,15 +131,15 @@ const EnvoyImage = styled.div`
     position: absolute;
     left: 0;
     top: 0;
-    @media(min-width:481px){
-      width:7.552vw;
-      height:7.552vw;
+    @media (min-width: 481px) {
+      width: 7.552vw;
+      height: 7.552vw;
     }
   }
   b {
     &:before {
       content: "";
-      display: ${(props) => props.secondFill===0?"none":""};
+      display: ${(props) => (props.secondFill === 0 ? "none" : "")};
       width: 90px;
       height: 93px;
       border-radius: 50%;
@@ -148,11 +153,11 @@ const EnvoyImage = styled.div`
         transparent 100%
       );
       z-index: 4;
-      animation: 3s ${props=>'span2'+props.id} linear forwards 3s;
+      animation: 3s ${(props) => "span2" + props.id} linear forwards 3s;
       opacity: 0;
-      @media(min-width:481px){
-        width:7.552vw;
-        height:7.552vw;
+      @media (min-width: 481px) {
+        width: 7.552vw;
+        height: 7.552vw;
       }
     }
     &:after {
@@ -170,11 +175,11 @@ const EnvoyImage = styled.div`
         transparent 100%
       );
       z-index: 1;
-      animation: 3s ${props=>'span'+props.id} linear forwards;
+      animation: 3s ${(props) => "span" + props.id} linear forwards;
       animation-delay: 4s;
-      @media(min-width:481px){
-        width:7.552vw;
-        height:7.552vw;
+      @media (min-width: 481px) {
+        width: 7.552vw;
+        height: 7.552vw;
       }
     }
   }
@@ -189,14 +194,14 @@ const EnvoyImage = styled.div`
     z-index: 5;
     border-radius: 50%;
     object-fit: contain;
-    @media(min-width:481px){
-      width:7.292vw;
-      height:7.292vw;
+    @media (min-width: 481px) {
+      width: 7.292vw;
+      height: 7.292vw;
       margin: 1.5px auto;
     }
   }
 
-  @keyframes ${props=>'span'+props.id} {
+  @keyframes ${(props) => "span" + props.id} {
     from {
       transform: rotate(0);
     }
@@ -204,7 +209,7 @@ const EnvoyImage = styled.div`
       transform: rotate(${(props) => props.firstFill}deg);
     }
   }
-  @keyframes ${props=>'span2'+props.id}  {
+  @keyframes ${(props) => "span2" + props.id} {
     from {
       transform: rotate(0);
       opacity: 1;
@@ -238,8 +243,8 @@ const Content = styled.div`
   }
   .status {
     display: flex;
-    align-items:center;
-    gap:7px;
+    align-items: center;
+    gap: 7px;
     margin-bottom: 10px;
     &:before {
       content: "";
@@ -249,7 +254,6 @@ const Content = styled.div`
       background-image: url(${profile});
       background-size: contain;
       background-repeat: no-repeat;
-     
     }
     .state {
       color: #707070;
