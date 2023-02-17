@@ -180,6 +180,7 @@ const FilterItem = styled.p`
   border-radius: 2px;
   margin: 0;
   padding: 5px 7px;
+  cursor: pointer;
   &.select {
     background-color: #707070;
     color: #ffffff;

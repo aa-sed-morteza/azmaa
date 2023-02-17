@@ -4,7 +4,7 @@ import data from "../../../data.json";
 import leftArrow from "../../../assets/lightArrow.webp";
 import profile from "../../../assets/profile.webp";
 import { useNavigate } from "react-router-dom";
-import {toFarsiNumber} from "../../../utils"
+import { toFarsiNumber } from "../../../utils";
 
 const Container = styled.section`
   overflow: hidden;
@@ -14,20 +14,20 @@ const Container = styled.section`
   margin: 0;
   position: relative;
   padding-bottom: 82px;
-  
 `;
 
 const ShowIndex = styled.div`
   display: flex;
   gap: 10px;
   position: absolute;
-  bottom:8%;
+  bottom: 8%;
   left: 28%;
   .item {
     width: 15px;
     height: 15px;
     border-radius: 15px;
     background-color: #cbcbcb;
+    cursor: pointer;
   }
   .active {
     background-color: #ffaa00;
@@ -43,6 +43,7 @@ const Slide = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2.6vw;
+  transition: all 0.7s ease-in-out;
 `;
 const PicWraper = styled.div`
   width: 116%;
@@ -68,10 +69,10 @@ const Content = styled.div`
     margin: 0;
     line-height: 5.78vw;
     -webkit-box-orient: vertical;
-  display: -webkit-box;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  -webkit-line-clamp: 2;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
   }
   .text {
     font-weight: 400;
@@ -81,10 +82,10 @@ const Content = styled.div`
     color: #707070;
     margin: 0;
     -webkit-box-orient: vertical;
-  display: -webkit-box;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  -webkit-line-clamp: 4;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
   }
   .identity {
     display: flex;
@@ -125,7 +126,8 @@ const Button = styled.div`
   position: relative;
   padding: 14px 80px 15px 30px;
   width: fit-content;
-  &:after{
+  cursor: pointer;
+  &:after {
     content: "";
     display: block;
     position: absolute;
@@ -136,17 +138,15 @@ const Button = styled.div`
     height: 15px;
     left: 9%;
     top: 50%;
-    transform:translate(0,-50%);
-}
-   
-  
+    transform: translate(0, -50%);
+  }
+
   .text-button {
     margin: 0;
     padding-left: 60px;
     color: #ffffff;
     font-size: 1.25vw;
     font-weight: 700;
-
   }
 `;
 
@@ -173,6 +173,9 @@ export default function Carousel({ posts }) {
   const index = items.map((x, i) => {
     return (
       <div
+        onClick={() => {
+          setCurrentIndex(i);
+        }}
         key={i}
         className={i === currentIndex ? "item active" : "item"}
       ></div>
@@ -195,7 +198,7 @@ export default function Carousel({ posts }) {
               <h1 className="title">{x.title.slice(0, 50) + "..."}</h1>
               <p className="text">{x.description.slice(0, 250) + "..."} </p>
               <div className="identity">
-                <p className="user">{toFarsiNumber(x.writer) }</p>
+                <p className="user">{toFarsiNumber(x.writer)}</p>
                 <p className="date">{x.created}</p>
               </div>
               <Button
