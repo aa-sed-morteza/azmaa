@@ -414,6 +414,7 @@ const Card = styled.div`
     border-radius: 10.93vw;
     margin-bottom: 10px;
     border: 3px solid ${(props) => props.color};
+    background-color: #fff;
     img {
       width: 100%;
       height: 100%;
