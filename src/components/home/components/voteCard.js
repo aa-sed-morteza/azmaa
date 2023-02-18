@@ -98,6 +98,11 @@ const CardHeader = styled.div`
       h2 {
         font-size: 1.667vw;
         font-weight: 700;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 100px;
       }
       .date {
         font-size: 1.25vw;
@@ -437,7 +442,6 @@ export default function VoteCard({ bill }) {
   const [color, SetColor] = useState("#DFF5F0");
   const [bColor, setBColor] = useState("#6cbba9");
   const [envoyData, setEnvoyData] = useState(bill.positive_vote);
-  
 
   const navigate = useNavigate();
 
@@ -487,19 +491,19 @@ export default function VoteCard({ bill }) {
           onClick={() => setActive(0)}
           className={active === 0 ? "active" : ""}
         >
-          {toFarsiNumber(bill.vote_number.positive) }
+          {toFarsiNumber(bill.vote_number.positive)}
         </Success>
         <Faild
           onClick={() => setActive(1)}
           className={active === 1 ? "active" : ""}
         >
-          {toFarsiNumber(bill.vote_number.negative) }
+          {toFarsiNumber(bill.vote_number.negative)}
         </Faild>
         <Not
           onClick={() => setActive(2)}
           className={active === 2 ? "active" : ""}
         >
-          {toFarsiNumber(bill.vote_number.without_vote) }
+          {toFarsiNumber(bill.vote_number.without_vote)}
         </Not>
       </Statistics>
 
