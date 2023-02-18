@@ -53,7 +53,11 @@ export default function Calendar({ activities }) {
         </SubTitile>
         <List>
           {width < 480 ? (
-            <ActionCard />
+             <>
+             {newList.map((item) => (
+               <ActionCard activity={item} />
+             ))}
+           </>
           ) : (
             <>
               {newList.map((item) => (
