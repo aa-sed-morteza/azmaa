@@ -237,7 +237,7 @@ export default function Magazine({ posts }) {
     return (
       <Paper key={i}>
         <div className="cover">
-          <img src={x.img} alt={x.date} />
+          <img src={x.main_image} alt={x.date} />
         </div>
 
         <p className="user">{x.writer}</p>

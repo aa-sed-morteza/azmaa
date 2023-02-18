@@ -6,11 +6,13 @@ import SelectState from "./selectState";
 import IranMap from "../../pluginIranMap/IranMap";
 import { BaseBackURL } from "../../../constant/api";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Carousel() {
   const items = data.slider;
   const [posts, setPosts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate =useNavigate();
 
   function carouselInfiniteScroll() {
     if (currentIndex === data.slider.length - 1) {
@@ -56,7 +58,7 @@ export default function Carousel() {
     );
   });
 
-  //
+  console.log('posts',posts)
 
   return (
     <Wraper>
@@ -73,7 +75,7 @@ export default function Carousel() {
             <div className="content">
               <h1>{item.title}</h1>
               <p>{item.description}</p>
-              <div className="show-more">ادامه مطلب</div>
+              <div className="show-more" onClick={()=>{navigate(`/blog/${item.id}`)}} >ادامه مطلب</div>
             </div>
           </Slide>
         );
@@ -186,6 +188,7 @@ const Slide = styled.div`
       width: fit-content;
       margin-top: 30px;
       position: relative;
+      cursor: pointer;
       &:before {
         content: "";
         display: block;

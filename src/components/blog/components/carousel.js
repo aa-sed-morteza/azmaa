@@ -125,6 +125,7 @@ const Button = styled.div`
   position: relative;
   padding: 14px 80px 15px 30px;
   width: fit-content;
+  cursor: pointer;
   &:after{
     content: "";
     display: block;
@@ -189,18 +190,18 @@ export default function Carousel({ posts }) {
             style={{ transform: `translate(${currentIndex * 100}%)` }}
           >
             <PicWraper>
-              <img src={x.img} alt="poster" />
+              <img src={x.main_image} alt="poster" />
             </PicWraper>
             <Content>
               <h1 className="title">{x.title.slice(0, 50) + "..."}</h1>
               <p className="text">{x.description.slice(0, 250) + "..."} </p>
               <div className="identity">
-                <p className="user">{toFarsiNumber(x.writer) }</p>
+                <p className="user">{x.writer }</p>
                 <p className="date">{x.created}</p>
               </div>
               <Button
                 onClick={() => {
-                  navigate(`/blog/${x.title}`);
+                  navigate(`/blog/${x.id}`);
                 }}
               >
                 <p className="text-button">ادامه مطلب</p>{" "}

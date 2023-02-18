@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import pic from "../../../assets/poster.webp";
@@ -15,6 +15,7 @@ const Picture = styled.div`
   width: 100%;
   height: auto;
   img {
+    border-radius: 4px 4px 0 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -37,19 +38,17 @@ const Type = styled.p`
   font-weight: 300;
   font-size: 3.721vw;
   margin: 0;
-  position: relative;
-  padding-right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
   &:before {
     content: "";
-    display: block;
+    display: inline-flex;
     background-image: url(${icon});
     background-size: cover;
     background-repeat: no-repeat;
-    position: absolute;
     width: 14px;
     height: 17px;
-    right: 0;
-    top: 2px;
   }
 `;
 
@@ -89,54 +88,83 @@ const ShowMore = styled.p`
   font-weight: 700;
   font-size: 3.721vw;
   color: #ffaa00;
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7px;
   margin-top: 5px;
   cursor: pointer;
   &:after {
     content: "";
-    display: block;
+    display: inline-flex;
     background-image: url(${more});
     background-size: cover;
     background-repeat: no-repeat;
-    position: absolute;
+
     width: 5px;
     height: 10px;
-    left: -18px;
-    top: 7px;
   }
 `;
 
 export default function Poster({ posts }) {
   const navigate = useNavigate();
+  const [post, setPost] = useState({});
 
-  const report = {
-    img: pic,
-    type: posts[0]?.type,
-    user: posts[0]?.writer,
-    date: posts[0]?.created,
-    title: posts[0]?.title,
-    expand: posts[0]?.description,
+  // const report = {
+  //   img: posts[0].main_image,
+  //   type: posts[0]?.type,
+  //   user: posts[0]?.writer,
+  //   date: posts[0]?.created,
+  //   title: posts[0]?.title,
+  //   expand: posts[0]?.description,
+  // };
+
+  useEffect(() => {
+    setPost(posts[0]);
+  }, [posts]);
+
+  const checkPost = () => {
+    setPost(posts[0]);
   };
+
+  const checkType = (type) => {
+    let text;
+    if (type == "note") {
+      text = "یادداشت";
+    } else if (type == "article") {
+      text = "مقاله";
+    } else if ("news") {
+      text = "خبر";
+    } else {
+      text = "گزارش ";
+    }
+
+    return text;
+  };
+
   return (
-    <Container>
-      <Picture>
-        <img src={report.img} alt="post-picture" />
-      </Picture>
-      <Content>
-        <HeadContent>
-          <Type>{report.type}</Type>
-          <Date>{report.date}</Date>
-        </HeadContent>
-        <Title>{report.title?.slice(0, 50) + " ..."}</Title>
-        <Paragraph>{report.expand?.slice(0, 250) + " ..."}</Paragraph>
-        <ShowMore
-          onClick={() => {
-            navigate(`/blog/${report.title}`);
-          }}
-        >
-          ادامۀ مطلب
-        </ShowMore>
-      </Content>
-    </Container>
+    <>
+      {post && (
+        <Container>
+          <Picture>
+            <img src={post.main_image} alt="post-picture" />
+          </Picture>
+          <Content>
+            <HeadContent>
+              <Type>{checkType(post.type)}</Type>
+              <Date>{post.created}</Date>
+            </HeadContent>
+            <Title>{post.title?.slice(0, 50) + " ..."}</Title>
+            <Paragraph>{post.description?.slice(0, 250) + " ..."}</Paragraph>
+            <ShowMore
+              onClick={() => {
+                navigate(`/blog/${post.id}`);
+              }}
+            >
+              ادامۀ مطلب
+            </ShowMore>
+          </Content>
+        </Container>
+      )}
+    </>
   );
 }
