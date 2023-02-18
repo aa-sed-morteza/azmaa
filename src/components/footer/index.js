@@ -7,6 +7,8 @@ import {toFarsiNumber} from "../../utils"
 const FooterContainer = styled.section`
   background-color: #095644;
   padding: 19px 20px;
+ 
+  
   @media (min-width: 481px) {
     display: flex;
     justify-content: space-between;
@@ -176,7 +178,7 @@ export default function Footer() {
   });
 
   return (
-    <div>
+    <div style={{marginTop:'auto'}}>
       <FooterContainer>
         <ContactUs>{contactItem}</ContactUs>
         <AboutUs>
