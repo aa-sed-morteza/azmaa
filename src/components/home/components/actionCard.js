@@ -65,6 +65,8 @@ export default function ActionCard({ activity }) {
     }
   }, [active]);
 
+  console.log('act',activity)
+
   return (
     <VCContainer>
       <CardHeader>
@@ -103,7 +105,7 @@ export default function ActionCard({ activity }) {
           <p
             className="content"
             onClick={() => {
-              navigate(`presentation/ دریافت خودرو دناپلاس `);
+              navigate(`/actions/presentation/${activity.id}`);
             }}
           >
             جزئیات
@@ -112,7 +114,7 @@ export default function ActionCard({ activity }) {
         {/* <SmallButton>
           <p className="content">بازنشر</p>
         </SmallButton> */}
-        <ShareButton text="دریافت خودرو دناپلاس " title="اطلاع رسانی نماینده" />
+        <ShareButton text={activity.name} title="اطلاع رسانی نماینده" />
       </ButtonWraper>
     </VCContainer>
   );

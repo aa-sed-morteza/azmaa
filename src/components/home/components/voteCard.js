@@ -445,6 +445,8 @@ export default function VoteCard({ bill }) {
 
   const navigate = useNavigate();
 
+  
+
   const envoyList = envoyData.map((x, i) => {
     return (
       <Card key={i} color={bColor}>
@@ -512,12 +514,12 @@ export default function VoteCard({ bill }) {
       <ButtonWraper>
         <LargButton
           onClick={() => {
-            navigate(`presentation/${"کلیات لایحۀ بودجۀ سال ۱۴۰۱"}`);
+            navigate(`presentation/${bill.id}`);
           }}
         >
           <p className="content">جزئیات</p>
         </LargButton>
-        <ShareButton text="کلیات لایحۀ بودجۀ سال ۱۴۰۱" title="رای گیری" />
+        <ShareButton text={bill.information} title={bill.name} />
       </ButtonWraper>
     </VCContainer>
   );

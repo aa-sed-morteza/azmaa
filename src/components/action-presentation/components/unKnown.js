@@ -19,9 +19,12 @@ export default function UnKnown({ envoys }) {
       />
     );
   });
+
+  
+  
   return (
     <Container>
-      <Title>نمایندگان ممتنع</Title>
+      <Title>{envoys.lenght == undefined ? 'نمایندگان مخالف' :envoys[0].vote }  </Title>
       <Gallery>{envoysList}</Gallery>
       <ShowMore>
         <p>نمایش بیشتر </p>

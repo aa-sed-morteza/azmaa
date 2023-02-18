@@ -12,21 +12,48 @@ import UnKnown from "./unKnown";
 // import NoVote from "./noVote";
 import useWidth from "../../../hook/useWidth";
 
-export default function ControlStatus({ envoys }) {
+export default function ControlStatus({ action }) {
+  
   const [select, setSelect] = useState(1);
   const width = useWidth();
-  const agree = envoys.filter((x) => x.vote == "همراه");
-  const disagree = envoys.filter((x) => x.vote == "ناهمراه");
-  const another = envoys.filter(
-    (x) => x.vote !== "ناهمراه" && x.vote !== "همراه"
+  const agree = action.vote.filter(
+    (x) => x.vote == action.activity_choice[0].name
   );
+
+  const disagree = action.vote.filter(
+    (x) => x.vote == action.activity_choice[1].name
+  );
+  const another = action.vote.filter(
+    (x) => x.vote == action.activity_choice[2].name
+  );
+
+  
+  
+ 
+
+  const controlItem = action.activity_choice.map((item, i) => {
+    return (
+      <Item
+        key={i}
+        color="#6CBBA9"
+        icon={ok}
+        onClick={() => {
+          setSelect(i + 1);
+        }}
+        className={select === i + 1 ? "select" : ""}
+      >
+        {item.name}
+      </Item>
+    );
+  });
 
   return (
     <Container>
       {width < 480 ? (
         <>
           <Filtering>
-            <Item
+            {controlItem}
+            {/* <Item
               color="#6CBBA9"
               icon={ok}
               onClick={() => {
@@ -35,8 +62,8 @@ export default function ControlStatus({ envoys }) {
               className={select === 1 ? "select" : ""}
             >
               همراه
-            </Item>
-            <Item
+            </Item> */}
+            {/* <Item
               color="#FFA5A5"
               icon={disagree}
               onClick={() => {
@@ -45,8 +72,8 @@ export default function ControlStatus({ envoys }) {
               className={select === 2 ? "select" : ""}
             >
               غیرهمراه
-            </Item>
-            <Item
+            </Item> */}
+            {/* <Item
               color="#CBCBCB"
               icon={info}
               onClick={() => {
@@ -55,7 +82,7 @@ export default function ControlStatus({ envoys }) {
               className={select === 3 ? "select" : ""}
             >
               نامشخص
-            </Item>
+            </Item> */}
           </Filtering>
           <ShowResult>
             {select === 1 && <Agree envoys={agree} />}
@@ -86,15 +113,41 @@ const Filtering = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-inline: 20px;
+  & > :nth-child(2) {
+    color: #ffa5a5;
+    &:before {
+      background-image: url(${disagree});
+    }
+    &.select {
+      &:after {
+        background-color: #ffa5a5;
+      }
+    }
+  }
+  & > :nth-child(3) {
+    color: #cbcbcb;
+    &:before {
+      background-image: url(${info});
+    }
+    &.select {
+      &:after {
+        background-color: #cbcbcb;
+      }
+    }
+  }
 `;
 
 const Item = styled.div`
-  padding-top: 50px;
+  /* padding-top: 50px; */
   position: relative;
   padding-bottom: 10px;
   font-size: 4.651vw;
   font-weight: 300;
   color: ${(props) => props.color};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
   &.select {
     font-weight: 700;
     &:after {
@@ -109,15 +162,15 @@ const Item = styled.div`
   }
   &:before {
     content: "";
-    display: block;
-    position: absolute;
+    display: inline-flex;
+    /* position: absolute; */
     background-image: url(${(props) => props.icon});
     background-size: contain;
     background-repeat: no-repeat;
     width: 41px;
     height: 41px;
-    right: 0;
-    top: 0px;
+    /* right: 0; */
+    /* top: 0px; */
   }
 `;
 

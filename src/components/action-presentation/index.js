@@ -30,6 +30,10 @@ export default function ActionPresentation() {
       });
   };
 
+//  console.log('ss',action)
+
+
+
   let positiveAction = [];
   let negativeAction = [];
   let anotherAction = [];
@@ -65,13 +69,11 @@ export default function ActionPresentation() {
             <Census total={action.vote.length} complete={"?"} select={"?"} />
             <ActionsCensus
               total={action.vote.length}
-              positive={positiveAction.length}
-              negative={negativeAction.length}
-              another={anotherAction.length}
+              data={action }
             />
           </Wraper>
         )}
-        {action.id && <ControlStatus envoys={action.vote} />}
+        {action.id && <ControlStatus action={action} />}
       </Content>
     </Container>
   );
@@ -81,7 +83,7 @@ const Container = styled.section`
   padding: 10px 20px;
   @media(min-width:480px){
     background-color:#ffffff;
-    padding 25px 0;
+    padding :25px 0;
   }
 `;
 
