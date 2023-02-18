@@ -98,6 +98,11 @@ const CardHeader = styled.div`
       h2 {
         font-size: 1.667vw;
         font-weight: 700;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 100px;
       }
       .date {
         font-size: 1.25vw;
