@@ -213,7 +213,6 @@ export default function Calendar({ bills }) {
   ];
 
   const elements = [];
-  
 
   for (let i = parseInt(month) - 1; i > 0; i--) {
     const newList = [];
@@ -234,7 +233,11 @@ export default function Calendar({ bills }) {
         </SubTitile>
         <List>
           {width < 480 ? (
-            <VoteCard />
+            <>
+              {newList.map((item) => (
+                <VoteCard bill={item} />
+              ))}
+            </>
           ) : (
             <>
               {newList.map((item) => (

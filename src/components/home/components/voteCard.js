@@ -233,6 +233,8 @@ const Not = styled.div`
   font-weight: 300;
   font-size: 5.58vw;
   position: relative;
+  /* display: flex;
+  align-items: center; */
   cursor: pointer;
   &:before {
     content: "";
@@ -243,8 +245,8 @@ const Not = styled.div`
     background-image: url(${not});
     background-size: contain;
     background-repeat: no-repeat;
-    bottom: -3.023vw;
     right: -11.628vw;
+    top: -1.395vw;
   }
 
   &.active,
