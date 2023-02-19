@@ -96,7 +96,8 @@ const EnvoyImage = styled.div`
   float: left;
   overflow: hidden;
   transform: rotate(0deg);
-  background: #f9f9f9;
+  /* background: #f9f9f9; */
+  background: #ffffff;
   @media(min-width:481px){
     width:7.552vw;
     height:7.552vw;

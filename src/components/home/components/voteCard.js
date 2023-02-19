@@ -317,6 +317,7 @@ const Card = styled.div`
     border-radius: 10.93vw;
     margin-bottom: 10px;
     border: 3px solid ${(props) => props.color};
+    background: #ffffff;
     img {
       width: 100%;
       height: 100%;
@@ -347,6 +348,7 @@ const Card = styled.div`
     border-bottom: 1px solid #ffffff;
     min-width: inherit;
     .picture {
+      
       width: 5vw;
       height: 5vw;
       border-radius: 5vw;

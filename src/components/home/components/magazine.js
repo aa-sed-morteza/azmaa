@@ -268,7 +268,7 @@ export default function Magazine() {
           <img src={x.main_image} alt={x.date} />
         </div>
 
-        <p className="user">{toFarsiNumber(x.writer) }</p>
+        <p className="user">{x.writer }</p>
 
         <p className="content">{x.title}</p>
 
