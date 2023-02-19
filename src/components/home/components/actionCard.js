@@ -17,55 +17,65 @@ export default function ActionCard({ activity }) {
   const [active, setActive] = useState(0);
   const [color, SetColor] = useState("#DFF5F0");
   const [bColor, setBColor] = useState("#6cbba9");
-  const [votes, setVotes] = useState(activity.vote);
+  const [votes, setVotes] = useState([]);
   const envoyData = data.envoy;
   const navigate = useNavigate();
-
- 
-
-  const envoyList = votes.map((x, i) => {
-    return (
-      <Card key={i} color={bColor}>
-        <div className="picture">
-          <img src={x.voter.image} alt={x.voter.last_name} />
-        </div>
-
-        <p className="name">
-          {x.voter.first_name} {x.voter.last_name}
-        </p>
-        <p className="state">{x.voter.electoral_district_name}</p>
-      </Card>
-    );
-  });
 
   let positive = 0;
   let negative = 0;
   let noChoice = 0;
 
   for (const item of activity.vote) {
-    if (item.vote === "positive") {
+    if (item.vote === activity.activity_choice[0].name) {
       positive = positive + 1;
-    } else if (item.vote === "negative") {
+    } else if (item.vote === activity.activity_choice[1].name) {
       negative = negative + 1;
     } else {
       noChoice = noChoice + 1;
     }
   }
 
+  // useEffect(()=>{
+  //   setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[0].name)]);
+  // },[])
+
+
+  console.log('voooo',[activity.vote.find((x) => x.vote == activity.activity_choice[0].name)])
+
   useEffect(() => {
-    if (active === 1) {
+    if (active === 0) {
+      SetColor("#DFF5F0");
+      setBColor("#6cbba9");
+     
+      setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[0].name)]);
+    } else if (active === 1) {
       SetColor("#FFD5D5");
       setBColor("#ffa5a5");
+      setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[1].name)]);
     } else if (active === 2) {
       SetColor("#EAEAEA");
       setBColor("#d8d8d8");
-    } else if (active === 0) {
-      SetColor("#DFF5F0");
-      setBColor("#6cbba9");
+      setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[2].name)]);
     }
   }, [active]);
 
-  console.log('act',activity)
+  const envoyList = votes.map((x, i) => {
+    return (
+      <Card key={i} color={bColor}>
+        <div className="picture">
+          <img
+            src={x && x.voter.image}
+            alt={x && x.voter.last_name}
+          />
+        </div>
+
+        <p className="name">
+          {x && x.voter.first_name} {x && x.voter.last_name}
+        </p>
+        <p className="state">{x && x.voter.electoral_district_name}</p>
+      </Card>
+    );
+  });
 
   return (
     <VCContainer>
@@ -82,19 +92,19 @@ export default function ActionCard({ activity }) {
           onClick={() => setActive(0)}
           className={active === 0 ? "active" : ""}
         >
-          {toFarsiNumber(positive) }
+          {toFarsiNumber(positive)}
         </Success>
         <Faild
           onClick={() => setActive(1)}
           className={active === 1 ? "active" : ""}
         >
-          {toFarsiNumber(negative) }
+          {toFarsiNumber(negative)}
         </Faild>
         <Not
           onClick={() => setActive(2)}
           className={active === 2 ? "active" : ""}
         >
-          {toFarsiNumber(noChoice) }
+          {toFarsiNumber(noChoice)}
         </Not>
       </Statistics>
 
