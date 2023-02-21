@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import check from "../../../assets/check.webp";
 import line from "../../../assets/Line.webp";
@@ -144,15 +144,15 @@ const ShowMore = styled.div`
     margin: auto;
     color: #9f9f9f;
     font-size: 4.65vw;
-    position: relative;
+   display: flex;
+    align-items:center;
+    gap: 20px;
     font-weight: 300;
     &:after {
       content: "";
-      display: flex;
-      position: absolute;
-      left: -25px;
-      bottom: 8px;
+      display: inline-flex;
       background-image: url(${upArrow});
+      transform: ${(props) => (props.arrow ? `rotate(180deg)` : "")};
       background-size: cover;
       background-repeat: no-repeat;
       width: 9px;
@@ -188,8 +188,16 @@ const List = styled.div`
     gap: 20px;
   }
 `;
+
+const Wraper =styled.div`
+ &:nth-of-type(1n + 6) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
+`
+
 export default function Calendar({ bills }) {
   const width = useWidth();
+  const [showMore,setShowMore]=useState(false);
   let today = new Date().toLocaleDateString("fa-IR", {
     year: "numeric",
     month: "numeric",
@@ -227,34 +235,24 @@ export default function Calendar({ bills }) {
     }
 
     elements.push(
-      <>
+      <Wraper hide={showMore}>
         <SubTitile>
           {monthArray[i]} {year}
         </SubTitile>
-        <List>
-          {width < 480 ? (
-            <>
+        <List >
               {newList.map((item) => (
                 <VoteCard bill={item} />
               ))}
-            </>
-          ) : (
-            <>
-              {newList.map((item) => (
-                <VoteCard bill={item} />
-              ))}
-            </>
-          )}
         </List>
-      </>
+      </Wraper>
     );
   }
   return (
     <Container>
       {elements}
 
-      <ShowMore>
-        <p> نمایش بیشتر</p>
+      <ShowMore arrow={showMore} onClick={()=>{setShowMore(!showMore)}}>
+        <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
       </ShowMore>
     </Container>
   );
