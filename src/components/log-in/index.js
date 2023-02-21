@@ -155,6 +155,7 @@ export default function LogIn() {
             id="password"
             value={values.usepasswordrName}
             onChange={handleChange}
+            show={true}
           />
           {errors.password && touched.password && (
             <ErrorText>{errors.password}</ErrorText>

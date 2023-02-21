@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
+import show from "../../assets/show.png";
+import hide from "../../assets/hide.png";
+ 
 export default function CustomInput({
   type,
   label,
@@ -9,9 +11,12 @@ export default function CustomInput({
   value,
   onChange,
   id,
+  show
 }) {
+  const [showPass,setShowPass]=useState(false);
+
   return (
-    <Container icon={icon} text={label} back={back} type={type}>
+    <Container icon={icon} text={label} back={back} type={type} show={showPass}>
       <span></span>
       {type == "textarea" ? (
         <textarea
@@ -23,8 +28,9 @@ export default function CustomInput({
           cols="100"
         ></textarea>
       ) : (
-        <input type={type} value={value} onChange={onChange} id={id} />
+        <input type={type} value={value} onChange={onChange} id={id}   type={showPass?'text':type}/>
       )}
+      {show && <div className="show-password" onClick={()=>{setShowPass(!showPass)}}></div>}
     </Container>
   );
 }
@@ -57,6 +63,17 @@ const Container = styled.div`
     right: 8px;
     top: 8px;
   }
+  .show-password{
+    width: 20px;
+    height: 20px;
+    background-image: ${props=>props.show ? `url(${show})`:`url(${hide})`};
+    background-repeat:no-repeat;
+    background-size:contain;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translate(0%,-50%);
+  } 
   input {
     outline: none;
     border: none;
