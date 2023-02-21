@@ -5,7 +5,7 @@ import Button from "../general/button";
 import login from "../../assets/log.webp";
 import signin from "../../assets/signin.webp";
 import CustomInput from "../general/customInput";
-import profile from "../../assets/profile.webp";
+import profile from "../../assets/user-log.svg";
 import lock from "../../assets/lock.webp";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";

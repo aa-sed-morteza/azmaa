@@ -215,7 +215,7 @@ const Paper = styled.div`
     .user {
       font-size: 1.042vw;
       margin-bottom: 36px;
-      padding-right: 30px;
+      
       &:before {
         width: 20px;
         height: 20px;

@@ -14,6 +14,8 @@ export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate =useNavigate();
 
+  console.log(posts)
+
   function carouselInfiniteScroll() {
     if (currentIndex === data.slider.length - 1) {
       return setCurrentIndex(0);
@@ -72,6 +74,7 @@ export default function Carousel() {
               backgroundColor: "#5e5e5e",
             }}
           >
+            <img className="cover" src={item.image} alt='news-picture'/>
             <div className="content">
               <h1>{item.title}</h1>
               <p>{item.description}</p>
@@ -142,11 +145,19 @@ const Slide = styled.div`
   height: 20rem;
   justify-content: center;
   align-items: center;
-  background-image: url(${(props) => props.photo});
-  background-size: cover;
-  background-repeat: no-repeat;
   padding-top: 44%;
+  .cover{
+    position: absolute;
+      left: 0px;
+      top: 0px;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      -webkit-filter:  brightness(0.5); /*Safari 6.0 - 9.0 */
+      filter: brightness(0.5);
 
+ 
+  }
   .content {
     position: absolute;
     display: flex;
@@ -154,6 +165,7 @@ const Slide = styled.div`
     width: 35%;
     top: 20%;
     right: 7%;
+    z-index: 30;
     h1 {
       color: #ffffff;
       font-size: 3.33vw;
