@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import profile from "../../../assets/profile.webp";
 import upArrow from "../../../assets/arrow.webp";
@@ -52,6 +52,9 @@ const EnvoyContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
+  & > :nth-of-type(1n + 7) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
 `;
 
 const ShowMore = styled.div`
@@ -68,29 +71,31 @@ const ShowMore = styled.div`
     font-size: 1.25vw;
     font-weight: 400;
     color: #9f9f9f;
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
     margin: 0;
     &:after {
       content: "";
-      display: flex;
-      position: absolute;
+      display: inline-flex;
       background-image: url(${upArrow});
+      transform: ${(props) => (props.arrow ? `rotate(180deg)` : "")};
       background-size: cover;
       background-repeat: no-repeat;
       width: 15px;
       height: 8px;
-      left: -37px;
-      bottom: 8px;
+    
     }
   }
 `;
 
 export default function NewEnvoy({ envoys }) {
   const navigate = useNavigate();
+  const [showMore,setShowMore]=useState(false);
   return (
     <Container>
       <Title> جدیدترین نمایندگان</Title>
-      <EnvoyContainer>
+      <EnvoyContainer hide={showMore}>
         {envoys.map((item) => (
           <BestEnvoy
             envoy={item}
@@ -100,8 +105,8 @@ export default function NewEnvoy({ envoys }) {
           />
         ))}
       </EnvoyContainer>
-      <ShowMore>
-        <p>نمایش بیشتر</p>{" "}
+      <ShowMore arrow={showMore} onClick={()=>{setShowMore(!showMore)}}>
+        <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
       </ShowMore>
     </Container>
   );
