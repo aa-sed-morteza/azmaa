@@ -13,6 +13,7 @@ const EnvoyCard = styled.div`
   border-radius: 4px;
   margin-bottom: 10px;
   direction: rtl;
+  cursor: pointer;
   @media (min-width: 481px) {
     margin: 0;
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);

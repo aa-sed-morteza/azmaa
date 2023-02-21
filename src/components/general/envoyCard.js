@@ -3,7 +3,7 @@ import styled from "styled-components";
 import profile from "../../assets/profile.webp";
 import { toFarsiNumber } from "../../utils";
 
-export default function EnvoyCard({name,state,commission,img,persantage,id,inBox}) {
+export default function EnvoyCard({name,state,commission,img,persantage,id,inBox,click}) {
   const [color, setColor] = useState("#FFAA00");
   const [firstHalf, setFirstHalf] = useState(0);
   const [secondHalf, setSecondHalf] = useState(0);
@@ -41,7 +41,7 @@ export default function EnvoyCard({name,state,commission,img,persantage,id,inBox
 
 
   return (
-    <Container width={inBox}>
+    <Container width={inBox} onClick={click}>
       <EnvoyImage
         coloring={color}
         firstFill={firstHalf}
@@ -75,6 +75,7 @@ const Container = styled.div`
   box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   direction: rtl;
+  cursor: pointer;
   @media (min-width: 481px) {
     margin: 0;
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);

@@ -462,7 +462,7 @@ export default function Controller() {
               <BestEnvoyContainer>
                 <Title>شفاف‌ترین نمایندگان</Title>
                 {newList.map((item, i) => {
-                  return <BestEnvoy envoy={item} key={i} />;
+                  return <BestEnvoy envoy={item} key={i} click={()=>{navigate(`/envoy/${item.id}`)}} />;
                 })}
 
                 {/* {envoys.length > 0 && <HonestEnvoy envoys={envoys} />} */}

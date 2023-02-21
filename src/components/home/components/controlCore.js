@@ -8,6 +8,7 @@ import upArrow from "../../../assets/arrow.webp";
 import SelectArea from "./selectArea";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.section`
   display: flex;
@@ -110,6 +111,7 @@ export default function ControlCore() {
   const [select, setSelect] = useState("transparent");
   const [envoys, setEnvoys] = useState([]);
   const [areas, setAreas] = useState([]);
+  const navigate =useNavigate()
 
   const getEnvoys = () => {
     let config = {
@@ -179,7 +181,7 @@ export default function ControlCore() {
           <>
             <EnvoyContainer>
               {newList.map((item, i) => {
-                return <BestEnvoy envoy={item} key={i} />;
+                return <BestEnvoy envoy={item} key={i}  click={()=>{navigate(`/envoy/${item.id}`)}}/>;
               })}
             </EnvoyContainer>
             <ShowMore>
