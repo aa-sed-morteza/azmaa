@@ -63,6 +63,9 @@ const Content = styled.div`
 `;
 
 const EnvoyContainer = styled.div`
+  & > :nth-of-type(1n + 7) {
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
@@ -71,7 +74,7 @@ const EnvoyContainer = styled.div`
 const ShowMore = styled.div`
   border: 2px solid #9f9f9f;
   border-radius: 8px;
-  max-width: 500px;
+  width: 31%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,24 +85,27 @@ const ShowMore = styled.div`
     font-size: 1.25vw;
     font-weight: 400;
     color: #9f9f9f;
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
     margin: 0;
     &:after {
       content: "";
-      display: flex;
-      position: absolute;
+      display: inline-flex;
       background-image: url(${upArrow});
+      transform: ${(props) => (props.arrow ? `rotate(180deg)` : "")};
       background-size: cover;
       background-repeat: no-repeat;
       width: 15px;
       height: 8px;
-      left: -37px;
-      bottom: 8px;
     }
   }
 `;
 
 const AreaContainer = styled.div`
+  & > :nth-of-type(1n + 7) {
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
   @media (min-width: 480px) {
     display: flex;
     flex-wrap: wrap;
@@ -111,7 +117,9 @@ export default function ControlCore() {
   const [select, setSelect] = useState("transparent");
   const [envoys, setEnvoys] = useState([]);
   const [areas, setAreas] = useState([]);
-  const navigate =useNavigate()
+  const [areaMore, setAreaMore] = useState(false);
+  const [envoyMore, setEnvoyMore] = useState(false);
+  const navigate = useNavigate();
 
   const getEnvoys = () => {
     let config = {
@@ -126,7 +134,6 @@ export default function ControlCore() {
       }
     });
   };
-
 
   const getElectoralDistrict = () => {
     let config = {
@@ -144,15 +151,12 @@ export default function ControlCore() {
       });
   };
 
-
   useEffect(() => {
     getEnvoys();
     getElectoralDistrict();
   }, []);
 
   const newList = envoys.sort((a, b) => a.transparency > b.transparency);
-
-  
 
   return (
     <Container>
@@ -179,25 +183,47 @@ export default function ControlCore() {
       <Content>
         {select === "transparent" && (
           <>
-            <EnvoyContainer>
+            <EnvoyContainer hide={envoyMore}>
               {newList.map((item, i) => {
-                return <BestEnvoy envoy={item} key={i}  click={()=>{navigate(`/envoy/${item.id}`)}}/>;
+                return (
+                  <BestEnvoy
+                    envoy={item}
+                    key={i}
+                    click={() => {
+                      navigate(`/envoy/${item.id}`);
+                    }}
+                  />
+                );
               })}
             </EnvoyContainer>
-            <ShowMore>
-              <p>نمایش بیشتر</p>{" "}
+            <ShowMore
+              arrow={envoyMore}
+              onClick={() => {
+                setEnvoyMore(!envoyMore);
+              }}
+            >
+              <p>{envoyMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
             </ShowMore>
           </>
         )}
         {select === "area" && (
-          <AreaContainer>
-        
-            {areas.map((item,i)=>{
-              return(
-                <SelectArea area={item.name} envoys={item.agent} key={i} />
-              )
-            })}
-          </AreaContainer>
+          <>
+            <AreaContainer hide={areaMore}>
+              {areas.map((item, i) => {
+                return (
+                  <SelectArea area={item.name} envoys={item.agent} key={i} />
+                );
+              })}
+            </AreaContainer>
+            <ShowMore
+              arrow={areaMore}
+              onClick={() => {
+                setAreaMore(!areaMore);
+              }}
+            >
+              <p> {areaMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
+            </ShowMore>
+          </>
         )}
       </Content>
     </Container>
