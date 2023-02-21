@@ -46,6 +46,9 @@ const NewsWraper = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 10px;
+  &:nth-of-type(1n + 4) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
   @media (min-width: 481px) {
     margin-bottom: 45px;
     justify-content: flex-start;
@@ -167,15 +170,15 @@ const ShowMore = styled.div`
     margin: auto;
     color: #9f9f9f;
     font-size: 4.65vw;
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
     font-weight: 300;
     &:after {
       content: "";
-      display: flex;
-      position: absolute;
-      left: -25px;
-      bottom: 8px;
+      display: inline-flex;
       background-image: url(${upArrow});
+      transform: ${(props) => (props.arrow ? `rotate(180deg)` : "")};
       background-size: cover;
       background-repeat: no-repeat;
       width: 9px;
@@ -217,6 +220,10 @@ const ChangeBack = styled.div`
 export default function SelectNews({ posts }) {
   const [selectedTag, setSelectedTag] = useState("همه");
   const [filteredPosts, setFilteredPosts] = useState(posts);
+  const [mostVisitedMore,setMostVisitedMore]=useState(false);
+  const [lastNewsMore,setLastNewsMore]=useState(false);
+
+
   const magPaper = filteredPosts.map((x, i) => {
     return (
       <Paper key={i}>
@@ -241,16 +248,16 @@ export default function SelectNews({ posts }) {
     <Container>
       <Control selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
       <Title> پربازدیدترین مطالب</Title>
-      <NewsWraper>{magPaper}</NewsWraper>
-      <ShowMore>
-        <p>نمایش بیشتر</p>
+      <NewsWraper hide={mostVisitedMore}>{magPaper}</NewsWraper>
+      <ShowMore arrow={mostVisitedMore} onClick={()=>{setMostVisitedMore(!mostVisitedMore)}}>
+        <p>{mostVisitedMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
       </ShowMore>
 
       <ChangeBack>
         <Title> آخرین مطالب</Title>
-        <NewsWraper>{magPaper}</NewsWraper>
-        <ShowMore>
-          <p>نمایش بیشتر</p>
+        <NewsWraper hide={lastNewsMore} >{magPaper}</NewsWraper>
+        <ShowMore arrow={lastNewsMore} onClick={()=>{setLastNewsMore(!lastNewsMore)}}>
+          <p >{lastNewsMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
         </ShowMore>
       </ChangeBack>
     </Container>

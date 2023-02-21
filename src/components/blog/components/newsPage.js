@@ -18,6 +18,7 @@ export default function NewsPage() {
   const { title } = useParams();
   const width = useWidth();
   const [post, setPost] = useState({});
+  const [showMore,setShowMore]=useState(false);
 
   const getPost = () => {
     let config = {
@@ -146,10 +147,10 @@ export default function NewsPage() {
           </DesktopContainer>
           <Related>
             <Header> آخرین مطالب</Header>
-            <CardContainer>{magPaper}</CardContainer>
+            <CardContainer hide={showMore}>{magPaper}</CardContainer>
 
-            <ShowMore>
-              <p>نمایش بیشتر</p>
+            <ShowMore arrow={showMore} onClick={()=>{setShowMore(!showMore)}}>
+              <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
             </ShowMore>
           </Related>
         </>
@@ -466,6 +467,9 @@ const CardContainer = styled.div`
   gap: 10px;
   @media (min-width: 481px) {
     justify-content: flex-start;
+    &>:nth-of-type(1n + 5) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
   }
 `;
 
@@ -591,14 +595,14 @@ const ShowMore = styled.div`
     color: #9f9f9f;
     font-size: 1.25vw;
     font-weight: 400;
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
     &:after {
       content: "";
-      display: flex;
-      position: absolute;
-      left: -25px;
-      bottom: 8px;
+      display: inline-flex;
       background-image: url(${upArrow});
+      transform: ${(props) => (props.arrow ? `rotate(180deg)` : "")};
       background-size: cover;
       background-repeat: no-repeat;
       width: 15px;
