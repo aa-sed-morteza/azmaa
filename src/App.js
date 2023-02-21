@@ -20,6 +20,7 @@ import { UserState } from "./components/context/userContext";
 import SetMobileNumber from "./components/sign-in/components/setMobileNumber";
 import EnvoySignIn from "./components/envoy-sign-in";
 import DetailsEnvoy from "./components/detailsEnvoy";
+import NotFound from "./notFound";
 
 function App() {
   return (
@@ -51,6 +52,9 @@ function App() {
 
           {/* dashboard routing */}
           <Route path="/dashboard/*" element={<Dashboard />} />
+
+          {/* not found page */}
+          <Route path='*' element={<NotFound/>}/>
         </Routes>
         <Footer />
         <ToastContainer />
