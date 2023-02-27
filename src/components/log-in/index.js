@@ -173,6 +173,7 @@ export default function LogIn() {
               background="#inherit"
               borderColor="#095644"
               textColor="#095644"
+              simple={true}
               icon={signin}
               click={() => {
                 navigate("/sign-in");

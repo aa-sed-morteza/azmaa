@@ -49,9 +49,10 @@ const Container = styled.div`
     font-weight: 400;
     position: absolute;
     right: 40px;
-    top: -13px;
+    top: -17px;
     color: #707070;
     background: ${(props) => props.back};
+    transform: scale(.6);
   }
   span {
     position: absolute;
@@ -101,7 +102,6 @@ const Container = styled.div`
     }
     input {
       font-size: 1.25vw;
-
       padding: 0.885vw;
       padding-right: 3.125vw;
     }
