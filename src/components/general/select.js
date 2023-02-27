@@ -53,9 +53,10 @@ const Wraper = styled.div`
     font-weight: 400;
     position: absolute;
     right: 40px;
-    top: -13px;
+    top: -17px;
     color: #6cbba9;
     background: ${(props) => (props.back ? props.back : "#F5F5F5")};
+    transform: scale(.6);
   }
   @media (min-width: 480px) {
     &:after {
@@ -67,7 +68,7 @@ const Wraper = styled.div`
     }
     &:before {
       font-size: 1.25vw;
-      top: -1.042vw;
+      top: -45%;
     }
   }
 `;

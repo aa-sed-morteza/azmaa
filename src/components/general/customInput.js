@@ -20,6 +20,7 @@ export default function CustomInput({
       <span></span>
       {type == "textarea" ? (
         <textarea
+          className="text-input"
           type={type}
           value={value}
           onChange={onChange}
@@ -28,7 +29,7 @@ export default function CustomInput({
           cols="100"
         ></textarea>
       ) : (
-        <input type={type} value={value} onChange={onChange} id={id}   type={showPass?'text':type}/>
+        <input value={value} onChange={onChange} id={id}   type={showPass?'text':type}/>
       )}
       {show && <div className="show-password" onClick={()=>{setShowPass(!showPass)}}></div>}
     </Container>
@@ -88,11 +89,17 @@ const Container = styled.div`
     padding-right: 40px;
     height: ${(props) => (props.type === "textarea" ? "80px" : "")};
   }
+  .text-input{
+    outline:none;
+    border:none;
+    padding :10px;
+    box-sizing:border-box;
+  }
   @media (min-width: 480px) {
     max-width: none;
     &:before {
       font-size: 1.25vw;
-      top: -50%;
+      top:${(props) => (props.type === "textarea" ? "-30%" : "-45%")};
     }
     span {
       width: 1.563vw;

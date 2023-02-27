@@ -55,9 +55,10 @@ const Container = styled.div`
     font-weight: 400;
     position: absolute;
     right: 40px;
-    top: -13px;
+    top: -17px;
     color: #6cbba9;
     background: ${(props) => props.back};
+    transform: scale(.6);
   }
   .Increase,
   .Decrease {
@@ -66,6 +67,7 @@ const Container = styled.div`
     font-size: 4.651vw;
   }
   .result {
+    outline: none;
     width: fit-content;
     border: none;
     text-align: center;
@@ -75,11 +77,12 @@ const Container = styled.div`
     padding: 0.885vw;
     &:before {
       font-size: 1.25vw;
-      top: -1.042vw;
+      top: -45%;
     }
     .Increase,
     .Decrease {
       font-size: 1.563vw;
+      line-height: 26px;
     }
   }
 `;

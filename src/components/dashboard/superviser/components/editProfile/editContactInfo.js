@@ -170,6 +170,7 @@ export default function EditContactInformation() {
             text="لغو"
             textColor="#095644"
             borderColor="#095644"
+            simple={true}
             width="35%"
             click={() => {
               navigate(-1);
