@@ -169,7 +169,8 @@ export default function Footer() {
           <img src={x.icon} />
         </span>
         <div className="content">
-          <a target="_blank" href={x.href}>
+  
+          <a  href={x.href}>
             {x.contact}
           </a>
         </div>

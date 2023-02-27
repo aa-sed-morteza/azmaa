@@ -126,17 +126,17 @@
     {
       "contact": "WWW.AZMAA.NET",
       "icon": "../../assets/site.webp",
-      "href": ""
+      "href": "https://www.azmaa.net"
     },
     {
-      "contact": " +989108993642",
+      "contact": "+989108993642",
       "icon": "../../assets/phone.webp",
-      "href": ""
+      "href": "tel:+989108993642"
     },
     {
       "contact": " @AZMAA_NET",
       "icon": "../../assets/insta.webp",
-      "href": ""
+      "href": "https://www.instagram.com/azmaa_net"
     }
   ],
   "state": [
