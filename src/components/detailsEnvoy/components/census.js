@@ -60,15 +60,16 @@ const Title = styled.h4`
   font-weight: 300;
   font-size: 4.651vw;
   color: #9f9f9f;
-  transform: translateY(-3.721vw);
+  transform: translateY(-63%);
   background: #ffffff;
   width: 45%;
   margin: 0;
   text-align: center;
   margin-right: -5%;
+  white-space: nowrap;
   @media(min-width:481px){
     font-size:1.875vw;
-    transform: translateY(-1.615vw);
+    transform: translateY(-60%);
     width: 55%;
   }
 `;

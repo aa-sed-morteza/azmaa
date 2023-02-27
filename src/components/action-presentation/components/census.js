@@ -65,6 +65,7 @@ const Title = styled.h4`
   margin: 0;
   text-align: center;
   margin-right: -5%;
+  white-space: nowrap;
   @media(min-width:480px){
     font-size:1.875vw;
     transform: translateY(-1.615vw);
