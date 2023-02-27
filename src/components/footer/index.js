@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import data from "../../data.json";
-import azmma from "../../assets/azmaa.webp";
+import azmma from "../../assets/azma-black.svg";
 import {toFarsiNumber} from "../../utils"
 
 const FooterContainer = styled.section`
@@ -148,12 +148,11 @@ const Copyright = styled.div`
     color: #cbcbcb;
     white-space: nowrap;
     display: flex;
+    align-items: center;
+    gap:5px;
     span {
       background-image: url(${azmma});
       background-size: contain;
-      padding-right: 5px;
-      padding-left: 5px;
-      opacity: 0.5;
       background-repeat: no-repeat;
       width: 29px;
       height: 24px;
