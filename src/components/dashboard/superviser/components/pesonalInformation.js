@@ -75,6 +75,7 @@ export default function PersonalInformation() {
             text="لغو"
             textColor="#095644"
             borderColor="#095644"
+            simple={true}
             width="35%"
             click={toggle}
           />

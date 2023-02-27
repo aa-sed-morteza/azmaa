@@ -93,13 +93,14 @@ const Container = styled.div`
     outline:none;
     border:none;
     padding :10px;
-    box-sizing:border-box;
+    font-weight: 400;
+    font-size: 3.721vw;
   }
   @media (min-width: 480px) {
     max-width: none;
     &:before {
       font-size: 1.25vw;
-      top:${(props) => (props.type === "textarea" ? "-30%" : "-45%")};
+      top:${(props) => (props.type === "textarea" ? "-20%" : "-45%")};
     }
     span {
       width: 1.563vw;
@@ -107,7 +108,7 @@ const Container = styled.div`
       right: 0.781vw;
       top: 0.781vw;
     }
-    input {
+    input,.text-input {
       font-size: 1.25vw;
       padding: 0.885vw;
       padding-right: 3.125vw;
