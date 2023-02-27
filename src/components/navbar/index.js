@@ -79,7 +79,7 @@ const MenuList = styled.ul`
   top: 67px;
   background-color: ${(props) => (props.back ? "#095644" : "#FFFFFF")};
   flex-direction: column;
-  padding: 51px 81px;
+  padding: 51px 81px 115px;
   gap: 10px;
   z-index: 40;
 `;
@@ -153,7 +153,7 @@ const MobilePanel = styled.div`
   align-items: center;
   gap: 3.488vw;
   padding-right: 4.186vw;
-  bottom: -16.279vw;
+  bottom: 9vw;
   right: 0;
   .icon {
     display: flex;
@@ -362,6 +362,7 @@ export default function Navbar() {
       dispatch({ type: "SET_TOKEN", payload: null });
     } else {
       navigate("/dashboard");
+      setDashboard(true)
     }
     // setDashboard(!dashboard);
     // setOpen(false);
@@ -383,17 +384,11 @@ export default function Navbar() {
   function choiseItem(num, path) {
     setActive(num);
     navigate(path);
-    setOpen(false);
+    setOpen(!open);
   }
 
-  function handelClick() {
-    if (open) {
-      setOpen(false);
-    } else {
-      setOpen(true);
-    }
-    return open;
-  }
+ 
+
 
   return (
     <TopBar>
@@ -420,21 +415,21 @@ export default function Navbar() {
         )}
 
         <Search></Search>
-        {width < 481 ? <Menu onClick={handelClick} open={open}></Menu> : ""}
+        {width < 481 ? <Menu onClick={()=>{setOpen(!open)}} open={open}></Menu> : ""}
         {width < 481 ? (
           <MenuList open={open} back={dashboard && state.loggedIn}>
             {dashboard && state.loggedIn ? <Profile /> : ""}
             {dashboard && state.loggedIn ? checkUserMenu() : menuItem}{" "}
             <MobilePanel
-              color={dashboard ? "#FF5A5A" : "#FFAA00"}
+              color={state.loggedIn ? "#FF5A5A" : "#FFAA00"}
               onClick={goDashboard}
             >
               <div className="icon">
-                <img src={dashboard ? exit : signInMobile} />
+                <img src={state.loggedIn ? exit : signInMobile} />
               </div>
               <p className="content">
                 {" "}
-                {dashboard ? "خروج از پنل" : "ورود به پنل"}{" "}
+                {state.loggedIn ? "خروج از پنل" : "ورود به پنل"}{" "}
               </p>{" "}
             </MobilePanel>
           </MenuList>
