@@ -138,6 +138,7 @@ export default function Contacts() {
           <CustomInput
             label=" ایمیل"
             back="#ffffff"
+            dir='ltr'
             value={values.email}
             onChange={handleChange}
             id="email"

@@ -136,6 +136,7 @@ export default function EditContactInformation() {
             <CustomInput
               label=" ایمیل"
               back="#ffffff"
+              dir='ltr'
               value={values.email}
               onChange={handleChange}
               id="email"
