@@ -258,7 +258,7 @@ const Category = styled.ul`
       font-weight: bolder;
       &:before {
         content: "";
-        display: "flex";
+        display: flex;
         background-color: white;
         bottom: -3.2vw;
         position: absolute;
