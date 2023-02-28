@@ -29,7 +29,7 @@ const useMouse = () => {
 };
 
 const IranMap = ({ position }) => {
-  const {state,dispatch}=useUser();
+  const { state, dispatch } = useUser();
   const { x, y } = useMouse();
   const [provinces, setProvinces] = useState(iranProvinces);
   const [data, setData] = useState([]);
@@ -76,13 +76,15 @@ const IranMap = ({ position }) => {
   const addCities = () => {
     provinces.map((item) => {
       for (let i = 0; i < data.length; i++) {
-        if (item.name === data[i].province_name) {
+        if (
+          item.name === data[i].province_name &&
+          !item.cities.includes(data[i].name)
+        ) {
           item.cities.push(data[i].name);
         }
       }
     });
   };
-
 
   useEffect(() => {
     getProvince();
