@@ -362,8 +362,8 @@ const Not = styled.div`
     background-image: url(${not});
     background-size: contain;
     background-repeat: no-repeat;
-    bottom: -3.023vw;
     right: -11.628vw;
+    top: -1.395vw;
   }
 
   &.active,
