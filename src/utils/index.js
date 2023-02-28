@@ -51,3 +51,19 @@ export function toFarsiNumber(n) {
       .toString()
       .replace(/\d/g, x => farsiDigits[x]);
 }
+
+export function convertDateToFarsi(stringArg) {
+  const ETF = '۰۱۲۳۴۵۶۷۸۹';
+  const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+  const ans = stringArg.split('-').map(elem => +elem)
+    .map(elem =>
+      String(elem)
+        .split('')
+        .map(subElem => Math.round(subElem)
+        .toString()
+        .replace(/\d/g, x => farsiDigits[x]))
+        .join('')
+    )
+    .join('/');
+  return ans;
+}

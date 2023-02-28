@@ -113,48 +113,13 @@ const AreaContainer = styled.div`
   }
 `;
 
-export default function ControlCore() {
+export default function ControlCore(props) {
   const [select, setSelect] = useState("transparent");
-  const [envoys, setEnvoys] = useState([]);
-  const [areas, setAreas] = useState([]);
+  const [envoys, setEnvoys] = useState(props.envoys);
+  const [areas, setAreas] = useState(props.areas);
   const [areaMore, setAreaMore] = useState(false);
   const [envoyMore, setEnvoyMore] = useState(false);
   const navigate = useNavigate();
-
-  const getEnvoys = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
-    };
-
-    axios(config).then((res) => {
-      console.log(res.data);
-      if (res.data.length > 0) {
-        setEnvoys([...res.data]);
-      }
-    });
-  };
-
-  const getElectoralDistrict = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        setAreas([...response.data]);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  useEffect(() => {
-    getEnvoys();
-    getElectoralDistrict();
-  }, []);
 
   const newList = envoys.sort((a, b) => a.transparency > b.transparency);
 

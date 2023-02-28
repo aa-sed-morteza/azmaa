@@ -9,7 +9,7 @@ import data from "../../../data.json";
 import left from ".././../../assets/left.webp";
 import { useNavigate } from "react-router-dom";
 import ShareButton from "../../general/shareButton";
-import { toFarsiNumber } from "../../../utils";
+import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
 
 const VCContainer = styled.div`
   background-color: #ffffff;
@@ -481,6 +481,7 @@ export default function VoteCard({ bill }) {
       setEnvoyData([...bill.positive_vote]);
     }
   }, [active]);
+
 
   return (
     <VCContainer>

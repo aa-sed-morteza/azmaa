@@ -12,10 +12,13 @@ import Search from "./components/search";
 import IranMap from "../pluginIranMap/IranMap";
 import { BaseBackURL } from "../../constant/api";
 import axios from "axios";
+import { useUser } from "../context/userContext";
 
 export default function Envoy() {
   const width = useWidth();
+  const {state,dispatch}=useUser();
   const [envoys, setEnvoys] = useState([]);
+  const [citeis,setCiteis]=useState([]);
 
   const getEnvoys = () => {
     let config = {
@@ -31,11 +34,53 @@ export default function Envoy() {
     });
   };
 
+  const getCiteis = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/city/`,
+    };
+
+    axios(config).then((res) => {
+      console.log(res.data);
+      if (res.data.length > 0) {
+        setCiteis([...res.data]);
+      }
+    });
+  };
+
+  const getDistrict = (id) => {
+    var config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/electoral_district/?city__id=${id}&city__province__id`,
+    };
+    axios(config)
+      .then(function (response) {
+        console.log('sagsol',response.data[0].agent);
+        setEnvoys([...response.data[0].agent]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const filterEnvoyByCity = () => {
+    const cityID = citeis.find((x) => x.name == state.city);
+    if(cityID){
+      getDistrict(cityID.id)
+    }
+  } 
+
  
 
   useEffect(() => {
     getEnvoys();
+    getCiteis();
   }, []);
+
+  useEffect(() => {
+    filterEnvoyByCity();
+    
+  }, [state.city]);
 
   return (
     <Container>
