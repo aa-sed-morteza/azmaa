@@ -48,6 +48,7 @@ const Title = styled.h4`
   margin: 0;
   text-align: center;
   margin-right: -5%;
+  white-space: nowrap;
   @media (min-width: 480px) {
     font-size: 1.875vw;
     transform: translateY(-60%);
@@ -102,4 +103,8 @@ const Edit = styled.div`
   background-image: url(${edit});
   background-size: contain;
   cursor: pointer;
+  @media (min-width: 480px){
+    width: 1.042vw;
+    height: 0.521vw;
+  }
 `;

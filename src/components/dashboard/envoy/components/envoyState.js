@@ -113,6 +113,10 @@ const Edit = styled.div`
   background-image: url(${edit});
   background-size: contain;
   cursor: pointer;
+  @media (min-width: 480px){
+    width: 1.042vw;
+    height: 0.521vw;
+  }
 `;
 
 const State = styled.div`
@@ -141,6 +145,22 @@ const State = styled.div`
       color: #6cbba9;
       font-weight: 400;
       font-size: 3.256vw;
+    }
+  }
+  @media (min-width: 480px){
+    gap: 1.094vw;
+    margin-bottom: 1.719vw;
+    span{
+      width: 4.792vw;
+      height: 5.313vw;
+    }
+    .content{
+      .title{
+        font-size: 1.667vw;
+      }
+      .persentage{
+        font-size: 1.250vw;
+      }
     }
   }
 `;
