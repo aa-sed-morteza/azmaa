@@ -36,24 +36,27 @@ const SubTitile = styled.h2`
   font-weight: 700;
   font-size: 3.721vw;
   color: #9f9f9f;
-  padding-right: 40px;
+  /* padding-right: 40px; */
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 5px;
   &:before {
     content: "";
-    display: block;
-    position: absolute;
+    display: inline-flex;
+    /* position: absolute; */
     background-image: url(${check});
     background-size: cover;
     background-repeat: no-repeat;
     width: 4.186vw;
     height: 4.186vw;
-    right: 4.186vw;
-    top: 0.465vw;
+    /* right: 4.186vw; */
+    /* top: 0.465vw; */
   }
   &:after {
     content: "";
-    display: block;
+    display: inline-flex;
     position: absolute;
     background-image: url(${line});
     background-size: cover;
@@ -61,23 +64,23 @@ const SubTitile = styled.h2`
     width: 3.721vw;
     height: 0.233vw;
     right: -0.698vw;
-    top: 2.326vw;
+    /* top: 2.326vw; */
   }
   @media (min-width: 481px) {
     font-size: 1.667vw;
     margin-bottom: 20px;
-    padding-top: 45px;
+    /* padding-top: 45px; */
     &:before {
       width: 1.563vw;
       height: 1.563vw;
-      right: -0.156vw;
-      top: 2.76vw;
+      /* right: -0.156vw; */
+      /* top: 2.76vw; */
     }
     &:after {
       width: 1.979vw;
       height: 0.156vw;
       right: -2.292vw;
-      top: 3.438vw;
+      /* top: 3.438vw; */
     }
   }
 `;
