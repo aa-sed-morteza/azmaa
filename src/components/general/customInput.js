@@ -50,7 +50,7 @@ const Container = styled.div`
     font-weight: 400;
     position: absolute;
     right: 40px;
-    top: -17px;
+    top: -25%;
     color: #707070;
     background: ${(props) => props.back};
     transform: scale(.6);
@@ -100,7 +100,7 @@ const Container = styled.div`
     max-width: none;
     &:before {
       font-size: 1.25vw;
-      top:${(props) => (props.type === "textarea" ? "-20%" : "-45%")};
+      top:${(props) => (props.type === "textarea" ? "-20%" : "-30%")};
     }
     span {
       width: 1.563vw;
