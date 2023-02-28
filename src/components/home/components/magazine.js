@@ -214,7 +214,7 @@ const Paper = styled.div`
     }
     .user {
       font-size: 1.042vw;
-      margin-bottom: 36px;
+      margin-bottom: 2.344vw;
       
       &:before {
         width: 20px;
@@ -223,7 +223,7 @@ const Paper = styled.div`
     }
     .content {
       font-size: 1.25vw;
-      margin-bottom: 36px;
+      margin-bottom: 2.344vw;
     }
     .date {
       font-size: 1.042vw;
