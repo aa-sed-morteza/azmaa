@@ -88,9 +88,45 @@ export const contentSchema = yup.object().shape({
 
 export const UploadPictSchema = yup.object().shape({
   picOne: yup
-    .string()
-    .required("لطفا تصویر ابتدایی مطلب خود را  بارگزاری کنید"),
-  picTwo: yup.string().required("لطفا   تصویر دوم مطلب  خود را  بارگزاری کنید"),
+    .mixed()
+    .required("لطفا تصویرمطلب خود را بارگزاری کنید")
+    .test("حجم فایل زیاد است", (value) => {
+      return value && value.size <= 2000000;
+    })
+    .test(
+      "نوع فایل",
+      "نوع فایل باید یکی از فرمت های نامبرده باشد: .jpeg, .jpg, .bmp, .pdf and .doc",
+      (value) => {
+        return (
+          value &&
+          (value.type === "image/jpeg" ||
+            value.type === "image/bmp" ||
+            value.type === "image/png" ||
+            value.type === "application/pdf" ||
+            value.type === "application/msword")
+        );
+      }
+    ),
+  picTwo: yup
+    .mixed()
+    .required("لطفا تصویرمطلب خود را بارگزاری کنید")
+    .test("حجم فایل زیاد است", (value) => {
+      return value && value.size <= 2000000;
+    })
+    .test(
+      "نوع فایل",
+      "نوع فایل باید یکی از فرمت های نامبرده باشد: .jpeg, .jpg, .bmp, .pdf and .doc",
+      (value) => {
+        return (
+          value &&
+          (value.type === "image/jpeg" ||
+            value.type === "image/bmp" ||
+            value.type === "image/png" ||
+            value.type === "application/pdf" ||
+            value.type === "application/msword")
+        );
+      }
+    ),
 });
 
 export const LinkSchema = yup.object().shape({

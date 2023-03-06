@@ -105,6 +105,7 @@ const Container = styled.div`
     height: ${(props) => (props.type === "textarea" ? "80px" : "")};
   }
   .text-input {
+    resize:none;
     outline: none;
     border: none;
     padding: 10px;
