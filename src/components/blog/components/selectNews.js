@@ -219,9 +219,16 @@ const ChangeBack = styled.div`
 
 export default function SelectNews({ posts }) {
   const [selectedTag, setSelectedTag] = useState("همه");
-  const [filteredPosts, setFilteredPosts] = useState(posts);
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const [mostVisitedMore,setMostVisitedMore]=useState(false);
   const [lastNewsMore,setLastNewsMore]=useState(false);
+
+  useEffect(()=>{
+    setFilteredPosts(posts);
+  },[posts]);
+
+  console.log('ssd',filteredPosts);
+  console.log('fag',selectedTag)
 
 
   const magPaper = filteredPosts.map((x, i) => {
@@ -240,9 +247,18 @@ export default function SelectNews({ posts }) {
     );
   });
 
+
   useEffect(() => {
-    let newPosts = posts.filter((post) => post.tag[0].name === selectedTag);
-    setFilteredPosts([...newPosts]);
+    if(posts.filter(x=> x.tag.length>0 && x.tag[0].name== selectedTag)){
+      setFilteredPosts(posts.filter(x=> x.tag.length>0 && x.tag[0].name== selectedTag))
+    }else{
+
+    }
+
+    if(selectedTag == 'همه'){
+      setFilteredPosts(posts)
+    }
+   
   }, [selectedTag]);
   return (
     <Container>

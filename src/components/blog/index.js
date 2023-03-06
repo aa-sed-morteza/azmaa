@@ -31,7 +31,6 @@ export default function Blog() {
     getPosts();
   }, []);
 
-  console.log('pooo',posts)
 
   return (
     <Container>
@@ -63,6 +62,7 @@ const Title = styled.div`
   display: flex;
   margin-bottom: 12px;
   padding-right: 10px;
+  white-space: nowrap;
   .home {
     font-size: 3.721vw;
     font-weight: 700;
