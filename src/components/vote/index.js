@@ -21,6 +21,7 @@ export default function Vote() {
       console.log(res.data);
       if (res.data.length > 0) {
         setBills([...res.data]);
+        setFilteredBills([...res.data])
       }
     });
   };
@@ -45,7 +46,6 @@ export default function Vote() {
   }, [selectedTag]);
 
   
-console.log('blose',selectedTag)
   
   return (
     <Container>
@@ -78,6 +78,7 @@ const Container = styled.section`
 const Title = styled.div`
   display: flex;
   margin-bottom: 12px;
+  white-space: nowrap;
   .home {
     font-size: 3.721vw;
     font-weight: 700;

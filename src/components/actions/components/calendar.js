@@ -61,10 +61,11 @@ export default function Calendar({ activities }) {
     );
   }
 
+  console.log('el',elements)
+
   return (
     <Container>
       {elements}
-
       <ShowMore arrow={showMore} onClick={()=>{setShowMore(!showMore)}}>
         <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
       </ShowMore>

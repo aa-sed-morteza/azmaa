@@ -129,6 +129,7 @@ const Container = styled.section`
 const Title = styled.div`
   display: flex;
   margin-bottom: 12px;
+  white-space: nowrap;
   .home {
     font-size: 3.721vw;
     font-weight: 700;

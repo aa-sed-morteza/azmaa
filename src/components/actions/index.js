@@ -21,6 +21,7 @@ export default function Actions() {
       console.log(res.data);
       if (res.data.length > 0) {
         setActivities([...res.data]);
+        setFilteredActivities([...res.data])
       }
     });
   };
@@ -30,14 +31,18 @@ export default function Actions() {
   }, []);
 
   useEffect(() => {
-    let newData = activities.filter((item) => item.tag[0].name === selectedTag);
-    if (selectedTag === "همه") {
-      setFilteredActivities([...activities]);
-    } else {
-      setFilteredActivities([...newData]);
+    if( activities.filter((item) => item.tag[0].name === selectedTag)){
+      setFilteredActivities(activities.filter((item) => item.tag[0].name === selectedTag))
+    }else{
+      setActivities(activities)
+    }
+    
+    if(selectedTag == 'همه'){
+      setFilteredActivities(activities)
     }
   }, [selectedTag]);
 
+  console.log('active',filteredActivities)
 
   return (
     <Container>
@@ -70,6 +75,7 @@ const Container = styled.section`
 const Title = styled.div`
   display: flex;
   margin-bottom: 12px;
+  white-space: nowrap;
   .home {
     font-size: 3.721vw;
     font-weight: 700;

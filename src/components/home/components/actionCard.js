@@ -35,6 +35,8 @@ export default function ActionCard({ activity }) {
     }
   }
 
+  console.log('ads',activity)
+
   // useEffect(()=>{
   //   setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[0].name)]);
   // },[])
