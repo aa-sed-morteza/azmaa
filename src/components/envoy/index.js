@@ -96,12 +96,12 @@ export default function Envoy() {
           <Wraper>
             {/* <Map />  */}
             <IranMap />
-            {envoys.length > 0 && <HonestEnvoy envoys={envoys} />}
+            {envoys && envoys.length > 0 && <HonestEnvoy envoys={envoys} />}
           </Wraper>
         )}
 
         <Search />
-        <AdvanceSearch />
+        <AdvanceSearch  setEnvoys={setEnvoys} />
         {width < 481 && <EnvoyFiltering envoys={envoys} />}
         {width > 481 && (
           <>
