@@ -29,18 +29,23 @@ export default function Vote() {
     getActivities();
   }, []);
 
+
   
   useEffect(() => {
-    let newData = bills.filter((item) => item.tag[0].name === selectedTag);
-    if (selectedTag === "همه") {
-      setFilteredBills([...bills]);
-    } else {
-      setFilteredBills([...newData]);
+    if( bills.filter((item) => item.tag[0].name === selectedTag)){
+      setFilteredBills(bills.filter((item) => item.tag[0].name === selectedTag))
+    }else{
+      setBills(bills)
     }
+
+    if(selectedTag == 'همه'){
+      setFilteredBills(bills)
+    }
+   
   }, [selectedTag]);
 
   
-
+console.log('blose',selectedTag)
   
   return (
     <Container>
@@ -52,7 +57,7 @@ export default function Vote() {
       <Content>
         <Controler selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
         <Filtering />
-        <Calendar bills={bills} />
+        <Calendar bills={filteredBills} />
       </Content>
     </Container>
   );
