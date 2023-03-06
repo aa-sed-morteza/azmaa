@@ -129,7 +129,7 @@ h1, h2, h3, h4, h5, h6,p,input, textarea,button {
 .App {
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   min-height: 100vh;
   /* height: 100vh; */
 }
