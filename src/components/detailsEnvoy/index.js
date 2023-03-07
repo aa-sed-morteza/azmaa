@@ -73,6 +73,7 @@ export default function DetailsEnvoy() {
       {/* filtering */}
       <SecondSection>
         <Filtering id={title} />
+        
       </SecondSection>
       {/* socialNetwork */}
       <ThirdSection>

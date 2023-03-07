@@ -7,7 +7,7 @@ import ScrollButton from "../../general/scrollButton";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { useNavigate } from "react-router-dom";
-import { toFarsiNumber } from "../../../utils";
+import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
 
 const MagazineContainer = styled.section`
   background-color: #ffaa00;
@@ -133,6 +133,7 @@ const Paper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
+  cursor: pointer;
   .cover {
     width: 160px;
     height: 120px;
@@ -260,7 +261,7 @@ export default function Magazine() {
     return (
       <Paper
         onClick={() => {
-          navigate(`${x.id}`);
+          navigate(`/blog/${x.id}`);
         }}
         key={i}
       >
@@ -272,7 +273,7 @@ export default function Magazine() {
 
         <p className="content">{x.title}</p>
 
-        <p className="date">{x.created}</p>
+        <p className="date">{x.created && convertDateToFarsi(x.created)}</p>
       </Paper>
     );
   });

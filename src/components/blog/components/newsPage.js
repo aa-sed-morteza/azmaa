@@ -13,6 +13,7 @@ import upArrow from "../../../assets/arrow.webp";
 import ShareButton from "../../general/shareButton";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
+import { convertDateToFarsi } from "../../../utils";
 
 export default function NewsPage() {
   const { title } = useParams();
@@ -56,11 +57,9 @@ export default function NewsPage() {
   useEffect(() => {
     getPost();
     getPosts();
-    console.log("set");
   }, [title]);
 
   useEffect(() => {
-    console.log(post);
     if (
       post &&
       post.tag &&
@@ -94,7 +93,7 @@ export default function NewsPage() {
 
         <p className="content">{x.description}</p>
 
-        <p className="date">{x.created}</p>
+        <p className="date">{x.created &&  convertDateToFarsi(x.created)}</p>
       </Paper>
     );
   });
@@ -115,7 +114,7 @@ export default function NewsPage() {
 
         <p className="content">{x.description}</p>
 
-        <p className="date">{x.created}</p>
+        <p className="date">{x.created && convertDateToFarsi(x.created)}</p>
       </Paper>
     );
   });
@@ -136,7 +135,7 @@ export default function NewsPage() {
             <Content>
               <HeadContent>
                 <Type>{post && post.writer}</Type>
-                <Date>{post && post.created}</Date>
+                <Date>{post.created && convertDateToFarsi(post.created)}</Date>
               </HeadContent>
               <SubTitle>{post && post.title}</SubTitle>
 
@@ -177,7 +176,7 @@ export default function NewsPage() {
                 <Content>
                   <HeadContent>
                     <Type>{post && post.writer}</Type>
-                    <Date>{post && post.created}</Date>
+                    <Date>{post.created && convertDateToFarsi(post.created)}</Date>
                   </HeadContent>
                   <SubTitle>{post && post.title}</SubTitle>
 
@@ -646,7 +645,7 @@ const Paper = styled.div`
 const ShowMore = styled.div`
   border: 2px solid #9f9f9f;
   border-radius: 8px;
-  max-width: 500px;
+  width: 50%;
   display: flex;
   padding: 8px;
   background-color: #ffffff;
@@ -656,6 +655,7 @@ const ShowMore = styled.div`
   margin: auto;
   padding: 13px;
   margin-top: 45px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;

@@ -388,6 +388,7 @@ const LargButton = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 5px;
+  cursor: pointer;
   .content {
     margin: 0 auto;
     font-size: 4.65vw;
@@ -490,7 +491,7 @@ export default function VoteCard({ bill }) {
         <div className="title-card">
           <p className="title">رأی‌گیری</p>
           <h2>{bill.name}</h2>
-          <p className="date">{bill.date}</p>
+          <p className="date">{bill.date && convertDateToFarsi(bill.date)}</p>
         </div>
       </CardHeader>
       <Statistics>

@@ -43,27 +43,32 @@ export function ChangeToPersianDate(dateStr) {
   return persianDate;
 }
 
-
 export function toFarsiNumber(n) {
-  const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+  const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
 
   return Math.round(n)
-      .toString()
-      .replace(/\d/g, x => farsiDigits[x]);
+    .toString()
+    .replace(/\d/g, (x) => farsiDigits[x]);
 }
 
 export function convertDateToFarsi(stringArg) {
-  const ETF = '۰۱۲۳۴۵۶۷۸۹';
-  const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-  const ans = stringArg.split('-').map(elem => +elem)
-    .map(elem =>
+  const ETF = "۰۱۲۳۴۵۶۷۸۹";
+  const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+  const ans = stringArg
+    .split("-")
+    .map((elem) => +elem)
+    .map((elem) =>
       String(elem)
-        .split('')
-        .map(subElem => Math.round(subElem)
-        .toString()
-        .replace(/\d/g, x => farsiDigits[x]))
-        .join('')
+        .split("")
+        .map((subElem) =>
+          Math.round(subElem)
+            .toString()
+            .replace(/\d/g, (x) => farsiDigits[x])
+        )
+        .join("")
     )
-    .join('/');
+    .join("/");
   return ans;
 }
+
+

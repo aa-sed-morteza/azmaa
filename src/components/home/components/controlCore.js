@@ -81,6 +81,7 @@ const ShowMore = styled.div`
   margin: auto;
   padding: 13px;
   margin-top: 43px;
+  cursor: pointer;
   p {
     font-size: 1.25vw;
     font-weight: 400;

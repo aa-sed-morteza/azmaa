@@ -60,6 +60,7 @@ const Wraper = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   margin-top:2.326vw;
+  cursor: pointer;
   @media (min-width: 481px) {
     overflow:hidden;
     border-radius: 8px;

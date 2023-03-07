@@ -40,6 +40,7 @@ const Container = styled.div`
 `;
 
 const Right = styled.div`
+cursor: pointer;
   &.active{
     width: 3.125vw;
     height: 3.125vw;
@@ -53,7 +54,7 @@ const Right = styled.div`
 `;
 
 const Left = styled(Right)`
-
+  
   transform: rotate(180deg);
   margin: 0;
 

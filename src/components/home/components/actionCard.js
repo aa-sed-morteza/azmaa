@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import ShareButton from "../../general/shareButton.js";
 import { BaseBackURL } from "../../../constant/api";
 import axios from "axios";
-import { toFarsiNumber } from "../../../utils";
+import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
 
 export default function ActionCard({ activity }) {
   const [active, setActive] = useState(0);
@@ -84,7 +84,7 @@ export default function ActionCard({ activity }) {
         <div className="title-card">
           <p className="title">عملکرد</p>
           <h2> {activity.name}</h2>
-          <p className="date">{activity.date}</p>
+          <p className="date">{activity.date && convertDateToFarsi(activity.date)}</p>
         </div>
       </CardHeader>
       <Statistics>
@@ -506,6 +506,7 @@ const LargButton = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 5px;
+  cursor: pointer;
   .content {
     margin: 0 auto;
     font-size: 4.65vw;

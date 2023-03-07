@@ -13,6 +13,7 @@ import line from "../../../assets/Line.webp";
 import title from "../../../assets/title1.svg";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
+import { ChangeToPersianDate, fixNumbers } from "../../../utils";
 
 // import actionActive from "../../../assets/action-active.webp";
 
@@ -20,6 +21,28 @@ export default function Filtering({ id }) {
   const [select, setSelect] = useState(1);
   const [billEnvoy, setBillEnvoy] = useState([]);
   const [activityEnvoy, setActivityEnvoy] = useState([]);
+
+  let today = new Date().toLocaleDateString("fa-IR", {
+    year: "numeric",
+    month: "numeric",
+  });
+  const year = today.slice(0, 4);
+  const month = fixNumbers(today.slice(5));
+
+  const monthArray = [
+    "فروردین",
+    "اردیبهشت",
+    "خرداد",
+    "تیر",
+    "مرداد",
+    "شهریور",
+    "مهر",
+    "آبان",
+    "آذر",
+    "دی",
+    "بهمن",
+    "اسفند",
+  ];
 
   // get vote envoy for bill from api
   const getEnvoyBills = () => {
@@ -78,6 +101,49 @@ export default function Filtering({ id }) {
       }
     });
   });
+
+  const activityElements = [];
+
+  for (let i = parseInt(month) - 1; i > 0; i--) {
+    const newList = [];
+    for (const item of activityEnvoy) {
+      const itemDate = ChangeToPersianDate(item.date);
+      const itemYear = itemDate.slice(0, 4);
+      const itmeMonth = fixNumbers(itemDate.slice(5));
+
+      if (itemYear === year && parseInt(itmeMonth) === i + 1) {
+        newList.push(item);
+      }
+    }
+    
+    activityElements.push(
+      
+      <div>
+        <SubTitile>
+          {monthArray[i]} {year}
+        </SubTitile>
+        <>
+          {newList.map((item, i) => {
+            return item.vote.map((x, j) => {
+              if (x.voter.id === parseInt(id)) {
+                return (
+                  <GeneralActionCard
+                    key={j}
+                    act="action"
+                    content={item.name}
+                    action={x.vote}
+                    date={item.date}
+                    item={item}
+                    margin="2%"
+                  />
+                );
+              }
+            });
+          })}
+        </>
+      </div>
+    );
+  }
 
   // get votes envoy for bills
   const positiveVote = billEnvoy.map((item, i) => {
@@ -165,6 +231,120 @@ export default function Filtering({ id }) {
     });
   });
 
+  const billsElements = [];
+
+  for (let i = parseInt(month) - 1; i > 0; i--) {
+    const newList = [];
+    for (const item of billEnvoy) {
+      const itemDate = ChangeToPersianDate(item.date);
+      const itemYear = itemDate.slice(0, 4);
+      const itmeMonth = fixNumbers(itemDate.slice(5));
+
+      if (itemYear === year && parseInt(itmeMonth) === i + 1) {
+        newList.push(item);
+      }
+    }
+    billsElements.push(
+      <div>
+        <SubTitile>
+          {monthArray[i]} {year}
+        </SubTitile>
+        <>
+          {newList.map((item, i) => {
+            return item.positive_vote.map((positive, i) => {
+              if (positive.voter && positive.voter.id === parseInt(id)) {
+                return (
+                  <GeneralActionCard
+                    key={i}
+                    act="vote"
+                    content={item.name}
+                    action="موافق"
+                    date={item.date}
+                    item={item}
+                    margin="2%"
+                  />
+                );
+              }
+            });
+          })}
+
+          {newList.map((item, i) => {
+            return item.absent_vote.map((absent, i) => {
+              if (absent.voter.id === id) {
+                return (
+                  <GeneralActionCard
+                    key={i}
+                    act="vote"
+                    content={item.name}
+                    action={absent.vote}
+                    date={item.date}
+                    item={item}
+                    margin="2%"
+                  />
+                );
+              }
+            });
+          })}
+
+          {newList.map((item, i) => {
+            return item.negative_vote.map((negative, i) => {
+              if (negative.voter.id === id) {
+                return (
+                  <GeneralActionCard
+                    key={i}
+                    act="vote"
+                    content={item.name}
+                    action={negative.vote}
+                    date={item.date}
+                    item={item}
+                    margin="2%"
+                  />
+                );
+              }
+            });
+          })}
+
+          {newList.map((item, i) => {
+            return item.none_vote.map((none, i) => {
+              if (none.voter.id === id) {
+                return (
+                  <GeneralActionCard
+                    key={i}
+                    act="vote"
+                    content={item.name}
+                    action={none.vote}
+                    date={item.date}
+                    item={item}
+                    margin="2%"
+                  />
+                );
+              }
+            });
+          })}
+
+          {newList.map((item, i) => {
+            return item.without_vote.map((without, i) => {
+              if (without.voter.id === id) {
+                return (
+                  <GeneralActionCard
+                    key={i}
+                    act="vote"
+                    content={item.name}
+                    action={without.vote}
+                    date={item.date}
+                    item={item}
+                    margin="2%"
+                  />
+                );
+              }
+            });
+          })}
+        </>
+      </div>
+    );
+  }
+
+
   return (
     <Container>
       <FilteringWraper>
@@ -211,7 +391,7 @@ export default function Filtering({ id }) {
       {select == 1 && (
         <Calendar>
           <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
-          <SubTitile>مرداد ۱۴۰۱</SubTitile>
+          {/* <SubTitile>مرداد ۱۴۰۱</SubTitile>
           <Gallery>
             {positiveVote}
             {absentVote}
@@ -224,28 +404,32 @@ export default function Filtering({ id }) {
 
           <Title>سال ۱۴۰۰</Title>
           <SubTitile>مرداد ۱۴۰۰</SubTitile>
-          <Gallery>{activity}</Gallery>
+          <Gallery>{activity}</Gallery> */}
+          {billsElements}
+          {activityElements}
         </Calendar>
       )}
       {select == 2 && <>همه با فعالیت ها چه فرقی داره ؟</>}
       {select == 3 && (
         <Calendar>
           <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
-          <SubTitile>مرداد ۱۴۰۰</SubTitile>
-          <Gallery>
-            {positiveVote}
-            {absentVote}
-            {negativeVote}
-            {noneVote}
-            {withoutVote}
-          </Gallery>
+          {/* <SubTitile>مرداد ۱۴۰۰</SubTitile> */}
+          {/* <Gallery> */}
+          {/* {positiveVote} */}
+          {/* {absentVote} */}
+          {/* {negativeVote} */}
+          {/* {noneVote} */}
+          {/* {withoutVote} */}
+          {/* </Gallery> */}
+          {billsElements}
         </Calendar>
       )}
       {select == 4 && (
         <Calendar>
           <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
-          <SubTitile>مرداد ۱۴۰۰</SubTitile>
-          <Gallery>{activity}</Gallery>
+          {/* <SubTitile>مرداد ۱۴۰۰</SubTitile> */}
+          {/* <Gallery>{activity}</Gallery> */}
+          {activityElements}
         </Calendar>
       )}
 
@@ -300,6 +484,7 @@ const Item = styled.p`
   font-weight: 300;
   padding-top: 35px;
   position: relative;
+  cursor: pointer;
   &.active {
     font-weight: 700;
     &:after {

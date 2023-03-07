@@ -60,13 +60,14 @@ const EnvoyContainer = styled.div`
 const ShowMore = styled.div`
   border: 2px solid #9f9f9f;
   border-radius: 8px;
-  width: 500px;
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
   padding: 13px;
   margin-top: 43px;
+  cursor: pointer;
   p {
     font-size: 1.25vw;
     font-weight: 400;

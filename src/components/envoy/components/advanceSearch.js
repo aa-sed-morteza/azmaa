@@ -161,7 +161,7 @@ const Container = styled.section`
   border-radius: 4px;
   padding: 10px;
   margin-top: 10px;
-
+cursor: pointer;
   @media (min-width: 481px) {
     width: 50.5%;
     margin: auto;

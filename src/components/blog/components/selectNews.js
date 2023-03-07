@@ -63,7 +63,7 @@ const Paper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
-
+  cursor: pointer;
   .cover {
     width: 160px;
     height: 120px;
@@ -167,6 +167,7 @@ const ShowMore = styled.div`
   padding: 8px;
   background-color: #ffffff;
   margin-bottom: 10px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;
@@ -190,7 +191,7 @@ const ShowMore = styled.div`
   @media (min-width: 481px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
-    max-width: 500px;
+    width:50%;
     justify-content: center;
     align-items: center;
     margin: auto;

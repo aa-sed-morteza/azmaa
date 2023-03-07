@@ -4,7 +4,7 @@ import data from "../../../data.json";
 import leftArrow from "../../../assets/lightArrow.webp";
 import profile from "../../../assets/profile.webp";
 import { useNavigate } from "react-router-dom";
-import {toFarsiNumber} from "../../../utils"
+import {convertDateToFarsi, toFarsiNumber} from "../../../utils"
 
 const Container = styled.section`
   overflow: hidden;
@@ -197,7 +197,7 @@ export default function Carousel({ posts }) {
               <p className="text">{x.description.slice(0, 250) + "..."} </p>
               <div className="identity">
                 <p className="user">{x.writer }</p>
-                <p className="date">{x.created}</p>
+                <p className="date">{convertDateToFarsi(x.created) }</p>
               </div>
               <Button
                 onClick={() => {

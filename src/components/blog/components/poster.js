@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import pic from "../../../assets/poster.webp";
 import icon from "../../../assets/text.webp";
 import more from "../../../assets/more.webp";
+import { convertDateToFarsi } from "../../../utils";
 
 const Container = styled.div`
   background: #ffffff;
@@ -151,7 +152,7 @@ export default function Poster({ posts }) {
           <Content>
             <HeadContent>
               <Type>{checkType(post.type)}</Type>
-              <Date>{post.created}</Date>
+              <Date>{post.created &&  convertDateToFarsi(post.created)}</Date>
             </HeadContent>
             <Title>{post.title?.slice(0, 50) + " ..."}</Title>
             <Paragraph>{post.description?.slice(0, 250) + " ..."}</Paragraph>

@@ -10,6 +10,7 @@ import VotesCensus from "./components/votesCensus";
 import ControlStatus from "./components/controlStatus";
 import axios from "axios";
 import { BaseBackURL } from "../../constant/api";
+import { convertDateToFarsi } from "../../utils";
 
 export default function Presentation() {
   const { title } = useParams();
@@ -47,7 +48,7 @@ export default function Presentation() {
               img={symbol}
               icon={vote}
               type="رای گیری"
-              date={bill.date}
+              date={bill.date && convertDateToFarsi(bill.date)}
               title={bill.name}
             />
             <DetailsVotes title={bill.name} fraction={bill.fraction.name} />

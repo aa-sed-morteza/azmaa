@@ -31,6 +31,7 @@ const SmallButton = styled.div`
   display: flex;
   padding: 5px;
   margin-right:${props=>props.right ? "auto" : ""};
+  cursor: pointer;
   .content {
     margin: 0 auto;
     font-size: 4.65vw;

@@ -39,6 +39,9 @@ const Gallery = styled.div`
   display: flex;
   flex-direction: column;
   // gap:10px;
+  & > :nth-of-type(1n + 7) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
 `;
 
 const ShowMore = styled.div`
@@ -50,16 +53,16 @@ const ShowMore = styled.div`
     margin: auto;
     color: #9f9f9f;
     font-size: 4.65vw;
-    position: relative;
     font-weight: 300;
+    display: flex;
+    align-items: center;
+    gap: 20px;
     &:after {
       content: "";
-      display: flex;
-      position: absolute;
-      left: -25px;
-      top: 50%;
-      transform: translate(0, -50%);
+      content: "";
+      display: inline-flex;
       background-image: url(${upArrow});
+      transform: ${(props) => (props.arrow ? `rotate(180deg)` : "")};
       background-size: cover;
       background-repeat: no-repeat;
       width: 9px;
@@ -88,6 +91,7 @@ const ShowMore = styled.div`
 
 export default function EnvoyFiltering({ envoys }) {
   const [select, setSelect] = useState(1);
+  const [showMore,setShowMore]=useState(false);
   const navigate = useNavigate();
 
  
@@ -130,7 +134,7 @@ export default function EnvoyFiltering({ envoys }) {
       </FilterBox>
 
       <Gallery>
-        <Gallery>
+        <Gallery hide={showMore}>
           {envoys.map((item) => (
             <BestEnvoy
               envoy={item}
@@ -140,8 +144,8 @@ export default function EnvoyFiltering({ envoys }) {
             />
           ))}
         </Gallery>
-        <ShowMore>
-          <p>نمایش بیشتر</p>{" "}
+        <ShowMore arrow={showMore} onClick={()=>{setShowMore(!showMore)}}>
+          <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
         </ShowMore>
       </Gallery>
     </Container>

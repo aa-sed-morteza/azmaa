@@ -6,6 +6,7 @@ import VoteCard from "../../home/components/voteCard";
 import upArrow from "../../../assets/arrow.webp";
 import useWidth from "../../../hook/useWidth";
 import { ChangeToPersianDate, fixNumbers } from "../../../utils";
+import GeneralActionCard from "./generalActionCard";
 
 const Container = styled.section`
   margin-top: 10px;
@@ -148,8 +149,8 @@ const ShowMore = styled.div`
     margin: auto;
     color: #9f9f9f;
     font-size: 4.65vw;
-   display: flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
     gap: 20px;
     font-weight: 300;
     &:after {
@@ -173,7 +174,7 @@ const ShowMore = styled.div`
     margin: auto;
     padding: 13px;
     margin-top: 78px;
-    width:50%;
+    width: 50%;
     p {
       font-size: 1.25vw;
       font-weight: 400;
@@ -194,15 +195,15 @@ const List = styled.div`
   }
 `;
 
-const Wraper =styled.div`
- &:nth-of-type(1n + 6) {
-      display: ${(props) => (!props.hide ? "none" : "")};
-    }
-`
+const Wraper = styled.div`
+  &:nth-of-type(1n + 6) {
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
+`;
 
-export default function Calendar({ bills }) {
+export default function CustomCalendar({ activity ,positive}) {
   const width = useWidth();
-  const [showMore,setShowMore]=useState(false);
+  const [showMore, setShowMore] = useState(false);
   let today = new Date().toLocaleDateString("fa-IR", {
     year: "numeric",
     month: "numeric",
@@ -229,7 +230,7 @@ export default function Calendar({ bills }) {
 
   for (let i = parseInt(month) - 1; i > 0; i--) {
     const newList = [];
-    for (const item of bills) {
+    for (const item of activity) {
       const itemDate = ChangeToPersianDate(item.date);
       const itemYear = itemDate.slice(0, 4);
       const itmeMonth = fixNumbers(itemDate.slice(5));
@@ -244,10 +245,23 @@ export default function Calendar({ bills }) {
         <SubTitile>
           {monthArray[i]} {year}
         </SubTitile>
-        <List >
-              {newList.map((item) => (
-                <VoteCard bill={item} />
-              ))}
+        <List>
+          {/* {newList.map((item) => (
+            <VoteCard bill={item} />
+          ))} */}
+
+          {newList.map((item, i) => {
+            return (
+              <GeneralActionCard
+                key={i}
+                act="action"
+                content={item.name}
+                action={item.vote}
+                date={item.date}
+                item={item}
+              />
+            );
+          })}
         </List>
       </Wraper>
     );
@@ -256,7 +270,12 @@ export default function Calendar({ bills }) {
     <Container>
       {elements}
 
-      <ShowMore arrow={showMore} onClick={()=>{setShowMore(!showMore)}}>
+      <ShowMore
+        arrow={showMore}
+        onClick={() => {
+          setShowMore(!showMore);
+        }}
+      >
         <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
       </ShowMore>
     </Container>
