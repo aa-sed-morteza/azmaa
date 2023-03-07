@@ -244,7 +244,7 @@ export default function Magazine() {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         setBlogs([...response.data]);
       })
       .catch(function (error) {

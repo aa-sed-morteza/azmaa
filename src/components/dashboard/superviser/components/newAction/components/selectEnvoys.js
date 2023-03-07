@@ -32,7 +32,7 @@ export default function SelectEnvoys() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setEnvoys([...res.data]);
       }
@@ -92,7 +92,7 @@ export default function SelectEnvoys() {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         setStates([...response.data]);
       })
       .catch(function (error) {
@@ -104,7 +104,6 @@ export default function SelectEnvoys() {
     getElectoralDistrict();
   }, []);
 
-  console.log("chichi", states);
 
   const stateList = states.map((x, i) => {
     return (

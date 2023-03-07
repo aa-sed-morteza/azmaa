@@ -137,7 +137,6 @@ export default function VoteEnvoy() {
     );
   });
 
-  console.log(state.typeAction);
 
   return (
     <>

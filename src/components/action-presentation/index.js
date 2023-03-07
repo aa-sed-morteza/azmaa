@@ -22,7 +22,7 @@ export default function ActionPresentation() {
     };
     axios(config)
       .then((res) => {
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
         setAction(res.data);
       })
       .catch((error) => {
@@ -30,7 +30,6 @@ export default function ActionPresentation() {
       });
   };
 
-//  console.log('ss',action)
 
 
 

@@ -27,7 +27,7 @@ export default function Envoy() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setEnvoys([...res.data]);
       }
@@ -41,7 +41,7 @@ export default function Envoy() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setCiteis([...res.data]);
       }
@@ -55,7 +55,6 @@ export default function Envoy() {
     };
     axios(config)
       .then(function (response) {
-        console.log('sagsol',response.data[0].agent);
         setEnvoys([...response.data[0].agent]);
       })
       .catch(function (error) {

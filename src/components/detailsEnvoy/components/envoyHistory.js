@@ -24,7 +24,7 @@ export default function EnvoyHistory({id}) {
 
     axios(config)
       .then(function (res) {
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
         
         setExperiences([...res.data.experiences]);
         

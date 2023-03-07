@@ -29,7 +29,7 @@ export default function EditLogInformation() {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
       })
       .catch(function (error) {
@@ -52,7 +52,7 @@ export default function EditLogInformation() {
 
     axios(config)
     .then((res) => {
-      console.log(JSON.stringify(res.data));
+      // console.log(JSON.stringify(res.data));
       dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
       navigate("/dashboard");
       actions.resetForm();
@@ -61,7 +61,7 @@ export default function EditLogInformation() {
       });
     })
     .catch((error) => {
-      console.log("sagError", error);
+      console.log("Error", error);
       if (error.response.status == 401) {
         refreshToken();
         toast.error("لطفا مجدد تلاش کنید", {

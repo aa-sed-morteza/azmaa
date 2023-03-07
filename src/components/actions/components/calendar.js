@@ -61,7 +61,6 @@ export default function Calendar({ activities }) {
     );
   }
 
-  console.log('el',elements)
 
   return (
     <Container>

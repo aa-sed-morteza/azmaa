@@ -55,11 +55,11 @@ export default function Dashboard() {
 
     axios(config)
       .then((res) => {
-        console.log('data;', res.data);
+        // console.log('data;', res.data);
         dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
       })
       .catch((err) => {
-        console.log('khata',err);
+        console.log('error',err);
       });
   };
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import pic from "../../../assets/poster.webp";
 import profile from "../../../assets/profile.webp";
 import like from "../../../assets/like1.webp";
@@ -21,6 +21,7 @@ export default function NewsPage() {
   const [showMore, setShowMore] = useState(false);
   const [allPosts, setAllPosts] = useState([]);
   const [relatedPosts, setRelatedPosts] = useState([]);
+  const navigate = useNavigate();
 
   const getPosts = () => {
     let config = {
@@ -29,7 +30,7 @@ export default function NewsPage() {
     };
 
     axios(config).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.data.length > 0) {
         setAllPosts([...res.data]);
       }
@@ -55,31 +56,36 @@ export default function NewsPage() {
   useEffect(() => {
     getPost();
     getPosts();
-  }, []);
+    console.log("set");
+  }, [title]);
 
   useEffect(() => {
+    console.log(post);
     if (
       post &&
+      post.tag &&
+      post.tag.length > 0 &&
       allPosts.filter(
         (x) => x.tag.length > 0 && x.tag[0].name == post.tag[0].name
       )
     ) {
       setRelatedPosts(
         allPosts.filter(
-          (x) =>
-            x.tag.length > 0 &&
-            x.tag[0].name == post.tag[0].name 
-            // && x.title !== post.title
+          (x) => x.tag.length > 0 && x.tag[0].name == post.tag[0].name
+          // && x.title !== post.title
         )
       );
     }
-  }, [allPosts.length > 0]);
-
-  console.log("saf", allPosts);
+  }, [post]);
 
   const magPaper = allPosts.map((x, i) => {
     return (
-      <Paper key={i}>
+      <Paper
+        key={i}
+        onClick={() => {
+          navigate(`/blog/${x.id}`);
+        }}
+      >
         <div className="cover">
           <img src={x.main_image} alt={x.title} />
         </div>
@@ -95,7 +101,12 @@ export default function NewsPage() {
 
   const relatedPaper = relatedPosts.map((x, i) => {
     return (
-      <Paper key={i}>
+      <Paper
+        key={i}
+        onClick={() => {
+          navigate(`/blog/${x.id}`);
+        }}
+      >
         <div className="cover">
           <img src={x.main_image} alt={x.title} />
         </div>

@@ -35,7 +35,7 @@ export default function LogIn() {
 
     axios(config, { withCredentials: true })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.id) {
           toast.success("ورود با موفقیت انجام شد!", {
             position: toast.POSITION.TOP_RIGHT,
@@ -79,7 +79,6 @@ export default function LogIn() {
     data.append("username", values.userName);
     data.append("password", values.password);
 
-    console.log("user:", values.userName);
 
     let config = {
       method: "post",
@@ -89,7 +88,7 @@ export default function LogIn() {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
         dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
         Cookies.set('refreshToken', response.data.refresh );

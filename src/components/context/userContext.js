@@ -161,7 +161,7 @@ export const UserState = (props) => {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
         
       })
@@ -171,15 +171,14 @@ export const UserState = (props) => {
   };
 
   useEffect(() => {
-    console.log(Cookies.get("token"));
+    // console.log(Cookies.get("token"));
     if (Cookies.get("token")) {
       refreshToken();
-      console.log("token");
+      // console.log("token");
       dispatch({ type: "SET_TOKEN", payload: Cookies.get("token") });
     }
   }, []);
 
-  console.log(state);
 
   return (
     <userContext.Provider value={{ state, dispatch }}>

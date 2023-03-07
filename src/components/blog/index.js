@@ -19,7 +19,7 @@ export default function Blog() {
     };
 
     axios(config).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.data.length > 0) {
         setPosts([...res.data]);
       }

@@ -38,7 +38,7 @@ export default function MyActions() {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
       })
       .catch(function (error) {
@@ -56,7 +56,7 @@ export default function MyActions() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setBills(res.data.filter((x) => x.voter.id == state.id));
       }
@@ -77,7 +77,7 @@ export default function MyActions() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setActivities(res.data.filter((x) => x.voter.id == state.id));
       }

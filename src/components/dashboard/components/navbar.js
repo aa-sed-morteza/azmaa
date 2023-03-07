@@ -14,7 +14,6 @@ export default function DashboardMenu() {
     navigate(path);
   };
 
-  console.log('lisets',data.dashboardSuperviser)
   const dashboardItem = data.dashboardSuperviser.map((g, i) => {
     return (
       <List

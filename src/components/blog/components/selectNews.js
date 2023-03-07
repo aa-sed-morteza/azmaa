@@ -4,6 +4,7 @@ import Control from "../../vote/components/controler";
 import data from "../../../data.json";
 import user from "../../../assets/profile.webp";
 import upArrow from "../../../assets/arrow.webp";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.section`
   background-color: #ffffff;
@@ -47,8 +48,8 @@ const NewsWraper = styled.div`
   justify-content: space-between;
   margin-bottom: 10px;
   &:nth-of-type(1n + 4) {
-      display: ${(props) => (!props.hide ? "none" : "")};
-    }
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
   @media (min-width: 481px) {
     margin-bottom: 45px;
     justify-content: flex-start;
@@ -218,20 +219,24 @@ const ChangeBack = styled.div`
 `;
 
 export default function SelectNews({ posts }) {
+  const navigate = useNavigate();
   const [selectedTag, setSelectedTag] = useState("همه");
   const [filteredPosts, setFilteredPosts] = useState([]);
-  const [mostVisitedMore,setMostVisitedMore]=useState(false);
-  const [lastNewsMore,setLastNewsMore]=useState(false);
+  const [mostVisitedMore, setMostVisitedMore] = useState(false);
+  const [lastNewsMore, setLastNewsMore] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     setFilteredPosts(posts);
-  },[posts]);
-
-
+  }, [posts]);
 
   const magPaper = filteredPosts.map((x, i) => {
     return (
-      <Paper key={i}>
+      <Paper
+        key={i}
+        onClick={() => {
+          navigate(`/blog/${x.id}`);
+        }}
+      >
         <div className="cover">
           <img src={x.main_image} alt={x.date} />
         </div>
@@ -245,33 +250,42 @@ export default function SelectNews({ posts }) {
     );
   });
 
-
   useEffect(() => {
-    if(posts.filter(x=> x.tag.length>0 && x.tag[0].name== selectedTag)){
-      setFilteredPosts(posts.filter(x=> x.tag.length>0 && x.tag[0].name== selectedTag))
-    }else{
-
+    if (posts.filter((x) => x.tag.length > 0 && x.tag[0].name == selectedTag)) {
+      setFilteredPosts(
+        posts.filter((x) => x.tag.length > 0 && x.tag[0].name == selectedTag)
+      );
+    } else {
     }
 
-    if(selectedTag == 'همه'){
-      setFilteredPosts(posts)
+    if (selectedTag == "همه") {
+      setFilteredPosts(posts);
     }
-   
   }, [selectedTag]);
   return (
     <Container>
       <Control selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
       <Title> پربازدیدترین مطالب</Title>
       <NewsWraper hide={mostVisitedMore}>{magPaper}</NewsWraper>
-      <ShowMore arrow={mostVisitedMore} onClick={()=>{setMostVisitedMore(!mostVisitedMore)}}>
+      <ShowMore
+        arrow={mostVisitedMore}
+        onClick={() => {
+          setMostVisitedMore(!mostVisitedMore);
+        }}
+      >
         <p>{mostVisitedMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
       </ShowMore>
 
       <ChangeBack>
         <Title> آخرین مطالب</Title>
-        <NewsWraper hide={lastNewsMore} >{magPaper}</NewsWraper>
-        <ShowMore arrow={lastNewsMore} onClick={()=>{setLastNewsMore(!lastNewsMore)}}>
-          <p >{lastNewsMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
+        <NewsWraper hide={lastNewsMore}>{magPaper}</NewsWraper>
+        <ShowMore
+          arrow={lastNewsMore}
+          onClick={() => {
+            setLastNewsMore(!lastNewsMore);
+          }}
+        >
+          <p>{lastNewsMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
         </ShowMore>
       </ChangeBack>
     </Container>

@@ -29,7 +29,7 @@ export default function Contacts() {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
       })
       .catch(function (error) {
@@ -54,7 +54,7 @@ export default function Contacts() {
     };
     axios(config)
       .then((res) => {
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
         dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
         dispatch({ type: "SET_SIGN_LEVEL", payload: 1 });
         dispatch({ type: "SET_LOGGED_IN", payload: true });
@@ -66,7 +66,7 @@ export default function Contacts() {
         });
       })
       .catch((error) => {
-        console.log("sagError", error);
+        console.log("Error", error);
         if (error.response.status == 401) {
           refreshToken();
           toast.error("لطفا مجدد تلاش کنید", {

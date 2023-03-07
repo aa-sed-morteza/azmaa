@@ -23,7 +23,7 @@ export default function AdvanceSearch({setEnvoys}) {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setAllEnvoys([...res.data]);
       }

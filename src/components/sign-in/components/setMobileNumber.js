@@ -49,7 +49,7 @@ export default function SetMobileNumber() {
 
       axios(config)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setValidate(0);
           dispatch({ type: "SET_ID", payload: res.data.id });
           navigate(`/sign-in/${state.userType}`);
@@ -57,7 +57,7 @@ export default function SetMobileNumber() {
           getToken(password, state.userName);
         })
         .catch((err) => {
-          console.log(err.response.data);
+          // console.log(err.response.data);
           if (err.response.data.code) {
             setValidate(0);
             toast.error(err.response.data.code, {
@@ -91,7 +91,7 @@ export default function SetMobileNumber() {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
         dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
         Cookies.set('refreshToken', response.data.refresh );
@@ -136,7 +136,7 @@ export default function SetMobileNumber() {
 
     axios(config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.msg === "otp sent") {
           toast.success("کد ثبت نام برای شما ارسال شد!", {
             position: toast.POSITION.TOP_RIGHT,

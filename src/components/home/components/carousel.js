@@ -14,7 +14,6 @@ export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate =useNavigate();
 
-  console.log(posts)
 
   function carouselInfiniteScroll() {
     if (currentIndex === data.slider.length - 1) {
@@ -38,7 +37,7 @@ export default function Carousel() {
     };
 
     axios(config).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.data.length > 0) {
         setPosts([...res.data.slice(0, 4)]);
       }
@@ -60,7 +59,6 @@ export default function Carousel() {
     );
   });
 
-  console.log('posts',posts)
 
   return (
     <Wraper>

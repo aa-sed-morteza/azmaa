@@ -30,7 +30,6 @@ export default function Filtering({ id }) {
 
     axios(config)
       .then(function (res) {
-        console.log("solakh", res.data[0]);
         // setBillEnvoy([res.data[0]]);
         setBillEnvoy([...res.data]);
       })
@@ -48,7 +47,7 @@ export default function Filtering({ id }) {
 
     axios(config)
       .then(function (res) {
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
 
         setActivityEnvoy([...res.data]);
       })

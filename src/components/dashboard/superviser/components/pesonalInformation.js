@@ -44,7 +44,6 @@ export default function PersonalInformation() {
     setSelectedFile(e.target.files[0]);
   };
 
-  console.log('pic',state.image)
 
   return (
     <Container>

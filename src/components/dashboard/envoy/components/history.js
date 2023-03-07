@@ -26,7 +26,7 @@ export default function HistoryEnvoy() {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
       })
       .catch(function (error) {
@@ -45,7 +45,7 @@ export default function HistoryEnvoy() {
 
     axios(config)
       .then((res) => {
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
         dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
         setHistory([...res.data])
        

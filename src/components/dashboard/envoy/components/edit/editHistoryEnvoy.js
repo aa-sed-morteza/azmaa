@@ -48,7 +48,7 @@ export default function EditHistoryEnvoy() {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
       })
       .catch(function (error) {
@@ -57,7 +57,6 @@ export default function EditHistoryEnvoy() {
   };
 
   const onSubmit = async (values, actions) => {
-    console.log('date',values.dateFrom)
     const data = new FormData();
     data.append("title", values.dutie);
     data.append("from_date", values.dateFrom);
@@ -74,7 +73,7 @@ export default function EditHistoryEnvoy() {
 
     axios(config)
       .then((res) => {
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
         dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
         navigate("/dashboard");
         actions.resetForm();
@@ -83,7 +82,7 @@ export default function EditHistoryEnvoy() {
         });
       })
       .catch((error) => {
-        console.log("sagError", error);
+        console.log("Error", error);
         if (error.response.status == 401) {
           refreshToken();
           toast.error("لطفا مجدد تلاش کنید", {

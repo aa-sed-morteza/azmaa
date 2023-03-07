@@ -18,7 +18,7 @@ export default function Vote() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setBills([...res.data]);
         setFilteredBills([...res.data])

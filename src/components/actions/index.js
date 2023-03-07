@@ -18,7 +18,7 @@ export default function Actions() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setActivities([...res.data]);
         setFilteredActivities([...res.data])
@@ -42,7 +42,6 @@ export default function Actions() {
     }
   }, [selectedTag]);
 
-  console.log('active',filteredActivities)
 
   return (
     <Container>

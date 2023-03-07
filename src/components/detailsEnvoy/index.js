@@ -24,7 +24,7 @@ export default function DetailsEnvoy() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setEnvoys([...res.data]);
       }
@@ -41,7 +41,6 @@ export default function DetailsEnvoy() {
     setEnvoy(envoys.find((x) => x.id === parseInt(title)));
   },[envoys])
 
-  // console.log("envoy", envoy);
 
   return (
     <Container>
