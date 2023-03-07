@@ -227,8 +227,6 @@ export default function SelectNews({ posts }) {
     setFilteredPosts(posts);
   },[posts]);
 
-  console.log('ssd',filteredPosts);
-  console.log('fag',selectedTag)
 
 
   const magPaper = filteredPosts.map((x, i) => {

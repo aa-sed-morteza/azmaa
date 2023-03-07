@@ -10,7 +10,6 @@ import { BaseBackURL } from "../../constant/api";
 
 export default function Blog() {
   const width = useWidth();
-
   const [posts, setPosts] = useState([]);
 
   const getPosts = () => {

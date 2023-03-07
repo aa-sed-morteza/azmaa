@@ -18,7 +18,23 @@ export default function NewsPage() {
   const { title } = useParams();
   const width = useWidth();
   const [post, setPost] = useState({});
-  const [showMore,setShowMore]=useState(false);
+  const [showMore, setShowMore] = useState(false);
+  const [allPosts, setAllPosts] = useState([]);
+  const [relatedPosts, setRelatedPosts] = useState([]);
+
+  const getPosts = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/blog/?writer__id&tag__id&is_suggested=True, False&ordering=created`,
+    };
+
+    axios(config).then((res) => {
+      console.log(res);
+      if (res.data.length > 0) {
+        setAllPosts([...res.data]);
+      }
+    });
+  };
 
   const getPost = () => {
     let config = {
@@ -38,22 +54,57 @@ export default function NewsPage() {
 
   useEffect(() => {
     getPost();
+    getPosts();
   }, []);
 
-  console.log("pos", post);
+  useEffect(() => {
+    if (
+      post &&
+      allPosts.filter(
+        (x) => x.tag.length > 0 && x.tag[0].name == post.tag[0].name
+      )
+    ) {
+      setRelatedPosts(
+        allPosts.filter(
+          (x) =>
+            x.tag.length > 0 &&
+            x.tag[0].name == post.tag[0].name 
+            // && x.title !== post.title
+        )
+      );
+    }
+  }, [allPosts.length > 0]);
 
-  const magPaper = data.magazine.map((x, i) => {
+  console.log("saf", allPosts);
+
+  const magPaper = allPosts.map((x, i) => {
     return (
-      <Paper>
+      <Paper key={i}>
         <div className="cover">
-          <img src={x.img} alt={x.date} />
+          <img src={x.main_image} alt={x.title} />
         </div>
 
-        <p className="user">{x.name}</p>
+        <p className="user">{x.writer}</p>
 
-        <p className="content">{x.content}</p>
+        <p className="content">{x.description}</p>
 
-        <p className="date">{x.date}</p>
+        <p className="date">{x.created}</p>
+      </Paper>
+    );
+  });
+
+  const relatedPaper = relatedPosts.map((x, i) => {
+    return (
+      <Paper key={i}>
+        <div className="cover">
+          <img src={x.main_image} alt={x.title} />
+        </div>
+
+        <p className="user">{x.writer}</p>
+
+        <p className="content">{x.description}</p>
+
+        <p className="date">{x.created}</p>
       </Paper>
     );
   });
@@ -101,7 +152,7 @@ export default function NewsPage() {
 
           <Related>
             <Header>مطالب مرتبط</Header>
-            <CardContainer>{magPaper}</CardContainer>
+            <CardContainer>{relatedPaper}</CardContainer>
           </Related>
         </>
       ) : (
@@ -142,14 +193,19 @@ export default function NewsPage() {
             </News>
             <RelatedContainer>
               <h3>مطالب مرتبط</h3>
-              {magPaper}
+              {relatedPaper}
             </RelatedContainer>
           </DesktopContainer>
           <Related>
             <Header> آخرین مطالب</Header>
             <CardContainer hide={showMore}>{magPaper}</CardContainer>
 
-            <ShowMore arrow={showMore} onClick={()=>{setShowMore(!showMore)}}>
+            <ShowMore
+              arrow={showMore}
+              onClick={() => {
+                setShowMore(!showMore);
+              }}
+            >
               <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
             </ShowMore>
           </Related>
@@ -467,7 +523,7 @@ const CardContainer = styled.div`
   gap: 10px;
   @media (min-width: 481px) {
     justify-content: flex-start;
-    &>:nth-of-type(1n + 5) {
+    & > :nth-of-type(1n + 5) {
       display: ${(props) => (!props.hide ? "none" : "")};
     }
   }
@@ -497,20 +553,19 @@ const Paper = styled.div`
     color: #707070;
     font-weight: 300;
     font-size: 3.72vw;
-    padding-right: 20px;
-    position: relative;
+    /* padding-right: 20px; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 10px;
     &:before {
       content: "";
-      display: flex;
-      position: absolute;
+      display: inline-flex;
       background-image: url(${user});
       background-size: cover;
       background-repeat: no-repeat;
       width: 15px;
       height: 15px;
-      right: 2px;
-      top: 5px;
     }
   }
   .content {
@@ -520,6 +575,11 @@ const Paper = styled.div`
     margin: 0;
     margin-bottom: 10px;
     max-width: 160px;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 5;
   }
 
   .date {
@@ -546,11 +606,6 @@ const Paper = styled.div`
     .user {
       font-size: 1.042vw;
       margin-bottom: 36px;
-      padding-right: 30px;
-      &:before {
-        width: 20px;
-        height: 20px;
-      }
     }
     .content {
       font-size: 1.25vw;
