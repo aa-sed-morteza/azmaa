@@ -14,8 +14,9 @@ export default function HonestEnvoy({ envoys }) {
     <Container>
       <Title>شفاف‌ترین نمایندگان</Title>
       <Gallery>
-        {newList.map((item) => (
+        {newList.map((item,i) => (
           <BestEnvoy
+            key={i}
             envoy={item}
             click={() => {
               navigate(`/envoy/${item.id}`);

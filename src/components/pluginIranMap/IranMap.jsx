@@ -160,9 +160,9 @@ const IranMap = ({ position }) => {
               <span>{provinceNameOnClick}</span>
             </p>
             <form onSubmit={handleSubmit} autoComplete="off">
-              {cities.map((city) => {
+              {cities.map((city,i) => {
                 return (
-                  <>
+                  <div key={i}>
                     <input
                       type="checkbox"
                       key={city}
@@ -176,7 +176,7 @@ const IranMap = ({ position }) => {
                       {city}
                     </label>
                     <br />
-                  </>
+                  </div>
                 );
               })}
               <div className={styles.select_cities_btns}>

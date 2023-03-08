@@ -38,6 +38,7 @@ const TopBar = styled.section`
 const Logo = styled.div`
   width: 31px;
   height: 26px;
+  cursor: pointer;
   img {
     width: 100%;
     height: 100%;
@@ -392,7 +393,7 @@ export default function Navbar() {
 
   return (
     <TopBar>
-      <Logo>
+      <Logo onClick={()=>{navigate('/')}}>
         <img src={LOGO} alt="logo" />
       </Logo>
 

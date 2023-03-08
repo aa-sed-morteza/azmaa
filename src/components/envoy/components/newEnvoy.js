@@ -97,8 +97,9 @@ export default function NewEnvoy({ envoys }) {
     <Container>
       <Title> جدیدترین نمایندگان</Title>
       <EnvoyContainer hide={showMore}>
-        {envoys.map((item) => (
+        {envoys.map((item,i) => (
           <BestEnvoy
+            key={i}
             envoy={item}
             click={() => {
               navigate(`/envoy/${item.id}`);
