@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import BestEnvoy from "../../home/components/bestEnvoy";
 import upArrow from "../../../assets/arrow.webp";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Agree({ envoys }) {
   const navigate = useNavigate();
+  const [showMore,setShowMore]=useState(false);
 
   const envoysList = envoys.map((item, i) => {
     return (
@@ -20,11 +21,13 @@ export default function Agree({ envoys }) {
     );
   });
 
+
+
   return (
     <Container>
-      <Title>نمایندگان موافق</Title>
+      <Title>{envoys[0].vote ? envoys[0].vote :'نمایندگان موافق'}   </Title>
       <Gallery>{envoysList}</Gallery>
-      <ShowMore>
+      <ShowMore onClick={()=>{setShowMore(!showMore)}}>
         <p>نمایش بیشتر </p>
       </ShowMore>
     </Container>

@@ -10,7 +10,6 @@ import { BaseBackURL } from "../../constant/api";
 
 export default function Blog() {
   const width = useWidth();
-
   const [posts, setPosts] = useState([]);
 
   const getPosts = () => {
@@ -20,7 +19,7 @@ export default function Blog() {
     };
 
     axios(config).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.data.length > 0) {
         setPosts([...res.data]);
       }
@@ -30,6 +29,7 @@ export default function Blog() {
   useEffect(() => {
     getPosts();
   }, []);
+
 
   return (
     <Container>
@@ -61,6 +61,7 @@ const Title = styled.div`
   display: flex;
   margin-bottom: 12px;
   padding-right: 10px;
+  white-space: nowrap;
   .home {
     font-size: 3.721vw;
     font-weight: 700;

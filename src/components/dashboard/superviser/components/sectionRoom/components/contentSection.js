@@ -70,6 +70,7 @@ export default function ContentSection() {
               textColor="#095644"
               borderColor="#095644"
               width="35%"
+              simple={true}
               click={() => {
                 navigate(-1);
               }}

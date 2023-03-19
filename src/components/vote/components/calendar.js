@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import check from "../../../assets/check.webp";
 import line from "../../../assets/Line.webp";
@@ -36,24 +36,27 @@ const SubTitile = styled.h2`
   font-weight: 700;
   font-size: 3.721vw;
   color: #9f9f9f;
-  padding-right: 40px;
+  /* padding-right: 40px; */
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 5px;
   &:before {
     content: "";
-    display: block;
-    position: absolute;
+    display: inline-flex;
+    /* position: absolute; */
     background-image: url(${check});
     background-size: cover;
     background-repeat: no-repeat;
     width: 4.186vw;
     height: 4.186vw;
-    right: 4.186vw;
-    top: 0.465vw;
+    /* right: 4.186vw; */
+    /* top: 0.465vw; */
   }
   &:after {
     content: "";
-    display: block;
+    display: inline-flex;
     position: absolute;
     background-image: url(${line});
     background-size: cover;
@@ -61,23 +64,23 @@ const SubTitile = styled.h2`
     width: 3.721vw;
     height: 0.233vw;
     right: -0.698vw;
-    top: 2.326vw;
+    /* top: 2.326vw; */
   }
   @media (min-width: 481px) {
     font-size: 1.667vw;
     margin-bottom: 20px;
-    padding-top: 45px;
+    /* padding-top: 45px; */
     &:before {
       width: 1.563vw;
       height: 1.563vw;
-      right: -0.156vw;
-      top: 2.76vw;
+      /* right: -0.156vw; */
+      /* top: 2.76vw; */
     }
     &:after {
       width: 1.979vw;
       height: 0.156vw;
       right: -2.292vw;
-      top: 3.438vw;
+      /* top: 3.438vw; */
     }
   }
 `;
@@ -140,19 +143,20 @@ const ShowMore = styled.div`
   display: flex;
   padding: 8px;
   margin-top: 16px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;
     font-size: 4.65vw;
-    position: relative;
+   display: flex;
+    align-items:center;
+    gap: 20px;
     font-weight: 300;
     &:after {
       content: "";
-      display: flex;
-      position: absolute;
-      left: -25px;
-      bottom: 8px;
+      display: inline-flex;
       background-image: url(${upArrow});
+      transform: ${(props) => (props.arrow ? `rotate(180deg)` : "")};
       background-size: cover;
       background-repeat: no-repeat;
       width: 9px;
@@ -169,6 +173,7 @@ const ShowMore = styled.div`
     margin: auto;
     padding: 13px;
     margin-top: 78px;
+    width:50%;
     p {
       font-size: 1.25vw;
       font-weight: 400;
@@ -188,8 +193,16 @@ const List = styled.div`
     gap: 20px;
   }
 `;
+
+const Wraper =styled.div`
+ &:nth-of-type(1n + 6) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
+`
+
 export default function Calendar({ bills }) {
   const width = useWidth();
+  const [showMore,setShowMore]=useState(false);
   let today = new Date().toLocaleDateString("fa-IR", {
     year: "numeric",
     month: "numeric",
@@ -213,7 +226,6 @@ export default function Calendar({ bills }) {
   ];
 
   const elements = [];
-  
 
   for (let i = parseInt(month) - 1; i > 0; i--) {
     const newList = [];
@@ -228,30 +240,24 @@ export default function Calendar({ bills }) {
     }
 
     elements.push(
-      <>
+      <Wraper hide={showMore}>
         <SubTitile>
           {monthArray[i]} {year}
         </SubTitile>
-        <List>
-          {width < 480 ? (
-            <VoteCard />
-          ) : (
-            <>
+        <List >
               {newList.map((item) => (
                 <VoteCard bill={item} />
               ))}
-            </>
-          )}
         </List>
-      </>
+      </Wraper>
     );
   }
   return (
     <Container>
       {elements}
 
-      <ShowMore>
-        <p> نمایش بیشتر</p>
+      <ShowMore arrow={showMore} onClick={()=>{setShowMore(!showMore)}}>
+        <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
       </ShowMore>
     </Container>
   );

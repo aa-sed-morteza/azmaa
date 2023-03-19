@@ -22,13 +22,16 @@ export default function ActionPresentation() {
     };
     axios(config)
       .then((res) => {
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
         setAction(res.data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+
+
 
   let positiveAction = [];
   let negativeAction = [];
@@ -65,13 +68,11 @@ export default function ActionPresentation() {
             <Census total={action.vote.length} complete={"?"} select={"?"} />
             <ActionsCensus
               total={action.vote.length}
-              positive={positiveAction.length}
-              negative={negativeAction.length}
-              another={anotherAction.length}
+              data={action }
             />
           </Wraper>
         )}
-        {action.id && <ControlStatus envoys={action.vote} />}
+        {action.id && <ControlStatus action={action} />}
       </Content>
     </Container>
   );
@@ -81,7 +82,7 @@ const Container = styled.section`
   padding: 10px 20px;
   @media(min-width:480px){
     background-color:#ffffff;
-    padding 25px 0;
+    padding :25px 0;
   }
 `;
 

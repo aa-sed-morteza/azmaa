@@ -9,6 +9,7 @@ import data from "../../../data.json";
 import left from ".././../../assets/left.webp";
 import { useNavigate } from "react-router-dom";
 import ShareButton from "../../general/shareButton";
+import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
 
 const VCContainer = styled.div`
   background-color: #ffffff;
@@ -97,6 +98,11 @@ const CardHeader = styled.div`
       h2 {
         font-size: 1.667vw;
         font-weight: 700;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 100px;
       }
       .date {
         font-size: 1.25vw;
@@ -227,6 +233,8 @@ const Not = styled.div`
   font-weight: 300;
   font-size: 5.58vw;
   position: relative;
+  /* display: flex;
+  align-items: center; */
   cursor: pointer;
   &:before {
     content: "";
@@ -237,8 +245,8 @@ const Not = styled.div`
     background-image: url(${not});
     background-size: contain;
     background-repeat: no-repeat;
-    bottom: -3.023vw;
     right: -11.628vw;
+    top: -1.395vw;
   }
 
   &.active,
@@ -309,6 +317,7 @@ const Card = styled.div`
     border-radius: 10.93vw;
     margin-bottom: 10px;
     border: 3px solid ${(props) => props.color};
+    background: #ffffff;
     img {
       width: 100%;
       height: 100%;
@@ -339,6 +348,7 @@ const Card = styled.div`
     border-bottom: 1px solid #ffffff;
     min-width: inherit;
     .picture {
+      
       width: 5vw;
       height: 5vw;
       border-radius: 5vw;
@@ -378,6 +388,7 @@ const LargButton = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 5px;
+  cursor: pointer;
   .content {
     margin: 0 auto;
     font-size: 4.65vw;
@@ -436,9 +447,10 @@ export default function VoteCard({ bill }) {
   const [color, SetColor] = useState("#DFF5F0");
   const [bColor, setBColor] = useState("#6cbba9");
   const [envoyData, setEnvoyData] = useState(bill.positive_vote);
-  
 
   const navigate = useNavigate();
+
+  
 
   const envoyList = envoyData.map((x, i) => {
     return (
@@ -471,6 +483,7 @@ export default function VoteCard({ bill }) {
     }
   }, [active]);
 
+
   return (
     <VCContainer>
       <CardHeader>
@@ -478,7 +491,7 @@ export default function VoteCard({ bill }) {
         <div className="title-card">
           <p className="title">رأی‌گیری</p>
           <h2>{bill.name}</h2>
-          <p className="date">{bill.date}</p>
+          <p className="date">{bill.date && convertDateToFarsi(bill.date)}</p>
         </div>
       </CardHeader>
       <Statistics>
@@ -486,19 +499,19 @@ export default function VoteCard({ bill }) {
           onClick={() => setActive(0)}
           className={active === 0 ? "active" : ""}
         >
-          {bill.vote_number.positive}
+          {toFarsiNumber(bill.vote_number.positive)}
         </Success>
         <Faild
           onClick={() => setActive(1)}
           className={active === 1 ? "active" : ""}
         >
-          {bill.vote_number.negative}
+          {toFarsiNumber(bill.vote_number.negative)}
         </Faild>
         <Not
           onClick={() => setActive(2)}
           className={active === 2 ? "active" : ""}
         >
-          {bill.vote_number.without_vote}
+          {toFarsiNumber(bill.vote_number.without_vote)}
         </Not>
       </Statistics>
 
@@ -507,12 +520,12 @@ export default function VoteCard({ bill }) {
       <ButtonWraper>
         <LargButton
           onClick={() => {
-            navigate(`presentation/${"کلیات لایحۀ بودجۀ سال ۱۴۰۱"}`);
+            navigate(`presentation/${bill.id}`);
           }}
         >
           <p className="content">جزئیات</p>
         </LargButton>
-        <ShareButton text="کلیات لایحۀ بودجۀ سال ۱۴۰۱" title="رای گیری" />
+        <ShareButton text={bill.information} title={bill.name} />
       </ButtonWraper>
     </VCContainer>
   );

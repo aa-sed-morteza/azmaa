@@ -4,6 +4,7 @@ import Control from "../../vote/components/controler";
 import data from "../../../data.json";
 import user from "../../../assets/profile.webp";
 import upArrow from "../../../assets/arrow.webp";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.section`
   background-color: #ffffff;
@@ -46,6 +47,9 @@ const NewsWraper = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 10px;
+  &:nth-of-type(1n + 4) {
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
   @media (min-width: 481px) {
     margin-bottom: 45px;
     justify-content: flex-start;
@@ -59,7 +63,7 @@ const Paper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
-
+  cursor: pointer;
   .cover {
     width: 160px;
     height: 120px;
@@ -163,19 +167,20 @@ const ShowMore = styled.div`
   padding: 8px;
   background-color: #ffffff;
   margin-bottom: 10px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;
     font-size: 4.65vw;
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
     font-weight: 300;
     &:after {
       content: "";
-      display: flex;
-      position: absolute;
-      left: -25px;
-      bottom: 8px;
+      display: inline-flex;
       background-image: url(${upArrow});
+      transform: ${(props) => (props.arrow ? `rotate(180deg)` : "")};
       background-size: cover;
       background-repeat: no-repeat;
       width: 9px;
@@ -186,7 +191,7 @@ const ShowMore = styled.div`
   @media (min-width: 481px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
-    max-width: 500px;
+    width:50%;
     justify-content: center;
     align-items: center;
     margin: auto;
@@ -215,13 +220,26 @@ const ChangeBack = styled.div`
 `;
 
 export default function SelectNews({ posts }) {
+  const navigate = useNavigate();
   const [selectedTag, setSelectedTag] = useState("همه");
-  const [filteredPosts, setFilteredPosts] = useState(posts);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [mostVisitedMore, setMostVisitedMore] = useState(false);
+  const [lastNewsMore, setLastNewsMore] = useState(false);
+
+  useEffect(() => {
+    setFilteredPosts(posts);
+  }, [posts]);
+
   const magPaper = filteredPosts.map((x, i) => {
     return (
-      <Paper key={i}>
+      <Paper
+        key={i}
+        onClick={() => {
+          navigate(`/blog/${x.id}`);
+        }}
+      >
         <div className="cover">
-          <img src={x.img} alt={x.date} />
+          <img src={x.main_image} alt={x.date} />
         </div>
 
         <p className="user">{x.writer}</p>
@@ -234,23 +252,41 @@ export default function SelectNews({ posts }) {
   });
 
   useEffect(() => {
-    let newPosts = posts.filter((post) => post.tag[0].name === selectedTag);
-    setFilteredPosts([...newPosts]);
+    if (posts.filter((x) => x.tag.length > 0 && x.tag[0].name == selectedTag)) {
+      setFilteredPosts(
+        posts.filter((x) => x.tag.length > 0 && x.tag[0].name == selectedTag)
+      );
+    } else {
+    }
+
+    if (selectedTag == "همه") {
+      setFilteredPosts(posts);
+    }
   }, [selectedTag]);
   return (
     <Container>
       <Control selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
       <Title> پربازدیدترین مطالب</Title>
-      <NewsWraper>{magPaper}</NewsWraper>
-      <ShowMore>
-        <p>نمایش بیشتر</p>
+      <NewsWraper hide={mostVisitedMore}>{magPaper}</NewsWraper>
+      <ShowMore
+        arrow={mostVisitedMore}
+        onClick={() => {
+          setMostVisitedMore(!mostVisitedMore);
+        }}
+      >
+        <p>{mostVisitedMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
       </ShowMore>
 
       <ChangeBack>
         <Title> آخرین مطالب</Title>
-        <NewsWraper>{magPaper}</NewsWraper>
-        <ShowMore>
-          <p>نمایش بیشتر</p>
+        <NewsWraper hide={lastNewsMore}>{magPaper}</NewsWraper>
+        <ShowMore
+          arrow={lastNewsMore}
+          onClick={() => {
+            setLastNewsMore(!lastNewsMore);
+          }}
+        >
+          <p>{lastNewsMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
         </ShowMore>
       </ChangeBack>
     </Container>

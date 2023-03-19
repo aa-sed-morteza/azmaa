@@ -33,7 +33,7 @@ export default function SelectionArea() {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
       })
       .catch(function (error) {
@@ -50,7 +50,7 @@ export default function SelectionArea() {
     
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
+      // console.log(JSON.stringify(response.data));
       setAreaName([...response.data.map(x=>x.name)])
 
     })
@@ -80,7 +80,7 @@ export default function SelectionArea() {
 
     axios(config)
     .then((res) => {
-      console.log(JSON.stringify(res.data));
+      // console.log(JSON.stringify(res.data));
       dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
       dispatch({ type: "SET_SIGN_LEVEL", payload: 4 });
     actions.resetForm();
@@ -89,7 +89,7 @@ export default function SelectionArea() {
       });
     })
     .catch((error) => {
-      console.log("sagError", error);
+      console.log("Error", error);
       if (error.response.status == 401) {
         refreshToken();
         toast.error("لطفا مجدد تلاش کنید", {

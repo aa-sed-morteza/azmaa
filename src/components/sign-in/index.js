@@ -22,10 +22,6 @@ export default function SignIn() {
       
       {state.signInLevel === 1 && <PersonalInformation />}
       {state.signInLevel === 2 && <><PersonalInformation /><Contacts/></>}
-      
-     
-      
-
     </Container>
   );
 }

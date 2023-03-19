@@ -5,7 +5,7 @@ import * as yup from "yup";
 
 export const phoneSchema = yup.object().shape({
   phoneNember: yup.number().required("لطفا شماره همراه خود را وارد کنید"),
-  type :yup.string().required("لطفا نوع کاربری خود را انتخاب کنید"),
+  type: yup.string().required("لطفا نوع کاربری خود را انتخاب کنید"),
 });
 
 export const infoSchema = yup.object().shape({
@@ -17,6 +17,24 @@ export const infoSchema = yup.object().shape({
     .min(10, "حداقل ۱۰ رقم وارد کنید")
     .required("لطفا کد ملی خود را وارد کنید"),
   birthDay: yup.string().required("لطفا تاریخ تولد خود را وارد کنید"),
+});
+
+export const generalInfoSchema = yup.object().shape({
+  firstName: yup.string().required("لطفا نام خود را وارد کنید"),
+  lastName: yup.string().required("لطفا نام خانوادگی خود را وارد کنید"),
+  birthPlace: yup.string().required("لطفا نام محل تولد خود را وارد کنید"),
+  personalCode: yup
+    .number()
+    .min(10, "حداقل ۱۰ رقم وارد کنید")
+    .required("لطفا کد ملی خود را وارد کنید"),
+  birthDay: yup.string().required("لطفا تاریخ تولد خود را وارد کنید"),
+  mobileNumber: yup.number().required("لطفا شماره مویابل خود را وارد کنید"),
+  email: yup.string().required("لطفا  ایمیل خود را وارد کنید"),
+  address: yup.string().required("لطفا آدرس  خود را وارد کنید"),
+  phoneNubmer: yup
+    .number()
+    .min(10, "حداقل ۸ رقم وارد کنید")
+    .required("لطفا شماره تلفن ثابت  خود را وارد کنید"),
 });
 
 export const passSchema = yup.object().shape({
@@ -70,9 +88,45 @@ export const contentSchema = yup.object().shape({
 
 export const UploadPictSchema = yup.object().shape({
   picOne: yup
-    .string()
-    .required("لطفا تصویر ابتدایی مطلب خود را  بارگزاری کنید"),
-  picTwo: yup.string().required("لطفا   تصویر دوم مطلب  خود را  بارگزاری کنید"),
+    .mixed()
+    .required("لطفا تصویرمطلب خود را بارگزاری کنید")
+    .test("حجم فایل زیاد است", (value) => {
+      return value && value.size <= 2000000;
+    })
+    .test(
+      "نوع فایل",
+      "نوع فایل باید یکی از فرمت های نامبرده باشد: .jpeg, .jpg, .bmp, .pdf and .doc",
+      (value) => {
+        return (
+          value &&
+          (value.type === "image/jpeg" ||
+            value.type === "image/bmp" ||
+            value.type === "image/png" ||
+            value.type === "application/pdf" ||
+            value.type === "application/msword")
+        );
+      }
+    ),
+  picTwo: yup
+    .mixed()
+    .required("لطفا تصویرمطلب خود را بارگزاری کنید")
+    .test("حجم فایل زیاد است", (value) => {
+      return value && value.size <= 2000000;
+    })
+    .test(
+      "نوع فایل",
+      "نوع فایل باید یکی از فرمت های نامبرده باشد: .jpeg, .jpg, .bmp, .pdf and .doc",
+      (value) => {
+        return (
+          value &&
+          (value.type === "image/jpeg" ||
+            value.type === "image/bmp" ||
+            value.type === "image/png" ||
+            value.type === "application/pdf" ||
+            value.type === "application/msword")
+        );
+      }
+    ),
 });
 
 export const LinkSchema = yup.object().shape({
@@ -89,9 +143,7 @@ export const selectActionTypeSchema = yup.object().shape({
 
 export const selectEnvoyTypeSchema = yup.object().shape({
   type: yup.string().required("لطفا دسته نماینده خود را انتخاب  کنید"),
-  envoy: yup
-    .string()
-    .required("لطفا نماینده مورد نظر  خود را انتخاب  کنید"),
+  envoy: yup.string().required("لطفا نماینده مورد نظر  خود را انتخاب  کنید"),
 });
 
 export const voteSchema = yup.object().shape({
@@ -109,5 +161,4 @@ export const suggestSchema = yup.object().shape({
 export const provinceSchema = yup.object().shape({
   province: yup.string().required("لطفا استان مورد خود را انتخاب کنید"),
   city: yup.string().required("لطفا شهر مورد خود را انتخاب کنید"),
-
 });

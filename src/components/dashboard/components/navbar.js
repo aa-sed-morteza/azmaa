@@ -36,7 +36,11 @@ export default function DashboardMenu() {
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0; /* required */
+`;
 
 const MenuList = styled.ul`
   overflow: hidden;
@@ -113,7 +117,7 @@ const List = styled.li`
     }
   }
 
-  &:nth-last-child(1){
-    display:none;
+  &:nth-last-child(1) {
+    display: none;
   }
 `;

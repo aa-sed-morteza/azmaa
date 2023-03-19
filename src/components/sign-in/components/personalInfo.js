@@ -17,7 +17,6 @@ export default function PersonalInformation() {
   const { state, dispatch } = useUser();
   const [order, setOrder] = useState(false);
 
-  console.log(state.token)
 
   const refreshToken = () => {
     const data = new FormData();
@@ -34,7 +33,7 @@ export default function PersonalInformation() {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
       })
       .catch(function (error) {
@@ -64,7 +63,7 @@ export default function PersonalInformation() {
 
     axios(config)
       .then((res) => {
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
         dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
         dispatch({ type: "SET_SIGN_LEVEL", payload: 2 });
         actions.resetForm();
@@ -73,7 +72,7 @@ export default function PersonalInformation() {
         });
       })
       .catch((error) => {
-        console.log("sagError", error);
+        console.log("Error", error);
         if (error.response.status == 401) {
           refreshToken();
           toast.error("لطفا مجدد تلاش کنید", {
@@ -128,7 +127,6 @@ export default function PersonalInformation() {
     }, [values.personalCode]);
 
 
-    console.log(state)
 
   return (
     <>

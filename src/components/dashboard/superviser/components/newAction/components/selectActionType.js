@@ -31,7 +31,7 @@ export default function SelectActionType() {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         setVoteItems([...response.data]);
       })
       .catch(function (error) {
@@ -46,7 +46,7 @@ export default function SelectActionType() {
     };
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
+      // console.log(JSON.stringify(response.data));
       setActionItems([...response.data]);
     })
     .catch(function (error) {

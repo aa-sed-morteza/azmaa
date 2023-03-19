@@ -12,6 +12,7 @@ import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { toast } from "react-toastify";
 import Select from "../../general/select";
+import Cookies from "js-cookie";
 
 export default function SetMobileNumber() {
   const { state, dispatch } = useUser();
@@ -48,7 +49,7 @@ export default function SetMobileNumber() {
 
       axios(config)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setValidate(0);
           dispatch({ type: "SET_ID", payload: res.data.id });
           navigate(`/sign-in/${state.userType}`);
@@ -56,7 +57,7 @@ export default function SetMobileNumber() {
           getToken(password, state.userName);
         })
         .catch((err) => {
-          console.log(err.response.data);
+          // console.log(err.response.data);
           if (err.response.data.code) {
             setValidate(0);
             toast.error(err.response.data.code, {
@@ -90,9 +91,11 @@ export default function SetMobileNumber() {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
         dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
+        Cookies.set('refreshToken', response.data.refresh );
+        Cookies.set('token', response.data.access  );
       })
       .catch((error) => {
         console.log(error);
@@ -133,7 +136,7 @@ export default function SetMobileNumber() {
 
     axios(config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.msg === "otp sent") {
           toast.success("کد ثبت نام برای شما ارسال شد!", {
             position: toast.POSITION.TOP_RIGHT,
@@ -200,10 +203,11 @@ export default function SetMobileNumber() {
           )}
           <Select
             label="نوع کاربر"
-            background="#FFFFFF"
+            background="#F5F5F5"
             value={values.type}
             onChange={handleChange}
             options={type}
+            white={true}
             id="type"
           />
           {errors.type && touched.type && <ErrorText>{errors.type}</ErrorText>}

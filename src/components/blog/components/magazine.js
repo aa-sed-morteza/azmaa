@@ -5,6 +5,7 @@ import mag from "../../../assets/blog.webp";
 import user from "../../../assets/profile.webp";
 import data from "../../../data.json";
 import ScrollButton from "../../general/scrollButton";
+import { useNavigate } from "react-router-dom";
 
 const MagazineContainer = styled.section`
   background-color: #ffaa00;
@@ -121,6 +122,7 @@ const Paper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
+  cursor: pointer;
   .cover {
     width: 160px;
     height: 120px;
@@ -203,7 +205,7 @@ const Paper = styled.div`
     .user {
       font-size: 1.042vw;
       margin-bottom: 36px;
-      padding-right: 30px;
+
       &:before {
         width: 20px;
         height: 20px;
@@ -233,11 +235,18 @@ const Curtain = styled.div`
   left: 0;
 `;
 export default function Magazine({ posts }) {
+  const navigate = useNavigate();
+
   const magPaper = posts.map((x, i) => {
     return (
-      <Paper key={i}>
+      <Paper
+        key={i}
+        onClick={() => {
+          navigate(`/blog/${x.id}`);
+        }}
+      >
         <div className="cover">
-          <img src={x.img} alt={x.date} />
+          <img src={x.main_image} alt={x.date} />
         </div>
 
         <p className="user">{x.writer}</p>

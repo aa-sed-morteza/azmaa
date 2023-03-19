@@ -1,4 +1,7 @@
 import React, { useReducer, useContext, useEffect } from "react";
+import Cookies from "js-cookie";
+import axios from "axios";
+import { BaseBackURL } from "../../constant/api";
 
 const initialState = {
   userName: "",
@@ -142,6 +145,40 @@ const reducer = (state, action) => {
 export const UserState = (props) => {
   //Defining the global state and dispatching fucntion as the ruducer function
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const refreshToken = () => {
+    const data = new FormData();
+    data.append("refresh", Cookies.get('refreshToken'));
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/refresh/`,
+      headers: {
+        Authorization: `Bearer ${Cookies.get('token')}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        // console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    // console.log(Cookies.get("token"));
+    if (Cookies.get("token")) {
+      refreshToken();
+      // console.log("token");
+      dispatch({ type: "SET_TOKEN", payload: Cookies.get("token") });
+    }
+  }, []);
+
 
   return (
     <userContext.Provider value={{ state, dispatch }}>

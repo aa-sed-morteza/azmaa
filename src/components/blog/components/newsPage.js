@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import pic from "../../../assets/poster.webp";
 import profile from "../../../assets/profile.webp";
 import like from "../../../assets/like1.webp";
@@ -11,23 +11,110 @@ import Text from "../../../assets/text.webp";
 import useWidth from "../../../hook/useWidth";
 import upArrow from "../../../assets/arrow.webp";
 import ShareButton from "../../general/shareButton";
+import axios from "axios";
+import { BaseBackURL } from "../../../constant/api";
+import { convertDateToFarsi } from "../../../utils";
 
 export default function NewsPage() {
   const { title } = useParams();
   const width = useWidth();
+  const [post, setPost] = useState({});
+  const [showMore, setShowMore] = useState(false);
+  const [allPosts, setAllPosts] = useState([]);
+  const [relatedPosts, setRelatedPosts] = useState([]);
+  const navigate = useNavigate();
 
-  const magPaper = data.magazine.map((x, i) => {
+  const getPosts = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/blog/?writer__id&tag__id&is_suggested=True, False&ordering=created`,
+    };
+
+    axios(config).then((res) => {
+      // console.log(res);
+      if (res.data.length > 0) {
+        setAllPosts([...res.data]);
+      }
+    });
+  };
+
+  const getPost = () => {
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `${BaseBackURL}api/v1/blog/${title}`,
+    };
+
+    axios(config)
+      .then(function (response) {
+        setPost({ ...response.data });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getPost();
+    getPosts();
+  }, [title]);
+
+  useEffect(() => {
+    if (
+      post &&
+      post.tag &&
+      post.tag.length > 0 &&
+      allPosts.filter(
+        (x) => x.tag.length > 0 && x.tag[0].name == post.tag[0].name
+      )
+    ) {
+      setRelatedPosts(
+        allPosts.filter(
+          (x) => x.tag.length > 0 && x.tag[0].name == post.tag[0].name
+          // && x.title !== post.title
+        )
+      );
+    }
+  }, [post]);
+
+  const magPaper = allPosts.map((x, i) => {
     return (
-      <Paper>
+      <Paper
+        key={i}
+        onClick={() => {
+          navigate(`/blog/${x.id}`);
+        }}
+      >
         <div className="cover">
-          <img src={x.img} alt={x.date} />
+          <img src={x.main_image} alt={x.title} />
         </div>
 
-        <p className="user">{x.name}</p>
+        <p className="user">{x.writer}</p>
 
-        <p className="content">{x.content}</p>
+        <p className="content">{x.description}</p>
 
-        <p className="date">{x.date}</p>
+        <p className="date">{x.created &&  convertDateToFarsi(x.created)}</p>
+      </Paper>
+    );
+  });
+
+  const relatedPaper = relatedPosts.map((x, i) => {
+    return (
+      <Paper
+        key={i}
+        onClick={() => {
+          navigate(`/blog/${x.id}`);
+        }}
+      >
+        <div className="cover">
+          <img src={x.main_image} alt={x.title} />
+        </div>
+
+        <p className="user">{x.writer}</p>
+
+        <p className="content">{x.description}</p>
+
+        <p className="date">{x.created && convertDateToFarsi(x.created)}</p>
       </Paper>
     );
   });
@@ -43,31 +130,16 @@ export default function NewsPage() {
         <>
           <NewsContainer>
             <Picture>
-              <img src={pic} alt="news-cover" />
+              <img src={post && post.main_image} alt="news-cover" />
             </Picture>
             <Content>
               <HeadContent>
-                <Type>سهیل داناچیان</Type>
-                <Date>۲۹ اسفند ۱۴۰۰</Date>
+                <Type>{post && post.writer}</Type>
+                <Date>{post.created && convertDateToFarsi(post.created)}</Date>
               </HeadContent>
-              <SubTitle>
-                مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود کدام
-                شرکت‌هاست؟
-              </SubTitle>
+              <SubTitle>{post && post.title}</SubTitle>
 
-              <Paragraph>
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-                استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
-                در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
-                نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
-                کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان
-                جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را
-                برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
-                زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
-                دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
-                زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
-                پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-              </Paragraph>
+              <Paragraph>{post && post.description}</Paragraph>
 
               <Feedback>
                 <Button color="#6CBBA9" icon={like}>
@@ -81,8 +153,8 @@ export default function NewsPage() {
                 </Share> */}
                 <ShareButton
                   right={true}
-                  text="  مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود ک "
-                  title="اطلاع رسانی نماینده"
+                  text={post.description}
+                  title={post.title}
                 />
               </Feedback>
             </Content>
@@ -90,7 +162,7 @@ export default function NewsPage() {
 
           <Related>
             <Header>مطالب مرتبط</Header>
-            <CardContainer>{magPaper}</CardContainer>
+            <CardContainer>{relatedPaper}</CardContainer>
           </Related>
         </>
       ) : (
@@ -99,32 +171,16 @@ export default function NewsPage() {
             <News>
               <NewsContainer>
                 <Picture>
-                  <img src={pic} alt="news-cover" />
+                  <img src={post && post.main_image} alt="news-cover" />
                 </Picture>
                 <Content>
                   <HeadContent>
-                    <Type>سهیل داناچیان</Type>
-                    <Date>۲۹ اسفند ۱۴۰۰</Date>
+                    <Type>{post && post.writer}</Type>
+                    <Date>{post.created && convertDateToFarsi(post.created)}</Date>
                   </HeadContent>
-                  <SubTitle>
-                    مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود کدام
-                    شرکت‌هاست؟
-                  </SubTitle>
+                  <SubTitle>{post && post.title}</SubTitle>
 
-                  <Paragraph>
-                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
-                    با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه
-                    و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی
-                    تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای
-                    کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و
-                    آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم
-                    افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص
-                    طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این
-                    صورت می توان امید داشت که تمام و دشواری موجود در ارائه
-                    راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز
-                    شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل
-                    دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                  </Paragraph>
+                  <Paragraph>{post && post.description}</Paragraph>
 
                   <Feedback>
                     <Button color="#6CBBA9" icon={like}>
@@ -138,8 +194,8 @@ export default function NewsPage() {
                     </Share> */}
                     <ShareButton
                       right={true}
-                      text="  مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود ک "
-                      title="اطلاع رسانی نماینده"
+                      text={post.description}
+                      title={post.title}
                     />
                   </Feedback>
                 </Content>
@@ -147,15 +203,20 @@ export default function NewsPage() {
             </News>
             <RelatedContainer>
               <h3>مطالب مرتبط</h3>
-              {magPaper}
+              {relatedPaper}
             </RelatedContainer>
           </DesktopContainer>
           <Related>
             <Header> آخرین مطالب</Header>
-            <CardContainer>{magPaper}</CardContainer>
+            <CardContainer hide={showMore}>{magPaper}</CardContainer>
 
-            <ShowMore>
-              <p>نمایش بیشتر</p>
+            <ShowMore
+              arrow={showMore}
+              onClick={() => {
+                setShowMore(!showMore);
+              }}
+            >
+              <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
             </ShowMore>
           </Related>
         </>
@@ -173,15 +234,14 @@ const DesktopContainer = styled.div`
 `;
 
 const News = styled.div`
-  padding:40px;
+  padding: 40px;
   background-color: #f3f3f3;
   border-radius: 8px 0px 0px 8px;
   width: 55%;
-  @media(min-width:769px){
-    width:54%;
+  @media (min-width: 769px) {
+    width: 54%;
     padding: 49px 200px 42px 54px;
   }
- 
 `;
 
 const RelatedContainer = styled.div`
@@ -196,14 +256,14 @@ const RelatedContainer = styled.div`
   padding-bottom: 10px;
   padding-left: 10%;
   h3 {
-    display:flex;
-    align-items:center;
-    gap:7px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
     font-weight: 300;
     font-size: 1.875vw;
     color: #707070;
     margin: 0;
-   
+
     &:before {
       content: "";
       display: inline-flex;
@@ -214,9 +274,9 @@ const RelatedContainer = styled.div`
       height: 18px;
     }
   }
-  @media(min-width:769px){
-    h3{
-      &:before{
+  @media (min-width: 769px) {
+    h3 {
+      &:before {
         width: 1.563vw;
         height: 1.823vw;
       }
@@ -280,6 +340,7 @@ const Picture = styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
+    border-radius: 12px 12px 0 0;
   }
 `;
 
@@ -305,23 +366,22 @@ const Type = styled.p`
   font-weight: 300;
   font-size: 3.721vw;
   margin: 0;
-  position: relative;
-  padding-right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  /* padding-right: 20px; */
   &:before {
     content: "";
-    display: block;
+    display: inline-flex;
     background-image: url(${profile});
     background-size: cover;
     background-repeat: no-repeat;
-    position: absolute;
     width: 14px;
     height: 17px;
-    right: 0;
-    top: 2px;
   }
   @media (min-width: 481px) {
     font-size: 1.25vw;
-    padding-right: 40px;
+    /* padding-right: 40px; */
     &:before {
       width: 30px;
       height: 30px;
@@ -473,6 +533,9 @@ const CardContainer = styled.div`
   gap: 10px;
   @media (min-width: 481px) {
     justify-content: flex-start;
+    & > :nth-of-type(1n + 5) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
   }
 `;
 
@@ -500,20 +563,19 @@ const Paper = styled.div`
     color: #707070;
     font-weight: 300;
     font-size: 3.72vw;
-    padding-right: 20px;
-    position: relative;
+    /* padding-right: 20px; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 10px;
     &:before {
       content: "";
-      display: flex;
-      position: absolute;
+      display: inline-flex;
       background-image: url(${user});
       background-size: cover;
       background-repeat: no-repeat;
       width: 15px;
       height: 15px;
-      right: 2px;
-      top: 5px;
     }
   }
   .content {
@@ -523,6 +585,11 @@ const Paper = styled.div`
     margin: 0;
     margin-bottom: 10px;
     max-width: 160px;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 5;
   }
 
   .date {
@@ -549,11 +616,6 @@ const Paper = styled.div`
     .user {
       font-size: 1.042vw;
       margin-bottom: 36px;
-      padding-right: 30px;
-      &:before {
-        width: 20px;
-        height: 20px;
-      }
     }
     .content {
       font-size: 1.25vw;
@@ -583,7 +645,7 @@ const Paper = styled.div`
 const ShowMore = styled.div`
   border: 2px solid #9f9f9f;
   border-radius: 8px;
-  max-width: 500px;
+  width: 50%;
   display: flex;
   padding: 8px;
   background-color: #ffffff;
@@ -593,19 +655,20 @@ const ShowMore = styled.div`
   margin: auto;
   padding: 13px;
   margin-top: 45px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;
     font-size: 1.25vw;
     font-weight: 400;
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
     &:after {
       content: "";
-      display: flex;
-      position: absolute;
-      left: -25px;
-      bottom: 8px;
+      display: inline-flex;
       background-image: url(${upArrow});
+      transform: ${(props) => (props.arrow ? `rotate(180deg)` : "")};
       background-size: cover;
       background-repeat: no-repeat;
       width: 15px;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useUser } from "../../../context/userContext";
 import edit from "../../../../assets/left.svg";
 import { useNavigate } from "react-router-dom";
+import {toFarsiNumber} from "../../../../utils"
 
 export default function PersonalInfo() {
   const navigate =useNavigate();
@@ -31,7 +32,7 @@ export default function PersonalInfo() {
       </Row>
       <Row>
         <p className="type"> کد ملی: </p>
-        <p className="expand">{state.national_code}</p>
+        <p className="expand">{toFarsiNumber(state.national_code) }</p>
       </Row>
     </Container>
   );
@@ -53,15 +54,16 @@ const Title = styled.h4`
   font-weight: 300;
   font-size: 4.651vw;
   color: #9f9f9f;
-  transform: translateY(-16px);
+  transform: translateY(-63%);
   background: #ffffff;
   width: 40%;
   margin: 0;
   text-align: center;
   margin-right: -5%;
+  white-space: nowrap;
   @media (min-width: 480px) {
     font-size: 1.875vw;
-    transform: translateY(-1.615vw);
+    transform: translateY(-60%);
     width: 27%;
     margin-right: 1.646vw;
     margin-bottom: -1.042vw;
@@ -110,4 +112,8 @@ const Edit = styled.div`
   background-image: url(${edit});
   background-size: contain;
   cursor: pointer;
+  @media (min-width: 480px){
+    width: 1.042vw;
+    height: 0.521vw;
+  }
 `;

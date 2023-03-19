@@ -5,6 +5,7 @@ import menu from "../../assets/menu.webp";
 import search from "../../assets/search.webp";
 import close from "../../assets/close.webp";
 import signIn from "../../assets/Sign_in.webp";
+import signInMobile from "../../assets/signMobile.svg";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import useWidth from "../../hook/useWidth";
@@ -37,6 +38,7 @@ const TopBar = styled.section`
 const Logo = styled.div`
   width: 31px;
   height: 26px;
+  cursor: pointer;
   img {
     width: 100%;
     height: 100%;
@@ -78,7 +80,7 @@ const MenuList = styled.ul`
   top: 67px;
   background-color: ${(props) => (props.back ? "#095644" : "#FFFFFF")};
   flex-direction: column;
-  padding: 51px 81px;
+  padding: 51px 81px 115px;
   gap: 10px;
   z-index: 40;
 `;
@@ -152,7 +154,7 @@ const MobilePanel = styled.div`
   align-items: center;
   gap: 3.488vw;
   padding-right: 4.186vw;
-  bottom: -16.279vw;
+  bottom: 9vw;
   right: 0;
   .icon {
     display: flex;
@@ -165,6 +167,7 @@ const MobilePanel = styled.div`
       width: 90%;
       height: 90%;
       object-fit: contain;
+      mix-blend-mode: lighten;
     }
   }
   .content {
@@ -177,6 +180,7 @@ const MobilePanel = styled.div`
 `;
 
 const Search = styled.div`
+  display: none;
   background-image: url(${search});
   background-size: contain;
   width: 20px;
@@ -255,7 +259,7 @@ const Category = styled.ul`
       font-weight: bolder;
       &:before {
         content: "";
-        display: "flex";
+        display: flex;
         background-color: white;
         bottom: -3.2vw;
         position: absolute;
@@ -359,6 +363,7 @@ export default function Navbar() {
       dispatch({ type: "SET_TOKEN", payload: null });
     } else {
       navigate("/dashboard");
+      setDashboard(true)
     }
     // setDashboard(!dashboard);
     // setOpen(false);
@@ -380,21 +385,15 @@ export default function Navbar() {
   function choiseItem(num, path) {
     setActive(num);
     navigate(path);
-    setOpen(false);
+    setOpen(!open);
   }
 
-  function handelClick() {
-    if (open) {
-      setOpen(false);
-    } else {
-      setOpen(true);
-    }
-    return open;
-  }
+ 
+
 
   return (
     <TopBar>
-      <Logo>
+      <Logo onClick={()=>{navigate('/')}}>
         <img src={LOGO} alt="logo" />
       </Logo>
 
@@ -417,21 +416,21 @@ export default function Navbar() {
         )}
 
         <Search></Search>
-        {width < 481 ? <Menu onClick={handelClick} open={open}></Menu> : ""}
+        {width < 481 ? <Menu onClick={()=>{setOpen(!open)}} open={open}></Menu> : ""}
         {width < 481 ? (
           <MenuList open={open} back={dashboard && state.loggedIn}>
             {dashboard && state.loggedIn ? <Profile /> : ""}
             {dashboard && state.loggedIn ? checkUserMenu() : menuItem}{" "}
             <MobilePanel
-              color={dashboard ? "#FF5A5A" : "#FFAA00"}
+              color={state.loggedIn ? "#FF5A5A" : "#FFAA00"}
               onClick={goDashboard}
             >
               <div className="icon">
-                <img src={dashboard ? exit : signIn} />
+                <img src={state.loggedIn ? exit : signInMobile} />
               </div>
               <p className="content">
                 {" "}
-                {dashboard ? "خروج از پنل" : "ورود به پنل"}{" "}
+                {state.loggedIn ? "خروج از پنل" : "ورود به پنل"}{" "}
               </p>{" "}
             </MobilePanel>
           </MenuList>

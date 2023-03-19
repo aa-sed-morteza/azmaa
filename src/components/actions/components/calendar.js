@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import check from "../../../assets/check.webp";
 import line from "../../../assets/Line.webp";
@@ -9,6 +9,7 @@ import { ChangeToPersianDate, fixNumbers } from "../../../utils";
 
 export default function Calendar({ activities }) {
   const width = useWidth();
+  const [showMore,setShowMore]=useState(false)
 
   let today = new Date().toLocaleDateString("fa-IR", {
     year: "numeric",
@@ -47,31 +48,25 @@ export default function Calendar({ activities }) {
     }
 
     elements.push(
-      <>
+      <Wraper hide={showMore}>
         <SubTitile>
           {monthArray[i]} {year}
         </SubTitile>
         <List>
-          {width < 480 ? (
-            <ActionCard />
-          ) : (
-            <>
-              {newList.map((item) => (
-                <ActionCard activity={item} />
-              ))}
-            </>
-          )}
+          {newList.map((item) => (
+            <ActionCard activity={item} />
+          ))}
         </List>
-      </>
+      </Wraper>
     );
   }
+
 
   return (
     <Container>
       {elements}
-
-      <ShowMore>
-        <p> نمایش بیشتر</p>
+      <ShowMore arrow={showMore} onClick={()=>{setShowMore(!showMore)}}>
+        <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
       </ShowMore>
     </Container>
   );
@@ -105,24 +100,25 @@ const SubTitile = styled.h2`
   font-weight: 700;
   font-size: 3.721vw;
   color: #9f9f9f;
-  padding-right: 40px;
+  /* padding-right: 40px; */
+  display: flex;
+  align-items: center;
+  gap: 10px;
   position: relative;
   margin-bottom: 5px;
   &:before {
     content: "";
-    display: block;
-    position: absolute;
+    display: inline-flex;
     background-image: url(${check});
     background-size: cover;
     background-repeat: no-repeat;
     width: 4.186vw;
     height: 4.186vw;
-    right: 3.721vw;
-    top: 0.465vw;
+
   }
   &:after {
     content: "";
-    display: block;
+    display: inline-flex;
     position: absolute;
     background-image: url(${line});
     background-size: cover;
@@ -130,12 +126,12 @@ const SubTitile = styled.h2`
     width: 3.721vw;
     height: 1px;
     right: -0.698vw;
-    top: 2.326vw;
+   
   }
   @media (min-width: 480px) {
     font-size: 1.667vw;
     margin-bottom: 20px;
-    padding-top: 45px;
+  
     &:before {
       width: 1.563vw;
       height: 1.563vw;
@@ -145,8 +141,8 @@ const SubTitile = styled.h2`
     &:after {
       width: 1.979vw;
       height: 0.156vw;
-      right: -44px;
-      top: 3.438vw;
+      right: -2.292vw;
+      
     }
   }
 `;
@@ -209,19 +205,20 @@ const ShowMore = styled.div`
   display: flex;
   padding: 8px;
   margin-top: 16px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;
     font-size: 4.65vw;
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
     font-weight: 300;
     &:after {
       content: "";
-      display: flex;
-      position: absolute;
-      left: -25px;
-      bottom: 8px;
+      display: inline-flex;
       background-image: url(${upArrow});
+      transform: ${(props) => (props.arrow ? `rotate(180deg)` : "")};
       background-size: cover;
       background-repeat: no-repeat;
       width: 9px;
@@ -232,7 +229,7 @@ const ShowMore = styled.div`
   @media (min-width: 480px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
-    max-width: 500px;
+    width:50%;
     justify-content: center;
     align-items: center;
     margin: auto;
@@ -257,3 +254,9 @@ const List = styled.div`
     gap: 20px;
   }
 `;
+
+const Wraper =styled.div`
+ &:nth-of-type(1n + 6) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
+`

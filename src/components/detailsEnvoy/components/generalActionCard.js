@@ -11,6 +11,7 @@ import like from "../../../assets/like.svg";
 import dislike from "../../../assets/dislike.webp";
 import action from "../../../assets/act.webp";
 import actionSymbol from "../../../assets/action-rate.webp";
+import { ChangeToPersianDate } from "../../../utils";
 
 export default function GeneralActionCard(props) {
   const navigate = useNavigate();
@@ -63,13 +64,13 @@ export default function GeneralActionCard(props) {
   }, []);
 
   return (
-    <Container>
+    <Container margin={props.margin}>
       <Header icon={actIcon} symbol={symbol}>
         <span></span>
         <div className="content">
           <p className="act">{act}</p>
           <p className="title">{props.content}</p>
-          <p className="date">{props.date}</p>
+          <p className="date">{props.date && ChangeToPersianDate(props.date)}</p>
         </div>
       </Header>
       <Action background={background} operation={operation} color={color}>
@@ -112,6 +113,7 @@ const Container = styled.div`
     margin-bottom: 0.521vw;
     box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
+    margin-right: ${props=>props.margin? props.margin :''};
   }
 `;
 
@@ -133,6 +135,7 @@ const LargButton = styled.div`
   display: flex;
   padding: 5px;
   z-index: 100;
+  cursor: pointer;
   .content {
     margin: 0 auto;
     font-size: 4.65vw;

@@ -4,6 +4,7 @@ import { useUser } from "../../../context/userContext";
 import edit from "../../../../assets/left.svg";
 import { useNavigate } from "react-router-dom";
 import box from "../../../../assets/state.svg";
+import {toFarsiNumber} from "../../../../utils"
 
 export default function EnvoyState() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function EnvoyState() {
 
       <Row>
         <p className="type"> تعداد آراء: </p>
-        <p className="expand">{state.vote_number}</p>
+        <p className="expand">{toFarsiNumber(state.vote_number) }</p>
       </Row>
       <Row>
         <p className="type"> تعداد کل آراء صندوق : </p>
@@ -54,15 +55,16 @@ const Title = styled.h4`
   font-weight: 300;
   font-size: 4.651vw;
   color: #9f9f9f;
-  transform: translateY(-16px);
+  transform: translateY(-63%);
   background: #ffffff;
   width: 40%;
   margin: 0;
   text-align: center;
   margin-right: -5%;
+  white-space: nowrap;
   @media (min-width: 480px) {
     font-size: 1.875vw;
-    transform: translateY(-1.615vw);
+    transform: translateY(-60%);
     width: 27%;
     margin-right: 1.646vw;
     margin-bottom: -1.042vw;
@@ -111,6 +113,10 @@ const Edit = styled.div`
   background-image: url(${edit});
   background-size: contain;
   cursor: pointer;
+  @media (min-width: 480px){
+    width: 1.042vw;
+    height: 0.521vw;
+  }
 `;
 
 const State = styled.div`
@@ -139,6 +145,22 @@ const State = styled.div`
       color: #6cbba9;
       font-weight: 400;
       font-size: 3.256vw;
+    }
+  }
+  @media (min-width: 480px){
+    gap: 1.094vw;
+    margin-bottom: 1.719vw;
+    span{
+      width: 4.792vw;
+      height: 5.313vw;
+    }
+    .content{
+      .title{
+        font-size: 1.667vw;
+      }
+      .persentage{
+        font-size: 1.250vw;
+      }
     }
   }
 `;

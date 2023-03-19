@@ -11,58 +11,71 @@ import { useNavigate } from "react-router-dom";
 import ShareButton from "../../general/shareButton.js";
 import { BaseBackURL } from "../../../constant/api";
 import axios from "axios";
+import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
 
 export default function ActionCard({ activity }) {
   const [active, setActive] = useState(0);
   const [color, SetColor] = useState("#DFF5F0");
   const [bColor, setBColor] = useState("#6cbba9");
-  const [votes, setVotes] = useState(activity.vote);
+  const [votes, setVotes] = useState([]);
   const envoyData = data.envoy;
   const navigate = useNavigate();
-
- 
-
-  const envoyList = votes.map((x, i) => {
-    return (
-      <Card key={i} color={bColor}>
-        <div className="picture">
-          <img src={x.voter.image} alt={x.voter.last_name} />
-        </div>
-
-        <p className="name">
-          {x.voter.first_name} {x.voter.last_name}
-        </p>
-        <p className="state">{x.voter.electoral_district_name}</p>
-      </Card>
-    );
-  });
 
   let positive = 0;
   let negative = 0;
   let noChoice = 0;
 
   for (const item of activity.vote) {
-    if (item.vote === "positive") {
+    if (item.vote === activity.activity_choice[0].name) {
       positive = positive + 1;
-    } else if (item.vote === "negative") {
+    } else if (item.vote === activity.activity_choice[1].name) {
       negative = negative + 1;
     } else {
       noChoice = noChoice + 1;
     }
   }
 
+
+  // useEffect(()=>{
+  //   setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[0].name)]);
+  // },[])
+
+
+
   useEffect(() => {
-    if (active === 1) {
+    if (active === 0) {
+      SetColor("#DFF5F0");
+      setBColor("#6cbba9");
+     
+      setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[0].name)]);
+    } else if (active === 1) {
       SetColor("#FFD5D5");
       setBColor("#ffa5a5");
+      setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[1].name)]);
     } else if (active === 2) {
       SetColor("#EAEAEA");
       setBColor("#d8d8d8");
-    } else if (active === 0) {
-      SetColor("#DFF5F0");
-      setBColor("#6cbba9");
+      setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[2].name)]);
     }
   }, [active]);
+
+  const envoyList = votes.map((x, i) => {
+    return (
+      <Card key={i} color={bColor}>
+        <div className="picture">
+          <img
+            src={x && x.voter.image}
+            alt={x && x.voter.last_name}
+          />
+        </div>
+
+        <p className="name">
+          {x && x.voter.first_name} {x && x.voter.last_name}
+        </p>
+        <p className="state">{x && x.voter.electoral_district_name}</p>
+      </Card>
+    );
+  });
 
   return (
     <VCContainer>
@@ -71,7 +84,7 @@ export default function ActionCard({ activity }) {
         <div className="title-card">
           <p className="title">عملکرد</p>
           <h2> {activity.name}</h2>
-          <p className="date">{activity.date}</p>
+          <p className="date">{activity.date && convertDateToFarsi(activity.date)}</p>
         </div>
       </CardHeader>
       <Statistics>
@@ -79,19 +92,19 @@ export default function ActionCard({ activity }) {
           onClick={() => setActive(0)}
           className={active === 0 ? "active" : ""}
         >
-          {positive}
+          {toFarsiNumber(positive)}
         </Success>
         <Faild
           onClick={() => setActive(1)}
           className={active === 1 ? "active" : ""}
         >
-          {negative}
+          {toFarsiNumber(negative)}
         </Faild>
         <Not
           onClick={() => setActive(2)}
           className={active === 2 ? "active" : ""}
         >
-          {noChoice}
+          {toFarsiNumber(noChoice)}
         </Not>
       </Statistics>
 
@@ -102,7 +115,7 @@ export default function ActionCard({ activity }) {
           <p
             className="content"
             onClick={() => {
-              navigate(`presentation/ دریافت خودرو دناپلاس `);
+              navigate(`/actions/presentation/${activity.id}`);
             }}
           >
             جزئیات
@@ -111,7 +124,7 @@ export default function ActionCard({ activity }) {
         {/* <SmallButton>
           <p className="content">بازنشر</p>
         </SmallButton> */}
-        <ShareButton text="دریافت خودرو دناپلاس " title="اطلاع رسانی نماینده" />
+        <ShareButton text={activity.name} title="اطلاع رسانی نماینده" />
       </ButtonWraper>
     </VCContainer>
   );
@@ -204,6 +217,11 @@ const CardHeader = styled.div`
       h2 {
         font-size: 1.667vw;
         font-weight: 700;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 100px;
       }
       .date {
         font-size: 1.25vw;
@@ -344,8 +362,8 @@ const Not = styled.div`
     background-image: url(${not});
     background-size: contain;
     background-repeat: no-repeat;
-    bottom: -3.023vw;
     right: -11.628vw;
+    top: -1.395vw;
   }
 
   &.active,
@@ -415,6 +433,7 @@ const Card = styled.div`
     border-radius: 10.93vw;
     margin-bottom: 10px;
     border: 3px solid ${(props) => props.color};
+    background: #ffffff;
     img {
       width: 100%;
       height: 100%;
@@ -487,6 +506,7 @@ const LargButton = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 5px;
+  cursor: pointer;
   .content {
     margin: 0 auto;
     font-size: 4.65vw;

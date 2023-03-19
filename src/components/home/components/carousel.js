@@ -6,11 +6,14 @@ import SelectState from "./selectState";
 import IranMap from "../../pluginIranMap/IranMap";
 import { BaseBackURL } from "../../../constant/api";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Carousel() {
   const items = data.slider;
   const [posts, setPosts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate =useNavigate();
+
 
   function carouselInfiniteScroll() {
     if (currentIndex === data.slider.length - 1) {
@@ -34,7 +37,7 @@ export default function Carousel() {
     };
 
     axios(config).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.data.length > 0) {
         setPosts([...res.data.slice(0, 4)]);
       }
@@ -56,7 +59,6 @@ export default function Carousel() {
     );
   });
 
-  //
 
   return (
     <Wraper>
@@ -70,10 +72,11 @@ export default function Carousel() {
               backgroundColor: "#5e5e5e",
             }}
           >
+            <img className="cover" src={item.image} alt='news-picture'/>
             <div className="content">
               <h1>{item.title}</h1>
               <p>{item.description}</p>
-              <div className="show-more">ادامه مطلب</div>
+              <div className="show-more" onClick={()=>{navigate(`/blog/${item.id}`)}} >ادامه مطلب</div>
             </div>
           </Slide>
         );
@@ -140,11 +143,19 @@ const Slide = styled.div`
   height: 20rem;
   justify-content: center;
   align-items: center;
-  background-image: url(${(props) => props.photo});
-  background-size: cover;
-  background-repeat: no-repeat;
   padding-top: 44%;
+  .cover{
+    position: absolute;
+      left: 0px;
+      top: 0px;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      -webkit-filter:  brightness(0.5); /*Safari 6.0 - 9.0 */
+      filter: brightness(0.5);
 
+ 
+  }
   .content {
     position: absolute;
     display: flex;
@@ -152,6 +163,7 @@ const Slide = styled.div`
     width: 35%;
     top: 20%;
     right: 7%;
+    z-index: 30;
     h1 {
       color: #ffffff;
       font-size: 3.33vw;
@@ -186,6 +198,7 @@ const Slide = styled.div`
       width: fit-content;
       margin-top: 30px;
       position: relative;
+      cursor: pointer;
       &:before {
         content: "";
         display: block;

@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useWidth from "../../hook/useWidth";
 import styled from "styled-components";
@@ -9,14 +9,13 @@ import EnvoyHistory from "./components/envoyHistory";
 import Filtering from "./components/Filtering";
 import SocialNetwork from "./components/socialNetwork";
 import axios from "axios";
-import {BaseBackURL}from "../../constant/api";
+import { BaseBackURL } from "../../constant/api";
 
 export default function DetailsEnvoy() {
   const { title } = useParams();
   const width = useWidth();
   const [envoys, setEnvoys] = useState([]);
-  const [envoy,setEnvoy]=useState({})
-
+  const [envoy, setEnvoy] = useState({});
 
   const getEnvoys = () => {
     let config = {
@@ -25,55 +24,60 @@ export default function DetailsEnvoy() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setEnvoys([...res.data]);
       }
     });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getEnvoys();
-    
-    if(envoys.length>0){
-      setEnvoy(envoys.find(x=>x.id=== parseInt(title) ))
-    }
-  },[]);
 
-  
+    
+  }, []);
+
+  useEffect(()=>{
+    setEnvoy(envoys.find((x) => x.id === parseInt(title)));
+  },[envoys])
+
 
   return (
     <Container>
       <Title>
         <p className="home"> خانه / نمایندگان /</p>
-        <p className="component"> {envoy && envoy.first_name+" "+envoy.last_name}</p>
+        <p className="component">
+          {" "}
+          {envoy && envoy.first_name + " " + envoy.last_name}
+        </p>
       </Title>
       {/* personal info */}
       <FirstSection>
-        {envoy&& 
-         <EnvoyCard
-         name={envoy.first_name+" "+envoy.last_name}
-         state={envoy.electoral_district_name}
-         commission={envoy.fraction_name}
-         img={envoy.image}
-         persantage={envoy.transparency}
-         id={envoy.id}
-         inBox={true}
-       />
-        }
-       
-        <Census select={"?"} complete={"?"} envoy={"?"}/>
-        <EnvoyArea votes={"?"}/>
+        {envoy && (
+          <EnvoyCard
+            name={envoy.first_name + " " + envoy.last_name}
+            state={envoy.electoral_district_name}
+            commission={envoy.fraction_name}
+            img={envoy.image}
+            persantage={envoy.transparency}
+            id={envoy.id}
+            inBox={true}
+          />
+        )}
+
+        <Census select={"?"} complete={"?"} envoy={"?"} />
+        <EnvoyArea votes={"?"} />
         <EnvoyHistory id={title} />
-        {width>481 ? ( <SocialNetwork/>):""}
+        {width > 481 ? <SocialNetwork /> : ""}
       </FirstSection>
       {/* filtering */}
       <SecondSection>
         <Filtering id={title} />
+        
       </SecondSection>
       {/* socialNetwork */}
       <ThirdSection>
-        <SocialNetwork/>
+        <SocialNetwork />
       </ThirdSection>
     </Container>
   );
@@ -84,13 +88,13 @@ const Container = styled.section`
   flex-direction: column;
   padding: 10px 20px;
   overflow: hidden;
-  gap:3.488vw;
+  gap: 3.488vw;
   @media (min-width: 481px) {
     padding: 20px 0;
     background-color: #ffffff;
-    gap:0;
-    flex-direction:row;
-    flex-wrap:wrap;
+    gap: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 `;
 
@@ -110,10 +114,10 @@ const Title = styled.div`
     color: rgba(112, 112, 112, 1);
   }
   @media (min-width: 481px) {
-    width:100%;
+    width: 100%;
     padding-bottom: 1.302vw;
     margin-right: 10%;
-    border-bottom:1px solid #D8D8D8;
+    border-bottom: 1px solid #d8d8d8;
 
     .home,
     .component {
@@ -132,25 +136,25 @@ const FirstSection = styled.div`
   & > * {
     box-shadow: none;
   }
-  @media(min-width:481px){
+  @media (min-width: 481px) {
     width: 23%;
     padding-right: 10%;
-    padding-top:1.302vw;
-    padding-left:0.521vw;
-    gap:0.781vw;
+    padding-top: 1.302vw;
+    padding-left: 0.521vw;
+    gap: 0.781vw;
     & > * {
-      padding:0;
+      padding: 0;
     }
   }
 `;
 
 const SecondSection = styled.div`
-background-color: #ffffff;
-border-radius: 4px;
-padding: 2.326vw;
-  @media(min-width:481px){
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 2.326vw;
+  @media (min-width: 481px) {
     width: 65%;
-    padding:0.990vw 1.302vw 0 0;
+    padding: 0.99vw 1.302vw 0 0;
   }
 `;
 
@@ -158,7 +162,7 @@ const ThirdSection = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 1.628vw 2.558vw 2.093vw;
-  @media(min-width:481px){
-    display:none;
+  @media (min-width: 481px) {
+    display: none;
   }
 `;

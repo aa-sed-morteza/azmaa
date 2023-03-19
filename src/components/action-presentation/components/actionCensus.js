@@ -4,13 +4,28 @@ import ok from "../../../assets/like.webp";
 import disagree from "../../../assets/dislike.webp";
 import info from "../../../assets/info.webp";
 
-export default function ActionsCensus({ total, positive, negative, another }) {
+export default function ActionsCensus({ total, data}) {
   const [envoy, setEnvoy] = useState(267);
+
+  const dataOptions = data.activity_choice.map((item,i)=>{
+    return(
+      <Item className="active" key={i}>
+          <Type color="#6CBBA9" icon={ok}>
+            {item.name}
+          </Type>
+          <Number color="#6CBBA9">
+            <span>{(data.vote.filter(x=>x.vote == item.name).length)}/</span>
+            {total}
+          </Number>
+        </Item>
+    )
+  })
   return (
     <Container>
       <Title> آمار آراء</Title>
       <Row>
-        <Item className="active">
+        {dataOptions}
+        {/* <Item className="active">
           <Type color="#6CBBA9" icon={ok}>
             همراه:
           </Type>
@@ -18,9 +33,9 @@ export default function ActionsCensus({ total, positive, negative, another }) {
             <span>{positive}/</span>
             {total}
           </Number>
-        </Item>
+        </Item> */}
 
-        <Item>
+        {/* <Item>
           <Type color="#FFA5A5" icon={disagree}>
             غیرهمراه:
           </Type>
@@ -28,9 +43,9 @@ export default function ActionsCensus({ total, positive, negative, another }) {
             <span>{negative}/</span>
             {total}
           </Number>
-        </Item>
+        </Item> */}
 
-        <Item>
+        {/* <Item>
           <Type color="#CBCBCB" icon={info}>
             نامشخص:
           </Type>
@@ -38,7 +53,7 @@ export default function ActionsCensus({ total, positive, negative, another }) {
             <span>{another}/</span>
             {total}
           </Number>
-        </Item>
+        </Item> */}
       </Row>
     </Container>
   );
@@ -81,7 +96,32 @@ const Row = styled.div`
     flex-direction: column;
     gap: 15px;
   }
+  &>:nth-child(2){
+    &>p{
+      color: #FFA5A5;
+      &:before{
+        background-image: url(${disagree});
+      }
+    }
+    &> div span{
+      color: #FFA5A5;
+    }
+    
+  }
+  &>:nth-child(3){
+    &>p{
+      color: #CBCBCB;
+      &:before{
+        background-image: url(${info});
+      }
+    }
+    &> div span{
+      color: #CBCBCB;
+    }
+    
+  }
 `;
+
 
 const Item = styled.div`
   width: 48%;
@@ -96,6 +136,7 @@ const Item = styled.div`
       padding: 5px;
     }
   }
+  
 `;
 
 const Type = styled.p`
@@ -103,28 +144,25 @@ const Type = styled.p`
   font-size: 3.721vw;
   font-weight: 400;
   color: ${(props) => props.color};
-  position: relative;
-  padding-right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
   &:before {
     content: "";
-    display: block;
-    position: absolute;
+    display: inline-flex;
     background-image: url(${(props) => props.icon});
     background-size: contain;
     background-repeat: no-repeat;
     width: 3.488vw;
     height: 3.488vw;
-    right: 0;
-    top: 1.163vw;
+   
   }
   @media (min-width: 480px) {
     font-size: 1.25vw;
     font-weight: 300;
-    padding-right: 40px;
     &:before {
       width: 1.563vw;
       height: 1.563vw;
-      top: 0.104vw;
     }
   }
 `;

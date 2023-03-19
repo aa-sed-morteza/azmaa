@@ -50,9 +50,10 @@ const Container = styled.div`
     font-weight: 400;
     position: absolute;
     right: 40px;
-    top: -13px;
+    top: -25%;
     color: #6cbba9;
     background: ${(props) => props.back};
+    transform: scale(.6);
   }
   &:after {
     content: "";
@@ -91,7 +92,7 @@ const Container = styled.div`
   @media (min-width: 480px) {
     &:before {
       font-size: 1.25vw;
-      top: -1.042vw;
+      top: -30%;
     }
     &:after {
       width:1.563vw;

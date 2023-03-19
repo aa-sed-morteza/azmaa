@@ -13,6 +13,7 @@ import gallery from "../../../../assets/gallery.svg";
 import Button from "../../../general/button";
 import Modal from "../../../general/modal";
 import useModal from "../../../../hook/useModal";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function PersonalInformation() {
   const { state, dispatch } = useUser();
@@ -20,6 +21,7 @@ export default function PersonalInformation() {
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
   const inputRef = useRef();
+  const navigate =useNavigate();
 
   useEffect(() => {
     if (!selectedFile) {
@@ -96,7 +98,7 @@ export default function PersonalInformation() {
       <EnvoyState />
       <CommissinInfo />
       <HistoryEnvoy />
-      <Edit>
+      <Edit onClick={()=>{navigate('edit')}}>
         <p className="text">ویرایش حساب کاربری</p>
       </Edit>
     </Container>

@@ -5,7 +5,7 @@ import Button from "../general/button";
 import login from "../../assets/log.webp";
 import signin from "../../assets/signin.webp";
 import CustomInput from "../general/customInput";
-import profile from "../../assets/profile.webp";
+import profile from "../../assets/user-log.svg";
 import lock from "../../assets/lock.webp";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -35,7 +35,7 @@ export default function LogIn() {
 
     axios(config, { withCredentials: true })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.id) {
           toast.success("ورود با موفقیت انجام شد!", {
             position: toast.POSITION.TOP_RIGHT,
@@ -79,7 +79,6 @@ export default function LogIn() {
     data.append("username", values.userName);
     data.append("password", values.password);
 
-    console.log("user:", values.userName);
 
     let config = {
       method: "post",
@@ -89,9 +88,11 @@ export default function LogIn() {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
         dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
+        Cookies.set('refreshToken', response.data.refresh );
+        Cookies.set('token', response.data.access  );
       })
       .catch((error) => {
         console.log(error);
@@ -147,11 +148,13 @@ export default function LogIn() {
           )}
           <CustomInput
             label="رمز عبور"
+            type='password'
             icon={lock}
             back="#f5f5f5"
             id="password"
             value={values.usepasswordrName}
             onChange={handleChange}
+            show={true}
           />
           {errors.password && touched.password && (
             <ErrorText>{errors.password}</ErrorText>
@@ -169,6 +172,7 @@ export default function LogIn() {
               background="#inherit"
               borderColor="#095644"
               textColor="#095644"
+              simple={true}
               icon={signin}
               click={() => {
                 navigate("/sign-in");
@@ -222,7 +226,7 @@ const Form = styled.form`
   flex-direction: column;
   gap: 15px;
   @media (min-width: 480px) {
-    gap: 1.302vw;
+    gap: 1.5vw;
   }
 `;
 

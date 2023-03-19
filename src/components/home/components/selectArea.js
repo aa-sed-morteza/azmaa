@@ -4,11 +4,13 @@ import useWidth from "../../../hook/useWidth";
 import arrow from "../../../assets/arrow.webp";
 import EnvoyCard from "../../general/envoyCard";
 import box from "../../../assets/state.svg"
+import { useNavigate } from "react-router-dom";
 
 export default function SelectArea(props) {
   const [open, setOpen] = useState(false);
   const width = useWidth();
   const envoys = props.envoys;
+  const navigate=useNavigate();
 
   const envoyGallery = envoys.map((x, i) => {
     return (
@@ -21,7 +23,7 @@ export default function SelectArea(props) {
         persantage={x.transparency}
         id={x.id}
         inBox={true}
-
+        click={()=>{navigate(`/envoy/${x.id}`)}}
       />
     );
   });
@@ -58,6 +60,7 @@ const Wraper = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   margin-top:2.326vw;
+  cursor: pointer;
   @media (min-width: 481px) {
     overflow:hidden;
     border-radius: 8px;

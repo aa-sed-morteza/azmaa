@@ -29,7 +29,7 @@ export default function EditContactInformation() {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
       })
       .catch(function (error) {
@@ -54,7 +54,7 @@ export default function EditContactInformation() {
     };
     axios(config)
     .then((res) => {
-      console.log(JSON.stringify(res.data));
+      // console.log(JSON.stringify(res.data));
       dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
       navigate("/dashboard");
       actions.resetForm();
@@ -63,7 +63,7 @@ export default function EditContactInformation() {
       });
     })
     .catch((error) => {
-      console.log("sagError", error);
+      console.log("Error", error);
       if (error.response.status == 401) {
         refreshToken();
         toast.error("لطفا مجدد تلاش کنید", {
@@ -136,6 +136,7 @@ export default function EditContactInformation() {
             <CustomInput
               label=" ایمیل"
               back="#ffffff"
+              dir='ltr'
               value={values.email}
               onChange={handleChange}
               id="email"
@@ -170,6 +171,7 @@ export default function EditContactInformation() {
             text="لغو"
             textColor="#095644"
             borderColor="#095644"
+            simple={true}
             width="35%"
             click={() => {
               navigate(-1);

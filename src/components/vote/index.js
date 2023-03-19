@@ -18,9 +18,10 @@ export default function Vote() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setBills([...res.data]);
+        setFilteredBills([...res.data])
       }
     });
   };
@@ -29,18 +30,22 @@ export default function Vote() {
     getActivities();
   }, []);
 
+
   
   useEffect(() => {
-    let newData = bills.filter((item) => item.tag[0].name === selectedTag);
-    if (selectedTag === "همه") {
-      setFilteredBills([...bills]);
-    } else {
-      setFilteredBills([...newData]);
+    if( bills.filter((item) => item.tag[0].name === selectedTag)){
+      setFilteredBills(bills.filter((item) => item.tag[0].name === selectedTag))
+    }else{
+      setBills(bills)
     }
+
+    if(selectedTag == 'همه'){
+      setFilteredBills(bills)
+    }
+   
   }, [selectedTag]);
 
   
-
   
   return (
     <Container>
@@ -52,7 +57,7 @@ export default function Vote() {
       <Content>
         <Controler selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
         <Filtering />
-        <Calendar bills={bills} />
+        <Calendar bills={filteredBills} />
       </Content>
     </Container>
   );
@@ -73,6 +78,7 @@ const Container = styled.section`
 const Title = styled.div`
   display: flex;
   margin-bottom: 12px;
+  white-space: nowrap;
   .home {
     font-size: 3.721vw;
     font-weight: 700;

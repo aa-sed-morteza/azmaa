@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Button({text, background, textColor, borderColor, icon,click,width,type,disabled}) {
+export default function Button({text, background, textColor, borderColor, icon,click,width,type,disabled,simple}) {
   return (
     <Container
       bgColor={background}
@@ -13,6 +13,7 @@ export default function Button({text, background, textColor, borderColor, icon,c
       type={type}
       disabled={disabled}
       className={disabled ? 'disable' : ""}
+      simple={simple}
     >
       <p className="text">{text}</p>
     </Container>
@@ -25,7 +26,7 @@ const Container = styled.button`
   display: flex;
   justifu-content: center;
   border-radius: 4px;
-  box-shadow: 0px 6px 8px -2px rgba(0, 0, 0, 0.3);
+  box-shadow:${props=>props.simple ? '' :'0px 6px 8px -2px rgba(0, 0, 0, 0.3)'}  ;
   background-color: ${(props) => props.bgColor};
   border: ${(props) => props.border ? `1px solid ${props.border}` : "none"};
   cursor:pointer;

@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import data from "../../data.json";
-import azmma from "../../assets/azmaa.webp";
+import azmma from "../../assets/azma-black.svg";
+import {toFarsiNumber} from "../../utils"
 
 const FooterContainer = styled.section`
   background-color: #095644;
   padding: 19px 20px;
+ 
+  
   @media (min-width: 481px) {
     display: flex;
     justify-content: space-between;
@@ -145,12 +148,11 @@ const Copyright = styled.div`
     color: #cbcbcb;
     white-space: nowrap;
     display: flex;
+    align-items: center;
+    gap:5px;
     span {
       background-image: url(${azmma});
       background-size: contain;
-      padding-right: 5px;
-      padding-left: 5px;
-      opacity: 0.5;
       background-repeat: no-repeat;
       width: 29px;
       height: 24px;
@@ -166,7 +168,8 @@ export default function Footer() {
           <img src={x.icon} />
         </span>
         <div className="content">
-          <a target="_blank" href={x.href}>
+  
+          <a  href={x.href}>
             {x.contact}
           </a>
         </div>
@@ -175,7 +178,7 @@ export default function Footer() {
   });
 
   return (
-    <div>
+    <div style={{marginTop:'auto'}}>
       <FooterContainer>
         <ContactUs>{contactItem}</ContactUs>
         <AboutUs>

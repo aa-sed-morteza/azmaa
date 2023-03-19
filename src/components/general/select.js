@@ -9,6 +9,7 @@ export default function Select({
   value,
   onChange,
   id,
+  white
 }) {
   const option = options.map((x, i) => {
     return (
@@ -20,7 +21,7 @@ export default function Select({
 
   return (
     <Wraper text={label} back={background}>
-      <Container value={value} onChange={onChange} id={id}>
+      <Container value={value} onChange={onChange} id={id} white={white}>
         <option value="" disabled selected hidden>
           انتخاب کنید
         </option>
@@ -52,9 +53,10 @@ const Wraper = styled.div`
     font-weight: 400;
     position: absolute;
     right: 40px;
-    top: -13px;
+    top: -17px;
     color: #6cbba9;
     background: ${(props) => (props.back ? props.back : "#F5F5F5")};
+    transform: scale(.6);
   }
   @media (min-width: 480px) {
     &:after {
@@ -66,7 +68,7 @@ const Wraper = styled.div`
     }
     &:before {
       font-size: 1.25vw;
-      top: -1.042vw;
+      top: -45%;
     }
   }
 `;
@@ -82,6 +84,7 @@ const Container = styled.select`
   font-size: 3.721vw;
   font-weight: 400;
   appearance: none;
+  background-color: ${props=>props.white ? '#F5F5F5':''};
   @media (min-width: 480px) {
     font-size: 1.25vw;
     padding: 0.885vw;

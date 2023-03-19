@@ -32,7 +32,7 @@ export default function AddDocument() {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
       })
       .catch(function (error) {
@@ -60,7 +60,7 @@ export default function AddDocument() {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         // dispatch({ type: "SET_DOC_ARTICLE", payload: values });
         dispatch({ type: "SET_ADD_ARTICLE", payload: 1 });
         navigate(`/dashboard/mySection`);
@@ -131,6 +131,7 @@ export default function AddDocument() {
           textColor="#095644"
           borderColor="#095644"
           width="35%"
+          simple={true}
           click={() => {
             navigate(-1);
           }}

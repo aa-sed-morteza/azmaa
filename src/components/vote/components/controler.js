@@ -56,7 +56,7 @@ const SearchInput = styled.input`
 `;
 
 const Tab = styled.div`
-  displey: flex;
+  display: flex;
   flex-direction: column;
   position: relative;
   cursor: pointer;

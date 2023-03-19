@@ -7,6 +7,7 @@ import ScrollButton from "../../general/scrollButton";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { useNavigate } from "react-router-dom";
+import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
 
 const MagazineContainer = styled.section`
   background-color: #ffaa00;
@@ -132,6 +133,7 @@ const Paper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
+  cursor: pointer;
   .cover {
     width: 160px;
     height: 120px;
@@ -213,8 +215,8 @@ const Paper = styled.div`
     }
     .user {
       font-size: 1.042vw;
-      margin-bottom: 36px;
-      padding-right: 30px;
+      margin-bottom: 2.344vw;
+      
       &:before {
         width: 20px;
         height: 20px;
@@ -222,7 +224,7 @@ const Paper = styled.div`
     }
     .content {
       font-size: 1.25vw;
-      margin-bottom: 36px;
+      margin-bottom: 2.344vw;
     }
     .date {
       font-size: 1.042vw;
@@ -243,7 +245,7 @@ export default function Magazine() {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         setBlogs([...response.data]);
       })
       .catch(function (error) {
@@ -259,7 +261,7 @@ export default function Magazine() {
     return (
       <Paper
         onClick={() => {
-          navigate(`${x.id}`);
+          navigate(`/blog/${x.id}`);
         }}
         key={i}
       >
@@ -267,11 +269,11 @@ export default function Magazine() {
           <img src={x.main_image} alt={x.date} />
         </div>
 
-        <p className="user">{x.writer}</p>
+        <p className="user">{x.writer }</p>
 
         <p className="content">{x.title}</p>
 
-        <p className="date">{x.created}</p>
+        <p className="date">{x.created && convertDateToFarsi(x.created)}</p>
       </Paper>
     );
   });

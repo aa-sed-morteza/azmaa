@@ -9,6 +9,8 @@ const HomeContainer = styled.section`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 14px 10px;
+  position: relative;
+  z-index: 10;
   @media(min-width:481px){
     padding:10%;
     margin-top:50px;

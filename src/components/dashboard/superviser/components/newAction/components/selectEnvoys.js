@@ -13,7 +13,7 @@ import locationActive from "../../../../../../assets/location-active.svg";
 import background from "../../../../../../assets/back-controll.webp";
 import symbol from "../../../../../../assets/state.svg";
 import EnvoyCard from "../../../../../general/envoyCard";
-import SelectArea from "../../../../../home/components/selectArea"
+import SelectArea from "../../../../../home/components/selectArea";
 import axios from "axios";
 import { BaseBackURL } from "../../../../../../constant/api";
 
@@ -22,8 +22,8 @@ export default function SelectEnvoys() {
   const [select, setSelect] = useState(1);
   const [check, setCheck] = useState(-1);
   const { state, dispatch } = useUser();
-  const [envoys,setEnvoys]=useState([]);
-  const [states,setStates]=useState([]);
+  const [envoys, setEnvoys] = useState([]);
+  const [states, setStates] = useState([]);
 
   const getEnvoys = () => {
     let config = {
@@ -32,18 +32,16 @@ export default function SelectEnvoys() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setEnvoys([...res.data]);
       }
     });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getEnvoys();
-  },[])
-
-
+  }, []);
 
   const envoyList = envoys.map((x, i) => {
     return (
@@ -57,7 +55,7 @@ export default function SelectEnvoys() {
       >
         <EnvoyCard
           key={i}
-          name={x.first_name+""+x.last_name}
+          name={x.first_name + "" + x.last_name}
           state={x.electoral_district_name}
           commission={x.fraction_name}
           img={x.image}
@@ -73,9 +71,9 @@ export default function SelectEnvoys() {
         key={i}
         className={x.id === state.selectEnvoy.envoy ? "active" : ""}
       >
-       <EnvoyCard
+        <EnvoyCard
           key={i}
-          name={x.first_name+""+x.last_name}
+          name={x.first_name + "" + x.last_name}
           state={x.electoral_district_name}
           commission={x.fraction_name}
           img={x.image}
@@ -86,7 +84,6 @@ export default function SelectEnvoys() {
     );
   });
 
-
   const getElectoralDistrict = () => {
     let config = {
       method: "get",
@@ -95,7 +92,7 @@ export default function SelectEnvoys() {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         setStates([...response.data]);
       })
       .catch(function (error) {
@@ -103,9 +100,10 @@ export default function SelectEnvoys() {
       });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getElectoralDistrict();
-  },[])
+  }, []);
+
 
   const stateList = states.map((x, i) => {
     return (
@@ -121,8 +119,8 @@ export default function SelectEnvoys() {
       >
         <div className="symbol"></div>
         <div className="content">
-          <h2 className="title">{x.name}</h2>
-          <p className="date">{x.city_name[0].name}</p>
+          {x.name && <h2 className="title">{x.name}</h2>}
+          {x.city_name.length>0 && <p className="date">{x.city_name[0].name}</p>}
         </div>
       </ActiveOrder>
     );
@@ -137,7 +135,8 @@ export default function SelectEnvoys() {
         <div className="symbol"></div>
         <div className="content">
           <h2 className="title">{x.name}</h2>
-          <p className="date">{x.city_name[0].name}</p>
+          {x.city_name.length>0 &&  <p className="date">{x.city_name[0].name}</p>}
+         
         </div>
       </ActiveOrder>
     );
@@ -166,8 +165,6 @@ export default function SelectEnvoys() {
     validationSchema: selectEnvoyTypeSchema,
     onSubmit,
   });
-
- 
 
   useEffect(() => {
     if (select === 1) {
@@ -222,6 +219,7 @@ export default function SelectEnvoys() {
               textColor="#095644"
               borderColor="#095644"
               width="35%"
+              simple={true}
               click={() => {
                 navigate(-1);
               }}
@@ -383,7 +381,7 @@ const Item = styled.p`
     height: 35px;
     top: 0;
     left: 50%;
-    transform: translate(-50%,0%);
+    transform: translate(-50%, 0%);
   }
   &:nth-child(2) {
     &:before {
@@ -446,45 +444,42 @@ const ActiveOrder = styled.div`
     border: 1px solid #6cbba9;
     border-radius: 4px;
   }
-  .symbol{
+  .symbol {
     background-image: url(${symbol});
     background-size: contain;
     background-repeat: no-repeat;
     width: 16.279vw;
     height: 18.372vw;
-    
-  }
-  .content{
-    display:flex;
-    flex-direction:column;
-    .title{
-        color:#707070;
-        margin:0;
-        font-weight:400;
-        font-size:4.651vw;
-    }
-    .date{
-        color:#707070;
-        margin:0;
-        font-weight:700;
-        font-size:3.256vw;
-    }
-  }
-
-@media (min-width: 480px) {
-  .symbol {
-    width: 6.771vw;
-    height: 6.771vw;
   }
   .content {
-   
+    display: flex;
+    flex-direction: column;
     .title {
-      font-size: 1.458vw;
+      color: #707070;
+      margin: 0;
+      font-weight: 400;
+      font-size: 4.651vw;
     }
     .date {
-      font-size: 1.25vw;
+      color: #707070;
+      margin: 0;
+      font-weight: 700;
+      font-size: 3.256vw;
     }
   }
-}
 
+  @media (min-width: 480px) {
+    .symbol {
+      width: 6.771vw;
+      height: 6.771vw;
+    }
+    .content {
+      .title {
+        font-size: 1.458vw;
+      }
+      .date {
+        font-size: 1.25vw;
+      }
+    }
+  }
 `;

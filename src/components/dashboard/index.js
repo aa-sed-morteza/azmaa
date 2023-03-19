@@ -32,6 +32,7 @@ import Cookies from "js-cookie";
 import { BaseBackURL } from "../../constant/api";
 import axios from "axios";
 import { toast } from "react-toastify";
+import GeneralEditInformation from "./superviser/components/editProfile/generalEditInformation";
 
 export default function Dashboard() {
   const { state, dispatch } = useUser();
@@ -54,14 +55,15 @@ export default function Dashboard() {
 
     axios(config)
       .then((res) => {
-        console.log('data;', res.data);
+        // console.log('data;', res.data);
         dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
       })
       .catch((err) => {
-        console.log('khata',err);
+        console.log('error',err);
       });
   };
 
+  console.log('data',state)
   
 
   useEffect(()=>{
@@ -148,6 +150,8 @@ export default function Dashboard() {
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/history" element={<MyHistory />} />
             <Route path="/mySection/:title" element={<News />} />
+            <Route path="/edit" element={<GeneralEditInformation/>} />
+
           </Routes>
         ) : (
           <Routes>
@@ -174,6 +178,7 @@ export default function Dashboard() {
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/history" element={<MyHistory />} />
             <Route path="/mySection/:title" element={<News />} />
+            <Route path="/edit" element={<GeneralEditInformation/>} />
           </Routes>
         )}
       </PageWraper>
@@ -195,6 +200,7 @@ const Menu = styled.div`
   background-color: #ffffff;
   border-radius: 8px;
   width: 28%;
+  /* overflow: scroll; */
 `;
 
 const PageWraper = styled.div`

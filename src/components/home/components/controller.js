@@ -74,11 +74,9 @@ const TabContainer = styled.div`
   display: flex;
   gap: 20px;
   align-items: flex-end;
-  @media(min-width:481px){
-    
+  @media (min-width: 481px) {
     justify-content: space-evenly;
   }
-
 `;
 
 const Tab = styled.div`
@@ -212,19 +210,20 @@ const ShowMore = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 8px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;
     font-size: 4.65vw;
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
     font-weight: 300;
     &:after {
       content: "";
-      display: flex;
-      position: absolute;
-      left: -25px;
-      bottom: 8px;
+      display: inline-flex;
       background-image: url(${upArrow});
+      transform: ${(props) => (props.arrow ? `rotate(180deg)` : "")};
       background-size: cover;
       background-repeat: no-repeat;
       width: 9px;
@@ -257,6 +256,9 @@ const LastActions = styled.div``;
 const BestEnvoyContainer = styled.div``;
 
 const VoterContainer = styled.div`
+  & > :nth-of-type(1n + 2) {
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
   @media (min-width: 481px) {
     display: flex;
     gap: 20px;
@@ -264,13 +266,34 @@ const VoterContainer = styled.div`
     flex-wrap: wrap;
     // margin-left:-7%;
     // margin-right:-7%;
+    & > :nth-of-type(1n + 2) {
+      display: flex;
+    }
+    & > :nth-of-type(1n + 4) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
   }
   @media (min-width: 769px) {
     justify-content: center;
   }
 `;
 
+const Album = styled.div`
+  & > :nth-of-type(1n + 2) {
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
+`;
+
+const SecondAlbum = styled.div`
+  & > :nth-of-type(1n + 4) {
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
+`;
+
 const ActionContainer = styled.div`
+  & > :nth-of-type(1n + 2) {
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
   @media (min-width: 481px) {
     display: flex;
     gap: 20px;
@@ -278,6 +301,12 @@ const ActionContainer = styled.div`
     flex-wrap: wrap;
     // margin-left:-7%;
     // margin-right:-7%;
+    & > :nth-of-type(1n + 2) {
+      display: flex;
+    }
+    & > :nth-of-type(1n + 4) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
   }
   @media (min-width: 769px) {
     justify-content: center;
@@ -286,43 +315,57 @@ const ActionContainer = styled.div`
 
 const EnvoyGalley = styled.div`
   padding-top: 2.326vw;
+  & > :nth-of-type(1n + 4) {
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
   @media (min-width: 481px) {
     display: flex;
     flex-wrap: wrap;
     gap: 1.042vw;
     width: 103%;
+
+    & > :nth-of-type(1n + 4) {
+      display: flex;
+    }
+    & > :nth-of-type(1n + 7) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
   }
 `;
 
 const AreaContainer = styled.div`
+  & > :nth-of-type(1n + 4) {
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
   @media (min-width: 481px) {
     display: flex;
     flex-wrap: wrap;
     gap: 1.042vw;
+    & > :nth-of-type(1n + 4) {
+      display: flex;
+    }
+    & > :nth-of-type(1n + 7) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
   }
 `;
 
 export default function Controller() {
-  const {state,dispatch}=useUser();
+  const { state, dispatch } = useUser();
   const [select, setSelect] = useState(0);
   const [bills, setBills] = useState([]);
   const [envoys, setEnvoys] = useState([]);
   const [activities, setActivities] = useState([]);
   const [areas, setAreas] = useState([]);
+  const [firstHide, setFirstHide] = useState(false);
+  const [secondHide, setSecondHide] = useState(false);
+  const [thirdHide, setThirdHide] = useState(false);
+  const [fourthHide, setFourthHide] = useState(false);
+  const [fifthHide, setFifthHide] = useState(false);
+  const [citeis, setCiteis] = useState([]);
 
   const navigate = useNavigate();
   const width = useWidth();
-
-  const filterEnvoyByCity = ()=>{
-    const selectEnvoys =  envoys.filter(x=>x.electoral_district_name == state.city);
-    setEnvoys([...selectEnvoys])
-   
-  }
-  
-
-  useEffect(()=>{
-    filterEnvoyByCity();
-  },[state.city])
 
   const getBills = () => {
     let config = {
@@ -331,9 +374,37 @@ export default function Controller() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setBills([...res.data]);
+      }
+    });
+  };
+
+  const getDistrict = (id) => {
+    var config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/electoral_district/?city__id=${id}&city__province__id`,
+    };
+    axios(config)
+      .then(function (response) {
+        setEnvoys([...response.data[0].agent]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const getCiteis = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/city/`,
+    };
+
+    axios(config).then((res) => {
+      // console.log(res.data);
+      if (res.data.length > 0) {
+        setCiteis([...res.data]);
       }
     });
   };
@@ -345,7 +416,7 @@ export default function Controller() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setEnvoys([...res.data]);
       }
@@ -359,12 +430,14 @@ export default function Controller() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.length > 0) {
         setActivities([...res.data]);
       }
     });
   };
+
+  
 
   const getElectoralDistrict = () => {
     let config = {
@@ -374,7 +447,7 @@ export default function Controller() {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         setAreas([...response.data]);
       })
       .catch(function (error) {
@@ -387,12 +460,32 @@ export default function Controller() {
     getEnvoys();
     getActivities();
     getElectoralDistrict();
+    getCiteis();
   }, []);
 
   
+  const filterEnvoyByCity = () => {
+    const cityID = citeis.find((x) => x.name == state.city);
+    if(cityID){
+      getDistrict(cityID.id)
+    }
+  } 
+
+
+  const filterAreaByCity =()=>{
+    const district = areas.find(x=>x.city_name.find(j=>j.name===state.city))
+    if(district){
+      setAreas([district])
+    }
+    
+  }
+
+  useEffect(() => {
+    filterEnvoyByCity();
+    filterAreaByCity();
+  }, [state.city]);
 
   const newList = envoys.sort((a, b) => a.transparency > b.transparency);
-
 
   const controllItem = data.controlPanel.map((x, i) => {
     return (
@@ -425,24 +518,19 @@ export default function Controller() {
         <>
           <LastVotes>
             <Title>آخرین رأی‌گیری‌ها</Title>
-            <VoterContainer>
-              {width < 481 ? (
-                <>
-                  {bills.map((item, i) => {
-                    return <VoteCard bill={item} key={i} />;
-                  })}
-                </>
-              ) : (
-                <>
-                  {bills.map((item, i) => {
-                    return <VoteCard bill={item} key={i} />;
-                  })}
-                </>
-              )}
+            <VoterContainer hide={firstHide}>
+              {bills.map((item, i) => {
+                return <VoteCard bill={item} key={i} />;
+              })}
             </VoterContainer>
 
-            <ShowMore>
-              <p>نمایش بیشتر</p>{" "}
+            <ShowMore
+              onClick={() => {
+                setFirstHide(!firstHide);
+              }}
+              arrow={firstHide}
+            >
+              <p>{firstHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
             </ShowMore>
           </LastVotes>
 
@@ -450,51 +538,67 @@ export default function Controller() {
             <>
               <LastActions>
                 <Title> آخرین عملکردها</Title>
-                {/* <ActionCard /> */}
-                {activities.map((item, i) => {
-                  return <ActionCard activity={item} key={i} />;
-                })}
-                <ShowMore>
-                  <p>نمایش بیشتر</p>{" "}
+                <Album hide={secondHide}>
+                  {activities.map((item, i) => {
+                    return <ActionCard activity={item} key={i} />;
+                  })}
+                </Album>
+                <ShowMore
+                  arrow={secondHide}
+                  onClick={() => {
+                    setSecondHide(!secondHide);
+                  }}
+                >
+                  <p>{secondHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
                 </ShowMore>
               </LastActions>
 
               <BestEnvoyContainer>
                 <Title>شفاف‌ترین نمایندگان</Title>
-                {newList.map((item, i) => {
-                  return <BestEnvoy envoy={item} key={i} />;
-                })}
+                <SecondAlbum hide={thirdHide}>
+                  {newList.map((item, i) => {
+                    return (
+                      <BestEnvoy
+                        envoy={item}
+                        key={i}
+                        click={() => {
+                          navigate(`/envoy/${item.id}`);
+                        }}
+                      />
+                    );
+                  })}
+                </SecondAlbum>
 
                 {/* {envoys.length > 0 && <HonestEnvoy envoys={envoys} />} */}
-                <ShowMore>
-                  <p>نمایش بیشتر</p>{" "}
+                <ShowMore
+                  arrow={thirdHide}
+                  onClick={() => {
+                    setThirdHide(!thirdHide);
+                  }}
+                >
+                  <p>{thirdHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
                 </ShowMore>
               </BestEnvoyContainer>
             </>
           ) : (
             <>
-              <ControlCore />
+              <ControlCore envoys={envoys} areas={areas} />
 
               <LastActions>
                 <Title> آخرین عملکردها</Title>
-                <ActionContainer>
-                  {width < 481 ? (
-                    <>
-                      {activities.map((item, i) => {
-                        return <ActionCard activity={item} key={i} />;
-                      })}
-                    </>
-                  ) : (
-                    <>
-                      {activities.map((item, i) => {
-                        return <ActionCard activity={item} key={i} />;
-                      })}
-                    </>
-                  )}
+                <ActionContainer hide={secondHide}>
+                  {activities.map((item, i) => {
+                    return <ActionCard activity={item} key={i} />;
+                  })}
                 </ActionContainer>
 
-                <ShowMore>
-                  <p>نمایش بیشتر</p>{" "}
+                <ShowMore
+                  arrow={secondHide}
+                  onClick={() => {
+                    setSecondHide(!secondHide);
+                  }}
+                >
+                  <p>{secondHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
                 </ShowMore>
               </LastActions>
             </>
@@ -505,51 +609,70 @@ export default function Controller() {
       {/* just envoys */}
       {select == 1 && (
         <>
-          <EnvoyGalley>
+          <EnvoyGalley hide={fourthHide}>
             {newList.map((item, i) => {
-              return <BestEnvoy envoy={item} key={i} click={()=>{navigate(`/envoy/${item.id}`)}}/>;
+              return (
+                <BestEnvoy
+                  envoy={item}
+                  key={i}
+                  click={() => {
+                    navigate(`/envoy/${item.id}`);
+                  }}
+                />
+              );
             })}
-          
           </EnvoyGalley>
-          <ShowMore style={{ marginTop: "20px" }}>
-            <p>نمایش بیشتر</p>{" "}
+          <ShowMore
+            arrow={fourthHide}
+            onClick={() => {
+              setFourthHide(!fourthHide);
+            }}
+            style={{ marginTop: "20px" }}
+          >
+            <p>{fourthHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
           </ShowMore>
         </>
       )}
 
       {/* just state */}
       {select == 2 && (
-        <AreaContainer>
-            {areas.map((item,i)=>{
-              return(
+        <>
+          <AreaContainer hide={fifthHide}>
+            {areas.map((item, i) => {
+              return (
                 <SelectArea area={item.name} envoys={item.agent} key={i} />
-              )
+              );
             })}
-        </AreaContainer>
+          </AreaContainer>
+          <ShowMore
+            arrow={fifthHide}
+            onClick={() => {
+              setFifthHide(!fifthHide);
+            }}
+            style={{ marginTop: "20px" }}
+          >
+            <p>{fifthHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
+          </ShowMore>
+        </>
       )}
 
       {/* just vote */}
       {select == 3 && (
         <LastVotes>
           <Title>آخرین رأی‌گیری‌ها</Title>
-          <VoterContainer>
-            {width < 481 ? (
-              <>
-                {bills.map((item, i) => {
-                  return <VoteCard bill={item} key={i} />;
-                })}
-              </>
-            ) : (
-              <>
-                {bills.map((item, i) => {
-                  return <VoteCard bill={item} key={i} />;
-                })}
-              </>
-            )}
+          <VoterContainer hide={firstHide}>
+            {bills.map((item, i) => {
+              return <VoteCard bill={item} key={i} />;
+            })}
           </VoterContainer>
 
-          <ShowMore>
-            <p>نمایش بیشتر</p>{" "}
+          <ShowMore
+            arrow={firstHide}
+            onClick={() => {
+              setFirstHide(!firstHide);
+            }}
+          >
+            <p>{firstHide ? "نمایش کمتر" : "نمایش بیشتر "} </p>{" "}
           </ShowMore>
         </LastVotes>
       )}
@@ -558,24 +681,19 @@ export default function Controller() {
       {select == 4 && (
         <LastActions>
           <Title> آخرین عملکردها</Title>
-          <ActionContainer>
-            {width < 481 ? (
-              <>
-                {activities.map((item, i) => {
-                  return <ActionCard activity={item} key={i} />;
-                })}
-              </>
-            ) : (
-              <>
-                {activities.map((item, i) => {
-                  return <ActionCard activity={item} key={i} />;
-                })}
-              </>
-            )}
+          <ActionContainer hide={secondHide}>
+            {activities.map((item, i) => {
+              return <ActionCard activity={item} key={i} />;
+            })}
           </ActionContainer>
 
-          <ShowMore>
-            <p>نمایش بیشتر</p>{" "}
+          <ShowMore
+            arrow={secondHide}
+            onClick={() => {
+              setSecondHide(!secondHide);
+            }}
+          >
+            <p> {secondHide ? "نمایش کمتر" : "نمایش بیشتر "} </p>{" "}
           </ShowMore>
         </LastActions>
       )}

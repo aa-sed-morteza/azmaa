@@ -29,7 +29,7 @@ const useMouse = () => {
 };
 
 const IranMap = ({ position }) => {
-  const {state,dispatch}=useUser();
+  const { state, dispatch } = useUser();
   const { x, y } = useMouse();
   const [provinces, setProvinces] = useState(iranProvinces);
   const [data, setData] = useState([]);
@@ -50,7 +50,7 @@ const IranMap = ({ position }) => {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         setData(response.data);
         selectProvinces();
         setChange(!change);
@@ -76,13 +76,15 @@ const IranMap = ({ position }) => {
   const addCities = () => {
     provinces.map((item) => {
       for (let i = 0; i < data.length; i++) {
-        if (item.name === data[i].province_name) {
+        if (
+          item.name === data[i].province_name &&
+          !item.cities.includes(data[i].name)
+        ) {
           item.cities.push(data[i].name);
         }
       }
     });
   };
-
 
   useEffect(() => {
     getProvince();
@@ -158,9 +160,9 @@ const IranMap = ({ position }) => {
               <span>{provinceNameOnClick}</span>
             </p>
             <form onSubmit={handleSubmit} autoComplete="off">
-              {cities.map((city) => {
+              {cities.map((city,i) => {
                 return (
-                  <>
+                  <div key={i}>
                     <input
                       type="checkbox"
                       key={city}
@@ -174,7 +176,7 @@ const IranMap = ({ position }) => {
                       {city}
                     </label>
                     <br />
-                  </>
+                  </div>
                 );
               })}
               <div className={styles.select_cities_btns}>

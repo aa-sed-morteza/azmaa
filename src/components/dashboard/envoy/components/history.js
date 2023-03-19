@@ -26,7 +26,7 @@ export default function HistoryEnvoy() {
 
     axios(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
       })
       .catch(function (error) {
@@ -45,7 +45,7 @@ export default function HistoryEnvoy() {
 
     axios(config)
       .then((res) => {
-        console.log(JSON.stringify(res.data));
+        // console.log(JSON.stringify(res.data));
         dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
         setHistory([...res.data])
        
@@ -96,15 +96,16 @@ const Title = styled.h4`
   font-weight: 300;
   font-size: 4.651vw;
   color: #9f9f9f;
-  transform: translateY(-16px);
+  transform: translateY(-63%);
   background: #ffffff;
   width: 40%;
   margin: 0;
   text-align: center;
   margin-right: -5%;
+  white-space: nowrap;
   @media (min-width: 480px) {
     font-size: 1.875vw;
-    transform: translateY(-1.615vw);
+    transform: translateY(-60%);
     width: 21%;
     margin-right: 1.646vw;
     margin-bottom: -1.042vw;
@@ -127,8 +128,13 @@ const Edit = styled.div`
   left: 5.885vw;
   height: 2.326vw;
   width: 1.163vw;
+  transform: translate(0%,-50%);
   background-repeat: no-repeat;
   background-image: url(${edit});
   background-size: contain;
   cursor: pointer;
+  @media (min-width: 480px){
+    width: 1.042vw;
+    height: 0.521vw;
+  }
 `;

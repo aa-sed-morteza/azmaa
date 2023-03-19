@@ -137,7 +137,6 @@ export default function VoteEnvoy() {
     );
   });
 
-  console.log(state.typeAction);
 
   return (
     <>
@@ -231,6 +230,7 @@ export default function VoteEnvoy() {
               textColor="#095644"
               borderColor="#095644"
               width="35%"
+              simple={true}
               click={() => {
                 navigate(-1);
               }}

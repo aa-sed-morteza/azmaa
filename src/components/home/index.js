@@ -8,7 +8,8 @@ import SecondBanner from "./components/secondBanner";
 import Carousel from "./components/carousel";
 
 const HomeContainer = styled.section`
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   height: auto;
   padding: 20px;
 `;
