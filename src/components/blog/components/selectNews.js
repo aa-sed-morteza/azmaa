@@ -4,7 +4,7 @@ import Control from "../../vote/components/controler";
 import data from "../../../data.json";
 import user from "../../../assets/profile.webp";
 import upArrow from "../../../assets/arrow.webp";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useSearchParams } from "react-router-dom";
 
 const Container = styled.section`
   background-color: #ffffff;
@@ -14,7 +14,6 @@ const Container = styled.section`
     margin-top: 25%;
   }
 `;
-
 const Title = styled.h1`
   color: #9f9f9f;
   font-size: 4.65vw;
@@ -40,7 +39,6 @@ const Title = styled.h1`
     }
   }
 `;
-
 const NewsWraper = styled.div`
   display: flex;
   gap: 10px;
@@ -55,7 +53,6 @@ const NewsWraper = styled.div`
     justify-content: flex-start;
   }
 `;
-
 const Paper = styled.div`
   display: flex;
   flex-direction: column;
@@ -159,7 +156,6 @@ const Paper = styled.div`
     }
   }
 `;
-
 const ShowMore = styled.div`
   border: 1px solid #9f9f9f;
   border-radius: 4px;
@@ -207,7 +203,6 @@ const ShowMore = styled.div`
     }
   }
 `;
-
 const ChangeBack = styled.div`
   @media (min-width: 481px) {
     background-color: #f3f3f3;
@@ -225,12 +220,17 @@ export default function SelectNews({ posts }) {
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [mostVisitedMore, setMostVisitedMore] = useState(false);
   const [lastNewsMore, setLastNewsMore] = useState(false);
-
+  const [searchparams, setsearchparams] = useSearchParams();
   useEffect(() => {
     setFilteredPosts(posts);
   }, [posts]);
 
-  const magPaper = filteredPosts.map((x, i) => {
+  const magPaper = filteredPosts.filter((x)=>{
+    let filter= searchparams.get("filter");
+    if(!filter)return true;
+    let name= x.writer + x.description ;
+    return name.includes(filter);
+  }).map((x, i) => {
     return (
       <Paper
         key={i}
@@ -252,9 +252,9 @@ export default function SelectNews({ posts }) {
   });
 
   useEffect(() => {
-    if (posts.filter((x) => x.tag.length > 0 && x.tag[0].name == selectedTag)) {
+    if (posts.filter((x) => x.tag.length > 0 && x.tag[0].name === selectedTag)) {
       setFilteredPosts(
-        posts.filter((x) => x.tag.length > 0 && x.tag[0].name == selectedTag)
+        posts.filter((x) => x.tag.length > 0 && x.tag[0].name === selectedTag)
       );
     } else {
     }
@@ -265,7 +265,8 @@ export default function SelectNews({ posts }) {
   }, [selectedTag]);
   return (
     <Container>
-      <Control selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
+      <Control selectedTag={selectedTag} setSelectedTag={setSelectedTag} /> {/* search component */}
+
       <Title> پربازدیدترین مطالب</Title>
       <NewsWraper hide={mostVisitedMore}>{magPaper}</NewsWraper>
       <ShowMore

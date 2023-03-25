@@ -11,7 +11,7 @@ import BestEnvoy from "./bestEnvoy";
 import tik from "../../../assets/vote.webp";
 import ControlCore from "./controlCore";
 import SelectArea from "./selectArea";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { useUser } from "../../context/userContext";
@@ -363,7 +363,7 @@ export default function Controller() {
   const [fourthHide, setFourthHide] = useState(false);
   const [fifthHide, setFifthHide] = useState(false);
   const [citeis, setCiteis] = useState([]);
-
+  const [searchparams, setsearchparams] = useSearchParams();
   const navigate = useNavigate();
   const width = useWidth();
 
@@ -509,7 +509,15 @@ export default function Controller() {
   return (
     <ControllContainer>
       <FilterContainer>
-        <SearchInput type="text" placeholder="&#xF002; جستجو کن..." />
+        <SearchInput 
+        value={searchparams.get("filter") || ""} onChange={event => { 
+        let filter = event.target.value;
+        if(filter){
+          setsearchparams({filter : filter});
+        }else{
+          setsearchparams({});
+        }
+      }} type="text" placeholder="&#xF002; جستجو کن..." />
         <TabContainer>{controllItem}</TabContainer>
       </FilterContainer>
 
@@ -519,7 +527,14 @@ export default function Controller() {
           <LastVotes>
             <Title>آخرین رأی‌گیری‌ها</Title>
             <VoterContainer hide={firstHide}>
-              {bills.map((item, i) => {
+              {bills.filter((item)=>{
+                let filter= searchparams.get("filter");
+                if(!filter)return true;
+                // let name= item.writer + item.description ;
+                let name= item.name ;
+                console.log(item);
+                return name.includes(filter);
+              }).map((item, i) => {
                 return <VoteCard bill={item} key={i} />;
               })}
             </VoterContainer>
@@ -539,7 +554,13 @@ export default function Controller() {
               <LastActions>
                 <Title> آخرین عملکردها</Title>
                 <Album hide={secondHide}>
-                  {activities.map((item, i) => {
+                  {activities.filter((item)=>{
+                let filter= searchparams.get("filter");
+                if(!filter)return true;
+                // let name= item.writer + item.description ;
+                let name= item.name ;
+                return name.includes(filter);
+              }).map((item, i) => {
                     return <ActionCard activity={item} key={i} />;
                   })}
                 </Album>
@@ -556,7 +577,14 @@ export default function Controller() {
               <BestEnvoyContainer>
                 <Title>شفاف‌ترین نمایندگان</Title>
                 <SecondAlbum hide={thirdHide}>
-                  {newList.map((item, i) => {
+                  {newList.filter((item)=>{
+                let filter= searchparams.get("filter");
+                if(!filter)return true;
+                // let name= item.writer + item.description ;
+                let name= item.first_name + item.last_name +item.electoral_district_name ;
+                // console.log(item);
+                return name.includes(filter);
+              }).map((item, i) => {
                     return (
                       <BestEnvoy
                         envoy={item}
@@ -587,7 +615,13 @@ export default function Controller() {
               <LastActions>
                 <Title> آخرین عملکردها</Title>
                 <ActionContainer hide={secondHide}>
-                  {activities.map((item, i) => {
+                  {activities.filter((item)=>{
+                let filter= searchparams.get("filter");
+                if(!filter)return true;
+                // let name= item.writer + item.description ;
+                let name= item.name ;
+                return name.includes(filter);
+              }).map((item, i) => {
                     return <ActionCard activity={item} key={i} />;
                   })}
                 </ActionContainer>
@@ -610,7 +644,14 @@ export default function Controller() {
       {select == 1 && (
         <>
           <EnvoyGalley hide={fourthHide}>
-            {newList.map((item, i) => {
+            {newList.filter((item)=>{
+                let filter= searchparams.get("filter");
+                if(!filter)return true;
+                // let name= item.writer + item.description ;
+                let name= item.first_name + item.last_name +item.electoral_district_name ;
+                // console.log(item);
+                return name.includes(filter);
+              }).map((item, i) => {
               return (
                 <BestEnvoy
                   envoy={item}
@@ -638,7 +679,13 @@ export default function Controller() {
       {select == 2 && (
         <>
           <AreaContainer hide={fifthHide}>
-            {areas.map((item, i) => {
+            {areas.filter((item)=>{
+                let filter= searchparams.get("filter");
+                if(!filter)return true;
+                // let name= item.writer + item.description ;
+                let name= item.name ;
+                return name.includes(filter);
+              }).map((item, i) => {
               return (
                 <SelectArea area={item.name} envoys={item.agent} key={i} />
               );
@@ -661,7 +708,14 @@ export default function Controller() {
         <LastVotes>
           <Title>آخرین رأی‌گیری‌ها</Title>
           <VoterContainer hide={firstHide}>
-            {bills.map((item, i) => {
+            {bills.filter((item)=>{
+                let filter= searchparams.get("filter");
+                if(!filter)return true;
+                // let name= item.writer + item.description ;
+                let name= item.name ;
+                console.log(item);
+                return name.includes(filter);
+              }).map((item, i) => {
               return <VoteCard bill={item} key={i} />;
             })}
           </VoterContainer>
@@ -682,7 +736,13 @@ export default function Controller() {
         <LastActions>
           <Title> آخرین عملکردها</Title>
           <ActionContainer hide={secondHide}>
-            {activities.map((item, i) => {
+            {activities.filter((item)=>{
+                let filter= searchparams.get("filter");
+                if(!filter)return true;
+                // let name= item.writer + item.description ;
+                let name= item.name ;
+                return name.includes(filter);
+              }).map((item, i) => {
               return <ActionCard activity={item} key={i} />;
             })}
           </ActionContainer>
