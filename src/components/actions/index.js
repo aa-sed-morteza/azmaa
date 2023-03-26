@@ -55,6 +55,7 @@ export default function Actions() {
 
       <Content>
         <Controler selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
+        <Filtering />
         <>
         <LastActions>
           <Title> آخرین عملکردها</Title>
@@ -65,6 +66,10 @@ export default function Actions() {
               // let name= item.writer + item.description ;
               let name = item.name;
               return name.includes(filter);
+            }).filter((item) => {
+              if (selectedTag === 'همه') return true;
+              let tag = item.tag[0].name;
+              return tag.includes(selectedTag);
             }).map((item, i) => {
               return <ActionCard activity={item} key={i} />;
             })}
@@ -80,8 +85,8 @@ export default function Actions() {
           </ShowMore>
         </LastActions>
         </>
-        <Filtering />
-        <Calendar activities={filteredActivities} />
+
+        {/* <Calendar activities={filteredActivities} /> */}
       </Content>
     </Container>
   );

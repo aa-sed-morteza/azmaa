@@ -265,9 +265,9 @@ export default function SelectNews({ posts }) {
   }, [selectedTag]);
   return (
     <Container>
-      <Control selectedTag={selectedTag} setSelectedTag={setSelectedTag} /> {/* search component */}
+      <Control selectedTag={selectedTag} setSelectedTag={setSelectedTag} /> 
 
-      <Title> پربازدیدترین مطالب</Title>
+      {/* <Title> پربازدیدترین مطالب</Title>
       <NewsWraper hide={mostVisitedMore}>{magPaper}</NewsWraper>
       <ShowMore
         arrow={mostVisitedMore}
@@ -276,7 +276,7 @@ export default function SelectNews({ posts }) {
         }}
       >
         <p>{mostVisitedMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
-      </ShowMore>
+      </ShowMore> */}
 
       <ChangeBack>
         <Title> آخرین مطالب</Title>

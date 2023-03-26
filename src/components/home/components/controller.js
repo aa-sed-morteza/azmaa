@@ -532,7 +532,7 @@ export default function Controller() {
                 if(!filter)return true;
                 // let name= item.writer + item.description ;
                 let name= item.name ;
-                console.log(item);
+                // console.log(item);
                 return name.includes(filter);
               }).map((item, i) => {
                 return <VoteCard bill={item} key={i} />;
@@ -713,7 +713,7 @@ export default function Controller() {
                 if(!filter)return true;
                 // let name= item.writer + item.description ;
                 let name= item.name ;
-                console.log(item);
+                // console.log(item);
                 return name.includes(filter);
               }).map((item, i) => {
               return <VoteCard bill={item} key={i} />;

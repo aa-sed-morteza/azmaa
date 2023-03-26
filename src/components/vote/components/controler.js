@@ -167,7 +167,7 @@ export default function Controler({ activities , selectedTag, setSelectedTag }) 
         type="text" placeholder="&#xF002; جستجو کن..." />
 
       <TabContainer>{controllItem}</TabContainer>
-
+      
     </Container>
   );
 }
