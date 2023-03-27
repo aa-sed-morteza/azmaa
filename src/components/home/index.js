@@ -6,6 +6,7 @@ import HomeDetails from "./components/homeDetails";
 import Magazine from "./components/magazine";
 import SecondBanner from "./components/secondBanner";
 import Carousel from "./components/carousel";
+import { useSelector } from "react-redux";
 
 const HomeContainer = styled.section`
   overflow-x: hidden;
@@ -16,6 +17,9 @@ const HomeContainer = styled.section`
 
 export default function Home() {
   const width = useWidth();
+
+  const data = useSelector((state) => state);
+  console.log(data);
 
   return (
     <HomeContainer>
