@@ -116,8 +116,4 @@ const List = styled.li`
       }
     }
   }
-
-  &:nth-last-child(1) {
-    display: none;
-  }
 `;

@@ -14,6 +14,7 @@ import Button from "../../../general/button";
 import Modal from "../../../general/modal";
 import useModal from "../../../../hook/useModal";
 import { Navigate, useNavigate } from "react-router-dom";
+import DefaultAvatar from "../../../../assets/default-avatar.png";
 
 export default function PersonalInformation() {
   const { state, dispatch } = useUser();
@@ -21,7 +22,7 @@ export default function PersonalInformation() {
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
   const inputRef = useRef();
-  const navigate =useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!selectedFile) {
@@ -51,7 +52,14 @@ export default function PersonalInformation() {
     <Container>
       <Content>
         <Image onClick={toggle}>
-          {selectedFile ? <img src={preview} alt="profile-picture" /> : <img src={state.image} alt="profile-picture" />}
+          {selectedFile ? (
+            <img src={preview} alt="profile-picture" />
+          ) : (
+            <img
+              src={state.image ? state.image : DefaultAvatar}
+              alt="profile-picture"
+            />
+          )}
         </Image>
         <Label>
           <p className="title">نمایندۀ مجلس شورای اسلامی</p>
@@ -98,7 +106,11 @@ export default function PersonalInformation() {
       <EnvoyState />
       <CommissinInfo />
       <HistoryEnvoy />
-      <Edit onClick={()=>{navigate('edit')}}>
+      <Edit
+        onClick={() => {
+          navigate("edit");
+        }}
+      >
         <p className="text">ویرایش حساب کاربری</p>
       </Edit>
     </Container>

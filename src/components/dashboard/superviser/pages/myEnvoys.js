@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import EnvoyCard from "../../../general/envoyCard";
 import pic from "../../../../assets/hamidreza.webp";
 import title from "../../../../assets/title.svg";
+import { BaseBackURL } from "../../../../constant/api";
+import axios from "axios";
+import { useUser } from "../../../context/userContext";
+import NewEnvoy from "../../../envoy/components/newEnvoy";
 
 export default function MyEnvoys() {
+  const { state, dispatch } = useUser();
+  const [envoy, setEnvoys] = useState([]);
+
+  const getEnvoys = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${state.id}`,
+    };
+
+    axios(config).then((res) => {
+      // console.log(res.data);
+      if (res.data.length > 0) {
+        setEnvoys([...res.data]);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getEnvoys();
+  }, []);
+
   return (
     <Container>
       <Title>
@@ -12,37 +37,16 @@ export default function MyEnvoys() {
         <p className="component"> نمایندگان من </p>
       </Title>
       <Gallery>
-        <AddEnvoy>
+        {/* <AddEnvoy>
           <p className="text">ثبــت نمایندۀ جـدید</p>
-        </AddEnvoy>
+        </AddEnvoy> */}
         <CardGallery>
-          <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
-          {/* <EnvoyCard
-            persantage={96}
-            name="حمیدرضا درویش"
-            state="سیستان و بلوچستان"
-            commission="امنیت اخلاقی"
-            img={pic}
-            id={1}
-          /> */}
-          {/* <EnvoyCard
-            persantage={20}
-            name=" صابر نیساز"
-            state=" یزد "
-            commission="امنیت اجتماعی"
-            img={pic}
-            id={2}
-          /> */}
-          {/* <EnvoyCard
-            persantage={75}
-            name=" حمید روحی"
-            state=" یزد "
-            commission="ورزش"
-            img={pic}
-            id={3}
-          /> */}
-          نمایندگان من برای نماینده چه کسانی هستند و ثبت نماینده جدید در فیگما
-          طراحی نشده!!
+          <GalleryTitle>نمایندگان من</GalleryTitle>
+          {envoy.length === 0 ? (
+            "در حال حاضر نماینده‌ای برای شما ثبت نشده است"
+          ) : (
+            <NewEnvoy envoys={envoy} />
+          )}
         </CardGallery>
       </Gallery>
     </Container>

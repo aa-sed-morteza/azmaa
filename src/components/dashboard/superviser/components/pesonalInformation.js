@@ -11,6 +11,7 @@ import camera from "../../../../assets/camera.svg";
 import gallery from "../../../../assets/gallery.svg";
 import Button from "../../../general/button";
 import { useNavigate } from "react-router-dom";
+import DefaultAvatar from "../../../../assets/default-avatar.png";
 
 export default function PersonalInformation() {
   const { state, dispatch } = useUser();
@@ -18,7 +19,7 @@ export default function PersonalInformation() {
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
   const inputRef = useRef();
-  const navigate =useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!selectedFile) {
@@ -44,12 +45,18 @@ export default function PersonalInformation() {
     setSelectedFile(e.target.files[0]);
   };
 
-
   return (
     <Container>
       <Content>
         <Image onClick={toggle}>
-          {selectedFile ? <img src={preview} alt="profile-picture" /> : <img src={state.image} alt="profile-picture" />}
+          {selectedFile ? (
+            <img src={preview} alt="profile-picture" />
+          ) : (
+            <img
+              src={state.image ? state.image : DefaultAvatar}
+              alt="profile-picture"
+            />
+          )}
         </Image>
         <Label>
           <p className="title">ناظر نمایندگان</p>
@@ -94,7 +101,11 @@ export default function PersonalInformation() {
       <PersonalInfo />
       <LogInInfo />
       <ContactInfo />
-      <Edit onClick={()=>{navigate('edit')}}>
+      <Edit
+        onClick={() => {
+          navigate("edit");
+        }}
+      >
         <p className="text">ویرایش حساب کاربری</p>
       </Edit>
     </Container>

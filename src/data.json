@@ -36,7 +36,6 @@
       "icon": "../../assets/about.webp",
       "active_icon": "../../assets/about-active.webp"
     }
-   
   ],
   "dashboardSuperviser": [
     {
@@ -46,25 +45,31 @@
       "active_icon": "../../assets/account.webp"
     },
     {
-      "title": "فعالیت‌ها",
+      "title": "نمایندگان من",
+      "path": "/dashboard/myEnvoy",
+      "icon": "../../assets/envoys.webp",
+      "active_icon": "../../assets/envoys-active.webp"
+    },
+    {
+      "title": "رأی‌گیری‌ها",
       "path": "/dashboard/myActions",
       "icon": "../../assets/actions.webp",
       "active_icon": "../../assets/actions-active.webp"
+    },
+    {
+      "title": "عملکردها",
+      "path": "/dashboard/myActions",
+      "icon": "../../assets/history.webp",
+      "active_icon": "../../assets/history-active.webp"
     },
     {
       "title": "مطالب من",
       "path": "/dashboard/mySection",
       "icon": "../../assets/section.webp",
       "active_icon": "../../assets/section-active.webp"
-    },
-    {
-      "title": " سابقۀ عملکرد",
-      "path": "/dashboard/history",
-      "icon": "../../assets/history.webp",
-      "active_icon": "../../assets/history-active.webp"
     }
   ],
-  "superviserLess":[
+  "superviserLess": [
     {
       "title": "نمایندگان من",
       "path": "/dashboard/myEnvoy",
@@ -115,10 +120,8 @@
       "icon": "../../assets/history.webp",
       "active_icon": "../../assets/history-active.webp"
     }
-   
-  
   ],
-  "envoysLess":[
+  "envoysLess": [
     {
       "title": "درخواست‌ها",
       "path": "/dashboard/suggestion",
@@ -433,17 +436,13 @@
       "img": "../../assets/poster1.webp"
     }
   ],
-  "news":[
+  "news": [
     {
-      "user":"اکبر داناچیان",
-      "date":"۲۹ اسفند ۱۴۰۰",
-      "title":"مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود کدام شرکت‌هاست؟",
-      "expand":"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
-      "img":"../../assets/poster1.webp"
+      "user": "اکبر داناچیان",
+      "date": "۲۹ اسفند ۱۴۰۰",
+      "title": "مصوبۀ شفافیت صورت‌های مالیاتی شرکت‌های بزرگ به سود کدام شرکت‌هاست؟",
+      "expand": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
+      "img": "../../assets/poster1.webp"
     }
   ]
 }
-
-
-
-
