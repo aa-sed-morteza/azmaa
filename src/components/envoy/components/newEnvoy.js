@@ -53,8 +53,8 @@ const EnvoyContainer = styled.div`
   flex-wrap: wrap;
   gap: 15px;
   & > :nth-of-type(1n + 7) {
-      display: ${(props) => (!props.hide ? "none" : "")};
-    }
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
 `;
 
 const ShowMore = styled.div`
@@ -85,19 +85,18 @@ const ShowMore = styled.div`
       background-repeat: no-repeat;
       width: 15px;
       height: 8px;
-    
     }
   }
 `;
 
 export default function NewEnvoy({ envoys }) {
   const navigate = useNavigate();
-  const [showMore,setShowMore]=useState(false);
+  const [showMore, setShowMore] = useState(false);
   return (
     <Container>
       <Title> جدیدترین نمایندگان</Title>
       <EnvoyContainer hide={showMore}>
-        {envoys.map((item,i) => (
+        {envoys.map((item, i) => (
           <BestEnvoy
             key={i}
             envoy={item}
@@ -107,7 +106,12 @@ export default function NewEnvoy({ envoys }) {
           />
         ))}
       </EnvoyContainer>
-      <ShowMore arrow={showMore} onClick={()=>{setShowMore(!showMore)}}>
+      <ShowMore
+        arrow={showMore}
+        onClick={() => {
+          setShowMore(!showMore);
+        }}
+      >
         <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
       </ShowMore>
     </Container>
