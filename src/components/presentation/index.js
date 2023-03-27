@@ -51,7 +51,7 @@ export default function Presentation() {
               date={bill.date && convertDateToFarsi(bill.date)}
               title={bill.name}
             />
-            <DetailsVotes title={bill.name} fraction={bill.fraction.name} />
+            <DetailsVotes title={bill.name} fraction={bill.fraction?bill.fraction.name:""} />
             <Census
               total={bill.vote_number.total}
               complete={"?"}

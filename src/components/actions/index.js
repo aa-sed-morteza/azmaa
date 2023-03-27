@@ -10,6 +10,7 @@ import { useSearchParams } from "react-router-dom"
 import upArrow from "../../assets/arrow.webp";
 
 export default function Actions() {
+  const [selectedFilter, setSelectedFilter] = useState(0);
   const [selectedTag, setSelectedTag] = useState("همه");
   const [activities, setActivities] = useState([]);
   const [filteredActivities, setFilteredActivities] = useState([]);
@@ -55,7 +56,7 @@ export default function Actions() {
 
       <Content>
         <Controler selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
-        <Filtering />
+        <Filtering selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
         <>
         <LastActions>
           <Title> آخرین عملکردها</Title>
@@ -70,6 +71,17 @@ export default function Actions() {
               if (selectedTag === 'همه') return true;
               let tag = item.tag[0].name;
               return tag.includes(selectedTag);
+            }).sort((a,b)=>{
+
+              if(selectedFilter== 1){
+                return new Date(b.date) - new Date(a.date);
+              }else if (selectedFilter== 2){
+                return new Date(a.date) - new Date(b.date);
+              }else if (selectedFilter== 3){
+                return a.bill_transparency - b.bill_transparency;
+              }else{
+                return 0;
+              }
             }).map((item, i) => {
               return <ActionCard activity={item} key={i} />;
             })}

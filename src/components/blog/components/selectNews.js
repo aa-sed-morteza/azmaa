@@ -6,6 +6,96 @@ import user from "../../../assets/profile.webp";
 import upArrow from "../../../assets/arrow.webp";
 import { useNavigate,useSearchParams } from "react-router-dom";
 
+
+export default function SelectNews({ posts }) {
+  const navigate = useNavigate();
+  const [selectedTag, setSelectedTag] = useState("همه");
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [mostVisitedMore, setMostVisitedMore] = useState(false);
+  const [lastNewsMore, setLastNewsMore] = useState(false);
+  const [searchparams, setsearchparams] = useSearchParams();
+  useEffect(() => {
+    setFilteredPosts(posts);
+  }, [posts]);
+
+  const magPaper = filteredPosts.filter((x)=>{
+    let filter= searchparams.get("filter");
+    if(!filter)return true;
+    let name= x.writer + x.description ;
+    return name.includes(filter);
+  }).map((x, i) => {
+    return (
+      <Paper
+        key={i}
+        onClick={() => {
+          navigate(`/blog/${x.id}`);
+        }}
+      >
+        <div className="cover">
+          <img src={x.main_image} alt={x.date} />
+        </div>
+
+        <p className="user">{x.writer}</p>
+
+        <p className="content">{x.description.slice(0, 180) + " ..."}</p>
+
+        <p className="date">{x.date}</p>
+      </Paper>
+    );
+  });
+
+  useEffect(() => {
+    if (posts.filter((x) => x.tag.length > 0 && x.tag[0].name === selectedTag)) {
+      setFilteredPosts(
+        posts.filter((x) => x.tag.length > 0 && x.tag[0].name === selectedTag)
+      );
+    } else {
+    }
+
+    if (selectedTag == "همه") {
+      setFilteredPosts(posts);
+    }
+  }, [selectedTag]);
+  return (
+    <Container>
+      <Control selectedTag={selectedTag} setSelectedTag={setSelectedTag} /> 
+
+      {/* <Title> پربازدیدترین مطالب</Title>
+      <NewsWraper hide={mostVisitedMore}>{magPaper}</NewsWraper>
+      <ShowMore
+        arrow={mostVisitedMore}
+        onClick={() => {
+          setMostVisitedMore(!mostVisitedMore);
+        }}
+      >
+        <p>{mostVisitedMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
+      </ShowMore> */}
+
+      <ChangeBack>
+        <Title> آخرین مطالب</Title>
+        <NewsWraper hide={lastNewsMore}>{magPaper}</NewsWraper>
+        <ShowMore
+          arrow={lastNewsMore}
+          onClick={() => {
+            setLastNewsMore(!lastNewsMore);
+          }}
+        >
+          <p>{lastNewsMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
+        </ShowMore>
+      </ChangeBack>
+    </Container>
+  );
+}
+
+
+
+
+
+
+
+
+
+
 const Container = styled.section`
   background-color: #ffffff;
   border-radius: 4px;
@@ -213,83 +303,3 @@ const ChangeBack = styled.div`
     margin-top: 54px;
   }
 `;
-
-export default function SelectNews({ posts }) {
-  const navigate = useNavigate();
-  const [selectedTag, setSelectedTag] = useState("همه");
-  const [filteredPosts, setFilteredPosts] = useState([]);
-  const [mostVisitedMore, setMostVisitedMore] = useState(false);
-  const [lastNewsMore, setLastNewsMore] = useState(false);
-  const [searchparams, setsearchparams] = useSearchParams();
-  useEffect(() => {
-    setFilteredPosts(posts);
-  }, [posts]);
-
-  const magPaper = filteredPosts.filter((x)=>{
-    let filter= searchparams.get("filter");
-    if(!filter)return true;
-    let name= x.writer + x.description ;
-    return name.includes(filter);
-  }).map((x, i) => {
-    return (
-      <Paper
-        key={i}
-        onClick={() => {
-          navigate(`/blog/${x.id}`);
-        }}
-      >
-        <div className="cover">
-          <img src={x.main_image} alt={x.date} />
-        </div>
-
-        <p className="user">{x.writer}</p>
-
-        <p className="content">{x.description.slice(0, 180) + " ..."}</p>
-
-        <p className="date">{x.date}</p>
-      </Paper>
-    );
-  });
-
-  useEffect(() => {
-    if (posts.filter((x) => x.tag.length > 0 && x.tag[0].name === selectedTag)) {
-      setFilteredPosts(
-        posts.filter((x) => x.tag.length > 0 && x.tag[0].name === selectedTag)
-      );
-    } else {
-    }
-
-    if (selectedTag == "همه") {
-      setFilteredPosts(posts);
-    }
-  }, [selectedTag]);
-  return (
-    <Container>
-      <Control selectedTag={selectedTag} setSelectedTag={setSelectedTag} /> 
-
-      {/* <Title> پربازدیدترین مطالب</Title>
-      <NewsWraper hide={mostVisitedMore}>{magPaper}</NewsWraper>
-      <ShowMore
-        arrow={mostVisitedMore}
-        onClick={() => {
-          setMostVisitedMore(!mostVisitedMore);
-        }}
-      >
-        <p>{mostVisitedMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
-      </ShowMore> */}
-
-      <ChangeBack>
-        <Title> آخرین مطالب</Title>
-        <NewsWraper hide={lastNewsMore}>{magPaper}</NewsWraper>
-        <ShowMore
-          arrow={lastNewsMore}
-          onClick={() => {
-            setLastNewsMore(!lastNewsMore);
-          }}
-        >
-          <p>{lastNewsMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
-        </ShowMore>
-      </ChangeBack>
-    </Container>
-  );
-}
