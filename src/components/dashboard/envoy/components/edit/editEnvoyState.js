@@ -14,24 +14,25 @@ import { toast } from "react-toastify";
 export default function EditEnvoyState() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
-  const [areaName,setAreaName]=useState([]);
+  const [areaName, setAreaName] = useState([]);
 
-  const getElectoralDistrict = ()=>{
+  const getElectoralDistrict = () => {
     let config = {
-      method: 'get',
+      method: "get",
       url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
-    
     };
-    
+
     axios(config)
-    .then(function (response) {
-      // console.log(JSON.stringify(response.data));
-      response.data.map(x=>{setAreaName([...areaName,x.name])})
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
+      .then(function (response) {
+        // console.log(JSON.stringify(response.data));
+        response.data.map((x) => {
+          setAreaName([...areaName, x.name]);
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const refreshToken = () => {
     const data = new FormData();
@@ -40,9 +41,9 @@ export default function EditEnvoyState() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${state.token}`,
+      // },
       data: data,
     };
 
@@ -58,8 +59,8 @@ export default function EditEnvoyState() {
 
   const onSubmit = async (values, actions) => {
     const data = new FormData();
-    data.append('electoral_district.name',values.areaName);
-    data.append('vote_number',values.voteNumber)
+    data.append("electoral_district.name", values.areaName);
+    data.append("vote_number", values.voteNumber);
 
     let config = {
       method: "put",
@@ -71,24 +72,24 @@ export default function EditEnvoyState() {
     };
 
     axios(config)
-    .then((res) => {
-      // console.log(JSON.stringify(res.data));
-      dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
-      navigate("/dashboard");
-      actions.resetForm();
-      toast.success(" اصلاحات با موفقیت انجام شد!", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    })
-    .catch((error) => {
-      console.log("Error", error);
-      if (error.response.status == 401) {
-        refreshToken();
-        toast.error("لطفا مجدد تلاش کنید", {
+      .then((res) => {
+        // console.log(JSON.stringify(res.data));
+        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        navigate("/dashboard");
+        actions.resetForm();
+        toast.success(" اصلاحات با موفقیت انجام شد!", {
           position: toast.POSITION.TOP_RIGHT,
         });
-      }
-    });
+      })
+      .catch((error) => {
+        console.log("Error", error);
+        if (error.response.status == 401) {
+          // refreshToken();
+          toast.error("لطفا مجدد تلاش کنید", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+      });
   };
 
   const {
@@ -109,83 +110,79 @@ export default function EditEnvoyState() {
     onSubmit,
   });
 
-   
-
-  useEffect(()=>{
+  useEffect(() => {
     getElectoralDistrict();
-  },[])
+  }, []);
 
   // Convert persianNumber to englishNumber
-//   useEffect(() => {
-//     setFieldValue(
-//       "voteNumber",
-//       values.voteNumber
-//         .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
-//         .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
-//     );
-  
- 
-// }, [values.voteNumber]);
+  //   useEffect(() => {
+  //     setFieldValue(
+  //       "voteNumber",
+  //       values.voteNumber
+  //         .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+  //         .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+  //     );
 
- 
+  // }, [values.voteNumber]);
+
   return (
     <Wraper>
-    <FirstTitle>
-      <p className="home">پنل / </p>
-      <p className="component"> ویرایش حوزه وآرا </p>
-    </FirstTitle>
-  
-        <form onSubmit={handleSubmit} autoComplete="off">
-          <Container>
-            <Title>۱. اطلاعات حوزۀ انتخابیه را وارد کنید:</Title>
-            <Form>
-              <Select
-                label="نام حوزه"
-                background="#FFFFFF"
-                value={values.areaName}
-                onChange={handleChange}
-                options={areaName}
-                id="areaName"
-              />
-              {errors.areaName && touched.areaName && (
-                <ErrorText>{errors.areaName}</ErrorText>
-              )}
+      <FirstTitle>
+        <p className="home">پنل / </p>
+        <p className="component"> ویرایش حوزه وآرا </p>
+      </FirstTitle>
 
-              <SelectNumber
-                label="تعداد آراء"
-                background="#FFFFFF"
-                id="voteNumber"
-                name="voteNumber"
-                value={values.voteNumber}
-                onChange={handleChange}
-              />
-              {errors.voteNumber && touched.voteNumber && (
-                <ErrorText>{errors.voteNumber}</ErrorText>
-              )}
-            </Form>
-          </Container>
-          <Box>
-            <Button
-              text="لغو"
-              textColor="#095644"
-              borderColor="#095644"
-              simple={true}
-              width="35%"
-              click={() => {
-                navigate(-1);
-              }}
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <Container>
+          <Title>۱. اطلاعات حوزۀ انتخابیه را وارد کنید:</Title>
+          <Form>
+            <Select
+              label="نام حوزه"
+              background="#FFFFFF"
+              value={values.areaName}
+              onChange={handleChange}
+              options={areaName}
+              id="areaName"
             />
-            <Button
-              text="ثبت"
-              textColor="#FFFFFF"
-              background="#095644"
-              width="62%"
-              type="submit"
+            {errors.areaName && touched.areaName && (
+              <ErrorText>{errors.areaName}</ErrorText>
+            )}
+
+            <SelectNumber
+              label="تعداد آراء"
+              background="#FFFFFF"
+              id="voteNumber"
+              name="voteNumber"
+              value={values.voteNumber}
+              onChange={handleChange}
             />
-          </Box>
-        </form>
-        </Wraper>
-  )
+            {errors.voteNumber && touched.voteNumber && (
+              <ErrorText>{errors.voteNumber}</ErrorText>
+            )}
+          </Form>
+        </Container>
+        <Box>
+          <Button
+            text="لغو"
+            textColor="#095644"
+            borderColor="#095644"
+            simple={true}
+            width="35%"
+            click={() => {
+              navigate(-1);
+            }}
+          />
+          <Button
+            text="ثبت"
+            textColor="#FFFFFF"
+            background="#095644"
+            width="62%"
+            type="submit"
+          />
+        </Box>
+      </form>
+    </Wraper>
+  );
 }
 
 const Wraper = styled.div`
@@ -225,8 +222,8 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 14px 10px 11px;
   margin-top: 15px;
-  @media(min-width:480px){
-    padding:2.083vw 2.604vw;
+  @media (min-width: 480px) {
+    padding: 2.083vw 2.604vw;
   }
 `;
 const Title = styled.h2`
@@ -236,9 +233,9 @@ const Title = styled.h2`
   font-size: 4.651vw;
   font-weight: 300;
   margin-bottom: 10px;
-  @media(min-width:480px){
-    font-size:1.250vw;
-    margin-bottom:1.042vw;
+  @media (min-width: 480px) {
+    font-size: 1.25vw;
+    margin-bottom: 1.042vw;
   }
 `;
 
@@ -246,9 +243,9 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  @media(min-width:480px){
-    width:90%;
-    gap:1.302vw;
+  @media (min-width: 480px) {
+    width: 90%;
+    gap: 1.302vw;
   }
 `;
 

@@ -21,9 +21,9 @@ export default function EditCommission() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${state.token}`,
+      // },
       data: data,
     };
 
@@ -39,7 +39,7 @@ export default function EditCommission() {
 
   const onSubmit = async (values, actions) => {
     const data = new FormData();
-    data.append('fraction',values.commission)
+    data.append("fraction", values.commission);
 
     let config = {
       method: "put",
@@ -51,24 +51,24 @@ export default function EditCommission() {
     };
 
     axios(config)
-    .then((res) => {
-      // console.log(JSON.stringify(res.data));
-      dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
-      navigate("/dashboard");
-      actions.resetForm();
-      toast.success(" اصلاح با موفقیت انجام شد!", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    })
-    .catch((error) => {
-      console.log("Error", error);
-      if (error.response.status == 401) {
-        refreshToken();
-        toast.error("لطفا مجدد تلاش کنید", {
+      .then((res) => {
+        // console.log(JSON.stringify(res.data));
+        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        navigate("/dashboard");
+        actions.resetForm();
+        toast.success(" اصلاح با موفقیت انجام شد!", {
           position: toast.POSITION.TOP_RIGHT,
         });
-      }
-    });
+      })
+      .catch((error) => {
+        console.log("Error", error);
+        if (error.response.status == 401) {
+          // refreshToken();
+          toast.error("لطفا مجدد تلاش کنید", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+      });
   };
 
   const {
@@ -171,8 +171,8 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 14px 10px 11px;
   margin-top: 15px;
-  @media(min-width:480px){
-    padding:2.083vw 2.604vw;
+  @media (min-width: 480px) {
+    padding: 2.083vw 2.604vw;
   }
 `;
 const Title = styled.h2`
@@ -182,9 +182,9 @@ const Title = styled.h2`
   font-size: 4.651vw;
   font-weight: 300;
   margin-bottom: 10px;
-  @media(min-width:480px){
-    font-size:1.250vw;
-    margin-bottom:1.042vw;
+  @media (min-width: 480px) {
+    font-size: 1.25vw;
+    margin-bottom: 1.042vw;
   }
 `;
 
@@ -192,9 +192,9 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  @media(min-width:480px){
-    width:90%;
-    gap:1.302vw;
+  @media (min-width: 480px) {
+    width: 90%;
+    gap: 1.302vw;
   }
 `;
 

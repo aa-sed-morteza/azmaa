@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import CustomInput from "../../general/customInput";
 import Button from "../../general/button";
@@ -21,9 +21,9 @@ export default function Contacts() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${state.token}`,
+      // },
       data: data,
     };
 
@@ -54,35 +54,34 @@ export default function Contacts() {
     };
 
     axios(config)
-    .then((res) => {
-      // console.log(JSON.stringify(res.data));
-      dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
-      dispatch({ type: "SET_SIGN_LEVEL", payload: 3 });
-      actions.resetForm();
-      toast.success(" ثبت با موفقیت انجام شد!", {
-        position: toast.POSITION.TOP_RIGHT,
+      .then((res) => {
+        // console.log(JSON.stringify(res.data));
+        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        dispatch({ type: "SET_SIGN_LEVEL", payload: 3 });
+        actions.resetForm();
+        toast.success(" ثبت با موفقیت انجام شد!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      })
+      .catch((error) => {
+        console.log("Error", error);
+        if (error.response.status == 401) {
+          // refreshToken();
+          toast.error("لطفا مجدد تلاش کنید", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+        if (error.response.data.telephone == "شماره تلفن معتبر نیست.") {
+          toast.error("شماره تلفن معتبر نیست.", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+        if (error.response.data.email == "Enter a valid email address.") {
+          toast.error("لطفا آدرس ایمیل را به درستی وارد کنید", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
       });
-    })
-    .catch((error) => {
-      console.log("Error", error);
-      if (error.response.status == 401) {
-        refreshToken();
-        toast.error("لطفا مجدد تلاش کنید", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-      }
-      if (error.response.data.telephone == "شماره تلفن معتبر نیست.") {
-        toast.error("شماره تلفن معتبر نیست.", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-      }
-      if (error.response.data.email == "Enter a valid email address.") {
-        toast.error("لطفا آدرس ایمیل را به درستی وارد کنید", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-      }
-    });
-   
   };
 
   const {
@@ -93,7 +92,7 @@ export default function Contacts() {
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValue
+    setFieldValue,
   } = useFormik({
     initialValues: {
       mobileNumber: "",
@@ -145,7 +144,7 @@ export default function Contacts() {
               <CustomInput
                 label=" ایمیل"
                 back="#ffffff"
-                dir='ltr'
+                dir="ltr"
                 value={values.email}
                 onChange={handleChange}
                 id="email"

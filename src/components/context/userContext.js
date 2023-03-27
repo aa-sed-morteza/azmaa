@@ -6,7 +6,7 @@ import { BaseBackURL } from "../../constant/api";
 const initialState = {
   userName: "",
   userType: "",
-  userId:0,
+  userId: 0,
   sms: "123456",
   timeOut: false,
   firstName: "",
@@ -25,7 +25,7 @@ const initialState = {
   areaName: "",
   commission: "",
   voteNumber: 0,
-  activityChoice:[],
+  activityChoice: [],
   dutieHistory: [],
   typeArticle: "",
   contentArticle: {},
@@ -40,10 +40,10 @@ const initialState = {
   mapLevel: 1,
   provinceSearch: {},
   citySearch: {},
-  city:"",
+  city: "",
   loggedIn: false,
   token: null,
-  refreshToken:null,
+  refreshToken: null,
 };
 
 export const userContext = React.createContext({});
@@ -100,7 +100,7 @@ const reducer = (state, action) => {
       return { ...state, typeArticle: action.payload };
     case "SET_CONTENT_ARTICLE":
       return { ...state, contentArticle: action.payload };
-      case "SET_ACTIVITY_CHOICE":
+    case "SET_ACTIVITY_CHOICE":
       return { ...state, activityChoice: action.payload };
     case "SET_IMG_ARTICLE":
       return { ...state, imageArticle: action.payload };
@@ -124,17 +124,17 @@ const reducer = (state, action) => {
       return { ...state, provinceSearch: action.payload };
     case "SET_CITY_SEARCH":
       return { ...state, citySearch: action.payload };
-      case "SET_CITY":
-        return { ...state, city: action.payload };
+    case "SET_CITY":
+      return { ...state, city: action.payload };
     case "SET_IMAGE":
       return { ...state, image: action.payload };
-     
+
     // case "SET_DATA":
     //   return { ...state, ...action.payload };
     case "SET_TOKEN":
       return { ...state, token: action.payload };
-      case "SET_REFRESH_TOKEN":
-        return { ...state, refreshToken: action.payload };
+    case "SET_REFRESH_TOKEN":
+      return { ...state, refreshToken: action.payload };
     case "CLEAR_DATA":
       return initialState;
     default:
@@ -148,14 +148,14 @@ export const UserState = (props) => {
 
   const refreshToken = () => {
     const data = new FormData();
-    data.append("refresh", Cookies.get('refreshToken'));
+    data.append("refresh", Cookies.get("refreshToken"));
 
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${Cookies.get('token')}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${Cookies.get('token')}`,
+      // },
       data: data,
     };
 
@@ -163,7 +163,6 @@ export const UserState = (props) => {
       .then((response) => {
         // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
-        
       })
       .catch(function (error) {
         console.log(error);
@@ -173,12 +172,11 @@ export const UserState = (props) => {
   useEffect(() => {
     // console.log(Cookies.get("token"));
     if (Cookies.get("token")) {
-      refreshToken();
+      // refreshToken();
       // console.log("token");
       dispatch({ type: "SET_TOKEN", payload: Cookies.get("token") });
     }
   }, []);
-
 
   return (
     <userContext.Provider value={{ state, dispatch }}>

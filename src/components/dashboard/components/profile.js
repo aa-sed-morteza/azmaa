@@ -47,9 +47,9 @@ export default function Profile() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${state.token}`,
+      // },
       data: data,
     };
 
@@ -83,7 +83,7 @@ export default function Profile() {
       .catch(function (error) {
         console.log(error);
         if (error.response.status == 401) {
-          refreshToken();
+          // refreshToken();
         }
       });
   };

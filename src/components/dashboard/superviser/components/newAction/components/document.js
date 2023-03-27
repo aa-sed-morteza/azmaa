@@ -15,8 +15,6 @@ export default function Document() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
 
- 
-
   const refreshToken = () => {
     const data = new FormData();
     data.append("refresh", state.refreshToken);
@@ -24,9 +22,9 @@ export default function Document() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${state.token}`,
+      // },
       data: data,
     };
 
@@ -40,94 +38,14 @@ export default function Document() {
       });
   };
 
- 
-
-  
-
   const onSubmit = async (values, actions) => {
-    if(state.userType == 'superviser'){
+    if (state.userType == "superviser") {
       if (state.typeAction.type == "vote") {
         const data = new FormData();
         data.append("bill_id", state.typeAction.description);
         data.append("vote", state.voteEnvoy);
-        data.append("voter_id",state.selectEnvoy.envoy)
-        
-  
-  
-        let config = {
-          method: "post",
-          url: `${BaseBackURL}api/v1/vote/bill/`,
-          headers: {
-            Authorization: `Bearer ${state.token}`,
-          },
-          data: data,
-        };
-        axios(config)
-          .then(function (response) {
-            // console.log(JSON.stringify(response.data));
-            toast.success(" فعالیت با موفقیت ثبت شد!", {
-              position: toast.POSITION.TOP_RIGHT,
-            });
-            dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
-            navigate("/dashboard/myActions");
-            actions.resetForm();
-          })
-          .catch(function (error) {
-            console.log(error);
-            if (error.response.status == 401) {
-              refreshToken();
-              toast.error("لطفا مجدد تلاش کنید", {
-                position: toast.POSITION.TOP_RIGHT,
-              });
-            }
-          });
-        }else{
-          const data = new FormData();
-          data.append("activity_id", state.typeAction.description);
-          data.append("activity_choice_id", state.voteEnvoy);
-           data.append("voter_id",state.selectEnvoy.envoy);
-    
-    
-          let config = {
-            method: "post",
-            url: `${BaseBackURL}api/v1/vote/activity/`,
-            headers: {
-              Authorization: `Bearer ${state.token}`,
-            },
-            data: data,
-          };
-    
-          axios(config)
-            .then(function (response) {
-              // console.log(JSON.stringify(response.data));
-              toast.success(" فعالیت با موفقیت ثبت شد!", {
-                position: toast.POSITION.TOP_RIGHT,
-              });
-              dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
-              navigate("/dashboard/myActions");
-              actions.resetForm();
-            })
-            .catch(function (error) {
-              console.log(error);
-              if (error.response.status == 401) {
-                refreshToken();
-                toast.error("لطفا مجدد تلاش کنید", {
-                  position: toast.POSITION.TOP_RIGHT,
-                });
-              }
-            });
-        }
-      
-        
+        data.append("voter_id", state.selectEnvoy.envoy);
 
-    }else{
-      if (state.typeAction.type == "vote") {
-        const data = new FormData();
-        data.append("bill_id", state.typeAction.description);
-        data.append("vote", state.voteEnvoy);
-        
-  
-  
         let config = {
           method: "post",
           url: `${BaseBackURL}api/v1/vote/bill/`,
@@ -149,20 +67,18 @@ export default function Document() {
           .catch(function (error) {
             console.log(error);
             if (error.response.status == 401) {
-              refreshToken();
+              // refreshToken();
               toast.error("لطفا مجدد تلاش کنید", {
                 position: toast.POSITION.TOP_RIGHT,
               });
             }
           });
-        }
-      else{
+      } else {
         const data = new FormData();
         data.append("activity_id", state.typeAction.description);
-        // data.append("activity_choice_id", state.voteEnvoy);
-         data.append("activity_choice_id", 1);
-  
-  
+        data.append("activity_choice_id", state.voteEnvoy);
+        data.append("voter_id", state.selectEnvoy.envoy);
+
         let config = {
           method: "post",
           url: `${BaseBackURL}api/v1/vote/activity/`,
@@ -171,7 +87,7 @@ export default function Document() {
           },
           data: data,
         };
-  
+
         axios(config)
           .then(function (response) {
             // console.log(JSON.stringify(response.data));
@@ -185,7 +101,75 @@ export default function Document() {
           .catch(function (error) {
             console.log(error);
             if (error.response.status == 401) {
-              refreshToken();
+              // refreshToken();
+              toast.error("لطفا مجدد تلاش کنید", {
+                position: toast.POSITION.TOP_RIGHT,
+              });
+            }
+          });
+      }
+    } else {
+      if (state.typeAction.type == "vote") {
+        const data = new FormData();
+        data.append("bill_id", state.typeAction.description);
+        data.append("vote", state.voteEnvoy);
+
+        let config = {
+          method: "post",
+          url: `${BaseBackURL}api/v1/vote/bill/`,
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+          data: data,
+        };
+        axios(config)
+          .then(function (response) {
+            // console.log(JSON.stringify(response.data));
+            toast.success(" فعالیت با موفقیت ثبت شد!", {
+              position: toast.POSITION.TOP_RIGHT,
+            });
+            dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
+            navigate("/dashboard/myActions");
+            actions.resetForm();
+          })
+          .catch(function (error) {
+            console.log(error);
+            if (error.response.status == 401) {
+              // refreshToken();
+              toast.error("لطفا مجدد تلاش کنید", {
+                position: toast.POSITION.TOP_RIGHT,
+              });
+            }
+          });
+      } else {
+        const data = new FormData();
+        data.append("activity_id", state.typeAction.description);
+        // data.append("activity_choice_id", state.voteEnvoy);
+        data.append("activity_choice_id", 1);
+
+        let config = {
+          method: "post",
+          url: `${BaseBackURL}api/v1/vote/activity/`,
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+          data: data,
+        };
+
+        axios(config)
+          .then(function (response) {
+            // console.log(JSON.stringify(response.data));
+            toast.success(" فعالیت با موفقیت ثبت شد!", {
+              position: toast.POSITION.TOP_RIGHT,
+            });
+            dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
+            navigate("/dashboard/myActions");
+            actions.resetForm();
+          })
+          .catch(function (error) {
+            console.log(error);
+            if (error.response.status == 401) {
+              // refreshToken();
               toast.error("لطفا مجدد تلاش کنید", {
                 position: toast.POSITION.TOP_RIGHT,
               });
@@ -193,10 +177,6 @@ export default function Document() {
           });
       }
     }
-
-   
-
-   
   };
 
   const {
@@ -216,8 +196,6 @@ export default function Document() {
     validationSchema: documentSchema,
     onSubmit,
   });
-
-  
 
   return (
     <form onSubmit={handleSubmit} autoComplete="off">

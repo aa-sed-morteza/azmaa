@@ -14,7 +14,6 @@ import { useUser } from "../../../context/userContext";
 import axios from "axios";
 import { BaseBackURL } from "../../../../constant/api";
 
-
 export default function MyActions() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
@@ -30,9 +29,9 @@ export default function MyActions() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${state.token}`,
+      // },
       data: data,
     };
 
@@ -55,16 +54,18 @@ export default function MyActions() {
       },
     };
 
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setBills(res.data.filter((x) => x.voter.id == state.id));
-      }
-    }).catch((err)=>{
-      if (err.response.status == 401) {
-        refreshToken();
-      }
-    });
+    axios(config)
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data.length > 0) {
+          setBills(res.data.filter((x) => x.voter.id == state.id));
+        }
+      })
+      .catch((err) => {
+        if (err.response.status == 401) {
+          // refreshToken();
+        }
+      });
   };
 
   const activityVoteUnconfirmed = () => {
@@ -76,16 +77,18 @@ export default function MyActions() {
       },
     };
 
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setActivities(res.data.filter((x) => x.voter.id == state.id));
-      }
-    }).catch((err)=>{
-      if (err.response.status == 401) {
-        refreshToken();
-      }
-    });
+    axios(config)
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data.length > 0) {
+          setActivities(res.data.filter((x) => x.voter.id == state.id));
+        }
+      })
+      .catch((err) => {
+        if (err.response.status == 401) {
+          // refreshToken();
+        }
+      });
   };
 
   useEffect(() => {
@@ -154,7 +157,7 @@ export default function MyActions() {
                 />
               );
             })}
-             {activities.map((item, i) => {
+            {activities.map((item, i) => {
               return (
                 <ActionCard
                   img={pic2}
@@ -191,7 +194,7 @@ export default function MyActions() {
         {select == 3 && (
           <ActionGallery>
             <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
-        
+
             {activities.map((item, i) => {
               return (
                 <ActionCard
@@ -366,8 +369,7 @@ const Item = styled.p`
     height: 35px;
     top: 0;
     left: 50%;
-    transform: translate(-50%,0%);
-
+    transform: translate(-50%, 0%);
   }
   &:nth-child(3) {
     &:before {

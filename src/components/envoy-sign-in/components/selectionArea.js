@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 export default function SelectionArea() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
-  const [areaName,setAreaName]=useState([]);
+  const [areaName, setAreaName] = useState([]);
   const commission = ["امنیت ملی", "سلامت", "ورزش", "عمران"];
 
   const refreshToken = () => {
@@ -25,9 +25,9 @@ export default function SelectionArea() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${state.token}`,
+      // },
       data: data,
     };
 
@@ -41,27 +41,25 @@ export default function SelectionArea() {
       });
   };
 
-  const getDistrict =()=>{
+  const getDistrict = () => {
     var config = {
-      method: 'get',
+      method: "get",
       url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
-     
     };
-    
+
     axios(config)
-    .then(function (response) {
-      // console.log(JSON.stringify(response.data));
-      setAreaName([...response.data.map(x=>x.name)])
+      .then(function (response) {
+        // console.log(JSON.stringify(response.data));
+        setAreaName([...response.data.map((x) => x.name)]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-
-  useEffect(()=>{
+  useEffect(() => {
     getDistrict();
-  },[])
+  }, []);
 
   const onSubmit = async (values, actions) => {
     const data = new FormData();
@@ -79,33 +77,29 @@ export default function SelectionArea() {
     };
 
     axios(config)
-    .then((res) => {
-      // console.log(JSON.stringify(res.data));
-      dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
-      dispatch({ type: "SET_SIGN_LEVEL", payload: 4 });
-    actions.resetForm();
-      toast.success(" ثبت با موفقیت انجام شد!", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    })
-    .catch((error) => {
-      console.log("Error", error);
-      if (error.response.status == 401) {
-        refreshToken();
-        toast.error("لطفا مجدد تلاش کنید", {
+      .then((res) => {
+        // console.log(JSON.stringify(res.data));
+        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        dispatch({ type: "SET_SIGN_LEVEL", payload: 4 });
+        actions.resetForm();
+        toast.success(" ثبت با موفقیت انجام شد!", {
           position: toast.POSITION.TOP_RIGHT,
         });
-      }
-      // if (error.response.data.telephone == "شماره تلفن معتبر نیست.") {
-      //   toast.error("شماره تلفن معتبر نیست.", {
-      //     position: toast.POSITION.TOP_RIGHT,
-      //   });
-      // }
-    
-    });
-
-  
-   
+      })
+      .catch((error) => {
+        console.log("Error", error);
+        if (error.response.status == 401) {
+          // refreshToken();
+          toast.error("لطفا مجدد تلاش کنید", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+        // if (error.response.data.telephone == "شماره تلفن معتبر نیست.") {
+        //   toast.error("شماره تلفن معتبر نیست.", {
+        //     position: toast.POSITION.TOP_RIGHT,
+        //   });
+        // }
+      });
   };
 
   const {
@@ -126,7 +120,6 @@ export default function SelectionArea() {
     onSubmit,
   });
 
-  
   return (
     <>
       {state.signInLevel === 3 ? (

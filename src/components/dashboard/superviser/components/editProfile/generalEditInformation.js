@@ -24,9 +24,9 @@ export default function GeneralEditInformation() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${state.token}`,
+      // },
       data: data,
     };
 
@@ -47,11 +47,10 @@ export default function GeneralEditInformation() {
     data.append("birth_place", values.birthPlace);
     data.append("birth_date", values.birthDay);
     data.append("national_code", values.personalCode);
-    data.append('mobileNumber',values.mobileNumber);
-    data.append('email',values.email)
-    data.append('address',values.address );
-    data.append('telephone',values.phoneNubmer )
-    
+    data.append("mobileNumber", values.mobileNumber);
+    data.append("email", values.email);
+    data.append("address", values.address);
+    data.append("telephone", values.phoneNubmer);
 
     let config = {
       method: "put",
@@ -75,7 +74,7 @@ export default function GeneralEditInformation() {
       .catch((error) => {
         console.log("Error", error);
         if (error.response.status == 401) {
-          refreshToken();
+          // refreshToken();
           toast.error("لطفا مجدد تلاش کنید", {
             position: toast.POSITION.TOP_RIGHT,
           });
@@ -108,9 +107,8 @@ export default function GeneralEditInformation() {
     onSubmit,
   });
 
-
-   // Convert persianNumber to englishNumber
-   useEffect(() => {
+  // Convert persianNumber to englishNumber
+  useEffect(() => {
     setFieldValue(
       "personalCode",
       values.personalCode
@@ -119,8 +117,8 @@ export default function GeneralEditInformation() {
     );
   }, [values.personalCode]);
 
-   // Convert persianNumber to englishNumber
-   useEffect(() => {
+  // Convert persianNumber to englishNumber
+  useEffect(() => {
     setFieldValue(
       "mobileNumber",
       values.mobileNumber
@@ -129,8 +127,8 @@ export default function GeneralEditInformation() {
     );
   }, [values.mobileNumber]);
 
-   // Convert persianNumber to englishNumber
-   useEffect(() => {
+  // Convert persianNumber to englishNumber
+  useEffect(() => {
     setFieldValue(
       "phoneNubmer",
       values.phoneNubmer
@@ -203,7 +201,7 @@ export default function GeneralEditInformation() {
             {errors.birthDay && touched.birthDay && (
               <ErrorText>{errors.birthDay}</ErrorText>
             )}
-              <CustomInput
+            <CustomInput
               label="شمارۀ همراه"
               back="#ffffff"
               value={values.mobileNumber}
@@ -216,7 +214,7 @@ export default function GeneralEditInformation() {
             <CustomInput
               label=" ایمیل"
               back="#ffffff"
-              dir='ltr'
+              dir="ltr"
               value={values.email}
               onChange={handleChange}
               id="email"

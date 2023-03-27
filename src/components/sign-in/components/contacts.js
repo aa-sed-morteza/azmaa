@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import CustomInput from "../../general/customInput";
 import Button from "../../general/button";
@@ -21,9 +21,9 @@ export default function Contacts() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${state.token}`,
+      // },
       data: data,
     };
 
@@ -68,7 +68,7 @@ export default function Contacts() {
       .catch((error) => {
         console.log("Error", error);
         if (error.response.status == 401) {
-          refreshToken();
+          // refreshToken();
           toast.error("لطفا مجدد تلاش کنید", {
             position: toast.POSITION.TOP_RIGHT,
           });
@@ -138,7 +138,7 @@ export default function Contacts() {
           <CustomInput
             label=" ایمیل"
             back="#ffffff"
-            dir='ltr'
+            dir="ltr"
             value={values.email}
             onChange={handleChange}
             id="email"

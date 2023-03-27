@@ -24,9 +24,9 @@ export default function EditPersonalInformation() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${state.token}`,
+      // },
       data: data,
     };
 
@@ -47,7 +47,6 @@ export default function EditPersonalInformation() {
     data.append("birth_place", values.birthPlace);
     data.append("birth_date", values.birthDay);
     data.append("national_code", values.personalCode);
-    
 
     let config = {
       method: "put",
@@ -71,7 +70,7 @@ export default function EditPersonalInformation() {
       .catch((error) => {
         console.log("Error", error);
         if (error.response.status == 401) {
-          refreshToken();
+          // refreshToken();
           toast.error("لطفا مجدد تلاش کنید", {
             position: toast.POSITION.TOP_RIGHT,
           });
@@ -100,8 +99,8 @@ export default function EditPersonalInformation() {
     onSubmit,
   });
 
-   // Convert persianNumber to englishNumber
-   useEffect(() => {
+  // Convert persianNumber to englishNumber
+  useEffect(() => {
     setFieldValue(
       "personalCode",
       values.personalCode

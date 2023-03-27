@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import CustomInput from "../../../../general/customInput";
 import Button from "../../../../general/button";
@@ -21,9 +21,9 @@ export default function EditContactInformation() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${state.token}`,
+      // },
       data: data,
     };
 
@@ -39,11 +39,11 @@ export default function EditContactInformation() {
 
   const onSubmit = async (values, actions) => {
     const data = new FormData();
-    data.append('mobileNumber',values.mobileNumber);
-    data.append('email',values.email)
-    data.append('address',values.address );
-    data.append('telephone',values.phoneNubmer )
-  
+    data.append("mobileNumber", values.mobileNumber);
+    data.append("email", values.email);
+    data.append("address", values.address);
+    data.append("telephone", values.phoneNubmer);
+
     let config = {
       method: "put",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
@@ -53,24 +53,24 @@ export default function EditContactInformation() {
       data: data,
     };
     axios(config)
-    .then((res) => {
-      // console.log(JSON.stringify(res.data));
-      dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
-      navigate("/dashboard");
-      actions.resetForm();
-      toast.success(" اصلاحات با موفقیت انجام شد!", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    })
-    .catch((error) => {
-      console.log("Error", error);
-      if (error.response.status == 401) {
-        refreshToken();
-        toast.error("لطفا مجدد تلاش کنید", {
+      .then((res) => {
+        // console.log(JSON.stringify(res.data));
+        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        navigate("/dashboard");
+        actions.resetForm();
+        toast.success(" اصلاحات با موفقیت انجام شد!", {
           position: toast.POSITION.TOP_RIGHT,
         });
-      }
-    });
+      })
+      .catch((error) => {
+        console.log("Error", error);
+        if (error.response.status == 401) {
+          // refreshToken();
+          toast.error("لطفا مجدد تلاش کنید", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+      });
   };
 
   const {
@@ -93,8 +93,8 @@ export default function EditContactInformation() {
     onSubmit,
   });
 
-   // Convert persianNumber to englishNumber
-   useEffect(() => {
+  // Convert persianNumber to englishNumber
+  useEffect(() => {
     setFieldValue(
       "mobileNumber",
       values.mobileNumber
@@ -103,8 +103,8 @@ export default function EditContactInformation() {
     );
   }, [values.mobileNumber]);
 
-   // Convert persianNumber to englishNumber
-   useEffect(() => {
+  // Convert persianNumber to englishNumber
+  useEffect(() => {
     setFieldValue(
       "phoneNubmer",
       values.phoneNubmer
@@ -136,7 +136,7 @@ export default function EditContactInformation() {
             <CustomInput
               label=" ایمیل"
               back="#ffffff"
-              dir='ltr'
+              dir="ltr"
               value={values.email}
               onChange={handleChange}
               id="email"
@@ -226,8 +226,8 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 14px 10px 11px;
   margin-top: 15px;
-  @media(min-width:480px){
-    padding:2.083vw 2.604vw;
+  @media (min-width: 480px) {
+    padding: 2.083vw 2.604vw;
   }
 `;
 const Title = styled.h2`
@@ -237,9 +237,9 @@ const Title = styled.h2`
   font-size: 4.651vw;
   font-weight: 300;
   margin-bottom: 10px;
-  @media(min-width:480px){
-    font-size:1.250vw;
-    margin-bottom:1.042vw;
+  @media (min-width: 480px) {
+    font-size: 1.25vw;
+    margin-bottom: 1.042vw;
   }
 `;
 
@@ -247,9 +247,9 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  @media(min-width:480px){
-    width:90%;
-    gap:1.302vw;
+  @media (min-width: 480px) {
+    width: 90%;
+    gap: 1.302vw;
   }
 `;
 

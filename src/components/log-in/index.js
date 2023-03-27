@@ -33,7 +33,7 @@ export default function LogIn() {
       data: data,
     };
 
-    axios(config, { withCredentials: true })
+    axios(config)
       .then((res) => {
         // console.log(res);
         if (res.data.id) {
@@ -79,7 +79,6 @@ export default function LogIn() {
     data.append("username", values.userName);
     data.append("password", values.password);
 
-
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/`,
@@ -91,8 +90,8 @@ export default function LogIn() {
         // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
         dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
-        Cookies.set('refreshToken', response.data.refresh );
-        Cookies.set('token', response.data.access  );
+        Cookies.set("refreshToken", response.data.refresh);
+        Cookies.set("token", response.data.access);
       })
       .catch((error) => {
         console.log(error);
@@ -117,7 +116,6 @@ export default function LogIn() {
     onSubmit,
   });
 
-
   // Convert persianNumber to englishNumber
   useEffect(() => {
     setFieldValue(
@@ -127,8 +125,6 @@ export default function LogIn() {
         .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
     );
   }, [values.userName]);
-
-  
 
   return (
     <Container>
@@ -148,7 +144,7 @@ export default function LogIn() {
           )}
           <CustomInput
             label="رمز عبور"
-            type='password'
+            type="password"
             icon={lock}
             back="#f5f5f5"
             id="password"

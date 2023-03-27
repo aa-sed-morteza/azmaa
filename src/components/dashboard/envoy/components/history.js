@@ -18,9 +18,9 @@ export default function HistoryEnvoy() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${state.token}`,
+      // },
       data: data,
     };
 
@@ -47,20 +47,19 @@ export default function HistoryEnvoy() {
       .then((res) => {
         // console.log(JSON.stringify(res.data));
         dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
-        setHistory([...res.data])
-       
+        setHistory([...res.data]);
       })
       .catch((error) => {
         console.log("sagError", error);
         if (error.response.status == 401) {
-          refreshToken();
+          // refreshToken();
         }
       });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getExpriences();
-  },[state.token])
+  }, [state.token]);
 
   return (
     <Container>
@@ -71,9 +70,10 @@ export default function HistoryEnvoy() {
       ></Edit>
       <Title>سوابق نماینده</Title>
       <Row>
-        {hisroty  && hisroty.map((item, i) => {
-          return <p className="text-history">{item.title}</p>;
-        })}
+        {hisroty &&
+          hisroty.map((item, i) => {
+            return <p className="text-history">{item.title}</p>;
+          })}
       </Row>
     </Container>
   );
@@ -128,12 +128,12 @@ const Edit = styled.div`
   left: 5.885vw;
   height: 2.326vw;
   width: 1.163vw;
-  transform: translate(0%,-50%);
+  transform: translate(0%, -50%);
   background-repeat: no-repeat;
   background-image: url(${edit});
   background-size: contain;
   cursor: pointer;
-  @media (min-width: 480px){
+  @media (min-width: 480px) {
     width: 1.042vw;
     height: 0.521vw;
   }

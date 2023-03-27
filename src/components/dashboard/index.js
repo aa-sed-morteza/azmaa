@@ -64,6 +64,33 @@ export default function Dashboard() {
 
   console.log("data", state);
 
+  const refreshToken = () => {
+    const data = new FormData();
+    data.append("refresh", Cookies.get("refreshToken"));
+
+    let config = {
+      method: "post",
+      url: `${BaseBackURL}api/token/refresh/`,
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then((response) => {
+        // console.log(JSON.stringify(response.data));
+        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    refreshToken();
+  }, []);
+
   useEffect(() => {
     getPersonalInfo(Cookies.get("userId"));
   }, [state.token]);

@@ -40,9 +40,9 @@ export default function EditHistoryEnvoy() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${state.token}`,
+      // },
       data: data,
     };
 
@@ -84,7 +84,7 @@ export default function EditHistoryEnvoy() {
       .catch((error) => {
         console.log("Error", error);
         if (error.response.status == 401) {
-          refreshToken();
+          // refreshToken();
           toast.error("لطفا مجدد تلاش کنید", {
             position: toast.POSITION.TOP_RIGHT,
           });

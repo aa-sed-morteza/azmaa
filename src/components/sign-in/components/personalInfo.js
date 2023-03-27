@@ -17,7 +17,6 @@ export default function PersonalInformation() {
   const { state, dispatch } = useUser();
   const [order, setOrder] = useState(false);
 
-
   const refreshToken = () => {
     const data = new FormData();
     data.append("refresh", state.refreshToken);
@@ -25,9 +24,9 @@ export default function PersonalInformation() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${state.token}`,
+      // },
       data: data,
     };
 
@@ -41,10 +40,7 @@ export default function PersonalInformation() {
       });
   };
 
-
-
   const onSubmit = async (values, actions) => {
-    
     const data = new FormData();
     data.append("first_name", values.firstName);
     data.append("last_name", values.lastName);
@@ -74,25 +70,22 @@ export default function PersonalInformation() {
       .catch((error) => {
         console.log("Error", error);
         if (error.response.status == 401) {
-          refreshToken();
+          // refreshToken();
           toast.error("لطفا مجدد تلاش کنید", {
             position: toast.POSITION.TOP_RIGHT,
           });
         }
-        if(error.response.data.national_code == "کد ملی معتبر نیست."){
+        if (error.response.data.national_code == "کد ملی معتبر نیست.") {
           toast.error("کد ملی معتبر نیست.", {
             position: toast.POSITION.TOP_RIGHT,
           });
         }
-        if(error.response.data.national_code == "کد ملی باید 10 رقمی باشد."){
+        if (error.response.data.national_code == "کد ملی باید 10 رقمی باشد.") {
           toast.error("کد ملی باید 10 رقمی باشد.", {
             position: toast.POSITION.TOP_RIGHT,
           });
         }
       });
-
-    
-    
   };
 
   const {
@@ -103,7 +96,7 @@ export default function PersonalInformation() {
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValue
+    setFieldValue,
   } = useFormik({
     initialValues: {
       firstName: "",
@@ -116,17 +109,15 @@ export default function PersonalInformation() {
     onSubmit,
   });
 
-    // Convert persianNumber to englishNumber
-    useEffect(() => {
-      setFieldValue(
-        "personalCode",
-        values.personalCode
-          .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
-          .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
-      );
-    }, [values.personalCode]);
-
-
+  // Convert persianNumber to englishNumber
+  useEffect(() => {
+    setFieldValue(
+      "personalCode",
+      values.personalCode
+        .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+        .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    );
+  }, [values.personalCode]);
 
   return (
     <>
@@ -175,7 +166,7 @@ export default function PersonalInformation() {
               {errors.personalCode && touched.personalCode && (
                 <ErrorText>{errors.personalCode}</ErrorText>
               )}
-          
+
               <CustomDatePicker
                 label="تاریخ تولد"
                 background="#FFFFFF"
@@ -258,8 +249,8 @@ const Container = styled.div`
   background: #ffffff;
   border-radius: 4px;
   padding: 14px 10px 11px;
-  @media(min-width:480px){
-    padding:2.604vw;
+  @media (min-width: 480px) {
+    padding: 2.604vw;
   }
 `;
 const Title = styled.h2`
@@ -269,9 +260,9 @@ const Title = styled.h2`
   font-size: 4.651vw;
   font-weight: 300;
   margin-bottom: 10px;
-  @media(min-width:480px){
-    font-size:1.458vw;
-    margin-bottom:1.302vw;
+  @media (min-width: 480px) {
+    font-size: 1.458vw;
+    margin-bottom: 1.302vw;
   }
 `;
 
@@ -279,19 +270,19 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  @media(min-width:480px){
-    width:65%;
-    gap:1.302vw;
+  @media (min-width: 480px) {
+    width: 65%;
+    gap: 1.302vw;
   }
 `;
 const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
-  @media(min-width:480px){
-    width:65%;
-    gap:1.042vw;
-    margin:1.042vw auto ;
+  @media (min-width: 480px) {
+    width: 65%;
+    gap: 1.042vw;
+    margin: 1.042vw auto;
   }
 `;
 
@@ -303,8 +294,8 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
-  @media(min-width:480px){
-    margin-top:0;
-    font-size:1.042vw;
+  @media (min-width: 480px) {
+    margin-top: 0;
+    font-size: 1.042vw;
   }
 `;
