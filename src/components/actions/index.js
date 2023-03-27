@@ -5,12 +5,16 @@ import Controler from "../vote/components/controler";
 import Filtering from "../vote/components/filtering";
 import Calendar from "./components/calendar";
 import { BaseBackURL } from "../../constant/api";
+import ActionCard from "../home/components/actionCard";
+import { useSearchParams } from "react-router-dom"
+import upArrow from "../../assets/arrow.webp";
 
 export default function Actions() {
   const [selectedTag, setSelectedTag] = useState("همه");
   const [activities, setActivities] = useState([]);
   const [filteredActivities, setFilteredActivities] = useState([]);
-
+  const [secondHide, setSecondHide] = useState(false);
+  const [searchparams, setsearchparams] = useSearchParams();
   const getActivities = () => {
     let config = {
       method: "get",
@@ -21,7 +25,6 @@ export default function Actions() {
       // console.log(res.data);
       if (res.data.length > 0) {
         setActivities([...res.data]);
-        setFilteredActivities([...res.data])
       }
     });
   };
@@ -31,13 +34,13 @@ export default function Actions() {
   }, []);
 
   useEffect(() => {
-    if( activities.filter((item) => item.tag[0].name === selectedTag)){
+    if (activities.filter((item) => item.tag[0].name === selectedTag)) {
       setFilteredActivities(activities.filter((item) => item.tag[0].name === selectedTag))
-    }else{
+    } else {
       setActivities(activities)
     }
-    
-    if(selectedTag == 'همه'){
+
+    if (selectedTag == 'همه') {
       setFilteredActivities(activities)
     }
   }, [selectedTag]);
@@ -45,15 +48,45 @@ export default function Actions() {
 
   return (
     <Container>
-      <Title>
+      <DivTitle>
         <p className="home">خانه / </p>
         <p className="component"> عملکردها </p>
-      </Title>
+      </DivTitle>
 
       <Content>
         <Controler selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
         <Filtering />
-        <Calendar activities={filteredActivities} />
+        <>
+        <LastActions>
+          <Title> آخرین عملکردها</Title>
+          <ActionContainer hide={secondHide}>
+            {activities.filter((item) => {
+              let filter = searchparams.get("filter");
+              if (!filter) return true;
+              // let name= item.writer + item.description ;
+              let name = item.name;
+              return name.includes(filter);
+            }).filter((item) => {
+              if (selectedTag === 'همه') return true;
+              let tag = item.tag[0].name;
+              return tag.includes(selectedTag);
+            }).map((item, i) => {
+              return <ActionCard activity={item} key={i} />;
+            })}
+          </ActionContainer>
+          
+          <ShowMore
+            arrow={secondHide}
+            onClick={() => {
+              setSecondHide(!secondHide);
+            }}
+          >
+            <p>{secondHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
+          </ShowMore>
+        </LastActions>
+        </>
+
+        {/* <Calendar activities={filteredActivities} /> */}
       </Content>
     </Container>
   );
@@ -70,8 +103,52 @@ const Container = styled.section`
     padding-bottom: 0;
   }
 `;
-
-const Title = styled.div`
+const Title = styled.h1`
+  color: #9f9f9f;
+  font-size: 4.65vw;
+  font-weight: 300;
+  overflow: hidden;
+  text-align: center;
+  margin-bottom: 10px;
+  &:after {
+    background-color: #9f9f9f;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    // vertical-align: middle;
+    width: 58%;
+  }
+  @media (min-width: 481px) {
+    margin-top: 47px;
+    font-size: 1.87vw;
+    margin-bottom: 24px;
+    &:after {
+      width: 75%;
+    }
+    &:before {
+      content: "";
+      display: inline-block;
+      
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 3.073vw;
+      height: 3.073vw;
+      margin-bottom: -1%;
+    }
+  }
+  // @media(max-width:1400px){
+  //   &:after{
+  //     width:79%;
+  //   }
+  // }
+  // @media(max-width:1000px){
+  //   &:after{
+  //     width:70%;
+  //   }
+  // }
+`;
+const DivTitle = styled.div`
   display: flex;
   margin-bottom: 12px;
   white-space: nowrap;
@@ -104,5 +181,73 @@ const Content = styled.div`
   @media (min-width: 480px) {
     margin-top: 25vh;
     padding-bottom: 0;
+  }
+`;
+const ActionContainer = styled.div`
+  & > :nth-of-type(1n + 2) {
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
+  @media (min-width: 481px) {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    // margin-left:-7%;
+    // margin-right:-7%;
+    & > :nth-of-type(1n + 2) {
+      display: flex;
+    }
+    & > :nth-of-type(1n + 4) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
+  }
+  @media (min-width: 769px) {
+    justify-content: center;
+  }
+`;
+const LastActions = styled.div``;
+const ShowMore = styled.div`
+  border: 1px solid #9f9f9f;
+  border-radius: 4px;
+  display: flex;
+  padding: 8px;
+  cursor: pointer;
+  p {
+    margin: auto;
+    color: #9f9f9f;
+    font-size: 4.65vw;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: 300;
+    &:after {
+      content: "";
+      display: inline-flex;
+      background-image: url(${upArrow});
+      transform: ${(props) => (props.arrow ? `rotate(180deg)` : "")};
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 9px;
+      height: 5px;
+    }
+  }
+
+  @media (min-width: 481px) {
+    border: 2px solid #9f9f9f;
+    border-radius: 8px;
+    width: 31%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 13px;
+    p {
+      font-size: 1.25vw;
+      font-weight: 400;
+      &:after {
+        width: 15px;
+        height: 8px;
+        left: -37px;
+      }
+    }
   }
 `;

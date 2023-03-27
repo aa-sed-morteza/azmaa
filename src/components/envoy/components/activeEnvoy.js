@@ -3,7 +3,7 @@ import styled from "styled-components";
 import profile from "../../../assets/profile.webp";
 import upArrow from "../../../assets/arrow.webp";
 import BestEnvoy from "../../home/components/bestEnvoy";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useSearchParams } from "react-router-dom";
 
 const Container = styled.section`
   display: flex;
@@ -92,12 +92,20 @@ const ShowMore = styled.div`
 
 export default function ActiveEnvoy({ envoys }) {
   const navigate = useNavigate();
-  const [showMore,setShowMore]=useState(false);
+  const [showMore, setShowMore] = useState(false);
+  const [searchparams, setsearchparams] = useSearchParams();
   return (
     <Container>
       <Title>فعال‌ترین نمایندگان</Title>
       <EnvoyContainer hide={showMore}>
-        {envoys.map((item,i) => (
+        {envoys.filter((item)=>{
+                let filter= searchparams.get("filter");
+                if(!filter)return true;
+                // let name= item.writer + item.description ;
+                let name= item.first_name + item.last_name +item.electoral_district_name ;
+                // console.log(item);
+                return name.includes(filter);
+              }).map((item, i) => (
           <BestEnvoy
             key={i}
             envoy={item}
@@ -107,7 +115,7 @@ export default function ActiveEnvoy({ envoys }) {
           />
         ))}
       </EnvoyContainer>
-      <ShowMore arrow={showMore} onClick={()=>{setShowMore(!showMore)}}>
+      <ShowMore arrow={showMore} onClick={() => { setShowMore(!showMore) }}>
         <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
       </ShowMore>
     </Container>

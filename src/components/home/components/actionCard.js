@@ -24,16 +24,16 @@ export default function ActionCard({ activity }) {
   let positive = 0;
   let negative = 0;
   let noChoice = 0;
-
-  for (const item of activity.vote) {
-    if (item.vote === activity.activity_choice[0].name) {
-      positive = positive + 1;
-    } else if (item.vote === activity.activity_choice[1].name) {
-      negative = negative + 1;
-    } else {
-      noChoice = noChoice + 1;
+  if((activity.activity_choice[0])  && (activity.activity_choice[1]))
+    for (const item of activity.vote) {
+      if (item.vote === activity.activity_choice[0].name) {
+        positive = positive + 1;
+      } else if (item.vote === activity.activity_choice[1].name) {
+        negative = negative + 1;
+      } else {
+        noChoice = noChoice + 1;
+      }
     }
-  }
 
 
   // useEffect(()=>{
@@ -46,15 +46,17 @@ export default function ActionCard({ activity }) {
     if (active === 0) {
       SetColor("#DFF5F0");
       setBColor("#6cbba9");
-     
-      setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[0].name)]);
+      if(activity.activity_choice[0] )
+        setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[0].name)]);
     } else if (active === 1) {
       SetColor("#FFD5D5");
       setBColor("#ffa5a5");
+      if(activity.activity_choice[1] )
       setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[1].name)]);
     } else if (active === 2) {
       SetColor("#EAEAEA");
       setBColor("#d8d8d8");
+      if(activity.activity_choice[2] )
       setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[2].name)]);
     }
   }, [active]);
