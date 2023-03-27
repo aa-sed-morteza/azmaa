@@ -9,6 +9,7 @@ import Modal from "../../general/modal";
 import useModal from "../../../hook/useModal";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
+import DefaultAvatar from "../../../assets/default-avatar.png";
 
 export default function Profile() {
   const { state, dispatch } = useUser();
@@ -95,7 +96,10 @@ export default function Profile() {
           {selectedFile ? (
             <img src={preview} alt="profile-picture" />
           ) : (
-            <img src={state.image} alt="profile-picture" />
+            <img
+              src={state.image ? state.image : DefaultAvatar}
+              alt="profile-picture"
+            />
           )}
         </Image>
         <Label color={state.userType}>
