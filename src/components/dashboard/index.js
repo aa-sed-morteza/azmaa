@@ -41,16 +41,15 @@ export default function Dashboard() {
 
   const getPersonalInfo = (userId) => {
     let data = new FormData();
-   
+
+    console.log(state.token);
 
     let config = {
       method: "put",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
-      headers: { 
-        'Authorization': `Bearer ${state.token}`, 
+      headers: {
+        Authorization: `Bearer ${state.token}`,
       },
-      withCredentials: true,
-    
     };
 
     axios(config)
@@ -59,16 +58,15 @@ export default function Dashboard() {
         dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
       })
       .catch((err) => {
-        console.log('error',err);
+        console.log("error", err);
       });
   };
 
-  console.log('data',state)
-  
+  console.log("data", state);
 
-  useEffect(()=>{
-    getPersonalInfo(Cookies.get('userId'));
-  },[state.token])
+  useEffect(() => {
+    getPersonalInfo(Cookies.get("userId"));
+  }, [state.token]);
 
   useEffect(() => {
     // if (state.loggedIn === false) {
@@ -88,7 +86,6 @@ export default function Dashboard() {
     let config = {
       method: "get",
       url: `${BaseBackURL}api/v1/accounts/member/${userId}`,
-      withCredentials: true,
     };
 
     axios(config).then((res) => {
@@ -109,10 +106,6 @@ export default function Dashboard() {
       }
     });
   };
-
- 
-
-  
 
   return (
     <Container>
@@ -150,8 +143,7 @@ export default function Dashboard() {
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/history" element={<MyHistory />} />
             <Route path="/mySection/:title" element={<News />} />
-            <Route path="/edit" element={<GeneralEditInformation/>} />
-
+            <Route path="/edit" element={<GeneralEditInformation />} />
           </Routes>
         ) : (
           <Routes>
@@ -178,7 +170,7 @@ export default function Dashboard() {
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/history" element={<MyHistory />} />
             <Route path="/mySection/:title" element={<News />} />
-            <Route path="/edit" element={<GeneralEditInformation/>} />
+            <Route path="/edit" element={<GeneralEditInformation />} />
           </Routes>
         )}
       </PageWraper>
