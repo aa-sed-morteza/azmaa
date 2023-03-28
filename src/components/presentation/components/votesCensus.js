@@ -6,7 +6,12 @@ import info from "../../../assets/info.webp";
 import absent from "../../../assets/absent.webp";
 import noVote from "../../../assets/noVote.webp";
 
-export default function VotesCensus({total,positive,negative,none,absent,without}) {
+export default function VotesCensus({total,positive,negative,none,absent,without,
+  real_absent_vote,
+  real_without_vote,
+  real_none_vote,
+  real_negative_vote,
+  real_positive_vote}) {
   
   return (
     <Container>
@@ -18,7 +23,7 @@ export default function VotesCensus({total,positive,negative,none,absent,without
           </Type>
           <Number color="#6CBBA9">
             <span>{positive}/</span>
-            {total}
+            {real_positive_vote}
           </Number>
         </Item>
 
@@ -28,7 +33,7 @@ export default function VotesCensus({total,positive,negative,none,absent,without
           </Type>
           <Number color="#FFA5A5">
             <span>{negative}/</span>
-            {total}
+            {real_negative_vote}
           </Number>
         </Item>
 
@@ -38,7 +43,7 @@ export default function VotesCensus({total,positive,negative,none,absent,without
           </Type>
           <Number color="#CBCBCB">
             <span>{none}/</span>
-            {total}
+            {real_none_vote}
           </Number>
         </Item>
 
@@ -48,7 +53,7 @@ export default function VotesCensus({total,positive,negative,none,absent,without
           </Type>
           <Number color="#9F9F9F">
             <span>{absent}/</span>
-            {total}
+            {real_absent_vote}
           </Number>
         </Item>
 
@@ -58,7 +63,7 @@ export default function VotesCensus({total,positive,negative,none,absent,without
           </Type>
           <Number color="#9F9F9F">
             <span>{without}/</span>
-            {total}
+            {real_without_vote}
           </Number>
         </Item>
       </Row>

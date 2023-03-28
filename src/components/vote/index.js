@@ -80,7 +80,6 @@ export default function Vote() {
              tag = item.tag[0].name;
             return tag.includes(selectedTag);
           }).sort((a,b)=>{
-
             if(selectedFilter== 1){
               return new Date(b.date) - new Date(a.date);
             }else if (selectedFilter== 2){
