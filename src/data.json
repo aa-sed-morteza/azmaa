@@ -52,7 +52,7 @@
     },
     {
       "title": "رأی‌گیری‌ها",
-      "path": "/dashboard/myActions",
+      "path": "/dashboard/myVotes",
       "icon": "../../assets/actions.webp",
       "active_icon": "../../assets/actions-active.webp"
     },

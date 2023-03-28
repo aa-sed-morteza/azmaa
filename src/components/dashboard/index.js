@@ -33,6 +33,8 @@ import { BaseBackURL } from "../../constant/api";
 import axios from "axios";
 import { toast } from "react-toastify";
 import GeneralEditInformation from "./superviser/components/editProfile/generalEditInformation";
+import MyVotes from "./superviser/pages/myVotes";
+import NewVote from "./superviser/components/newVote";
 
 export default function Dashboard() {
   const { state, dispatch } = useUser();
@@ -163,7 +165,9 @@ export default function Dashboard() {
 
             <Route path="/myEnvoy" element={<MyEnvoys />} />
             <Route path="/myActions" element={<MyActions />} />
+            <Route path="/myVotes" element={<MyVotes />} />
             <Route path="/myActions/:title" element={<NewAction />} />
+            <Route path="/myVotes/:title" element={<NewVote />} />
             <Route path="/mySection" element={<MySection />} />
             <Route path="/suggestion" element={<MySuggest />} />
             <Route path="/suggestion/:title" element={<AddNewSuggets />} />

@@ -11,8 +11,6 @@ import activeDisagree from "../../../../../../assets/disagree1.svg";
 import disagree from "../../../../../../assets/disagree.svg";
 import not from "../../../../../../assets/not.svg";
 import activeNot from "../../../../../../assets/not1.svg";
-import { BaseBackURL } from "../../../../../../constant/api";
-import axios from "axios";
 
 export default function VoteEnvoy() {
   const { state, dispatch } = useUser();
@@ -27,29 +25,19 @@ export default function VoteEnvoy() {
     { name: "absent", text: "غایب" },
   ]);
 
-  const getActions = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/activity/${state.typeAction.description}`,
-    };
-
-    axios(config).then((res) => {
-      console.log(res.data);
-      setActions([...res.data.activity_choice]);
-    });
-  };
-
   useEffect(() => {
-    getActions();
-  }, [state.typeAction.description]);
+    if (state.typeAction !== "vote") {
+      if (state.activityChoice) {
+        setActions([...state.activityChoice]);
+      }
+    }
+  }, []);
 
   const onSubmit = async (values, actions) => {
     dispatch({ type: "SET_VOTE_ENVOY", payload: values.vote });
-    dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 4 });
+    dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 4 });
     actions.resetForm();
   };
-
-  console.log(actions);
 
   const {
     values,
@@ -84,7 +72,7 @@ export default function VoteEnvoy() {
           onChange={() => {
             setFieldValue("vote", item.id);
           }}
-          checked={values.vote === item.id}
+          checked={values.vote == item.id}
         />
         <label htmlFor="vote">{item.name}</label>
         <img src={select == i + 1 ? activeAgree : agree} />
@@ -151,8 +139,83 @@ export default function VoteEnvoy() {
       {state.addActionLevel === 3 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
-            <Title>۳. عملکرد نماینده را انتخاب کنید:</Title>
-            {actionsItems}
+            <Title>۳. رأی نماینده را انتخاب کنید:</Title>
+            {state.typeAction.type == "vote" ? voteItems : actionsItems}
+
+            {/* <RadioButton
+              onClick={() => {
+                setFieldValue("vote", "positive");
+                setSelect(1);
+              }}
+            >
+              <input
+                type="radio"
+                name="vote"
+                value={values.vote}
+                onChange={() => {
+                  setFieldValue("vote", "positive");
+                }}
+                checked={values.vote == "positive"}
+              />
+              <label htmlFor="vote">موافق</label>
+              <img src={select == 1 ? activeAgree : agree} />
+            </RadioButton>
+            <RadioButton
+              onClick={() => {
+                setFieldValue("vote", "negative");
+                setSelect(2);
+              }}
+            >
+              <input
+                type="radio"
+                name="vote"
+                value={values.vote}
+                onChange={() => {
+                  setFieldValue("vote", "negative");
+                }}
+                checked={values.vote == "negative"}
+              />
+              <label htmlFor="vote">مخالف</label>
+              <img src={select == 2 ? activeDisagree : disagree} />
+            </RadioButton>
+
+            <RadioButton
+              onClick={() => {
+                setFieldValue("vote", "ممتنع");
+                setSelect(3);
+              }}
+            >
+              <input
+                type="radio"
+                name="vote"
+                value={values.vote}
+                onChange={() => {
+                  setFieldValue("vote", "ممتنع");
+                }}
+                checked={values.vote == "ممتنع"}
+              />
+              <label htmlFor="vote">ممتنع</label>
+              <img src={select == 3 ? activeNot : not} />
+            </RadioButton>
+
+            <RadioButton
+              onClick={() => {
+                setFieldValue("vote", "نامشخص");
+                setSelect(4);
+              }}
+            >
+              <input
+                type="radio"
+                name="vote"
+                value={values.vote}
+                onChange={() => {
+                  setFieldValue("vote", "نامشخص");
+                }}
+                checked={values.vote == "نامشخص"}
+              />
+              <label htmlFor="vote">نامشخص</label>
+            </RadioButton> */}
+
             {errors.vote && touched.vote && (
               <ErrorText>{errors.vote}</ErrorText>
             )}
@@ -179,8 +242,51 @@ export default function VoteEnvoy() {
         </form>
       ) : (
         <Container>
-          <Title>۳. عملکرد نماینده را انتخاب کنید:</Title>
-          {checkActionsItems}
+          <Title>۳. رأی نماینده را انتخاب کنید:</Title>
+          {state.typeAction.type == "vote" ? checkVoteItems : checkActionsItems}
+
+          {/* <RadioButton>
+            <input
+              type="radio"
+              name="vote"
+              value={state.voteEnvoy}
+              checked={state.voteEnvoy == "positive"}
+            />
+            <label htmlFor="text">موافق</label>
+            <img src={state.voteEnvoy == "positive" ? activeAgree : agree} />
+          </RadioButton> */}
+
+          {/* <RadioButton>
+            <input
+              type="radio"
+              name="vote"
+              value={state.voteEnvoy}
+              checked={state.voteEnvoy == "negative"}
+            />
+            <label htmlFor="text">مخالف</label>
+            <img src={state.voteEnvoy == "negative" ? activeDisagree : disagree} />
+          </RadioButton> */}
+
+          {/* <RadioButton>
+            <input
+              type="radio"
+              name="vote"
+              value={state.voteEnvoy}
+              checked={state.voteEnvoy == "ممتنع"}
+            />
+            <label htmlFor="text">ممتنع</label>
+            <img src={state.voteEnvoy == "ممتنع" ? activeNot : not} />
+          </RadioButton> */}
+
+          {/* <RadioButton>
+            <input
+              type="radio"
+              name="vote"
+              value={state.voteEnvoy}
+              checked={state.voteEnvoy == "نامشخص"}
+            />
+            <label htmlFor="text">نامشخص</label>
+          </RadioButton> */}
         </Container>
       )}
     </>

@@ -26,6 +26,7 @@ export default function SelectEnvoys() {
   const [states, setStates] = useState([]);
 
   const getEnvoys = () => {
+    console.log("getEnvoys");
     let config = {
       method: "get",
       url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${state.id}`,
@@ -146,7 +147,7 @@ export default function SelectEnvoys() {
 
   const onSubmit = async (values, actions) => {
     dispatch({ type: "SET_SELECT_ENVOUY", payload: values });
-    dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 3 });
+    dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 3 });
     actions.resetForm();
   };
 

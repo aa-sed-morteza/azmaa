@@ -32,6 +32,7 @@ const initialState = {
   imageArticle: {},
   documentArticle: {},
   addActionLevel: 1,
+  addVoteLevel: 1,
   typeAction: {},
   selectEnvoy: {},
   voteEnvoy: "",
@@ -108,6 +109,8 @@ const reducer = (state, action) => {
       return { ...state, documentArticle: action.payload };
     case "SET_ADD_ACT_LEVEL":
       return { ...state, addActionLevel: action.payload };
+    case "SET_ADD_VOTE_LEVEL":
+      return { ...state, addVoteLevel: action.payload };
     case "SET_TYPE_ACTION":
       return { ...state, typeAction: action.payload };
     case "SET_SELECT_ENVOUY":

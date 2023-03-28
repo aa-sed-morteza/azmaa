@@ -6,11 +6,13 @@ import title from "../../../../assets/title.svg";
 import { BaseBackURL } from "../../../../constant/api";
 import axios from "axios";
 import { useUser } from "../../../context/userContext";
-import NewEnvoy from "../../../envoy/components/newEnvoy";
+import { useNavigate } from "react-router-dom";
+import BestEnvoy from "../../../home/components/bestEnvoy";
 
 export default function MyEnvoys() {
   const { state, dispatch } = useUser();
   const [envoy, setEnvoys] = useState([]);
+  const navigate = useNavigate();
 
   const getEnvoys = () => {
     let config = {
@@ -45,7 +47,17 @@ export default function MyEnvoys() {
           {envoy.length === 0 ? (
             "در حال حاضر نماینده‌ای برای شما ثبت نشده است"
           ) : (
-            <NewEnvoy envoys={envoy} />
+            <EnvoyPart>
+              {envoy.map((item, i) => (
+                <BestEnvoy
+                  key={i}
+                  envoy={item}
+                  click={() => {
+                    navigate(`/envoy/${item.id}`);
+                  }}
+                />
+              ))}
+            </EnvoyPart>
           )}
         </CardGallery>
       </Gallery>
@@ -173,5 +185,16 @@ const GalleryTitle = styled.h2`
       background-size: contain;
       background-repeat: no-repeat;
     }
+  }
+`;
+
+const EnvoyPart = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+
+  & > div {
+    width: 29%;
   }
 `;

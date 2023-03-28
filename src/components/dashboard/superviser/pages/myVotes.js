@@ -14,7 +14,7 @@ import { useUser } from "../../../context/userContext";
 import axios from "axios";
 import { BaseBackURL } from "../../../../constant/api";
 
-export default function MyActions() {
+export default function MyVotes() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
   const [select, setSelect] = useState(1);
@@ -22,33 +22,10 @@ export default function MyActions() {
   const [activities, setActivities] = useState([]);
   const [envoys, setEnvoys] = useState([]);
 
-  const refreshToken = () => {
-    const data = new FormData();
-    data.append("refresh", state.refreshToken);
-
-    let config = {
-      method: "post",
-      url: `${BaseBackURL}api/token/refresh/`,
-      // headers: {
-      //   Authorization: `Bearer ${state.token}`,
-      // },
-      data: data,
-    };
-
-    axios(config)
-      .then((response) => {
-        // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const activityVoteUnconfirmed = () => {
+  const billVoteUnconfirmed = () => {
     let config = {
       method: "get",
-      url: `${BaseBackURL}api/v1/vote/activity/unconfirmed/`,
+      url: `${BaseBackURL}api/v1/bill/`,
       headers: {
         Authorization: `Bearer ${state.token}`,
       },
@@ -58,49 +35,51 @@ export default function MyActions() {
       .then((res) => {
         // console.log(res.data);
         if (res.data.length > 0) {
-          setActivities(res.data.filter((x) => x.voter.id == state.id));
+          setBills(res.data.filter((x) => x.voter.id === state.id));
         }
       })
       .catch((err) => {
-        if (err.response.status == 401) {
+        if (err.response.status === 401) {
           // refreshToken();
         }
       });
   };
 
   useEffect(() => {
-    activityVoteUnconfirmed();
+    billVoteUnconfirmed();
+    // activityVoteUnconfirmed();
   }, [state.token]);
 
   return (
     <Container>
       <Title>
         <p className="home">پنل / </p>
-        <p className="component"> فعالیت ها </p>
+        <p className="component"> رأی‌گیری‌ها </p>
       </Title>
       <Wraper>
         <AddnewAction
           onClick={() => {
-            navigate("فعالیت  جدید");
+            navigate("رأی‌گیری  جدید");
           }}
         >
-          <p className="text">ثبت فعالیت جدید</p>
+          <p className="text">ثبت رأی‌گیری جدید</p>
         </AddnewAction>
         <Filtering>
           <input placeholder="جستجو کن..." />
         </Filtering>
-
         <ActionGallery>
-          <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
-          {activities.length === 0 ? (
-            <p>هیچ فعالتی برای شما ثبت نشده است.</p>
+          <GalleryTitle>آخرین رأی‌گیری‌های من</GalleryTitle>
+          {bills.length === 0 ? (
+            <p style={{ margin: "0px" }}>
+              در حال حاضر برای شما موردی ثبت نشده است.
+            </p>
           ) : (
             <div>
-              {activities.map((item, i) => (
+              {bills.map((item, i) => (
                 <ActionCard
-                  img={pic2}
-                  titr="عملکرد"
-                  title={item.activity}
+                  img={pic}
+                  titr="رأی‌گیری"
+                  title={item.bill}
                   date="?"
                   icon={icon}
                   envoys={item.voter}
