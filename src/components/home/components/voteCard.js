@@ -662,7 +662,7 @@ export default function VoteCard({ bill }) {
       <ButtonWraper>
         <LargButton
           onClick={() => {
-            navigate(`presentation/${bill.id}`);
+            navigate(`/presentation/${bill.id}`);
           }}
         >
           <p className="content">جزئیات</p>

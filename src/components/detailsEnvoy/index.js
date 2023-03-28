@@ -10,7 +10,7 @@ import Filtering from "./components/Filtering";
 import SocialNetwork from "./components/socialNetwork";
 import axios from "axios";
 import { BaseBackURL } from "../../constant/api";
-
+import Controller from "../home/components/controller";
 export default function DetailsEnvoy() {
   const { title } = useParams();
   const width = useWidth();
@@ -24,12 +24,16 @@ export default function DetailsEnvoy() {
     };
 
     axios(config).then((res) => {
-      // console.log(res.data);
+      //  console.log(res.data);
       if (res.data.length > 0) {
         setEnvoys([...res.data]);
       }
     });
   };
+
+
+
+
 
   useEffect(() => {
     getEnvoys();
@@ -39,6 +43,7 @@ export default function DetailsEnvoy() {
 
   useEffect(()=>{
     setEnvoy(envoys.find((x) => x.id === parseInt(title)));
+    // console.log("title="+title);
   },[envoys])
 
 
@@ -72,7 +77,7 @@ export default function DetailsEnvoy() {
       </FirstSection>
       {/* filtering */}
       <SecondSection>
-        <Filtering id={title} />
+        <Controller vote_voter={title} />
         
       </SecondSection>
       {/* socialNetwork */}

@@ -350,7 +350,7 @@ const AreaContainer = styled.div`
   }
 `;
 
-export default function Controller() {
+export default function Controller({vote_voter}) {
   const { state, dispatch } = useUser();
   const [select, setSelect] = useState(0);
   const [bills, setBills] = useState([]);
@@ -368,10 +368,19 @@ export default function Controller() {
   const width = useWidth();
 
   const getBills = () => {
-    let config = {
+    let config;
+    if (vote_voter>0)
+    {
+     config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter=${vote_voter}&ordering=name, date`,
+    };
+  }else    {
+     config = {
       method: "get",
       url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter&ordering=name, date`,
     };
+  }
 
     axios(config).then((res) => {
       // console.log(res.data);
@@ -424,10 +433,21 @@ export default function Controller() {
   };
 
   const getActivities = () => {
-    let config = {
+    let config;
+    // console.log("vote_voter="+vote_voter);
+    if(vote_voter>0)
+    {
+     config = {
       method: "get",
-      url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter`,
-    };
+      url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter=${vote_voter}`,
+    }
+  }
+    else{
+       config = {
+        method: "get",
+        url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter`,
+      }
+    }
 
     axios(config).then((res) => {
       // console.log(res.data);
@@ -489,6 +509,8 @@ export default function Controller() {
 
   const controllItem = data.controlPanel.map((x, i) => {
     return (
+      <>
+      {(vote_voter>0 && (i== 1||i==2))?"":
       <Tab
         key={i}
         onClick={() => setSelect(i)}
@@ -504,6 +526,9 @@ export default function Controller() {
 
         <p>{x.name}</p>
       </Tab>
+      }
+      </>
+        
     );
   });
   return (
@@ -573,7 +598,7 @@ export default function Controller() {
                   <p>{secondHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
                 </ShowMore>
               </LastActions>
-
+            {vote_voter>0?<hr/>:
               <BestEnvoyContainer>
                 <Title>شفاف‌ترین نمایندگان</Title>
                 <SecondAlbum hide={thirdHide}>
@@ -607,10 +632,11 @@ export default function Controller() {
                   <p>{thirdHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
                 </ShowMore>
               </BestEnvoyContainer>
+              }
             </>
           ) : (
             <>
-              <ControlCore envoys={envoys} areas={areas} />
+              {vote_voter>0?<hr/>:<ControlCore envoys={envoys} areas={areas} />}
 
               <LastActions>
                 <Title> آخرین عملکردها</Title>
