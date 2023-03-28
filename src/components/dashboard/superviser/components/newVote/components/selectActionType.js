@@ -80,7 +80,7 @@ export default function SelectActionType() {
 
   const onSubmit = async (values, actions) => {
     dispatch({ type: "SET_TYPE_ACTION", payload: values });
-    dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 2 });
+    dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 2 });
     actions.resetForm();
   };
 

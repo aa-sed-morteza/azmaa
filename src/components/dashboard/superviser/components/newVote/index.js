@@ -16,21 +16,21 @@ export default function NewVote() {
         <p className="home">پنل / فعالیت ها /</p>
         <p className="component"> {title} </p>
       </Title>
-      {state.addActionLevel === 1 && <SelectActionType />}
-      {state.addActionLevel === 2 && (
+      {state.addVoteLevel === 1 && <SelectActionType />}
+      {state.addVoteLevel === 2 && (
         <>
           <SelectActionType />
           <SelectEnvoys />
         </>
       )}
-      {state.addActionLevel === 3 && (
+      {state.addVoteLevel === 3 && (
         <>
           <SelectActionType />
           <SelectEnvoys />
           <VoteEnvoy />
         </>
       )}
-      {state.addActionLevel === 4 && (
+      {state.addVoteLevel === 4 && (
         <>
           <SelectActionType />
           <SelectEnvoys />

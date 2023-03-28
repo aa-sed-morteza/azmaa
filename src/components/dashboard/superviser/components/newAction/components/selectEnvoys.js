@@ -28,7 +28,7 @@ export default function SelectEnvoys() {
   const getEnvoys = () => {
     let config = {
       method: "get",
-      url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${state.id}`,
     };
 
     axios(config).then((res) => {
@@ -104,7 +104,6 @@ export default function SelectEnvoys() {
     getElectoralDistrict();
   }, []);
 
-
   const stateList = states.map((x, i) => {
     return (
       // <SelectArea area={x.name} envoys={x.agent} key={i} />
@@ -120,7 +119,9 @@ export default function SelectEnvoys() {
         <div className="symbol"></div>
         <div className="content">
           {x.name && <h2 className="title">{x.name}</h2>}
-          {x.city_name.length>0 && <p className="date">{x.city_name[0].name}</p>}
+          {x.city_name.length > 0 && (
+            <p className="date">{x.city_name[0].name}</p>
+          )}
         </div>
       </ActiveOrder>
     );
@@ -135,8 +136,9 @@ export default function SelectEnvoys() {
         <div className="symbol"></div>
         <div className="content">
           <h2 className="title">{x.name}</h2>
-          {x.city_name.length>0 &&  <p className="date">{x.city_name[0].name}</p>}
-         
+          {x.city_name.length > 0 && (
+            <p className="date">{x.city_name[0].name}</p>
+          )}
         </div>
       </ActiveOrder>
     );

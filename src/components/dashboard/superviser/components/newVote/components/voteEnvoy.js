@@ -30,12 +30,12 @@ export default function VoteEnvoy() {
       if (state.activityChoice) {
         setActions([...state.activityChoice]);
       }
-    } 
+    }
   }, []);
 
   const onSubmit = async (values, actions) => {
     dispatch({ type: "SET_VOTE_ENVOY", payload: values.vote });
-    dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 4 });
+    dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 4 });
     actions.resetForm();
   };
 
@@ -95,31 +95,28 @@ export default function VoteEnvoy() {
     );
   });
 
-  
-
   const voteItems = votes.map((item, i) => {
-    return(
+    return (
       <RadioButton
-      key={i}
-      onClick={() => {
-        setFieldValue("vote", item.name);
-        setSelect(i + 1);
-      }}
-    >
-      <input
-        type="radio"
-        name="vote"
-        value={values.vote}
-        onChange={() => {
+        key={i}
+        onClick={() => {
           setFieldValue("vote", item.name);
+          setSelect(i + 1);
         }}
-        checked={values.vote == item.name}
-      />
-      <label htmlFor="vote">{item.text}</label>
-      <img src={select == i + 1 ? activeAgree : agree} />
-    </RadioButton>
-    )
-   
+      >
+        <input
+          type="radio"
+          name="vote"
+          value={values.vote}
+          onChange={() => {
+            setFieldValue("vote", item.name);
+          }}
+          checked={values.vote == item.name}
+        />
+        <label htmlFor="vote">{item.text}</label>
+        <img src={select == i + 1 ? activeAgree : agree} />
+      </RadioButton>
+    );
   });
 
   const checkVoteItems = votes.map((item, i) => {
@@ -136,7 +133,6 @@ export default function VoteEnvoy() {
       </RadioButton>
     );
   });
-
 
   return (
     <>

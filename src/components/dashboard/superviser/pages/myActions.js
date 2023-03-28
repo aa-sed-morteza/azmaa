@@ -45,29 +45,6 @@ export default function MyActions() {
       });
   };
 
-  const billVoteUnconfirmed = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/vote/bill/unconfirmed/`,
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-      },
-    };
-
-    axios(config)
-      .then((res) => {
-        // console.log(res.data);
-        if (res.data.length > 0) {
-          setBills(res.data.filter((x) => x.voter.id == state.id));
-        }
-      })
-      .catch((err) => {
-        if (err.response.status == 401) {
-          // refreshToken();
-        }
-      });
-  };
-
   const activityVoteUnconfirmed = () => {
     let config = {
       method: "get",
@@ -92,7 +69,6 @@ export default function MyActions() {
   };
 
   useEffect(() => {
-    billVoteUnconfirmed();
     activityVoteUnconfirmed();
   }, [state.token]);
 
@@ -112,53 +88,15 @@ export default function MyActions() {
         </AddnewAction>
         <Filtering>
           <input placeholder="جستجو کن..." />
-          <Items>
-            <Item
-              onClick={() => {
-                setSelect(1);
-              }}
-              className={select == 1 ? "active" : ""}
-            >
-              همه
-            </Item>
-            <Item
-              icon={select == 2 ? voteAction : vote}
-              onClick={() => {
-                setSelect(2);
-              }}
-              className={select == 2 ? "active" : ""}
-            >
-              رأی‌گیری‌ها
-            </Item>
-            <Item
-              icon={action}
-              onClick={() => {
-                setSelect(3);
-              }}
-              className={select == 3 ? "active" : ""}
-            >
-              عملکردها
-            </Item>
-          </Items>
         </Filtering>
-        {select == 1 && (
-          <ActionGallery>
-            <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
-            {bills.map((item, i) => {
-              return (
-                <ActionCard
-                  img={pic}
-                  titr="رأی‌گیری"
-                  title={item.bill}
-                  date="?"
-                  icon={icon}
-                  envoys={item.voter}
-                  action={item.vote}
-                />
-              );
-            })}
-            {activities.map((item, i) => {
-              return (
+
+        <ActionGallery>
+          <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
+          {activities.length === 0 ? (
+            <p>هیچ فعالتی برای شما ثبت نشده است.</p>
+          ) : (
+            <div>
+              {activities.map((item, i) => (
                 <ActionCard
                   img={pic2}
                   titr="عملکرد"
@@ -168,48 +106,10 @@ export default function MyActions() {
                   envoys={item.voter}
                   action={item.vote}
                 />
-              );
-            })}
-          </ActionGallery>
-        )}
-        {select == 2 && (
-          <ActionGallery>
-            <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
-
-            {bills.map((item, i) => {
-              return (
-                <ActionCard
-                  img={pic}
-                  titr="رأی‌گیری"
-                  title={item.bill}
-                  date="?"
-                  icon={icon}
-                  envoys={item.voter}
-                  action={item.vote}
-                />
-              );
-            })}
-          </ActionGallery>
-        )}
-        {select == 3 && (
-          <ActionGallery>
-            <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
-
-            {activities.map((item, i) => {
-              return (
-                <ActionCard
-                  img={pic2}
-                  titr="عملکرد"
-                  title={item.activity}
-                  date="?"
-                  icon={icon}
-                  envoys={item.voter}
-                  action={item.vote}
-                />
-              );
-            })}
-          </ActionGallery>
-        )}
+              ))}
+            </div>
+          )}
+        </ActionGallery>
       </Wraper>
     </Container>
   );

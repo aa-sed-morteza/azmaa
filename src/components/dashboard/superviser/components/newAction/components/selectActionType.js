@@ -21,7 +21,7 @@ export default function SelectActionType() {
   const [check, setCheck] = useState(-1);
   const { state, dispatch } = useUser();
   const [voteItems, setVoteItems] = useState([]);
-  const [actionItems,setActionItems]=useState([]);
+  const [actionItems, setActionItems] = useState([]);
 
   const getVoteItems = () => {
     let config = {
@@ -39,26 +39,25 @@ export default function SelectActionType() {
       });
   };
 
-  const getActionsItems =()=>{
+  const getActionsItems = () => {
     let config = {
       method: "get",
       url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter=`,
     };
     axios(config)
-    .then(function (response) {
-      // console.log(JSON.stringify(response.data));
-      setActionItems([...response.data]);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
+      .then(function (response) {
+        // console.log(JSON.stringify(response.data));
+        setActionItems([...response.data]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     getVoteItems();
     getActionsItems();
-  },[])
-
+  }, []);
 
   const voteList = voteItems.map((x, i) => {
     return (
@@ -68,7 +67,6 @@ export default function SelectActionType() {
         onClick={() => {
           setCheck(i);
           setFieldValue("description", x.id);
-
         }}
       >
         <div className="symbol"></div>
@@ -95,10 +93,6 @@ export default function SelectActionType() {
       </SelectItem>
     );
   });
-
- 
-
-
 
   const actionList = actionItems.map((x, i) => {
     return (
@@ -141,10 +135,7 @@ export default function SelectActionType() {
     dispatch({ type: "SET_TYPE_ACTION", payload: values });
     dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 2 });
     actions.resetForm();
-   
   };
-
-  
 
   const {
     values,
@@ -164,7 +155,6 @@ export default function SelectActionType() {
     onSubmit,
   });
 
-  
   useEffect(() => {
     if (select === 1) {
       setFieldValue("type", "vote");
@@ -173,7 +163,6 @@ export default function SelectActionType() {
       setFieldValue("type", "action");
     }
   }, [select]);
- 
 
   return (
     <>
@@ -183,29 +172,8 @@ export default function SelectActionType() {
             <Title>۱. فعالیت موردنظر خود را انتخاب کنید:</Title>
             <Filtering>
               <input placeholder="جستجو کن..." />
-              <Items>
-                <Item
-                  icon={select == 1 ? voteAction : vote}
-                  onClick={() => {
-                    setSelect(1);
-                  }}
-                  className={select == 1 ? "active" : ""}
-                >
-                  رأی‌گیری‌ها
-                </Item>
-                <Item
-                  icon={action}
-                  onClick={() => {
-                    setSelect(2);
-                  }}
-                  className={select == 2 ? "active" : ""}
-                >
-                  عملکردها
-                </Item>
-              </Items>
             </Filtering>
-            {select === 1 && <Gallery>{voteList}</Gallery>}
-            {select === 2 && <Gallery>{actionList}</Gallery>}
+            <Gallery>{actionList}</Gallery>
             {errors.type && touched.type && (
               <ErrorText>{errors.type}</ErrorText>
             )}
@@ -238,27 +206,8 @@ export default function SelectActionType() {
 
           <Filtering>
             <input placeholder="جستجو کن..." />
-            <Items>
-              <Item
-                icon={state.typeAction.type == "vote" ? voteAction : vote}
-                className={state.typeAction.type == "vote" ? "active" : ""}
-              >
-                رأی‌گیری‌ها
-              </Item>
-              <Item
-                icon={action}
-                className={state.typeAction.type == "action" ? "active" : ""}
-              >
-                عملکردها
-              </Item>
-            </Items>
           </Filtering>
-          {state.typeAction.type == "vote" && (
-            <Gallery>{checkVoteList}</Gallery>
-          )}
-          {state.typeAction.type == "action" && (
-            <Gallery>{checkActionList}</Gallery>
-          )}
+          <Gallery>{checkActionList}</Gallery>
         </Container>
       )}
     </>
@@ -361,7 +310,7 @@ const Item = styled.p`
     &:after {
       content: "";
       display: block;
-      position:absolute;
+      position: absolute;
       width: 100%;
       height: 3px;
       background-color: #dff5f0;

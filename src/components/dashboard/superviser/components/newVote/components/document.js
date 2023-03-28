@@ -60,7 +60,7 @@ export default function Document() {
             toast.success(" فعالیت با موفقیت ثبت شد!", {
               position: toast.POSITION.TOP_RIGHT,
             });
-            dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
+            dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
             navigate("/dashboard/myActions");
             actions.resetForm();
           })
@@ -94,7 +94,7 @@ export default function Document() {
             toast.success(" فعالیت با موفقیت ثبت شد!", {
               position: toast.POSITION.TOP_RIGHT,
             });
-            dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
+            dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
             navigate("/dashboard/myActions");
             actions.resetForm();
           })

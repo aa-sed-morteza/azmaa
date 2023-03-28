@@ -147,7 +147,7 @@ export default function SelectEnvoys() {
 
   const onSubmit = async (values, actions) => {
     dispatch({ type: "SET_SELECT_ENVOUY", payload: values });
-    dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 3 });
+    dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 3 });
     actions.resetForm();
   };
 
