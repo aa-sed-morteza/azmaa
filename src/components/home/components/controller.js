@@ -476,11 +476,12 @@ export default function Controller({vote_voter}) {
   };
 
   useEffect(() => {
+
     getBills();
-    getEnvoys();
     getActivities();
     getElectoralDistrict();
     getCiteis();
+    getEnvoys();
   }, []);
 
   
@@ -505,7 +506,7 @@ export default function Controller({vote_voter}) {
     filterAreaByCity();
   }, [state.city]);
 
-  const newList = envoys.sort((a, b) => a.transparency > b.transparency);
+  const newList = envoys.sort((a, b) =>{ return a.transparency - b.transparency });
 
   const controllItem = data.controlPanel.map((x, i) => {
     return (
@@ -598,7 +599,7 @@ export default function Controller({vote_voter}) {
                   <p>{secondHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
                 </ShowMore>
               </LastActions>
-            {vote_voter>0?<hr/>:
+            {(vote_voter>0 && envoys.length>10 )?<hr/>:
               <BestEnvoyContainer>
                 <Title>شفاف‌ترین نمایندگان</Title>
                 <SecondAlbum hide={thirdHide}>
@@ -636,8 +637,10 @@ export default function Controller({vote_voter}) {
             </>
           ) : (
             <>
-              {vote_voter>0?<hr/>:<ControlCore envoys={envoys} areas={areas} />}
-
+            {/* {console.log(areas.length)}
+            {console.log(envoys.length)} */}
+              {(vote_voter>0 || (areas.length<2) )?<hr/>:<ControlCore envoys={envoys} areas={areas} />}
+              
               <LastActions>
                 <Title> آخرین عملکردها</Title>
                 <ActionContainer hide={secondHide}>

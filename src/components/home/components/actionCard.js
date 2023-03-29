@@ -21,7 +21,7 @@ export default function ActionCard({ activity }) {
   const [votes, setVotes] = useState([]);
   const envoyData = data.envoy;
   const navigate = useNavigate();
-  console.log(activity);
+  // console.log(activity);
   let positive = 0;
   let negative = 0;
   let noChoice = 0;
