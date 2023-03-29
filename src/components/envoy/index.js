@@ -100,7 +100,7 @@ export default function Envoy() {
         )}
 
         <Search />
-        <AdvanceSearch  setEnvoys={setEnvoys} />
+        {/* <AdvanceSearch  setEnvoys={setEnvoys} /> */}
         {width < 481 && <EnvoyFiltering envoys={envoys} />}
         {width > 481 && (
           <>

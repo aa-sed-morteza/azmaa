@@ -10,6 +10,7 @@ import VoteCard from "../home/components/voteCard";
 import upArrow from "../../assets/arrow.webp";
 
 export default function Vote() {
+  const [selectedFilter, setSelectedFilter] = useState(0);
   const [selectedTag, setSelectedTag] = useState("همه");
   const [bills, setBills] = useState([]);
   const [filteredBills, setFilteredBills] = useState([]);
@@ -37,7 +38,8 @@ export default function Vote() {
 
 
   useEffect(() => {
-    if (bills.filter((item) => item.tag[0].name === selectedTag)) {
+    if(bills.tag)
+    if (bills.filter((item) =>item.tag[0].name === selectedTag )) {
       setFilteredBills(bills.filter((item) => item.tag[0].name === selectedTag))
     } else {
       setBills(bills)
@@ -61,7 +63,7 @@ export default function Vote() {
       <Content>
         <Controler selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
         {/* {console.log(selectedTag)} */}
-        <Filtering />
+        <Filtering selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
         <Titleh1>آخرین رأی‌گیری‌ها</Titleh1>
         <VoterContainer hide={firstHide}>
           {bills.filter((item) => {
@@ -69,12 +71,24 @@ export default function Vote() {
             if (!filter) return true;
             // let name= item.writer + item.description ;
             let name = item.name;
-            //  console.log(item);
+              console.log(item);
             return name.includes(filter);
           }).filter((item) => {
             if (selectedTag === 'همه') return true;
-            let tag = item.tag[0].name;
+            let tag="";
+            if(item.tag[0])
+             tag = item.tag[0].name;
             return tag.includes(selectedTag);
+          }).sort((a,b)=>{
+            if(selectedFilter== 1){
+              return new Date(b.date) - new Date(a.date);
+            }else if (selectedFilter== 2){
+              return new Date(a.date) - new Date(b.date);
+            }else if (selectedFilter== 3){
+              return a.bill_transparency - b.bill_transparency;
+            }else{
+              return 0;
+            }
           }).map((item, i) => {
             return <VoteCard bill={item} key={i} />;
           })}

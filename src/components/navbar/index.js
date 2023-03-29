@@ -365,6 +365,7 @@ export default function Navbar() {
       navigate("/dashboard");
       setDashboard(true)
     }
+    setOpen(!open);
     // setDashboard(!dashboard);
     // setOpen(false);
     // if (!dashboard) {

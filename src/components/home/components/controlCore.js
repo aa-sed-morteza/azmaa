@@ -147,7 +147,7 @@ export default function ControlCore(props) {
         </Title>
       </Selector>
       <Content>
-        {select === "transparent" && (
+        {select === "transparent" ? (
           <>
             <EnvoyContainer hide={envoyMore}>
               {newList.map((item, i) => {
@@ -171,8 +171,8 @@ export default function ControlCore(props) {
               <p>{envoyMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
             </ShowMore>
           </>
-        )}
-        {select === "area" && (
+        ):(
+        // {select === "area" && (
           <>
             <AreaContainer hide={areaMore}>
               {areas.map((item, i) => {

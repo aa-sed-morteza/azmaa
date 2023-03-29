@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import symbol from "../../../assets/vote-logo.webp";
+import symbol2 from "../../../assets/vote-logo-reject.webp";
 import vote from "../../../assets/vote.webp";
 import success from "../../../assets/success.webp";
 import faild from "../../../assets/faild.webp";
 import not from "../../../assets/not.webp";
+import absentimg from "../../../assets/absent.webp";
+import noVote from "../../../assets/noVote.webp";
 import data from "../../../data.json";
 import left from ".././../../assets/left.webp";
 import { useNavigate } from "react-router-dom";
@@ -42,6 +45,17 @@ const CardHeader = styled.div`
   justify-content: space-between;
   & > .vote-logo {
     background-image: url(${symbol});
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20.698vw;
+    height: 17.674vw;
+    @media (min-width: 481px) {
+      width: 6.771vw;
+      height: 6.771vw;
+    }
+  }
+  & > .vote-logo-reject {
+    background-image: url(${symbol2});
     background-size: contain;
     background-repeat: no-repeat;
     width: 20.698vw;
@@ -282,6 +296,114 @@ const Not = styled.div`
   }
 `;
 
+const Absentdiv = styled.div`
+  color: #d8d8d8;
+  font-weight: 300;
+  font-size: 5.58vw;
+  position: relative;
+  /* display: flex;
+  align-items: center; */
+  cursor: pointer;
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 9.535vw;
+    height: 9.535vw;
+    background-image: url(${absentimg});
+    background-size: contain;
+    background-repeat: no-repeat;
+    right: -11.628vw;
+    top: -1.395vw;
+  }
+
+  &.active,
+  &:hover {
+    font-weight: bold;
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 18.605vw;
+      height: 0.93vw;
+      background-color: #d8d8d8;
+      bottom: -3.023vw;
+      right: -11.628vw;
+    }
+  }
+  @media (min-width: 481px) {
+    font-size: 1.458vw;
+    font-weight: 400;
+    padding-bottom: 10px;
+    &:before {
+      width: 2.917vw;
+      height: 2.917vw;
+      right: -3.385vw;
+      top: -0.26vw;
+    }
+    &:after {
+      width: 5.208vw !important;
+      bottom: -0.7vh !important;
+      height: 0.208vw !important;
+      right: -3.031vw !important;
+    }
+  }
+`;
+
+const Nonvote = styled.div`
+  color: #d8d8d8;
+  font-weight: 300;
+  font-size: 5.58vw;
+  position: relative;
+  /* display: flex;
+  align-items: center; */
+  cursor: pointer;
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 9.535vw;
+    height: 9.535vw;
+    background-image: url(${noVote});
+    background-size: contain;
+    background-repeat: no-repeat;
+    right: -11.628vw;
+    top: -1.395vw;
+  }
+
+  &.active,
+  &:hover {
+    font-weight: bold;
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 18.605vw;
+      height: 0.93vw;
+      background-color: #d8d8d8;
+      bottom: -3.023vw;
+      right: -11.628vw;
+    }
+  }
+  @media (min-width: 481px) {
+    font-size: 1.458vw;
+    font-weight: 400;
+    padding-bottom: 10px;
+    &:before {
+      width: 2.917vw;
+      height: 2.917vw;
+      right: -3.385vw;
+      top: -0.26vw;
+    }
+    &:after {
+      width: 5.208vw !important;
+      bottom: -0.7vh !important;
+      height: 0.208vw !important;
+      right: -3.031vw !important;
+    }
+  }
+`;
+
 const EnvoyGallery = styled.div`
   background-color: ${(props) => props.color};
   border-radius: 4px;
@@ -476,6 +598,14 @@ export default function VoteCard({ bill }) {
       SetColor("#EAEAEA");
       setBColor("#d8d8d8");
       setEnvoyData([...bill.without_vote]);
+    }else if (active === 3) {
+      SetColor("#EAEAEA");
+      setBColor("#d8d8d8");
+      setEnvoyData([...bill.none_vote]);
+    }else if (active === 4) {
+      SetColor("#EAEAEA");
+      setBColor("#d8d8d8");
+      setEnvoyData([...bill.absent_vote]);
     } else if (active === 0) {
       SetColor("#DFF5F0");
       setBColor("#6cbba9");
@@ -487,7 +617,7 @@ export default function VoteCard({ bill }) {
   return (
     <VCContainer>
       <CardHeader>
-        <div className="vote-logo"></div>
+        <div className={bill.is_approved?"vote-logo":"vote-logo-reject"}></div>
         <div className="title-card">
           <p className="title">رأی‌گیری</p>
           <h2>{bill.name}</h2>
@@ -513,6 +643,18 @@ export default function VoteCard({ bill }) {
         >
           {toFarsiNumber(bill.vote_number.without_vote)}
         </Not>
+        <Nonvote
+          onClick={() => setActive(3)}
+          className={active === 3 ? "active" : ""}
+        >
+          {toFarsiNumber(bill.vote_number.none)}
+        </Nonvote>
+        <Absentdiv
+          onClick={() => setActive(4)}
+          className={active === 4 ? "active" : ""}
+        >
+          {toFarsiNumber(bill.vote_number.absent)}
+        </Absentdiv>
       </Statistics>
 
       <EnvoyGallery color={color}>{envoyList}</EnvoyGallery>
@@ -520,7 +662,7 @@ export default function VoteCard({ bill }) {
       <ButtonWraper>
         <LargButton
           onClick={() => {
-            navigate(`presentation/${bill.id}`);
+            navigate(`/presentation/${bill.id}`);
           }}
         >
           <p className="content">جزئیات</p>

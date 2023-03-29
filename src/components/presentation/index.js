@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./components/header";
 import symbol from "../../assets/vote-logo.webp";
+import symbol2 from "../../assets/vote-logo-reject.webp";
 import vote from "../../assets/vote.webp";
 import DetailsVotes from "./components/detailsvotes";
 import Census from "./components/census";
@@ -23,7 +24,7 @@ export default function Presentation() {
     };
     axios(config)
       .then((res) => {
-        // console.log(JSON.stringify(res.data));
+         console.log(JSON.stringify(res.data));
         setBill(res.data);
       })
       .catch((error) => {
@@ -45,13 +46,14 @@ export default function Presentation() {
         {bill.name && (
           <Wraper>
             <Header
-              img={symbol}
+              
+              img={bill.is_approved?symbol:symbol2}
               icon={vote}
               type="رای گیری"
               date={bill.date && convertDateToFarsi(bill.date)}
               title={bill.name}
             />
-            <DetailsVotes title={bill.name} fraction={bill.fraction.name} />
+            <DetailsVotes title={bill.name} fraction={bill.fraction?bill.fraction.name:""} />
             <Census
               total={bill.vote_number.total}
               complete={"?"}
@@ -64,6 +66,12 @@ export default function Presentation() {
               none={bill.vote_number.none}
               absent={bill.vote_number.absent}
               without={bill.vote_number.without_vote}
+              real_absent_vote={bill.real_absent_vote_number}
+              real_without_vote={bill.real_without_vote_number}
+              real_none_vote={bill.real_none_vote_number}
+              real_negative_vote={bill.real_negative_vote_number}
+              real_positive_vote={bill.real_positive_vote_number}
+
             />
           </Wraper>
         )}

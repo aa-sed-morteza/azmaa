@@ -17,14 +17,14 @@ export default function ControlStatus({ action }) {
   const [select, setSelect] = useState(1);
   const width = useWidth();
   const agree = action.vote.filter(
-    (x) => x.vote == action.activity_choice[0].name
+    (x) => action.activity_choice[0]?x.vote == action.activity_choice[0].name:""
   );
 
   const disagree = action.vote.filter(
-    (x) => x.vote == action.activity_choice[1].name
+    (x) => action.activity_choice[1]?x.vote == action.activity_choice[1].name:""
   );
   const another = action.vote.filter(
-    (x) => x.vote == action.activity_choice[2].name
+    (x) =>action.activity_choice[2]? x.vote == action.activity_choice[2].name:""
   );
 
   

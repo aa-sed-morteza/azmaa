@@ -38,39 +38,39 @@ const FilterItem = styled.p`
   }
 `;
 
-export default function Filtering() {
-  const [select, setSelect] = useState(1);
+export default function Filtering({selectedFilter ,setSelectedFilter}) {
+  // const [select, setSelect] = useState(1);
   return (
     <FilterBox>
       <FilterItem
         onClick={() => {
-          setSelect(1);
+          setSelectedFilter(1);
         }}
-        className={select === 1 ? "select" : ""}
+        className={selectedFilter === 1 ? "select" : ""}
       >
         جدیدترین
       </FilterItem>
       <FilterItem
         onClick={() => {
-          setSelect(2);
+          setSelectedFilter(2);
         }}
-        className={select === 2 ? "select" : ""}
+        className={selectedFilter === 2 ? "select" : ""}
       >
         قدیمی‌ترین
       </FilterItem>
       <FilterItem
         onClick={() => {
-          setSelect(3);
+          setSelectedFilter(3);
         }}
-        className={select === 3 ? "select" : ""}
+        className={selectedFilter === 3 ? "select" : ""}
       >
         شفاف‌ترین
       </FilterItem>
       <FilterItem
         onClick={() => {
-          setSelect(4);
+          setSelectedFilter(4);
         }}
-        className={select === 4 ? "select" : ""}
+        className={selectedFilter === 4 ? "select" : ""}
       >
         حروف الفبا
       </FilterItem>
