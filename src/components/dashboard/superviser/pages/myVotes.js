@@ -25,7 +25,7 @@ export default function MyVotes() {
   const billVoteUnconfirmed = () => {
     let config = {
       method: "get",
-      url: `${BaseBackURL}api/v1/bill/`,
+      url: `${BaseBackURL}api/v1/bill/?parliment_member=42`,
       headers: {
         Authorization: `Bearer ${state.token}`,
       },
@@ -46,7 +46,7 @@ export default function MyVotes() {
   };
 
   useEffect(() => {
-    billVoteUnconfirmed();
+    // billVoteUnconfirmed();
     // activityVoteUnconfirmed();
   }, [state.token]);
 

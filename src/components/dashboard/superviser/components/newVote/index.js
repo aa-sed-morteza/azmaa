@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useUser } from "../../../../context/userContext";
@@ -10,6 +10,12 @@ import VoteEnvoy from "./components/voteEnvoy";
 export default function NewVote() {
   const { state, dispatch } = useUser();
   const { title } = useParams();
+
+  useEffect(() => {
+    return () => {
+      dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
+    };
+  }, []);
   return (
     <Container>
       <Title>
