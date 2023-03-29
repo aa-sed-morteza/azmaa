@@ -11,11 +11,11 @@ export default function NewVote() {
   const { state, dispatch } = useUser();
   const { title } = useParams();
 
-  useEffect(() => {
-    return () => {
-      dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
+  //   };
+  // }, []);
   return (
     <Container>
       <Title>

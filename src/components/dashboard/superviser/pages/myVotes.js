@@ -18,14 +18,29 @@ export default function MyVotes() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
   const [select, setSelect] = useState(1);
-  const [bills, setBills] = useState([]);
+  const [votes, setVotes] = useState([]);
+  const [filteredVotes, setFilteredVotes] = useState([]);
   const [activities, setActivities] = useState([]);
   const [envoys, setEnvoys] = useState([]);
+
+  const getEnvoys = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${state.id}`,
+    };
+
+    axios(config).then((res) => {
+      // console.log(res.data);
+      if (res.data.length > 0) {
+        setEnvoys([...res.data]);
+      }
+    });
+  };
 
   const billVoteUnconfirmed = () => {
     let config = {
       method: "get",
-      url: `${BaseBackURL}api/v1/bill/?parliment_member=42`,
+      url: `${BaseBackURL}api/v1/bill/`,
       headers: {
         Authorization: `Bearer ${state.token}`,
       },
@@ -33,10 +48,8 @@ export default function MyVotes() {
 
     axios(config)
       .then((res) => {
-        // console.log(res.data);
-        if (res.data.length > 0) {
-          setBills(res.data.filter((x) => x.voter.id === state.id));
-        }
+        console.log(res.data);
+        setVotes([...res.data]);
       })
       .catch((err) => {
         if (err.response.status === 401) {
@@ -45,8 +58,53 @@ export default function MyVotes() {
       });
   };
 
+  const filterVotes = () => {
+    let result = [];
+
+    for (const vote of votes) {
+      if (vote.negative_vote.length > 0) {
+        for (const item of vote.negative_vote) {
+          for (const envoy of envoys) {
+            if (envoy.id === item.voter.id) {
+              result.push(item);
+            }
+          }
+        }
+      }
+      if (vote.none_vote.length > 0) {
+        for (const item of vote.none_vote) {
+          for (const envoy of envoys) {
+            if (envoy.id === item.voter.id) {
+              result.push(item);
+            }
+          }
+        }
+      }
+      if (vote.positive_vote.length > 0) {
+        for (const item of vote.positive_vote) {
+          for (const envoy of envoys) {
+            if (envoy.id === item.voter.id) {
+              result.push(item);
+            }
+          }
+        }
+      }
+    }
+
+    setFilteredVotes([...result]);
+  };
+
+  console.log(filteredVotes);
+
   useEffect(() => {
-    // billVoteUnconfirmed();
+    if (votes.length !== 0 && envoys.length !== 0) {
+      filterVotes();
+    }
+  }, [votes, envoys]);
+
+  useEffect(() => {
+    billVoteUnconfirmed();
+    getEnvoys();
     // activityVoteUnconfirmed();
   }, [state.token]);
 
@@ -69,13 +127,13 @@ export default function MyVotes() {
         </Filtering>
         <ActionGallery>
           <GalleryTitle>آخرین رأی‌گیری‌های من</GalleryTitle>
-          {bills.length === 0 ? (
+          {filteredVotes.length === 0 ? (
             <p style={{ margin: "0px" }}>
               در حال حاضر برای شما موردی ثبت نشده است.
             </p>
           ) : (
             <div>
-              {bills.map((item, i) => (
+              {filteredVotes.map((item, i) => (
                 <ActionCard
                   img={pic}
                   titr="رأی‌گیری"
