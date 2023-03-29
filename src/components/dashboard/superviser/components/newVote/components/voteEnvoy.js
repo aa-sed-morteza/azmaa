@@ -136,7 +136,7 @@ export default function VoteEnvoy() {
 
   return (
     <>
-      {state.addActionLevel === 3 ? (
+      {state.addVoteLevel === 3 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <Title>۳. رأی نماینده را انتخاب کنید:</Title>

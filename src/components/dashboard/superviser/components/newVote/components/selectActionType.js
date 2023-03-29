@@ -113,7 +113,7 @@ export default function SelectActionType() {
 
   return (
     <>
-      {state.addActionLevel === 1 ? (
+      {state.addVoteLevel === 1 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <Title>۱. فعالیت موردنظر خود را انتخاب کنید:</Title>
@@ -149,7 +149,7 @@ export default function SelectActionType() {
         </form>
       ) : (
         <Container>
-          <Title>۱. فعالیت موردنظر خود را انتخاب کنید:</Title>
+          <Title>۱. رأی‌گیری‌ موردنظر خود را انتخاب کنید:</Title>
 
           <Filtering>
             <input placeholder="جستجو کن..." />
