@@ -5,6 +5,7 @@ import background from "../../../assets/back-controll.webp";
 import upArrow from "../../../assets/arrow.webp";
 import data from "../../../data.json";
 import VoteCard from "./voteCard";
+import EnvoyvoteCard from "./EnvoyvoteCard";
 import HonestEnvoy from "../../envoy/components/honestEnvoy";
 import ActionCard from "./actionCard";
 import BestEnvoy from "./bestEnvoy";
@@ -561,7 +562,10 @@ export default function Controller({vote_voter}) {
                 // console.log(item);
                 return name.includes(filter);
               }).map((item, i) => {
-                return <VoteCard bill={item} key={i} />;
+                if(vote_voter>0)
+                  return <EnvoyvoteCard bill={item} vote_voter={vote_voter} key={i}/>;
+                else
+                  return <VoteCard bill={item} key={i} />;
               })}
             </VoterContainer>
 
@@ -745,7 +749,10 @@ export default function Controller({vote_voter}) {
                 // console.log(item);
                 return name.includes(filter);
               }).map((item, i) => {
-              return <VoteCard bill={item} key={i} />;
+                if(vote_voter>0)
+                return <EnvoyvoteCard bill={item} vote_voter={vote_voter} key={i}/>;
+              else
+                return <VoteCard bill={item} key={i} />;
             })}
           </VoterContainer>
 

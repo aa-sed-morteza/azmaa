@@ -77,8 +77,9 @@ export default function DetailsEnvoy() {
       </FirstSection>
       {/* filtering */}
       <SecondSection>
-        <Controller vote_voter={title} />
-        
+      {envoy && (
+        <Controller vote_voter={title }  />
+        )}
       </SecondSection>
       {/* socialNetwork */}
       <ThirdSection>
