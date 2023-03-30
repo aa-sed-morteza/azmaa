@@ -24,7 +24,7 @@ export default function ForgetMobileNumber() {
   const [update, setUpdate] = useState(false);
   const [type, setType] = useState(["نماینده", "ناظر"]);
   const [password, setPassword] = useState("");
-
+  const [phon, setPhon] = useState("");
   const checkCode = (e) => {
     e.preventDefault();
 
@@ -32,30 +32,28 @@ export default function ForgetMobileNumber() {
       setValidate(2);
     } else {
       const data = new FormData();
-      data.append("phone", state.userName);
-      if (state.userType == "envoy") {
-        data.append("type", "parliament_member");
-      } else {
-        data.append("type", state.userType);
-      }
 
+      // if (state.userType == "envoy") {
+      //   data.append("type", "parliament_member");
+      // } else {
+      //   data.append("type", state.userType);
+      // }
+      console.log("stateusernumber"+state.userName);
       data.append("code", code);
       data.append("password", password);
-
+      data.append("phone", phon);
       let config = {
         method: "post",
-        url: `${BaseBackURL}api/v1/accounts/signup/`,
+        url: `${BaseBackURL}api/v1/accounts/forget/`,
         data: data,
       };
 
       axios(config)
         .then((res) => {
-          // console.log(res);
+          console.log(res);
           setValidate(0);
-          dispatch({ type: "SET_ID", payload: res.data.id });
-          navigate(`/sign-in/${state.userType}`);
+          navigate(`/log-in/`);
           setStep(1);
-          getToken(password, state.userName);
         })
         .catch((err) => {
           // console.log(err.response.data);
@@ -79,29 +77,29 @@ export default function ForgetMobileNumber() {
     }
   };
 
-  const getToken = (pass, user) => {
-    const data = new FormData();
-    data.append("username", user);
-    data.append("password", pass);
+  // const getToken = (pass, user) => {
+  //   const data = new FormData();
+  //   data.append("username", user);
+  //   data.append("password", pass);
 
-    let config = {
-      method: "post",
-      url: `${BaseBackURL}api/token/`,
-      data: data,
-    };
+  //   let config = {
+  //     method: "post",
+  //     url: `${BaseBackURL}api/token/`,
+  //     data: data,
+  //   };
 
-    axios(config)
-      .then((response) => {
-        // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
-        dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
-        Cookies.set('refreshToken', response.data.refresh );
-        Cookies.set('token', response.data.access  );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  //   axios(config)
+  //     .then((response) => {
+  //       // console.log(JSON.stringify(response.data));
+  //       dispatch({ type: "SET_TOKEN", payload: response.data.access });
+  //       dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
+  //       Cookies.set('refreshToken', response.data.refresh );
+  //       Cookies.set('token', response.data.access  );
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   useEffect(() => {
     if (state.loggedIn === false) {
@@ -127,21 +125,23 @@ export default function ForgetMobileNumber() {
     dispatch({ type: "SET_TIME_OUT", payload: false });
 
     const data = new FormData();
-    data.append("phone", values.phoneNember);
-
+    data.append("user_name", values.phoneNember);
+    console.log(data);
     let config = {
       method: "post",
-      url: `${BaseBackURL}api/v1/accounts/signup/init/`,
+      url: `${BaseBackURL}api/v1/accounts/forget/init/`,
       data: data,
     };
 
     axios(config)
       .then((res) => {
-        // console.log(res);
-        if (res.data.msg === "otp sent") {
-          toast.success("کد ثبت نام برای شما ارسال شد!", {
+        console.log(res);
+        if (res.data.msg === "code send") {
+          toast.success("کد بازیابی برای شما ارسال شد!", {
             position: toast.POSITION.TOP_RIGHT,
+            
           });
+          setPhon(values.phoneNember);
           setStep(2);
           actions.resetForm();
         } else if (res.data.msg === "not athurized!") {
@@ -342,3 +342,4 @@ const Box = styled.div`
     }
   }
 `;
+

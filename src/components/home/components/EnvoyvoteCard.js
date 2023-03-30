@@ -28,7 +28,7 @@ const VCContainer = styled.div`
     margin-bottom: 34px;
     width: 25%;
     padding: 20px 17px;
-    height: 43.229vw;
+    height: 26.229vw;
     min-height: 0;
   }
 
