@@ -44,10 +44,11 @@ const EnvoyImage = styled.div`
   height: 20.93vw;
   border-radius: 50%;
   border: 3px solid #9f9f9f;
+  flex-shrink: 0;
   img {
     width: 100%;
     height: 100%;
-    border-radius:50%;
+    border-radius: 50%;
     object-fit: contain;
   }
   @media (min-width: 481px) {
@@ -137,13 +138,12 @@ const Content = styled.div`
   }
 `;
 
-export default function BestEnvoy({ envoy ,click}) {
-
-
-  
+export default function BestEnvoy({ envoy, click }) {
   return (
     <EnvoyCard onClick={click}>
-      <EnvoyImage><img src={envoy.image} /></EnvoyImage>
+      <EnvoyImage>
+        <img src={envoy.image} />
+      </EnvoyImage>
       <Content>
         <h3>
           {envoy.first_name} {envoy.last_name}
@@ -154,7 +154,7 @@ export default function BestEnvoy({ envoy ,click}) {
         </div>
         <div className="persantage">
           <p className="text">شفافیت: ٪</p>
-          <p className="content">{toFarsiNumber(envoy.transparency) }</p>
+          <p className="content">{toFarsiNumber(envoy.transparency)}</p>
         </div>
       </Content>
     </EnvoyCard>

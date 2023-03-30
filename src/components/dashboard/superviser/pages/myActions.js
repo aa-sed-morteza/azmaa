@@ -21,6 +21,7 @@ export default function MyActions() {
   const [bills, setBills] = useState([]);
   const [activities, setActivities] = useState([]);
   const [envoys, setEnvoys] = useState([]);
+  const [filteredActivities, setFilteredActivities] = useState([]);
 
   const refreshToken = () => {
     const data = new FormData();
@@ -48,7 +49,7 @@ export default function MyActions() {
   const activityVoteUnconfirmed = () => {
     let config = {
       method: "get",
-      url: `${BaseBackURL}api/v1/vote/activity/unconfirmed/`,
+      url: `${BaseBackURL}api/v1/vote/activity/`,
       headers: {
         Authorization: `Bearer ${state.token}`,
       },
@@ -56,10 +57,8 @@ export default function MyActions() {
 
     axios(config)
       .then((res) => {
-        // console.log(res.data);
-        if (res.data.length > 0) {
-          setActivities(res.data.filter((x) => x.voter.id == state.id));
-        }
+        console.log(res.data);
+        setActivities([...res.data]);
       })
       .catch((err) => {
         if (err.response.status == 401) {
@@ -68,8 +67,45 @@ export default function MyActions() {
       });
   };
 
+  const getEnvoys = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${state.id}`,
+    };
+
+    axios(config).then((res) => {
+      // console.log(res.data);
+      if (res.data.length > 0) {
+        setEnvoys([...res.data]);
+      }
+    });
+  };
+
+  const filterACtivity = () => {
+    let result = [];
+
+    for (const activity of activities) {
+      for (const envoy of envoys) {
+        if (envoy.id === activity.voter_id) {
+          result.push(activity);
+        }
+      }
+    }
+
+    setFilteredActivities([...result]);
+  };
+
+  console.log(filteredActivities);
+
+  useEffect(() => {
+    if (activities.length !== 0 && envoys.length !== 0) {
+      filterACtivity();
+    }
+  }, [activities, envoys]);
+
   useEffect(() => {
     activityVoteUnconfirmed();
+    getEnvoys();
   }, [state.token]);
 
   return (
@@ -92,11 +128,11 @@ export default function MyActions() {
 
         <ActionGallery>
           <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
-          {activities.length === 0 ? (
+          {filteredActivities.length === 0 ? (
             <p>هیچ فعالتی برای شما ثبت نشده است.</p>
           ) : (
             <div>
-              {activities.map((item, i) => (
+              {filteredActivities.map((item, i) => (
                 <ActionCard
                   img={pic2}
                   titr="عملکرد"

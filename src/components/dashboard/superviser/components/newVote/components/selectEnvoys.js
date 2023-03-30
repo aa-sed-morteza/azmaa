@@ -44,6 +44,8 @@ export default function SelectEnvoys() {
     getEnvoys();
   }, []);
 
+  console.log(envoys);
+
   const envoyList = envoys.map((x, i) => {
     return (
       <SelectItem
@@ -180,7 +182,7 @@ export default function SelectEnvoys() {
 
   return (
     <>
-      {state.addActionLevel === 2 ? (
+      {state.addVoteLevel === 2 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <Title>۲. نمایندگان خود را انتخاب کنید:</Title>

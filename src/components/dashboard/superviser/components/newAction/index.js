@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useUser } from "../../../../context/userContext";
@@ -10,6 +10,14 @@ import VoteEnvoy from "./components/voteEnvoy";
 export default function NewAction() {
   const { state, dispatch } = useUser();
   const { title } = useParams();
+
+  useEffect(() => {
+    return () => {
+      console.log("end");
+      dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
+    };
+  }, []);
+
   return (
     <Container>
       <Title>
@@ -27,15 +35,15 @@ export default function NewAction() {
         <>
           <SelectActionType />
           <SelectEnvoys />
-          <VoteEnvoy/>
+          <VoteEnvoy />
         </>
       )}
       {state.addActionLevel === 4 && (
         <>
           <SelectActionType />
           <SelectEnvoys />
-          <VoteEnvoy/>
-          <Document/>
+          <VoteEnvoy />
+          <Document />
         </>
       )}
     </Container>
