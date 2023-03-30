@@ -42,13 +42,13 @@ export default function Document() {
     if (state.userType == "superviser") {
       if (state.typeAction.type == "vote") {
         const data = new FormData();
-        data.append("bill_id", state.typeAction.description);
-        data.append("vote", state.voteEnvoy);
+        data.append("activity_id", state.typeAction.description);
+        data.append("activity_choice_id", state.voteEnvoy);
         data.append("voter_id", state.selectEnvoy.envoy);
 
         let config = {
           method: "post",
-          url: `${BaseBackURL}api/v1/vote/bill/`,
+          url: `${BaseBackURL}api/v1/vote/activity/`,
           headers: {
             Authorization: `Bearer ${state.token}`,
           },
