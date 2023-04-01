@@ -5,7 +5,7 @@ import arrow from "../../../assets/arrow.webp";
 import { useNavigate } from "react-router-dom";
 import box from "../../../assets/state.svg";
 
-export default function EnvoyArea({votes}) {
+export default function EnvoyArea({ votes }) {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const [open, setOpen] = useState(false);
@@ -16,7 +16,7 @@ export default function EnvoyArea({votes}) {
 
   return (
     <Container onClick={handleClick} className={open ? "active" : ""}>
-      <Title>حوزۀ انتخابیه</Title>
+      <Title>حوزه انتخابیه</Title>
       <State>
         <span></span>
         <div className="content">
@@ -73,12 +73,11 @@ const Container = styled.div`
       transform: rotate(180deg);
     }
   }
- 
 
   @media (min-width: 481px) {
     padding: 0 2.292vw 1.875vw !important;
     margin-top: 2.083vw;
-    &:after{
+    &:after {
       width: 1.042vw;
       height: 0.521vw;
       left: 1.823vw;
@@ -166,19 +165,19 @@ const State = styled.div`
       font-size: 3.256vw;
     }
   }
-  @media(min-width:481px){
-    gap:1.094vw;
-    margin-bottom:0.781vw;
-    span{
-      width:4.479vw;
-      height:5vw;
+  @media (min-width: 481px) {
+    gap: 1.094vw;
+    margin-bottom: 0.781vw;
+    span {
+      width: 4.479vw;
+      height: 5vw;
     }
-    .content{
-      .title{
-        font-size:1.250vw;
+    .content {
+      .title {
+        font-size: 1.25vw;
       }
-      .persentage{
-        font-size:1.042vw;
+      .persentage {
+        font-size: 1.042vw;
       }
     }
   }
