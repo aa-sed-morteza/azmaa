@@ -129,7 +129,7 @@ export default function MyActions() {
         <ActionGallery>
           <GalleryTitle>آخرین فعالیت‌های من</GalleryTitle>
           {filteredActivities.length === 0 ? (
-            <p>هیچ فعالتی برای شما ثبت نشده است.</p>
+            <p>هیچ فعالیتی برای شما ثبت نشده است.</p>
           ) : (
             <div>
               {filteredActivities.map((item, i) => (

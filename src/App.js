@@ -18,6 +18,7 @@ import SignIn from "./components/sign-in";
 import Dashboard from "./components/dashboard";
 import { UserState } from "./components/context/userContext";
 import SetMobileNumber from "./components/sign-in/components/setMobileNumber";
+import ForgetMobileNumber from "./components/forget/components/forgetMobileNumber";
 import EnvoySignIn from "./components/envoy-sign-in";
 import DetailsEnvoy from "./components/detailsEnvoy";
 import NotFound from "./notFound";
@@ -46,6 +47,7 @@ function App() {
           <Route path="/about-me" element={<AboutMe />} />
           <Route path="/log-in" element={<LogIn />} />
           <Route path="/sign-in" element={<SetMobileNumber />} />
+          <Route path="/forget" element={<ForgetMobileNumber />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/sign-in/supervisor" element={<SignIn />} />
           <Route path="/sign-in/envoy" element={<EnvoySignIn />} />

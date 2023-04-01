@@ -11,6 +11,7 @@ import SocialNetwork from "./components/socialNetwork";
 import axios from "axios";
 import { BaseBackURL } from "../../constant/api";
 import Controller from "../home/components/controller";
+
 export default function DetailsEnvoy() {
   const { title } = useParams();
   const width = useWidth();
@@ -31,21 +32,16 @@ export default function DetailsEnvoy() {
     });
   };
 
-
-
-
+  console.log(envoy);
 
   useEffect(() => {
     getEnvoys();
-
-    
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     setEnvoy(envoys.find((x) => x.id === parseInt(title)));
     // console.log("title="+title);
-  },[envoys])
-
+  }, [envoys]);
 
   return (
     <Container>
@@ -70,15 +66,14 @@ export default function DetailsEnvoy() {
           />
         )}
 
-        <Census select={"?"} complete={"?"} envoy={"?"} />
-        <EnvoyArea votes={"?"} />
+        <Census data={"?"} complete={"?"} envoy={"?"} />
+        <EnvoyArea data={envoy} />
         <EnvoyHistory id={title} />
         {width > 481 ? <SocialNetwork /> : ""}
       </FirstSection>
       {/* filtering */}
       <SecondSection>
-        <Controller vote_voter={title} />
-        
+        {envoy && <Controller vote_voter={title} />}
       </SecondSection>
       {/* socialNetwork */}
       <ThirdSection>
