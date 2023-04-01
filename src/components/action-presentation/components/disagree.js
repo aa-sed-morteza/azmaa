@@ -22,7 +22,7 @@ export default function Disagree({envoys}) {
   });
   return (
     <Container>
-       <Title>{envoys[0].vote?envoys[0].vote:'نمایندگان مخالف'}   </Title>
+       <Title>{envoys[0]?(envoys[0].vote?envoys[0].vote:'نمایندگان مخالف'):""}   </Title>
        <Gallery>
         {envoysList}
       </Gallery>

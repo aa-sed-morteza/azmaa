@@ -25,7 +25,7 @@ export default function Agree({ envoys }) {
 
   return (
     <Container>
-      <Title>{envoys[0].vote ? envoys[0].vote :'نمایندگان موافق'}   </Title>
+      <Title>{envoys[0]?(envoys[0].vote ? envoys[0].vote :'نمایندگان موافق'):""}   </Title>
       <Gallery>{envoysList}</Gallery>
       <ShowMore onClick={()=>{setShowMore(!showMore)}}>
         <p>نمایش بیشتر </p>

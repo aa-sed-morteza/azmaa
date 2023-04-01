@@ -28,7 +28,7 @@ const VCContainer = styled.div`
     margin-bottom: 34px;
     width: 25%;
     padding: 20px 17px;
-    height: 43.229vw;
+    height: 26.229vw;
     min-height: 0;
   }
 
@@ -564,54 +564,31 @@ const SmallButton = styled.div`
   }
 `;
 
-export default function VoteCard({ bill }) {
-  const [active, setActive] = useState(0);
-  const [color, SetColor] = useState("#DFF5F0");
-  const [bColor, setBColor] = useState("#6cbba9");
-  const [envoyData, setEnvoyData] = useState(bill.positive_vote);
+export default function EnvoyvoteCard({ bill,vote_voter }) {
+  // const [active, setActive] = useState(0);
+  // const [color, SetColor] = useState("#DFF5F0");
+  // const [bColor, setBColor] = useState("#6cbba9");
+  // const [envoyData, setEnvoyData] = useState(bill.positive_vote);
 
   const navigate = useNavigate();
 
   
 
-  const envoyList = envoyData.map((x, i) => {
-    return (
-      <Card key={i} color={bColor}>
-        <div className="picture">
-          <img src={x.voter.image} alt={x.voter.last_name} />
-        </div>
+  // const envoyList = envoyData.map((x, i) => {
+  //   return (
+  //     <Card key={i} color={bColor}>
+  //       <div className="picture">
+  //         <img src={x.voter.image} alt={x.voter.last_name} />
+  //       </div>
 
-        <p className="name">
-          {x.voter.first_name} {x.voter.last_name}
-        </p>
-        <p className="state">{x.voter.electoral_district_name}</p>
-      </Card>
-    );
-  });
+  //       <p className="name">
+  //         {x.voter.first_name} {x.voter.last_name}
+  //       </p>
+  //       <p className="state">{x.voter.electoral_district_name}</p>
+  //     </Card>
+  //   );
+  // });
 
-  useEffect(() => {
-    if (active === 1) {
-      SetColor("#FFD5D5");
-      setBColor("#ffa5a5");
-      setEnvoyData([...bill.negative_vote]);
-    } else if (active === 2) {
-      SetColor("#EAEAEA");
-      setBColor("#d8d8d8");
-      setEnvoyData([...bill.without_vote]);
-    }else if (active === 3) {
-      SetColor("#EAEAEA");
-      setBColor("#d8d8d8");
-      setEnvoyData([...bill.none_vote]);
-    }else if (active === 4) {
-      SetColor("#EAEAEA");
-      setBColor("#d8d8d8");
-      setEnvoyData([...bill.absent_vote]);
-    } else if (active === 0) {
-      SetColor("#DFF5F0");
-      setBColor("#6cbba9");
-      setEnvoyData([...bill.positive_vote]);
-    }
-  }, [active]);
 
 
   return (
@@ -625,39 +602,34 @@ export default function VoteCard({ bill }) {
         </div>
       </CardHeader>
       <Statistics>
-        <Success
-          onClick={() => setActive(0)}
-          className={active === 0 ? "active" : ""}
-        >
-          {toFarsiNumber(bill.vote_number.positive)}
-        </Success>
-        <Faild
-          onClick={() => setActive(1)}
-          className={active === 1 ? "active" : ""}
-        >
-          {toFarsiNumber(bill.vote_number.negative)}
-        </Faild>
-        <Not
-          onClick={() => setActive(2)}
-          className={active === 2 ? "active" : ""}
-        >
-          {toFarsiNumber(bill.vote_number.without_vote)}
-        </Not>
-        <Nonvote
-          onClick={() => setActive(3)}
-          className={active === 3 ? "active" : ""}
-        >
-          {toFarsiNumber(bill.vote_number.none)}
-        </Nonvote>
-        <Absentdiv
-          onClick={() => setActive(4)}
-          className={active === 4 ? "active" : ""}
-        >
-          {toFarsiNumber(bill.vote_number.absent)}
-        </Absentdiv>
+        {(bill.positive_vote.map((x, i)=> {
+          return (x.voter.id==vote_voter?true:false)
+}).includes(true))?(<Success>
+        موافق
+        </Success>):""}
+        {(bill.negative_vote.map((x, i)=> {
+            return (x.voter.id==vote_voter?true:false)
+}).includes(true))?(<Faild>
+         مخالف
+        </Faild>):""}
+        {(bill.without_vote.map((x, i)=> {
+          return (x.voter.id==vote_voter?true:false)
+}).includes(true))?(<Not>
+          بدون رای
+        </Not>):""}
+        {(bill.none_vote.map((x, i)=> {
+          return (x.voter.id==vote_voter?true:false)
+}).includes(true))?(<Nonvote>
+          ممتنع
+        </Nonvote>):""}
+        {(bill.absent_vote.map((x, i)=> {
+          return (x.voter.id==vote_voter?true:false)
+}).includes(true))?(<Absentdiv>
+          غایب
+        </Absentdiv>):""}
       </Statistics>
 
-      <EnvoyGallery color={color}>{envoyList}</EnvoyGallery>
+      {/* <EnvoyGallery color={color}>{envoyList}</EnvoyGallery> */}
 
       <ButtonWraper>
         <LargButton

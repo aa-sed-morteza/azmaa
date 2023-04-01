@@ -5,7 +5,7 @@ import arrow from "../../../assets/arrow.webp";
 import { useNavigate } from "react-router-dom";
 import box from "../../../assets/state.svg";
 
-export default function EnvoyArea({ votes }) {
+export default function EnvoyArea({ data }) {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const [open, setOpen] = useState(false);
@@ -16,11 +16,11 @@ export default function EnvoyArea({ votes }) {
 
   return (
     <Container onClick={handleClick} className={open ? "active" : ""}>
-      <Title>حوزه انتخابیه</Title>
+      <Title>حوزهٔ انتخابیه</Title>
       <State>
         <span></span>
         <div className="content">
-          <p className="title">تهران، ری و شمیرانات</p>
+          <p className="title">{data?.electoral_district_name}</p>
           <p className="persentage">درصد آراء: ۳۵٪</p>
         </div>
       </State>
@@ -28,7 +28,7 @@ export default function EnvoyArea({ votes }) {
       <Content className={open ? "open" : ""}>
         <Row>
           <p className="type"> تعداد آراء: </p>
-          <p className="expand">{votes}</p>
+          <p className="expand">?</p>
         </Row>
         <Row>
           <p className="type"> تعداد کل آراء صندوق : </p>

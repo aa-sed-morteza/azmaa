@@ -15,6 +15,7 @@ import axios from "axios";
 import { BaseBackURL } from "../../constant/api";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
@@ -176,7 +177,10 @@ export default function LogIn() {
             />
           </Box>
         </Form>
-        <Link>رمز عبور خود را فراموش کرده‌اید؟</Link>
+        <Link  to="/forget">
+        رمز عبور خود را فراموش کرده‌اید؟
+        </Link>
+
       </Content>
     </Container>
   );
@@ -226,15 +230,9 @@ const Form = styled.form`
   }
 `;
 
-const Link = styled.p`
-  margin: 0;
-  color: #ffaa00;
-  font-weight: 300;
-  font-size: 3.721vw;
-  @media (min-width: 480px) {
-    font-size: 1.25vw;
-  }
-`;
+
+
+
 
 const ErrorText = styled.p`
   color: #fc8181;

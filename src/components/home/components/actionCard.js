@@ -14,26 +14,30 @@ import axios from "axios";
 import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
 
 export default function ActionCard({ activity }) {
+
   const [active, setActive] = useState(0);
   const [color, SetColor] = useState("#DFF5F0");
   const [bColor, setBColor] = useState("#6cbba9");
   const [votes, setVotes] = useState([]);
   const envoyData = data.envoy;
   const navigate = useNavigate();
-
+  // console.log(activity);
   let positive = 0;
   let negative = 0;
   let noChoice = 0;
-
-  for (const item of activity.vote) {
-    if (item.vote === activity.activity_choice[0].name) {
-      positive = positive + 1;
-    } else if (item.vote === activity.activity_choice[1].name) {
-      negative = negative + 1;
-    } else {
-      noChoice = noChoice + 1;
+    for (const item of activity.vote) {
+      if (activity.activity_choice[0])
+        if (item.vote === activity.activity_choice[0].name) {
+          positive = positive + 1;
+        }
+      if (activity.activity_choice[1])
+        if (item.vote === activity.activity_choice[1].name) {
+          negative = negative + 1;
+        }
+        else {
+          noChoice = noChoice + 1;
+        }
     }
-  }
 
 
   // useEffect(()=>{
@@ -46,28 +50,40 @@ export default function ActionCard({ activity }) {
     if (active === 0) {
       SetColor("#DFF5F0");
       setBColor("#6cbba9");
-     
-      setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[0].name)]);
+      if (activity.activity_choice[0])
+        setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[0].name)]);
+      else
+        setVotes([activity.vote.find((x) => x.vote == "activity.activity_choice[0].name")]);
+
     } else if (active === 1) {
       SetColor("#FFD5D5");
       setBColor("#ffa5a5");
-      setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[1].name)]);
+      if (activity.activity_choice[1])
+        setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[1].name)]);
+        else
+        setVotes([activity.vote.find((x) => x.vote == "activity.activity_choice[0].name")]);
+
     } else if (active === 2) {
       SetColor("#EAEAEA");
       setBColor("#d8d8d8");
-      setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[2].name)]);
+      if (activity.activity_choice[2])
+        setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[2].name)]);
+        else
+        setVotes([activity.vote.find((x) => x.vote == "activity.activity_choice[0].name")]);
+
     }
   }, [active]);
 
   const envoyList = votes.map((x, i) => {
     return (
       <Card key={i} color={bColor}>
-        <div className="picture">
+        {x?        <div className="picture">
           <img
             src={x && x.voter.image}
             alt={x && x.voter.last_name}
           />
-        </div>
+        </div>:""}
+
 
         <p className="name">
           {x && x.voter.first_name} {x && x.voter.last_name}
