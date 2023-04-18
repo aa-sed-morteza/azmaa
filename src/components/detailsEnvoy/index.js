@@ -32,9 +32,9 @@ export default function DetailsEnvoy() {
     });
   };
 
-  console.log(envoy);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getEnvoys();
   }, []);
 
