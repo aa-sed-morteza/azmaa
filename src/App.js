@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,6 +21,7 @@ import ForgetMobileNumber from "./components/forget/components/forgetMobileNumbe
 import EnvoySignIn from "./components/envoy-sign-in";
 import DetailsEnvoy from "./components/detailsEnvoy";
 import NotFound from "./notFound";
+import ScrollTop from "react-scrolltop-button";
 
 function App() {
   return (
@@ -56,9 +56,19 @@ function App() {
           <Route path="/dashboard/*" element={<Dashboard />} />
 
           {/* not found page */}
-          <Route path='*' element={<NotFound/>}/>
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+
+        <ScrollTop
+          distance={100}
+          breakpoint={768}
+          style={{ backgroundColor: "#095644", borderColor: "#FFFFFF" }}
+          className="scroll-your-role"
+          speed={1000}
+          zindex={1000}
+          // target={75}
+        />
         <ToastContainer />
       </UserState>
     </div>
