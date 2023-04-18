@@ -61,6 +61,7 @@ function App() {
         <Footer />
 
         <ScrollTop
+          text="برو بالا"
           distance={100}
           breakpoint={768}
           style={{ backgroundColor: "#095644", borderColor: "#FFFFFF" }}
