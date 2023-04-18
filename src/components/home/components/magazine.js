@@ -32,8 +32,9 @@ const Ttitle = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 100px;
-  margin-right: 40px;
+  margin-right: 30px;
   position: relative;
+  padding-left: 20px;
   span {
     background-image: url(${mag});
     background-size: contain;
@@ -56,7 +57,7 @@ const Ttitle = styled.div`
     background-repeat: no-repeat;
     width: 5px;
     height: 10px;
-    left: -8px;
+    left: 5px;
   }
 
   @media (min-width: 481px) {
