@@ -90,7 +90,7 @@ const Ttitle = styled.div`
   }
   @media (min-width: 769px) {
     width: 30%;
-    margin-right: 12%;
+    margin-right: 8%;
     /* max-width: 200px; */
     flex-direction: column;
     span {
