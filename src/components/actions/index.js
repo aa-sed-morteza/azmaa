@@ -16,6 +16,7 @@ export default function Actions() {
   const [filteredActivities, setFilteredActivities] = useState([]);
   const [secondHide, setSecondHide] = useState(false);
   const [searchparams, setsearchparams] = useSearchParams();
+
   const getActivities = () => {
     let config = {
       method: "get",
