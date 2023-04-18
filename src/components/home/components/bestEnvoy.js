@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import pic from "../../../assets/pic.webp";
 import profile from "../../../assets/profile.webp";
+import area from "../../../assets/gray.svg"
 import { toFarsiNumber } from "../../../utils";
 
 const EnvoyCard = styled.div`
@@ -90,7 +91,7 @@ const Content = styled.div`
       display: inline-flex;
       width: 20px;
       height: 20px;
-      background-image: url(${profile});
+      background-image: url(${area});
       background-size: contain;
       background-repeat: no-repeat;
       @media (min-width: 1200px) {

@@ -123,7 +123,7 @@ export default function NewsPage() {
     <Container>
       <Title>
         <p className="home">خانه / بلاگ /</p>
-        <p className="component"> {title} </p>
+        <p className="component"> {post && post.title} </p>
       </Title>
 
       {width < 481 ? (
