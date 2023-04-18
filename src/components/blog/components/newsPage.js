@@ -123,7 +123,7 @@ export default function NewsPage() {
     <Container>
       <Title>
         <p className="home">خانه / بلاگ /</p>
-        <p className="component"> {title} </p>
+        <p className="component"> {post && post.title} </p>
       </Title>
 
       {width < 481 ? (
@@ -183,12 +183,12 @@ export default function NewsPage() {
                   <Paragraph>{post && post.description}</Paragraph>
 
                   <Feedback>
-                    <Button color="#6CBBA9" icon={like}>
+                    {/* <Button color="#6CBBA9" icon={like}>
                       ۵۴
-                    </Button>
-                    <Button color="#FFA5A5" icon={dislike}>
+                    </Button> */}
+                    {/* <Button color="#FFA5A5" icon={dislike}>
                       ۱۰
-                    </Button>
+                    </Button> */}
                     {/* <Share>
                       <p className="text">بازنشر</p>
                     </Share> */}
@@ -627,12 +627,12 @@ const Paper = styled.div`
       font-weight: 500;
     }
   }
-  @media (max-width: 1600px) {
+  @media (min-width: 1600px) {
     .cover {
       width: 16vw;
     }
   }
-  @media (max-width: 1200px) {
+  @media (min-width: 1200px) {
     .cover {
       width: 15vw;
     }

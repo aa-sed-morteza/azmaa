@@ -64,7 +64,7 @@ export default function Vote() {
         <Controler selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
         {/* {console.log(selectedTag)} */}
         <Filtering selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
-        <Titleh1>آخرین رأی‌گیری‌ها</Titleh1>
+        {/* <Titleh1>آخرین رأی‌گیری‌ها</Titleh1> */}
         <VoterContainer hide={firstHide}>
           {bills.filter((item) => {
             let filter = searchparams.get("filter");

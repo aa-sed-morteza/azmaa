@@ -391,7 +391,7 @@
     },
     {
       "name": "اقتصادی",
-      "icon": "../../assets/user.webp"
+      "icon": "../../assets/eco.svg"
     },
     {
       "name": "سیاسی",
@@ -399,7 +399,7 @@
     },
     {
       "name": "اجتماعی",
-      "icon": "../../assets/user.webp"
+      "icon": "../../assets/pub.svg"
     },
     {
       "name": "فرهنگی",

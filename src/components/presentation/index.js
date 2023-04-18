@@ -39,7 +39,7 @@ export default function Presentation() {
   return (
     <Container>
       <Title>
-        <p className="home">خانه / رای گیری /</p>
+        <p className="home">خانه / رأی‌گیری‌ها  /</p>
         <p className="component"> {bill && bill.name} </p>
       </Title>
       <Content>

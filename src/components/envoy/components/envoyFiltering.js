@@ -16,7 +16,8 @@ const FilterBox = styled.div`
   border-radius: 4px;
   padding: 8px;
   display: flex;
-  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const FilterItem = styled.p`
@@ -135,8 +136,9 @@ export default function EnvoyFiltering({ envoys }) {
 
       <Gallery>
         <Gallery hide={showMore}>
-          {envoys.map((item) => (
+          {envoys.map((item ,i) => (
             <BestEnvoy
+            key={i}
               envoy={item}
               click={() => {
                 navigate(`/envoy/${item.id}`);

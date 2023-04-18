@@ -195,6 +195,12 @@ const EnvoyPart = styled.div`
   justify-content: center;
 
   & > div {
-    width: 29%;
+    width: 100%;
   }
+  @media (min-width:481px){
+    & > div {
+    width: 45%;
+  }
+}
+  
 `;

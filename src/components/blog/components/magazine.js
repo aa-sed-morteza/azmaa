@@ -16,6 +16,7 @@ const MagazineContainer = styled.section`
   display: flex;
   margin-bottom: 15px;
   position: relative;
+  flex-wrap: wrap;
   @media (min-width: 481px) {
     padding: 20px;
     // margin-top:70px;
@@ -25,29 +26,32 @@ const MagazineContainer = styled.section`
   }
   @media (min-width: 769px) {
     padding: 36px 0 50px;
+    flex-wrap: nowrap;
   }
 `;
 
 const Ttitle = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 100px;
-  margin-right: 40px;
+  width: 100%;
+  margin-right: 20px;
   position: relative;
   span {
     background-image: url(${mag});
     background-size: contain;
     background-repeat: no-repeat;
-    width: 51px;
-    height: 50px;
+    width: 20px;
+    height: 20px;
   }
   h1 {
+    width: 100%;
     color: #095644;
-    font-size: 4.65vw;
+    font-size: 4vw;
+    white-space: nowrap;
     font-weight: 300;
-    text-align: center;
+    text-align: right;
+    margin-right: 10px;
   }
   &:after {
     content: "";
@@ -58,13 +62,15 @@ const Ttitle = styled.div`
     background-repeat: no-repeat;
     width: 5px;
     height: 10px;
-    left: -8px;
+    left: 5px;
   }
 
   @media (min-width: 481px) {
+    width: 30%;
     margin-right: 5%;
     max-width: 150px;
     padding-left: 7%;
+    flex-direction: column;
     span {
       width: 50px;
       height: 50px;
@@ -82,8 +88,10 @@ const Ttitle = styled.div`
     }
   }
   @media (min-width: 769px) {
-    margin-right: 12%;
+    width: 30%;
+    margin-right: 8%;
     max-width: 200px;
+    flex-direction: column;
     span {
       width: 97px;
       height: 97px;
@@ -104,13 +112,15 @@ const Wraper = styled.div`
   display: flex;
   overflow-x: scroll;
   gap: 10px;
-  padding-right: 50px;
+  width: 100%;
+  margin-right: 16px;
   ::-webkit-scrollbar {
     display: none;
   }
 
   @media (min-width: 481px) {
     // padding-right: 90px;
+    flex-grow: 1;
     gap: 28px;
   }
 `;

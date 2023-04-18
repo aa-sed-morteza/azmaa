@@ -134,7 +134,8 @@ const IranMap = ({ position }) => {
       {values.province == "" && <p className="input">{input}</p>}
       {values.province !== "" && (
         <p className="select">
-          ایران <span>{values.province}</span> <span>{values.city}</span>
+          ایران <span>{values.province}</span> 
+          {/* <span>{values.city}</span> */}
         </p>
       )}
 
@@ -238,7 +239,7 @@ const IranMap = ({ position }) => {
               ))}
             </g>
 
-            {/* <g className={styles.sea}>
+            <g className={styles.sea}>
               <path className={styles.caspian} d={caspianD} />
               <path
                 className={styles.persian_gulf}
@@ -246,7 +247,7 @@ const IranMap = ({ position }) => {
                 onMouseLeave={() => setProvinceName("")}
                 d={persianGulfD}
               />
-            </g> */}
+            </g>
             <g className={styles.lake}>
               <path
                 className={styles.jazmourian}

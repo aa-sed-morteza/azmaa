@@ -73,15 +73,15 @@ const SearchInput = styled.input`
 
 const TabContainer = styled.div`
   display: flex;
-  gap: 20px;
   align-items: flex-end;
+  justify-content: space-between;
   @media (min-width: 481px) {
     justify-content: space-evenly;
   }
 `;
 
 const Tab = styled.div`
-  displey: flex;
+  display: flex;
   flex-direction: column;
   position: relative;
   cursor: pointer;
@@ -535,7 +535,7 @@ export default function Controller({vote_voter}) {
   });
   return (
     <ControllContainer>
-      <FilterContainer>
+      <FilterContainer className="filter-box">
         <SearchInput 
         value={searchparams.get("filter") || ""} onChange={event => { 
         let filter = event.target.value;

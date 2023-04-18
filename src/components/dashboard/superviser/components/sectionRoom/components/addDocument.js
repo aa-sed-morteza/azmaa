@@ -47,6 +47,7 @@ export default function AddDocument() {
     data.append("title", state.contentArticle.title);
     data.append("description", state.contentArticle.expand);
     data.append("main_image", state.imageArticle.picOne);
+    // data.append("related_blog",'test')
 
     let config = {
       method: "post",

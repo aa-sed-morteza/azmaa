@@ -120,7 +120,7 @@ const Tab = styled.div`
 
 const TabContainer = styled.div`
   display: flex;
-  gap: 25px;
+  justify-content: space-between;
   align-items: flex-end;
   @media (min-width: 481px) {
     justify-content: space-between;

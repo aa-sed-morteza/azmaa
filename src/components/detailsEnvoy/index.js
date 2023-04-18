@@ -32,9 +32,9 @@ export default function DetailsEnvoy() {
     });
   };
 
-  console.log(envoy);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getEnvoys();
   }, []);
 
@@ -155,6 +155,11 @@ const SecondSection = styled.div`
   @media (min-width: 481px) {
     width: 65%;
     padding: 0.99vw 1.302vw 0 0;
+    &>* {
+      & .filter-box{
+      margin-top: 0;
+    }
+  }
   }
 `;
 

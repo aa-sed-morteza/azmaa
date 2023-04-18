@@ -45,7 +45,7 @@ const Container = styled.div`
     input{
       padding: 18px;    
     }
-  
+  }
 `;
 
 export default function Search() {

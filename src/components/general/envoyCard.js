@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import profile from "../../assets/profile.webp";
+import profile from "../../assets/gray.svg";
 import { toFarsiNumber } from "../../utils";
 
 export default function EnvoyCard({name,state,commission,img,persantage,id,inBox,click}) {
