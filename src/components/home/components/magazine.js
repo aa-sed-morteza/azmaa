@@ -16,6 +16,7 @@ const MagazineContainer = styled.section`
   margin-right: -20px;
   margin-left: -20px;
   display: flex;
+  flex-wrap: wrap;
   position: relative;
   @media (min-width: 481px) {
     padding: 20px;
@@ -23,30 +24,34 @@ const MagazineContainer = styled.section`
   }
   @media (min-width: 769px) {
     padding: 36px 0 50px;
+    flex-wrap: nowrap;
   }
 `;
 
 const Ttitle = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 100px;
-  margin-right: 30px;
+  width: 100%;
+  margin-right: 10px;
   position: relative;
   padding-left: 20px;
   span {
     background-image: url(${mag});
     background-size: contain;
     background-repeat: no-repeat;
-    width: 64px;
-    height: 64px;
+    width: 20px;
+    height: 20px;
   }
   h1 {
+    width: 100%;
     color: #095644;
-    font-size: 4.65vw;
+    font-size: 4vw;
+    white-space: nowrap;
     font-weight: 300;
-    text-align: center;
+    text-align: right;
+    margin-right: 10px;
+    
   }
   &:after {
     content: "";
@@ -61,14 +66,17 @@ const Ttitle = styled.div`
   }
 
   @media (min-width: 481px) {
+    width: 30%;
     margin-right: 5%;
     max-width: 150px;
     padding-left: 7%;
+    flex-direction: column;
     span {
       width: 50px;
       height: 50px;
     }
     h1 {
+      width: fit-content;
       font-size: 1.875vw;
       white-space: nowrap;
     }
@@ -81,8 +89,10 @@ const Ttitle = styled.div`
     }
   }
   @media (min-width: 769px) {
+    width: 30%;
     margin-right: 12%;
-    max-width: 200px;
+    /* max-width: 200px; */
+    flex-direction: column;
     span {
       width: 97px;
       height: 97px;
@@ -103,13 +113,16 @@ const Wraper = styled.div`
   display: flex;
   overflow-x: scroll;
   gap: 10px;
-  // padding-right: 50px;
+  width: 100%;
+  margin-right: 12px;
+  /* // padding-right: 50px; */
   scroll-behavior: smooth;
   ::-webkit-scrollbar {
     display: none;
   }
   @media (min-width: 481px) {
     // padding-right: 90px;
+    flex-grow: 1;
     gap: 28px;
   }
 `;
@@ -283,7 +296,7 @@ export default function Magazine() {
     <MagazineContainer>
       <Ttitle>
         <span></span>
-        <h1> پیشنهاد سردبیر</h1>
+        <h1>یادداشت ها</h1>
       </Ttitle>
       <Wraper id="magazine">
         {magPaper}
