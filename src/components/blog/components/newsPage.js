@@ -183,12 +183,12 @@ export default function NewsPage() {
                   <Paragraph>{post && post.description}</Paragraph>
 
                   <Feedback>
-                    <Button color="#6CBBA9" icon={like}>
+                    {/* <Button color="#6CBBA9" icon={like}>
                       ۵۴
-                    </Button>
-                    <Button color="#FFA5A5" icon={dislike}>
+                    </Button> */}
+                    {/* <Button color="#FFA5A5" icon={dislike}>
                       ۱۰
-                    </Button>
+                    </Button> */}
                     {/* <Share>
                       <p className="text">بازنشر</p>
                     </Share> */}
