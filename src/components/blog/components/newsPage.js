@@ -627,12 +627,12 @@ const Paper = styled.div`
       font-weight: 500;
     }
   }
-  @media (max-width: 1600px) {
+  @media (min-width: 1600px) {
     .cover {
       width: 16vw;
     }
   }
-  @media (max-width: 1200px) {
+  @media (min-width: 1200px) {
     .cover {
       width: 15vw;
     }
