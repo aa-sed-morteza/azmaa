@@ -67,7 +67,7 @@ export default function Document() {
         .catch(function (error) {
           console.log(error);
           if (error.response.status === 401) {
-            // refreshToken();
+            refreshToken();
             toast.error("لطفا مجدد تلاش کنید", {
               position: toast.POSITION.TOP_RIGHT,
             });

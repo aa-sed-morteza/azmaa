@@ -56,7 +56,7 @@ export default function SelectEnvoys() {
       >
         <EnvoyCard
           key={i}
-          name={x.first_name + "" + x.last_name}
+          name={x.first_name + " " + x.last_name}
           state={x.electoral_district_name}
           commission={x.fraction_name}
           img={x.image}
@@ -74,7 +74,7 @@ export default function SelectEnvoys() {
       >
         <EnvoyCard
           key={i}
-          name={x.first_name + "" + x.last_name}
+          name={x.first_name + " " + x.last_name}
           state={x.electoral_district_name}
           commission={x.fraction_name}
           img={x.image}

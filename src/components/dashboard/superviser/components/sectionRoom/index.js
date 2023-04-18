@@ -166,7 +166,7 @@ const FilterBox = styled.div`
   border-radius: 4px;
   padding: 8px;
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
   @media (min-width: 480px) {
     display: none;
   }
@@ -175,7 +175,7 @@ const FilterBox = styled.div`
 const FilterItem = styled.p`
   background-color: #ffffff;
   color: #9f9f9f;
-  font-size: 3.721vw;
+  font-size: 3vw;
   font-weight: 300;
   border-radius: 2px;
   margin: 0;
