@@ -438,7 +438,7 @@ const EnvoyGallery = styled.div`
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 4px;
   min-width: 20.93vw;
