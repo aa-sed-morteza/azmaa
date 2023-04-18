@@ -238,7 +238,7 @@ const IranMap = ({ position }) => {
               ))}
             </g>
 
-            {/* <g className={styles.sea}>
+            <g className={styles.sea}>
               <path className={styles.caspian} d={caspianD} />
               <path
                 className={styles.persian_gulf}
@@ -246,7 +246,7 @@ const IranMap = ({ position }) => {
                 onMouseLeave={() => setProvinceName("")}
                 d={persianGulfD}
               />
-            </g> */}
+            </g>
             <g className={styles.lake}>
               <path
                 className={styles.jazmourian}
