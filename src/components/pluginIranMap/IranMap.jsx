@@ -134,7 +134,8 @@ const IranMap = ({ position }) => {
       {values.province == "" && <p className="input">{input}</p>}
       {values.province !== "" && (
         <p className="select">
-          ایران <span>{values.province}</span> <span>{values.city}</span>
+          ایران <span>{values.province}</span> 
+          {/* <span>{values.city}</span> */}
         </p>
       )}
 
