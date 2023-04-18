@@ -122,7 +122,9 @@ export default function ControlCore(props) {
   const [envoyMore, setEnvoyMore] = useState(false);
   const navigate = useNavigate();
 
-  const newList = envoys.sort((a, b) => a.transparency > b.transparency);
+  const newList = envoys.sort((a, b) => b.transparency - a.transparency);
+
+  console.log('list',newList)
 
   return (
     <Container>
