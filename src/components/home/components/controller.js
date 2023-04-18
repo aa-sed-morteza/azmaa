@@ -535,7 +535,7 @@ export default function Controller({vote_voter}) {
   });
   return (
     <ControllContainer>
-      <FilterContainer>
+      <FilterContainer className="filter-box">
         <SearchInput 
         value={searchparams.get("filter") || ""} onChange={event => { 
         let filter = event.target.value;
