@@ -128,65 +128,60 @@ const CardHeader = styled.div`
 
 const Statistics = styled.div`
   display: flex;
-  gap: 70px;
-  padding-right: 50px;
+  /* gap: 70px; */
+  /* padding-right: 50px; */
+  justify-content: space-between;
+  align-items: flex-start;
   padding-top: 20px;
   border-top: 1px solid #d8d8d8;
   margin-top: 17px;
-  justify-content: center;
-  padding-bottom: 13px;
+  /* padding-bottom: 13px; */
   @media (min-width: 481px) {
-    gap: 4.688vw;
+    /* gap: 4.688vw; */
   }
 `;
 
 const Success = styled.div`
   color: #6cbba9;
   font-weight: 300;
-  font-size: 5.58vw;
-  position: relative;
+  font-size: 4.3vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
   cursor: pointer;
   &:before {
     content: "";
-    display: block;
-    position: absolute;
+    display: inline-flex;
     width: 9.535vw;
     height: 9.535vw;
     background-image: url(${success});
     background-size: contain;
     background-repeat: no-repeat;
-    right: -11.628vw;
-    top: -1.395vw;
   }
   &.active,
   &:hover {
     font-weight: bold;
     &:after {
       content: "";
-      display: block;
-      position: absolute;
-      width: 18.605vw;
+      display: inline-flex;
+      width: 100%;
       height: 0.93vw;
       background-color: #6cbba9;
-      bottom: -3.023vw;
-      right: -11.628vw;
+    
     }
   }
   @media (min-width: 481px) {
     font-size: 1.458vw;
     font-weight: 400;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
     &:before {
       width: 2.917vw;
       height: 2.917vw;
-      right: -3.385vw;
-      top: -0.26vw;
     }
     &:after {
       width: 5.208vw !important;
-      bottom: -0.7vh !important;
       height: 0.208vw !important;
-      right: -3.031vw !important;
     }
   }
 `;
@@ -194,50 +189,46 @@ const Success = styled.div`
 const Faild = styled.div`
   color: #ffa5a5;
   font-weight: 300;
-  font-size: 5.58vw;
-  position: relative;
+  font-size: 4.3vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
   cursor: pointer;
   &:before {
     content: "";
-    display: block;
-    position: absolute;
+    display: inline-flex;
     width: 9.535vw;
     height: 9.535vw;
     background-image: url(${faild});
     background-size: contain;
     background-repeat: no-repeat;
-    right: -11.628vw;
-    top: -1.395vw;
+  
   }
   &.active,
   &:hover {
     font-weight: bold;
     &:after {
       content: "";
-      display: block;
-      position: absolute;
-      width: 18.605vw;
+      display: inline-flex;
+      width:100%;
       height: 0.93vw;
       background-color: #ffa5a5;
-      bottom: -3.023vw;
-      right: -11.628vw;
+
     }
   }
   @media (min-width: 481px) {
     font-size: 1.458vw;
     font-weight: 400;
-    padding-bottom: 10px;
     &:before {
       width: 2.917vw;
       height: 2.917vw;
-      right: -3.385vw;
-      top: -0.26vw;
+    
     }
     &:after {
       width: 5.208vw !important;
-      bottom: -0.7vh !important;
       height: 0.208vw !important;
-      right: -3.031vw !important;
+   
     }
   }
 `;
@@ -245,22 +236,21 @@ const Faild = styled.div`
 const Not = styled.div`
   color: #d8d8d8;
   font-weight: 300;
-  font-size: 5.58vw;
-  position: relative;
-  /* display: flex;
-  align-items: center; */
+  font-size: 4.3vw;
+ 
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   cursor: pointer;
   &:before {
     content: "";
-    display: block;
-    position: absolute;
+    display: inline-flex;
     width: 9.535vw;
     height: 9.535vw;
     background-image: url(${not});
     background-size: contain;
     background-repeat: no-repeat;
-    right: -11.628vw;
-    top: -1.395vw;
+    
   }
 
   &.active,
@@ -268,30 +258,24 @@ const Not = styled.div`
     font-weight: bold;
     &:after {
       content: "";
-      display: block;
-      position: absolute;
-      width: 18.605vw;
+      display: inline-flex;
+      width: 100%;
       height: 0.93vw;
       background-color: #d8d8d8;
-      bottom: -3.023vw;
-      right: -11.628vw;
+ 
     }
   }
   @media (min-width: 481px) {
     font-size: 1.458vw;
     font-weight: 400;
-    padding-bottom: 10px;
     &:before {
       width: 2.917vw;
       height: 2.917vw;
-      right: -3.385vw;
-      top: -0.26vw;
+    
     }
     &:after {
       width: 5.208vw !important;
-      bottom: -0.7vh !important;
       height: 0.208vw !important;
-      right: -3.031vw !important;
     }
   }
 `;
@@ -299,22 +283,20 @@ const Not = styled.div`
 const Absentdiv = styled.div`
   color: #d8d8d8;
   font-weight: 300;
-  font-size: 5.58vw;
-  position: relative;
-  /* display: flex;
-  align-items: center; */
+  font-size: 4.3vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
   &:before {
     content: "";
-    display: block;
-    position: absolute;
+    display: inline-flex;
     width: 9.535vw;
     height: 9.535vw;
     background-image: url(${absentimg});
     background-size: contain;
     background-repeat: no-repeat;
-    right: -11.628vw;
-    top: -1.395vw;
+
   }
 
   &.active,
@@ -322,30 +304,23 @@ const Absentdiv = styled.div`
     font-weight: bold;
     &:after {
       content: "";
-      display: block;
-      position: absolute;
+      display: inline-flex;
       width: 18.605vw;
       height: 0.93vw;
       background-color: #d8d8d8;
-      bottom: -3.023vw;
-      right: -11.628vw;
     }
   }
   @media (min-width: 481px) {
     font-size: 1.458vw;
     font-weight: 400;
-    padding-bottom: 10px;
     &:before {
       width: 2.917vw;
       height: 2.917vw;
-      right: -3.385vw;
-      top: -0.26vw;
+    
     }
     &:after {
       width: 5.208vw !important;
-      bottom: -0.7vh !important;
       height: 0.208vw !important;
-      right: -3.031vw !important;
     }
   }
 `;
@@ -353,22 +328,20 @@ const Absentdiv = styled.div`
 const Nonvote = styled.div`
   color: #d8d8d8;
   font-weight: 300;
-  font-size: 5.58vw;
-  position: relative;
-  /* display: flex;
-  align-items: center; */
+  font-size: 4.3vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
   &:before {
     content: "";
-    display: block;
-    position: absolute;
+    display: inline-flex;
     width: 9.535vw;
     height: 9.535vw;
     background-image: url(${noVote});
     background-size: contain;
     background-repeat: no-repeat;
-    right: -11.628vw;
-    top: -1.395vw;
+
   }
 
   &.active,
@@ -376,30 +349,24 @@ const Nonvote = styled.div`
     font-weight: bold;
     &:after {
       content: "";
-      display: block;
-      position: absolute;
-      width: 18.605vw;
+      display: inline-flex;
+      width: 100%;
       height: 0.93vw;
       background-color: #d8d8d8;
-      bottom: -3.023vw;
-      right: -11.628vw;
+  
     }
   }
   @media (min-width: 481px) {
     font-size: 1.458vw;
     font-weight: 400;
-    padding-bottom: 10px;
     &:before {
       width: 2.917vw;
       height: 2.917vw;
-      right: -3.385vw;
-      top: -0.26vw;
+    
     }
     &:after {
       width: 5.208vw !important;
-      bottom: -0.7vh !important;
       height: 0.208vw !important;
-      right: -3.031vw !important;
     }
   }
 `;
@@ -428,7 +395,7 @@ const EnvoyGallery = styled.div`
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 4px;
   min-width: 20.93vw;
@@ -461,6 +428,7 @@ const Card = styled.div`
     font-size: 2.32vw;
     font-weight: bold;
     margin: 0;
+    
   }
   @media (min-width: 481px) {
     flex-wrap: wrap;
@@ -629,31 +597,36 @@ export default function VoteCard({ bill }) {
           onClick={() => setActive(0)}
           className={active === 0 ? "active" : ""}
         >
-          {toFarsiNumber(bill.vote_number.positive)}
+          {/* {toFarsiNumber(bill.vote_number.positive)} */}
+          موافق
         </Success>
         <Faild
           onClick={() => setActive(1)}
           className={active === 1 ? "active" : ""}
         >
-          {toFarsiNumber(bill.vote_number.negative)}
+          {/* {toFarsiNumber(bill.vote_number.negative)} */}
+          مخالف
         </Faild>
         <Not
           onClick={() => setActive(2)}
           className={active === 2 ? "active" : ""}
         >
-          {toFarsiNumber(bill.vote_number.without_vote)}
+          {/* {toFarsiNumber(bill.vote_number.without_vote)} */}
+          ممتنع
         </Not>
         <Nonvote
           onClick={() => setActive(3)}
           className={active === 3 ? "active" : ""}
         >
-          {toFarsiNumber(bill.vote_number.none)}
+          {/* {toFarsiNumber(bill.vote_number.none)} */}
+          بدون رای
         </Nonvote>
         <Absentdiv
           onClick={() => setActive(4)}
           className={active === 4 ? "active" : ""}
         >
-          {toFarsiNumber(bill.vote_number.absent)}
+          {/* {toFarsiNumber(bill.vote_number.absent)} */}
+          غایب
         </Absentdiv>
       </Statistics>
 
