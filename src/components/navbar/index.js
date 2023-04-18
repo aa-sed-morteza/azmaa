@@ -3,7 +3,7 @@ import data from "../../data.json";
 import LOGO from "../../assets/azmaa-logo.webp";
 import menu from "../../assets/menu.webp";
 import search from "../../assets/search.webp";
-import close from "../../assets/close.webp";
+import close from "../../assets/closed.svg";
 import signIn from "../../assets/Sign_in.webp";
 import signInMobile from "../../assets/signMobile.svg";
 import styled from "styled-components";
