@@ -7,6 +7,10 @@ import like from "../../../assets/like1.webp";
 import dislike from "../../../assets/dislike1.webp";
 import data from "../../../data.json";
 import user from "../../../assets/profile.webp";
+import note from "../../../assets/text.webp";
+import news from "../../../assets/news.webp";
+import report from "../../../assets/report.webp";
+import article from "../../../assets/report.webp";
 import Text from "../../../assets/text.webp";
 import useWidth from "../../../hook/useWidth";
 import upArrow from "../../../assets/arrow.webp";
@@ -81,6 +85,7 @@ export default function NewsPage() {
     return (
       <Paper
         key={i}
+        icon={x.type}
         onClick={() => {
           navigate(`/blog/${x.id}`);
         }}
@@ -89,11 +94,16 @@ export default function NewsPage() {
           <img src={x.main_image} alt={x.title} />
         </div>
 
-        <p className="user">{x.writer}</p>
+        <p className="user">
+          {x.type == "note" && "یادداشت"}
+          {x.type == "news" && "خبر"}
+          {x.type == "report" && "گزارش"}
+          {x.type == "article" && "مقاله"}
+        </p>
 
         <p className="content">{x.description}</p>
 
-        <p className="date">{x.created &&  convertDateToFarsi(x.created)}</p>
+        <p className="date">{x.created && convertDateToFarsi(x.created)}</p>
       </Paper>
     );
   });
@@ -102,6 +112,7 @@ export default function NewsPage() {
     return (
       <Paper
         key={i}
+        icon={x.type}
         onClick={() => {
           navigate(`/blog/${x.id}`);
         }}
@@ -110,7 +121,12 @@ export default function NewsPage() {
           <img src={x.main_image} alt={x.title} />
         </div>
 
-        <p className="user">{x.writer}</p>
+        <p className="user">
+          {x.type == "note" && "یادداشت"}
+          {x.type == "news" && "خبر"}
+          {x.type == "report" && "گزارش"}
+          {x.type == "article" && "مقاله"}
+        </p>
 
         <p className="content">{x.description}</p>
 
@@ -134,7 +150,12 @@ export default function NewsPage() {
             </Picture>
             <Content>
               <HeadContent>
-                <Type>{post && post.writer}</Type>
+                <Type icon={post.type}>
+                  {post && post.type == "note" && "یادداشت"}
+                  {post && post.type == "news" && "خبر"}
+                  {post && post.type == "report" && "گزارش"}
+                  {post && post.type == "atricle" && "مقاله"}
+                </Type>
                 <Date>{post.created && convertDateToFarsi(post.created)}</Date>
               </HeadContent>
               <SubTitle>{post && post.title}</SubTitle>
@@ -142,12 +163,12 @@ export default function NewsPage() {
               <Paragraph>{post && post.description}</Paragraph>
 
               <Feedback>
-                <Button color="#6CBBA9" icon={like}>
+                {/* <Button color="#6CBBA9" icon={like}>
                   ۵۴
                 </Button>
                 <Button color="#FFA5A5" icon={dislike}>
                   ۱۰
-                </Button>
+                </Button> */}
                 {/* <Share>
                   <p className="text">بازنشر</p>
                 </Share> */}
@@ -175,8 +196,15 @@ export default function NewsPage() {
                 </Picture>
                 <Content>
                   <HeadContent>
-                    <Type>{post && post.writer}</Type>
-                    <Date>{post.created && convertDateToFarsi(post.created)}</Date>
+                    <Type icon={post.type}>
+                      {post && post.type == "note" && "یادداشت"}
+                      {post && post.type == "news" && "خبر"}
+                      {post && post.type == "report" && "گزارش"}
+                      {post && post.type == "atricle" && "مقاله"}
+                    </Type>
+                    <Date>
+                      {post.created && convertDateToFarsi(post.created)}
+                    </Date>
                   </HeadContent>
                   <SubTitle>{post && post.title}</SubTitle>
 
@@ -373,8 +401,12 @@ const Type = styled.p`
   &:before {
     content: "";
     display: inline-flex;
-    background-image: url(${profile});
-    background-size: cover;
+    background-image: ${(props) => props.icon == "note" && `url(${note})`};
+    background-image: ${(props) => props.icon == "news" && `url(${news})`};
+    background-image: ${(props) => props.icon == "report" && `url(${report})`};
+    background-image: ${(props) =>
+      props.icon == "article" && `url(${article})`};
+    background-size: contain;
     background-repeat: no-repeat;
     width: 14px;
     height: 17px;
@@ -571,8 +603,13 @@ const Paper = styled.div`
     &:before {
       content: "";
       display: inline-flex;
-      background-image: url(${user});
-      background-size: cover;
+      background-image: ${(props) => props.icon == "note" && `url(${note})`};
+      background-image: ${(props) => props.icon == "news" && `url(${news})`};
+      background-image: ${(props) =>
+        props.icon == "report" && `url(${report})`};
+      background-image: ${(props) =>
+        props.icon == "article" && `url(${article})`};
+      background-size: contain;
       background-repeat: no-repeat;
       width: 15px;
       height: 15px;

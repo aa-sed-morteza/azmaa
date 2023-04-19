@@ -3,9 +3,12 @@ import styled from "styled-components";
 import Control from "../../vote/components/controler";
 import data from "../../../data.json";
 import user from "../../../assets/profile.webp";
+import note from "../../../assets/text.webp";
+import news from "../../../assets/news.webp";
+import report from "../../../assets/report.webp";
+import article from "../../../assets/report.webp";
 import upArrow from "../../../assets/arrow.webp";
-import { useNavigate,useSearchParams } from "react-router-dom";
-
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function SelectNews({ posts }) {
   const navigate = useNavigate();
@@ -18,34 +21,44 @@ export default function SelectNews({ posts }) {
     setFilteredPosts(posts);
   }, [posts]);
 
-  const magPaper = filteredPosts.filter((x)=>{
-    let filter= searchparams.get("filter");
-    if(!filter)return true;
-    let name= x.writer + x.description ;
-    return name.includes(filter);
-  }).map((x, i) => {
-    return (
-      <Paper
-        key={i}
-        onClick={() => {
-          navigate(`/blog/${x.id}`);
-        }}
-      >
-        <div className="cover">
-          <img src={x.main_image} alt={x.date} />
-        </div>
+  const magPaper = filteredPosts
+    .filter((x) => {
+      let filter = searchparams.get("filter");
+      if (!filter) return true;
+      let name = x.writer + x.description;
+      return name.includes(filter);
+    })
+    .map((x, i) => {
+      return (
+        <Paper
+          key={i}
+          icon={x.type}
+          onClick={() => {
+            navigate(`/blog/${x.id}`);
+          }}
+        >
+          <div className="cover">
+            <img src={x.main_image} alt={x.date} />
+          </div>
 
-        <p className="user">{x.writer}</p>
+          <p className="user">
+            {x.type == "note" && "یادداشت"}
+            {x.type == "news" && "خبر"}
+            {x.type == "report" && "گزارش"}
+            {x.type == "article" && "مقاله"}
+          </p>
 
-        <p className="content">{x.description.slice(0, 180) + " ..."}</p>
+          <p className="content">{x.description.slice(0, 180) + " ..."}</p>
 
-        <p className="date">{x.date}</p>
-      </Paper>
-    );
-  });
+          <p className="date">{x.date}</p>
+        </Paper>
+      );
+    });
 
   useEffect(() => {
-    if (posts.filter((x) => x.tag.length > 0 && x.tag[0].name === selectedTag)) {
+    if (
+      posts.filter((x) => x.tag.length > 0 && x.tag[0].name === selectedTag)
+    ) {
       setFilteredPosts(
         posts.filter((x) => x.tag.length > 0 && x.tag[0].name === selectedTag)
       );
@@ -58,7 +71,7 @@ export default function SelectNews({ posts }) {
   }, [selectedTag]);
   return (
     <Container>
-      <Control selectedTag={selectedTag} setSelectedTag={setSelectedTag} /> 
+      <Control selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
 
       {/* <Title> پربازدیدترین مطالب</Title>
       <NewsWraper hide={mostVisitedMore}>{magPaper}</NewsWraper>
@@ -86,15 +99,6 @@ export default function SelectNews({ posts }) {
     </Container>
   );
 }
-
-
-
-
-
-
-
-
-
 
 const Container = styled.section`
   background-color: #ffffff;
@@ -168,20 +172,25 @@ const Paper = styled.div`
     color: #707070;
     font-weight: 300;
     font-size: 3.72vw;
-    padding-right: 20px;
-    position: relative;
+    /* padding-right: 20px; */
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     &:before {
       content: "";
-      display: flex;
-      position: absolute;
-      background-image: url(${user});
-      background-size: cover;
+      display: inline-flex;
+      background-image: ${(props) => props.icon == "note" && `url(${note})`};
+      background-image: ${(props) => props.icon == "news" && `url(${news})`};
+      background-image: ${(props) =>
+        props.icon == "report" && `url(${report})`};
+      background-image: ${(props) =>
+        props.icon == "article" && `url(${article})`};
+      background-size: contain;
       background-repeat: no-repeat;
       width: 15px;
       height: 15px;
-      right: 2px;
-      top: 5px;
+    
     }
   }
   .content {
@@ -217,7 +226,7 @@ const Paper = styled.div`
     .user {
       font-size: 1.042vw;
       margin-bottom: 36px;
-      padding-right: 30px;
+      /* padding-right: 30px; */
       &:before {
         width: 20px;
         height: 20px;
@@ -278,7 +287,7 @@ const ShowMore = styled.div`
   @media (min-width: 481px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
-    width:50%;
+    width: 50%;
     justify-content: center;
     align-items: center;
     margin: auto;
