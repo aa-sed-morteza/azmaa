@@ -3,8 +3,12 @@ import styled from "styled-components";
 import data from "../../../data.json";
 import leftArrow from "../../../assets/lightArrow.webp";
 import profile from "../../../assets/profile.webp";
+import note from "../../../assets/text.webp";
+import news from "../../../assets/news.webp";
+import report from "../../../assets/report.webp";
+import article from "../../../assets/report.webp"
 import { useNavigate } from "react-router-dom";
-import {convertDateToFarsi, toFarsiNumber} from "../../../utils"
+import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
 
 const Container = styled.section`
   overflow: hidden;
@@ -14,14 +18,13 @@ const Container = styled.section`
   margin: 0;
   position: relative;
   padding-bottom: 82px;
-  
 `;
 
 const ShowIndex = styled.div`
   display: flex;
   gap: 10px;
   position: absolute;
-  bottom:8%;
+  bottom: 8%;
   left: 28%;
   .item {
     width: 15px;
@@ -68,10 +71,10 @@ const Content = styled.div`
     margin: 0;
     line-height: 5.78vw;
     -webkit-box-orient: vertical;
-  display: -webkit-box;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  -webkit-line-clamp: 2;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
   }
   .text {
     font-weight: 400;
@@ -81,10 +84,10 @@ const Content = styled.div`
     color: #707070;
     margin: 0;
     -webkit-box-orient: vertical;
-  display: -webkit-box;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  -webkit-line-clamp: 4;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
   }
   .identity {
     display: flex;
@@ -102,8 +105,11 @@ const Content = styled.div`
       &:before {
         content: "";
         display: inline-flex;
-        background-image: url(${profile});
-        background-size: cover;
+        background-image: ${(props) => props.icon == "note" && `url(${note})`};
+        background-image: ${(props) => props.icon == "news" && `url(${news})`};
+        background-image: ${(props) => props.icon == "report" && `url(${report})`};
+        background-image: ${(props) => props.icon == "article" && `url(${article})`};
+        background-size: contain;
         background-repeat: no-repeat;
         width: 30px;
         height: 30px;
@@ -126,7 +132,7 @@ const Button = styled.div`
   padding: 14px 80px 15px 30px;
   width: fit-content;
   cursor: pointer;
-  &:after{
+  &:after {
     content: "";
     display: block;
     position: absolute;
@@ -137,17 +143,15 @@ const Button = styled.div`
     height: 15px;
     left: 9%;
     top: 50%;
-    transform:translate(0,-50%);
-}
-   
-  
+    transform: translate(0, -50%);
+  }
+
   .text-button {
     margin: 0;
     padding-left: 60px;
     color: #ffffff;
     font-size: 1.25vw;
     font-weight: 700;
-
   }
 `;
 
@@ -155,6 +159,7 @@ export default function Carousel({ posts }) {
   const items = posts;
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [type, setType] = useState("");
 
   function carouselInfiniteScroll() {
     if (currentIndex === data.newspaper.length - 1) {
@@ -180,7 +185,7 @@ export default function Carousel({ posts }) {
     );
   });
 
-  //
+  // console.log('new',items)
   return (
     <Container>
       {items.map((x, i) => {
@@ -192,12 +197,17 @@ export default function Carousel({ posts }) {
             <PicWraper>
               <img src={x.main_image} alt="poster" />
             </PicWraper>
-            <Content>
+            <Content icon={x.type}>
               <h1 className="title">{x.title.slice(0, 50) + "..."}</h1>
               <p className="text">{x.description.slice(0, 250) + "..."} </p>
               <div className="identity">
-                <p className="user">{x.writer }</p>
-                <p className="date">{convertDateToFarsi(x.created) }</p>
+                <p className="user">
+                  {x.type == "note" && "یادداشت"}
+                  {x.type =='news'&& 'خبر'}
+                  {x.type =='report' &&'گزارش'}
+                  {x.type =='article' &&'مقاله'}
+                </p>
+                <p className="date">{convertDateToFarsi(x.created)}</p>
               </div>
               <Button
                 onClick={() => {
