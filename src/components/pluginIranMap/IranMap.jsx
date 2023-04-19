@@ -101,6 +101,17 @@ const IranMap = ({ position }) => {
     }
   }, [change]);
 
+  useEffect(()=>{
+    setCities('');
+    setProvinceSelected(false);
+    setProvinceNameOnClick('');
+    setProvinceName('')
+    setFieldValue("city", '')
+    setFieldValue("province", '');
+  },[state.city==''])
+
+  console.log('city_map',state.city)
+
   const onSubmit = async (values, actions) => {
     setProvinceSelected(false);
     setCities(values.city);
