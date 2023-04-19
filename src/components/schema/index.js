@@ -160,5 +160,5 @@ export const suggestSchema = yup.object().shape({
 
 export const provinceSchema = yup.object().shape({
   province: yup.string().required("لطفا استان مورد خود را انتخاب کنید"),
-  city: yup.string().required("لطفا شهر مورد خود را انتخاب کنید"),
+  // city: yup.string().required("لطفا شهر مورد خود را انتخاب کنید"),
 });

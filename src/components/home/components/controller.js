@@ -521,6 +521,7 @@ export default function Controller({ vote_voter }) {
   });
 
 
+
   const controllItem = data.controlPanel.map((x, i) => {
     return (
       <>
@@ -546,6 +547,8 @@ export default function Controller({ vote_voter }) {
       </>
     );
   });
+
+  console.log('cities',state.citySearch)
   return (
     <ControllContainer>
       <FilterContainer className="filter-box">
@@ -566,7 +569,7 @@ export default function Controller({ vote_voter }) {
         <RemoveCitySearch
           onClick={() => {
             dispatch({ type: "SET_PROVICE", payload: '' });
-            dispatch({ type: "SET_CITY", payload: '' });
+            dispatch({ type: "SET_CITY_SEARCH", payload: [] });
           }}
         >
           حذف فیلتر نقشه

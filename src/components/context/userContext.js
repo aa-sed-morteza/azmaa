@@ -40,7 +40,7 @@ const initialState = {
   suggestType: "",
   mapLevel: 1,
   provinceSearch: {},
-  citySearch: {},
+  citySearch: [],
   city: "",
   loggedIn: false,
   token: null,
