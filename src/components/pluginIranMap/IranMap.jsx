@@ -112,10 +112,11 @@ const IranMap = ({ position }) => {
 
   const onSubmit = async (values, actions) => {
     setProvinceSelected(false);
-    setCities(values.city);
-    dispatch({ type: "SET_PROVICE", payload: values.province });
+    // setCities(values.city);
+    dispatch({ type: "SET_PROVINCE_SEARCH", payload: values.province });
     dispatch({ type: "SET_CITY_SEARCH", payload: values.city });
-    setChange(!change)
+
+    // setChange(!change)
     // dispatch({ type: "SET_ELECTORAL_DISTRICT", payload: values.password });
     // setProvinceName(values.province);
     // setProvinceNameOnClick(values.province);

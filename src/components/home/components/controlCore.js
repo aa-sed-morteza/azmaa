@@ -9,6 +9,7 @@ import SelectArea from "./selectArea";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../context/userContext";
 
 const Container = styled.section`
   display: flex;
@@ -115,6 +116,7 @@ const AreaContainer = styled.div`
 `;
 
 export default function ControlCore(props) {
+  const {state,dispatch}=useUser();
   const [select, setSelect] = useState("transparent");
   const [envoys, setEnvoys] = useState(props.envoys);
   const [areas, setAreas] = useState(props.areas);
@@ -122,9 +124,14 @@ export default function ControlCore(props) {
   const [envoyMore, setEnvoyMore] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    setEnvoys(props.envoys);
+    setAreas(props.areas)
+  },[state.citySearch])
+
   const newList = envoys.sort((a, b) => b.transparency - a.transparency);
 
-  console.log('list',newList)
+
 
   return (
     <Container>

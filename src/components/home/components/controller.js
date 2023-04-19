@@ -16,6 +16,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { useUser } from "../../context/userContext";
+import { contentSchema } from "../../schema";
 
 const ControllContainer = styled.section`
   display: flex;
@@ -384,6 +385,9 @@ export default function Controller({ vote_voter }) {
   const navigate = useNavigate();
   const width = useWidth();
 
+  const [filterCities, setFilterCities] = useState([]);
+  const [filterAreas, setFilterAreas] = useState([]);
+
   const getBills = () => {
     let config;
     if (vote_voter > 0) {
@@ -413,7 +417,8 @@ export default function Controller({ vote_voter }) {
     };
     axios(config)
       .then(function (response) {
-        setEnvoys([...response.data[0].agent]);
+        console.log('request',response.data)
+        setFilterCities([...response.data[0].agent]);
       })
       .catch(function (error) {
         console.log(error);
@@ -496,31 +501,42 @@ export default function Controller({ vote_voter }) {
   }, []);
 
   const filterEnvoyByCity = () => {
-    const cityID = citeis.find((x) => x.name == state.city);
-    if (cityID) {
-      getDistrict(cityID.id);
-    }
+    const result = envoys.filter((obj1) => {
+      return state.citySearch.some((obj2) => {
+        return obj1.electoral_district_name === obj2;
+      });
+    });
+
+    setFilterCities(result);
+    getDistrict(result.map(x=>x.id))
   };
 
   const filterAreaByCity = () => {
-    const district = areas.find((x) =>
-      x.city_name.find((j) => j.name === state.city)
-    );
-    if (district) {
-      setAreas([district]);
+    const district = areas.filter((obj1) => {
+      return state.citySearch.some((obj2) => {
+        return obj1.name === obj2;
+      });
+    });
+
+    if (district && state.citySearch.length > 0) {
+      setFilterAreas(district);
+    }else{
+      setFilterCities(envoys)
     }
   };
+  console.log("area", filterAreas);
+  console.log("city", filterCities);
+  console.log("state", state.citySearch);
+  console.log('envoy',envoys)
 
   useEffect(() => {
     filterEnvoyByCity();
     filterAreaByCity();
-  }, [state.city]);
+  }, [state.citySearch]);
 
   const newList = envoys.sort((a, b) => {
     return a.transparency - b.transparency;
   });
-
-
 
   const controllItem = data.controlPanel.map((x, i) => {
     return (
@@ -548,7 +564,6 @@ export default function Controller({ vote_voter }) {
     );
   });
 
-  console.log('cities',state.citySearch)
   return (
     <ControllContainer>
       <FilterContainer className="filter-box">
@@ -568,7 +583,7 @@ export default function Controller({ vote_voter }) {
         <TabContainer>{controllItem}</TabContainer>
         <RemoveCitySearch
           onClick={() => {
-            dispatch({ type: "SET_PROVICE", payload: '' });
+            dispatch({ type: "SET_PROVICE", payload: "" });
             dispatch({ type: "SET_CITY_SEARCH", payload: [] });
           }}
         >
@@ -690,7 +705,10 @@ export default function Controller({ vote_voter }) {
               {vote_voter > 0 || areas.length < 2 ? (
                 <hr />
               ) : (
-                <ControlCore envoys={envoys} areas={areas} />
+                <ControlCore
+                  envoys={filterCities.length>0 ? filterCities : envoys}
+                  areas={filterAreas.length > 0 ? filterAreas : areas}
+                />
               )}
 
               <LastActions>
