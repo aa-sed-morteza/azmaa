@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function Census({select,complete,envoy}) {
- 
-
+export default function Census({ select, complete, envoy }) {
   const checkCensus = (num1, num2) => {
     let bgColor;
-    if ( num2 / num1 > 0.5) {
+    if (num2 / num1 > 0.5) {
       bgColor = "#6CBBA9";
     } else {
       bgColor = "#FFA5A5";
     }
 
     let persentage = (num2 / num1) * 100;
-    
+
     return (
       <Progress>
         <div className="number">
@@ -50,9 +48,9 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 0px 29px 20px;
   margin-top: 40px;
-  @media(min-width:481px){
-    padding:0px 45px 30px 40px !important;
-    margin-top:60px;
+  @media (min-width: 481px) {
+    padding: 0px 45px 30px 40px !important;
+    margin-top: 60px;
   }
 `;
 
@@ -67,8 +65,8 @@ const Title = styled.h4`
   text-align: center;
   margin-right: -5%;
   white-space: nowrap;
-  @media(min-width:481px){
-    font-size:1.875vw;
+  @media (min-width: 481px) {
+    font-size: 1.875vw;
     transform: translateY(-60%);
     width: 55%;
   }
@@ -79,7 +77,7 @@ const Row = styled.div`
   flex-wrap: wrap;
   margin-bottom: 5px;
   align-items: center;
-  gap:12px;
+  gap: 12px;
   .type {
     color: #9f9f9f;
     font-weight: 400;
@@ -87,9 +85,9 @@ const Row = styled.div`
     margin: 0;
     padding-bottom: 5px;
   }
-  @media(min-width:481px){
-    .type{
-      font-size:1.250vw;
+  @media (min-width: 481px) {
+    .type {
+      font-size: 1.25vw;
     }
   }
 `;
@@ -113,16 +111,16 @@ const Progress = styled.div`
       right: 0;
     }
   }
-  @media(min-width:481px){
-    width:40%;
-    .number{
-      font-size:1.250vw;
+  @media (min-width: 481px) {
+    width: 40%;
+    .number {
+      font-size: 1.25vw;
       white-space: nowrap;
     }
-    .line{
-      height:5px;
-      .show-census{
-        height:5px;
+    .line {
+      height: 5px;
+      .show-census {
+        height: 5px;
       }
     }
   }
