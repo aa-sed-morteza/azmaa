@@ -153,6 +153,36 @@
       "contact": " @AZMAA_NET",
       "icon": "../../assets/insta.webp",
       "href": "https://www.instagram.com/azmaa_net"
+    },
+    {
+      "contact": " @AZMAA_NET",
+      "icon": "../../assets/twitter-icon.webp",
+      "href": "https://twitter.com/azmaa_net"
+    },
+    {
+      "contact": " @AZMAA_NET",
+      "icon": "../../assets/telegram-icon.webp",
+      "href": "https://t.me/azmaa_net"
+    },
+    {
+      "contact": " @AZMAA_NET",
+      "icon": "../../assets/whatsapp.webp",
+      "href": "http://wa.me/989108993642"
+    },
+    {
+      "contact": " @AZMAA_NET",
+      "icon": "../../assets/bale-icon.webp",
+      "href": "https://ble.ir/azmaa_net"
+    },
+    {
+      "contact": " @AZMAA_NET",
+      "icon": "../../assets/etaa-icon.webp",
+      "href": "http://www.eitaa.com/azmaa_net"
+    },
+    {
+      "contact": " @AZMAA_NET",
+      "icon": "../../assets/aparat-icon.webp",
+      "href": "http://www.aparat.com/azmaa_net"
     }
   ],
   "state": [
