@@ -20,10 +20,10 @@ export default function Home() {
   return (
     <HomeContainer>
       {width > 480 ? <Carousel /> : ""}
-      <FirstBanner />
+      {/* <FirstBanner /> */}
       <HomeDetails />
       <Magazine />
-      <SecondBanner />
+      {/* <SecondBanner /> */}
     </HomeContainer>
   );
 }
