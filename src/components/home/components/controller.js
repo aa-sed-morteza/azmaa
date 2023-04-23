@@ -507,7 +507,7 @@ export default function Controller({vote_voter}) {
     filterAreaByCity();
   }, [state.city]);
 
-  const newList = envoys.sort((a, b) =>{ return a.transparency - b.transparency });
+  const newList = envoys.sort((a, b) => b.transparency - a.transparency);
 
   const controllItem = data.controlPanel.map((x, i) => {
     return (
