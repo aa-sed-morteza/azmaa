@@ -96,9 +96,10 @@ export default function ActiveEnvoy({ envoys }) {
   const [searchparams, setsearchparams] = useSearchParams();
   return (
     <Container>
-      <Title>فعال‌ترین نمایندگان</Title>
+      <Title>شفاف ترین نمایندگان</Title>
       <EnvoyContainer hide={showMore}>
-        {envoys.filter((item)=>{
+        {/* {console.log(envoys)} */}
+        {envoys.sort((a, b) => b.transparency - a.transparency).filter((item)=>{
                 let filter= searchparams.get("filter");
                 if(!filter)return true;
                 // let name= item.writer + item.description ;

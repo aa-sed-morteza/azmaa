@@ -40,7 +40,8 @@ const IranMap = ({ position }) => {
   const [provinceSelected, setProvinceSelected] = useState(false);
   const [cities, setCities] = useState(["تمام ایران"]);
   const [input, setInput] = useState("استان خود را انتخاب کنید");
-
+  const [envoys, setEnvoys] = useState([]);
+  const [citeis,setCiteis]=useState([]);
   //get provinces of iran
   const getProvince = () => {
     let config = {
@@ -90,6 +91,37 @@ const IranMap = ({ position }) => {
     getProvince();
   }, []);
 
+
+
+  const getEnvoys = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
+    };
+
+    axios(config).then((res) => {
+      // console.log(res.data);
+      if (res.data.length > 0) {
+        setEnvoys([...res.data]);
+      }
+    });
+  };
+
+  const getCiteis = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/city/`,
+    };
+
+    axios(config).then((res) => {
+      // console.log(res.data);
+      if (res.data.length > 0) {
+        setCiteis([...res.data]);
+      }
+      state.city=citeis;
+    });
+  };
+
   useEffect(() => {
     if (provinces.length == 0) {
       selectProvinces();
@@ -102,13 +134,18 @@ const IranMap = ({ position }) => {
   }, [change]);
 
   const onSubmit = async (values, actions) => {
+    if(values){
     setProvinceSelected(false);
+    console.log(values.city);
     setCities(values.city);
     dispatch({ type: "SET_PROVICE", payload: values.province });
     dispatch({ type: "SET_CITY", payload: values.city });
     // dispatch({ type: "SET_ELECTORAL_DISTRICT", payload: values.password });
     // setProvinceName(values.province);
     // setProvinceNameOnClick(values.province);
+    }else{
+      dispatch({ type: "SET_CITY", payload: "تمام ایران" });
+    }
   };
 
   const {
@@ -169,7 +206,10 @@ const IranMap = ({ position }) => {
                       value={values.city}
                       name={city}
                       onChange={() => {
-                        setFieldValue("city", city);
+                        console.log("setFieldValue"+ city);
+                        citeis.push(city);
+                        console.log("citeis="+ citeis);
+                        setFieldValue("city", citeis);
                       }}
                     />
                     <label htmlFor={city} className={styles.city_label}>
@@ -182,9 +222,11 @@ const IranMap = ({ position }) => {
               <div className={styles.select_cities_btns}>
                 <button
                   type="button"
-                  onClick={() => setProvinceSelected(false)}
+                  onClick={() => {
+                    onSubmit();
+                    setProvinceSelected(false);}}
                 >
-                  بازگشت
+                   بازگشت و حذف فیلتر
                 </button>
                 <input type="submit" value="تایید" />
               </div>
