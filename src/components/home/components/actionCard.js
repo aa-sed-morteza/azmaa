@@ -15,7 +15,6 @@ import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
 import ActionsCensus from "../../action-presentation/components/actionCensus";
 
 export default function ActionCard({ activity }) {
-
   const [active, setActive] = useState(0);
   const [color, SetColor] = useState("#DFF5F0");
   const [bColor, setBColor] = useState("#6cbba9");
@@ -38,49 +37,72 @@ export default function ActionCard({ activity }) {
   let negative = 0;
   let noChoice = 0;
 
-  // console.log(activity.vote);
+  // console.log(activity.verified_vote);
   if (number_of_choice > 0)
-    for (const item of activity.vote) {
-      for (let i = 0; i < name_of_choice.length; i++) {
-        if (item.vote == name_of_choice[i]) {
-          number_of_each_choice[i] = number_of_each_choice[i] + 1;
+    if (activity.verified_vote) {
+      for (const item of activity.verified_vote) {
+        for (let i = 0; i < name_of_choice.length; i++) {
+          if (item.vote == name_of_choice[i]) {
+            number_of_each_choice[i] = number_of_each_choice[i] + 1;
+          }
         }
       }
     }
+
   // console.log("number_of_each_choice is =");
   // console.log(number_of_each_choice);
 
   // useEffect(()=>{
-  //   setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[0].name)]);
+  //   setVotes([activity.verified_vote.find((x) => x.vote == activity.activity_choice[0].name)]);
   // },[])
-
-
+  console.log(activity);
 
   useEffect(() => {
     if (active === 0) {
       SetColor("#DFF5F0");
       setBColor("#6cbba9");
       if (activity.activity_choice[0])
-        setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[0].name)]);
+        setVotes([
+          activity.verified_vote.find(
+            (x) => x.vote == activity.activity_choice[0].name
+          ),
+        ]);
       else
-        setVotes([activity.vote.find((x) => x.vote == "activity.activity_choice[0].name")]);
-
+        setVotes([
+          activity.verified_vote.find(
+            (x) => x.vote == "activity.activity_choice[0].name"
+          ),
+        ]);
     } else if (active === 1) {
       SetColor("#FFD5D5");
       setBColor("#ffa5a5");
       if (activity.activity_choice[1])
-        setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[1].name)]);
+        setVotes([
+          activity.verified_vote.find(
+            (x) => x.vote == activity.activity_choice[1].name
+          ),
+        ]);
       else
-        setVotes([activity.vote.find((x) => x.vote == "activity.activity_choice[0].name")]);
-
+        setVotes([
+          activity.verified_vote.find(
+            (x) => x.vote == "activity.activity_choice[0].name"
+          ),
+        ]);
     } else if (active === 2) {
       SetColor("#EAEAEA");
       setBColor("#d8d8d8");
       if (activity.activity_choice[2])
-        setVotes([activity.vote.find((x) => x.vote == activity.activity_choice[2].name)]);
+        setVotes([
+          activity.verified_vote.find(
+            (x) => x.vote == activity.activity_choice[2].name
+          ),
+        ]);
       else
-        setVotes([activity.vote.find((x) => x.vote == "activity.activity_choice[0].name")]);
-
+        setVotes([
+          activity.verified_vote.find(
+            (x) => x.vote == "activity.activity_choice[0].name"
+          ),
+        ]);
     }
   }, [active]);
 
@@ -116,11 +138,6 @@ export default function ActionCard({ activity }) {
   //   )
   // })
 
-
-
-
-
-
   return (
     <VCContainer>
       <CardHeader>
@@ -128,7 +145,9 @@ export default function ActionCard({ activity }) {
         <div className="title-card">
           <p className="title">عملکرد</p>
           <h2> {activity.name}</h2>
-          <p className="date">{activity.date && convertDateToFarsi(activity.date)}</p>
+          <p className="date">
+            {activity.date && convertDateToFarsi(activity.date)}
+          </p>
         </div>
       </CardHeader>
       {/* <Statistics>
@@ -153,7 +172,7 @@ export default function ActionCard({ activity }) {
       </Statistics>
       <EnvoyGallery color={color}>{envoyList}</EnvoyGallery> */}
       <ActionsCensus
-        total={activity.vote.length}
+        total={activity.verified_vote ? activity.verified_vote.length : 0}
         data={activity}
       />
       <ButtonWraper>
@@ -175,15 +194,6 @@ export default function ActionCard({ activity }) {
     </VCContainer>
   );
 }
-
-
-
-
-
-
-
-
-
 
 const VCContainer = styled.div`
   background-color: #ffffff;

@@ -4,27 +4,32 @@ import ok from "../../../assets/like.webp";
 import disagree from "../../../assets/dislike.webp";
 import info from "../../../assets/info.webp";
 
-export default function ActionsCensus({ total, data}) {
+export default function ActionsCensus({ total, data }) {
   const [envoy, setEnvoy] = useState(267);
 
-  const dataOptions = data.activity_choice.map((item,i)=>{
-    return(
+  const dataOptions = data.activity_choice.map((item, i) => {
+    return (
       <Item className="active" key={i}>
-          <Type color="#6CBBA9" icon={ok}>
-            {item.name}
-          </Type>
-          <Number color="#6CBBA9">
-            <span>{(data.vote.filter(x=>x.vote == item.name).length)}/</span>
-            {total}
-          </Number>
-        </Item>
-    )
-  })
+        <Type color="#6CBBA9" icon={ok}>
+          {item.name}
+        </Type>
+        <Number color="#6CBBA9">
+          <span>
+            {data.vote
+              ? data.vote.filter((x) => x.vote == item.name).length
+              : ""}
+            /
+          </span>
+          {total}
+        </Number>
+      </Item>
+    );
+  });
   return (
     <Container>
       <Title> آمار آراء</Title>
       <Row>
-        {total>0 ? dataOptions : <h5> هنوز عملکردی ثبت نشده</h5>}
+        {total > 0 ? dataOptions : <h5> هنوز عملکردی ثبت نشده</h5>}
         {/* <Item className="active">
           <Type color="#6CBBA9" icon={ok}>
             همراه:
@@ -96,32 +101,29 @@ const Row = styled.div`
     flex-direction: column;
     gap: 15px;
   }
-  &>:nth-child(2){
-    &>p{
-      color: #FFA5A5;
-      &:before{
+  & > :nth-child(2) {
+    & > p {
+      color: #ffa5a5;
+      &:before {
         background-image: url(${disagree});
       }
     }
-    &> div span{
-      color: #FFA5A5;
+    & > div span {
+      color: #ffa5a5;
     }
-    
   }
-  &>:nth-child(3){
-    &>p{
-      color: #CBCBCB;
-      &:before{
+  & > :nth-child(3) {
+    & > p {
+      color: #cbcbcb;
+      &:before {
         background-image: url(${info});
       }
     }
-    &> div span{
-      color: #CBCBCB;
+    & > div span {
+      color: #cbcbcb;
     }
-    
   }
 `;
-
 
 const Item = styled.div`
   width: 48%;
@@ -136,7 +138,6 @@ const Item = styled.div`
       padding: 5px;
     }
   }
-  
 `;
 
 const Type = styled.p`
@@ -155,7 +156,6 @@ const Type = styled.p`
     background-repeat: no-repeat;
     width: 3.488vw;
     height: 3.488vw;
-   
   }
   @media (min-width: 480px) {
     font-size: 1.25vw;
