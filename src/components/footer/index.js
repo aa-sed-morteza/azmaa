@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import data from "../../data.json";
 import azmma from "../../assets/azma-black.svg";
-import {toFarsiNumber} from "../../utils"
+import { toFarsiNumber } from "../../utils"
 
 const FooterContainer = styled.section`
   background-color: #095644;
@@ -60,11 +60,11 @@ const AboutUs = styled.div`
 
 const ContactUs = styled.div`
   & > .item {
-    display: flex;
+    display: inline-block;
     margin-bottom: 10px;
     gap: 17px;
     align-items:center;
-
+    padding: 5px 5px 5px 5px;
     span {
       width: 45px;
       height: 40px;
@@ -75,36 +75,36 @@ const ContactUs = styled.div`
       }
     }
 
-    .content {
-      width: 85%;
-      background-color: #f3f3f3;
-      border-radius: 4px;
-      display: flex;
+    // .content {
+    //   width: 85%;
+    //   background-color: #f3f3f3;
+    //   border-radius: 4px;
+    //   display: flex;
      
-      a {
-        margin: auto 10px;
-        color: #095644;
-        text-decoration: none;
-        width: 100%;
-        text-align: left;
-        font-size: 5.85vw;
-        font-weight: light;
-        direction: ltr;
-      }
+      // a {
+      //   margin: auto 10px;
+      //   color: #095644;
+      //   text-decoration: none;
+      //   width: 100%;
+      //   text-align: left;
+      //   font-size: 5.85vw;
+      //   font-weight: light;
+      //   direction: ltr;
+      // }
     }
   }
 
   @media (min-width: 481px) {
-    width: 45%;
+    width: 40%;
     & > .item {
-      margin-bottom: 10px;
+      // margin-bottom: 20px;
       span {
-        width: 50px;
-        height: 50px;
+        width: 76px;
+        height: 67px;
       }
       .content {
-        width: 70%;
-        height:43px;
+        width: 80%;
+        height:55px;
         a {
           font-size: 1.87vw;
         }
@@ -163,28 +163,26 @@ const Copyright = styled.div`
 export default function Footer() {
   const contactItem = data.footer.map((x, i) => {
     return (
-      <div className="item" key={i}>
-        <span>
-          <img src={x.icon} />
-        </span>
-        <div className="content">
-  
-          <a  href={x.href}>
-            {x.contact}
-          </a>
+        <div className="item" key={i}>
+          <div className="content">
+            <a href={x.href}>
+              <span>
+                <img src={x.icon} />
+              </span>
+            </a>
+          </div>
         </div>
-      </div>
     );
   });
 
   return (
-    <div style={{marginTop:'auto'}}>
+    <div style={{ marginTop: 'auto' }}>
       <FooterContainer>
-        <ContactUs>{contactItem}</ContactUs>
+        <ContactUs  >{contactItem}</ContactUs>
         <AboutUs>
           <h4>کمی در بارۀ ازما:</h4>
           <p>
-          جنبش ازما در آستانه انتخابات یازدهمین دوره مجلس شورای اسلامی با اعتقاد به این که خانه ملت از آن مردم ایران است فعالیت خود را آغاز و با محور قرار دادن سه ارزش شایسته‌گزینی، شفافیت و پاسخگویی به منظور بسط عدالت در عرصه قدرت ابزارها و فرآیندهایی را طراحی و اجرا کرد.         </p>
+            جنبش ازما در آستانه انتخابات یازدهمین دوره مجلس شورای اسلامی با اعتقاد به این که خانه ملت از آن مردم ایران است فعالیت خود را آغاز و با محور قرار دادن سه ارزش شایسته‌گزینی، شفافیت و پاسخگویی به منظور بسط عدالت در عرصه قدرت ابزارها و فرآیندهایی را طراحی و اجرا کرد.         </p>
         </AboutUs>
       </FooterContainer>
       <Copyright>

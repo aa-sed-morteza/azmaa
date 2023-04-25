@@ -101,7 +101,9 @@ export default function NewsPage() {
           {x.type == "article" && "مقاله"}
         </p>
 
-        <p className="content">{x.description}</p>
+        <h5 className="Ttitle">{x.title}</h5>
+
+        <p className="content">{x.description.slice(0, 100) + " ..."}</p>
 
         <p className="date">{x.created && convertDateToFarsi(x.created)}</p>
       </Paper>
@@ -128,7 +130,9 @@ export default function NewsPage() {
           {x.type == "article" && "مقاله"}
         </p>
 
-        <p className="content">{x.description}</p>
+        <h5 className="Ttitle">{x.title}</h5>
+
+        <p className="content">{x.description.slice(0, 100) + " ..."}</p>
 
         <p className="date">{x.created && convertDateToFarsi(x.created)}</p>
       </Paper>
@@ -141,7 +145,6 @@ export default function NewsPage() {
         <p className="home">خانه / بلاگ /</p>
         <p className="component"> {post && post.title} </p>
       </Title>
-
       {width < 481 ? (
         <>
           <NewsContainer>
@@ -209,6 +212,13 @@ export default function NewsPage() {
                   <SubTitle>{post && post.title}</SubTitle>
 
                   <Paragraph>{post && post.description}</Paragraph>
+                  {post.image ? (
+                    <Picture>
+                      <img src={post && post.image} alt="news-cover" />
+                    </Picture>
+                  ) : (
+                    ""
+                  )}
 
                   <Feedback>
                     {/* <Button color="#6CBBA9" icon={like}>

@@ -29,7 +29,7 @@ export default function Envoy() {
     axios(config).then((res) => {
       // console.log(res.data);
       if (res.data.length > 0) {
-        setEnvoys([...res.data]);
+        setEnvoys([...res.data.sort((a, b) => b.transparency - a.transparency)]);
       }
     });
   };
@@ -63,10 +63,15 @@ export default function Envoy() {
   };
 
   const filterEnvoyByCity = () => {
+    if(state.city!="تمام ایران"){
     const cityID = citeis.find((x) => x.name == state.city);
     if(cityID){
       getDistrict(cityID.id)
     }
+  }
+  else{
+    getEnvoys();
+  }
   } 
 
  
@@ -77,8 +82,8 @@ export default function Envoy() {
   }, []);
 
   useEffect(() => {
-    filterEnvoyByCity();
-    
+     filterEnvoyByCity();
+      console.log(state.city);
   }, [state.city]);
 
   return (

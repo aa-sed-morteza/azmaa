@@ -40,7 +40,8 @@ const IranMap = ({ position }) => {
   const [provinceSelected, setProvinceSelected] = useState(false);
   const [cities, setCities] = useState(["تمام ایران"]);
   const [input, setInput] = useState("استان خود را انتخاب کنید");
-
+  const [envoys, setEnvoys] = useState([]);
+  const [citeis, setCiteis] = useState([]);
   //get provinces of iran
   const getProvince = () => {
     let config = {
@@ -90,6 +91,35 @@ const IranMap = ({ position }) => {
     getProvince();
   }, []);
 
+  const getEnvoys = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
+    };
+
+    axios(config).then((res) => {
+      // console.log(res.data);
+      if (res.data.length > 0) {
+        setEnvoys([...res.data]);
+      }
+    });
+  };
+
+  const getCiteis = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/city/`,
+    };
+
+    axios(config).then((res) => {
+      // console.log(res.data);
+      if (res.data.length > 0) {
+        setCiteis([...res.data]);
+      }
+      state.city = citeis;
+    });
+  };
+
   useEffect(() => {
     if (provinces.length == 0) {
       selectProvinces();
@@ -101,25 +131,28 @@ const IranMap = ({ position }) => {
     }
   }, [change]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setProvinceSelected(false);
-    setProvinceNameOnClick('');
-    setProvinceName('')
-    setFieldValue("city", [])
-    setFieldValue("province", '');
-  },[state.citySearch.length ==0])
-
+    setProvinceNameOnClick("");
+    setProvinceName("");
+    setFieldValue("city", []);
+    setFieldValue("province", "");
+  }, [state.citySearch.length == 0]);
 
   const onSubmit = async (values, actions) => {
-    setProvinceSelected(false);
-    // setCities(values.city);
-    dispatch({ type: "SET_PROVINCE_SEARCH", payload: values.province });
-    dispatch({ type: "SET_CITY_SEARCH", payload: values.city });
+    if (values) {
+      setProvinceSelected(false);
+      // setCities(values.city);
+      dispatch({ type: "SET_PROVINCE_SEARCH", payload: values.province });
+      dispatch({ type: "SET_CITY_SEARCH", payload: values.city });
 
-    // setChange(!change)
-    // dispatch({ type: "SET_ELECTORAL_DISTRICT", payload: values.password });
-    // setProvinceName(values.province);
-    // setProvinceNameOnClick(values.province);
+      // setChange(!change)
+      // dispatch({ type: "SET_ELECTORAL_DISTRICT", payload: values.password });
+      // setProvinceName(values.province);
+      // setProvinceNameOnClick(values.province);
+    } else {
+      dispatch({ type: "SET_CITY", payload: "تمام ایران" });
+    }
   };
 
   const {
@@ -139,7 +172,6 @@ const IranMap = ({ position }) => {
     validationSchema: provinceSchema,
     onSubmit,
   });
-
 
   return (
     <Container position={position}>
@@ -180,12 +212,11 @@ const IranMap = ({ position }) => {
                   name="all"
                   id="all"
                   onChange={() => {
-                    if(values.city.length>0){
+                    if (values.city.length > 0) {
                       setFieldValue("city", []);
-                    }else{
+                    } else {
                       setFieldValue("city", [...cities]);
                     }
-                    
                   }}
                 />
                 <label htmlFor="all" className={styles.city_label}>
@@ -204,6 +235,9 @@ const IranMap = ({ position }) => {
                       name={city}
                       onChange={() => {
                         setFieldValue("city", [...values.city, city]);
+                        console.log("setFieldValue" + city);
+                        citeis.push(city);
+                        console.log("citeis=" + citeis);
                       }}
                       checked={values.city.includes(city)}
                       // defaultChecked={values.city.includes(city)}
@@ -219,9 +253,12 @@ const IranMap = ({ position }) => {
               <div className={styles.select_cities_btns}>
                 <button
                   type="button"
-                  onClick={() => setProvinceSelected(false)}
+                  onClick={() => {
+                    onSubmit();
+                    setProvinceSelected(false);
+                  }}
                 >
-                  بازگشت
+                  بازگشت و حذف فیلتر
                 </button>
                 <input type="submit" value="تایید" />
               </div>

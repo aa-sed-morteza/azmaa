@@ -411,8 +411,9 @@ export default function Navbar() {
             <div className="content">
               {" "}
               {state.loggedIn ? "خروج از پنل" : "ورود به پنل"}{" "}
+              {/* <div className="icon"></div> */}
             </div>{" "}
-            <div className="icon"></div>
+            
           </Panel>
         )}
 

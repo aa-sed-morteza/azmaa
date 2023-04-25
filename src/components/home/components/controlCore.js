@@ -116,7 +116,7 @@ const AreaContainer = styled.div`
 `;
 
 export default function ControlCore(props) {
-  const {state,dispatch}=useUser();
+  const { state, dispatch } = useUser();
   const [select, setSelect] = useState("transparent");
   const [envoys, setEnvoys] = useState(props.envoys);
   const [areas, setAreas] = useState(props.areas);
@@ -124,14 +124,12 @@ export default function ControlCore(props) {
   const [envoyMore, setEnvoyMore] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     setEnvoys(props.envoys);
-    setAreas(props.areas)
-  },[state.citySearch])
+    setAreas(props.areas);
+  }, [state.citySearch]);
 
   const newList = envoys.sort((a, b) => b.transparency - a.transparency);
-
-
 
   return (
     <Container>
@@ -180,8 +178,8 @@ export default function ControlCore(props) {
               <p>{envoyMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
             </ShowMore>
           </>
-        ):(
-        // {select === "area" && (
+        ) : (
+          // {select === "area" && (
           <>
             <AreaContainer hide={areaMore}>
               {areas.map((item, i) => {

@@ -417,7 +417,7 @@ export default function Controller({ vote_voter }) {
     };
     axios(config)
       .then(function (response) {
-        console.log('request',response.data)
+        console.log("request", response.data);
         setFilterCities([...response.data[0].agent]);
       })
       .catch(function (error) {
@@ -508,7 +508,7 @@ export default function Controller({ vote_voter }) {
     });
 
     setFilterCities(result);
-    getDistrict(result.map(x=>x.id))
+    getDistrict(result.map((x) => x.id));
   };
 
   const filterAreaByCity = () => {
@@ -520,23 +520,21 @@ export default function Controller({ vote_voter }) {
 
     if (district && state.citySearch.length > 0) {
       setFilterAreas(district);
-    }else{
-      setFilterCities(envoys)
+    } else {
+      setFilterCities(envoys);
     }
   };
   console.log("area", filterAreas);
   console.log("city", filterCities);
   console.log("state", state.citySearch);
-  console.log('envoy',envoys)
+  console.log("envoy", envoys);
 
   useEffect(() => {
     filterEnvoyByCity();
     filterAreaByCity();
   }, [state.citySearch]);
 
-  const newList = envoys.sort((a, b) => {
-    return a.transparency - b.transparency;
-  });
+  const newList = envoys.sort((a, b) => b.transparency - a.transparency);
 
   const controllItem = data.controlPanel.map((x, i) => {
     return (
@@ -706,7 +704,7 @@ export default function Controller({ vote_voter }) {
                 <hr />
               ) : (
                 <ControlCore
-                  envoys={filterCities.length>0 ? filterCities : envoys}
+                  envoys={filterCities.length > 0 ? filterCities : envoys}
                   areas={filterAreas.length > 0 ? filterAreas : areas}
                 />
               )}

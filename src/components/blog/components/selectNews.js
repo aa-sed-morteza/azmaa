@@ -41,14 +41,9 @@ export default function SelectNews({ posts }) {
             <img src={x.main_image} alt={x.date} />
           </div>
 
-          <p className="user">
-            {x.type == "note" && "یادداشت"}
-            {x.type == "news" && "خبر"}
-            {x.type == "report" && "گزارش"}
-            {x.type == "article" && "مقاله"}
-          </p>
-
-          <p className="content">{x.description.slice(0, 180) + " ..."}</p>
+          <p className="user">{x.writer}</p>
+          <h5 className="title">{x.title}</h5>
+          <p className="content">{x.description.slice(0, 100) + " ..."}</p>
 
           <p className="date">{x.date}</p>
         </Paper>
@@ -190,7 +185,6 @@ const Paper = styled.div`
       background-repeat: no-repeat;
       width: 15px;
       height: 15px;
-    
     }
   }
   .content {

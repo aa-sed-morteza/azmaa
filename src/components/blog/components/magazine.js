@@ -276,7 +276,9 @@ export default function Magazine({ posts }) {
           {x.type == "article" && "مقاله"}
         </p>
 
-        <p className="content">{x.description.slice(0, 245) + " ..."}</p>
+        <h5 className="Ttitle">{x.title}</h5>
+
+        <p className="content">{x.description.slice(0, 100) + " ..."}</p>
 
         <p className="date">{x.date}</p>
       </Paper>
