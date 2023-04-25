@@ -12,10 +12,11 @@ import BestEnvoy from "./bestEnvoy";
 import tik from "../../../assets/vote.webp";
 import ControlCore from "./controlCore";
 import SelectArea from "./selectArea";
-import { useNavigate,useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { useUser } from "../../context/userContext";
+import { contentSchema } from "../../schema";
 
 const ControllContainer = styled.section`
   display: flex;
@@ -52,7 +53,7 @@ const SearchInput = styled.input`
   border: none;
   font-size: 3.72vw;
   margin-bottom: 19px;
-  font-family: FontAwesome;
+  font-family: FontAwesome !important;
   &:placeholder {
     // color:#D8D8D8;
   }
@@ -151,6 +152,22 @@ const Tab = styled.div`
         height: 39px;
       }
     }
+  }
+`;
+
+const RemoveCitySearch = styled.div`
+  position: absolute;
+  top: 0;
+  right: 10%;
+  background: #ffaa00;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 10px;
+  font-weight: 400;
+  color: #ffffff;
+  cursor: pointer;
+  @media (min-width: 481px) {
+    font-size: 14px;
   }
 `;
 
@@ -351,7 +368,7 @@ const AreaContainer = styled.div`
   }
 `;
 
-export default function Controller({vote_voter}) {
+export default function Controller({ vote_voter }) {
   const { state, dispatch } = useUser();
   const [select, setSelect] = useState(0);
   const [bills, setBills] = useState([]);
@@ -368,20 +385,22 @@ export default function Controller({vote_voter}) {
   const navigate = useNavigate();
   const width = useWidth();
 
+  const [filterCities, setFilterCities] = useState([]);
+  const [filterAreas, setFilterAreas] = useState([]);
+
   const getBills = () => {
     let config;
-    if (vote_voter>0)
-    {
-     config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter=${vote_voter}&ordering=name, date`,
-    };
-  }else    {
-     config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter&ordering=name, date`,
-    };
-  }
+    if (vote_voter > 0) {
+      config = {
+        method: "get",
+        url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter=${vote_voter}&ordering=name, date`,
+      };
+    } else {
+      config = {
+        method: "get",
+        url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter&ordering=name, date`,
+      };
+    }
 
     axios(config).then((res) => {
       // console.log(res.data);
@@ -398,7 +417,8 @@ export default function Controller({vote_voter}) {
     };
     axios(config)
       .then(function (response) {
-        setEnvoys([...response.data[0].agent]);
+        console.log('request',response.data)
+        setFilterCities([...response.data[0].agent]);
       })
       .catch(function (error) {
         console.log(error);
@@ -436,18 +456,16 @@ export default function Controller({vote_voter}) {
   const getActivities = () => {
     let config;
     // console.log("vote_voter="+vote_voter);
-    if(vote_voter>0)
-    {
-     config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter=${vote_voter}`,
-    }
-  }
-    else{
-       config = {
+    if (vote_voter > 0) {
+      config = {
+        method: "get",
+        url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter=${vote_voter}`,
+      };
+    } else {
+      config = {
         method: "get",
         url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter`,
-      }
+      };
     }
 
     axios(config).then((res) => {
@@ -457,8 +475,6 @@ export default function Controller({vote_voter}) {
       }
     });
   };
-
-  
 
   const getElectoralDistrict = () => {
     let config = {
@@ -477,7 +493,6 @@ export default function Controller({vote_voter}) {
   };
 
   useEffect(() => {
-
     getBills();
     getActivities();
     getElectoralDistrict();
@@ -485,67 +500,95 @@ export default function Controller({vote_voter}) {
     getEnvoys();
   }, []);
 
-  
   const filterEnvoyByCity = () => {
-    const cityID = citeis.find((x) => x.name == state.city);
-    if(cityID){
-      getDistrict(cityID.id)
-    }
-  } 
+    const result = envoys.filter((obj1) => {
+      return state.citySearch.some((obj2) => {
+        return obj1.electoral_district_name === obj2;
+      });
+    });
 
+    setFilterCities(result);
+    getDistrict(result.map(x=>x.id))
+  };
 
-  const filterAreaByCity =()=>{
-    const district = areas.find(x=>x.city_name.find(j=>j.name===state.city))
-    if(district){
-      setAreas([district])
+  const filterAreaByCity = () => {
+    const district = areas.filter((obj1) => {
+      return state.citySearch.some((obj2) => {
+        return obj1.name === obj2;
+      });
+    });
+
+    if (district && state.citySearch.length > 0) {
+      setFilterAreas(district);
+    }else{
+      setFilterCities(envoys)
     }
-    
-  }
+  };
+  console.log("area", filterAreas);
+  console.log("city", filterCities);
+  console.log("state", state.citySearch);
+  console.log('envoy',envoys)
 
   useEffect(() => {
     filterEnvoyByCity();
     filterAreaByCity();
-  }, [state.city]);
+  }, [state.citySearch]);
 
-  const newList = envoys.sort((a, b) =>{ return a.transparency - b.transparency });
+  const newList = envoys.sort((a, b) => {
+    return a.transparency - b.transparency;
+  });
 
   const controllItem = data.controlPanel.map((x, i) => {
     return (
       <>
-      {(vote_voter>0 && (i== 1||i==2))?"":
-      <Tab
-        key={i}
-        onClick={() => setSelect(i)}
-        className={select === i ? "select" : ""}
-      >
-        {x.icon ? (
-          <div>
-            <img src={x.icon} />
-          </div>
-        ) : (
+        {vote_voter > 0 && (i == 1 || i == 2) ? (
           ""
-        )}
+        ) : (
+          <Tab
+            key={i}
+            onClick={() => setSelect(i)}
+            className={select === i ? "select" : ""}
+          >
+            {x.icon ? (
+              <div>
+                <img src={x.icon} />
+              </div>
+            ) : (
+              ""
+            )}
 
-        <p>{x.name}</p>
-      </Tab>
-      }
+            <p>{x.name}</p>
+          </Tab>
+        )}
       </>
-        
     );
   });
+
   return (
     <ControllContainer>
       <FilterContainer className="filter-box">
-        <SearchInput 
-        value={searchparams.get("filter") || ""} onChange={event => { 
-        let filter = event.target.value;
-        if(filter){
-          setsearchparams({filter : filter});
-        }else{
-          setsearchparams({});
-        }
-      }} type="text" placeholder="&#xF002; جستجو کن..." />
+        <SearchInput
+          value={searchparams.get("filter") || ""}
+          onChange={(event) => {
+            let filter = event.target.value;
+            if (filter) {
+              setsearchparams({ filter: filter });
+            } else {
+              setsearchparams({});
+            }
+          }}
+          type="text"
+          placeholder="&#xF002; جستجو کن..."
+        />
         <TabContainer>{controllItem}</TabContainer>
+        <RemoveCitySearch
+          onClick={() => {
+            dispatch({ type: "SET_PROVICE", payload: "" });
+            dispatch({ type: "SET_CITY_SEARCH", payload: [] });
+          }}
+        >
+          حذف فیلتر نقشه
+        </RemoveCitySearch>
       </FilterContainer>
 
       {/* all */}
@@ -554,19 +597,26 @@ export default function Controller({vote_voter}) {
           <LastVotes>
             <Title>آخرین رأی‌گیری‌ها</Title>
             <VoterContainer hide={firstHide}>
-              {bills.filter((item)=>{
-                let filter= searchparams.get("filter");
-                if(!filter)return true;
-                // let name= item.writer + item.description ;
-                let name= item.name ;
-                // console.log(item);
-                return name.includes(filter);
-              }).map((item, i) => {
-                if(vote_voter>0)
-                  return <EnvoyvoteCard bill={item} vote_voter={vote_voter} key={i}/>;
-                else
-                  return <VoteCard bill={item} key={i} />;
-              })}
+              {bills
+                .filter((item) => {
+                  let filter = searchparams.get("filter");
+                  if (!filter) return true;
+                  // let name= item.writer + item.description ;
+                  let name = item.name;
+                  // console.log(item);
+                  return name.includes(filter);
+                })
+                .map((item, i) => {
+                  if (vote_voter > 0)
+                    return (
+                      <EnvoyvoteCard
+                        bill={item}
+                        vote_voter={vote_voter}
+                        key={i}
+                      />
+                    );
+                  else return <VoteCard bill={item} key={i} />;
+                })}
             </VoterContainer>
 
             <ShowMore
@@ -584,15 +634,17 @@ export default function Controller({vote_voter}) {
               <LastActions>
                 <Title> آخرین عملکردها</Title>
                 <Album hide={secondHide}>
-                  {activities.filter((item)=>{
-                let filter= searchparams.get("filter");
-                if(!filter)return true;
-                // let name= item.writer + item.description ;
-                let name= item.name ;
-                return name.includes(filter);
-              }).map((item, i) => {
-                    return <ActionCard activity={item} key={i} />;
-                  })}
+                  {activities
+                    .filter((item) => {
+                      let filter = searchparams.get("filter");
+                      if (!filter) return true;
+                      // let name= item.writer + item.description ;
+                      let name = item.name;
+                      return name.includes(filter);
+                    })
+                    .map((item, i) => {
+                      return <ActionCard activity={item} key={i} />;
+                    })}
                 </Album>
                 <ShowMore
                   arrow={secondHide}
@@ -603,60 +655,76 @@ export default function Controller({vote_voter}) {
                   <p>{secondHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
                 </ShowMore>
               </LastActions>
-            {(vote_voter>0 && envoys.length>10 )?<hr/>:
-              <BestEnvoyContainer>
-                <Title>شفاف‌ترین نمایندگان</Title>
-                <SecondAlbum hide={thirdHide}>
-                  {newList.filter((item)=>{
-                let filter= searchparams.get("filter");
-                if(!filter)return true;
-                // let name= item.writer + item.description ;
-                let name= item.first_name + item.last_name +item.electoral_district_name ;
-                // console.log(item);
-                return name.includes(filter);
-              }).map((item, i) => {
-                    return (
-                      <BestEnvoy
-                        envoy={item}
-                        key={i}
-                        click={() => {
-                          navigate(`/envoy/${item.id}`);
-                        }}
-                      />
-                    );
-                  })}
-                </SecondAlbum>
+              {vote_voter > 0 && envoys.length > 10 ? (
+                <hr />
+              ) : (
+                <BestEnvoyContainer>
+                  <Title>شفاف‌ترین نمایندگان</Title>
+                  <SecondAlbum hide={thirdHide}>
+                    {newList
+                      .filter((item) => {
+                        let filter = searchparams.get("filter");
+                        if (!filter) return true;
+                        // let name= item.writer + item.description ;
+                        let name =
+                          item.first_name +
+                          item.last_name +
+                          item.electoral_district_name;
+                        // console.log(item);
+                        return name.includes(filter);
+                      })
+                      .map((item, i) => {
+                        return (
+                          <BestEnvoy
+                            envoy={item}
+                            key={i}
+                            click={() => {
+                              navigate(`/envoy/${item.id}`);
+                            }}
+                          />
+                        );
+                      })}
+                  </SecondAlbum>
 
-                {/* {envoys.length > 0 && <HonestEnvoy envoys={envoys} />} */}
-                <ShowMore
-                  arrow={thirdHide}
-                  onClick={() => {
-                    setThirdHide(!thirdHide);
-                  }}
-                >
-                  <p>{thirdHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
-                </ShowMore>
-              </BestEnvoyContainer>
-              }
+                  {/* {envoys.length > 0 && <HonestEnvoy envoys={envoys} />} */}
+                  <ShowMore
+                    arrow={thirdHide}
+                    onClick={() => {
+                      setThirdHide(!thirdHide);
+                    }}
+                  >
+                    <p>{thirdHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
+                  </ShowMore>
+                </BestEnvoyContainer>
+              )}
             </>
           ) : (
             <>
-            {/* {console.log(areas.length)}
+              {/* {console.log(areas.length)}
             {console.log(envoys.length)} */}
-              {(vote_voter>0 || (areas.length<2) )?<hr/>:<ControlCore envoys={envoys} areas={areas} />}
-              
+              {vote_voter > 0 || areas.length < 2 ? (
+                <hr />
+              ) : (
+                <ControlCore
+                  envoys={filterCities.length>0 ? filterCities : envoys}
+                  areas={filterAreas.length > 0 ? filterAreas : areas}
+                />
+              )}
+
               <LastActions>
                 <Title> آخرین عملکردها</Title>
                 <ActionContainer hide={secondHide}>
-                  {activities.filter((item)=>{
-                let filter= searchparams.get("filter");
-                if(!filter)return true;
-                // let name= item.writer + item.description ;
-                let name= item.name ;
-                return name.includes(filter);
-              }).map((item, i) => {
-                    return <ActionCard activity={item} key={i} />;
-                  })}
+                  {activities
+                    .filter((item) => {
+                      let filter = searchparams.get("filter");
+                      if (!filter) return true;
+                      // let name= item.writer + item.description ;
+                      let name = item.name;
+                      return name.includes(filter);
+                    })
+                    .map((item, i) => {
+                      return <ActionCard activity={item} key={i} />;
+                    })}
                 </ActionContainer>
 
                 <ShowMore
@@ -677,24 +745,29 @@ export default function Controller({vote_voter}) {
       {select == 1 && (
         <>
           <EnvoyGalley hide={fourthHide}>
-            {newList.filter((item)=>{
-                let filter= searchparams.get("filter");
-                if(!filter)return true;
+            {newList
+              .filter((item) => {
+                let filter = searchparams.get("filter");
+                if (!filter) return true;
                 // let name= item.writer + item.description ;
-                let name= item.first_name + item.last_name +item.electoral_district_name ;
+                let name =
+                  item.first_name +
+                  item.last_name +
+                  item.electoral_district_name;
                 // console.log(item);
                 return name.includes(filter);
-              }).map((item, i) => {
-              return (
-                <BestEnvoy
-                  envoy={item}
-                  key={i}
-                  click={() => {
-                    navigate(`/envoy/${item.id}`);
-                  }}
-                />
-              );
-            })}
+              })
+              .map((item, i) => {
+                return (
+                  <BestEnvoy
+                    envoy={item}
+                    key={i}
+                    click={() => {
+                      navigate(`/envoy/${item.id}`);
+                    }}
+                  />
+                );
+              })}
           </EnvoyGalley>
           <ShowMore
             arrow={fourthHide}
@@ -712,17 +785,19 @@ export default function Controller({vote_voter}) {
       {select == 2 && (
         <>
           <AreaContainer hide={fifthHide}>
-            {areas.filter((item)=>{
-                let filter= searchparams.get("filter");
-                if(!filter)return true;
+            {areas
+              .filter((item) => {
+                let filter = searchparams.get("filter");
+                if (!filter) return true;
                 // let name= item.writer + item.description ;
-                let name= item.name ;
+                let name = item.name;
                 return name.includes(filter);
-              }).map((item, i) => {
-              return (
-                <SelectArea area={item.name} envoys={item.agent} key={i} />
-              );
-            })}
+              })
+              .map((item, i) => {
+                return (
+                  <SelectArea area={item.name} envoys={item.agent} key={i} />
+                );
+              })}
           </AreaContainer>
           <ShowMore
             arrow={fifthHide}
@@ -741,19 +816,26 @@ export default function Controller({vote_voter}) {
         <LastVotes>
           <Title>آخرین رأی‌گیری‌ها</Title>
           <VoterContainer hide={firstHide}>
-            {bills.filter((item)=>{
-                let filter= searchparams.get("filter");
-                if(!filter)return true;
+            {bills
+              .filter((item) => {
+                let filter = searchparams.get("filter");
+                if (!filter) return true;
                 // let name= item.writer + item.description ;
-                let name= item.name ;
+                let name = item.name;
                 // console.log(item);
                 return name.includes(filter);
-              }).map((item, i) => {
-                if(vote_voter>0)
-                return <EnvoyvoteCard bill={item} vote_voter={vote_voter} key={i}/>;
-              else
-                return <VoteCard bill={item} key={i} />;
-            })}
+              })
+              .map((item, i) => {
+                if (vote_voter > 0)
+                  return (
+                    <EnvoyvoteCard
+                      bill={item}
+                      vote_voter={vote_voter}
+                      key={i}
+                    />
+                  );
+                else return <VoteCard bill={item} key={i} />;
+              })}
           </VoterContainer>
 
           <ShowMore
@@ -772,15 +854,17 @@ export default function Controller({vote_voter}) {
         <LastActions>
           <Title> آخرین عملکردها</Title>
           <ActionContainer hide={secondHide}>
-            {activities.filter((item)=>{
-                let filter= searchparams.get("filter");
-                if(!filter)return true;
+            {activities
+              .filter((item) => {
+                let filter = searchparams.get("filter");
+                if (!filter) return true;
                 // let name= item.writer + item.description ;
-                let name= item.name ;
+                let name = item.name;
                 return name.includes(filter);
-              }).map((item, i) => {
-              return <ActionCard activity={item} key={i} />;
-            })}
+              })
+              .map((item, i) => {
+                return <ActionCard activity={item} key={i} />;
+              })}
           </ActionContainer>
 
           <ShowMore

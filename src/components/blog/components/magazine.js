@@ -3,6 +3,10 @@ import styled from "styled-components";
 import leftArrow from "../../../assets/leftArrow.webp";
 import mag from "../../../assets/blog.webp";
 import user from "../../../assets/profile.webp";
+import note from "../../../assets/text.webp";
+import news from "../../../assets/news.webp";
+import report from "../../../assets/report.webp";
+import article from "../../../assets/report.webp"
 import data from "../../../data.json";
 import ScrollButton from "../../general/scrollButton";
 import { useNavigate } from "react-router-dom";
@@ -156,8 +160,13 @@ const Paper = styled.div`
     &:before {
       content: "";
       display: inline-flex;
-      background-image: url(${user});
-      background-size: cover;
+      background-image: ${(props) => props.icon == "note" && `url(${note})`};
+      background-image: ${(props) => props.icon == "news" && `url(${news})`};
+      background-image: ${(props) =>
+        props.icon == "report" && `url(${report})`};
+      background-image: ${(props) =>
+        props.icon == "article" && `url(${article})`};
+      background-size: contain;
       background-repeat: no-repeat;
       width: 15px;
       height: 15px;
@@ -251,6 +260,7 @@ export default function Magazine({ posts }) {
     return (
       <Paper
         key={i}
+        icon={x.type}
         onClick={() => {
           navigate(`/blog/${x.id}`);
         }}
@@ -259,7 +269,12 @@ export default function Magazine({ posts }) {
           <img src={x.main_image} alt={x.date} />
         </div>
 
-        <p className="user">{x.writer}</p>
+        <p className="user">
+          {x.type == "note" && "یادداشت"}
+          {x.type == "news" && "خبر"}
+          {x.type == "report" && "گزارش"}
+          {x.type == "article" && "مقاله"}
+        </p>
 
         <p className="content">{x.description.slice(0, 245) + " ..."}</p>
 

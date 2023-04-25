@@ -101,11 +101,22 @@ const IranMap = ({ position }) => {
     }
   }, [change]);
 
+  useEffect(()=>{
+    setProvinceSelected(false);
+    setProvinceNameOnClick('');
+    setProvinceName('')
+    setFieldValue("city", [])
+    setFieldValue("province", '');
+  },[state.citySearch.length ==0])
+
+
   const onSubmit = async (values, actions) => {
     setProvinceSelected(false);
-    setCities(values.city);
-    dispatch({ type: "SET_PROVICE", payload: values.province });
-    dispatch({ type: "SET_CITY", payload: values.city });
+    // setCities(values.city);
+    dispatch({ type: "SET_PROVINCE_SEARCH", payload: values.province });
+    dispatch({ type: "SET_CITY_SEARCH", payload: values.city });
+
+    // setChange(!change)
     // dispatch({ type: "SET_ELECTORAL_DISTRICT", payload: values.password });
     // setProvinceName(values.province);
     // setProvinceNameOnClick(values.province);
@@ -123,18 +134,19 @@ const IranMap = ({ position }) => {
   } = useFormik({
     initialValues: {
       province: "",
-      city: "",
+      city: [],
     },
     validationSchema: provinceSchema,
     onSubmit,
   });
+
 
   return (
     <Container position={position}>
       {values.province == "" && <p className="input">{input}</p>}
       {values.province !== "" && (
         <p className="select">
-          ایران <span>{values.province}</span> 
+          ایران <span>{values.province}</span>
           {/* <span>{values.city}</span> */}
         </p>
       )}
@@ -161,7 +173,28 @@ const IranMap = ({ position }) => {
               <span>{provinceNameOnClick}</span>
             </p>
             <form onSubmit={handleSubmit} autoComplete="off">
-              {cities.map((city,i) => {
+              {/* For select all */}
+              <div>
+                <input
+                  type="checkbox"
+                  name="all"
+                  id="all"
+                  onChange={() => {
+                    if(values.city.length>0){
+                      setFieldValue("city", []);
+                    }else{
+                      setFieldValue("city", [...cities]);
+                    }
+                    
+                  }}
+                />
+                <label htmlFor="all" className={styles.city_label}>
+                  انتخاب همه
+                </label>
+                <br />
+              </div>
+
+              {cities.map((city, i) => {
                 return (
                   <div key={i}>
                     <input
@@ -170,8 +203,10 @@ const IranMap = ({ position }) => {
                       value={values.city}
                       name={city}
                       onChange={() => {
-                        setFieldValue("city", city);
+                        setFieldValue("city", [...values.city, city]);
                       }}
+                      checked={values.city.includes(city)}
+                      // defaultChecked={values.city.includes(city)}
                     />
                     <label htmlFor={city} className={styles.city_label}>
                       {city}
@@ -180,6 +215,7 @@ const IranMap = ({ position }) => {
                   </div>
                 );
               })}
+
               <div className={styles.select_cities_btns}>
                 <button
                   type="button"

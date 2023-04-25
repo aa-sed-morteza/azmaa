@@ -4,6 +4,8 @@ import data from "../../../data.json";
 import background from "../../../assets/back-controll.webp";
 import { useSearchParams } from "react-router-dom";
 import { renderIntoDocument } from "react-dom/test-utils";
+// import 'font-awesome/css/font-awesome.min.css';
+
 
 const Container = styled.div`
   background-image: url(${background});
@@ -36,7 +38,7 @@ const SearchInput = styled.input`
   border: none;
   font-size: 3.72vw;
   margin-bottom: 23px;
-  font-family: FontAwesome;
+  font-family: FontAwesome !important;
   ::placeholder {
     color: #d8d8d8;
   }

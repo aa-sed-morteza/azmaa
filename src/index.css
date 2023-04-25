@@ -110,7 +110,7 @@ This set of fonts are used in this project under the license: (.....)
 body {
   background-color: #f3f3f3;
   margin: 0;
-  font-family: iranyekan, Digital-7, BlinkMacSystemFont, "Segoe UI", "Roboto",
+  font-family: iranyekan, Digital-7, BlinkMacSystemFont, FontAwesome, "Roboto",
     "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -119,7 +119,7 @@ body {
 
 code {
   font-family: iranyekan, source-code-pro, Menlo, Monaco, Consolas,
-    "Courier New", monospace;
+  FontAwesome,"Courier New", monospace;
 }
 
 h1, h2, h3, h4, h5, h6,p,input, textarea,button {
