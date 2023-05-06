@@ -201,7 +201,9 @@ const IranMap = ({ position }) => {
           ></div>
           <div className={styles.cities}>
             <p>
-              <span className={styles.selected_province}>انتخاب شهر در </span>
+              <span className={styles.selected_province}>
+                انتخاب شهرستان در{" "}
+              </span>
               <span>{provinceNameOnClick}</span>
             </p>
             <form onSubmit={handleSubmit} autoComplete="off">
