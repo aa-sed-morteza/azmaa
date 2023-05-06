@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import mag from "../../../assets/mag.webp";
 import leftArrow from "../../../assets/leftArrow.webp";
@@ -51,7 +51,6 @@ const Ttitle = styled.div`
     font-weight: 300;
     text-align: right;
     margin-right: 10px;
-    
   }
   &:after {
     content: "";
@@ -193,6 +192,13 @@ const Paper = styled.div`
     margin: 0;
   }
 
+  .ReadMore {
+    color: #fab732;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
   @media (min-width: 481px) {
     padding: 20px;
     box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.3);
@@ -230,7 +236,7 @@ const Paper = styled.div`
     .user {
       font-size: 1.042vw;
       margin-bottom: 2.344vw;
-      
+
       &:before {
         width: 20px;
         height: 20px;
@@ -249,7 +255,7 @@ const Paper = styled.div`
 
 export default function Magazine() {
   const [blogs, setBlogs] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const getBlogs = () => {
     let config = {
@@ -283,9 +289,20 @@ export default function Magazine() {
           <img src={x.main_image} alt={x.date} />
         </div>
 
-        <p className="user">{x.writer }</p>
+        <p className="user">{x.writer}</p>
 
         <p className="content">{x.title}</p>
+
+        <p className="content">{x.description.slice(0, 100) + " ..."}</p>
+
+        <p
+          className="ReadMore"
+          onClick={() => {
+            navigate(`/blog/${x.id}`);
+          }}
+        >
+          ادامه مطلب
+        </p>
 
         <p className="date">{x.created && convertDateToFarsi(x.created)}</p>
       </Paper>
@@ -302,7 +319,7 @@ export default function Magazine() {
         {magPaper}
         <ScrollButton container="magazine" />
       </Wraper>
-      <Curtain></Curtain>
+      {/* <Curtain></Curtain> */}
     </MagazineContainer>
   );
 }
