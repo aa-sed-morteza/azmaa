@@ -64,7 +64,7 @@ function App() {
           text="برو بالا"
           distance={100}
           breakpoint={768}
-          style={{ backgroundColor: "#095644", borderColor: "#FFFFFF" }}
+          style={{ backgroundColor: "#095644", borderColor: "#FFFFFF",color: "#FFFFFF"}}
           className="scroll-your-role"
           speed={1000}
           zindex={1000}
