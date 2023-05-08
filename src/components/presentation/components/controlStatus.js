@@ -107,6 +107,9 @@ const Filtering = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: #FFFFFF;
 `;
 
 const Item = styled.div`
