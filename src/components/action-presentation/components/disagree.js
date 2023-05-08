@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export default function Disagree({envoys}) {
   const navigate = useNavigate();
 
-  const envoysList = envoys.map((item, i) => {
+  const envoysList =envoys&& envoys.length>0 && envoys.map((item, i) => {
     return (
       <BestEnvoy
         key={i}
@@ -22,7 +22,7 @@ export default function Disagree({envoys}) {
   });
   return (
     <Container>
-       <Title>{envoys[0]?(envoys[0].vote?envoys[0].vote:'نمایندگان مخالف'):""}   </Title>
+       <Title>{envoys && envoys[0]?(envoys[0].vote?envoys[0].vote:'نمایندگان مخالف'):""}   </Title>
        <Gallery>
         {envoysList}
       </Gallery>

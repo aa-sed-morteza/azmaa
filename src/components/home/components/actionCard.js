@@ -556,10 +556,12 @@ const ButtonWraper = styled.div`
   display: flex;
   margin-top: 10px;
   justify-content: space-between;
+ 
   @media (min-width: 481px) {
     border-top: 1px solid #d8d8d8;
     padding-top: 14px;
     flex-direction: row-reverse;
+    margin-top: auto;
   }
 `;
 

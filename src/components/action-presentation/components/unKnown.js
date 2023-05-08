@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function UnKnown({ envoys }) {
   const navigate = useNavigate();
 
-  const envoysList = envoys.map((item, i) => {
+  const envoysList =envoys && envoys.map((item, i) => {
     return (
       <BestEnvoy
         key={i}
@@ -24,7 +24,7 @@ export default function UnKnown({ envoys }) {
   
   return (
     <Container>
-      <Title>{envoys.lenght == undefined ? 'نمایندگان مخالف' :envoys[0].vote }  </Title>
+      <Title>{envoys && envoys.lenght>0 ? envoys[0].vote:'نمایندگان مخالف' }  </Title>
       <Gallery>{envoysList}</Gallery>
       <ShowMore>
         <p>نمایش بیشتر </p>

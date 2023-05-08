@@ -9,6 +9,7 @@ import report from "../../../assets/report.webp";
 import article from "../../../assets/report.webp";
 import upArrow from "../../../assets/arrow.webp";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { convertDateToFarsi } from "../../../utils";
 
 export default function SelectNews({ posts }) {
   const navigate = useNavigate();
@@ -41,11 +42,26 @@ export default function SelectNews({ posts }) {
             <img src={x.main_image} alt={x.date} />
           </div>
 
-          <p className="user">{x.writer}</p>
+          {/* <p className="user">{x.writer}</p> */}
+          <p className="user">
+          {x.type == "note" && "یادداشت"}
+          {x.type == "news" && "خبر"}
+          {x.type == "report" && "گزارش"}
+          {x.type == "article" && "مقاله"}
+        </p>
           <h5 className="title">{x.title}</h5>
           <p className="content">{x.description.slice(0, 100) + " ..."}</p>
 
-          <p className="date">{x.date}</p>
+          <p
+          className="ReadMore"
+          onClick={() => {
+            navigate(`/blog/${x.id}`);
+          }}
+        >
+          ادامه مطلب
+        </p>
+
+          <p className="date">{convertDateToFarsi(x.created) }</p>
         </Paper>
       );
     });
@@ -201,6 +217,12 @@ const Paper = styled.div`
     font-size: 3.25vw;
     font-weight: bold;
     margin: 0;
+  }
+  .ReadMore {
+    color: #fab732;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: underline;
   }
 
   &:nth-child(5) {

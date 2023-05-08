@@ -104,6 +104,14 @@ export default function NewsPage() {
         <h5 className="Ttitle">{x.title}</h5>
 
         <p className="content">{x.description.slice(0, 100) + " ..."}</p>
+        <p
+          className="ReadMore"
+          onClick={() => {
+            navigate(`/blog/${x.id}`);
+          }}
+        >
+          ادامه مطلب
+        </p>
 
         <p className="date">{x.created && convertDateToFarsi(x.created)}</p>
       </Paper>
@@ -133,6 +141,14 @@ export default function NewsPage() {
         <h5 className="Ttitle">{x.title}</h5>
 
         <p className="content">{x.description.slice(0, 100) + " ..."}</p>
+        <p
+          className="ReadMore"
+          onClick={() => {
+            navigate(`/blog/${x.id}`);
+          }}
+        >
+          ادامه مطلب
+        </p>
 
         <p className="date">{x.created && convertDateToFarsi(x.created)}</p>
       </Paper>
@@ -164,6 +180,15 @@ export default function NewsPage() {
               <SubTitle>{post && post.title}</SubTitle>
 
               <Paragraph>{post && post.description}</Paragraph>
+              {post.image ? (
+                    <Picture>
+                      <img src={post && post.image} alt="news-cover" />
+                    </Picture>
+                  ) : (
+                    ""
+                  )}
+
+                  <Writer icon="user"> نویسنده :  {post.writer}</Writer>
 
               <Feedback>
                 {/* <Button color="#6CBBA9" icon={like}>
@@ -219,6 +244,8 @@ export default function NewsPage() {
                   ) : (
                     ""
                   )}
+
+                  <Writer icon="user"> نویسنده :  {post.writer}</Writer>
 
                   <Feedback>
                     {/* <Button color="#6CBBA9" icon={like}>
@@ -413,6 +440,7 @@ const Type = styled.p`
     content: "";
     display: inline-flex;
     background-image: ${(props) => props.icon == "note" && `url(${note})`};
+    background-image: ${(props) => props.icon == "user" && `url(${user})`};
     background-image: ${(props) => props.icon == "news" && `url(${news})`};
     background-image: ${(props) => props.icon == "report" && `url(${report})`};
     background-image: ${(props) =>
@@ -431,6 +459,9 @@ const Type = styled.p`
     }
   }
 `;
+
+const Writer =styled(Type)`
+`
 const Date = styled.p`
   margin: 0;
   font-weight: 700;
@@ -645,6 +676,12 @@ const Paper = styled.div`
     font-size: 3.25vw;
     font-weight: bold;
     margin: 0;
+  }
+  .ReadMore {
+    color: #fab732;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: underline;
   }
 
   &:nth-child(5) {

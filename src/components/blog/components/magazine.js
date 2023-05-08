@@ -10,6 +10,7 @@ import article from "../../../assets/report.webp"
 import data from "../../../data.json";
 import ScrollButton from "../../general/scrollButton";
 import { useNavigate } from "react-router-dom";
+import { convertDateToFarsi } from "../../../utils";
 
 const MagazineContainer = styled.section`
   background-color: #ffaa00;
@@ -186,6 +187,12 @@ const Paper = styled.div`
     font-weight: bold;
     margin: 0;
   }
+  .ReadMore {
+    color: #fab732;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: underline;
+  }
 
   @media (min-width: 481px) {
     padding: 20px;
@@ -213,6 +220,7 @@ const Paper = styled.div`
       font-size: 1.042vw;
       font-weight: 500;
     }
+   
   }
   @media (min-width: 1200px) {
     padding: 20px 19px 25px 19px;
@@ -257,6 +265,8 @@ display: none;
 export default function Magazine({ posts }) {
   const navigate = useNavigate();
 
+  console.log('pos',posts)
+
   const magPaper = posts.map((x, i) => {
     return (
       <Paper
@@ -281,7 +291,16 @@ export default function Magazine({ posts }) {
 
         <p className="content">{x.description.slice(0, 100) + " ..."}</p>
 
-        <p className="date">{x.date}</p>
+        <p
+          className="ReadMore"
+          onClick={() => {
+            navigate(`/blog/${x.id}`);
+          }}
+        >
+          ادامه مطلب
+        </p>
+
+        <p className="date">{convertDateToFarsi(x.created) }</p>
       </Paper>
     );
   });

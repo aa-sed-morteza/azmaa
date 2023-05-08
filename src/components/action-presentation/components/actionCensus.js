@@ -3,9 +3,11 @@ import styled from "styled-components";
 import ok from "../../../assets/like.webp";
 import disagree from "../../../assets/dislike.webp";
 import info from "../../../assets/info.webp";
+import { toFarsiNumber } from "../../../utils";
 
 export default function ActionsCensus({ total, data }) {
   const [envoy, setEnvoy] = useState(267);
+
 
   const dataOptions = data.activity_choice.map((item, i) => {
     return (
@@ -15,12 +17,12 @@ export default function ActionsCensus({ total, data }) {
         </Type>
         <Number color="#6CBBA9">
           <span>
-            {data.vote
-              ? data.vote.filter((x) => x.vote == item.name).length
+            {data.verified_vote
+              ?toFarsiNumber(data.verified_vote.filter((x) => x.vote == item.name).length)  
               : ""}
             /
           </span>
-          {total}
+          {toFarsiNumber(total) }
         </Number>
       </Item>
     );

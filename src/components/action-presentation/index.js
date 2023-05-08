@@ -10,6 +10,7 @@ import action from "../../assets/act.webp";
 import symbol from "../../assets/action-rate.webp";
 import axios from "axios";
 import { BaseBackURL } from "../../constant/api";
+import { ChangeToPersianDate, convertDateToFarsi } from "../../utils";
 
 export default function ActionPresentation() {
   const navigate = useNavigate();
@@ -40,14 +41,16 @@ export default function ActionPresentation() {
   useEffect(() => {
     getAction();
 
-    if (action.id) {
-      positiveAction = action.vote.filter((x) => x.vote == "همراه");
-      negativeAction = action.vote.filter((x) => x.vote == "ناهمراه");
-      anotherAction = action.vote.filter(
+    if (action && action.id) {
+      positiveAction = action.verified_vote.filter((x) => x.vote == "همراه");
+      negativeAction = action.verified_vote.filter((x) => x.vote == "ناهمراه");
+      anotherAction = action.verified_vote.filter(
         (x) => x.vote !== "ناهمراه" && x.vote !== "همراه"
       );
     }
   }, []);
+
+  console.log('act',action)
 
   return (
     <Container>
@@ -63,12 +66,12 @@ export default function ActionPresentation() {
               icon={action}
               type="عملکرد"
               title={action.name}
-              date={action.date}
+              date={ action.date && convertDateToFarsi(action.date) }
             />
             <DetailsAction title={action.name} />
-            <Census total={action.vote && action.vote.length} complete={"?"} select={"?"} />
+            <Census total={action.verified_vote && action.verified_vote.length} complete={"?"} select={"?"} />
             <ActionsCensus
-              total={action.vote && action.vote.length}
+              total={action.verified_vote && action.verified_vote.length}
               data={action }
             />
           </Wraper>
