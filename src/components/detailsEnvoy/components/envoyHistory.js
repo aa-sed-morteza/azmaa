@@ -5,12 +5,13 @@ import arrow from "../../../assets/arrow.webp";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
+import { ChangeToPersianDate } from "../../../utils";
 
-export default function EnvoyHistory({id}) {
+export default function EnvoyHistory({ id }) {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const [open, setOpen] = useState(false);
-  const [experiences,setExperiences]=useState([]);
+  const [experiences, setExperiences] = useState([]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -25,37 +26,57 @@ export default function EnvoyHistory({id}) {
     axios(config)
       .then(function (res) {
         // console.log(JSON.stringify(res.data));
-        
+
         setExperiences([...res.data.experiences]);
-        
       })
       .catch(function (error) {
         console.log(error);
       });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getEnvoyHistory();
-  },[])
+  }, []);
 
-
+  console.log("his", experiences[0]);
 
   return (
     <Container onClick={handleClick} className={open ? "active" : ""}>
       <Title>سوابق نماینده</Title>
       <History>
-        <p className="text">{experiences.length !== 0 ?experiences[0].title :""} </p>
+        {!open && (
+          <p className="text">
+            {experiences.length !== 0
+              ? experiences[0].title +
+                " " +
+                "|" +
+                " " +
+                ChangeToPersianDate(experiences[0].from_date).slice(0, 4) +
+                "-" +
+                ChangeToPersianDate(experiences[0].to_date).slice(0, 4)
+              : ""}{" "}
+          </p>
+        )}
         {/* <p className="text">{experiences[0][1] ?experiences[0][1].title :""} </p> */}
       </History>
 
       <Content className={open ? "open" : ""}>
         <History>
-          {experiences.length !==0 && experiences.map((item,i)=>{
-            return(
-              <p className="text" key={i}> {item.title}</p>
-            )
-          })}
-        
+          {experiences.length !== 0 &&
+            experiences.map((item, i) => {
+              return (
+                <p className="text" key={i}>
+                  {" "}
+                  {item.title +
+                    " " +
+                    "|" +
+                    " " +
+                    ChangeToPersianDate(item.from_date).slice(0, 4) +
+                    "-" +
+                    ChangeToPersianDate(item.to_date).slice(0, 4)}
+                </p>
+              );
+            })}
         </History>
       </Content>
     </Container>
