@@ -64,6 +64,7 @@ export default function DetailsEnvoy() {
             persantage={envoy.transparency}
             id={envoy.id}
             inBox={true}
+            position='sticky'
           />
         )}
 
@@ -88,7 +89,7 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   padding: 10px 20px;
-  overflow: hidden;
+  /* overflow: hidden; */
   gap: 3.488vw;
   @media (min-width: 481px) {
     padding: 20px 0;
