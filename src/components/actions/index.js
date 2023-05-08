@@ -61,7 +61,7 @@ export default function Actions() {
         <Filtering selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
         <>
         <LastActions>
-          <Title> آخرین عملکردها</Title>
+          <Title> عملکردها</Title>
           <ActionContainer hide={secondHide}>
             {activities.filter((item) => {
               let filter = searchparams.get("filter");
