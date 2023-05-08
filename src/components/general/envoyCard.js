@@ -78,7 +78,7 @@ const Container = styled.div`
   cursor: pointer;
   position: ${props=>props.pos ? props.pos :'static'};
   top:${props=>props.pos == 'sticky' ? 0 :''};
-  z-index: 100;
+  z-index: 20;
   @media (min-width: 481px) {
     margin: 0;
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);

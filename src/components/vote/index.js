@@ -153,9 +153,13 @@ const Content = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   @media (min-width: 481px) {
     margin-top: 25vh;
     padding-bottom: 0;
+    gap: 0;
   }
 `;
 
