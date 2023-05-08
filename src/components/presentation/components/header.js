@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Header({ img, type, icon,title,date }) {
+export default function Header({ img, type, icon,title,date,posi }) {
   return (
-    <Container>
+    <Container pos={posi}>
       <Symbol>
         <img src={img} alt="symbol" />
       </Symbol>
@@ -21,6 +21,10 @@ const Container = styled.div`
   padding: 0px 24px;
   justify-content: space-between;
   margin-bottom: 20px;
+  position: ${props=>props.pos?props.pos:""};
+  top:${props=>props.pos =='sticky'?0:''};
+  z-index: 20;
+  background-color: #FFFFFF;
   @media (min-width: 481px) {
     padding: 0;
   }

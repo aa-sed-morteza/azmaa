@@ -47,12 +47,13 @@ export default function Presentation() {
         {bill.name && (
           <Wraper>
             <Header
-              
               img={bill.is_approved?symbol:symbol2}
               icon={vote}
               type="رای گیری"
               date={bill.date && convertDateToFarsi(bill.date)}
               title={bill.name}
+              posi="sticky"
+              
             />
             <DetailsVotes title={bill.name} fraction={bill.fraction?bill.fraction.name:""} />
             <Census
