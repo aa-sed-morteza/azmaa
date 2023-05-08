@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { toFarsiNumber } from "../../../utils";
 
 export default function Census({total,complete,select}) {
 
@@ -16,8 +17,8 @@ export default function Census({total,complete,select}) {
     return (
       <Progress>
         <div className="number">
-          {num1}
-          <span style={{ color: bgColor }}> /{num2}</span>
+          {toFarsiNumber(num1) }
+          <span style={{ color: bgColor }}> /{toFarsiNumber(num2)  }</span>
         </div>
         <div className="line">
           <span

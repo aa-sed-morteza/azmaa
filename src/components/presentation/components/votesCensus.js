@@ -5,6 +5,7 @@ import disagree from "../../../assets/disagree.webp";
 import info from "../../../assets/info.webp";
 import absent from "../../../assets/absent.webp";
 import noVote from "../../../assets/noVote.webp";
+import { toFarsiNumber } from "../../../utils";
 
 export default function VotesCensus({total,positive,negative,none,absent,without,
   real_absent_vote,
@@ -22,8 +23,8 @@ export default function VotesCensus({total,positive,negative,none,absent,without
             موافق:
           </Type>
           <Number color="#6CBBA9">
-            <span>{positive}/</span>
-            {real_positive_vote}
+            <span>{toFarsiNumber(positive) }/</span>
+            {toFarsiNumber(real_positive_vote)}
           </Number>
         </Item>
 
@@ -32,8 +33,8 @@ export default function VotesCensus({total,positive,negative,none,absent,without
             مخالف:
           </Type>
           <Number color="#FFA5A5">
-            <span>{negative}/</span>
-            {real_negative_vote}
+            <span>{toFarsiNumber(negative) }/</span>
+            {toFarsiNumber(real_negative_vote)}
           </Number>
         </Item>
 
@@ -42,8 +43,8 @@ export default function VotesCensus({total,positive,negative,none,absent,without
             ممتنع:
           </Type>
           <Number color="#CBCBCB">
-            <span>{none}/</span>
-            {real_none_vote}
+            <span>{toFarsiNumber(none)}/</span>
+            {toFarsiNumber(real_none_vote)}
           </Number>
         </Item>
 
@@ -52,8 +53,8 @@ export default function VotesCensus({total,positive,negative,none,absent,without
             غایب:
           </Type>
           <Number color="#9F9F9F">
-            <span>{absent}/</span>
-            {real_absent_vote}
+            <span>{toFarsiNumber(absent)}/</span>
+            {toFarsiNumber(real_absent_vote)}
           </Number>
         </Item>
 
@@ -62,8 +63,8 @@ export default function VotesCensus({total,positive,negative,none,absent,without
             بدون‌رأی:
           </Type>
           <Number color="#9F9F9F">
-            <span>{without}/</span>
-            {real_without_vote}
+            <span>{toFarsiNumber(without)}/</span>
+            {toFarsiNumber(real_without_vote)}
           </Number>
         </Item>
       </Row>
