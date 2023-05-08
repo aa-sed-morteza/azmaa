@@ -232,7 +232,15 @@ export default function Controller({ vote_voter }) {
     return name.includes(filter);
   });
 
-  const filteredBills = bills.filter((item) => {
+  var isDescending = true; //set to false for ascending
+  const sortBillsByDate = bills.sort((a, b) =>
+    isDescending
+      ? new Date(b.date).getTime() - new Date(a.date).getTime()
+      : new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
+
+  const filteredBills = sortBillsByDate.filter((item) => {
     let filter = searchparams.get("filter");
     if (!filter) return true;
     // let name= item.writer + item.description ;
@@ -241,7 +249,14 @@ export default function Controller({ vote_voter }) {
     return name.includes(filter);
   });
 
-  const filteredActivities = activities.filter((item) => {
+  var istDescending = true; //set to false for ascending
+  const sortActivitiesByDate = activities.sort((a, b) =>
+    istDescending
+      ? new Date(b.date).getTime() - new Date(a.date).getTime()
+      : new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
+  const filteredActivities = sortActivitiesByDate.filter((item) => {
     let filter = searchparams.get("filter");
     if (!filter) return true;
     // let name= item.writer + item.description ;
@@ -249,8 +264,6 @@ export default function Controller({ vote_voter }) {
     return name.includes(filter);
   });
 
-  console.log(areaLimit);
-  console.log(filteredAreas.length);
   return (
     <ControllContainer>
       <FilterContainer className="filter-box">
