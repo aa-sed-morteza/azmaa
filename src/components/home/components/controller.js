@@ -707,7 +707,7 @@ const Tab = styled.div`
 
 const RemoveCitySearch = styled.div`
   position: absolute;
-  top: 0;
+  top: -15px;
   right: 10%;
   background: #ffaa00;
   border-radius: 4px;
