@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ok from "../../../assets/ok.webp";
 import disagree from "../../../assets/disagree.webp";
 import info from "../../../assets/info.webp";
-import absent from "../../../assets/absent.webp";
+import Absent from "../../../assets/absent.webp";
 import noVote from "../../../assets/noVote.webp";
 import { toFarsiNumber } from "../../../utils";
 
@@ -49,7 +49,7 @@ export default function VotesCensus({total,positive,negative,none,absent,without
         </Item>
 
         <Item>
-          <Type color="#9F9F9F" icon={absent}>
+          <Type color="#9F9F9F" icon={Absent}>
             غایب:
           </Type>
           <Number color="#9F9F9F">
