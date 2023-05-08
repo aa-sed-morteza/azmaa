@@ -37,6 +37,8 @@ export default function Presentation() {
     getBill();
   }, []);
 
+  console.log('bili',bill)
+
   return (
     <Container>
       <Title>
@@ -55,7 +57,7 @@ export default function Presentation() {
               posi="sticky"
               
             />
-            <DetailsVotes title={bill.name} fraction={bill.fraction?bill.fraction.name:""} />
+            <DetailsVotes title={bill.information} fraction={bill.fraction?bill.fraction.name:""} approved={bill.is_approved &&bill.is_approved} />
             <Census
               total={bill.vote_number.total}
               complete={"?"}

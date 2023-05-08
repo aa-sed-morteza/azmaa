@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function DetailsVotes({title,fraction}) {
+export default function DetailsVotes({title,fraction,approved}) {
   return (
     <Container>
       <Title>جزئیات </Title>
       <Row>
-        <p className="type">نام طرح: </p>
+        {/* <p className="type">نام طرح: </p> */}
         <p className="expand">{title}</p>
       </Row>
       <Row>
-        <p className="type"> فوریت: </p>
-        <p className="expand">?</p>
+        <p className="type"> وضعیت: </p>
+        <p className="expand">{approved && approved ==true ? 'تصویب شده' : 'رد شده'}</p>
       </Row>
       <Row>
         <p className="type"> کمیسیون: </p>
