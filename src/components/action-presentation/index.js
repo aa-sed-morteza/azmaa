@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./components/header";
 import DetailsAction from "./components/detailsAction";
@@ -12,6 +12,7 @@ import axios from "axios";
 import { BaseBackURL } from "../../constant/api";
 
 export default function ActionPresentation() {
+  const navigate = useNavigate();
   const { title } = useParams();
   const [action, setAction] = useState({});
 
@@ -51,7 +52,7 @@ export default function ActionPresentation() {
   return (
     <Container>
       <Title>
-        <p className="home">خانه / عملکردها /</p>
+        <p className="home" onClick={()=>{navigate("/actions")}} >خانه / عملکردها /</p>
         <p className="component">{action && action.name} </p>
       </Title>
       <Content>
@@ -65,9 +66,9 @@ export default function ActionPresentation() {
               date={action.date}
             />
             <DetailsAction title={action.name} />
-            <Census total={action.vote.length} complete={"?"} select={"?"} />
+            <Census total={action.vote && action.vote.length} complete={"?"} select={"?"} />
             <ActionsCensus
-              total={action.vote.length}
+              total={action.vote && action.vote.length}
               data={action }
             />
           </Wraper>
@@ -101,6 +102,7 @@ const Title = styled.div`
     font-size: 3.721vw;
     font-weight: 700;
     margin: 0;
+    padding-right: 5px;
     color: rgba(112, 112, 112, 1);
     white-space: nowrap;
     overflow: hidden;

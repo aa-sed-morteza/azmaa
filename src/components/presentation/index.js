@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./components/header";
 import symbol from "../../assets/vote-logo.webp";
@@ -14,6 +14,7 @@ import { BaseBackURL } from "../../constant/api";
 import { convertDateToFarsi } from "../../utils";
 
 export default function Presentation() {
+  const navigate =useNavigate();
   const { title } = useParams();
   const [bill, setBill] = useState({});
 
@@ -39,7 +40,7 @@ export default function Presentation() {
   return (
     <Container>
       <Title>
-        <p className="home">خانه / رأی‌گیری‌ها  /</p>
+        <p className="home" onClick={()=>{navigate("/votes")}} >خانه / رأی‌گیری‌ها  /</p>
         <p className="component"> {bill && bill.name} </p>
       </Title>
       <Content>
@@ -86,7 +87,7 @@ const Container = styled.section`
   padding: 10px 20px;
   @media(min-width:481px){
     background-color:#ffffff;
-    padding 25px 0;
+    padding: 25px 0;
   }
 `;
 
@@ -104,6 +105,7 @@ const Title = styled.div`
   .component {
     font-size: 3.721vw;
     font-weight: 700;
+    padding-right: 5px;
     margin: 0;
     color: rgba(112, 112, 112, 1);
     white-space: nowrap;

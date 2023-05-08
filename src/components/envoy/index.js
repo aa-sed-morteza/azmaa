@@ -13,9 +13,11 @@ import IranMap from "../pluginIranMap/IranMap";
 import { BaseBackURL } from "../../constant/api";
 import axios from "axios";
 import { useUser } from "../context/userContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Envoy() {
   const width = useWidth();
+  const navigate =useNavigate();
   const {state,dispatch}=useUser();
   const [envoys, setEnvoys] = useState([]);
   const [citeis,setCiteis]=useState([]);
@@ -89,8 +91,8 @@ export default function Envoy() {
   return (
     <Container>
       <Title>
-        <p className="home">خانه / </p>
-        <p className="component"> نمایندگان </p>
+        <p className="home" onClick={()=>{navigate("/")}} >خانه /  </p>
+        <p className="component" onClick={()=>{navigate("/envoy")}} > نمایندگان </p>
       </Title>
       <Content>
         {width < 481 ? (
@@ -145,6 +147,7 @@ const Title = styled.div`
     font-weight: 700;
     margin: 0;
     color: rgba(112, 112, 112, 1);
+    padding-right: 5px;
   }
   @media (min-width: 481px) {
     margin-bottom: 25px;

@@ -5,11 +5,12 @@ import Controler from "./components/controler";
 import Filtering from "./components/filtering";
 import { BaseBackURL } from "../../constant/api";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import VoteCard from "../home/components/voteCard";
 import upArrow from "../../assets/arrow.webp";
 
 export default function Vote() {
+  const navigate = useNavigate();
   const [selectedFilter, setSelectedFilter] = useState(0);
   const [selectedTag, setSelectedTag] = useState("همه");
   const [bills, setBills] = useState([]);
@@ -56,7 +57,7 @@ export default function Vote() {
   return (
     <Container>
       <Title>
-        <p className="home">خانه / </p>
+        <p className="home" onClick={()=>{navigate("/")}} >خانه / </p>
         <p className="component"> رأی‌گیری‌ها </p>
       </Title>
 
@@ -136,6 +137,7 @@ const Title = styled.div`
     font-weight: 700;
     margin: 0;
     color: rgba(112, 112, 112, 1);
+    padding-right: 5px;
   }
   @media (min-width: 481px) {
     margin-bottom: 25px;

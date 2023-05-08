@@ -142,7 +142,7 @@ export default function NewsPage() {
   return (
     <Container>
       <Title>
-        <p className="home">خانه / بلاگ /</p>
+        <p className="home" onClick={()=>{navigate("/blog")}} >خانه / بلاگ /</p>
         <p className="component"> {post && post.title} </p>
       </Title>
       {width < 481 ? (
@@ -345,6 +345,7 @@ const Title = styled.div`
     font-size: 3.721vw;
     font-weight: 700;
     margin: 0;
+    padding-right: 5px;
     color: rgba(112, 112, 112, 1);
     white-space: nowrap;
     overflow: hidden;

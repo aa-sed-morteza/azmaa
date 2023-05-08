@@ -6,10 +6,11 @@ import Filtering from "../vote/components/filtering";
 import Calendar from "./components/calendar";
 import { BaseBackURL } from "../../constant/api";
 import ActionCard from "../home/components/actionCard";
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import upArrow from "../../assets/arrow.webp";
 
 export default function Actions() {
+  const navigate =useNavigate();
   const [selectedFilter, setSelectedFilter] = useState(0);
   const [selectedTag, setSelectedTag] = useState("همه");
   const [activities, setActivities] = useState([]);
@@ -51,7 +52,7 @@ export default function Actions() {
   return (
     <Container>
       <DivTitle>
-        <p className="home">خانه / </p>
+        <p className="home" onClick={()=>{navigate("/")}} >خانه / </p>
         <p className="component"> عملکردها </p>
       </DivTitle>
 
@@ -175,6 +176,7 @@ const DivTitle = styled.div`
     font-size: 3.721vw;
     font-weight: 700;
     margin: 0;
+    padding-right: 5px;
     color: rgba(112, 112, 112, 1);
   }
   @media (min-width: 480px) {

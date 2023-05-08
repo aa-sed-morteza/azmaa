@@ -242,6 +242,7 @@ const Paper = styled.div`
 `;
 
 const Curtain = styled.div`
+display: none;
   position: absolute;
   width: 45%;
   height: 100%;

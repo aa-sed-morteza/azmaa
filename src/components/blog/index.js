@@ -7,9 +7,11 @@ import useWidth from "../../hook/useWidth";
 import Carousel from "./components/carousel";
 import axios from "axios";
 import { BaseBackURL } from "../../constant/api";
+import { useNavigate } from "react-router-dom";
 
 export default function Blog() {
   const width = useWidth();
+  const navigate =useNavigate();
   const [posts, setPosts] = useState([]);
 
   const getPosts = () => {
@@ -34,7 +36,7 @@ export default function Blog() {
   return (
     <Container>
       <Title>
-        <p className="home">خانه / </p>
+        <p className="home" onClick={()=>{navigate("/")}}>خانه / </p>
         <p className="component"> بلاگ </p>
       </Title>
       {width < 481 ? <Poster posts={posts} /> : <Carousel posts={posts} />}
@@ -71,6 +73,7 @@ const Title = styled.div`
   .component {
     font-size: 3.721vw;
     font-weight: 700;
+    padding-right: 5px;
     margin: 0;
     color: rgba(112, 112, 112, 1);
   }

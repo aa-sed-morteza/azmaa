@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useWidth from "../../hook/useWidth";
 import styled from "styled-components";
 import EnvoyCard from "../general/envoyCard";
@@ -14,6 +14,7 @@ import Controller from "../home/components/controller";
 
 export default function DetailsEnvoy() {
   const { title } = useParams();
+  const navigate =useNavigate();
   const width = useWidth();
   const [envoys, setEnvoys] = useState([]);
   const [envoy, setEnvoy] = useState({});
@@ -46,7 +47,7 @@ export default function DetailsEnvoy() {
   return (
     <Container>
       <Title>
-        <p className="home"> خانه / نمایندگان /</p>
+        <p className="home" onClick={()=>{navigate("/envoy")}} > خانه / نمایندگان /</p>
         <p className="component">
           {" "}
           {envoy && envoy.first_name + " " + envoy.last_name}
@@ -112,6 +113,7 @@ const Title = styled.div`
     font-weight: 700;
     margin: 0;
     color: rgba(112, 112, 112, 1);
+    padding-right: 5px;
   }
   @media (min-width: 481px) {
     width: 100%;

@@ -9,7 +9,7 @@ export default function Agree({ envoys }) {
   const navigate = useNavigate();
   const [showMore,setShowMore]=useState(false);
 
-  const envoysList = envoys.map((item, i) => {
+  const envoysList =envoys !== undefined && envoys.length>0 && envoys.map((item, i) => {
     return (
       <BestEnvoy
         key={i}
@@ -25,7 +25,7 @@ export default function Agree({ envoys }) {
 
   return (
     <Container>
-      <Title>{envoys[0]?(envoys[0].vote ? envoys[0].vote :'نمایندگان موافق'):""}   </Title>
+      <Title>{envoys !== undefined && envoys.length>0 && envoys[0]?(envoys[0].vote ? envoys[0].vote :'نمایندگان موافق'):""}   </Title>
       <Gallery>{envoysList}</Gallery>
       <ShowMore onClick={()=>{setShowMore(!showMore)}}>
         <p>نمایش بیشتر </p>
