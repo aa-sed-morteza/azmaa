@@ -23,6 +23,7 @@ const TopBar = styled.section`
   padding: 20px 30px;
   display: flex;
   justify-content: space-between;
+  z-index: 100;
 
   @media (min-width: 481px) {
     justify-content: flex-start;

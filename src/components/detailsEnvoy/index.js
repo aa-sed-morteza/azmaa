@@ -44,6 +44,7 @@ export default function DetailsEnvoy() {
     // console.log("title="+title);
   }, [envoys]);
 
+
   return (
     <Container>
       <Title>

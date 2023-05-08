@@ -21,7 +21,7 @@ export default function EnvoyArea({ data }) {
         <span></span>
         <div className="content">
           <p className="title">{data?.electoral_district_name}</p>
-          <p className="persentage">درصد آراء: ۳۵٪</p>
+          {/* <p className="persentage">درصد آراء: ۳۵٪</p> */}
         </div>
       </State>
 
@@ -30,10 +30,10 @@ export default function EnvoyArea({ data }) {
           <p className="type"> تعداد آراء: </p>
           <p className="expand">?</p>
         </Row>
-        <Row>
+        {/* <Row>
           <p className="type"> تعداد کل آراء صندوق : </p>
           <p className="expand">?</p>
-        </Row>
+        </Row> */}
       </Content>
     </Container>
   );
