@@ -72,7 +72,7 @@ export default function DetailsEnvoy() {
         <Census data={"?"} complete={"?"} envoy={"?"} />
         <EnvoyArea data={envoy} />
         <EnvoyHistory id={title} />
-        {width > 481 ? <SocialNetwork /> : ""}
+        {/* {width > 481 ? <SocialNetwork /> : ""} */}
       </FirstSection>
       {/* filtering */}
       <SecondSection>
@@ -80,7 +80,7 @@ export default function DetailsEnvoy() {
       </SecondSection>
       {/* socialNetwork */}
       <ThirdSection>
-        <SocialNetwork />
+        {/* <SocialNetwork /> */}
       </ThirdSection>
     </Container>
   );

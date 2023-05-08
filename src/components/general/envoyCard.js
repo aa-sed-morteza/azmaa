@@ -194,6 +194,7 @@ const EnvoyImage = styled.div`
     z-index: 5;
     border-radius: 50%;
     object-fit: contain;
+    background: #ffffff;
     @media(min-width:481px){
       width:7.292vw;
       height:7.292vw;
