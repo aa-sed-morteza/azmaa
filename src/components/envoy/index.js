@@ -105,6 +105,14 @@ export default function Envoy() {
             {envoys && envoys.length > 0 && <HonestEnvoy envoys={envoys} />}
           </Wraper>
         )}
+        <RemoveCitySearch
+          onClick={() => {
+            dispatch({ type: "SET_PROVICE", payload: "" });
+            dispatch({ type: "SET_CITY_SEARCH", payload: [] });
+          }}
+        >
+          حذف فیلتر نقشه
+        </RemoveCitySearch>
 
         <Search />
         {/* <AdvanceSearch  setEnvoys={setEnvoys} /> */}
@@ -163,9 +171,11 @@ const Content = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 10px;
+  position: relative;
   @media (min-width: 481px) {
     padding: 0;
     padding-right: 10%;
+    
   }
 `;
 
@@ -173,4 +183,21 @@ const Wraper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 70px;
+`;
+
+
+const RemoveCitySearch = styled.div`
+  position: absolute;
+  top: -15px;
+  left: 10%;
+  background: #ffaa00;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 10px;
+  font-weight: 400;
+  color: #ffffff;
+  cursor: pointer;
+  @media (min-width: 481px) {
+    font-size: 14px;
+  }
 `;
