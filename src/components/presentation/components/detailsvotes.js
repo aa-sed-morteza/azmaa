@@ -4,7 +4,7 @@ import styled from "styled-components";
 export default function DetailsVotes({title,fraction}) {
   return (
     <Container>
-      <Title>جزئیات رأی‌گیری</Title>
+      <Title>جزئیات </Title>
       <Row>
         <p className="type">نام طرح: </p>
         <p className="expand">{title}</p>
