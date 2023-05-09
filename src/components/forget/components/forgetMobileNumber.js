@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import Timer from "../../general/countdown";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
+import lock from "../../../assets/lock.webp";
 import { toast } from "react-toastify";
 import Select from "../../general/select";
 import Cookies from "js-cookie";
@@ -245,12 +246,15 @@ export default function ForgetMobileNumber() {
           />
           <CustomInput
             label="رمز عبور"
+            type="password"
             // icon={mobile}
+            icon={lock}
             back="#F5F5F5"
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
             }}
+            show={true}
           />
           {validate === 1 && <ErrorText>کد وارد شده صحیح نیست.</ErrorText>}
           {validate === 2 && (

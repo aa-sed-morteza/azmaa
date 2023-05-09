@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import wellcome from "../../assets/welcome.webp";
+// import wellcome from "../../assets/welcome.webp";
+import wellcome from "../../assets/well.svg";
 import Button from "../general/button";
 import login from "../../assets/log.webp";
 import signin from "../../assets/signin.webp";
@@ -16,9 +17,11 @@ import { BaseBackURL } from "../../constant/api";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import useWidth from "../../hook/useWidth";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
+  const width =useWidth();
   const navigate = useNavigate();
 
   const onSubmit = (values) => {

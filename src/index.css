@@ -133,3 +133,15 @@ h1, h2, h3, h4, h5, h6,p,input, textarea,button {
   min-height: 100vh;
   /* height: 100vh; */
 }
+
+.Toastify__toast-theme--light{
+	@media screen and (max-width: 481px) {
+		width:80%;
+	}
+}
+
+.Toastify__toast-body > div:last-child {
+	font-family:iranyekan, source-code-pro, Menlo, Monaco, Consolas;
+	direction: rtl;
+	font-size: 0.875rem !important;
+  }
