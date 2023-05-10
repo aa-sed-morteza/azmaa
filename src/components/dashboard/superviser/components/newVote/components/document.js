@@ -61,7 +61,7 @@ export default function Document() {
               position: toast.POSITION.TOP_RIGHT,
             });
             dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
-            navigate("/dashboard/myActions");
+            navigate("/dashboard/myVotes");
             actions.resetForm();
           })
           .catch(function (error) {
@@ -95,7 +95,7 @@ export default function Document() {
               position: toast.POSITION.TOP_RIGHT,
             });
             dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
-            navigate("/dashboard/myActions");
+            navigate("/dashboard/myVotes");
             actions.resetForm();
           })
           .catch(function (error) {

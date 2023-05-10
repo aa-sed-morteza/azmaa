@@ -46,7 +46,7 @@ export default function ImageSection() {
             <h2>۳. تصویر مطلب را بارگذاری کنید:</h2>
 
             <FileUploadInput
-              placeholder="بارگذاری تصویر اصلی"
+              placeholder={values.picOne ==null ? "بارگذاری تصویر اصلی":"تصویر دریافت شد"}
               id="picOne"
               name="picOne"
               onChange={(event) => {
@@ -57,7 +57,7 @@ export default function ImageSection() {
               <ErrorText>{errors.picOne}</ErrorText>
             )}
             <FileUploadInput
-              placeholder="بارگذاری تصویر دوم"
+              placeholder={values.picTwo ==null ?"بارگذاری تصویر دوم":"تصویر دریافت شد"} 
               id="picTwo"
               name="picTwo"
               onChange={(event) => {
@@ -101,7 +101,7 @@ export default function ImageSection() {
             placeholder="بارگذاری تصویر دوم"
             id="picTwo"
             name="picTwo"
-            value={state.imageArticle.picTwo.file}
+            value={state.imageArticle.picTwo ? state.imageArticle.picTwo.file: null}
           />
         </Container>
       )}

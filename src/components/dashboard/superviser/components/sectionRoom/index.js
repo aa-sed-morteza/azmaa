@@ -35,6 +35,7 @@ export default function SectionRoom() {
     getBlogs();
   }, []);
 
+
   const magPaper = blogs.map((x, i) => {
     return (
       <Paper

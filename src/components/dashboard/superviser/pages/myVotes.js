@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import background from "../../../../assets/back-controll.webp";
-import vote from "../../../../assets/vote-light.webp";
+import votei from "../../../../assets/vote-light.webp";
 import voteAction from "../../../../assets/vote-active.webp";
 import action from "../../../../assets/act-light.webp";
 import ActionCard from "../components/actions/actionCard";
@@ -93,8 +93,6 @@ export default function MyVotes() {
 
     setFilteredVotes([...result]);
   };
-
-  console.log(filteredVotes);
 
   useEffect(() => {
     if (votes.length !== 0 && envoys.length !== 0) {
