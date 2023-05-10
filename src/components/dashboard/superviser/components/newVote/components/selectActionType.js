@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Button from "../../../../../general/button";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,8 @@ import background from "../../../../../../assets/back-controll.webp";
 import voteIcon from "../../../../../../assets/vote.webp";
 import symbol from "../../../../../../assets/vote-logo.webp";
 import actionsymbol from "../../../../../../assets/action-rate.webp";
+import upArrow from "../../../../../../assets/arrow.webp";
+
 import axios from "axios";
 import { BaseBackURL } from "../../../../../../constant/api";
 
@@ -22,6 +24,10 @@ export default function SelectActionType() {
   const { state, dispatch } = useUser();
   const [voteItems, setVoteItems] = useState([]);
   const [actionItems, setActionItems] = useState([]);
+  const [showLimit,setShowLimit]=useState(10);
+
+  const showRef = useRef(null);
+
 
   const getVoteItems = () => {
     let config = {
@@ -43,7 +49,7 @@ export default function SelectActionType() {
     getVoteItems();
   }, []);
 
-  const voteList = voteItems.map((x, i) => {
+  const voteList = voteItems.slice(0, showLimit).map((x, i) => {
     return (
       <SelectItem
         key={i}
@@ -120,7 +126,26 @@ export default function SelectActionType() {
             <Filtering>
               <input placeholder="جستجو کن..." />
             </Filtering>
-            <Gallery>{voteList}</Gallery>
+            <Gallery ref={showRef} >{voteList}</Gallery>
+            <ShowMore
+            arrow={showLimit >= voteItems.length}
+            onClick={() => {
+              if (showLimit < voteItems.length) {
+                setShowLimit(showLimit + 10);
+              } else {
+                setShowLimit(10);
+                showRef.current.scrollIntoView();
+              }
+            }}
+            style={{ marginTop: "20px" }}
+          >
+            <p>
+              {showLimit >= voteItems.length
+                ? "نمایش کمتر"
+                : "نمایش بیشتر "}
+            </p>{" "}
+          </ShowMore>
+
             {errors.type && touched.type && (
               <ErrorText>{errors.type}</ErrorText>
             )}
@@ -453,6 +478,53 @@ const ActiveOrder = styled.div`
       }
       .date {
         font-size: 1.25vw;
+      }
+    }
+  }
+`;
+
+
+const ShowMore = styled.div`
+  border: 1px solid #9f9f9f;
+  border-radius: 4px;
+  display: flex;
+  padding: 8px;
+  cursor: pointer;
+  p {
+    margin: auto;
+    color: #9f9f9f;
+    font-size: 4.65vw;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: 300;
+    &:after {
+      content: "";
+      display: inline-flex;
+      background-image: url(${upArrow});
+      transform: ${(props) => (props.arrow ? `rotate(180deg)` : "")};
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 9px;
+      height: 5px;
+    }
+  }
+
+  @media (min-width: 481px) {
+    border: 2px solid #9f9f9f;
+    border-radius: 8px;
+    width: 31%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 13px;
+    p {
+      font-size: 1.25vw;
+      font-weight: 400;
+      &:after {
+        width: 15px;
+        height: 8px;
+        left: -37px;
       }
     }
   }
