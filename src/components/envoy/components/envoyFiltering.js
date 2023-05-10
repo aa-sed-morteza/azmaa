@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import upArrow from "../../../assets/arrow.webp";
 import BestEnvoy from "../../home/components/bestEnvoy";
@@ -21,19 +21,18 @@ const FilterBox = styled.div`
 `;
 
 const FilterItem = styled.p`
-background-color: #FFFFFF;
-color:#9F9F9F;
-font-size:3.721vw;
-font-weight:300;
-border-radius: 2px;
-margin: 0;
-padding: 5px 7px;
-&.select{
-  background-color:#707070;
-  color:#FFFFFF;
-  font-weight:700;
-}
-
+  background-color: #ffffff;
+  color: #9f9f9f;
+  font-size: 3.721vw;
+  font-weight: 300;
+  border-radius: 2px;
+  margin: 0;
+  padding: 5px 7px;
+  &.select {
+    background-color: #707070;
+    color: #ffffff;
+    font-weight: 700;
+  }
 `;
 
 const Gallery = styled.div`
@@ -41,8 +40,8 @@ const Gallery = styled.div`
   flex-direction: column;
   // gap:10px;
   & > :nth-of-type(1n + 7) {
-      display: ${(props) => (!props.hide ? "none" : "")};
-    }
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
 `;
 
 const ShowMore = styled.div`
@@ -92,10 +91,10 @@ const ShowMore = styled.div`
 
 export default function EnvoyFiltering({ envoys }) {
   const [select, setSelect] = useState(1);
-  const [showMore,setShowMore]=useState(false);
-  const navigate = useNavigate();
+  const [showMore, setShowMore] = useState(false);
+  const [searchparams, setsearchparams] = useSearchParams();
 
- 
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -136,17 +135,32 @@ export default function EnvoyFiltering({ envoys }) {
 
       <Gallery>
         <Gallery hide={showMore}>
-          {envoys.map((item ,i) => (
-            <BestEnvoy
-            key={i}
-              envoy={item}
-              click={() => {
-                navigate(`/envoy/${item.id}`);
-              }}
-            />
-          ))}
+          {envoys
+            .filter((item) => {
+              let filter = searchparams.get("filter");
+              if (!filter) return true;
+              // let name= item.writer + item.description ;
+              let name =
+                item.first_name + item.last_name + item.electoral_district_name;
+              // console.log(item);
+              return name.includes(filter);
+            })
+            .map((item, i) => (
+              <BestEnvoy
+                key={i}
+                envoy={item}
+                click={() => {
+                  navigate(`/envoy/${item.id}`);
+                }}
+              />
+            ))}
         </Gallery>
-        <ShowMore arrow={showMore} onClick={()=>{setShowMore(!showMore)}}>
+        <ShowMore
+          arrow={showMore}
+          onClick={() => {
+            setShowMore(!showMore);
+          }}
+        >
           <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
         </ShowMore>
       </Gallery>

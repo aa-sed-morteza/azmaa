@@ -1,28 +1,37 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import eye from "../../../assets/eye.webp";
 import BestEnvoy from "../../home/components/bestEnvoy";
 
 export default function HonestEnvoy({ envoys }) {
-  const navigate =useNavigate();
+  const navigate = useNavigate();
+  const [searchparams, setsearchparams] = useSearchParams();
   const newList = envoys.sort((a, b) => a.transparency > b.transparency);
-
-  
 
   return (
     <Container>
       <Title>شفاف‌ترین نمایندگان</Title>
       <Gallery>
-        {newList.map((item,i) => (
-          <BestEnvoy
-            key={i}
-            envoy={item}
-            click={() => {
-              navigate(`/envoy/${item.id}`);
-            }}
-          />
-        ))}
+        {newList
+          .filter((item) => {
+            let filter = searchparams.get("filter");
+            if (!filter) return true;
+            // let name= item.writer + item.description ;
+            let name =
+              item.first_name + item.last_name + item.electoral_district_name;
+            // console.log(item);
+            return name.includes(filter);
+          })
+          .map((item, i) => (
+            <BestEnvoy
+              key={i}
+              envoy={item}
+              click={() => {
+                navigate(`/envoy/${item.id}`);
+              }}
+            />
+          ))}
       </Gallery>
     </Container>
   );

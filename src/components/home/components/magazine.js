@@ -266,6 +266,8 @@ export default function Magazine() {
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
 
+  console.log('blog',blogs)
+
   const getBlogs = () => {
     let config = {
       method: "get",

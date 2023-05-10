@@ -13,14 +13,16 @@ import IranMap from "../pluginIranMap/IranMap";
 import { BaseBackURL } from "../../constant/api";
 import axios from "axios";
 import { useUser } from "../context/userContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function Envoy() {
   const width = useWidth();
-  const navigate =useNavigate();
-  const {state,dispatch}=useUser();
+  const navigate = useNavigate();
+  const { state, dispatch } = useUser();
   const [envoys, setEnvoys] = useState([]);
-  const [citeis,setCiteis]=useState([]);
+  const [filterEnvoy, setFilterEnvoy] = useState([]);
+  const [citeis, setCiteis] = useState([]);
+  const [searchparams, setsearchparams] = useSearchParams();
 
   const getEnvoys = () => {
     let config = {
@@ -31,7 +33,9 @@ export default function Envoy() {
     axios(config).then((res) => {
       // console.log(res.data);
       if (res.data.length > 0) {
-        setEnvoys([...res.data.sort((a, b) => b.transparency - a.transparency)]);
+        setEnvoys([
+          ...res.data.sort((a, b) => b.transparency - a.transparency),
+        ]);
       }
     });
   };
@@ -65,18 +69,15 @@ export default function Envoy() {
   };
 
   const filterEnvoyByCity = () => {
-    if(state.city!="تمام ایران"){
-    const cityID = citeis.find((x) => x.name == state.city);
-    if(cityID){
-      getDistrict(cityID.id)
+    if (state.city != "تمام ایران") {
+      const cityID = citeis.find((x) => x.name == state.city);
+      if (cityID) {
+        getDistrict(cityID.id);
+      }
+    } else {
+      getEnvoys();
     }
-  }
-  else{
-    getEnvoys();
-  }
-  } 
-
- 
+  };
 
   useEffect(() => {
     getEnvoys();
@@ -84,15 +85,47 @@ export default function Envoy() {
   }, []);
 
   useEffect(() => {
-     filterEnvoyByCity();
-      console.log(state.city);
-  }, [state.city]);
+    filterEnvoyByCity();
+    if (state.citySearch.length > 0) {
+      setsearchparams({ filter: state.citySearch.map((x) => x) });
+      setFilterEnvoy(
+        envoys.filter((item) => {
+          let filter = searchparams.get("filter");
+          if (!filter) return true;
+          // let name= item.writer + item.description ;
+          let name =
+            item.first_name + item.last_name + item.electoral_district_name;
+          // console.log(item);
+          return name.includes(filter);
+        })
+      );
+    } else {
+      setsearchparams({});
+      setFilterEnvoy([]);
+    }
+  }, [state.citySearch]);
 
+  
   return (
     <Container>
       <Title>
-        <p className="home" onClick={()=>{navigate("/")}} >خانه /  </p>
-        <p className="component" onClick={()=>{navigate("/envoy")}} > نمایندگان </p>
+        <p
+          className="home"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          خانه /{" "}
+        </p>
+        <p
+          className="component"
+          onClick={() => {
+            navigate("/envoy");
+          }}
+        >
+          {" "}
+          نمایندگان{" "}
+        </p>
       </Title>
       <Content>
         {width < 481 ? (
@@ -102,13 +135,18 @@ export default function Envoy() {
           <Wraper>
             {/* <Map />  */}
             <IranMap />
-            {envoys && envoys.length > 0 && <HonestEnvoy envoys={envoys} />}
+            {filterEnvoy.length > 0 ? (
+              <HonestEnvoy envoys={filterEnvoy} />
+            ) : (
+              <HonestEnvoy envoys={envoys} />
+            )}
           </Wraper>
         )}
         <RemoveCitySearch
           onClick={() => {
             dispatch({ type: "SET_PROVICE", payload: "" });
             dispatch({ type: "SET_CITY_SEARCH", payload: [] });
+            dispatch({ type: "REMOVE_CITY_FILTER", payload: true });
           }}
         >
           حذف فیلتر نقشه
@@ -116,12 +154,25 @@ export default function Envoy() {
 
         <Search />
         {/* <AdvanceSearch  setEnvoys={setEnvoys} /> */}
-        {width < 481 && <EnvoyFiltering envoys={envoys} />}
+        {width < 481 &&
+          (filterEnvoy.length > 0 ? (
+            <EnvoyFiltering envoys={filterEnvoy} />
+          ) : (
+            <EnvoyFiltering envoys={envoys} />
+          ))}
         {width > 481 && (
           <>
-            <ActiveEnvoy envoys={envoys} />
+            {filterEnvoy.length > 0 ? (
+              <ActiveEnvoy envoys={filterEnvoy} />
+            ) : (
+              <ActiveEnvoy envoys={envoys} />
+            )}
             <Banner />
-            <NewEnvoy envoys={envoys} />
+            {filterEnvoy.length > 0 ? (
+              <NewEnvoy envoys={filterEnvoy} />
+            ) : (
+              <NewEnvoy envoys={envoys} />
+            )}
           </>
         )}
       </Content>
@@ -175,7 +226,6 @@ const Content = styled.div`
   @media (min-width: 481px) {
     padding: 0;
     padding-right: 10%;
-    
   }
 `;
 
@@ -184,7 +234,6 @@ const Wraper = styled.div`
   justify-content: space-between;
   margin-bottom: 70px;
 `;
-
 
 const RemoveCitySearch = styled.div`
   position: absolute;
