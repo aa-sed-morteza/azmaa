@@ -26,6 +26,7 @@ export default function ForgetMobileNumber() {
   const [type, setType] = useState(["نماینده", "ناظر"]);
   const [password, setPassword] = useState("");
   const [phon, setPhon] = useState("");
+  const [limitTime,setLimitTime]=useState(false);
   const checkCode = (e) => {
     e.preventDefault();
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import data from "../../data.json";
 import LOGO from "../../assets/azmaa-logo.webp";
 import menu from "../../assets/menu.webp";
@@ -301,6 +301,11 @@ export default function Navbar() {
   const [active, setActive] = useState(0);
   const [dashboard, setDashboard] = useState(false);
 
+  useEffect(()=>{
+    setDashboard(true);
+    setOpen(true)
+  },[state.openMenu])
+
   const menuItem = data.navbar.map((x, i) => {
     return (
       <List
@@ -362,6 +367,7 @@ export default function Navbar() {
       Cookies.remove("userName");
       dispatch({ type: "SET_LOGGED_IN", payload: false });
       dispatch({ type: "SET_TOKEN", payload: null });
+      dispatch({ type: "OPEN_MENU", payload: false });
     } else {
       navigate("/dashboard");
       setDashboard(true)

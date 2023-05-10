@@ -57,7 +57,9 @@ export default function LogIn() {
             dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
             Cookies.set("userType", "envoy");
           }
+
           navigate("/dashboard");
+          dispatch({ type: "OPEN_MENU", payload:true });
         } else if (res.data.code === -1) {
           toast.error("نام کاربری یا رمز عبور اشتباه است!", {
             position: toast.POSITION.TOP_RIGHT,

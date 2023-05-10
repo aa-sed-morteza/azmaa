@@ -43,6 +43,7 @@ const initialState = {
   citySearch: [],
   city: "",
   loggedIn: false,
+  openMenu: false,
   token: null,
   refreshToken: null,
 };
@@ -71,6 +72,8 @@ const reducer = (state, action) => {
       return { ...state, firstName: action.payload };
     case "SET_LNAME":
       return { ...state, lastName: action.payload };
+    case "OPEN_MENU":
+      return { ...state, openMenu: action.payload };
     case "SET_USERNAME":
       return { ...state, userName: action.payload };
     case "SET_TIME_OUT":
