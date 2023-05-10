@@ -115,8 +115,8 @@ const Edit = styled.div`
   position: absolute;
   top: 50%;
   left: 5.885vw;
-  height: 2.326vw;
-  width: 1.163vw;
+  height: 4vw;
+  width: 2vw;
   background-repeat: no-repeat;
   background-image: url(${edit});
   background-size: contain;
