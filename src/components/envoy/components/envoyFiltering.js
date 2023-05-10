@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import upArrow from "../../../assets/arrow.webp";
@@ -39,9 +39,9 @@ const Gallery = styled.div`
   display: flex;
   flex-direction: column;
   // gap:10px;
-  & > :nth-of-type(1n + 7) {
+  /* & > :nth-of-type(1n + 7) {
     display: ${(props) => (!props.hide ? "none" : "")};
-  }
+  } */
 `;
 
 const ShowMore = styled.div`
@@ -91,10 +91,30 @@ const ShowMore = styled.div`
 
 export default function EnvoyFiltering({ envoys }) {
   const [select, setSelect] = useState(1);
-  const [showMore, setShowMore] = useState(false);
+  const [showLimit, setShowLimit] = useState(10);
   const [searchparams, setsearchparams] = useSearchParams();
+  const [envoyFilter, setEnvoyFilter] = useState([]);
+  const showRef = useRef(null);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (searchparams.get("filter") !== "") {
+      setEnvoyFilter([
+        ...envoys.filter((item) => {
+          let filter = searchparams.get("filter");
+          if (!filter) return true;
+          // let name= item.writer + item.description ;
+          let name =
+            item.first_name + item.last_name + item.electoral_district_name;
+          // console.log(item);
+          return name.includes(filter);
+        }),
+      ]);
+    } else {
+      setEnvoyFilter([...envoys]);
+    }
+  }, [searchparams]);
 
   return (
     <Container>
@@ -134,34 +154,30 @@ export default function EnvoyFiltering({ envoys }) {
       </FilterBox>
 
       <Gallery>
-        <Gallery hide={showMore}>
-          {envoys
-            .filter((item) => {
-              let filter = searchparams.get("filter");
-              if (!filter) return true;
-              // let name= item.writer + item.description ;
-              let name =
-                item.first_name + item.last_name + item.electoral_district_name;
-              // console.log(item);
-              return name.includes(filter);
-            })
-            .map((item, i) => (
-              <BestEnvoy
-                key={i}
-                envoy={item}
-                click={() => {
-                  navigate(`/envoy/${item.id}`);
-                }}
-              />
-            ))}
+        <Gallery ref={showRef}>
+          {envoyFilter.slice(0, showLimit).map((item, i) => (
+            <BestEnvoy
+              key={i}
+              envoy={item}
+              click={() => {
+                navigate(`/envoy/${item.id}`);
+              }}
+            />
+          ))}
         </Gallery>
         <ShowMore
-          arrow={showMore}
+          arrow={showLimit >= envoyFilter.length}
           onClick={() => {
-            setShowMore(!showMore);
+            if (showLimit < envoyFilter.length) {
+              setShowLimit(showLimit + 10);
+            } else {
+              setShowLimit(10);
+              showRef.current.scrollIntoView();
+            }
           }}
+          style={{ marginTop: "20px" }}
         >
-          <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
+          <p>{showLimit >= envoyFilter.length ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
         </ShowMore>
       </Gallery>
     </Container>
