@@ -84,7 +84,7 @@ export default function EditContactInformation() {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      mobileNumber: state.mobileNumber,
+      mobileNumber: state.userName,
       email: state.email,
       address: state.address,
       phoneNubmer: state.phoneNubmer,
@@ -121,7 +121,7 @@ export default function EditContactInformation() {
       </FirstTitle>
       <form onSubmit={handleSubmit} autoComplete="off">
         <Container>
-          <Title>۳. اطلاعات تماس خود را بنویسید:</Title>
+          <Title> اطلاعات تماس خود را بنویسید:</Title>
           <Form>
             <CustomInput
               label="شمارۀ همراه"

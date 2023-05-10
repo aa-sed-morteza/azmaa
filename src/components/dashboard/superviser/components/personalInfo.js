@@ -3,17 +3,20 @@ import styled from "styled-components";
 import { useUser } from "../../../context/userContext";
 import edit from "../../../../assets/left.svg";
 import { useNavigate } from "react-router-dom";
-import {toFarsiNumber} from "../../../../utils"
+import { convertDateToFarsi, toFarsiNumber } from "../../../../utils";
 
 export default function PersonalInfo() {
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   const { state, dispatch } = useUser();
-
 
   return (
     <Container>
-      <Edit onClick={()=>{navigate('edit-personal-info')}}></Edit>
-      <Title >اطلاعات شخصی</Title>
+      <Edit
+        onClick={() => {
+          navigate("edit-personal-info");
+        }}
+      ></Edit>
+      <Title>اطلاعات شخصی</Title>
       <Row>
         <p className="type">نام : </p>
         <p className="expand">{state.first_name}</p>
@@ -28,11 +31,17 @@ export default function PersonalInfo() {
       </Row>
       <Row>
         <p className="type"> تاریخ تولد: </p>
-        <p className="expand">{state.birth_date}</p>
+        <p className="expand">
+          {toFarsiNumber(state.birth_date.slice(0, 4)) +
+            "/" +
+            toFarsiNumber(state.birth_date.slice(5, 7)) +
+            "/" +
+            toFarsiNumber(state.birth_date.slice(8, 10))}
+        </p>
       </Row>
       <Row>
         <p className="type"> کد ملی: </p>
-        <p className="expand">{toFarsiNumber(state.national_code) }</p>
+        <p className="expand">{toFarsiNumber(state.national_code)}</p>
       </Row>
     </Container>
   );
@@ -106,13 +115,13 @@ const Edit = styled.div`
   position: absolute;
   top: 50%;
   left: 5.885vw;
-  height:2.326vw;
-  width:1.163vw;
+  height: 2.326vw;
+  width: 1.163vw;
   background-repeat: no-repeat;
   background-image: url(${edit});
   background-size: contain;
   cursor: pointer;
-  @media (min-width: 480px){
+  @media (min-width: 480px) {
     width: 1.042vw;
     height: 0.521vw;
   }

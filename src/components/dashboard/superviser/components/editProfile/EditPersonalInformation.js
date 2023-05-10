@@ -78,6 +78,7 @@ export default function EditPersonalInformation() {
       });
   };
 
+
   const {
     values,
     errors,
@@ -89,11 +90,11 @@ export default function EditPersonalInformation() {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      firstName: state.firstName,
-      lastName: state.lastName,
-      birthPlace: state.birthPlace,
-      personalCode: state.personalCode,
-      birthDay: state.birthDay,
+      firstName: state.first_name,
+      lastName: state.last_name,
+      birthPlace: state.birth_place,
+      personalCode: state.national_code,
+      birthDay: state.birth_date,
     },
     validationSchema: infoSchema,
     onSubmit,
@@ -118,7 +119,7 @@ export default function EditPersonalInformation() {
 
       <form onSubmit={handleSubmit} autoComplete="off">
         <Container>
-          <Title>۱. اطلاعات شخصی خود را اصلاح کنید:</Title>
+          <Title> اطلاعات شخصی خود را اصلاح کنید:</Title>
           <Form>
             <CustomInput
               label="نام"

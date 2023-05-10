@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import CustomInput from "../../../../general/customInput";
 import Button from "../../../../general/button";
+import lock from "../../../../../assets/lock.webp";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../../context/userContext";
 import { useFormik } from "formik";
@@ -97,7 +98,7 @@ export default function EditLogInformation() {
 
       <form onSubmit={handleSubmit} autoComplete="off">
         <Container>
-          <Title>۲. رمز عبور خود را تعیین کنید:</Title>
+          <Title> رمز عبور خود را تعیین کنید:</Title>
           <Form>
             <CustomInput
               label="نام کاربری"
@@ -109,9 +110,12 @@ export default function EditLogInformation() {
             <CustomInput
               label="رمز عبور "
               back="#ffffff"
+              icon={lock}
+              type="password"
               value={values.password}
               onChange={handleChange}
               id="password"
+              show={true}
             />
             {errors.password && touched.password && (
               <ErrorText>{errors.password}</ErrorText>

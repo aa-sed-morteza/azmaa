@@ -27,7 +27,7 @@ export default function ContactInfo() {
       </Row>
 
       <Row>
-        <p className="type">نشانی دفتر : </p>
+        <p className="type">نشانی  : </p>
         <p className="expand"> {state.address}</p>
       </Row>
       <Row>
