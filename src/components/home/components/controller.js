@@ -186,7 +186,15 @@ export default function Controller({ vote_voter }) {
   useEffect(() => {
     filterEnvoyByCity();
     filterAreaByCity();
+    if(state.citySearch.length>0){
+      setsearchparams({filter:state.citySearch.map(x=>x)})
+    }else{
+      setsearchparams({})
+      console.log('free')
+    }
   }, [state.citySearch]);
+
+
 
   const newList = envoys.sort((a, b) => b.transparency - a.transparency);
   const filteredList = newList.filter((item) => {
@@ -285,6 +293,7 @@ export default function Controller({ vote_voter }) {
           onClick={() => {
             dispatch({ type: "SET_PROVICE", payload: "" });
             dispatch({ type: "SET_CITY_SEARCH", payload: [] });
+            dispatch({ type: "REMOVE_CITY_FILTER", payload: true });
           }}
         >
           حذف فیلتر نقشه

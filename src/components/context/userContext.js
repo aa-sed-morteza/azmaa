@@ -42,6 +42,7 @@ const initialState = {
   provinceSearch: "",
   citySearch: [],
   city: "",
+  removeCityFilter: false,
   loggedIn: false,
   openMenu: false,
   token: null,
@@ -56,6 +57,8 @@ const reducer = (state, action) => {
       return { ...state, userId: action.payload };
     case "SET_LOGGED_IN":
       return { ...state, loggedIn: action.payload };
+    case "REMOVE_CITY_FILTER":
+      return { ...state, removeCityFilter: action.payload };
     case "SET_LOGIN_INFO":
       return { ...state, ...action.payload };
     case "SET_USER_DATA":

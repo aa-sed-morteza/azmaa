@@ -162,7 +162,6 @@ export default function Dashboard() {
               path="/edit-contact-info"
               element={<EditContactInformation />}
             />
-
             <Route path="/myEnvoy" element={<MyEnvoys />} />
             <Route path="/myActions" element={<MyActions />} />
             <Route path="/myVotes" element={<MyVotes />} />

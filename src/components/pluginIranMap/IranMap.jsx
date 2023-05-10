@@ -28,7 +28,7 @@ const useMouse = () => {
   return mousePosition;
 };
 
-const IranMap = ({ position }) => {
+const IranMap = ({ position,empty }) => {
   const { state, dispatch } = useUser();
   const { x, y } = useMouse();
   const [provinces, setProvinces] = useState(iranProvinces);
@@ -132,12 +132,15 @@ const IranMap = ({ position }) => {
   }, [change]);
 
   useEffect(() => {
-    setProvinceSelected(false);
-    setProvinceNameOnClick("");
-    setProvinceName("");
-    setFieldValue("city", []);
-    setFieldValue("province", "");
-  }, [state.citySearch.length == 0]);
+    if(state.removeCityFilter ===true){
+      setProvinceSelected(false);
+      setProvinceNameOnClick("");
+      setProvinceName("");
+      setFieldValue("city", []);
+      setFieldValue("province", "");
+    }
+   
+  }, [state.removeCityFilter]);
 
   const onSubmit = async (values, actions) => {
     if (values) {
@@ -145,7 +148,7 @@ const IranMap = ({ position }) => {
       // setCities(values.city);
       dispatch({ type: "SET_PROVINCE_SEARCH", payload: values.province });
       dispatch({ type: "SET_CITY_SEARCH", payload: values.city });
-
+      dispatch({ type: "REMOVE_CITY_FILTER", payload: false });
       // setChange(!change)
       // dispatch({ type: "SET_ELECTORAL_DISTRICT", payload: values.password });
       // setProvinceName(values.province);
@@ -154,6 +157,8 @@ const IranMap = ({ position }) => {
       dispatch({ type: "SET_CITY", payload: "تمام ایران" });
     }
   };
+
+ 
 
   const {
     values,
@@ -172,6 +177,7 @@ const IranMap = ({ position }) => {
     validationSchema: provinceSchema,
     onSubmit,
   });
+  console.log('select_city',values.city)
 
   return (
     <Container position={position}>

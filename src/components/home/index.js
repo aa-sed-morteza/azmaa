@@ -19,7 +19,6 @@ export default function Home() {
   const width = useWidth();
 
   const data = useSelector((state) => state);
-  console.log(data);
 
   return (
     <HomeContainer>
