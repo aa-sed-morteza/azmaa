@@ -64,7 +64,7 @@ export default function SelectionArea() {
   const onSubmit = async (values, actions) => {
     const data = new FormData();
     data.append("electoral_district", 1);
-    data.append("fraction", 1);
+    data.append("fraction", 4);
     data.append("vote_number", values.voteNumber);
 
     let config = {
@@ -110,15 +110,26 @@ export default function SelectionArea() {
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue
   } = useFormik({
     initialValues: {
       areaName: "",
-      voteNumber: 0,
+      voteNumber: "0",
       commission: "",
     },
     validationSchema: selectAreaSchema,
     onSubmit,
   });
+
+    // Convert persianNumber to englishNumber
+    useEffect(() => {
+      setFieldValue(
+        "voteNumber",
+        values.voteNumber
+          .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+          .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+      );
+    }, [values.voteNumber]);
 
   return (
     <>

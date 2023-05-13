@@ -61,6 +61,15 @@ const Row = styled.div`
     font-weight:700;
     font-size:4.651vw;
 }
+@media (min-width: 480px){
+  .text{
+    margin:0;
+    padding:0;
+    color: #9F9F9F;
+    font-weight:700;
+    font-size:2vw;
+}
+}
 `;
 
 const Edit = styled.div`

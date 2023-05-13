@@ -64,7 +64,6 @@ export default function Dashboard() {
       });
   };
 
-  console.log("data", state);
 
   const refreshToken = () => {
     const data = new FormData();

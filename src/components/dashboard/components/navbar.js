@@ -3,11 +3,14 @@ import styled from "styled-components";
 import useWidth from "../../../hook/useWidth";
 import data from "../../../data.json";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../context/userContext";
 
 export default function DashboardMenu() {
   const width = useWidth();
   const navigate = useNavigate();
+  const {state,dispatch}=useUser();
   const [active, setActive] = useState(0);
+
 
   const choiseItem = (num, path) => {
     setActive(num);
@@ -29,9 +32,27 @@ export default function DashboardMenu() {
     );
   });
 
+  const envoyDashboardItems = data.dashboardEnvoy.map((item, i) => {
+    return (
+      <List
+        key={i}
+        onClick={() => choiseItem(i, item.path)}
+        className={i === active ? "active" : ""}
+      >
+        <span>
+          <img
+            src={active === i ? item.active_icon : item.icon}
+            alt={item.title}
+          />
+        </span>{" "}
+        {item.title}
+      </List>
+    );
+  });
+
   return (
     <Container>
-      <MenuList>{dashboardItem}</MenuList>
+      <MenuList>{state.userType =="envoy" ? envoyDashboardItems :dashboardItem}</MenuList>
     </Container>
   );
 }

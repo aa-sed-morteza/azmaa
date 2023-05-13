@@ -118,7 +118,12 @@ const Row = styled.div`
     padding: 0;
     color: #9f9f9f;
     font-weight: 700;
-    font-size: 1.2vw;
+    font-size: 3vw;
+  }
+  @media (min-width: 480px) {
+    .text-history {
+      font-size: 1.2vw;
+    }
   }
 `;
 

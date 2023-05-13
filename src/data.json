@@ -103,23 +103,24 @@
       "active_icon": "../../assets/account.webp"
     },
     {
-      "title": "فعالیت‌ها",
-      "path": "/dashboard/myActions",
+      "title": "رأی‌گیری‌ها",
+      "path": "/dashboard/myVotes",
       "icon": "../../assets/actions.webp",
       "active_icon": "../../assets/actions-active.webp"
+    },
+    {
+      "title": "عملکردها",
+      "path": "/dashboard/myActions",
+      "icon": "../../assets/history.webp",
+      "active_icon": "../../assets/history-active.webp"
     },
     {
       "title": "مطالب من",
       "path": "/dashboard/mySection",
       "icon": "../../assets/section.webp",
       "active_icon": "../../assets/section-active.webp"
-    },
-    {
-      "title": " سابقۀ عملکرد",
-      "path": "/dashboard/history",
-      "icon": "../../assets/history.webp",
-      "active_icon": "../../assets/history-active.webp"
     }
+   
   ],
   "envoysLess": [
     {
