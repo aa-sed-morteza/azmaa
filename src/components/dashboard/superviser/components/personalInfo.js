@@ -32,7 +32,7 @@ export default function PersonalInfo() {
       <Row>
         <p className="type"> تاریخ تولد: </p>
         <p className="expand">
-          {toFarsiNumber(state.birth_date.slice(0, 4)) +
+          {state.birth_place && toFarsiNumber(state.birth_date.slice(0, 4)) +
             "/" +
             toFarsiNumber(state.birth_date.slice(5, 7)) +
             "/" +

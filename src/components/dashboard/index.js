@@ -191,6 +191,8 @@ export default function Dashboard() {
             <Route path="/edit-envoy-state" element={<EditEnvoyState />} />
 
             <Route path="/myEnvoy" element={<MyEnvoys />} />
+            <Route path="/myVotes" element={<MyVotes />} />
+            <Route path="/myVotes/:title" element={<NewVote />} />
             <Route path="/myActions" element={<MyActions />} />
             <Route path="/myActions/:title" element={<NewAction />} />
             <Route path="/mySection" element={<MySection />} />

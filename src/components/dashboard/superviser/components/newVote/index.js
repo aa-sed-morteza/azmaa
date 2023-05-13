@@ -11,11 +11,23 @@ export default function NewVote() {
   const { state, dispatch } = useUser();
   const { title } = useParams();
 
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
-  //   };
-  // }, []);
+  useEffect(() => {
+    return () => {
+      dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
+    };
+  }, []);
+
+  useEffect(() => {
+    if (state.userType == "envoy") {
+      dispatch({ type: "SET_SELECT_ENVOUY", payload: state });
+    }
+  }, []);
+
+  const goNextLevel = () => {
+    dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 3 });
+  };
+
+
   return (
     <Container>
       <Title>
@@ -26,20 +38,20 @@ export default function NewVote() {
       {state.addVoteLevel === 2 && (
         <>
           <SelectActionType />
-          <SelectEnvoys />
+          {state.userType == "envoy"? goNextLevel() : <SelectEnvoys />}
         </>
       )}
       {state.addVoteLevel === 3 && (
         <>
           <SelectActionType />
-          <SelectEnvoys />
+          {state.userType !== "envoy" && <SelectEnvoys />}
           <VoteEnvoy />
         </>
       )}
       {state.addVoteLevel === 4 && (
         <>
           <SelectActionType />
-          <SelectEnvoys />
+          {state.userType !== "envoy" && <SelectEnvoys />}
           <VoteEnvoy />
           <Document />
         </>

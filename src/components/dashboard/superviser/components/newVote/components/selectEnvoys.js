@@ -44,7 +44,6 @@ export default function SelectEnvoys() {
     getEnvoys();
   }, []);
 
-  console.log(envoys);
 
   const envoyList = envoys.map((x, i) => {
     return (

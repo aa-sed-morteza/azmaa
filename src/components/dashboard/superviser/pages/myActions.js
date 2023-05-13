@@ -95,7 +95,6 @@ export default function MyActions() {
     setFilteredActivities([...result]);
   };
 
-  console.log(filteredActivities);
 
   useEffect(() => {
     if (activities.length !== 0 && envoys.length !== 0) {
