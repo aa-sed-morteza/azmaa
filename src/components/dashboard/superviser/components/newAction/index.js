@@ -18,6 +18,16 @@ export default function NewAction() {
     };
   }, []);
 
+  useEffect(() => {
+    if (state.userType == "envoy") {
+      dispatch({ type: "SET_SELECT_ENVOUY", payload: state });
+    }
+  }, []);
+
+  const goNextLevel = () => {
+    dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 3 });
+  };
+
   return (
     <Container>
       <Title>
@@ -28,20 +38,20 @@ export default function NewAction() {
       {state.addActionLevel === 2 && (
         <>
           <SelectActionType />
-          <SelectEnvoys />
+          {state.userType == "envoy" ? goNextLevel() : <SelectEnvoys />}
         </>
       )}
       {state.addActionLevel === 3 && (
         <>
           <SelectActionType />
-          <SelectEnvoys />
+          {state.userType !== "envoy" && <SelectEnvoys />}
           <VoteEnvoy />
         </>
       )}
       {state.addActionLevel === 4 && (
         <>
           <SelectActionType />
-          <SelectEnvoys />
+          {state.userType !== "envoy" && <SelectEnvoys />}
           <VoteEnvoy />
           <Document />
         </>

@@ -49,7 +49,6 @@ export default function VoteEnvoy() {
     actions.resetForm();
   };
 
-  console.log(actions);
 
   const {
     values,
@@ -91,6 +90,7 @@ export default function VoteEnvoy() {
       </RadioButton>
     );
   });
+
 
   const checkActionsItems = actions.map((item, i) => {
     return (
