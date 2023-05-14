@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Controler from "../vote/components/controler";
 import Filtering from "../vote/components/filtering";
@@ -17,6 +17,10 @@ export default function Actions() {
   const [filteredActivities, setFilteredActivities] = useState([]);
   const [secondHide, setSecondHide] = useState(false);
   const [searchparams, setsearchparams] = useSearchParams();
+  const [showLimit, setShowLimit] = useState(3);
+
+  const showRef =useRef(null)
+
 
   const getActivities = () => {
     let config = {
@@ -64,7 +68,7 @@ export default function Actions() {
         <>
         <LastActions>
           <Title> عملکردها</Title>
-          <ActionContainer hide={secondHide}>
+          <ActionContainer ref={showRef}>
             {activities.filter((item) => {
               let filter = searchparams.get("filter");
               if (!filter) return true;
@@ -86,19 +90,25 @@ export default function Actions() {
               }else{
                 return 0;
               }
-            }).map((item, i) => {
+            }).slice(0, showLimit).map((item, i) => {
               return <ActionCard activity={item} key={i} />;
             })}
           </ActionContainer>
           
           <ShowMore
-            arrow={secondHide}
-            onClick={() => {
-              setSecondHide(!secondHide);
-            }}
-          >
-            <p>{secondHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
-          </ShowMore>
+          arrow={showLimit >= activities.length}
+          onClick={() => {
+            if (showLimit < activities.length) {
+              setShowLimit(showLimit + 10);
+            } else {
+              setShowLimit(3);
+              showRef.current.scrollIntoView();
+            }
+          }}
+          style={{ marginTop: "20px" }}
+        >
+          <p>{showLimit >= activities.length ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
+        </ShowMore>
         </LastActions>
         </>
 
@@ -116,7 +126,7 @@ const Container = styled.section`
   overflow: hidden;
   @media (min-width: 480px) {
     background-color: #ffffff;
-    padding-bottom: 0;
+    padding-bottom: 5%;
   }
 `;
 const Title = styled.h1`
@@ -201,22 +211,13 @@ const Content = styled.div`
   }
 `;
 const ActionContainer = styled.div`
-  & > :nth-of-type(1n + 2) {
-    display: ${(props) => (!props.hide ? "none" : "")};
-  }
+
   @media (min-width: 481px) {
     display: flex;
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
-    // margin-left:-7%;
-    // margin-right:-7%;
-    & > :nth-of-type(1n + 2) {
-      display: flex;
-    }
-    & > :nth-of-type(1n + 4) {
-      display: ${(props) => (!props.hide ? "none" : "")};
-    }
+  
   }
   @media (min-width: 769px) {
     justify-content: center;
