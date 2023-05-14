@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../../../../../general/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useUser } from "../../../../../context/userContext";
 import { useFormik } from "formik";
 import { selectActionTypeSchema } from "../../../../../schema";
@@ -14,6 +14,7 @@ import symbol from "../../../../../../assets/vote-logo.webp";
 import actionsymbol from "../../../../../../assets/action-rate.webp";
 import axios from "axios";
 import { BaseBackURL } from "../../../../../../constant/api";
+import { convertDateToFarsi } from "../../../../../../utils";
 
 export default function SelectActionType() {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export default function SelectActionType() {
   const { state, dispatch } = useUser();
   const [voteItems, setVoteItems] = useState([]);
   const [actionItems, setActionItems] = useState([]);
+  const [searchparams, setsearchparams] = useSearchParams();
 
   const getVoteItems = () => {
     let config = {
@@ -73,7 +75,7 @@ export default function SelectActionType() {
         <div className="content">
           <p className="titr">رأی‌گیری</p>
           <h2 className="title">{x.name}</h2>
-          <p className="date">{x.date}</p>
+          <p className="date">{convertDateToFarsi(x.date)}</p>
         </div>
       </SelectItem>
     );
@@ -94,26 +96,43 @@ export default function SelectActionType() {
     );
   });
 
-  const actionList = actionItems.map((x, i) => {
-    return (
-      <ActiveOrder
-        key={i}
-        className={check === i ? "active" : ""}
-        onClick={() => {
-          setCheck(i);
-          setFieldValue("description", x.id);
-          dispatch({ type: "SET_ACTIVITY_CHOICE", payload: x.activity_choice });
-        }}
-      >
-        <div className="symbol"></div>
-        <div className="content">
-          <p className="titr">عملکرد ها</p>
-          <h2 className="title">{x.name}</h2>
-          <p className="date">{x.date}</p>
-        </div>
-      </ActiveOrder>
-    );
-  });
+  var isDescending = true; //set to false for ascending
+  const sortActsByDate = actionItems.sort((a, b) =>
+    isDescending
+      ? new Date(b.date).getTime() - new Date(a.date).getTime()
+      : new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
+  const actionList = sortActsByDate
+    .filter((item) => {
+      let filter = searchparams.get("filter");
+      if (!filter) return true;
+      let name = item.name + item.date;
+      return name.includes(filter);
+    })
+    .map((x, i) => {
+      return (
+        <ActiveOrder
+          key={i}
+          className={check === i ? "active" : ""}
+          onClick={() => {
+            setCheck(i);
+            setFieldValue("description", x.id);
+            dispatch({
+              type: "SET_ACTIVITY_CHOICE",
+              payload: x.activity_choice,
+            });
+          }}
+        >
+          <div className="symbol"></div>
+          <div className="content">
+            <p className="titr">عملکرد ها</p>
+            <h2 className="title">{x.name}</h2>
+            <p className="date">{convertDateToFarsi(x.date)}</p>
+          </div>
+        </ActiveOrder>
+      );
+    });
 
   const checkActionList = actionItems.map((x, i) => {
     return (
@@ -125,7 +144,7 @@ export default function SelectActionType() {
         <div className="content">
           <p className="titr">عملکرد ها</p>
           <h2 className="title">{x.name}</h2>
-          <p className="date">{x.date}</p>
+          <p className="date">{convertDateToFarsi(x.date)}</p>
         </div>
       </ActiveOrder>
     );
@@ -171,7 +190,18 @@ export default function SelectActionType() {
           <Container>
             <Title>۱. فعالیت موردنظر خود را انتخاب کنید:</Title>
             <Filtering>
-              <input placeholder="جستجو کن..." />
+              <input
+                value={searchparams.get("filter") || ""}
+                onChange={(event) => {
+                  let filter = event.target.value;
+                  if (filter) {
+                    setsearchparams({ filter: filter });
+                  } else {
+                    setsearchparams({});
+                  }
+                }}
+                placeholder="جستجو کن..."
+              />
             </Filtering>
             <Gallery>{actionList}</Gallery>
             {errors.type && touched.type && (
