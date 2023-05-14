@@ -58,6 +58,23 @@ export default function MyVotes() {
       });
   };
 
+  const getBills = () => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter=${state.id}&ordering=name, date`,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        setVotes([...response.data]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const filterVotes = () => {
     let result = [];
 
@@ -89,6 +106,24 @@ export default function MyVotes() {
           }
         }
       }
+      if (vote.absent_vote.length > 0) {
+        for (const item of vote.absent_vote) {
+          for (const envoy of envoys) {
+            if (envoy.id === item.voter.id) {
+              result.push(item);
+            }
+          }
+        }
+      }
+      if (vote.without_vote.length > 0) {
+        for (const item of vote.without_vote) {
+          for (const envoy of envoys) {
+            if (envoy.id === item.voter.id) {
+              result.push(item);
+            }
+          }
+        }
+      }
     }
 
     setFilteredVotes([...result]);
@@ -101,10 +136,18 @@ export default function MyVotes() {
   }, [votes, envoys]);
 
   useEffect(() => {
-    billVoteUnconfirmed();
-    getEnvoys();
+    if (state.userType == "envoy") {
+      setEnvoys([state]);
+      getBills();
+    } else {
+      getEnvoys();
+      billVoteUnconfirmed();
+    }
+
     // activityVoteUnconfirmed();
   }, [state.token]);
+
+  console.log("fili", votes);
 
   return (
     <Container>

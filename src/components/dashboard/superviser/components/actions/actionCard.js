@@ -13,7 +13,7 @@ export default function ActionCard(props) {
     return (
       <SecondEnvoyCard
         key={i}
-        name={x.first_name+""+x.last_name}
+        name={x.first_name+" "+x.last_name}
         state={x.electoral_district_name}
         commission={x.fraction_name}
         id={x.id}
@@ -81,7 +81,7 @@ const Container = styled.div`
   position: relative;
   &:after {
     content: "";
-    diplay: block;
+    display: block;
     position: absolute;
     background-image: url(${arrow});
     background-size: contain;
@@ -130,7 +130,7 @@ const Symbol = styled.div`
   height:20.698vw;
   img{
     width:100%;
-    height:100%
+    height:100%;
     object-fit:contain;
   }
   @media(min-width:480px){

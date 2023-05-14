@@ -21,7 +21,7 @@ export default function SecondEnvoyCard({
   const [secondHalf, setSecondHalf] = useState(0);
   const [actIcon, setActIcon] = useState([]);
   const [actColor, setActColor] = useState("");
-  const [actionWord,setActionWord]=useState("");
+  const [actionWord, setActionWord] = useState("");
 
   const generateColor = () => {
     if (!persantage) {
@@ -47,24 +47,33 @@ export default function SecondEnvoyCard({
   };
 
   const checkAction = () => {
-    if (action === "موافق" || 'positive') {
+    if (action === "موافق" || action=="positive") {
       setActColor("#6CBBA9");
       setActIcon([like]);
-      setActionWord('موافق')
+      setActionWord("موافق");
     } else if (action === "مخالف") {
       setActColor("#FFA5A5");
       setActIcon([dislike]);
+      setActionWord("مخالف");
     } else if (action === "ممتنع") {
       setActColor("#D8D8D8");
       setActIcon([not]);
-    }else if (action==="همراه"){
+      setActionWord("ممتنع");
+    } else if (action == "غایب" || action == "absent") {
+      setActColor("#D8D8D8");
+      setActIcon([not]);
+      setActionWord("غایب");
+    } else if (action === "همراه") {
       setActColor("#6CBBA9");
       setActIcon([like1]);
-    }else if(action==="ناهمراه"){
+      setActionWord("همراه");
+    } else if (action === "ناهمراه") {
       setActColor("#FFA5A5");
       setActIcon([dislike1]);
+      setActionWord("ناهمراه");
     }
   };
+
 
   useEffect(() => {
     calculateFillCircle();
@@ -91,7 +100,7 @@ export default function SecondEnvoyCard({
           <p className="position"> {commission || "کمیسیون"}</p>
         </div>
         <div className="persantage">
-          <p className="content">{action}</p>
+          <p className="content">{actionWord}</p>
         </div>
       </Content>
     </Container>
@@ -121,9 +130,9 @@ const EnvoyImage = styled.div`
   float: left;
   overflow: hidden;
   background: #f9f9f9;
-  @media(min-width:480px){
-    width:7.292vw;
-    height:7.552vw;
+  @media (min-width: 480px) {
+    width: 7.292vw;
+    height: 7.552vw;
   }
   &:before {
     content: "";
@@ -137,9 +146,9 @@ const EnvoyImage = styled.div`
     z-index: 2;
     left: -50%;
     background: #f9f9f9;
-    @media(min-width:480px){
-      width:7.292vw;
-      height:7.552vw;
+    @media (min-width: 480px) {
+      width: 7.292vw;
+      height: 7.552vw;
     }
   }
   &:after {
@@ -150,9 +159,9 @@ const EnvoyImage = styled.div`
     position: absolute;
     left: 0;
     top: 0;
-    @media(min-width:480px){
-      width:7.292vw;
-      height:7.552vw;
+    @media (min-width: 480px) {
+      width: 7.292vw;
+      height: 7.552vw;
     }
   }
   b {
@@ -174,9 +183,9 @@ const EnvoyImage = styled.div`
       z-index: 4;
       animation: 3s ${(props) => "span2" + props.id} linear forwards 3s;
       opacity: 0;
-      @media(min-width:480px){
-        width:7.292vw;
-        height:7.552vw;
+      @media (min-width: 480px) {
+        width: 7.292vw;
+        height: 7.552vw;
       }
     }
     &:after {
@@ -196,9 +205,9 @@ const EnvoyImage = styled.div`
       z-index: 1;
       animation: 3s ${(props) => "span" + props.id} linear forwards;
       animation-delay: 4s;
-      @media(min-width:480px){
-        width:7.292vw;
-        height:7.552vw;
+      @media (min-width: 480px) {
+        width: 7.292vw;
+        height: 7.552vw;
       }
     }
   }
@@ -213,9 +222,9 @@ const EnvoyImage = styled.div`
     z-index: 5;
     border-radius: 50%;
     object-fit: contain;
-    @media(min-width:480px){
-      width:6.979vw;
-      height:7.083vw;
+    @media (min-width: 480px) {
+      width: 6.979vw;
+      height: 7.083vw;
     }
   }
 
@@ -323,11 +332,10 @@ const Content = styled.div`
       }
       @media (min-width: 480px) {
         font-size: 1.042vw;
-        &:before{
-          width:1.354vw;
-          height:1.354vw;
+        &:before {
+          width: 1.354vw;
+          height: 1.354vw;
         }
-       
       }
     }
   }
