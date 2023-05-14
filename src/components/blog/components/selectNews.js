@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Control from "../../vote/components/controler";
 import data from "../../../data.json";
@@ -18,6 +18,10 @@ export default function SelectNews({ posts }) {
   const [mostVisitedMore, setMostVisitedMore] = useState(false);
   const [lastNewsMore, setLastNewsMore] = useState(false);
   const [searchparams, setsearchparams] = useSearchParams();
+  const [showLimit, setShowLimit] = useState(4);
+
+  const showRef = useRef(null);
+
   useEffect(() => {
     setFilteredPosts(posts);
   }, [posts]);
@@ -29,6 +33,7 @@ export default function SelectNews({ posts }) {
       let name = x.writer + x.description;
       return name.includes(filter);
     })
+    .slice(0, showLimit)
     .map((x, i) => {
       return (
         <Paper
@@ -44,24 +49,24 @@ export default function SelectNews({ posts }) {
 
           {/* <p className="user">{x.writer}</p> */}
           <p className="user">
-          {x.type == "note" && "یادداشت"}
-          {x.type == "news" && "خبر"}
-          {x.type == "report" && "گزارش"}
-          {x.type == "article" && "مقاله"}
-        </p>
+            {x.type == "note" && "یادداشت"}
+            {x.type == "news" && "خبر"}
+            {x.type == "report" && "گزارش"}
+            {x.type == "article" && "مقاله"}
+          </p>
           <h5 className="title">{x.title}</h5>
           <p className="content">{x.description.slice(0, 100) + " ..."}</p>
 
           <p
-          className="ReadMore"
-          onClick={() => {
-            navigate(`/blog/${x.id}`);
-          }}
-        >
-          ادامه مطلب
-        </p>
+            className="ReadMore"
+            onClick={() => {
+              navigate(`/blog/${x.id}`);
+            }}
+          >
+            ادامه مطلب
+          </p>
 
-          <p className="date">{convertDateToFarsi(x.created) }</p>
+          <p className="date">{convertDateToFarsi(x.created)}</p>
         </Paper>
       );
     });
@@ -97,14 +102,20 @@ export default function SelectNews({ posts }) {
 
       <ChangeBack>
         <Title> آخرین مطالب</Title>
-        <NewsWraper hide={lastNewsMore}>{magPaper}</NewsWraper>
+        <NewsWraper ref={showRef}>{magPaper}</NewsWraper>
         <ShowMore
-          arrow={lastNewsMore}
+          arrow={showLimit >= filteredPosts.length}
           onClick={() => {
-            setLastNewsMore(!lastNewsMore);
+            if (showLimit < filteredPosts.length) {
+              setShowLimit(showLimit + 4);
+            } else {
+              setShowLimit(4);
+              showRef.current.scrollIntoView();
+            }
           }}
+          style={{ marginTop: "20px" }}
         >
-          <p>{lastNewsMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
+          <p>{showLimit >= filteredPosts.length ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
         </ShowMore>
       </ChangeBack>
     </Container>
@@ -150,9 +161,9 @@ const NewsWraper = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 10px;
-  &:nth-of-type(1n + 4) {
+  /* &:nth-of-type(1n + 4) {
     display: ${(props) => (!props.hide ? "none" : "")};
-  }
+  } */
   @media (min-width: 481px) {
     margin-bottom: 45px;
     justify-content: flex-start;
