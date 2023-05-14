@@ -48,6 +48,7 @@ export default function Actions() {
     }
   }, [selectedTag]);
 
+  console.log('act',activities)
 
   return (
     <Container>
@@ -56,6 +57,7 @@ export default function Actions() {
         <p className="component"> عملکردها </p>
       </DivTitle>
 
+    
       <Content>
         <Controler selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
         <Filtering selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
@@ -80,7 +82,7 @@ export default function Actions() {
               }else if (selectedFilter== 2){
                 return new Date(a.date) - new Date(b.date);
               }else if (selectedFilter== 3){
-                return a.bill_transparency - b.bill_transparency;
+                return a.transparency - b.transparency;
               }else{
                 return 0;
               }
