@@ -6,6 +6,7 @@ import dislike from "../../../../../assets/disagree.webp";
 import not from "../../../../../assets/info.webp";
 import like1 from "../../../../../assets/like.webp";
 import dislike1 from "../../../../../assets/dislike.webp";
+import { act } from "react-dom/test-utils";
 
 export default function SecondEnvoyCard({
   name,
@@ -46,16 +47,18 @@ export default function SecondEnvoyCard({
     }
   };
 
+
+  console.log('sag',action)
   const checkAction = () => {
     if (action === "موافق" || action=="positive") {
       setActColor("#6CBBA9");
       setActIcon([like]);
       setActionWord("موافق");
-    } else if (action === "مخالف") {
+    } else if (action === "مخالف" || action == "negative") {
       setActColor("#FFA5A5");
       setActIcon([dislike]);
       setActionWord("مخالف");
-    } else if (action === "ممتنع") {
+    } else if (action === "ممتنع" || action =="none") {
       setActColor("#D8D8D8");
       setActIcon([not]);
       setActionWord("ممتنع");
@@ -63,7 +66,11 @@ export default function SecondEnvoyCard({
       setActColor("#D8D8D8");
       setActIcon([not]);
       setActionWord("غایب");
-    } else if (action === "همراه") {
+    } else if (action == "بدون رای" || action == "without_vote") {
+      setActColor("#D8D8D8");
+      setActIcon([not]);
+      setActionWord("بدون رای");
+    }else if (action === "همراه") {
       setActColor("#6CBBA9");
       setActIcon([like1]);
       setActionWord("همراه");
