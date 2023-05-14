@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Calendar from "./components/calendar";
 import Controler from "./components/controler";
@@ -17,6 +17,10 @@ export default function Vote() {
   const [filteredBills, setFilteredBills] = useState([]);
   const [firstHide, setFirstHide] = useState(false);
   const [searchparams, setsearchparams] = useSearchParams();
+  const [showLimit, setShowLimit] = useState(3);
+
+  const showRef =useRef(null);
+
   const getActivities = () => {
     let config = {
       method: "get",
@@ -53,7 +57,6 @@ export default function Vote() {
   }, [selectedTag]);
 
 
-
   return (
     <Container>
       <Title>
@@ -66,7 +69,7 @@ export default function Vote() {
         {/* {console.log(selectedTag)} */}
         <Filtering selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
         {/* <Titleh1>آخرین رأی‌گیری‌ها</Titleh1> */}
-        <VoterContainer hide={firstHide}>
+        <VoterContainer ref={showRef} >
           {bills.filter((item) => {
             let filter = searchparams.get("filter");
             if (!filter) return true;
@@ -86,21 +89,27 @@ export default function Vote() {
             }else if (selectedFilter== 2){
               return new Date(a.date) - new Date(b.date);
             }else if (selectedFilter== 3){
-              return a.bill_transparency - b.bill_transparency;
+              return b.bill_transparency - a.bill_transparency;
             }else{
               return 0;
             }
-          }).map((item, i) => {
+          }).slice(0,showLimit).map((item, i) => {
             return <VoteCard bill={item} key={i} />;
           })}
         </VoterContainer>
         <ShowMore
-          arrow={firstHide}
+          arrow={showLimit >= bills.length}
           onClick={() => {
-            setFirstHide(!firstHide);
+            if (showLimit < bills.length) {
+              setShowLimit(showLimit + 10);
+            } else {
+              setShowLimit(3);
+              showRef.current.scrollIntoView();
+            }
           }}
+          style={{ marginTop: "20px" }}
         >
-          <p>{firstHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>
+          <p>{showLimit >= bills.length ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
         </ShowMore>
 
 
@@ -118,7 +127,7 @@ const Container = styled.section`
   overflow: hidden;
   @media (min-width: 481px) {
     background-color: #ffffff;
-    padding-bottom: 0;
+    padding-bottom: 5%;
   }
 `;
 
@@ -164,9 +173,7 @@ const Content = styled.div`
 `;
 
 const VoterContainer = styled.div`
-  & > :nth-of-type(1n + 2) {
-    display: ${(props) => (!props.hide ? "none" : "")};
-  }
+
   @media (min-width: 481px) {
     display: flex;
     gap: 20px;
@@ -174,12 +181,7 @@ const VoterContainer = styled.div`
     flex-wrap: wrap;
     // margin-left:-7%;
     // margin-right:-7%;
-    & > :nth-of-type(1n + 2) {
-      display: flex;
-    }
-    & > :nth-of-type(1n + 4) {
-      display: ${(props) => (!props.hide ? "none" : "")};
-    }
+   
   }
   @media (min-width: 769px) {
     justify-content: center;

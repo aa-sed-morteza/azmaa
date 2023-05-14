@@ -538,6 +538,7 @@ export default function VoteCard({ bill }) {
   const [bColor, setBColor] = useState("#6cbba9");
   const [envoyData, setEnvoyData] = useState(bill.positive_vote);
 
+
   const navigate = useNavigate();
 
   
