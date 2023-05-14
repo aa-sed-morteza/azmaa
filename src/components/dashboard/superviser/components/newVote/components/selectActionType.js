@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Button from "../../../../../general/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useUser } from "../../../../../context/userContext";
 import { useFormik } from "formik";
 import { selectActionTypeSchema } from "../../../../../schema";
@@ -16,6 +16,7 @@ import upArrow from "../../../../../../assets/arrow.webp";
 
 import axios from "axios";
 import { BaseBackURL } from "../../../../../../constant/api";
+import { convertDateToFarsi } from "../../../../../../utils";
 
 export default function SelectActionType() {
   const navigate = useNavigate();
@@ -24,10 +25,10 @@ export default function SelectActionType() {
   const { state, dispatch } = useUser();
   const [voteItems, setVoteItems] = useState([]);
   const [actionItems, setActionItems] = useState([]);
-  const [showLimit,setShowLimit]=useState(10);
+  const [showLimit, setShowLimit] = useState(10);
+  const [searchparams, setsearchparams] = useSearchParams();
 
   const showRef = useRef(null);
-
 
   const getVoteItems = () => {
     let config = {
@@ -49,25 +50,40 @@ export default function SelectActionType() {
     getVoteItems();
   }, []);
 
-  const voteList = voteItems.slice(0, showLimit).map((x, i) => {
-    return (
-      <SelectItem
-        key={i}
-        className={check === i ? "active" : ""}
-        onClick={() => {
-          setCheck(i);
-          setFieldValue("description", x.id);
-        }}
-      >
-        <div className="symbol"></div>
-        <div className="content">
-          <p className="titr">رأی‌گیری</p>
-          <h2 className="title">{x.name}</h2>
-          <p className="date">{x.date}</p>
-        </div>
-      </SelectItem>
-    );
-  });
+  var isDescending = true; //set to false for ascending
+  const sortVotesByDate = voteItems.sort((a, b) =>
+    isDescending
+      ? new Date(b.date).getTime() - new Date(a.date).getTime()
+      : new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
+  const voteList = sortVotesByDate
+    .filter((item) => {
+      let filter = searchparams.get("filter");
+      if (!filter) return true;
+      let name = item.name + item.date;
+      return name.includes(filter);
+    })
+    .slice(0, showLimit)
+    .map((x, i) => {
+      return (
+        <SelectItem
+          key={i}
+          className={check === i ? "active" : ""}
+          onClick={() => {
+            setCheck(i);
+            setFieldValue("description", x.id);
+          }}
+        >
+          <div className="symbol"></div>
+          <div className="content">
+            <p className="titr">رأی‌گیری</p>
+            <h2 className="title">{x.name}</h2>
+            <p className="date">{convertDateToFarsi(x.date)}</p>
+          </div>
+        </SelectItem>
+      );
+    });
   const checkVoteList = voteItems.map((x, i) => {
     return (
       <SelectItem
@@ -78,7 +94,7 @@ export default function SelectActionType() {
         <div className="content">
           <p className="titr">رأی‌گیری</p>
           <h2 className="title">{x.name}</h2>
-          <p className="date">{x.date}</p>
+          <p className="date">{convertDateToFarsi(x.date)}</p>
         </div>
       </SelectItem>
     );
@@ -124,27 +140,36 @@ export default function SelectActionType() {
           <Container>
             <Title>۱. فعالیت موردنظر خود را انتخاب کنید:</Title>
             <Filtering>
-              <input placeholder="جستجو کن..." />
+              <input
+                value={searchparams.get("filter") || ""}
+                onChange={(event) => {
+                  let filter = event.target.value;
+                  if (filter) {
+                    setsearchparams({ filter: filter });
+                  } else {
+                    setsearchparams({});
+                  }
+                }}
+                placeholder="جستجو کن..."
+              />
             </Filtering>
-            <Gallery ref={showRef} >{voteList}</Gallery>
+            <Gallery ref={showRef}>{voteList}</Gallery>
             <ShowMore
-            arrow={showLimit >= voteItems.length}
-            onClick={() => {
-              if (showLimit < voteItems.length) {
-                setShowLimit(showLimit + 10);
-              } else {
-                setShowLimit(10);
-                showRef.current.scrollIntoView();
-              }
-            }}
-            style={{ marginTop: "20px" }}
-          >
-            <p>
-              {showLimit >= voteItems.length
-                ? "نمایش کمتر"
-                : "نمایش بیشتر "}
-            </p>{" "}
-          </ShowMore>
+              arrow={showLimit >= voteItems.length}
+              onClick={() => {
+                if (showLimit < voteItems.length) {
+                  setShowLimit(showLimit + 10);
+                } else {
+                  setShowLimit(10);
+                  showRef.current.scrollIntoView();
+                }
+              }}
+              style={{ marginTop: "20px" }}
+            >
+              <p>
+                {showLimit >= voteItems.length ? "نمایش کمتر" : "نمایش بیشتر "}
+              </p>{" "}
+            </ShowMore>
 
             {errors.type && touched.type && (
               <ErrorText>{errors.type}</ErrorText>
@@ -482,7 +507,6 @@ const ActiveOrder = styled.div`
     }
   }
 `;
-
 
 const ShowMore = styled.div`
   border: 1px solid #9f9f9f;
