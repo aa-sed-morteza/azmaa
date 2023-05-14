@@ -173,7 +173,7 @@ export default function MyVotes() {
               در حال حاضر برای شما موردی ثبت نشده است.
             </p>
           ) : (
-            <div>
+            <div className="wraper">
               {filteredVotes.map((item, i) => (
                 <ActionCard
                   img={pic}
@@ -370,6 +370,12 @@ const ActionGallery = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  .wraper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
   @media (min-width: 480px) {
     display: flex;
     flex-direction: row;
@@ -377,6 +383,13 @@ const ActionGallery = styled.div`
     padding: 1.302vw 1.302vw 2.604vw 6.667vw;
     background-color: #ffffff;
     border-radius: 0px 8px 8px 0px;
+    .wraper{
+      flex-direction: row;
+      flex-wrap: wrap;
+      &>*{
+        align-self: flex-start;
+      }
+    }
   }
 `;
 
