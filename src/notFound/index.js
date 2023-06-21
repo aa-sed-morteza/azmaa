@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+
+//Not Found page 
 export default function NotFound() {
   return (
     <Container>
