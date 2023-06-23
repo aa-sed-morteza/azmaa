@@ -28,6 +28,10 @@ export default function NewsPage() {
   const [relatedPosts, setRelatedPosts] = useState([]);
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  },[title])
+
   const getPosts = () => {
     let config = {
       method: "get",
