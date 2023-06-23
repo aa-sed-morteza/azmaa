@@ -192,6 +192,8 @@ const Paper = styled.div`
     font-size: 14px;
     font-weight: bold;
     text-decoration: underline;
+    margin-top:auto;
+    cursor: pointer;
   }
 
   @media (min-width: 481px) {
