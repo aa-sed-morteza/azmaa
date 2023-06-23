@@ -7,7 +7,7 @@ export default function EnvoyDashboard() {
     <Container>
       <Title>
         <p className="home">پنل / </p>
-        <p className="component"> اطلاعات کاربری </p>
+        <p className="component">  اطلاعات کاربری</p>
       </Title>
       <PersonalInformation/>
     </Container>
@@ -35,6 +35,7 @@ const Title = styled.div`
     font-weight: 700;
     margin: 0;
     color: rgba(0, 0, 0, 0.2);
+    padding-left: 7px;
   }
   .component {
     font-size: 3.721vw;
