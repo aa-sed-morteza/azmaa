@@ -14,6 +14,7 @@ export default function EnvoyArea({ data }) {
     setOpen(!open);
   };
 
+
   return (
     <Container onClick={handleClick} className={open ? "active" : ""}>
       <Title>حوزهٔ انتخابیه</Title>
