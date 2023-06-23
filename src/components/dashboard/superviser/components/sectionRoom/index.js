@@ -8,6 +8,7 @@ import title from "../../../../../assets/text.webp";
 import axios from "axios";
 import { BaseBackURL } from "../../../../../constant/api";
 import { useUser } from "../../../../context/userContext";
+import { ChangeToPersianDate } from "../../../../../utils";
 
 export default function SectionRoom() {
   const { state, dispatch } = useUser();
@@ -52,7 +53,7 @@ export default function SectionRoom() {
 
         <p className="content">{x.title}</p>
 
-        <p className="date">{x.created}</p>
+        <p className="date">{ChangeToPersianDate(x.created) }</p>
       </Paper>
     );
   });
