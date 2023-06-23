@@ -9,6 +9,7 @@ export default function HonestEnvoy({ envoys }) {
   const [searchparams, setsearchparams] = useSearchParams();
   const newList = envoys.sort((a, b) => a.transparency > b.transparency);
 
+
   return (
     <Container>
       <Title>شفاف‌ترین نمایندگان</Title>
@@ -20,7 +21,7 @@ export default function HonestEnvoy({ envoys }) {
             // let name= item.writer + item.description ;
             let name =
               item.first_name + item.last_name + item.electoral_district_name;
-            // console.log(item);
+              console.log('filter',filter)
             return name.includes(filter);
           })
           .map((item, i) => (
