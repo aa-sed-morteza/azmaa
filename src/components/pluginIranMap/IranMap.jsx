@@ -192,7 +192,7 @@ const IranMap = ({ position, empty }) => {
           span {
             left: ${x + 5 + "px"};
             top: ${y + 5 + "px"};
-            z-index: 999;
+            /* z-index: 999; */
           }
         `}</style>
       </span>
