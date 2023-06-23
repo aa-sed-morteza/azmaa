@@ -182,7 +182,7 @@ export default function LogIn() {
             />
           </Box>
         </Form>
-        <Link  to="/forget">
+        <Link  to="/forget" style={{color:'#FFAA00',textDecoration :'none'}} >
         رمز عبور خود را فراموش کرده‌اید؟
         </Link>
 
