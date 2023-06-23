@@ -65,7 +65,7 @@ export default function AddDocument() {
         dispatch({ type: "SET_ADD_ARTICLE", payload: 1 });
         navigate(`/dashboard/mySection`);
         actions.resetForm();
-        toast.success(" بلاگ با موفقیت ثبت شد!", {
+        toast.success(" مطلب با موفقیت ثبت شد!", {
           position: toast.POSITION.TOP_RIGHT,
         });
       })
