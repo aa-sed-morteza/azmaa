@@ -23,7 +23,7 @@ const TopBar = styled.section`
   padding: 20px 30px;
   display: flex;
   justify-content: space-between;
-  z-index: 100;
+  z-index: 1000;
 
   @media (min-width: 481px) {
     justify-content: flex-start;
@@ -301,10 +301,10 @@ export default function Navbar() {
   const [active, setActive] = useState(0);
   const [dashboard, setDashboard] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     setDashboard(true);
-    setOpen(true)
-  },[state.openMenu])
+    setOpen(true);
+  }, [state.openMenu]);
 
   const menuItem = data.navbar.map((x, i) => {
     return (
@@ -370,7 +370,7 @@ export default function Navbar() {
       dispatch({ type: "OPEN_MENU", payload: false });
     } else {
       navigate("/dashboard");
-      setDashboard(true)
+      setDashboard(true);
     }
     setOpen(!open);
     // setDashboard(!dashboard);
@@ -396,12 +396,13 @@ export default function Navbar() {
     setOpen(!open);
   }
 
- 
-
-
   return (
     <TopBar>
-      <Logo onClick={()=>{navigate('/')}}>
+      <Logo
+        onClick={() => {
+          navigate("/");
+        }}
+      >
         <img src={LOGO} alt="logo" />
       </Logo>
 
@@ -420,12 +421,20 @@ export default function Navbar() {
               {state.loggedIn ? "خروج از پنل" : "ورود به پنل"}{" "}
               {/* <div className="icon"></div> */}
             </div>{" "}
-            
           </Panel>
         )}
 
         <Search></Search>
-        {width < 481 ? <Menu onClick={()=>{setOpen(!open)}} open={open}></Menu> : ""}
+        {width < 481 ? (
+          <Menu
+            onClick={() => {
+              setOpen(!open);
+            }}
+            open={open}
+          ></Menu>
+        ) : (
+          ""
+        )}
         {width < 481 ? (
           <MenuList open={open} back={dashboard && state.loggedIn}>
             {dashboard && state.loggedIn ? <Profile /> : ""}

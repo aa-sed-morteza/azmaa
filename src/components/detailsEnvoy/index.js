@@ -14,7 +14,7 @@ import Controller from "../home/components/controller";
 
 export default function DetailsEnvoy() {
   const { title } = useParams();
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   const width = useWidth();
   const [envoys, setEnvoys] = useState([]);
   const [envoy, setEnvoy] = useState({});
@@ -33,7 +33,6 @@ export default function DetailsEnvoy() {
     });
   };
 
-
   useEffect(() => {
     window.scrollTo(0, 0);
     getEnvoys();
@@ -44,19 +43,42 @@ export default function DetailsEnvoy() {
     // console.log("title="+title);
   }, [envoys]);
 
+  console.log(envoy);
 
   return (
     <Container>
       <Title>
-        <p className="home" onClick={()=>{navigate("/envoy")}} > خانه / نمایندگان /</p>
+        <p
+          className="home"
+          onClick={() => {
+            navigate("/envoy");
+          }}
+        >
+          {" "}
+          خانه / نمایندگان /
+        </p>
         <p className="component">
           {" "}
           {envoy && envoy.first_name + " " + envoy.last_name}
         </p>
       </Title>
       {/* personal info */}
+
+      {envoy && width < 420 && (
+        <EnvoyCard
+          name={envoy.first_name + " " + envoy.last_name}
+          state={envoy.electoral_district_name}
+          commission={envoy.fraction_name}
+          img={envoy.image}
+          persantage={envoy.transparency}
+          id={envoy.id}
+          inBox={true}
+          position="sticky"
+        />
+      )}
+
       <FirstSection>
-        {envoy && (
+        {envoy && width > 420 && (
           <EnvoyCard
             name={envoy.first_name + " " + envoy.last_name}
             state={envoy.electoral_district_name}
@@ -65,10 +87,9 @@ export default function DetailsEnvoy() {
             persantage={envoy.transparency}
             id={envoy.id}
             inBox={true}
-            position='sticky'
+            position="sticky"
           />
         )}
-
         <Census data={"?"} complete={"?"} envoy={"?"} />
         <EnvoyArea data={envoy} />
         <EnvoyHistory id={title} />
@@ -79,9 +100,7 @@ export default function DetailsEnvoy() {
         {envoy && <Controller vote_voter={title} />}
       </SecondSection>
       {/* socialNetwork */}
-      <ThirdSection>
-        {/* <SocialNetwork /> */}
-      </ThirdSection>
+      <ThirdSection>{/* <SocialNetwork /> */}</ThirdSection>
     </Container>
   );
 }
@@ -137,9 +156,7 @@ const FirstSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.326vw;
-  & > * {
-    box-shadow: none;
-  }
+
   @media (min-width: 481px) {
     width: 23%;
     padding-right: 10%;
@@ -159,11 +176,11 @@ const SecondSection = styled.div`
   @media (min-width: 481px) {
     width: 65%;
     padding: 0.99vw 1.302vw 0 0;
-    &>* {
-      & .filter-box{
-      margin-top: 0;
+    & > * {
+      & .filter-box {
+        margin-top: 0;
+      }
     }
-  }
   }
 `;
 

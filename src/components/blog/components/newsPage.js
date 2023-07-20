@@ -28,9 +28,9 @@ export default function NewsPage() {
   const [relatedPosts, setRelatedPosts] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  },[title])
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [title]);
 
   const getPosts = () => {
     let config = {
@@ -162,7 +162,14 @@ export default function NewsPage() {
   return (
     <Container>
       <Title>
-        <p className="home" onClick={()=>{navigate("/blog")}} >خانه / بلاگ /</p>
+        <p
+          className="home"
+          onClick={() => {
+            navigate("/blog");
+          }}
+        >
+          خانه / بلاگ /
+        </p>
         <p className="component"> {post && post.title} </p>
       </Title>
       {width < 481 ? (
@@ -185,14 +192,14 @@ export default function NewsPage() {
 
               <Paragraph>{post && post.description}</Paragraph>
               {post.image ? (
-                    <Picture>
-                      <img src={post && post.image} alt="news-cover" />
-                    </Picture>
-                  ) : (
-                    ""
-                  )}
+                <Picture>
+                  <img src={post && post.image} alt="news-cover" />
+                </Picture>
+              ) : (
+                ""
+              )}
 
-                  <Writer icon="user"> نویسنده :  {post.writer}</Writer>
+              <Writer icon="user"> نویسنده : {post.writer}</Writer>
 
               <Feedback>
                 {/* <Button color="#6CBBA9" icon={like}>
@@ -249,7 +256,7 @@ export default function NewsPage() {
                     ""
                   )}
 
-                  <Writer icon="user"> نویسنده :  {post.writer}</Writer>
+                  <Writer icon="user"> نویسنده : {post.writer}</Writer>
 
                   <Feedback>
                     {/* <Button color="#6CBBA9" icon={like}>
@@ -464,8 +471,7 @@ const Type = styled.p`
   }
 `;
 
-const Writer =styled(Type)`
-`
+const Writer = styled(Type)``;
 const Date = styled.p`
   margin: 0;
   font-weight: 700;
@@ -479,7 +485,7 @@ const Date = styled.p`
 const SubTitle = styled.h1`
   margin: 0;
   color: #707070;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 4.651vw;
   line-height: 8.14vw;
   @media (min-width: 481px) {

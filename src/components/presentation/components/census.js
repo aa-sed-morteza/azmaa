@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { toFarsiNumber } from "../../../utils";
 
-export default function Census({total,complete,select}) {
-
-
+export default function Census({ total, votes, registered }) {
   const checkCensus = (num1, num2) => {
     let bgColor;
     if (num2 / num1 > 0.5) {
@@ -17,8 +15,8 @@ export default function Census({total,complete,select}) {
     return (
       <Progress>
         <div className="number">
-          {toFarsiNumber(num1) }
-          <span style={{ color: bgColor }}> /{toFarsiNumber(num2)  }</span>
+          {toFarsiNumber(num1)}
+          <span style={{ color: bgColor }}> /{toFarsiNumber(num2)}</span>
         </div>
         <div className="line">
           <span
@@ -32,14 +30,21 @@ export default function Census({total,complete,select}) {
 
   return (
     <Container>
-      <Title> آمار شفافیت</Title>
+      <Title>آمار آراء</Title>
       <Row>
-        <p className="type">کامل:</p>
-        {checkCensus(total,complete )}
+        <p className="type">حاضران:</p>
+        {/* {checkCensus(total, complete)} */}
+        <span>{toFarsiNumber(total)}</span>
       </Row>
       <Row>
-        <p className="type">گزینشی:</p>
-        {checkCensus(total, select)}
+        <p className="type">آراء مأخوذه:</p>
+        {/* {checkCensus(total, select)} */}
+        <span>{toFarsiNumber(votes)}</span>
+      </Row>
+      <Row>
+        <p className="type">میزان شفافیت آراء:</p>
+        <span>{toFarsiNumber(registered)}</span>
+        {/* {checkCensus(total, select)} */}
       </Row>
     </Container>
   );
@@ -50,16 +55,16 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 0px 29px 20px;
   margin-top: 40px;
-  @media(min-width:481px){
-    padding:0px 20px 0px 10px;
-    margin-top:20px;
+  @media (min-width: 481px) {
+    padding: 0px 20px 0px 10px;
+    margin-top: 20px;
   }
-  @media(min-width:769px){
-    padding:0px 45px 30px 40px;
-    margin-top:40px;
+  @media (min-width: 769px) {
+    padding: 0px 45px 30px 40px;
+    margin-top: 40px;
   }
-  @media(min-width:1200px){
-    margin-top:60px;
+  @media (min-width: 1200px) {
+    margin-top: 60px;
   }
 `;
 
@@ -74,17 +79,17 @@ const Title = styled.h4`
   text-align: center;
   margin-right: -5%;
   white-space: nowrap;
-  @media(min-width:481px){
-    font-size:1.875vw;
+  @media (min-width: 481px) {
+    font-size: 1.875vw;
     transform: translateY(-10px);
     width: 64%;
   }
-  @media(min-width:769px){
-    font-size:1.875vw;
+  @media (min-width: 769px) {
+    font-size: 1.875vw;
     transform: translateY(-14px);
     width: 74%;
   }
-  @media(min-width:1200px){
+  @media (min-width: 1200px) {
     transform: translateY(-31px);
   }
 `;
@@ -94,7 +99,7 @@ const Row = styled.div`
   flex-wrap: wrap;
   margin-bottom: 5px;
   align-items: center;
-  gap:12px;
+  gap: 12px;
   .type {
     color: #9f9f9f;
     font-weight: 400;
@@ -102,9 +107,12 @@ const Row = styled.div`
     margin: 0;
     padding-bottom: 5px;
   }
-  @media(min-width:481px){
-    .type{
-      font-size:1.250vw;
+  span {
+    color: #9f9f9f;
+  }
+  @media (min-width: 481px) {
+    .type {
+      font-size: 1.25vw;
     }
   }
 `;
@@ -129,14 +137,14 @@ const Progress = styled.div`
       right: 0;
     }
   }
-  @media(min-width:481px){
-    .number{
-      font-size:1.250vw;
+  @media (min-width: 481px) {
+    .number {
+      font-size: 1.25vw;
     }
-    .line{
-      height:5px;
-      .show-census{
-        height:5px;
+    .line {
+      height: 5px;
+      .show-census {
+        height: 5px;
       }
     }
   }

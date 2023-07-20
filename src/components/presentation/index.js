@@ -14,7 +14,7 @@ import { BaseBackURL } from "../../constant/api";
 import { convertDateToFarsi } from "../../utils";
 
 export default function Presentation() {
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   const { title } = useParams();
   const [bill, setBill] = useState({});
 
@@ -25,7 +25,7 @@ export default function Presentation() {
     };
     axios(config)
       .then((res) => {
-         console.log(JSON.stringify(res.data));
+        console.log(JSON.stringify(res.data));
         setBill(res.data);
       })
       .catch((error) => {
@@ -37,29 +37,49 @@ export default function Presentation() {
     getBill();
   }, []);
 
+  console.log(bill);
   return (
     <Container>
       <Title>
-        <p className="home" onClick={()=>{navigate("/votes")}} >خانه / رأی‌گیری‌ها  /</p>
+        <p
+          className="home"
+          onClick={() => {
+            navigate("/votes");
+          }}
+        >
+          خانه / رأی‌گیری‌ها /
+        </p>
         <p className="component"> {bill && bill.name} </p>
       </Title>
       <Content>
         {bill.name && (
           <Wraper>
             <Header
-              img={bill.is_approved?symbol:symbol2}
+              img={bill.is_approved ? symbol : symbol2}
               icon={vote}
               type="رای گیری"
               date={bill.date && convertDateToFarsi(bill.date)}
               title={bill.name}
               posi="sticky"
-              
             />
-            <DetailsVotes title={bill.information} fraction={bill.fraction?bill.fraction:""} approved={bill.is_approved &&bill.is_approved} />
+            <DetailsVotes
+              title={bill.information}
+              fraction={bill.fraction ? bill.fraction.name : ""}
+              approved={bill.is_approved && bill.is_approved}
+            />
             <Census
-              total={bill.vote_number.total}
-              complete={"?"}
-              select={"?"}
+              total={
+                bill.real_negative_vote_number +
+                bill.real_none_vote_number +
+                bill.real_positive_vote_number +
+                bill.real_without_vote_number
+              }
+              votes={
+                bill.real_negative_vote_number +
+                bill.real_none_vote_number +
+                bill.real_positive_vote_number
+              }
+              registered={bill.vote_number.total}
             />
             <VotesCensus
               total={bill.vote_number.total}
@@ -73,7 +93,6 @@ export default function Presentation() {
               real_none_vote={bill.real_none_vote_number}
               real_negative_vote={bill.real_negative_vote_number}
               real_positive_vote={bill.real_positive_vote_number}
-
             />
           </Wraper>
         )}
@@ -86,8 +105,8 @@ export default function Presentation() {
 
 const Container = styled.section`
   padding: 10px 20px;
-  @media(min-width:481px){
-    background-color:#ffffff;
+  @media (min-width: 481px) {
+    background-color: #ffffff;
     padding: 25px 0;
   }
 `;

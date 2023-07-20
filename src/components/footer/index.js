@@ -2,13 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import data from "../../data.json";
 import azmma from "../../assets/azma-black.svg";
-import { toFarsiNumber } from "../../utils"
+import { toFarsiNumber } from "../../utils";
 
 const FooterContainer = styled.section`
   background-color: #095644;
   padding: 19px 20px;
- 
-  
+
   @media (min-width: 481px) {
     display: flex;
     justify-content: space-between;
@@ -20,7 +19,7 @@ const FooterContainer = styled.section`
 
 const AboutUs = styled.div`
   display: none;
-  @media(min-width:481px){
+  @media (min-width: 481px) {
     display: flex;
     width: 50%;
     flex-direction: column;
@@ -149,7 +148,7 @@ const Copyright = styled.div`
     white-space: nowrap;
     display: flex;
     align-items: center;
-    gap:5px;
+    gap: 5px;
     span {
       background-image: url(${azmma});
       background-size: contain;
@@ -163,26 +162,30 @@ const Copyright = styled.div`
 export default function Footer() {
   const contactItem = data.footer.map((x, i) => {
     return (
-        <div className="item" key={i}>
-          <div className="content">
-            <a href={x.href}>
-              <span>
-                <img src={x.icon} />
-              </span>
-            </a>
-          </div>
+      <div className="item" key={i}>
+        <div className="content">
+          <a href={x.href}>
+            <span>
+              <img src={x.icon} />
+            </span>
+          </a>
         </div>
+      </div>
     );
   });
 
   return (
-    <div style={{ marginTop: 'auto' }}>
+    <div style={{ marginTop: "auto" }}>
       <FooterContainer>
-        <ContactUs  >{contactItem}</ContactUs>
+        <ContactUs>{contactItem}</ContactUs>
         <AboutUs>
           <h4>کمی در بارۀ ازما:</h4>
           <p>
-            جنبش ازما در آستانه انتخابات یازدهمین دوره مجلس شورای اسلامی با اعتقاد به این که خانه ملت از آن مردم ایران است فعالیت خود را آغاز و با محور قرار دادن سه ارزش شایسته‌گزینی، شفافیت و پاسخگویی به منظور بسط عدالت در عرصه قدرت ابزارها و فرآیندهایی را طراحی و اجرا کرد.         </p>
+            جنبش ازما در آستانه انتخابات یازدهمین دوره مجلس شورای اسلامی با
+            اعتقاد به این که خانه ملت از آن مردم ایران است فعالیت خود را آغاز و
+            با محور قرار دادن سه ارزش شایسته‌گزینی، شفافیت و پاسخگویی به منظور
+            بسط عدالت در عرصه قدرت ابزارها و فرآیندهایی را طراحی و اجرا کرد.{" "}
+          </p>
         </AboutUs>
       </FooterContainer>
       <Copyright>
