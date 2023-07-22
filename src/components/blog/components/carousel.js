@@ -6,7 +6,7 @@ import profile from "../../../assets/profile.webp";
 import note from "../../../assets/text.webp";
 import news from "../../../assets/news.webp";
 import report from "../../../assets/report.webp";
-import article from "../../../assets/report.webp"
+import article from "../../../assets/report.webp";
 import { useNavigate } from "react-router-dom";
 import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
 
@@ -107,8 +107,10 @@ const Content = styled.div`
         display: inline-flex;
         background-image: ${(props) => props.icon == "note" && `url(${note})`};
         background-image: ${(props) => props.icon == "news" && `url(${news})`};
-        background-image: ${(props) => props.icon == "report" && `url(${report})`};
-        background-image: ${(props) => props.icon == "article" && `url(${article})`};
+        background-image: ${(props) =>
+          props.icon == "report" && `url(${report})`};
+        background-image: ${(props) =>
+          props.icon == "article" && `url(${article})`};
         background-size: contain;
         background-repeat: no-repeat;
         width: 30px;
@@ -129,7 +131,7 @@ const Button = styled.div`
   background-color: #095644;
   border-radius: 8px;
   position: relative;
-  padding: 14px 80px 15px 30px;
+  padding: 14px 30px 15px 50px;
   width: fit-content;
   cursor: pointer;
   &:after {
@@ -141,14 +143,13 @@ const Button = styled.div`
     background-repeat: no-repeat;
     width: 9px;
     height: 15px;
-    left: 9%;
+    left: 15%;
     top: 50%;
     transform: translate(0, -50%);
   }
 
   .text-button {
     margin: 0;
-    padding-left: 60px;
     color: #ffffff;
     font-size: 1.25vw;
     font-weight: 700;
@@ -203,9 +204,9 @@ export default function Carousel({ posts }) {
               <div className="identity">
                 <p className="user">
                   {x.type == "note" && "یادداشت"}
-                  {x.type =='news'&& 'خبر'}
-                  {x.type =='report' &&'گزارش'}
-                  {x.type =='article' &&'مقاله'}
+                  {x.type == "news" && "خبر"}
+                  {x.type == "report" && "گزارش"}
+                  {x.type == "article" && "مقاله"}
                 </p>
                 <p className="date">{convertDateToFarsi(x.created)}</p>
               </div>

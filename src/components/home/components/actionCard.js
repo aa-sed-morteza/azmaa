@@ -139,17 +139,18 @@ export default function ActionCard({ activity }) {
 
   return (
     <VCContainer>
-      <CardHeader>
-        <div className="action-logo"></div>
-        <div className="title-card">
-          <p className="title">عملکرد</p>
-          <h2> {activity.name}</h2>
-          <p className="date">
-            {activity.date && convertDateToFarsi(activity.date)}
-          </p>
-        </div>
-      </CardHeader>
-      {/* <Statistics>
+      <StickyPart>
+        <CardHeader>
+          <div className="action-logo"></div>
+          <div className="title-card">
+            <p className="title">عملکرد</p>
+            <h2> {activity.name}</h2>
+            <p className="date">
+              {activity.date && convertDateToFarsi(activity.date)}
+            </p>
+          </div>
+        </CardHeader>
+        {/* <Statistics>
         <Success
           onClick={() => setActive(0)}
           className={active === 0 ? "active" : ""}
@@ -170,10 +171,12 @@ export default function ActionCard({ activity }) {
         </Not>
       </Statistics>
       <EnvoyGallery color={color}>{envoyList}</EnvoyGallery> */}
-      <ActionsCensus
-        total={activity.verified_vote ? activity.verified_vote.length : 0}
-        data={activity}
-      />
+        <ActionsCensus
+          total={activity.verified_vote ? activity.verified_vote.length : 0}
+          data={activity}
+        />
+      </StickyPart>
+
       <ButtonWraper>
         <LargButton>
           <p
@@ -293,6 +296,12 @@ const CardHeader = styled.div`
       }
     }
   }
+`;
+
+const StickyPart = styled.div`
+  position: sticky;
+  top: 0;
+  background-color: white;
 `;
 
 const Statistics = styled.div`
@@ -556,7 +565,7 @@ const ButtonWraper = styled.div`
   display: flex;
   margin-top: 10px;
   justify-content: space-between;
- 
+
   @media (min-width: 481px) {
     border-top: 1px solid #d8d8d8;
     padding-top: 14px;

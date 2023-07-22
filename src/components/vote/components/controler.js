@@ -6,7 +6,6 @@ import { useSearchParams } from "react-router-dom";
 import { renderIntoDocument } from "react-dom/test-utils";
 // import 'font-awesome/css/font-awesome.min.css';
 
-
 const Container = styled.div`
   background-image: url(${background});
   background-size: cover;

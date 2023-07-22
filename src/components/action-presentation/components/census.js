@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { toFarsiNumber } from "../../../utils";
 
-export default function Census({total,complete,select}) {
-  
-
+export default function Census({ total, complete, select }) {
   const checkCensus = (num1, num2) => {
     let bgColor;
     if (num2 / num1 > 0.5) {
@@ -17,8 +15,8 @@ export default function Census({total,complete,select}) {
     return (
       <Progress>
         <div className="number">
-          {toFarsiNumber(num1) }
-          <span style={{ color: bgColor }}> /{toFarsiNumber(num2) }</span>
+          {toFarsiNumber(num1)}
+          <span style={{ color: bgColor }}> از {toFarsiNumber(num2)}</span>
         </div>
         <div className="line">
           <span
@@ -50,9 +48,9 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 0px 29px 20px;
   margin-top: 40px;
-  @media(min-width:480px){
-    padding:0px 45px 30px 40px;
-    margin-top:60px;
+  @media (min-width: 480px) {
+    padding: 0px 45px 30px 40px;
+    margin-top: 60px;
   }
 `;
 
@@ -62,15 +60,15 @@ const Title = styled.h4`
   color: #9f9f9f;
   transform: translateY(-3.721vw);
   background: #ffffff;
-  width: 45%;
+  width: fit-content;
+  padding: 0 15px;
   margin: 0;
   text-align: center;
   margin-right: -5%;
   white-space: nowrap;
-  @media(min-width:480px){
-    font-size:1.875vw;
+  @media (min-width: 480px) {
+    font-size: 1.875vw;
     transform: translateY(-1.615vw);
-    width: 55%;
   }
 `;
 
@@ -79,7 +77,7 @@ const Row = styled.div`
   flex-wrap: wrap;
   margin-bottom: 5px;
   align-items: center;
-  gap:12px;
+  gap: 12px;
   .type {
     color: #9f9f9f;
     font-weight: 400;
@@ -87,9 +85,9 @@ const Row = styled.div`
     margin: 0;
     padding-bottom: 5px;
   }
-  @media(min-width:480px){
-    .type{
-      font-size:1.250vw;
+  @media (min-width: 480px) {
+    .type {
+      font-size: 1.25vw;
     }
   }
 `;
@@ -113,14 +111,14 @@ const Progress = styled.div`
       right: 0;
     }
   }
-  @media(min-width:480px){
-    .number{
-      font-size:1.250vw;
+  @media (min-width: 480px) {
+    .number {
+      font-size: 1.25vw;
     }
-    .line{
-      height:5px;
-      .show-census{
-        height:5px;
+    .line {
+      height: 5px;
+      .show-census {
+        height: 5px;
       }
     }
   }

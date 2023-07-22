@@ -6,11 +6,11 @@ import Filtering from "../vote/components/filtering";
 import Calendar from "./components/calendar";
 import { BaseBackURL } from "../../constant/api";
 import ActionCard from "../home/components/actionCard";
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom";
 import upArrow from "../../assets/arrow.webp";
 
 export default function Actions() {
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   const [selectedFilter, setSelectedFilter] = useState(0);
   const [selectedTag, setSelectedTag] = useState("همه");
   const [activities, setActivities] = useState([]);
@@ -19,8 +19,7 @@ export default function Actions() {
   const [searchparams, setsearchparams] = useSearchParams();
   const [showLimit, setShowLimit] = useState(3);
 
-  const showRef =useRef(null)
-
+  const showRef = useRef(null);
 
   const getActivities = () => {
     let config = {
@@ -42,74 +41,91 @@ export default function Actions() {
 
   useEffect(() => {
     if (activities.filter((item) => item.tag[0].name === selectedTag)) {
-      setFilteredActivities(activities.filter((item) => item.tag[0].name === selectedTag))
+      setFilteredActivities(
+        activities.filter((item) => item.tag[0].name === selectedTag)
+      );
     } else {
-      setActivities(activities)
+      setActivities(activities);
     }
 
-    if (selectedTag == 'همه') {
-      setFilteredActivities(activities)
+    if (selectedTag == "همه") {
+      setFilteredActivities(activities);
     }
   }, [selectedTag]);
 
-  console.log('act',activities)
+  console.log("act", activities);
 
   return (
     <Container>
       <DivTitle>
-        <p className="home" onClick={()=>{navigate("/")}} >خانه / </p>
+        <p
+          className="home"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          خانه /{" "}
+        </p>
         <p className="component"> عملکردها </p>
       </DivTitle>
 
-    
       <Content>
         <Controler selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
-        <Filtering selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
+        <Filtering
+          selectedFilter={selectedFilter}
+          setSelectedFilter={setSelectedFilter}
+        />
         <>
-        <LastActions>
-          <Title> عملکردها</Title>
-          <ActionContainer ref={showRef}>
-            {activities.filter((item) => {
-              let filter = searchparams.get("filter");
-              if (!filter) return true;
-              // let name= item.writer + item.description ;
-              let name = item.name;
-              return name.includes(filter);
-            }).filter((item) => {
-              if (selectedTag === 'همه') return true;
-              let tag = item.tag[0].name;
-              return tag.includes(selectedTag);
-            }).sort((a,b)=>{
+          <LastActions>
+            <Title> عملکردها</Title>
+            <ActionContainer ref={showRef}>
+              {activities
+                .filter((item) => {
+                  let filter = searchparams.get("filter");
+                  if (!filter) return true;
+                  // let name= item.writer + item.description ;
+                  let name = item.name;
+                  return name.includes(filter);
+                })
+                .filter((item) => {
+                  if (selectedTag === "همه") return true;
+                  let tag = item.tag[0].name;
+                  return tag.includes(selectedTag);
+                })
+                .sort((a, b) => {
+                  if (selectedFilter == 1) {
+                    return new Date(b.date) - new Date(a.date);
+                  } else if (selectedFilter == 2) {
+                    return new Date(a.date) - new Date(b.date);
+                  } else if (selectedFilter == 3) {
+                    return a.transparency - b.transparency;
+                  } else {
+                    return 0;
+                  }
+                })
+                .slice(0, showLimit)
+                .map((item, i) => {
+                  return <ActionCard activity={item} key={i} />;
+                })}
+            </ActionContainer>
 
-              if(selectedFilter== 1){
-                return new Date(b.date) - new Date(a.date);
-              }else if (selectedFilter== 2){
-                return new Date(a.date) - new Date(b.date);
-              }else if (selectedFilter== 3){
-                return a.transparency - b.transparency;
-              }else{
-                return 0;
-              }
-            }).slice(0, showLimit).map((item, i) => {
-              return <ActionCard activity={item} key={i} />;
-            })}
-          </ActionContainer>
-          
-          <ShowMore
-          arrow={showLimit >= activities.length}
-          onClick={() => {
-            if (showLimit < activities.length) {
-              setShowLimit(showLimit + 10);
-            } else {
-              setShowLimit(3);
-              showRef.current.scrollIntoView();
-            }
-          }}
-          style={{ marginTop: "20px" }}
-        >
-          <p>{showLimit >= activities.length ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
-        </ShowMore>
-        </LastActions>
+            <ShowMore
+              arrow={showLimit >= activities.length}
+              onClick={() => {
+                if (showLimit < activities.length) {
+                  setShowLimit(showLimit + 10);
+                } else {
+                  setShowLimit(3);
+                  showRef.current.scrollIntoView();
+                }
+              }}
+              style={{ marginTop: "20px" }}
+            >
+              <p>
+                {showLimit >= activities.length ? "نمایش کمتر" : "نمایش بیشتر "}
+              </p>{" "}
+            </ShowMore>
+          </LastActions>
         </>
 
         {/* <Calendar activities={filteredActivities} /> */}
@@ -123,10 +139,10 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   padding: 10px 20px;
-  overflow: hidden;
   @media (min-width: 480px) {
     background-color: #ffffff;
     padding-bottom: 5%;
+    overflow: hidden;
   }
 `;
 const Title = styled.h1`
@@ -155,7 +171,7 @@ const Title = styled.h1`
     &:before {
       content: "";
       display: inline-block;
-      
+
       background-size: cover;
       background-repeat: no-repeat;
       width: 3.073vw;
@@ -211,13 +227,11 @@ const Content = styled.div`
   }
 `;
 const ActionContainer = styled.div`
-
   @media (min-width: 481px) {
     display: flex;
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
-  
   }
   @media (min-width: 769px) {
     justify-content: center;

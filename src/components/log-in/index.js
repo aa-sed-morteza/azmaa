@@ -21,7 +21,7 @@ import useWidth from "../../hook/useWidth";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
-  const width =useWidth();
+  const width = useWidth();
   const navigate = useNavigate();
 
   const onSubmit = (values) => {
@@ -59,7 +59,7 @@ export default function LogIn() {
           }
 
           navigate("/dashboard");
-          dispatch({ type: "OPEN_MENU", payload:true });
+          dispatch({ type: "OPEN_MENU", payload: true });
         } else if (res.data.code === -1) {
           toast.error("نام کاربری یا رمز عبور اشتباه است!", {
             position: toast.POSITION.TOP_RIGHT,
@@ -182,10 +182,9 @@ export default function LogIn() {
             />
           </Box>
         </Form>
-        <Link  to="/forget" style={{color:'#FFAA00',textDecoration :'none'}} >
-        رمز عبور خود را فراموش کرده‌اید؟
+        <Link to="/forget" style={{ color: "#ffaa00", textDecoration: "none" }}>
+          رمز عبور خود را فراموش کرده‌اید؟
         </Link>
-
       </Content>
     </Container>
   );
@@ -234,10 +233,6 @@ const Form = styled.form`
     gap: 1.5vw;
   }
 `;
-
-
-
-
 
 const ErrorText = styled.p`
   color: #fc8181;

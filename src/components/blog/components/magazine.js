@@ -6,7 +6,7 @@ import user from "../../../assets/profile.webp";
 import note from "../../../assets/text.webp";
 import news from "../../../assets/news.webp";
 import report from "../../../assets/report.webp";
-import article from "../../../assets/report.webp"
+import article from "../../../assets/report.webp";
 import data from "../../../data.json";
 import ScrollButton from "../../general/scrollButton";
 import { useNavigate } from "react-router-dom";
@@ -137,7 +137,6 @@ const Paper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
-  cursor: pointer;
   .cover {
     width: 160px;
     height: 120px;
@@ -192,7 +191,7 @@ const Paper = styled.div`
     font-size: 14px;
     font-weight: bold;
     text-decoration: underline;
-    margin-top:auto;
+    margin-top: auto;
     cursor: pointer;
   }
 
@@ -222,7 +221,6 @@ const Paper = styled.div`
       font-size: 1.042vw;
       font-weight: 500;
     }
-   
   }
   @media (min-width: 1200px) {
     padding: 20px 19px 25px 19px;
@@ -252,7 +250,7 @@ const Paper = styled.div`
 `;
 
 const Curtain = styled.div`
-display: none;
+  display: none;
   position: absolute;
   width: 45%;
   height: 100%;
@@ -267,17 +265,11 @@ display: none;
 export default function Magazine({ posts }) {
   const navigate = useNavigate();
 
-  console.log('pos',posts)
+  console.log("pos", posts);
 
   const magPaper = posts.map((x, i) => {
     return (
-      <Paper
-        key={i}
-        icon={x.type}
-        onClick={() => {
-          navigate(`/blog/${x.id}`);
-        }}
-      >
+      <Paper key={i} icon={x.type}>
         <div className="cover">
           <img src={x.main_image} alt={x.date} />
         </div>
@@ -302,7 +294,7 @@ export default function Magazine({ posts }) {
           ادامه مطلب
         </p>
 
-        <p className="date">{convertDateToFarsi(x.created) }</p>
+        <p className="date">{convertDateToFarsi(x.created)}</p>
       </Paper>
     );
   });

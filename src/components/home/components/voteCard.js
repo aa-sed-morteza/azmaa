@@ -40,6 +40,12 @@ const VCContainer = styled.div`
   }
 `;
 
+const StickyPart = styled.div`
+  position: sticky;
+  background: white;
+  top: 0;
+`;
+
 const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -168,7 +174,6 @@ const Success = styled.div`
       width: 100%;
       height: 0.93vw;
       background-color: #6cbba9;
-    
     }
   }
   @media (min-width: 481px) {
@@ -203,7 +208,6 @@ const Faild = styled.div`
     background-image: url(${faild});
     background-size: contain;
     background-repeat: no-repeat;
-  
   }
   &.active,
   &:hover {
@@ -211,10 +215,9 @@ const Faild = styled.div`
     &:after {
       content: "";
       display: inline-flex;
-      width:100%;
+      width: 100%;
       height: 0.93vw;
       background-color: #ffa5a5;
-
     }
   }
   @media (min-width: 481px) {
@@ -223,12 +226,10 @@ const Faild = styled.div`
     &:before {
       width: 2.917vw;
       height: 2.917vw;
-    
     }
     &:after {
       width: 5.208vw !important;
       height: 0.208vw !important;
-   
     }
   }
 `;
@@ -237,7 +238,7 @@ const Not = styled.div`
   color: #d8d8d8;
   font-weight: 300;
   font-size: 4.3vw;
- 
+
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -250,7 +251,6 @@ const Not = styled.div`
     background-image: url(${not});
     background-size: contain;
     background-repeat: no-repeat;
-    
   }
 
   &.active,
@@ -262,7 +262,6 @@ const Not = styled.div`
       width: 100%;
       height: 0.93vw;
       background-color: #d8d8d8;
- 
     }
   }
   @media (min-width: 481px) {
@@ -271,7 +270,6 @@ const Not = styled.div`
     &:before {
       width: 2.917vw;
       height: 2.917vw;
-    
     }
     &:after {
       width: 5.208vw !important;
@@ -296,7 +294,6 @@ const Absentdiv = styled.div`
     background-image: url(${absentimg});
     background-size: contain;
     background-repeat: no-repeat;
-
   }
 
   &.active,
@@ -316,7 +313,6 @@ const Absentdiv = styled.div`
     &:before {
       width: 2.917vw;
       height: 2.917vw;
-    
     }
     &:after {
       width: 5.208vw !important;
@@ -341,7 +337,6 @@ const Nonvote = styled.div`
     background-image: url(${noVote});
     background-size: contain;
     background-repeat: no-repeat;
-
   }
 
   &.active,
@@ -353,7 +348,6 @@ const Nonvote = styled.div`
       width: 100%;
       height: 0.93vw;
       background-color: #d8d8d8;
-  
     }
   }
   @media (min-width: 481px) {
@@ -362,7 +356,6 @@ const Nonvote = styled.div`
     &:before {
       width: 2.917vw;
       height: 2.917vw;
-    
     }
     &:after {
       width: 5.208vw !important;
@@ -428,7 +421,6 @@ const Card = styled.div`
     font-size: 2.32vw;
     font-weight: bold;
     margin: 0;
-    
   }
   @media (min-width: 481px) {
     flex-wrap: wrap;
@@ -438,7 +430,6 @@ const Card = styled.div`
     border-bottom: 1px solid #ffffff;
     min-width: inherit;
     .picture {
-      
       width: 5vw;
       height: 5vw;
       border-radius: 5vw;
@@ -538,10 +529,7 @@ export default function VoteCard({ bill }) {
   const [bColor, setBColor] = useState("#6cbba9");
   const [envoyData, setEnvoyData] = useState(bill.positive_vote);
 
-
   const navigate = useNavigate();
-
-  
 
   const envoyList = envoyData.map((x, i) => {
     return (
@@ -567,11 +555,11 @@ export default function VoteCard({ bill }) {
       SetColor("#EAEAEA");
       setBColor("#d8d8d8");
       setEnvoyData([...bill.without_vote]);
-    }else if (active === 3) {
+    } else if (active === 3) {
       SetColor("#EAEAEA");
       setBColor("#d8d8d8");
       setEnvoyData([...bill.none_vote]);
-    }else if (active === 4) {
+    } else if (active === 4) {
       SetColor("#EAEAEA");
       setBColor("#d8d8d8");
       setEnvoyData([...bill.absent_vote]);
@@ -582,54 +570,57 @@ export default function VoteCard({ bill }) {
     }
   }, [active]);
 
-
   return (
     <VCContainer>
-      <CardHeader>
-        <div className={bill.is_approved?"vote-logo":"vote-logo-reject"}></div>
-        <div className="title-card">
-          <p className="title">رأی‌گیری</p>
-          <h2>{bill.name}</h2>
-          <p className="date">{bill.date && convertDateToFarsi(bill.date)}</p>
-        </div>
-      </CardHeader>
-      <Statistics>
-        <Success
-          onClick={() => setActive(0)}
-          className={active === 0 ? "active" : ""}
-        >
-          {/* {toFarsiNumber(bill.vote_number.positive)} */}
-          موافق
-        </Success>
-        <Faild
-          onClick={() => setActive(1)}
-          className={active === 1 ? "active" : ""}
-        >
-          {/* {toFarsiNumber(bill.vote_number.negative)} */}
-          مخالف
-        </Faild>
-        <Not
-          onClick={() => setActive(2)}
-          className={active === 2 ? "active" : ""}
-        >
-          {/* {toFarsiNumber(bill.vote_number.without_vote)} */}
-          ممتنع
-        </Not>
-        <Nonvote
-          onClick={() => setActive(3)}
-          className={active === 3 ? "active" : ""}
-        >
-          {/* {toFarsiNumber(bill.vote_number.none)} */}
-          بدون رای
-        </Nonvote>
-        <Absentdiv
-          onClick={() => setActive(4)}
-          className={active === 4 ? "active" : ""}
-        >
-          {/* {toFarsiNumber(bill.vote_number.absent)} */}
-          غایب
-        </Absentdiv>
-      </Statistics>
+      <StickyPart>
+        <CardHeader>
+          <div
+            className={bill.is_approved ? "vote-logo" : "vote-logo-reject"}
+          ></div>
+          <div className="title-card">
+            <p className="title">رأی‌گیری</p>
+            <h2>{bill.name}</h2>
+            <p className="date">{bill.date && convertDateToFarsi(bill.date)}</p>
+          </div>
+        </CardHeader>
+        <Statistics>
+          <Success
+            onClick={() => setActive(0)}
+            className={active === 0 ? "active" : ""}
+          >
+            {/* {toFarsiNumber(bill.vote_number.positive)} */}
+            موافق
+          </Success>
+          <Faild
+            onClick={() => setActive(1)}
+            className={active === 1 ? "active" : ""}
+          >
+            {/* {toFarsiNumber(bill.vote_number.negative)} */}
+            مخالف
+          </Faild>
+          <Not
+            onClick={() => setActive(2)}
+            className={active === 2 ? "active" : ""}
+          >
+            {/* {toFarsiNumber(bill.vote_number.without_vote)} */}
+            ممتنع
+          </Not>
+          <Nonvote
+            onClick={() => setActive(3)}
+            className={active === 3 ? "active" : ""}
+          >
+            {/* {toFarsiNumber(bill.vote_number.none)} */}
+            بدون رای
+          </Nonvote>
+          <Absentdiv
+            onClick={() => setActive(4)}
+            className={active === 4 ? "active" : ""}
+          >
+            {/* {toFarsiNumber(bill.vote_number.absent)} */}
+            غایب
+          </Absentdiv>
+        </Statistics>
+      </StickyPart>
 
       <EnvoyGallery color={color}>{envoyList}</EnvoyGallery>
 

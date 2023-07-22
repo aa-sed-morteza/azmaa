@@ -32,9 +32,6 @@ export default function ActionPresentation() {
       });
   };
 
-
-
-
   let positiveAction = [];
   let negativeAction = [];
   let anotherAction = [];
@@ -50,12 +47,19 @@ export default function ActionPresentation() {
     }
   }, []);
 
-  console.log('act',action)
+  console.log("act", action);
 
   return (
     <Container>
       <Title>
-        <p className="home" onClick={()=>{navigate("/actions")}} >خانه / عملکردها /</p>
+        <p
+          className="home"
+          onClick={() => {
+            navigate("/actions");
+          }}
+        >
+          خانه / عملکردها /
+        </p>
         <p className="component">{action && action.name} </p>
       </Title>
       <Content>
@@ -66,13 +70,17 @@ export default function ActionPresentation() {
               icon={action}
               type="عملکرد"
               title={action.name}
-              date={ action.date && convertDateToFarsi(action.date) }
+              date={action.date && convertDateToFarsi(action.date)}
             />
             <DetailsAction title={action.name} />
-            <Census total={action.verified_vote && action.verified_vote.length} complete={"?"} select={"?"} />
+            <Census
+              total={action.verified_vote && action.verified_vote.length}
+              complete={"?"}
+              select={"?"}
+            />
             <ActionsCensus
               total={action.verified_vote && action.verified_vote.length}
-              data={action }
+              data={action}
             />
           </Wraper>
         )}
@@ -84,9 +92,9 @@ export default function ActionPresentation() {
 
 const Container = styled.section`
   padding: 10px 20px;
-  @media(min-width:480px){
-    background-color:#ffffff;
-    padding :25px 0;
+  @media (min-width: 480px) {
+    background-color: #ffffff;
+    padding: 25px 0;
   }
 `;
 
