@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useModal from "../../../../hook/useModal";
-import { useUser } from "../../../context/userContext";
+import { useUser, userContext } from "../../../context/userContext";
 import Modal from "../../../general/modal";
 import ContactInfo from "./contactInfo";
 import LogInInfo from "./logInInfo";
@@ -59,7 +59,9 @@ export default function PersonalInformation() {
           )}
         </Image>
         <Label>
-          <p className="title">ناظر نمایندگان</p>
+          <p className="title">
+            {state.useType === "envoy" ? "نماینده" : "ناظر نمایندگان"}
+          </p>
           <p className="name">{`${state.firstName}   ${state.lastName}`}</p>
           <p className="edit" onClick={toggle}>
             ویرایش تصویر{" "}

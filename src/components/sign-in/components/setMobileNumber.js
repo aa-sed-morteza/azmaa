@@ -94,8 +94,8 @@ export default function SetMobileNumber() {
         // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
         dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
-        Cookies.set('refreshToken', response.data.refresh );
-        Cookies.set('token', response.data.access  );
+        Cookies.set("refreshToken", response.data.refresh);
+        Cookies.set("token", response.data.access);
       })
       .catch((error) => {
         console.log(error);
@@ -220,6 +220,13 @@ export default function SetMobileNumber() {
               type="submit"
             />
           </Box>
+          <Box>
+            <p>
+              پنل کاربری مخصوص شبکه ناظران ازما و نمایندگان مجلس است. در صورتی
+              که در یکی از این دو دسته هستید به شماره{" "}
+              <a href="sms:+989108993662">۰۹۱۰۸۹۹۳۶۶۲</a> پیامک دهید.»
+            </p>
+          </Box>
         </Form>
       ) : (
         <Form onSubmit={checkCode} autoComplete="off">
@@ -243,6 +250,7 @@ export default function SetMobileNumber() {
             // icon={mobile}
             back="#F5F5F5"
             value={password}
+            type="password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
@@ -302,6 +310,16 @@ const Form = styled.form`
     color: #707070;
     max-width: 278px;
     text-align: center;
+  }
+  P {
+    margin: 0;
+    font-weight: 300;
+    font-size: 12px;
+    color: #707070;
+    text-align: center;
+    a {
+      color: #ffaa00;
+    }
   }
   @media (min-width: 480px) {
     width: 20%;
