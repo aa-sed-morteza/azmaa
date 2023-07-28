@@ -3,19 +3,17 @@ import styled from "styled-components";
 import useWidth from "../../../hook/useWidth";
 import arrow from "../../../assets/arrow.webp";
 import EnvoyCard from "../../general/envoyCard";
-import box from "../../../assets/state.svg"
-import { useNavigate } from "react-router-dom";
+import box from "../../../assets/state.svg";
 
 export default function SelectArea(props) {
   const [open, setOpen] = useState(false);
   const width = useWidth();
   const envoys = props.envoys;
-  const navigate=useNavigate();
 
   const envoyGallery = envoys.map((x, i) => {
     return (
       <EnvoyCard
-        name={x.first_name+" "+x.last_name}
+        name={x.first_name + "" + x.last_name}
         key={i}
         state={x.electoral_district_name}
         img={x.image}
@@ -23,7 +21,6 @@ export default function SelectArea(props) {
         persantage={x.transparency}
         id={x.id}
         inBox={true}
-        click={()=>{navigate(`/envoy/${x.id}`)}}
       />
     );
   });
@@ -34,21 +31,18 @@ export default function SelectArea(props) {
     }
   };
 
-  useEffect(()=>{
-    if(width<480){
+  useEffect(() => {
+    if (width < 480) {
       setOpen(true);
     }
-  },[])
+  }, []);
 
   return (
     <Wraper>
       <Container onClick={handdleClick} className={open ? "active" : ""}>
         <h2>{props.area}</h2>
       </Container>
-      {open && 
-      <Details>
-        {envoyGallery}
-        </Details>}
+      {open && <Details>{envoyGallery}</Details>}
     </Wraper>
   );
 }
@@ -59,20 +53,19 @@ const Wraper = styled.div`
   box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.25);
   background-color: #ffffff;
   border-radius: 4px;
-  margin-top:2.326vw;
+  margin-top: 2.326vw;
   cursor: pointer;
   @media (min-width: 481px) {
-    overflow:hidden;
+    overflow: hidden;
     border-radius: 8px;
     width: 32%;
     height: fit-content;
     box-shadow: 0px 0px 30px -5px rgba(0, 0, 0, 0.15);
   }
- 
 `;
 
 const Container = styled.div`
-  padding: 4.651vw 6.512vw ;
+  padding: 4.651vw 6.512vw;
   position: relative;
   &:after {
     content: "";
@@ -101,7 +94,7 @@ const Container = styled.div`
     color: #707070;
     font-weight: 400;
     font-size: 4.651vw;
-    gap:2vw;
+    gap: 2vw;
     &:before {
       content: "";
       display: flex;
@@ -126,33 +119,33 @@ const Container = styled.div`
     &:after {
       display: none;
     }
-    h2{
-      font-size:1.563vw;
-      &:before{
-        width:8.333vw;
-        height:8.333vw;
+    h2 {
+      font-size: 1.563vw;
+      &:before {
+        width: 8.333vw;
+        height: 8.333vw;
       }
     }
   }
-  @media(min-width:769px){
+  @media (min-width: 769px) {
     &:after {
       display: block;
     }
   }
-  @media(min-width:1200px){
+  @media (min-width: 1200px) {
     &:after {
-      left:5%;
+      left: 5%;
     }
   }
 `;
 
 const Details = styled.div`
   background-color: #ffffff;
-  
+
   border-top: 1px solid #f5f5f5;
-  &>*{
-     box-shadow:none;
-     padding:15px;
+  & > * {
+    box-shadow: none;
+    padding: 15px;
     //  width:100%;
   }
 `;

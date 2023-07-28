@@ -182,6 +182,7 @@ const FilterItem = styled.p`
   border-radius: 2px;
   margin: 0;
   padding: 5px 7px;
+  cursor: pointer;
   &.select {
     background-color: #707070;
     color: #ffffff;
@@ -302,6 +303,7 @@ const ShowMore = styled.div`
   display: flex;
   padding: 8px;
   margin-top: 16px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;

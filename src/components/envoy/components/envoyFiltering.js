@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import upArrow from "../../../assets/arrow.webp";
 import BestEnvoy from "../../home/components/bestEnvoy";
@@ -16,8 +16,7 @@ const FilterBox = styled.div`
   border-radius: 4px;
   padding: 8px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  gap: 10px;
 `;
 
 const FilterItem = styled.p`
@@ -39,9 +38,6 @@ const Gallery = styled.div`
   display: flex;
   flex-direction: column;
   // gap:10px;
-  /* & > :nth-of-type(1n + 7) {
-    display: ${(props) => (!props.hide ? "none" : "")};
-  } */
 `;
 
 const ShowMore = styled.div`
@@ -49,20 +45,21 @@ const ShowMore = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 8px;
+  cursor: pointer;
   p {
     margin: auto;
     color: #9f9f9f;
     font-size: 4.65vw;
+    position: relative;
     font-weight: 300;
-    display: flex;
-    align-items: center;
-    gap: 20px;
     &:after {
       content: "";
-      content: "";
-      display: inline-flex;
+      display: flex;
+      position: absolute;
+      left: -25px;
+      top: 50%;
+      transform: translate(0, -50%);
       background-image: url(${upArrow});
-      transform: ${(props) => (props.arrow ? `rotate(180deg)` : "")};
       background-size: cover;
       background-repeat: no-repeat;
       width: 9px;
@@ -91,30 +88,7 @@ const ShowMore = styled.div`
 
 export default function EnvoyFiltering({ envoys }) {
   const [select, setSelect] = useState(1);
-  const [showLimit, setShowLimit] = useState(10);
-  const [searchparams, setsearchparams] = useSearchParams();
-  const [envoyFilter, setEnvoyFilter] = useState([]);
-  const showRef = useRef(null);
-
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (searchparams.get("filter") !== "") {
-      setEnvoyFilter([
-        ...envoys.filter((item) => {
-          let filter = searchparams.get("filter");
-          if (!filter) return true;
-          // let name= item.writer + item.description ;
-          let name =
-            item.first_name + item.last_name + item.electoral_district_name;
-          // console.log(item);
-          return name.includes(filter);
-        }),
-      ]);
-    } else {
-      setEnvoyFilter([...envoys]);
-    }
-  }, [searchparams]);
 
   return (
     <Container>
@@ -154,10 +128,9 @@ export default function EnvoyFiltering({ envoys }) {
       </FilterBox>
 
       <Gallery>
-        <Gallery ref={showRef}>
-          {envoyFilter.slice(0, showLimit).map((item, i) => (
+        <Gallery>
+          {envoys.map((item) => (
             <BestEnvoy
-              key={i}
               envoy={item}
               click={() => {
                 navigate(`/envoy/${item.id}`);
@@ -165,19 +138,8 @@ export default function EnvoyFiltering({ envoys }) {
             />
           ))}
         </Gallery>
-        <ShowMore
-          arrow={showLimit >= envoyFilter.length}
-          onClick={() => {
-            if (showLimit < envoyFilter.length) {
-              setShowLimit(showLimit + 10);
-            } else {
-              setShowLimit(10);
-              showRef.current.scrollIntoView();
-            }
-          }}
-          style={{ marginTop: "20px" }}
-        >
-          <p>{showLimit >= envoyFilter.length ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
+        <ShowMore>
+          <p>نمایش بیشتر</p>{" "}
         </ShowMore>
       </Gallery>
     </Container>

@@ -3,15 +3,11 @@ import styled from "styled-components";
 import mag from "../../../assets/mag.webp";
 import leftArrow from "../../../assets/leftArrow.webp";
 import user from "../../../assets/profile.webp";
-import note from "../../../assets/text.webp";
-import news from "../../../assets/news.webp";
-import report from "../../../assets/report.webp";
-import article from "../../../assets/report.webp";
 import ScrollButton from "../../general/scrollButton";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { useNavigate } from "react-router-dom";
-import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
+import { toFarsiNumber } from "../../../utils";
 
 const MagazineContainer = styled.section`
   background-color: #ffaa00;
@@ -20,7 +16,6 @@ const MagazineContainer = styled.section`
   margin-right: -20px;
   margin-left: -20px;
   display: flex;
-  flex-wrap: wrap;
   position: relative;
   @media (min-width: 481px) {
     padding: 20px;
@@ -28,33 +23,29 @@ const MagazineContainer = styled.section`
   }
   @media (min-width: 769px) {
     padding: 36px 0 50px;
-    flex-wrap: nowrap;
   }
 `;
 
 const Ttitle = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  margin-right: 10px;
+  max-width: 100px;
+  margin-right: 40px;
   position: relative;
-  padding-left: 20px;
   span {
     background-image: url(${mag});
     background-size: contain;
     background-repeat: no-repeat;
-    width: 20px;
-    height: 20px;
+    width: 64px;
+    height: 64px;
   }
   h1 {
-    width: 100%;
     color: #095644;
-    font-size: 4vw;
-    white-space: nowrap;
+    font-size: 4.65vw;
     font-weight: 300;
-    text-align: right;
-    margin-right: 10px;
+    text-align: center;
   }
   &:after {
     content: "";
@@ -65,21 +56,18 @@ const Ttitle = styled.div`
     background-repeat: no-repeat;
     width: 5px;
     height: 10px;
-    left: 5px;
+    left: -8px;
   }
 
   @media (min-width: 481px) {
-    width: 30%;
     margin-right: 5%;
     max-width: 150px;
     padding-left: 7%;
-    flex-direction: column;
     span {
       width: 50px;
       height: 50px;
     }
     h1 {
-      width: fit-content;
       font-size: 1.875vw;
       white-space: nowrap;
     }
@@ -92,10 +80,8 @@ const Ttitle = styled.div`
     }
   }
   @media (min-width: 769px) {
-    width: 30%;
-    margin-right: 8%;
-    /* max-width: 200px; */
-    flex-direction: column;
+    margin-right: 12%;
+    max-width: 200px;
     span {
       width: 97px;
       height: 97px;
@@ -116,16 +102,13 @@ const Wraper = styled.div`
   display: flex;
   overflow-x: scroll;
   gap: 10px;
-  width: 100%;
-  margin-right: 12px;
-  /* // padding-right: 50px; */
+  // padding-right: 50px;
   scroll-behavior: smooth;
   ::-webkit-scrollbar {
     display: none;
   }
   @media (min-width: 481px) {
     // padding-right: 90px;
-    flex-grow: 1;
     gap: 28px;
   }
 `;
@@ -167,20 +150,15 @@ const Paper = styled.div`
     color: #707070;
     font-weight: 300;
     font-size: 3.72vw;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 7px;
-    margin-bottom: 10px;
     &:before {
       content: "";
       display: inline-flex;
-      background-image: ${(props) => props.icon == "note" && `url(${note})`};
-      background-image: ${(props) => props.icon == "news" && `url(${news})`};
-      background-image: ${(props) =>
-        props.icon == "report" && `url(${report})`};
-      background-image: ${(props) =>
-        props.icon == "article" && `url(${article})`};
-      background-size: contain;
+      background-image: url(${user});
+      background-size: cover;
       background-repeat: no-repeat;
       width: 15px;
       height: 15px;
@@ -199,13 +177,6 @@ const Paper = styled.div`
     font-size: 3.25vw;
     font-weight: bold;
     margin: 0;
-  }
-
-  .ReadMore {
-    color: #fab732;
-    font-size: 14px;
-    font-weight: bold;
-    text-decoration: underline;
   }
 
   @media (min-width: 481px) {
@@ -244,8 +215,8 @@ const Paper = styled.div`
     }
     .user {
       font-size: 1.042vw;
-      margin-bottom: 2.344vw;
-
+      margin-bottom: 36px;
+      padding-right: 30px;
       &:before {
         width: 20px;
         height: 20px;
@@ -253,7 +224,7 @@ const Paper = styled.div`
     }
     .content {
       font-size: 1.25vw;
-      margin-bottom: 2.344vw;
+      margin-bottom: 36px;
     }
     .date {
       font-size: 1.042vw;
@@ -266,8 +237,6 @@ export default function Magazine() {
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
 
-  console.log('blog',blogs)
-
   const getBlogs = () => {
     let config = {
       method: "get",
@@ -276,7 +245,7 @@ export default function Magazine() {
 
     axios(config)
       .then(function (response) {
-        // console.log(JSON.stringify(response.data));
+        console.log(JSON.stringify(response.data));
         setBlogs([...response.data]);
       })
       .catch(function (error) {
@@ -291,9 +260,8 @@ export default function Magazine() {
   const magPaper = blogs.map((x, i) => {
     return (
       <Paper
-        icon={x.type}
         onClick={() => {
-          navigate(`/blog/${x.id}`);
+          navigate(`${x.id}`);
         }}
         key={i}
       >
@@ -301,29 +269,11 @@ export default function Magazine() {
           <img src={x.main_image} alt={x.date} />
         </div>
 
-        {/* <p className="user">{x.writer}</p> */}
-
-        <p className="user">
-          {x.type == "note" && "یادداشت"}
-          {x.type == "news" && "خبر"}
-          {x.type == "report" && "گزارش"}
-          {x.type == "article" && "مقاله"}
-        </p>
+        <p className="user">{toFarsiNumber(x.writer)}</p>
 
         <p className="content">{x.title}</p>
 
-        <p className="content">{x.description.slice(0, 100) + " ..."}</p>
-
-        <p
-          className="ReadMore"
-          onClick={() => {
-            navigate(`/blog/${x.id}`);
-          }}
-        >
-          ادامه مطلب
-        </p>
-
-        <p className="date">{x.created && convertDateToFarsi(x.created)}</p>
+        <p className="date">{x.created}</p>
       </Paper>
     );
   });
@@ -332,13 +282,13 @@ export default function Magazine() {
     <MagazineContainer>
       <Ttitle>
         <span></span>
-        <h1>یادداشت ها</h1>
+        <h1> پیشنهاد سردبیر</h1>
       </Ttitle>
       <Wraper id="magazine">
         {magPaper}
         <ScrollButton container="magazine" />
       </Wraper>
-      {/* <Curtain></Curtain> */}
+      <Curtain></Curtain>
     </MagazineContainer>
   );
 }

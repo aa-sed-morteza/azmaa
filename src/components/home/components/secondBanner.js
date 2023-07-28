@@ -22,6 +22,7 @@ const BannerContainer = styled.div`
   width: 100%;
   height: auto;
   margin-top: 30px;
+  cursor: pointer;
   img {
     width: 100%;
     height: auto;

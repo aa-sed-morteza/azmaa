@@ -8,7 +8,7 @@ import news from "../../../assets/news.webp";
 import report from "../../../assets/report.webp";
 import article from "../../../assets/report.webp";
 import { useNavigate } from "react-router-dom";
-import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
+import { toFarsiNumber } from "../../../utils";
 
 const Container = styled.section`
   overflow: hidden;
@@ -18,6 +18,7 @@ const Container = styled.section`
   margin: 0;
   position: relative;
   padding-bottom: 82px;
+  height: 100vh;
 `;
 
 const ShowIndex = styled.div`
@@ -31,6 +32,7 @@ const ShowIndex = styled.div`
     height: 15px;
     border-radius: 15px;
     background-color: #cbcbcb;
+    cursor: pointer;
   }
   .active {
     background-color: #ffaa00;
@@ -46,6 +48,8 @@ const Slide = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2.6vw;
+  transition: all 0.7s ease-in-out;
+  height: 100%;
 `;
 const PicWraper = styled.div`
   width: 116%;
@@ -180,6 +184,9 @@ export default function Carousel({ posts }) {
   const index = items.map((x, i) => {
     return (
       <div
+        onClick={() => {
+          setCurrentIndex(i);
+        }}
         key={i}
         className={i === currentIndex ? "item active" : "item"}
       ></div>
@@ -202,13 +209,8 @@ export default function Carousel({ posts }) {
               <h1 className="title">{x.title.slice(0, 50) + "..."}</h1>
               <p className="text">{x.description.slice(0, 250) + "..."} </p>
               <div className="identity">
-                <p className="user">
-                  {x.type == "note" && "یادداشت"}
-                  {x.type == "news" && "خبر"}
-                  {x.type == "report" && "گزارش"}
-                  {x.type == "article" && "مقاله"}
-                </p>
-                <p className="date">{convertDateToFarsi(x.created)}</p>
+                <p className="user">{toFarsiNumber(x.writer)}</p>
+                <p className="date">{x.created}</p>
               </div>
               <Button
                 onClick={() => {

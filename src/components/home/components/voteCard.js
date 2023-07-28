@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import symbol from "../../../assets/vote-logo.webp";
-import symbol2 from "../../../assets/vote-logo-reject.webp";
 import vote from "../../../assets/vote.webp";
 import success from "../../../assets/success.webp";
 import faild from "../../../assets/faild.webp";
 import not from "../../../assets/not.webp";
-import absentimg from "../../../assets/absent.webp";
-import noVote from "../../../assets/noVote.webp";
 import data from "../../../data.json";
 import left from ".././../../assets/left.webp";
 import { useNavigate } from "react-router-dom";
 import ShareButton from "../../general/shareButton";
-import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
+import { toFarsiNumber } from "../../../utils";
 
 const VCContainer = styled.div`
   background-color: #ffffff;
@@ -40,28 +37,11 @@ const VCContainer = styled.div`
   }
 `;
 
-const StickyPart = styled.div`
-  position: sticky;
-  background: white;
-  top: 0;
-`;
-
 const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
   & > .vote-logo {
     background-image: url(${symbol});
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 20.698vw;
-    height: 17.674vw;
-    @media (min-width: 481px) {
-      width: 6.771vw;
-      height: 6.771vw;
-    }
-  }
-  & > .vote-logo-reject {
-    background-image: url(${symbol2});
     background-size: contain;
     background-repeat: no-repeat;
     width: 20.698vw;
@@ -134,59 +114,65 @@ const CardHeader = styled.div`
 
 const Statistics = styled.div`
   display: flex;
-  /* gap: 70px; */
-  /* padding-right: 50px; */
-  justify-content: space-between;
-  align-items: flex-start;
+  gap: 70px;
+  padding-right: 50px;
   padding-top: 20px;
   border-top: 1px solid #d8d8d8;
   margin-top: 17px;
-  /* padding-bottom: 13px; */
+  justify-content: center;
+  padding-bottom: 13px;
   @media (min-width: 481px) {
-    /* gap: 4.688vw; */
+    gap: 4.688vw;
   }
 `;
 
 const Success = styled.div`
   color: #6cbba9;
   font-weight: 300;
-  font-size: 4.3vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
+  font-size: 5.58vw;
+  position: relative;
   cursor: pointer;
   &:before {
     content: "";
-    display: inline-flex;
+    display: block;
+    position: absolute;
     width: 9.535vw;
     height: 9.535vw;
     background-image: url(${success});
     background-size: contain;
     background-repeat: no-repeat;
+    right: -11.628vw;
+    top: -1.395vw;
   }
   &.active,
   &:hover {
     font-weight: bold;
     &:after {
       content: "";
-      display: inline-flex;
-      width: 100%;
+      display: block;
+      position: absolute;
+      width: 18.605vw;
       height: 0.93vw;
       background-color: #6cbba9;
+      bottom: -3.023vw;
+      right: -11.628vw;
     }
   }
   @media (min-width: 481px) {
     font-size: 1.458vw;
     font-weight: 400;
-    /* padding-bottom: 10px; */
+    padding-bottom: 10px;
     &:before {
       width: 2.917vw;
       height: 2.917vw;
+      right: -3.385vw;
+      top: -0.26vw;
     }
     &:after {
       width: 5.208vw !important;
+      bottom: -0.7vh !important;
       height: 0.208vw !important;
+      right: -3.031vw !important;
     }
   }
 `;
@@ -194,42 +180,50 @@ const Success = styled.div`
 const Faild = styled.div`
   color: #ffa5a5;
   font-weight: 300;
-  font-size: 4.3vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
+  font-size: 5.58vw;
+  position: relative;
   cursor: pointer;
   &:before {
     content: "";
-    display: inline-flex;
+    display: block;
+    position: absolute;
     width: 9.535vw;
     height: 9.535vw;
     background-image: url(${faild});
     background-size: contain;
     background-repeat: no-repeat;
+    right: -11.628vw;
+    top: -1.395vw;
   }
   &.active,
   &:hover {
     font-weight: bold;
     &:after {
       content: "";
-      display: inline-flex;
-      width: 100%;
+      display: block;
+      position: absolute;
+      width: 18.605vw;
       height: 0.93vw;
       background-color: #ffa5a5;
+      bottom: -3.023vw;
+      right: -11.628vw;
     }
   }
   @media (min-width: 481px) {
     font-size: 1.458vw;
     font-weight: 400;
+    padding-bottom: 10px;
     &:before {
       width: 2.917vw;
       height: 2.917vw;
+      right: -3.385vw;
+      top: -0.26vw;
     }
     &:after {
       width: 5.208vw !important;
+      bottom: -0.7vh !important;
       height: 0.208vw !important;
+      right: -3.031vw !important;
     }
   }
 `;
@@ -237,20 +231,20 @@ const Faild = styled.div`
 const Not = styled.div`
   color: #d8d8d8;
   font-weight: 300;
-  font-size: 4.3vw;
-
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  font-size: 5.58vw;
+  position: relative;
   cursor: pointer;
   &:before {
     content: "";
-    display: inline-flex;
+    display: block;
+    position: absolute;
     width: 9.535vw;
     height: 9.535vw;
     background-image: url(${not});
     background-size: contain;
     background-repeat: no-repeat;
+    bottom: -3.023vw;
+    right: -11.628vw;
   }
 
   &.active,
@@ -258,108 +252,30 @@ const Not = styled.div`
     font-weight: bold;
     &:after {
       content: "";
-      display: inline-flex;
-      width: 100%;
-      height: 0.93vw;
-      background-color: #d8d8d8;
-    }
-  }
-  @media (min-width: 481px) {
-    font-size: 1.458vw;
-    font-weight: 400;
-    &:before {
-      width: 2.917vw;
-      height: 2.917vw;
-    }
-    &:after {
-      width: 5.208vw !important;
-      height: 0.208vw !important;
-    }
-  }
-`;
-
-const Absentdiv = styled.div`
-  color: #d8d8d8;
-  font-weight: 300;
-  font-size: 4.3vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  &:before {
-    content: "";
-    display: inline-flex;
-    width: 9.535vw;
-    height: 9.535vw;
-    background-image: url(${absentimg});
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-
-  &.active,
-  &:hover {
-    font-weight: bold;
-    &:after {
-      content: "";
-      display: inline-flex;
+      display: block;
+      position: absolute;
       width: 18.605vw;
       height: 0.93vw;
       background-color: #d8d8d8;
+      bottom: -3.023vw;
+      right: -11.628vw;
     }
   }
   @media (min-width: 481px) {
     font-size: 1.458vw;
     font-weight: 400;
+    padding-bottom: 10px;
     &:before {
       width: 2.917vw;
       height: 2.917vw;
+      right: -3.385vw;
+      top: -0.26vw;
     }
     &:after {
       width: 5.208vw !important;
+      bottom: -0.7vh !important;
       height: 0.208vw !important;
-    }
-  }
-`;
-
-const Nonvote = styled.div`
-  color: #d8d8d8;
-  font-weight: 300;
-  font-size: 4.3vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  &:before {
-    content: "";
-    display: inline-flex;
-    width: 9.535vw;
-    height: 9.535vw;
-    background-image: url(${noVote});
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-
-  &.active,
-  &:hover {
-    font-weight: bold;
-    &:after {
-      content: "";
-      display: inline-flex;
-      width: 100%;
-      height: 0.93vw;
-      background-color: #d8d8d8;
-    }
-  }
-  @media (min-width: 481px) {
-    font-size: 1.458vw;
-    font-weight: 400;
-    &:before {
-      width: 2.917vw;
-      height: 2.917vw;
-    }
-    &:after {
-      width: 5.208vw !important;
-      height: 0.208vw !important;
+      right: -3.031vw !important;
     }
   }
 `;
@@ -388,7 +304,7 @@ const EnvoyGallery = styled.div`
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   padding: 4px;
   min-width: 20.93vw;
@@ -399,7 +315,7 @@ const Card = styled.div`
     border-radius: 10.93vw;
     margin-bottom: 10px;
     border: 3px solid ${(props) => props.color};
-    background: #ffffff;
+    background-color: #fff;
     img {
       width: 100%;
       height: 100%;
@@ -470,6 +386,8 @@ const LargButton = styled.div`
   display: flex;
   padding: 5px;
   cursor: pointer;
+  margin-right: 10px;
+
   .content {
     margin: 0 auto;
     font-size: 4.65vw;
@@ -555,14 +473,6 @@ export default function VoteCard({ bill }) {
       SetColor("#EAEAEA");
       setBColor("#d8d8d8");
       setEnvoyData([...bill.without_vote]);
-    } else if (active === 3) {
-      SetColor("#EAEAEA");
-      setBColor("#d8d8d8");
-      setEnvoyData([...bill.none_vote]);
-    } else if (active === 4) {
-      SetColor("#EAEAEA");
-      setBColor("#d8d8d8");
-      setEnvoyData([...bill.absent_vote]);
     } else if (active === 0) {
       SetColor("#DFF5F0");
       setBColor("#6cbba9");
@@ -572,67 +482,46 @@ export default function VoteCard({ bill }) {
 
   return (
     <VCContainer>
-      <StickyPart>
-        <CardHeader>
-          <div
-            className={bill.is_approved ? "vote-logo" : "vote-logo-reject"}
-          ></div>
-          <div className="title-card">
-            <p className="title">رأی‌گیری</p>
-            <h2>{bill.name}</h2>
-            <p className="date">{bill.date && convertDateToFarsi(bill.date)}</p>
-          </div>
-        </CardHeader>
-        <Statistics>
-          <Success
-            onClick={() => setActive(0)}
-            className={active === 0 ? "active" : ""}
-          >
-            {/* {toFarsiNumber(bill.vote_number.positive)} */}
-            موافق
-          </Success>
-          <Faild
-            onClick={() => setActive(1)}
-            className={active === 1 ? "active" : ""}
-          >
-            {/* {toFarsiNumber(bill.vote_number.negative)} */}
-            مخالف
-          </Faild>
-          <Not
-            onClick={() => setActive(2)}
-            className={active === 2 ? "active" : ""}
-          >
-            {/* {toFarsiNumber(bill.vote_number.without_vote)} */}
-            ممتنع
-          </Not>
-          <Nonvote
-            onClick={() => setActive(3)}
-            className={active === 3 ? "active" : ""}
-          >
-            {/* {toFarsiNumber(bill.vote_number.none)} */}
-            بدون رای
-          </Nonvote>
-          <Absentdiv
-            onClick={() => setActive(4)}
-            className={active === 4 ? "active" : ""}
-          >
-            {/* {toFarsiNumber(bill.vote_number.absent)} */}
-            غایب
-          </Absentdiv>
-        </Statistics>
-      </StickyPart>
+      <CardHeader>
+        <div className="vote-logo"></div>
+        <div className="title-card">
+          <p className="title">رأی‌گیری</p>
+          <h2>{bill.name}</h2>
+          <p className="date">{bill.date}</p>
+        </div>
+      </CardHeader>
+      <Statistics>
+        <Success
+          onClick={() => setActive(0)}
+          className={active === 0 ? "active" : ""}
+        >
+          {toFarsiNumber(bill.vote_number.positive)}
+        </Success>
+        <Faild
+          onClick={() => setActive(1)}
+          className={active === 1 ? "active" : ""}
+        >
+          {toFarsiNumber(bill.vote_number.negative)}
+        </Faild>
+        <Not
+          onClick={() => setActive(2)}
+          className={active === 2 ? "active" : ""}
+        >
+          {toFarsiNumber(bill.vote_number.without_vote)}
+        </Not>
+      </Statistics>
 
       <EnvoyGallery color={color}>{envoyList}</EnvoyGallery>
 
       <ButtonWraper>
         <LargButton
           onClick={() => {
-            navigate(`/presentation/${bill.id}`);
+            navigate(`presentation/${"کلیات لایحۀ بودجۀ سال ۱۴۰۱"}`);
           }}
         >
           <p className="content">جزئیات</p>
         </LargButton>
-        <ShareButton text={bill.information} title={bill.name} />
+        <ShareButton text="کلیات لایحۀ بودجۀ سال ۱۴۰۱" title="رای گیری" />
       </ButtonWraper>
     </VCContainer>
   );

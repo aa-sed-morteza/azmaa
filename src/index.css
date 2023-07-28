@@ -1,147 +1,68 @@
-/**
-*
-*	Name:			IRANYekan Font
-*	Version:			3.3
-*	Author:			Moslem Ebrahimi (moslemebrahimi.com)
-*	Created on:		Sep 17, 2020
-*	Updated on:		Sep 17, 2020
-*	Website:			http://fontiran.com
-*	Copyright:		Commercial/Proprietary Software
---------------------------------------------------------------------------------------
-فونت ایران یکان یک نرم افزار مالکیتی محسوب می شود. جهت آگاهی از قوانین استفاده از این فونت ها لطفا به وب سایت (فونت ایران دات کام) مراجعه نمایید
---------------------------------------------------------------------------------------
-IRANYekan fonts are considered a proprietary software. To gain information about the laws regarding the use of these fonts, please visit www.fontiran.com 
---------------------------------------------------------------------------------------
-This set of fonts are used in this project under the license: (.....)
---------------------------------------------------------------------------------------
-*	
-**/
+/* Fonts
 @font-face {
-	font-family: iranyekan;
-	font-style: normal;
-	font-weight: bold;
-	src: url('./assets/fonts/eot/IRANYekanWebBold.eot');
-	src: url('./assets/fonts/eot/IRANYekanWebBold.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-		 url('./assets/fonts/woff/IRANYekanWebBold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-		 url('./assets/fonts/woff2/IRANYekanWebBold.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-		 url('./assets/fonts/ttf/IRANYekanWebBold.ttf') format('truetype');
-    
+  font-family: YekanBakh;
+  src: url("./assets/Fonts/Yekan-Bakh-EN-05-Medium.woff");
+  font-weight: 500;
 }
 
 @font-face {
-	font-family: iranyekan;
-	font-style: normal;
-	font-weight: 100;
-	src: url('./assets/fonts/eot/IRANYekanWebThin.eot');
-	src: url('./assets/fonts/eot/IRANYekanWebThin.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-		 url('./assets/fonts/woff/IRANYekanWebThin.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-		 url('./assets/fonts/woff2/IRANYekanWebThin.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-		 url('./assets/fonts/ttf/IRANYekanWebThin.ttf') format('truetype');
+  font-family: YekanBakh;
+  src: url("./assets/Fonts/Yekan-Bakh-EN-03-Light.woff");
+  font-weight: 300;
 }
 
 @font-face {
-	font-family: iranyekan;
-	font-style: normal;
-	font-weight: 300;
-	src: url('./assets/fonts/eot/IRANYekanWebLight.eot');
-	src: url('./assets/fonts/eot/IRANYekanWebLight.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-		 url('./assets/fonts/woff/IRANYekanWebLight.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-		 url('./assets/fonts/woff2/IRANYekanWebLight.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-		 url('./assets/fonts/ttf/IRANYekanWebLight.ttf') format('truetype');
-}
+  font-family: YekanBakh;
+  src: url("./assets/Fonts/Yekan-Bakh-EN-01-Hairline.woff");
+  font-weight: 100;
+} */
 
 @font-face {
-	font-family: iranyekan;
-	font-style: normal;
-	font-weight: normal;
-	src: url('./assets/fonts/eot/IRANYekanWebRegular.eot');
-	src: url('./assets/fonts/eot/IRANYekanWebRegular.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-		 url('./assets/fonts/woff/IRANYekanWebRegular.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-		 url('./assets/fonts/woff2/IRANYekanWebRegular.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
-		 url('./assets/fonts/ttf/IRANYekanWebRegular.ttf') format('truetype');
+  font-family: YekanBakh;
+  src: url("./assets/Fonts/Yekan.eot");
+  src: url("./assets/Fonts/Yekan.eot?#iefix") format("embedded-opentype"),
+    url("./assets/Fonts/Yekan.woff2") format("woff2"),
+    url("./assets/Fonts/Yekan.woff") format("woff"),
+    url("./assets/Fonts/Yekan.ttf") format("truetype"),
+    url("./assets/Fonts/Yekan.svg#Yekan") format("svg");
+  font-weight: normal;
+  font-style: normal;
 }
 
-@font-face {
-	font-family: iranyekan;
-	font-style: normal;
-	font-weight: 500;
-	src: url('./assets/fonts/eot/IRANYekanWebMedium.eot');
-	src: url('./assets/fonts/eot/IRANYekanWebMedium.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-		 url('./assets/fonts/woff/IRANYekanWebMedium.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-		 url('./assets/fonts/woff2/IRANYekanWebMedium.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-		 url('./assets/fonts/ttf/IRANYekanWebMedium.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: iranyekan;
-	font-style: normal;
-	font-weight: 800;
-	src: url('./assets/fonts/eot/IRANYekanWebExtraBold.eot');
-	src: url('./assets/fonts/eot/IRANYekanWebExtraBold.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-		 url('./assets/fonts/woff/IRANYekanWebExtraBold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-		 url('./assets/fonts/woff2/IRANYekanWebExtraBold.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-		 url('./assets/fonts/ttf/IRANYekanWebExtraBold.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: iranyekan;
-	font-style: normal;
-	font-weight: 850;
-	src: url('./assets/fonts/eot/IRANYekanWebBlack.eot');
-	src: url('./assets/fonts/eot/IRANYekanWebBlack.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-		 url('./assets/fonts/woff/IRANYekanWebBlack.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-		 url('./assets/fonts/woff2/IRANYekanWebBlack.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-		 url('./assets/fonts/ttf/IRANYekanWebBlack.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: iranyekan;
-	font-style: normal;
-	font-weight: 900;
-	src: url('./assets/fonts/eot/IRANYekanWebExtraBlack.eot');
-	src: url('./assets/fonts/eot/IRANYekanWebExtraBlack.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-		 url('./assets/fonts/woff/IRANYekanWebExtraBlack.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-		 url('./assets/fonts/woff2/IRANYekanWebExtraBlack.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-		 url('./assets/fonts/ttf/IRANYekanWebExtraBlack.ttf') format('truetype');
-    
-}
-
+/* @font-face {
+  font-family: Digital-7;
+  src:url('./assets/Fonts/Digital-7.ttf.woff') format('woff'),
+      url('./assets/Fonts/Digital-7.ttf.svg#Digital-7') format('svg'),
+      url('./assets/Fonts/Digital-7.ttf.eot'),
+      url('./assets/Fonts/Digital-7.ttf.eot?#iefix') format('embedded-opentype'); 
+  font-weight: normal;
+  font-style: normal;
+} */
 
 body {
   background-color: #f3f3f3;
   margin: 0;
-  font-family: iranyekan, Digital-7, BlinkMacSystemFont, FontAwesome, "Roboto",
+  font-family: YekanBakh, Digital-7, BlinkMacSystemFont, "Segoe UI", "Roboto",
     "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: iranyekan, source-code-pro, Menlo, Monaco, Consolas,
-  FontAwesome,"Courier New", monospace;
+input {
+  font-family: YekanBakh, Digital-7, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6,p,input, textarea,button {
-	font-family: iranyekan !important;
+code {
+  font-family: YekanBakh, source-code-pro, Menlo, Monaco, Consolas,
+    "Courier New", monospace;
 }
 
 .App {
   display: flex;
   flex-direction: column;
-  /* overflow-x: hidden; */
-  min-height: 100vh;
-  /* height: 100vh; */
 }
-
-.Toastify__toast-theme--light{
-	@media screen and (max-width: 481px) {
-		width:80%;
-	}
-}
-
-.Toastify__toast-body > div:last-child {
-	font-family:iranyekan, source-code-pro, Menlo, Monaco, Consolas;
-	direction: rtl;
-	font-size: 0.875rem !important;
-  }

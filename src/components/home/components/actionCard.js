@@ -11,146 +11,69 @@ import { useNavigate } from "react-router-dom";
 import ShareButton from "../../general/shareButton.js";
 import { BaseBackURL } from "../../../constant/api";
 import axios from "axios";
-import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
-import ActionsCensus from "../../action-presentation/components/actionCensus";
+import { toFarsiNumber } from "../../../utils";
 
 export default function ActionCard({ activity }) {
   const [active, setActive] = useState(0);
   const [color, SetColor] = useState("#DFF5F0");
   const [bColor, setBColor] = useState("#6cbba9");
-  const [votes, setVotes] = useState([]);
+  const [votes, setVotes] = useState(activity.vote);
   const envoyData = data.envoy;
   const navigate = useNavigate();
 
-  let name_of_choice = [];
-  let number_of_each_choice = [];
-  let number_of_choice = 0;
-  for (const choice of activity.activity_choice) {
-    // console.log(activity.activity_choice[choice].name);
-    number_of_each_choice.push([0]);
-    name_of_choice.push(choice.name);
-    number_of_choice++;
-  }
-  // console.log(number_of_each_choice);
-  // console.log(name_of_choice);
+  const envoyList = votes.map((x, i) => {
+    return (
+      <Card key={i} color={bColor}>
+        <div className="picture">
+          <img src={x.voter.image} alt={x.voter.last_name} />
+        </div>
+
+        <p className="name">
+          {x.voter.first_name} {x.voter.last_name}
+        </p>
+        <p className="state">{x.voter.electoral_district_name}</p>
+      </Card>
+    );
+  });
+
   let positive = 0;
   let negative = 0;
   let noChoice = 0;
 
-  // console.log(activity.verified_vote);
-  if (number_of_choice > 0)
-    if (activity.verified_vote) {
-      for (const item of activity.verified_vote) {
-        for (let i = 0; i < name_of_choice.length; i++) {
-          if (item.vote == name_of_choice[i]) {
-            number_of_each_choice[i] = number_of_each_choice[i] + 1;
-          }
-        }
-      }
+  for (const item of activity.vote) {
+    if (item.vote === "positive") {
+      positive = positive + 1;
+    } else if (item.vote === "negative") {
+      negative = negative + 1;
+    } else {
+      noChoice = noChoice + 1;
     }
-
-  // console.log("number_of_each_choice is =");
-  // console.log(number_of_each_choice);
-
-  // useEffect(()=>{
-  //   setVotes([activity.verified_vote.find((x) => x.vote == activity.activity_choice[0].name)]);
-  // },[])
+  }
 
   useEffect(() => {
-    if (active === 0) {
-      SetColor("#DFF5F0");
-      setBColor("#6cbba9");
-      if (activity.activity_choice[0])
-        setVotes([
-          activity.verified_vote.find(
-            (x) => x.vote == activity.activity_choice[0].name
-          ),
-        ]);
-      else
-        setVotes([
-          activity.verified_vote.find(
-            (x) => x.vote == "activity.activity_choice[0].name"
-          ),
-        ]);
-    } else if (active === 1) {
+    if (active === 1) {
       SetColor("#FFD5D5");
       setBColor("#ffa5a5");
-      if (activity.activity_choice[1])
-        setVotes([
-          activity.verified_vote.find(
-            (x) => x.vote == activity.activity_choice[1].name
-          ),
-        ]);
-      else
-        setVotes([
-          activity.verified_vote.find(
-            (x) => x.vote == "activity.activity_choice[0].name"
-          ),
-        ]);
     } else if (active === 2) {
       SetColor("#EAEAEA");
       setBColor("#d8d8d8");
-      if (activity.activity_choice[2])
-        setVotes([
-          activity.verified_vote.find(
-            (x) => x.vote == activity.activity_choice[2].name
-          ),
-        ]);
-      else
-        setVotes([
-          activity.verified_vote.find(
-            (x) => x.vote == "activity.activity_choice[0].name"
-          ),
-        ]);
+    } else if (active === 0) {
+      SetColor("#DFF5F0");
+      setBColor("#6cbba9");
     }
   }, [active]);
 
-  // const envoyList = votes.map((x, i) => {
-  //   return (
-  //     <Card key={i} color={bColor}>
-  //       {x ? <div className="picture">
-  //         <img
-  //           src={x && x.voter.image}
-  //           alt={x && x.voter.last_name}
-  //         />
-  //       </div> : ""}
-
-  //       <p className="name">
-  //         {x && x.voter.first_name} {x && x.voter.last_name}
-  //       </p>
-  //       <p className="state">{x && x.voter.electoral_district_name}</p>
-  //     </Card>
-  //   );
-  // });
-
-  // const dataOptions = name_of_choice.map((item,i)=>{
-  //   return(
-  //     <Item className="active" key={i}>
-  //         <Type color="#6CBBA9" icon={ok}>
-  //           {item}
-  //         </Type>
-  //         <Number color="#6CBBA9">
-  //           <span>{(data.vote.filter(x=>x.vote == item.name).length)}/</span>
-  //           {total}
-  //         </Number>
-  //       </Item>
-  //   )
-  // })
-
   return (
     <VCContainer>
-      <StickyPart>
-        <CardHeader>
-          <div className="action-logo"></div>
-          <div className="title-card">
-            <p className="title">عملکرد</p>
-            <h2> {activity.name}</h2>
-            <p className="date">
-              {activity.date && convertDateToFarsi(activity.date)}
-            </p>
-          </div>
-        </CardHeader>
-        {/* <Statistics>
+      <CardHeader>
+        <div className="action-logo"></div>
+        <div className="title-card">
+          <p className="title">عملکرد</p>
+          <h2> {activity.name}</h2>
+          <p className="date">{activity.date}</p>
+        </div>
+      </CardHeader>
+      <Statistics>
         <Success
           onClick={() => setActive(0)}
           className={active === 0 ? "active" : ""}
@@ -170,19 +93,15 @@ export default function ActionCard({ activity }) {
           {toFarsiNumber(noChoice)}
         </Not>
       </Statistics>
-      <EnvoyGallery color={color}>{envoyList}</EnvoyGallery> */}
-        <ActionsCensus
-          total={activity.verified_vote ? activity.verified_vote.length : 0}
-          data={activity}
-        />
-      </StickyPart>
+
+      <EnvoyGallery color={color}>{envoyList}</EnvoyGallery>
 
       <ButtonWraper>
         <LargButton>
           <p
             className="content"
             onClick={() => {
-              navigate(`/actions/presentation/${activity.id}`);
+              navigate(`presentation/ دریافت خودرو دناپلاس `);
             }}
           >
             جزئیات
@@ -191,7 +110,7 @@ export default function ActionCard({ activity }) {
         {/* <SmallButton>
           <p className="content">بازنشر</p>
         </SmallButton> */}
-        <ShareButton text={activity.name} title="اطلاع رسانی نماینده" />
+        <ShareButton text="دریافت خودرو دناپلاس " title="اطلاع رسانی نماینده" />
       </ButtonWraper>
     </VCContainer>
   );
@@ -296,12 +215,6 @@ const CardHeader = styled.div`
       }
     }
   }
-`;
-
-const StickyPart = styled.div`
-  position: sticky;
-  top: 0;
-  background-color: white;
 `;
 
 const Statistics = styled.div`
@@ -435,8 +348,8 @@ const Not = styled.div`
     background-image: url(${not});
     background-size: contain;
     background-repeat: no-repeat;
+    bottom: -3.023vw;
     right: -11.628vw;
-    top: -1.395vw;
   }
 
   &.active,
@@ -495,7 +408,7 @@ const EnvoyGallery = styled.div`
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   padding: 4px;
   min-width: 20.93vw;
@@ -506,7 +419,7 @@ const Card = styled.div`
     border-radius: 10.93vw;
     margin-bottom: 10px;
     border: 3px solid ${(props) => props.color};
-    background: #ffffff;
+    background-color: #fff;
     img {
       width: 100%;
       height: 100%;
@@ -565,12 +478,10 @@ const ButtonWraper = styled.div`
   display: flex;
   margin-top: 10px;
   justify-content: space-between;
-
   @media (min-width: 481px) {
     border-top: 1px solid #d8d8d8;
     padding-top: 14px;
     flex-direction: row-reverse;
-    margin-top: auto;
   }
 `;
 
@@ -582,6 +493,8 @@ const LargButton = styled.div`
   display: flex;
   padding: 5px;
   cursor: pointer;
+  margin-right: 10px;
+
   .content {
     margin: 0 auto;
     font-size: 4.65vw;
