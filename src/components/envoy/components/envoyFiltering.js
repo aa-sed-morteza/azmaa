@@ -95,11 +95,11 @@ export default function EnvoyFiltering({ envoys }) {
       <FilterBox>
         <FilterItem
           onClick={() => {
-            setSelect(1);
+            setSelect(2);
           }}
           className={select === 1 ? "select" : ""}
         >
-          جوان‌ترین
+          شفاف‌ترین
         </FilterItem>
         <FilterItem
           onClick={() => {
@@ -107,7 +107,7 @@ export default function EnvoyFiltering({ envoys }) {
           }}
           className={select === 2 ? "select" : ""}
         >
-          جدیدترین
+          فعال‌ترین
         </FilterItem>
         <FilterItem
           onClick={() => {
@@ -115,15 +115,7 @@ export default function EnvoyFiltering({ envoys }) {
           }}
           className={select === 3 ? "select" : ""}
         >
-          شفاف‌ترین
-        </FilterItem>
-        <FilterItem
-          onClick={() => {
-            setSelect(4);
-          }}
-          className={select === 4 ? "select" : ""}
-        >
-          فعال‌ترین
+          الفبا
         </FilterItem>
       </FilterBox>
 
