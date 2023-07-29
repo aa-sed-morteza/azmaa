@@ -21,7 +21,9 @@ export default function ActionCard({ activity }) {
   const envoyData = data.envoy;
   const navigate = useNavigate();
 
-  const envoyList = votes.map((x, i) => {
+  console.log(activity);
+
+  const envoyList = votes?.map((x, i) => {
     return (
       <Card key={i} color={bColor}>
         <div className="picture">
@@ -40,7 +42,7 @@ export default function ActionCard({ activity }) {
   let negative = 0;
   let noChoice = 0;
 
-  for (const item of activity.vote) {
+  for (const item of activity.verified_vote) {
     if (item.vote === "positive") {
       positive = positive + 1;
     } else if (item.vote === "negative") {
