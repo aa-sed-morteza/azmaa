@@ -61,6 +61,7 @@ export default function NewsPage() {
   useEffect(() => {
     getPost();
     getPosts();
+    window.scrollTo(0, 0);
   }, [title]);
 
   useEffect(() => {
@@ -682,6 +683,7 @@ const Paper = styled.div`
     font-size: 14px;
     font-weight: bold;
     text-decoration: underline;
+    cursor: pointer;
   }
 
   &:nth-child(5) {

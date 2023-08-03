@@ -69,6 +69,8 @@ export default function Actions() {
         <LastActions>
           <Title> عملکردها</Title>
           <ActionContainer ref={showRef}>
+
+
             {activities.filter((item) => {
               let filter = searchparams.get("filter");
               if (!filter) return true;
@@ -86,7 +88,7 @@ export default function Actions() {
               }else if (selectedFilter== 2){
                 return new Date(a.date) - new Date(b.date);
               }else if (selectedFilter== 3){
-                return a.transparency - b.transparency;
+                return b.transparency - a.transparency;
               }else{
                 return 0;
               }

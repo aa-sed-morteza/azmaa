@@ -23,7 +23,7 @@ export default function VotesCensus({total,positive,negative,none,absent,without
             موافق:
           </Type>
           <Number color="#6CBBA9">
-            <span>{toFarsiNumber(positive) }/</span>
+            <span>{toFarsiNumber(positive) }&nbsp;از &nbsp;</span>
             {toFarsiNumber(real_positive_vote)}
           </Number>
         </Item>
@@ -33,7 +33,7 @@ export default function VotesCensus({total,positive,negative,none,absent,without
             مخالف:
           </Type>
           <Number color="#FFA5A5">
-            <span>{toFarsiNumber(negative) }/</span>
+            <span>{toFarsiNumber(negative) }&nbsp;از &nbsp;</span>
             {toFarsiNumber(real_negative_vote)}
           </Number>
         </Item>
@@ -43,7 +43,7 @@ export default function VotesCensus({total,positive,negative,none,absent,without
             ممتنع:
           </Type>
           <Number color="#CBCBCB">
-            <span>{toFarsiNumber(none)}/</span>
+            <span>{toFarsiNumber(none)}&nbsp;از &nbsp;</span>
             {toFarsiNumber(real_none_vote)}
           </Number>
         </Item>
@@ -53,7 +53,7 @@ export default function VotesCensus({total,positive,negative,none,absent,without
             غایب:
           </Type>
           <Number color="#9F9F9F">
-            <span>{toFarsiNumber(absent)}/</span>
+            <span>{toFarsiNumber(absent)}&nbsp;از &nbsp;</span>
             {toFarsiNumber(real_absent_vote)}
           </Number>
         </Item>
@@ -63,7 +63,7 @@ export default function VotesCensus({total,positive,negative,none,absent,without
             بدون‌رأی:
           </Type>
           <Number color="#9F9F9F">
-            <span>{toFarsiNumber(without)}/</span>
+            <span>{toFarsiNumber(without)}&nbsp;از &nbsp;</span>
             {toFarsiNumber(real_without_vote)}
           </Number>
         </Item>

@@ -30,18 +30,18 @@ export default function Census({total,complete,select}) {
     );
   };
 
-  return (
-    <Container>
-      <Title> آمار شفافیت</Title>
-      <Row>
-        <p className="type">کامل:</p>
-        {checkCensus(total,complete )}
-      </Row>
-      <Row>
-        <p className="type">گزینشی:</p>
-        {checkCensus(total, select)}
-      </Row>
-    </Container>
+  return (<></>
+    // <Container>
+    //   <Title> آمار شفافیت</Title>
+    //   <Row>
+    //     <p className="type">کامل:</p>
+    //     {checkCensus(total,complete )}
+    //   </Row>
+    //   <Row>
+    //     <p className="type">گزینشی:</p>
+    //     {checkCensus(total, select)}
+    //   </Row>
+    // </Container>
   );
 }
 

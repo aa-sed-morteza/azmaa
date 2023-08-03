@@ -129,8 +129,8 @@ const Button = styled.div`
   background-color: #095644;
   border-radius: 8px;
   position: relative;
-  padding: 14px 80px 15px 30px;
-  width: fit-content;
+  padding: 14px 30px 15px 30px;
+  width: 90px;
   cursor: pointer;
   &:after {
     content: "";
@@ -148,9 +148,9 @@ const Button = styled.div`
 
   .text-button {
     margin: 0;
-    padding-left: 60px;
+    padding-left: 10px;
     color: #ffffff;
-    font-size: 1.25vw;
+    cursor: pointer;
     font-weight: 700;
   }
 `;
@@ -214,7 +214,7 @@ export default function Carousel({ posts }) {
                   navigate(`/blog/${x.id}`);
                 }}
               >
-                <p className="text-button">ادامه مطلب</p>{" "}
+                <p className="text-button">ادامه مطلب</p>
               </Button>
             </Content>
           </Slide>

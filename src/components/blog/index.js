@@ -30,6 +30,7 @@ export default function Blog() {
 
   useEffect(() => {
     getPosts();
+    window.scrollTo(0, 0);
   }, []);
 
 

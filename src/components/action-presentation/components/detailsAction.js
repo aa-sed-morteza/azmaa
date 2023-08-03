@@ -4,19 +4,19 @@ import styled from "styled-components";
 export default function DetailsAction({title}) {
   return (
     <Container>
-      <Title>جزئیات رأی‌گیری</Title>
+      <Title>جزئیات عملکرد</Title>
       <Row>
         <p className="type">نام طرح: </p>
         <p className="expand">{title}</p>
       </Row>
-      <Row>
+      {/* <Row>
         <p className="type"> فوریت: </p>
         <p className="expand">?</p>
       </Row>
       <Row>
         <p className="type"> کمیسیون: </p>
         <p className="expand">?</p>
-      </Row>
+      </Row> */}
     </Container>
   );
 }

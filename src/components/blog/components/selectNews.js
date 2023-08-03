@@ -63,7 +63,7 @@ export default function SelectNews({ posts }) {
               navigate(`/blog/${x.id}`);
             }}
           >
-            ادامه مطلب
+            ادامه  مطلب
           </p>
 
           <p className="date">{convertDateToFarsi(x.created)}</p>
