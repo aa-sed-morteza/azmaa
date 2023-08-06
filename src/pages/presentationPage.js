@@ -25,7 +25,6 @@ export default function Presentation() {
     };
     axios(config)
       .then((res) => {
-        console.log(JSON.stringify(res.data));
         setBill(res.data);
       })
       .catch((error) => {

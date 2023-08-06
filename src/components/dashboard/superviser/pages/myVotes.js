@@ -48,7 +48,6 @@ export default function MyVotes() {
 
     axios(config)
       .then((res) => {
-        console.log(res.data);
         setVotes([...res.data]);
       })
       .catch((err) => {
@@ -67,7 +66,6 @@ export default function MyVotes() {
     axios
       .request(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
         setVotes([...response.data]);
       })
       .catch((error) => {
@@ -146,8 +144,6 @@ export default function MyVotes() {
 
     // activityVoteUnconfirmed();
   }, [state.token]);
-
-  console.log("fili", votes);
 
   return (
     <Container>

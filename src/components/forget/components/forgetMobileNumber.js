@@ -40,7 +40,6 @@ export default function ForgetMobileNumber() {
       // } else {
       //   data.append("type", state.userType);
       // }
-      console.log("stateusernumber" + state.userName);
       data.append("code", code);
       data.append("password", password);
       data.append("phone", phon);
@@ -128,7 +127,6 @@ export default function ForgetMobileNumber() {
 
     const data = new FormData();
     data.append("user_name", values.phoneNember);
-    console.log(data);
     let config = {
       method: "post",
       url: `${BaseBackURL}api/v1/accounts/forget/init/`,

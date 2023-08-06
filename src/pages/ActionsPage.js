@@ -53,8 +53,6 @@ export default function Actions() {
     }
   }, [selectedTag]);
 
-  console.log("act", activities);
-
   return (
     <Container>
       <DivTitle>

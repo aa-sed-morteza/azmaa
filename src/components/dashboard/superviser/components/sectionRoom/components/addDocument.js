@@ -60,7 +60,6 @@ export default function AddDocument() {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
         // dispatch({ type: "SET_DOC_ARTICLE", payload: values });
         dispatch({ type: "SET_ADD_ARTICLE", payload: 1 });
         navigate(`/dashboard/mySection`);

@@ -174,7 +174,6 @@ const IranMap = ({ position, empty }) => {
     validationSchema: provinceSchema,
     onSubmit,
   });
-  console.log("select_city", values.city);
 
   return (
     <Container position={position}>
@@ -240,9 +239,7 @@ const IranMap = ({ position, empty }) => {
                       name={city}
                       onChange={() => {
                         setFieldValue("city", [...values.city, city]);
-                        console.log("setFieldValue" + city);
                         citeis.push(city);
-                        console.log("citeis=" + citeis);
                       }}
                       checked={values.city.includes(city)}
                       // defaultChecked={values.city.includes(city)}

@@ -26,7 +26,6 @@ export default function SelectEnvoys() {
   const [states, setStates] = useState([]);
 
   const getEnvoys = () => {
-    console.log("getEnvoys");
     let config = {
       method: "get",
       url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${state.id}`,

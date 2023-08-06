@@ -75,7 +75,6 @@ export default function Controller({ vote_voter }) {
     };
     axios(config)
       .then(function (response) {
-        console.log("request", response.data);
         setFilterCities([...response.data[0].agent]);
       })
       .catch(function (error) {
@@ -190,7 +189,6 @@ export default function Controller({ vote_voter }) {
       setsearchparams({ filter: state.citySearch.map((x) => x) });
     } else {
       setsearchparams({});
-      console.log("free");
     }
   }, [state.citySearch]);
 

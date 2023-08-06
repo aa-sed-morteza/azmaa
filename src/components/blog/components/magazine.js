@@ -6,7 +6,7 @@ import user from "../../../assets/profile.webp";
 import note from "../../../assets/text.webp";
 import news from "../../../assets/news.webp";
 import report from "../../../assets/report.webp";
-import article from "../../../assets/report.webp"
+import article from "../../../assets/report.webp";
 import data from "../../../data.json";
 import ScrollButton from "../../general/scrollButton";
 import { useNavigate } from "react-router-dom";
@@ -221,7 +221,6 @@ const Paper = styled.div`
       font-size: 1.042vw;
       font-weight: 500;
     }
-   
   }
   @media (min-width: 1200px) {
     padding: 20px 19px 25px 19px;
@@ -251,7 +250,7 @@ const Paper = styled.div`
 `;
 
 const Curtain = styled.div`
-display: none;
+  display: none;
   position: absolute;
   width: 45%;
   height: 100%;
@@ -265,8 +264,6 @@ display: none;
 `;
 export default function Magazine({ posts }) {
   const navigate = useNavigate();
-
-  console.log('pos',posts)
 
   const magPaper = posts.map((x, i) => {
     return (
@@ -301,7 +298,7 @@ export default function Magazine({ posts }) {
           ادامه مطلب
         </p>
 
-        <p className="date">{convertDateToFarsi(x.created) }</p>
+        <p className="date">{convertDateToFarsi(x.created)}</p>
       </Paper>
     );
   });

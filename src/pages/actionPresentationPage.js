@@ -47,8 +47,6 @@ export default function ActionPresentation() {
     }
   }, []);
 
-  console.log("act", action);
-
   return (
     <Container>
       <Title>

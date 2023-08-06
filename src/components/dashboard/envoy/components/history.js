@@ -50,7 +50,6 @@ export default function HistoryEnvoy() {
         setHistory([...res.data]);
       })
       .catch((error) => {
-        console.log("sagError", error);
         if (error.response.status == 401) {
           // refreshToken();
         }

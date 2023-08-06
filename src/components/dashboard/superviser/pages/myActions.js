@@ -57,7 +57,6 @@ export default function MyActions() {
 
     axios(config)
       .then((res) => {
-        console.log(res.data);
         setActivities([...res.data]);
       })
       .catch((err) => {

@@ -44,8 +44,6 @@ export default function Dashboard() {
   const getPersonalInfo = (userId) => {
     let data = new FormData();
 
-    console.log(state.token);
-
     let config = {
       method: "put",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,

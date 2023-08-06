@@ -15,6 +15,7 @@ const HomeContainer = styled.section`
 
 export default function Home() {
   const width = useWidth();
+  const { message } = useSelector((state) => state.messages);
 
   const data = useSelector((state) => state);
 
