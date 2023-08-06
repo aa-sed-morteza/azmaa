@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import edit from "../../../../assets/left.svg";
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../../context/userContext";
 import axios from "axios";
 import { BaseBackURL } from "../../../../constant/api";
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../../context/userContext";
 import ContactInfo from "../../superviser/components/contactInfo";
 import LogInInfo from "../../superviser/components/logInInfo";
 import PersonalInfo from "../../superviser/components/personalInfo";

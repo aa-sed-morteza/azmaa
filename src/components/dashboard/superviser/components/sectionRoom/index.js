@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import title from "../../../../../assets/text.webp";
 import axios from "axios";
 import { BaseBackURL } from "../../../../../constant/api";
-import { useUser } from "../../../../context/userContext";
+import { useUser } from "../../../../../context/userContext";
 
 export default function SectionRoom() {
   const { state, dispatch } = useUser();
@@ -34,7 +34,6 @@ export default function SectionRoom() {
   useEffect(() => {
     getBlogs();
   }, []);
-
 
   const magPaper = blogs.map((x, i) => {
     return (

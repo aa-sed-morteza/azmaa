@@ -5,13 +5,12 @@ import SetPassword from "./components/setPassword";
 import Button from "../general/button";
 import Contacts from "./components/contacts";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../context/userContext";
-
+import { useUser } from "../../context/userContext";
 
 export default function forget() {
   const { state, dispatch } = useUser();
   const [step, setStep] = useState(0);
-  const navigate  =useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -19,9 +18,14 @@ export default function forget() {
         <p className="home"> پنل / </p>
         <p className="component"> فراموشی رمز عبور</p>
       </Title>
-      
-      {state.forgetLevel === 1 &&  <PersonalInformation />}
-      {state.forgetLevel === 2 && <><PersonalInformation /><Contacts/></>}
+
+      {state.forgetLevel === 1 && <PersonalInformation />}
+      {state.forgetLevel === 2 && (
+        <>
+          <PersonalInformation />
+          <Contacts />
+        </>
+      )}
     </Container>
   );
 }
@@ -55,5 +59,3 @@ const Title = styled.div`
     }
   }
 `;
-
-

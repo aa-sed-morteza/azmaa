@@ -5,7 +5,7 @@ import pic from "../../../../assets/hamidreza.webp";
 import title from "../../../../assets/title.svg";
 import { BaseBackURL } from "../../../../constant/api";
 import axios from "axios";
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../../context/userContext";
 import { useNavigate } from "react-router-dom";
 import BestEnvoy from "../../../home/components/bestEnvoy";
 
@@ -197,10 +197,9 @@ const EnvoyPart = styled.div`
   & > div {
     width: 100%;
   }
-  @media (min-width:481px){
+  @media (min-width: 481px) {
     & > div {
-    width: 45%;
+      width: 45%;
+    }
   }
-}
-  
 `;

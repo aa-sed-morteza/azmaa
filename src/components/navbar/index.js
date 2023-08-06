@@ -9,12 +9,10 @@ import signInMobile from "../../assets/signMobile.svg";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import useWidth from "../../hook/useWidth";
-import { useUser } from "../context/userContext";
 import exit from "../../assets/exit.webp";
 import Profile from "../dashboard/components/profile";
-import axios from "axios";
-import { BaseBackURL } from "../../constant/api";
 import Cookies from "js-cookie";
+import { useUser } from "../../context/userContext";
 
 // styled
 const TopBar = styled.section`
@@ -301,10 +299,10 @@ export default function Navbar() {
   const [active, setActive] = useState(0);
   const [dashboard, setDashboard] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     setDashboard(true);
-    setOpen(true)
-  },[state.openMenu])
+    setOpen(true);
+  }, [state.openMenu]);
 
   const menuItem = data.navbar.map((x, i) => {
     return (
@@ -370,7 +368,7 @@ export default function Navbar() {
       dispatch({ type: "OPEN_MENU", payload: false });
     } else {
       navigate("/dashboard");
-      setDashboard(true)
+      setDashboard(true);
     }
     setOpen(!open);
     // setDashboard(!dashboard);
@@ -396,12 +394,13 @@ export default function Navbar() {
     setOpen(!open);
   }
 
- 
-
-
   return (
     <TopBar>
-      <Logo onClick={()=>{navigate('/')}}>
+      <Logo
+        onClick={() => {
+          navigate("/");
+        }}
+      >
         <img src={LOGO} alt="logo" />
       </Logo>
 
@@ -420,12 +419,20 @@ export default function Navbar() {
               {state.loggedIn ? "خروج از پنل" : "ورود به پنل"}{" "}
               {/* <div className="icon"></div> */}
             </div>{" "}
-            
           </Panel>
         )}
 
         <Search></Search>
-        {width < 481 ? <Menu onClick={()=>{setOpen(!open)}} open={open}></Menu> : ""}
+        {width < 481 ? (
+          <Menu
+            onClick={() => {
+              setOpen(!open);
+            }}
+            open={open}
+          ></Menu>
+        ) : (
+          ""
+        )}
         {width < 481 ? (
           <MenuList open={open} back={dashboard && state.loggedIn}>
             {dashboard && state.loggedIn ? <Profile /> : ""}

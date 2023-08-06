@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Button from "../../../../../general/button";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useUser } from "../../../../../context/userContext";
+import { useUser } from "../../../../../../context/userContext";
 import { useFormik } from "formik";
 import { selectActionTypeSchema } from "../../../../../schema";
 import vote from "../../../../../../assets/vote-light.webp";

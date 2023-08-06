@@ -4,7 +4,7 @@ import CustomInput from "../../general/customInput";
 import mobile from "../../../assets/mobile.webp";
 import Button from "../../general/button";
 import { useFormik } from "formik";
-import { useUser } from "../../context/userContext";
+import { useUser } from "../../../context/userContext";
 import { phoneSchema } from "../../schema";
 import { useNavigate } from "react-router-dom";
 import Timer from "../../general/countdown";
@@ -94,8 +94,8 @@ export default function SetMobileNumber() {
         // console.log(JSON.stringify(response.data));
         dispatch({ type: "SET_TOKEN", payload: response.data.access });
         dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
-        Cookies.set('refreshToken', response.data.refresh );
-        Cookies.set('token', response.data.access  );
+        Cookies.set("refreshToken", response.data.refresh);
+        Cookies.set("token", response.data.access);
       })
       .catch((error) => {
         console.log(error);

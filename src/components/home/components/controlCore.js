@@ -9,7 +9,7 @@ import SelectArea from "./selectArea";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../context/userContext";
+import { useUser } from "../../../context/userContext";
 
 const Container = styled.section`
   display: flex;

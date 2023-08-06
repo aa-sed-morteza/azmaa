@@ -4,7 +4,7 @@ import CustomInput from "../../general/customInput";
 import mobile from "../../../assets/mobile.webp";
 import Button from "../../general/button";
 import { useFormik } from "formik";
-import { useUser } from "../../context/userContext";
+import { useUser } from "../../../context/userContext";
 // import { phoneSchema } from "../../schema";
 import { useNavigate } from "react-router-dom";
 import Timer from "../../general/countdown";
@@ -26,7 +26,7 @@ export default function ForgetMobileNumber() {
   const [type, setType] = useState(["نماینده", "ناظر"]);
   const [password, setPassword] = useState("");
   const [phon, setPhon] = useState("");
-  const [limitTime,setLimitTime]=useState(false);
+  const [limitTime, setLimitTime] = useState(false);
   const checkCode = (e) => {
     e.preventDefault();
 
@@ -40,7 +40,7 @@ export default function ForgetMobileNumber() {
       // } else {
       //   data.append("type", state.userType);
       // }
-      console.log("stateusernumber"+state.userName);
+      console.log("stateusernumber" + state.userName);
       data.append("code", code);
       data.append("password", password);
       data.append("phone", phon);
@@ -141,7 +141,6 @@ export default function ForgetMobileNumber() {
         if (res.data.msg === "code send") {
           toast.success("کد بازیابی برای شما ارسال شد!", {
             position: toast.POSITION.TOP_RIGHT,
-            
           });
           setPhon(values.phoneNember);
           setStep(2);
@@ -347,4 +346,3 @@ const Box = styled.div`
     }
   }
 `;
-

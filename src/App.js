@@ -2,26 +2,26 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/navbar";
-import Envoy from "./components/envoy";
-import Vote from "./components/vote";
-import Actions from "./components/actions";
-import Blog from "./components/blog";
-import AboutMe from "./components/about-me";
-import Home from "./components/home";
-import LogIn from "./components/log-in";
+import Vote from "./pages/votePage";
+import Actions from "./pages/ActionsPage";
+import Blog from "./pages/blogPage";
+import AboutMe from "./pages/aboutUs";
+import LogIn from "./pages/loginPage";
 import Footer from "./components/footer";
-import NewsPage from "./components/blog/components/newsPage";
-import Presentation from "./components/presentation";
-import ActionPresentation from "./components/action-presentation";
+import NewsPage from "./pages/newsPage";
+import Presentation from "./pages/presentationPage";
+import ActionPresentation from "./pages/actionPresentationPage";
 import SignIn from "./components/sign-in";
 import Dashboard from "./components/dashboard";
-import { UserState } from "./components/context/userContext";
+import { UserState } from "./context/userContext";
 import SetMobileNumber from "./components/sign-in/components/setMobileNumber";
 import ForgetMobileNumber from "./components/forget/components/forgetMobileNumber";
 import EnvoySignIn from "./components/envoy-sign-in";
-import DetailsEnvoy from "./components/detailsEnvoy";
+import DetailsEnvoy from "./pages/EnvoyDetails";
 import NotFound from "./notFound";
 import ScrollTop from "react-scrolltop-button";
+import Home from "./pages";
+import Envoy from "./pages/envoyPage";
 
 function App() {
   return (
@@ -64,7 +64,11 @@ function App() {
           text="برو بالا"
           distance={100}
           breakpoint={768}
-          style={{ backgroundColor: "#095644", borderColor: "#FFFFFF",color: "#FFFFFF"}}
+          style={{
+            backgroundColor: "#095644",
+            borderColor: "#FFFFFF",
+            color: "#FFFFFF",
+          }}
           className="scroll-your-role"
           speed={1000}
           zindex={1000}

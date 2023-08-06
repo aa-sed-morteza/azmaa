@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import Header from "./components/header";
-import DetailsAction from "./components/detailsAction";
-import ActionsCensus from "./components/actionCensus";
-import Census from "./components/census";
-import ControlStatus from "./components/controlStatus";
-import action from "../../assets/act.webp";
-import symbol from "../../assets/action-rate.webp";
+import Header from "../components/action-presentation/components/header";
+import DetailsAction from "../components/action-presentation/components/detailsAction";
+import ActionsCensus from "../components/action-presentation/components/actionCensus";
+import Census from "../components/action-presentation/components/census";
+import ControlStatus from "../components/action-presentation/components/controlStatus";
+import action from "../assets/act.webp";
+import symbol from "../assets/action-rate.webp";
 import axios from "axios";
-import { BaseBackURL } from "../../constant/api";
-import { ChangeToPersianDate, convertDateToFarsi } from "../../utils";
+import { BaseBackURL } from "../constant/api";
+import { ChangeToPersianDate, convertDateToFarsi } from "../utils";
 
 export default function ActionPresentation() {
   const navigate = useNavigate();
@@ -32,9 +32,6 @@ export default function ActionPresentation() {
       });
   };
 
-
-
-
   let positiveAction = [];
   let negativeAction = [];
   let anotherAction = [];
@@ -50,12 +47,19 @@ export default function ActionPresentation() {
     }
   }, []);
 
-  console.log('act',action)
+  console.log("act", action);
 
   return (
     <Container>
       <Title>
-        <p className="home" onClick={()=>{navigate("/actions")}} >خانه / عملکردها /</p>
+        <p
+          className="home"
+          onClick={() => {
+            navigate("/actions");
+          }}
+        >
+          خانه / عملکردها /
+        </p>
         <p className="component">{action && action.name} </p>
       </Title>
       <Content>
@@ -66,13 +70,17 @@ export default function ActionPresentation() {
               icon={action}
               type="عملکرد"
               title={action.name}
-              date={ action.date && convertDateToFarsi(action.date) }
+              date={action.date && convertDateToFarsi(action.date)}
             />
             <DetailsAction title={action.name} />
-            <Census total={action.verified_vote && action.verified_vote.length} complete={"?"} select={"?"} />
+            <Census
+              total={action.verified_vote && action.verified_vote.length}
+              complete={"?"}
+              select={"?"}
+            />
             <ActionsCensus
               total={action.verified_vote && action.verified_vote.length}
-              data={action }
+              data={action}
             />
           </Wraper>
         )}
@@ -84,9 +92,9 @@ export default function ActionPresentation() {
 
 const Container = styled.section`
   padding: 10px 20px;
-  @media(min-width:480px){
-    background-color:#ffffff;
-    padding :25px 0;
+  @media (min-width: 480px) {
+    background-color: #ffffff;
+    padding: 25px 0;
   }
 `;
 

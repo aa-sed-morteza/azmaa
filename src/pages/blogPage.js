@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Magazine from "./components/magazine";
-import Poster from "./components/poster";
-import SelectNews from "./components/selectNews";
-import useWidth from "../../hook/useWidth";
-import Carousel from "./components/carousel";
+import Magazine from "../components/blog/components/magazine";
+import Poster from "../components/blog/components/poster";
+import SelectNews from "../components/blog/components/selectNews";
+import useWidth from "../hook/useWidth";
+import Carousel from "../components/blog/components/carousel";
 import axios from "axios";
-import { BaseBackURL } from "../../constant/api";
+import { BaseBackURL } from "../constant/api";
 import { useNavigate } from "react-router-dom";
 
 export default function Blog() {
   const width = useWidth();
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
 
   const getPosts = () => {
@@ -33,11 +33,17 @@ export default function Blog() {
     window.scrollTo(0, 0);
   }, []);
 
-
   return (
     <Container>
       <Title>
-        <p className="home" onClick={()=>{navigate("/")}}>خانه / </p>
+        <p
+          className="home"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          خانه /{" "}
+        </p>
         <p className="component"> بلاگ </p>
       </Title>
       {width < 481 ? <Poster posts={posts} /> : <Carousel posts={posts} />}

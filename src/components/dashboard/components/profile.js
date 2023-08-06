@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useUser } from "../../context/userContext";
+import { useUser } from "../../../context/userContext";
 import remove from "../../../assets/remove.svg";
 import camera from "../../../assets/camera.svg";
 import gallery from "../../../assets/gallery.svg";

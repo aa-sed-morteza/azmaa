@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import IranMap from "../../iranMap";
 import arrow from "../../../assets/ggArrow.svg";
-import { useUser } from "../../context/userContext";
+import { useUser } from "../../../context/userContext";
 import SelectCity from "../../iranMap/components/selectCity";
 
 export default function SelectState() {

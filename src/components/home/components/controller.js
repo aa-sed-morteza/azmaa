@@ -15,7 +15,7 @@ import SelectArea from "./selectArea";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
-import { useUser } from "../../context/userContext";
+import { useUser } from "../../../context/userContext";
 import { contentSchema } from "../../schema";
 
 export default function Controller({ vote_voter }) {
@@ -186,15 +186,13 @@ export default function Controller({ vote_voter }) {
   useEffect(() => {
     filterEnvoyByCity();
     filterAreaByCity();
-    if(state.citySearch.length>0){
-      setsearchparams({filter:state.citySearch.map(x=>x)})
-    }else{
-      setsearchparams({})
-      console.log('free')
+    if (state.citySearch.length > 0) {
+      setsearchparams({ filter: state.citySearch.map((x) => x) });
+    } else {
+      setsearchparams({});
+      console.log("free");
     }
   }, [state.citySearch]);
-
-
 
   const newList = envoys.sort((a, b) => b.transparency - a.transparency);
   const filteredList = newList.filter((item) => {
@@ -246,7 +244,6 @@ export default function Controller({ vote_voter }) {
       ? new Date(b.date).getTime() - new Date(a.date).getTime()
       : new Date(a.date).getTime() - new Date(b.date).getTime()
   );
-
 
   const filteredBills = sortBillsByDate.filter((item) => {
     let filter = searchparams.get("filter");

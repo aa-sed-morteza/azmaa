@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { documentSchema } from "../../../../../schema/index";
 import Button from "../../../../../general/button";
-import { useUser } from "../../../../../context/userContext";
+import { useUser } from "../../../../../../context/userContext";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import FileUploadInput from "../../../../../general/fileUploadInput";

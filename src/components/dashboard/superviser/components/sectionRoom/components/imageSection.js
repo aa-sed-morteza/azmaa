@@ -6,7 +6,7 @@ import { UploadPictSchema } from "../../../../../schema";
 
 import Button from "../../../../../general/button";
 
-import { useUser } from "../../../../../context/userContext";
+import { useUser } from "../../../../../../context/userContext";
 import FileUploadInput from "../../../../../general/fileUploadInput";
 
 export default function ImageSection() {
@@ -36,8 +36,6 @@ export default function ImageSection() {
     onSubmit,
   });
 
-  
-
   return (
     <>
       {state.addArticleLevel == 3 ? (
@@ -46,7 +44,11 @@ export default function ImageSection() {
             <h2>۳. تصویر مطلب را بارگذاری کنید:</h2>
 
             <FileUploadInput
-              placeholder={values.picOne ==null ? "بارگذاری تصویر اصلی":"تصویر دریافت شد"}
+              placeholder={
+                values.picOne == null
+                  ? "بارگذاری تصویر اصلی"
+                  : "تصویر دریافت شد"
+              }
               id="picOne"
               name="picOne"
               onChange={(event) => {
@@ -57,7 +59,9 @@ export default function ImageSection() {
               <ErrorText>{errors.picOne}</ErrorText>
             )}
             <FileUploadInput
-              placeholder={values.picTwo ==null ?"بارگذاری تصویر دوم":"تصویر دریافت شد"} 
+              placeholder={
+                values.picTwo == null ? "بارگذاری تصویر دوم" : "تصویر دریافت شد"
+              }
               id="picTwo"
               name="picTwo"
               onChange={(event) => {
@@ -101,7 +105,9 @@ export default function ImageSection() {
             placeholder="بارگذاری تصویر دوم"
             id="picTwo"
             name="picTwo"
-            value={state.imageArticle.picTwo ? state.imageArticle.picTwo.file: null}
+            value={
+              state.imageArticle.picTwo ? state.imageArticle.picTwo.file : null
+            }
           />
         </Container>
       )}
@@ -124,13 +130,12 @@ const Container = styled.div`
     margin: 0;
     margin-bottom: 10px;
   }
-  @media(min-width:480px){
-    padding:2.083vw 2.604vw;
-    h2{
+  @media (min-width: 480px) {
+    padding: 2.083vw 2.604vw;
+    h2 {
       font-size: 1.458vw;
       margin-bottom: 1.458vw;
     }
- 
   }
 `;
 
@@ -138,9 +143,9 @@ const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
-  @media(min-width:480px){
-    width:100%;
-    justify-content:center;
+  @media (min-width: 480px) {
+    width: 100%;
+    justify-content: center;
     margin: 1.302vw auto;
   }
 `;
@@ -153,8 +158,8 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
-  @media(min-width:480px){
-    margin-top:0;
-    font-size:1.042vw
+  @media (min-width: 480px) {
+    margin-top: 0;
+    font-size: 1.042vw;
   }
 `;

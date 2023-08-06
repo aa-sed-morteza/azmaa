@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useUser } from "../../context/userContext";
+import { useUser } from "../../../context/userContext";
 import arrow from "../../../assets/arrow.webp";
 import { useNavigate } from "react-router-dom";
 import box from "../../../assets/state.svg";

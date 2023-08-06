@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../../context/userContext";
 import edit from "../../../../assets/left.svg";
 import { useNavigate } from "react-router-dom";
 import box from "../../../../assets/state.svg";
-import {toFarsiNumber} from "../../../../utils"
+import { toFarsiNumber } from "../../../../utils";
 
 export default function EnvoyState() {
   const navigate = useNavigate();
@@ -21,15 +21,17 @@ export default function EnvoyState() {
       <State>
         <span></span>
         <div className="content">
-          {state.electoral_district &&  <p className="title">{state.electoral_district.name  }</p>}
-         
+          {state.electoral_district && (
+            <p className="title">{state.electoral_district.name}</p>
+          )}
+
           <p className="persentage">درصد آراء: ۳۵٪</p>
         </div>
       </State>
 
       <Row>
         <p className="type"> تعداد آراء: </p>
-        <p className="expand">{toFarsiNumber(state.vote_number) }</p>
+        <p className="expand">{toFarsiNumber(state.vote_number)}</p>
       </Row>
       <Row>
         <p className="type"> تعداد کل آراء صندوق : </p>
@@ -113,7 +115,7 @@ const Edit = styled.div`
   background-image: url(${edit});
   background-size: contain;
   cursor: pointer;
-  @media (min-width: 480px){
+  @media (min-width: 480px) {
     width: 1.042vw;
     height: 0.521vw;
   }
@@ -123,7 +125,7 @@ const State = styled.div`
   display: flex;
   align-items: center;
   gap: 4.651vw;
-  margin-bottom:4.186vw;
+  margin-bottom: 4.186vw;
   span {
     background-repeat: no-repeat;
     background-image: url(${box});
@@ -147,19 +149,19 @@ const State = styled.div`
       font-size: 3.256vw;
     }
   }
-  @media (min-width: 480px){
+  @media (min-width: 480px) {
     gap: 1.094vw;
     margin-bottom: 1.719vw;
-    span{
+    span {
       width: 4.792vw;
       height: 5.313vw;
     }
-    .content{
-      .title{
+    .content {
+      .title {
         font-size: 1.667vw;
       }
-      .persentage{
-        font-size: 1.250vw;
+      .persentage {
+        font-size: 1.25vw;
       }
     }
   }

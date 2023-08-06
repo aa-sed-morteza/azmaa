@@ -5,13 +5,12 @@ import SetPassword from "./components/setPassword";
 import Button from "../general/button";
 import Contacts from "./components/contacts";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../context/userContext";
-
+import { useUser } from "../../context/userContext";
 
 export default function SignIn() {
   const { state, dispatch } = useUser();
   const [step, setStep] = useState(0);
-  const navigate  =useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -19,9 +18,14 @@ export default function SignIn() {
         <p className="home">پنل / </p>
         <p className="component"> ثبت نام </p>
       </Title>
-      
+
       {state.signInLevel === 1 && <PersonalInformation />}
-      {state.signInLevel === 2 && <><PersonalInformation /><Contacts/></>}
+      {state.signInLevel === 2 && (
+        <>
+          <PersonalInformation />
+          <Contacts />
+        </>
+      )}
     </Container>
   );
 }
@@ -56,5 +60,3 @@ const Title = styled.div`
     }
   }
 `;
-
-

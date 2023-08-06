@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import Calendar from "./components/calendar";
-import Controler from "./components/controler";
-import Filtering from "./components/filtering";
-import { BaseBackURL } from "../../constant/api";
+import Calendar from "../components/vote/components/calendar";
+import Controler from "../components/vote/components/controler";
+import Filtering from "../components/vote/components/filtering";
+import { BaseBackURL } from "../constant/api";
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import VoteCard from "../home/components/voteCard";
-import upArrow from "../../assets/arrow.webp";
+import VoteCard from "../components/home/components/voteCard";
+import upArrow from "../assets/arrow.webp";
 
 export default function Vote() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function Vote() {
   const [searchparams, setsearchparams] = useSearchParams();
   const [showLimit, setShowLimit] = useState(3);
 
-  const showRef =useRef(null);
+  const showRef = useRef(null);
 
   const getActivities = () => {
     let config = {
@@ -31,7 +31,7 @@ export default function Vote() {
       // console.log(res.data);
       if (res.data.length > 0) {
         setBills([...res.data]);
-        setFilteredBills([...res.data])
+        setFilteredBills([...res.data]);
       }
     });
   };
@@ -40,62 +40,74 @@ export default function Vote() {
     getActivities();
   }, []);
 
-
-
   useEffect(() => {
-    if(bills.tag)
-    if (bills.filter((item) =>item.tag[0].name === selectedTag )) {
-      setFilteredBills(bills.filter((item) => item.tag[0].name === selectedTag))
-    } else {
-      setBills(bills)
-    }
+    if (bills.tag)
+      if (bills.filter((item) => item.tag[0].name === selectedTag)) {
+        setFilteredBills(
+          bills.filter((item) => item.tag[0].name === selectedTag)
+        );
+      } else {
+        setBills(bills);
+      }
 
-    if (selectedTag == 'همه') {
-      setFilteredBills(bills)
+    if (selectedTag == "همه") {
+      setFilteredBills(bills);
     }
-
   }, [selectedTag]);
-
 
   return (
     <Container>
       <Title>
-        <p className="home" onClick={()=>{navigate("/")}} >خانه / </p>
+        <p
+          className="home"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          خانه /{" "}
+        </p>
         <p className="component"> رأی‌گیری‌ها </p>
       </Title>
 
       <Content>
         <Controler selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
         {/* {console.log(selectedTag)} */}
-        <Filtering selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
+        <Filtering
+          selectedFilter={selectedFilter}
+          setSelectedFilter={setSelectedFilter}
+        />
         {/* <Titleh1>آخرین رأی‌گیری‌ها</Titleh1> */}
-        <VoterContainer ref={showRef} >
-          {bills.filter((item) => {
-            let filter = searchparams.get("filter");
-            if (!filter) return true;
-            // let name= item.writer + item.description ;
-            let name = item.name;
+        <VoterContainer ref={showRef}>
+          {bills
+            .filter((item) => {
+              let filter = searchparams.get("filter");
+              if (!filter) return true;
+              // let name= item.writer + item.description ;
+              let name = item.name;
               console.log(item);
-            return name.includes(filter);
-          }).filter((item) => {
-            if (selectedTag === 'همه') return true;
-            let tag="";
-            if(item.tag[0])
-             tag = item.tag[0].name;
-            return tag.includes(selectedTag);
-          }).sort((a,b)=>{
-            if(selectedFilter== 1){
-              return new Date(b.date) - new Date(a.date);
-            }else if (selectedFilter== 2){
-              return new Date(a.date) - new Date(b.date);
-            }else if (selectedFilter== 3){
-              return b.bill_transparency - a.bill_transparency;
-            }else{
-              return 0;
-            }
-          }).slice(0,showLimit).map((item, i) => {
-            return <VoteCard bill={item} key={i} />;
-          })}
+              return name.includes(filter);
+            })
+            .filter((item) => {
+              if (selectedTag === "همه") return true;
+              let tag = "";
+              if (item.tag[0]) tag = item.tag[0].name;
+              return tag.includes(selectedTag);
+            })
+            .sort((a, b) => {
+              if (selectedFilter == 1) {
+                return new Date(b.date) - new Date(a.date);
+              } else if (selectedFilter == 2) {
+                return new Date(a.date) - new Date(b.date);
+              } else if (selectedFilter == 3) {
+                return b.bill_transparency - a.bill_transparency;
+              } else {
+                return 0;
+              }
+            })
+            .slice(0, showLimit)
+            .map((item, i) => {
+              return <VoteCard bill={item} key={i} />;
+            })}
         </VoterContainer>
         <ShowMore
           arrow={showLimit >= bills.length}
@@ -111,7 +123,6 @@ export default function Vote() {
         >
           <p>{showLimit >= bills.length ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
         </ShowMore>
-
 
         {/* <Calendar bills={filteredBills} /> */}
       </Content>
@@ -173,7 +184,6 @@ const Content = styled.div`
 `;
 
 const VoterContainer = styled.div`
-
   @media (min-width: 481px) {
     display: flex;
     gap: 20px;
@@ -181,7 +191,6 @@ const VoterContainer = styled.div`
     flex-wrap: wrap;
     // margin-left:-7%;
     // margin-right:-7%;
-   
   }
   @media (min-width: 769px) {
     justify-content: center;
@@ -262,7 +271,7 @@ const ShowMore = styled.div`
   @media (min-width: 481px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
-    width:50%;
+    width: 50%;
     justify-content: center;
     align-items: center;
     margin: auto;

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useModal from "../../../../hook/useModal";
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../../context/userContext";
 import Modal from "../../../general/modal";
 import ContactInfo from "./contactInfo";
 import LogInInfo from "./logInInfo";

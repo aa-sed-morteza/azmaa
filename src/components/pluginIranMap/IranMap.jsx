@@ -8,7 +8,7 @@ import { useFormik } from "formik";
 import { provinceSchema } from "../schema/index";
 import axios from "axios";
 import { BaseBackURL } from "../../constant/api";
-import { useUser } from "../context/userContext";
+import { useUser } from "../../context/userContext";
 
 const useMouse = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -28,7 +28,7 @@ const useMouse = () => {
   return mousePosition;
 };
 
-const IranMap = ({ position,empty }) => {
+const IranMap = ({ position, empty }) => {
   const { state, dispatch } = useUser();
   const { x, y } = useMouse();
   const [provinces, setProvinces] = useState(iranProvinces);
@@ -132,14 +132,13 @@ const IranMap = ({ position,empty }) => {
   }, [change]);
 
   useEffect(() => {
-    if(state.removeCityFilter ===true){
+    if (state.removeCityFilter === true) {
       setProvinceSelected(false);
       setProvinceNameOnClick("");
       setProvinceName("");
       setFieldValue("city", []);
       setFieldValue("province", "");
     }
-   
   }, [state.removeCityFilter]);
 
   const onSubmit = async (values, actions) => {
@@ -158,8 +157,6 @@ const IranMap = ({ position,empty }) => {
     }
   };
 
- 
-
   const {
     values,
     errors,
@@ -177,7 +174,7 @@ const IranMap = ({ position,empty }) => {
     validationSchema: provinceSchema,
     onSubmit,
   });
-  console.log('select_city',values.city)
+  console.log("select_city", values.city);
 
   return (
     <Container position={position}>
