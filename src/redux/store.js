@@ -1,5 +1,8 @@
 import storage from "redux-persist/lib/storage";
-import dataReducer from "./slices/dataSlice";
+import envoyReducer from "./slices/envoySlice";
+import voteReducer from "./slices/voteSlice";
+import actionReducer from "./slices/actionSlice";
+import blogReducer from "./slices/blogSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import { combineReducers } from "redux";
@@ -11,7 +14,10 @@ const persistConfig = {
 };
 
 const reducers = combineReducers({
-  messages: dataReducer,
+  envoy: envoyReducer,
+  vote: voteReducer,
+  action: actionReducer,
+  blog: blogReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

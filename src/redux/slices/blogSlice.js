@@ -1,9 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const DataSlice = createSlice({
-  name: "dataSlice",
+export const BlogSlice = createSlice({
+  name: "blogSlice",
   initialState: {
-    message: "Hello World",
+    envoyLists: [],
+    envoyData: {
+      firstName: "",
+      lastName: "",
+    },
   },
   reducers: {
     updateMessage: (state, actions) => {
@@ -13,6 +17,6 @@ export const DataSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { updateMessage } = DataSlice.actions;
+export const { updateMessage } = BlogSlice.actions;
 
-export default DataSlice.reducer;
+export default BlogSlice.reducer;
