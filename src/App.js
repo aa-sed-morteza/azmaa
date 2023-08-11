@@ -22,8 +22,18 @@ import NotFound from "./notFound";
 import ScrollTop from "react-scrolltop-button";
 import Home from "./pages";
 import Envoy from "./pages/envoyPage";
+import { useEffect } from "react";
+import { getAllEnvoysData } from "./dataFunctions/publicDataFunctions";
+import { useSelector } from "react-redux";
 
 function App() {
+  useEffect(() => {
+    console.log("hello");
+    getAllEnvoysData();
+  }, []);
+
+  const { envoyList } = useSelector((state) => state.envoy);
+  console.log(envoyList);
   return (
     <div className="App">
       <UserState>
