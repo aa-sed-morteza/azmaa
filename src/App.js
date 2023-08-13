@@ -23,27 +23,12 @@ import ScrollTop from "react-scrolltop-button";
 import Home from "./pages";
 import Envoy from "./pages/envoyPage";
 import { useEffect } from "react";
-import {
-  getAllActivityData,
-  getAllEnvoysData,
-  getAllVotesData,
-} from "./dataFunctions/publicDataFunctions";
-import { useSelector } from "react-redux";
+import { getAllInitialData } from "./dataFunctions/publicDataFunctions";
 
 function App() {
   useEffect(() => {
-    console.log("hello");
-    getAllEnvoysData();
-    getAllActivityData();
-    getAllVotesData();
+    getAllInitialData();
   }, []);
-
-  const { envoyList } = useSelector((state) => state.envoy);
-  const { activityList } = useSelector((state) => state.activity);
-  const { voteList } = useSelector((state) => state.vote);
-  console.log(envoyList);
-  console.log(activityList);
-  console.log(voteList);
 
   return (
     <div className="App">

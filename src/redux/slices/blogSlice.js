@@ -3,20 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 export const BlogSlice = createSlice({
   name: "blogSlice",
   initialState: {
-    envoyLists: [],
-    envoyData: {
-      firstName: "",
-      lastName: "",
-    },
+    postList: [],
+    postData: {},
   },
   reducers: {
-    updateMessage: (state, actions) => {
-      state.message = actions.payload;
+    setAllPosts: (state, actions) => {
+      state.postList = actions.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateMessage } = BlogSlice.actions;
+export const { setAllPosts } = BlogSlice.actions;
 
 export default BlogSlice.reducer;

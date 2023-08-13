@@ -28,7 +28,7 @@ const useMouse = () => {
   return mousePosition;
 };
 
-const IranMap = ({ position, empty }) => {
+const IranMap = ({ position, empty, style }) => {
   const { state, dispatch } = useUser();
   const { x, y } = useMouse();
   const [provinces, setProvinces] = useState(iranProvinces);
@@ -176,7 +176,7 @@ const IranMap = ({ position, empty }) => {
   });
 
   return (
-    <Container position={position}>
+    <Container style={style}>
       {values.province == "" && <p className="input">{input}</p>}
       {values.province !== "" && (
         <p className="select">
@@ -398,7 +398,7 @@ const Container = styled.div`
     position: ${(props) => props.position};
     top: 14%;
     left: 8%;
-    width: 46%;
+    width: 40%;
     background-color: rgba(255, 255, 255, 0.5);
     .input {
       font-size: 1.458vw;

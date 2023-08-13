@@ -5,6 +5,7 @@ import { setAllEnvoys } from "../redux/slices/envoySlice";
 import { setAllVotes } from "../redux/slices/voteSlice";
 import { setAllActivity } from "../redux/slices/activitySlice";
 import { setAllCities, setAllDistricts } from "../redux/slices/citySlice";
+import { setAllPosts } from "../redux/slices/blogSlice";
 
 export function getAllEnvoysData() {
   let config = {
@@ -75,4 +76,26 @@ export function getAllDistricts() {
     .catch(function (error) {
       console.log(error);
     });
+}
+
+export function getAllBlogPosts() {
+  let config = {
+    method: "get",
+    url: `${BaseBackURL}api/v1/blog/?writer__id&tag__id&is_suggested=True, False&ordering=created`,
+  };
+
+  axios(config).then((res) => {
+    // console.log(res);
+    if (res.data.length > 0) {
+      store.dispatch(setAllPosts(res.data));
+    }
+  });
+}
+
+export function getAllInitialData() {
+  getAllEnvoysData();
+  getAllVotesData();
+  getAllActivityData();
+  getAllCities();
+  getAllBlogPosts();
 }

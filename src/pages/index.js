@@ -12,8 +12,6 @@ import axios from "axios";
 const HomeContainer = styled.section`
   overflow-x: hidden;
   overflow-y: auto;
-  height: auto;
-  padding: 20px;
 `;
 
 export default function Home() {
