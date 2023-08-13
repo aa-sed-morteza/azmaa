@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 export const VoteSlice = createSlice({
   name: "voteSlice",
   initialState: {
-    voteLists: [],
+    voteList: [],
     voteData: {},
   },
   reducers: {
-    setAllVOtes: (state, actions) => {
-      state.voteLists = actions.payload;
+    setAllVotes: (state, actions) => {
+      state.voteList = actions.payload;
     },
     setVoteData: (state, actions) => {
       state.voteData = actions.payload;
@@ -17,6 +17,6 @@ export const VoteSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { updateMessage } = VoteSlice.actions;
+export const { setAllVotes, setVoteData } = VoteSlice.actions;
 
 export default VoteSlice.reducer;
