@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BaseBackURL } from "../constant/api";
 import { store } from "../redux/store";
-import { setAllEnvoys } from "../redux/slices/envoySlice";
+import { setAllEnvoys, setEnvoyToShow } from "../redux/slices/envoySlice";
 import { setAllVotes } from "../redux/slices/voteSlice";
 import { setAllActivity } from "../redux/slices/activitySlice";
 import { setAllCities, setAllDistricts } from "../redux/slices/citySlice";
@@ -17,6 +17,7 @@ export function getAllEnvoysData() {
     console.log(res.data);
     if (res.data.length > 0) {
       store.dispatch(setAllEnvoys(res.data));
+      store.dispatch(setEnvoyToShow(res.data));
     }
   });
 }
@@ -98,4 +99,19 @@ export function getAllInitialData() {
   getAllActivityData();
   getAllCities();
   getAllBlogPosts();
+}
+
+export function filterDataByCity(cityList) {
+  const allEnvoys = store.getState().envoy.envoyList;
+  const filteredList = [];
+  for (const item of cityList) {
+    for (const envoy of allEnvoys) {
+      if (envoy.electoral_district_name.includes(item)) {
+        if (!filteredList.includes(envoy)) {
+          filteredList.push(envoy);
+        }
+      }
+    }
+  }
+  store.dispatch(setEnvoyToShow([...filteredList]));
 }

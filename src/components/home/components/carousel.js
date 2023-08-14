@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import data from "../../../data.json";
 import leftArrow from "../../../assets/lightArrow.webp";
-import SelectState from "./selectState";
 import IranMap from "../../pluginIranMap/IranMap";
-import { BaseBackURL } from "../../../constant/api";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 

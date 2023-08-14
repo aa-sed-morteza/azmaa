@@ -17,9 +17,13 @@ import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { useUser } from "../../../context/userContext";
 import { contentSchema } from "../../schema";
+import { useSelector } from "react-redux";
 
 export default function Controller({ vote_voter }) {
-  const { state, dispatch } = useUser();
+  const { envoyListToShow } = useSelector((state) => state.envoy);
+  const { voteListToShow } = useSelector((state) => state.vote);
+  const { activityListToShow } = useSelector((state) => state.activity);
+
   const [select, setSelect] = useState(0);
   const [bills, setBills] = useState([]);
   const [envoys, setEnvoys] = useState([]);
@@ -46,161 +50,161 @@ export default function Controller({ vote_voter }) {
   const [filterCities, setFilterCities] = useState([]);
   const [filterAreas, setFilterAreas] = useState([]);
 
-  const getBills = () => {
-    let config;
-    if (vote_voter > 0) {
-      config = {
-        method: "get",
-        url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter=${vote_voter}&ordering=name, date`,
-      };
-    } else {
-      config = {
-        method: "get",
-        url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter&ordering=name, date`,
-      };
-    }
+  // const getBills = () => {
+  //   let config;
+  //   if (vote_voter > 0) {
+  //     config = {
+  //       method: "get",
+  //       url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter=${vote_voter}&ordering=name, date`,
+  //     };
+  //   } else {
+  //     config = {
+  //       method: "get",
+  //       url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter&ordering=name, date`,
+  //     };
+  //   }
 
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setBills([...res.data]);
-      }
-    });
-  };
+  //   axios(config).then((res) => {
+  //     // console.log(res.data);
+  //     if (res.data.length > 0) {
+  //       setBills([...res.data]);
+  //     }
+  //   });
+  // };
 
-  const getDistrict = (id) => {
-    var config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/electoral_district/?city__id=${id}&city__province__id`,
-    };
-    axios(config)
-      .then(function (response) {
-        setFilterCities([...response.data[0].agent]);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  // const getDistrict = (id) => {
+  //   var config = {
+  //     method: "get",
+  //     url: `${BaseBackURL}api/v1/electoral_district/?city__id=${id}&city__province__id`,
+  //   };
+  //   axios(config)
+  //     .then(function (response) {
+  //       setFilterCities([...response.data[0].agent]);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
 
-  const getCiteis = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/city/`,
-    };
+  // const getCiteis = () => {
+  //   let config = {
+  //     method: "get",
+  //     url: `${BaseBackURL}api/v1/city/`,
+  //   };
 
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setCiteis([...res.data]);
-      }
-    });
-  };
+  //   axios(config).then((res) => {
+  //     // console.log(res.data);
+  //     if (res.data.length > 0) {
+  //       setCiteis([...res.data]);
+  //     }
+  //   });
+  // };
 
-  const getEnvoys = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
-    };
+  // const getEnvoys = () => {
+  //   let config = {
+  //     method: "get",
+  //     url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
+  //   };
 
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setEnvoys([...res.data]);
-      }
-    });
-  };
+  //   axios(config).then((res) => {
+  //     // console.log(res.data);
+  //     if (res.data.length > 0) {
+  //       setEnvoys([...res.data]);
+  //     }
+  //   });
+  // };
 
-  const getActivities = () => {
-    let config;
-    // console.log("vote_voter="+vote_voter);
-    if (vote_voter > 0) {
-      config = {
-        method: "get",
-        url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter=${vote_voter}`,
-      };
-    } else {
-      config = {
-        method: "get",
-        url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter`,
-      };
-    }
+  // const getActivities = () => {
+  //   let config;
+  //   // console.log("vote_voter="+vote_voter);
+  //   if (vote_voter > 0) {
+  //     config = {
+  //       method: "get",
+  //       url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter=${vote_voter}`,
+  //     };
+  //   } else {
+  //     config = {
+  //       method: "get",
+  //       url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter`,
+  //     };
+  //   }
 
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setActivities([...res.data]);
-      }
-    });
-  };
+  //   axios(config).then((res) => {
+  //     // console.log(res.data);
+  //     if (res.data.length > 0) {
+  //       setActivities([...res.data]);
+  //     }
+  //   });
+  // };
 
-  const getElectoralDistrict = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
-    };
+  // const getElectoralDistrict = () => {
+  //   let config = {
+  //     method: "get",
+  //     url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
+  //   };
 
-    axios(config)
-      .then(function (response) {
-        // console.log(JSON.stringify(response.data));
-        setAreas([...response.data]);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  //   axios(config)
+  //     .then(function (response) {
+  //       // console.log(JSON.stringify(response.data));
+  //       setAreas([...response.data]);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
 
-  useEffect(() => {
-    getBills();
-    getActivities();
-    getElectoralDistrict();
-    getCiteis();
-    getEnvoys();
-  }, []);
+  // useEffect(() => {
+  //   getBills();
+  //   getActivities();
+  //   getElectoralDistrict();
+  //   getCiteis();
+  //   getEnvoys();
+  // }, []);
 
-  const filterEnvoyByCity = () => {
-    const result = envoys.filter((obj1) => {
-      return state.citySearch.some((obj2) => {
-        return obj1.electoral_district_name === obj2;
-      });
-    });
+  // const filterEnvoyByCity = () => {
+  //   const result = envoys.filter((obj1) => {
+  //     return state.citySearch.some((obj2) => {
+  //       return obj1.electoral_district_name === obj2;
+  //     });
+  //   });
 
-    setFilterCities(result);
-    getDistrict(result.map((x) => x.id));
-  };
+  //   setFilterCities(result);
+  //   getDistrict(result.map((x) => x.id));
+  // };
 
-  const filterAreaByCity = () => {
-    const district = areas.filter((obj1) => {
-      return state.citySearch.some((obj2) => {
-        return obj1.name === obj2;
-      });
-    });
+  // const filterAreaByCity = () => {
+  //   const district = areas.filter((obj1) => {
+  //     return state.citySearch.some((obj2) => {
+  //       return obj1.name === obj2;
+  //     });
+  //   });
 
-    if (district && state.citySearch.length > 0) {
-      setFilterAreas(district);
-    } else {
-      setFilterCities(envoys);
-    }
-  };
+  //   if (district && state.citySearch.length > 0) {
+  //     setFilterAreas(district);
+  //   } else {
+  //     setFilterCities(envoys);
+  //   }
+  // };
 
-  useEffect(() => {
-    filterEnvoyByCity();
-    filterAreaByCity();
-    if (state.citySearch.length > 0) {
-      setsearchparams({ filter: state.citySearch.map((x) => x) });
-    } else {
-      setsearchparams({});
-    }
-  }, [state.citySearch]);
+  // useEffect(() => {
+  //   filterEnvoyByCity();
+  //   filterAreaByCity();
+  //   if (state.citySearch.length > 0) {
+  //     setsearchparams({ filter: state.citySearch.map((x) => x) });
+  //   } else {
+  //     setsearchparams({});
+  //   }
+  // }, [state.citySearch]);
 
   const newList = envoys.sort((a, b) => b.transparency - a.transparency);
-  const filteredList = newList.filter((item) => {
-    let filter = searchparams.get("filter");
-    if (!filter) return true;
-    // let name= item.writer + item.description ;
-    let name = item.first_name + item.last_name + item.electoral_district_name;
-    // console.log(item);
-    return name.includes(filter);
-  });
+  // const filteredList = newList.filter((item) => {
+  //   let filter = searchparams.get("filter");
+  //   if (!filter) return true;
+  //   // let name= item.writer + item.description ;
+  //   let name = item.first_name + item.last_name + item.electoral_district_name;
+  //   // console.log(item);
+  //   return name.includes(filter);
+  // });
 
   const controllItem = data.controlPanel.map((x, i) => {
     return (
@@ -209,7 +213,7 @@ export default function Controller({ vote_voter }) {
           ""
         ) : (
           <Tab
-            key={i}
+            key={x.name + i}
             onClick={() => setSelect(i)}
             className={select === i ? "select" : ""}
           >
@@ -228,44 +232,44 @@ export default function Controller({ vote_voter }) {
     );
   });
 
-  const filteredAreas = areas.filter((item) => {
-    let filter = searchparams.get("filter");
-    if (!filter) return true;
-    // let name= item.writer + item.description ;
-    let name = item.name;
-    return name.includes(filter);
-  });
+  // const filteredAreas = areas.filter((item) => {
+  //   let filter = searchparams.get("filter");
+  //   if (!filter) return true;
+  //   // let name= item.writer + item.description ;
+  //   let name = item.name;
+  //   return name.includes(filter);
+  // });
 
-  var isDescending = true; //set to false for ascending
-  const sortBillsByDate = bills.sort((a, b) =>
-    isDescending
-      ? new Date(b.date).getTime() - new Date(a.date).getTime()
-      : new Date(a.date).getTime() - new Date(b.date).getTime()
-  );
+  // var isDescending = true; //set to false for ascending
+  // const sortBillsByDate = bills.sort((a, b) =>
+  //   isDescending
+  //     ? new Date(b.date).getTime() - new Date(a.date).getTime()
+  //     : new Date(a.date).getTime() - new Date(b.date).getTime()
+  // );
 
-  const filteredBills = sortBillsByDate.filter((item) => {
-    let filter = searchparams.get("filter");
-    if (!filter) return true;
-    // let name= item.writer + item.description ;
-    let name = item.name;
-    // console.log(item);
-    return name.includes(filter);
-  });
+  // const filteredBills = sortBillsByDate.filter((item) => {
+  //   let filter = searchparams.get("filter");
+  //   if (!filter) return true;
+  //   // let name= item.writer + item.description ;
+  //   let name = item.name;
+  //   // console.log(item);
+  //   return name.includes(filter);
+  // });
 
-  var istDescending = true; //set to false for ascending
-  const sortActivitiesByDate = activities.sort((a, b) =>
-    istDescending
-      ? new Date(b.date).getTime() - new Date(a.date).getTime()
-      : new Date(a.date).getTime() - new Date(b.date).getTime()
-  );
+  // var istDescending = true; //set to false for ascending
+  // const sortActivitiesByDate = activities.sort((a, b) =>
+  //   istDescending
+  //     ? new Date(b.date).getTime() - new Date(a.date).getTime()
+  //     : new Date(a.date).getTime() - new Date(b.date).getTime()
+  // );
 
-  const filteredActivities = sortActivitiesByDate.filter((item) => {
-    let filter = searchparams.get("filter");
-    if (!filter) return true;
-    // let name= item.writer + item.description ;
-    let name = item.name;
-    return name.includes(filter);
-  });
+  // const filteredActivities = sortActivitiesByDate.filter((item) => {
+  //   let filter = searchparams.get("filter");
+  //   if (!filter) return true;
+  //   // let name= item.writer + item.description ;
+  //   let name = item.name;
+  //   return name.includes(filter);
+  // });
 
   return (
     <ControllContainer>
@@ -284,15 +288,7 @@ export default function Controller({ vote_voter }) {
           placeholder="&#xF002; جستجو کن..."
         />
         <TabContainer>{controllItem}</TabContainer>
-        <RemoveCitySearch
-          onClick={() => {
-            dispatch({ type: "SET_PROVICE", payload: "" });
-            dispatch({ type: "SET_CITY_SEARCH", payload: [] });
-            dispatch({ type: "REMOVE_CITY_FILTER", payload: true });
-          }}
-        >
-          حذف فیلتر نقشه
-        </RemoveCitySearch>
+        <RemoveCitySearch>حذف فیلتر نقشه</RemoveCitySearch>
       </FilterContainer>
 
       {/* all */}
@@ -308,7 +304,7 @@ export default function Controller({ vote_voter }) {
                     <EnvoyvoteCard
                       bill={item}
                       vote_voter={vote_voter}
-                      key={i}
+                      key={"vote" + i}
                     />
                   );
                 else return <VoteCard bill={item} key={i} />;
@@ -343,7 +339,9 @@ export default function Controller({ vote_voter }) {
                   {filteredActivities
                     .slice(0, actionCardLimit)
                     .map((item, i) => {
-                      return <ActionCard activity={item} key={i} />;
+                      return (
+                        <ActionCard activity={item} key={"activity" + i} />
+                      );
                     })}
                 </Album>
                 <ShowMore
@@ -368,7 +366,7 @@ export default function Controller({ vote_voter }) {
                 <BestEnvoyContainer>
                   <Title>شفاف‌ترین نمایندگان</Title>
                   <SecondAlbum hide={thirdHide}>
-                    {newList
+                    {envoyListToShow
                       .filter((item) => {
                         let filter = searchparams.get("filter");
                         if (!filter) return true;
@@ -384,7 +382,7 @@ export default function Controller({ vote_voter }) {
                         return (
                           <BestEnvoy
                             envoy={item}
-                            key={i}
+                            key={"transparentEnvoy" + i}
                             click={() => {
                               navigate(`/envoy/${item.id}`);
                             }}
@@ -421,7 +419,9 @@ export default function Controller({ vote_voter }) {
                   {filteredActivities
                     .slice(0, actionCardLimit)
                     .map((item, i) => {
-                      return <ActionCard activity={item} key={i} />;
+                      return (
+                        <ActionCard activity={item} key={"lastAction" + i} />
+                      );
                     })}
                 </ActionContainer>
 
@@ -455,7 +455,7 @@ export default function Controller({ vote_voter }) {
               return (
                 <BestEnvoy
                   envoy={item}
-                  key={i}
+                  key={"envoyGallery" + i}
                   click={() => {
                     navigate(`/envoy/${item.id}`);
                   }}
@@ -490,7 +490,11 @@ export default function Controller({ vote_voter }) {
           <AreaContainer ref={areaRef}>
             {filteredAreas.slice(0, areaLimit).map((item, i) => {
               return (
-                <SelectArea area={item.name} envoys={item.agent} key={i} />
+                <SelectArea
+                  area={item.name}
+                  envoys={item.agent}
+                  key={"areaSelect" + i}
+                />
               );
             })}
           </AreaContainer>

@@ -9,6 +9,8 @@ import { provinceSchema } from "../schema/index";
 import axios from "axios";
 import { BaseBackURL } from "../../constant/api";
 import { useUser } from "../../context/userContext";
+import { useSelector } from "react-redux";
+import { filterDataByCity } from "../../dataFunctions/publicDataFunctions";
 
 const useMouse = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -29,199 +31,81 @@ const useMouse = () => {
 };
 
 const IranMap = ({ position, empty, style }) => {
-  const { state, dispatch } = useUser();
   const { x, y } = useMouse();
-  const [provinces, setProvinces] = useState(iranProvinces);
-  const [data, setData] = useState([]);
-  const [change, setChange] = useState(false);
-  const [provinceName, setProvinceName] = useState("");
-  const [provinceNameOnClick, setProvinceNameOnClick] = useState("");
-  const [mapZoom, setMapZoom] = useState(false);
-  const [provinceSelected, setProvinceSelected] = useState(false);
-  const [cities, setCities] = useState(["تمام ایران"]);
-  const [input, setInput] = useState("استان خود را انتخاب کنید");
-  const [envoys, setEnvoys] = useState([]);
-  const [citeis, setCiteis] = useState([]);
-  //get provinces of iran
-  const getProvince = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/city/`,
-    };
+  //
+  const [selectedProvince, setSelectedProvince] = useState(null);
+  const [availableCities, setAvailableCities] = useState([]);
+  const [showSelectModal, setShowSelectModal] = useState(false);
+  const [hoveredProvince, setHoveredProvince] = useState("");
+  const [selectedCities, setSelectedCities] = useState([]);
 
-    axios(config)
-      .then((response) => {
-        // console.log(JSON.stringify(response.data));
-        setData(response.data);
-        selectProvinces();
-        setChange(!change);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const onSubmit = () => {
+    console.log(selectedCities);
+    filterDataByCity(selectedCities);
   };
 
-  const selectProvinces = () => {
-    let box = [];
-    data.map((item) => {
-      iranProvinces.map((x) => {
-        if (x.name === item.province_name) {
-          box.push(x);
+  const { envoyListToShow } = useSelector((state) => state.envoy);
+  console.log(envoyListToShow);
+
+  const { cityList } = useSelector((state) => state.city);
+
+  useEffect(() => {
+    const newList = [];
+    if (selectedProvince) {
+      for (const item of cityList) {
+        if (item.province_name === selectedProvince) {
+          newList.push(item.name);
         }
-      });
-    });
-
-    setProvinces([...new Set(box)]);
-  };
-
-  const addCities = () => {
-    provinces.map((item) => {
-      for (let i = 0; i < data.length; i++) {
-        if (
-          item.name === data[i].province_name &&
-          !item.cities.includes(data[i].name)
-        ) {
-          item.cities.push(data[i].name);
-        }
+        setAvailableCities([...newList]);
       }
-    });
-  };
-
-  useEffect(() => {
-    getProvince();
-  }, []);
-
-  const getEnvoys = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
-    };
-
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setEnvoys([...res.data]);
-      }
-    });
-  };
-
-  const getCiteis = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/city/`,
-    };
-
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setCiteis([...res.data]);
-      }
-      state.city = citeis;
-    });
-  };
-
-  useEffect(() => {
-    if (provinces.length == 0) {
-      selectProvinces();
-      setChange(!change);
     } else {
-      if (provinces.map((item) => item.cities.length == 0)) {
-        addCities();
-      }
+      setAvailableCities([]);
     }
-  }, [change]);
-
-  useEffect(() => {
-    if (state.removeCityFilter === true) {
-      setProvinceSelected(false);
-      setProvinceNameOnClick("");
-      setProvinceName("");
-      setFieldValue("city", []);
-      setFieldValue("province", "");
-    }
-  }, [state.removeCityFilter]);
-
-  const onSubmit = async (values, actions) => {
-    if (values) {
-      setProvinceSelected(false);
-      // setCities(values.city);
-      dispatch({ type: "SET_PROVINCE_SEARCH", payload: values.province });
-      dispatch({ type: "SET_CITY_SEARCH", payload: values.city });
-      dispatch({ type: "REMOVE_CITY_FILTER", payload: false });
-      // setChange(!change)
-      // dispatch({ type: "SET_ELECTORAL_DISTRICT", payload: values.password });
-      // setProvinceName(values.province);
-      // setProvinceNameOnClick(values.province);
-    } else {
-      dispatch({ type: "SET_CITY", payload: "تمام ایران" });
-    }
-  };
-
-  const {
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-  } = useFormik({
-    initialValues: {
-      province: "",
-      city: [],
-    },
-    validationSchema: provinceSchema,
-    onSubmit,
-  });
+  }, [selectedProvince]);
 
   return (
     <Container style={style}>
-      {values.province == "" && <p className="input">{input}</p>}
-      {values.province !== "" && (
+      {selectedProvince === null && (
+        <p className="input">استان خود را انتخاب کنید</p>
+      )}
+      {selectedProvince && (
         <p className="select">
-          ایران <span>{values.province}</span>
-          {/* <span>{values.city}</span> */}
+          ایران <span>{selectedProvince}</span>
+          <span>{selectedCities.map((item) => item + " - ")}</span>
         </p>
       )}
 
-      <span className={styles.show_title}>
-        {provinceName}
-        <style jsx>{`
-          span {
-            left: ${x + 5 + "px"};
-            top: ${y + 5 + "px"};
-            z-index: 999;
-          }
-        `}</style>
+      <span
+        className={styles.show_title}
+        style={{ left: `${x - 70}px`, top: `${y - 120}px`, zIndex: 999 }}
+      >
+        {hoveredProvince}
       </span>
-      {provinceSelected && (
+      {showSelectModal && (
         <div>
           <div
             className={styles.backdrop}
-            onClick={() => setProvinceSelected(false)}
+            onClick={() => {
+              setShowSelectModal(false);
+              setSelectedProvince(null);
+              setSelectedCities([]);
+            }}
           ></div>
           <div className={styles.cities}>
             <p>
               <span className={styles.selected_province}>
                 انتخاب شهرستان در{" "}
               </span>
-              <span>{provinceNameOnClick}</span>
+              <span>{selectedProvince}</span>
             </p>
-            <form onSubmit={handleSubmit} autoComplete="off">
+            <form onSubmit={() => {}} autoComplete="off">
               {/* For select all */}
               <div>
                 <input
                   type="checkbox"
                   name="all"
                   id="all"
-                  onChange={() => {
-                    if (values.city.length > 0) {
-                      setFieldValue("city", []);
-                    } else {
-                      setFieldValue("city", [...cities]);
-                    }
-                  }}
+                  onChange={() => {}}
                 />
                 <label htmlFor="all" className={styles.city_label}>
                   انتخاب همه
@@ -229,19 +113,24 @@ const IranMap = ({ position, empty, style }) => {
                 <br />
               </div>
 
-              {cities.map((city, i) => {
+              {availableCities.map((city, i) => {
                 return (
                   <div key={i}>
                     <input
                       type="checkbox"
-                      key={city}
-                      value={values.city}
-                      name={city}
+                      key={city.name}
+                      value={city}
+                      name={city.name}
                       onChange={() => {
-                        setFieldValue("city", [...values.city, city]);
-                        citeis.push(city);
+                        if (selectedCities.includes(city)) {
+                          const newList = [...selectedCities];
+                          newList.splice(newList.indexOf(city), 1);
+                          setSelectedCities([...newList]);
+                        } else {
+                          setSelectedCities([...selectedCities, city]);
+                        }
                       }}
-                      checked={values.city.includes(city)}
+                      checked={selectedCities.includes(city)}
                       // defaultChecked={values.city.includes(city)}
                     />
                     <label htmlFor={city} className={styles.city_label}>
@@ -256,13 +145,22 @@ const IranMap = ({ position, empty, style }) => {
                 <button
                   type="button"
                   onClick={() => {
-                    onSubmit();
-                    setProvinceSelected(false);
+                    setShowSelectModal(false);
+                    setSelectedProvince(null);
+                    setSelectedCities([]);
                   }}
                 >
                   بازگشت و حذف فیلتر
                 </button>
-                <input type="submit" value="تایید" />
+                <input
+                  type="submit"
+                  onClick={() => {
+                    setShowSelectModal(false);
+                    onSubmit();
+                    setAvailableCities([]);
+                  }}
+                  value="تایید"
+                />
               </div>
             </form>
           </div>
@@ -281,9 +179,7 @@ const IranMap = ({ position, empty, style }) => {
             }}
           /> */}
           <svg
-            className={
-              mapZoom ? styles.svg + " " + styles.map_zoom : styles.svg
-            }
+            className={styles.svg}
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -295,20 +191,18 @@ const IranMap = ({ position, empty, style }) => {
               <path className={styles.iran} d={iranBorder} />
             </g>
             <g className={styles.province}>
-              {provinces.map((province) => (
+              {iranProvinces.map((province) => (
                 <path
                   key={province.id}
                   id={province.id}
                   className={province.className}
-                  fill={values.province == province.name ? "#FFAA00" : ""}
+                  fill={selectedProvince === province.name ? "#FFAA00" : ""}
                   d={province.d}
-                  onMouseOver={() => setProvinceName(province.name)}
-                  onMouseLeave={() => setProvinceName("")}
+                  onMouseOver={() => setHoveredProvince(province.name)}
+                  onMouseLeave={() => setHoveredProvince("")}
                   onClick={() => {
-                    setCities(province.cities);
-                    setProvinceSelected(true);
-                    setProvinceNameOnClick(province.name);
-                    setFieldValue("province", province.name);
+                    setSelectedProvince(province.name);
+                    setShowSelectModal(true);
                   }}
                 />
               ))}
@@ -318,8 +212,8 @@ const IranMap = ({ position, empty, style }) => {
               <path className={styles.caspian} d={caspianD} />
               <path
                 className={styles.persian_gulf}
-                onMouseOver={() => setProvinceName("جزایر خلیج فارس")}
-                onMouseLeave={() => setProvinceName("")}
+                onMouseOver={() => setHoveredProvince("جزایر خلیج فارس")}
+                onMouseLeave={() => setHoveredProvince("")}
                 d={persianGulfD}
               />
             </g>
