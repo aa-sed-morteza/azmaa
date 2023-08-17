@@ -14,96 +14,15 @@ import { BaseBackURL } from "../constant/api";
 import axios from "axios";
 import { useUser } from "../context/userContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Envoy() {
+  const { enovyListToShow } = useSelector((state) => state.envoy);
   const width = useWidth();
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const [envoys, setEnvoys] = useState([]);
   const [filterEnvoy, setFilterEnvoy] = useState([]);
-  const [citeis, setCiteis] = useState([]);
-  const [searchparams, setsearchparams] = useSearchParams();
-
-  const getEnvoys = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
-    };
-
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setEnvoys([
-          ...res.data.sort((a, b) => b.transparency - a.transparency),
-        ]);
-      }
-    });
-  };
-
-  const getCiteis = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/city/`,
-    };
-
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setCiteis([...res.data]);
-      }
-    });
-  };
-
-  const getDistrict = (id) => {
-    var config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/electoral_district/?city__id=${id}&city__province__id`,
-    };
-    axios(config)
-      .then(function (response) {
-        setEnvoys([...response.data[0].agent]);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const filterEnvoyByCity = () => {
-    if (state.city != "تمام ایران") {
-      const cityID = citeis.find((x) => x.name == state.city);
-      if (cityID) {
-        getDistrict(cityID.id);
-      }
-    } else {
-      getEnvoys();
-    }
-  };
-
-  useEffect(() => {
-    getEnvoys();
-    getCiteis();
-  }, []);
-
-  useEffect(() => {
-    filterEnvoyByCity();
-    if (state.citySearch.length > 0) {
-      setsearchparams({ filter: state.citySearch.map((x) => x) });
-      setFilterEnvoy(
-        envoys.filter((item) => {
-          let filter = searchparams.get("filter");
-          if (!filter) return true;
-          // let name= item.writer + item.description ;
-          let name =
-            item.first_name + item.last_name + item.electoral_district_name;
-          // console.log(item);
-          return name.includes(filter);
-        })
-      );
-    } else {
-      setsearchparams({});
-      setFilterEnvoy([]);
-    }
-  }, [state.citySearch]);
 
   return (
     <Container>
