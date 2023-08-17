@@ -1,4 +1,3 @@
-import { useState } from "react";
 import data from "../../data.json";
 import styled from "styled-components";
 import background from "../../assets/back-controll.webp";
@@ -9,18 +8,15 @@ export default function FilterBox({
   searchPhrase,
   setSearchPhrase,
 }) {
-  const [select, setSelect] = useState(0);
-
   const controllItem = data.controlPanel.map((item, i) => {
     return (
       <>
         <Tab
           key={item.name + i}
           onClick={() => {
-            setSelect(i);
-            setFilterType(item.name);
+            setFilterType(item.value);
           }}
-          className={select === i ? "select" : ""}
+          className={item.value === filterType ? "select" : ""}
         >
           {item.icon ? (
             <div>
@@ -42,6 +38,7 @@ export default function FilterBox({
           setSearchPhrase(e.target.value);
         }}
         type="text"
+        value={searchPhrase}
         placeholder="&#xF002; جستجو کن..."
       />
       <TabContainer>{controllItem}</TabContainer>

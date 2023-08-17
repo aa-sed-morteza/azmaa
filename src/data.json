@@ -120,7 +120,6 @@
       "icon": "../../assets/section.webp",
       "active_icon": "../../assets/section-active.webp"
     }
-   
   ],
   "envoysLess": [
     {
@@ -310,23 +309,28 @@
   "controlPanel": [
     {
       "name": "همه",
-      "icon": ""
+      "icon": "",
+      "value": "all"
     },
     {
       "name": "نمایندگان",
-      "icon": "../../assets/user.webp"
+      "icon": "../../assets/user.webp",
+      "value": "envoy"
     },
     {
       "name": "حوزه‌ها",
-      "icon": "../../assets/location.webp"
+      "icon": "../../assets/location.webp",
+      "value": "district"
     },
     {
       "name": "رأی‌گیری‌ها",
-      "icon": "../../assets/tik.webp"
+      "icon": "../../assets/tik.webp",
+      "value": "vote"
     },
     {
       "name": "عملکردها",
-      "icon": "../../assets/act.webp"
+      "icon": "../../assets/act.webp",
+      "value": "activity"
     }
   ],
   "envoy": [
