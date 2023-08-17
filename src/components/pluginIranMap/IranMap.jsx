@@ -4,11 +4,6 @@ import iranBorder, { caspianD, persianGulfD } from "../data/IranMapData";
 import styles from "./IranMap.module.css";
 import styled from "styled-components";
 import arrow from "../../assets/ggArrow.svg";
-import { useFormik } from "formik";
-import { provinceSchema } from "../schema/index";
-import axios from "axios";
-import { BaseBackURL } from "../../constant/api";
-import { useUser } from "../../context/userContext";
 import { useSelector } from "react-redux";
 import { filterDataByCity } from "../../dataFunctions/publicDataFunctions";
 
@@ -31,9 +26,11 @@ const useMouse = () => {
 };
 
 const IranMap = ({ position, empty, style }) => {
+  const { isFilterActive } = useSelector((state) => state.general);
+
   const { x, y } = useMouse();
   //
-  const [selectedProvince, setSelectedProvince] = useState(null);
+  const [selectedProvince, setSelectedProvince] = useState([]);
   const [availableCities, setAvailableCities] = useState([]);
   const [showSelectModal, setShowSelectModal] = useState(false);
   const [hoveredProvince, setHoveredProvince] = useState("");
@@ -51,9 +48,12 @@ const IranMap = ({ position, empty, style }) => {
 
   useEffect(() => {
     const newList = [];
-    if (selectedProvince) {
+    console.log(selectedProvince);
+    if (selectedProvince.length > 0) {
       for (const item of cityList) {
-        if (item.province_name === selectedProvince) {
+        if (
+          item.province_name === selectedProvince[selectedProvince.length - 1]
+        ) {
           newList.push(item.name);
         }
         setAvailableCities([...newList]);
@@ -63,6 +63,13 @@ const IranMap = ({ position, empty, style }) => {
     }
   }, [selectedProvince]);
 
+  useEffect(() => {
+    if (!isFilterActive) {
+      setSelectedProvince([]);
+      setSelectedCities([]);
+    }
+  }, [isFilterActive]);
+
   return (
     <Container style={style}>
       {selectedProvince === null && (
@@ -70,8 +77,13 @@ const IranMap = ({ position, empty, style }) => {
       )}
       {selectedProvince && (
         <p className="select">
-          ایران <span>{selectedProvince}</span>
-          <span>{selectedCities.map((item) => item + " - ")}</span>
+          ایران{" "}
+          <span>
+            {selectedProvince.length > 1 ? "چند استان" : selectedProvince[0]}
+          </span>
+          <span>
+            {selectedCities.length > 1 ? "چند شهر" : selectedCities[0]}
+          </span>
         </p>
       )}
 
@@ -86,9 +98,8 @@ const IranMap = ({ position, empty, style }) => {
           <div
             className={styles.backdrop}
             onClick={() => {
+              selectedProvince.splice(selectedProvince.length - 1, 1);
               setShowSelectModal(false);
-              setSelectedProvince(null);
-              setSelectedCities([]);
             }}
           ></div>
           <div className={styles.cities}>
@@ -146,7 +157,7 @@ const IranMap = ({ position, empty, style }) => {
                   type="button"
                   onClick={() => {
                     setShowSelectModal(false);
-                    setSelectedProvince(null);
+                    setSelectedProvince([]);
                     setSelectedCities([]);
                   }}
                 >
@@ -196,12 +207,20 @@ const IranMap = ({ position, empty, style }) => {
                   key={province.id}
                   id={province.id}
                   className={province.className}
-                  fill={selectedProvince === province.name ? "#FFAA00" : ""}
+                  fill={
+                    selectedProvince.includes(province.name) ? "#FFAA00" : ""
+                  }
                   d={province.d}
                   onMouseOver={() => setHoveredProvince(province.name)}
                   onMouseLeave={() => setHoveredProvince("")}
                   onClick={() => {
-                    setSelectedProvince(province.name);
+                    if (selectedProvince.includes(province.name)) {
+                      selectedProvince.splice(
+                        selectedProvince.indexOf(province.name),
+                        1
+                      );
+                    }
+                    setSelectedProvince([...selectedProvince, province.name]);
                     setShowSelectModal(true);
                   }}
                 />

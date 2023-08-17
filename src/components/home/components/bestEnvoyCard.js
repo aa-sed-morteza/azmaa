@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import pic from "../../../assets/pic.webp";
 import profile from "../../../assets/profile.webp";
-import area from "../../../assets/gray.svg"
+import area from "../../../assets/gray.svg";
 import { toFarsiNumber } from "../../../utils";
 
 const EnvoyCard = styled.div`
@@ -139,7 +139,7 @@ const Content = styled.div`
   }
 `;
 
-export default function BestEnvoy({ envoy, click }) {
+export default function BestEnvoyCard({ envoy, click }) {
   return (
     <EnvoyCard onClick={click}>
       <EnvoyImage>

@@ -23,13 +23,19 @@ import ScrollTop from "react-scrolltop-button";
 import Home from "./pages";
 import Envoy from "./pages/envoyPage";
 import { useEffect } from "react";
-import { getAllInitialData } from "./dataFunctions/publicDataFunctions";
+import {
+  clearFilterForAnyData,
+  getAllInitialData,
+} from "./dataFunctions/publicDataFunctions";
+import ClearFilterButton from "./components/general/clearFilterButton";
+import { useSelector } from "react-redux";
 
 function App() {
   useEffect(() => {
     getAllInitialData();
   }, []);
 
+  const { isFilterActive } = useSelector((state) => state.general);
   return (
     <div className="App">
       <UserState>
@@ -80,6 +86,7 @@ function App() {
           zindex={1000}
           // target={75}
         />
+        {isFilterActive && <ClearFilterButton />}
         <ToastContainer />
       </UserState>
     </div>

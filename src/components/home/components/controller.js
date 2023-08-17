@@ -8,7 +8,7 @@ import VoteCard from "./voteCard";
 import EnvoyvoteCard from "./EnvoyvoteCard";
 import HonestEnvoy from "../../envoy/components/honestEnvoy";
 import ActionCard from "./actionCard";
-import BestEnvoy from "./bestEnvoy";
+import BestEnvoy from "./bestEnvoyCard";
 import tik from "../../../assets/vote.webp";
 import ControlCore from "./controlCore";
 import SelectArea from "./selectArea";
@@ -18,11 +18,13 @@ import { BaseBackURL } from "../../../constant/api";
 import { useUser } from "../../../context/userContext";
 import { contentSchema } from "../../schema";
 import { useSelector } from "react-redux";
+import FilterBox from "../../general/filterBox";
 
 export default function Controller({ vote_voter }) {
   const { envoyListToShow } = useSelector((state) => state.envoy);
   const { voteListToShow } = useSelector((state) => state.vote);
   const { activityListToShow } = useSelector((state) => state.activity);
+  const { districtListToShow } = useSelector((state) => state.city);
 
   const [select, setSelect] = useState(0);
   const [bills, setBills] = useState([]);
@@ -197,7 +199,7 @@ export default function Controller({ vote_voter }) {
   // }, [state.citySearch]);
 
   const newList = envoys.sort((a, b) => b.transparency - a.transparency);
-  // const filteredList = newList.filter((item) => {
+  // const envoyListToShow = newList.filter((item) => {
   //   let filter = searchparams.get("filter");
   //   if (!filter) return true;
   //   // let name= item.writer + item.description ;
@@ -206,31 +208,31 @@ export default function Controller({ vote_voter }) {
   //   return name.includes(filter);
   // });
 
-  const controllItem = data.controlPanel.map((x, i) => {
-    return (
-      <>
-        {vote_voter > 0 && (i === 1 || i === 2) ? (
-          ""
-        ) : (
-          <Tab
-            key={x.name + i}
-            onClick={() => setSelect(i)}
-            className={select === i ? "select" : ""}
-          >
-            {x.icon ? (
-              <div>
-                <img src={x.icon} />
-              </div>
-            ) : (
-              ""
-            )}
+  // const controllItem = data.controlPanel.map((x, i) => {
+  //   return (
+  //     <>
+  //       {vote_voter > 0 && (i === 1 || i === 2) ? (
+  //         ""
+  //       ) : (
+  //         <Tab
+  //           key={x.name + i}
+  //           onClick={() => setSelect(i)}
+  //           className={select === i ? "select" : ""}
+  //         >
+  //           {x.icon ? (
+  //             <div>
+  //               <img src={x.icon} />
+  //             </div>
+  //           ) : (
+  //             ""
+  //           )}
 
-            <p>{x.name}</p>
-          </Tab>
-        )}
-      </>
-    );
-  });
+  //           <p>{x.name}</p>
+  //         </Tab>
+  //       )}
+  //     </>
+  //   );
+  // });
 
   // const filteredAreas = areas.filter((item) => {
   //   let filter = searchparams.get("filter");
@@ -263,7 +265,7 @@ export default function Controller({ vote_voter }) {
   //     : new Date(a.date).getTime() - new Date(b.date).getTime()
   // );
 
-  // const filteredActivities = sortActivitiesByDate.filter((item) => {
+  // const activityListToShow = sortActivitiesByDate.filter((item) => {
   //   let filter = searchparams.get("filter");
   //   if (!filter) return true;
   //   // let name= item.writer + item.description ;
@@ -273,32 +275,14 @@ export default function Controller({ vote_voter }) {
 
   return (
     <ControllContainer>
-      <FilterContainer className="filter-box">
-        <SearchInput
-          value={searchparams.get("filter") || ""}
-          onChange={(event) => {
-            let filter = event.target.value;
-            if (filter) {
-              setsearchparams({ filter: filter });
-            } else {
-              setsearchparams({});
-            }
-          }}
-          type="text"
-          placeholder="&#xF002; جستجو کن..."
-        />
-        <TabContainer>{controllItem}</TabContainer>
-        <RemoveCitySearch>حذف فیلتر نقشه</RemoveCitySearch>
-      </FilterContainer>
-
-      {/* all */}
+      <FilterBox />
 
       <>
         {(select === 0 || select === 3) && (
           <LastVotes ref={voterContainerRef}>
             <Title>آخرین رأی‌گیری‌ها</Title>
             <VoterContainer>
-              {filteredBills.slice(0, voteCardLimit).map((item, i) => {
+              {voteListToShow.slice(0, voteCardLimit).map((item, i) => {
                 if (vote_voter > 0)
                   return (
                     <EnvoyvoteCard
@@ -313,17 +297,17 @@ export default function Controller({ vote_voter }) {
 
             <ShowMore
               onClick={() => {
-                if (voteCardLimit < filteredBills.length) {
+                if (voteCardLimit < voteListToShow.length) {
                   setVoteCardLimit(voteCardLimit + 10);
                 } else {
                   setVoteCardLimit(3);
                   voterContainerRef.current.scrollIntoView();
                 }
               }}
-              arrow={voteCardLimit >= filteredBills.length}
+              arrow={voteCardLimit >= voteListToShow.length}
             >
               <p>
-                {voteCardLimit < filteredBills.length
+                {voteCardLimit < voteListToShow.length
                   ? "نمایش بیشتر"
                   : "نمایش کمتر "}
               </p>{" "}
@@ -336,7 +320,7 @@ export default function Controller({ vote_voter }) {
               <LastActions ref={mobileActionContainerRef}>
                 <Title> آخرین عملکردها</Title>
                 <Album>
-                  {filteredActivities
+                  {activityListToShow
                     .slice(0, actionCardLimit)
                     .map((item, i) => {
                       return (
@@ -345,9 +329,9 @@ export default function Controller({ vote_voter }) {
                     })}
                 </Album>
                 <ShowMore
-                  arrow={actionCardLimit >= filteredActivities.length}
+                  arrow={actionCardLimit >= activityListToShow.length}
                   onClick={() => {
-                    if (voteCardLimit < filteredActivities.length) {
+                    if (voteCardLimit < activityListToShow.length) {
                       setActionCardLimit(voteCardLimit + 10);
                     } else {
                       setActionCardLimit(3);
@@ -355,7 +339,7 @@ export default function Controller({ vote_voter }) {
                     }
                   }}
                 >
-                  {actionCardLimit < filteredActivities.length
+                  {actionCardLimit < activityListToShow.length
                     ? "نمایش بیشتر"
                     : "نمایش کمتر "}
                 </ShowMore>
@@ -416,7 +400,7 @@ export default function Controller({ vote_voter }) {
               <LastActions ref={actionContainerRef}>
                 <Title> آخرین عملکردها</Title>
                 <ActionContainer>
-                  {filteredActivities
+                  {activityListToShow
                     .slice(0, actionCardLimit)
                     .map((item, i) => {
                       return (
@@ -426,9 +410,9 @@ export default function Controller({ vote_voter }) {
                 </ActionContainer>
 
                 <ShowMore
-                  arrow={actionCardLimit >= filteredActivities.length}
+                  arrow={actionCardLimit >= activityListToShow.length}
                   onClick={() => {
-                    if (actionCardLimit < filteredActivities.length) {
+                    if (actionCardLimit < activityListToShow.length) {
                       setActionCardLimit(actionCardLimit + 10);
                     } else {
                       setActionCardLimit(3);
@@ -437,7 +421,7 @@ export default function Controller({ vote_voter }) {
                   }}
                 >
                   <p>
-                    {actionCardLimit < filteredActivities.length
+                    {actionCardLimit < activityListToShow.length
                       ? "نمایش بیشتر"
                       : "نمایش کمتر"}
                   </p>
@@ -451,7 +435,7 @@ export default function Controller({ vote_voter }) {
       {select === 1 && (
         <>
           <EnvoyGalley ref={envoyRef}>
-            {filteredList.slice(0, envoyLimit).map((item, i) => {
+            {envoyListToShow.slice(0, envoyLimit).map((item, i) => {
               return (
                 <BestEnvoy
                   envoy={item}
@@ -464,9 +448,9 @@ export default function Controller({ vote_voter }) {
             })}
           </EnvoyGalley>
           <ShowMore
-            arrow={envoyLimit >= filteredList.length}
+            arrow={envoyLimit >= envoyListToShow.length}
             onClick={() => {
-              if (envoyLimit < filteredList.length) {
+              if (envoyLimit < envoyListToShow.length) {
                 setEnvoyLimit(envoyLimit + 10);
               } else {
                 setEnvoyLimit(3);
@@ -476,7 +460,7 @@ export default function Controller({ vote_voter }) {
             style={{ marginTop: "20px" }}
           >
             <p>
-              {envoyLimit >= filteredList.length
+              {envoyLimit >= envoyListToShow.length
                 ? "نمایش کمتر"
                 : "نمایش بیشتر "}
             </p>{" "}
@@ -488,7 +472,7 @@ export default function Controller({ vote_voter }) {
       {select === 2 && (
         <>
           <AreaContainer ref={areaRef}>
-            {filteredAreas.slice(0, areaLimit).map((item, i) => {
+            {districtListToShow.slice(0, areaLimit).map((item, i) => {
               return (
                 <SelectArea
                   area={item.name}
@@ -499,9 +483,9 @@ export default function Controller({ vote_voter }) {
             })}
           </AreaContainer>
           <ShowMore
-            arrow={areaLimit >= filteredAreas.length}
+            arrow={areaLimit >= districtListToShow.length}
             onClick={() => {
-              if (areaLimit < filteredAreas.length) {
+              if (areaLimit < districtListToShow.length) {
                 setAreaLimit(areaLimit + 10);
               } else {
                 setAreaLimit(3);
@@ -511,7 +495,7 @@ export default function Controller({ vote_voter }) {
             style={{ marginTop: "20px" }}
           >
             <p>
-              {areaLimit >= filteredAreas.length
+              {areaLimit >= districtListToShow.length
                 ? "نمایش کمتر"
                 : "نمایش بیشتر "}
             </p>{" "}

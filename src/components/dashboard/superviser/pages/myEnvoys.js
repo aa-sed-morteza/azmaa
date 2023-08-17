@@ -7,7 +7,7 @@ import { BaseBackURL } from "../../../../constant/api";
 import axios from "axios";
 import { useUser } from "../../../../context/userContext";
 import { useNavigate } from "react-router-dom";
-import BestEnvoy from "../../../home/components/bestEnvoy";
+import BestEnvoy from "../../../home/components/bestEnvoyCard";
 
 export default function MyEnvoys() {
   const { state, dispatch } = useUser();

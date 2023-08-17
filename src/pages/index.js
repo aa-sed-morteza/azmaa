@@ -11,6 +11,10 @@ import {
 } from "../dataFunctions/publicDataFunctions";
 import { BaseBackURL } from "../constant/api";
 import axios from "axios";
+import FilterBox from "../components/general/filterBox";
+import LastVotes from "../components/home/components/lastVotes";
+import LastActivities from "../components/home/components/lastActivities";
+import BestEnvoys from "../components/home/components/BestEnvoys";
 
 const HomeContainer = styled.section`
   overflow-x: hidden;
@@ -24,7 +28,11 @@ export default function Home() {
     <HomeContainer>
       {width > 480 ? <Carousel /> : ""}
       {/* <FirstBanner /> */}
-      <HomeDetails />
+      <FilterBox />
+      <LastVotes />
+      <BestEnvoys />
+      <LastActivities />
+      {/* <HomeDetails /> */}
       <Magazine />
       {/* <SecondBanner /> */}
     </HomeContainer>

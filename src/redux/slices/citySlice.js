@@ -5,6 +5,7 @@ export const CitySlice = createSlice({
   initialState: {
     cityList: [],
     districtList: [],
+    districtToShow: [],
   },
   reducers: {
     setAllCities: (state, actions) => {
@@ -12,6 +13,9 @@ export const CitySlice = createSlice({
     },
     setAllDistricts: (state, actions) => {
       state.districtList = actions.payload;
+    },
+    setDistrictToShow: (state, actions) => {
+      state.districtToShow = actions.payload;
     },
   },
 });

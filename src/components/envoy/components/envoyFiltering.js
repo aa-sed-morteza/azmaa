@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import upArrow from "../../../assets/arrow.webp";
-import BestEnvoy from "../../home/components/bestEnvoy";
+import BestEnvoy from "../../home/components/bestEnvoyCard";
 
 const Container = styled.section`
   display: flex;
@@ -177,7 +177,9 @@ export default function EnvoyFiltering({ envoys }) {
           }}
           style={{ marginTop: "20px" }}
         >
-          <p>{showLimit >= envoyFilter.length ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
+          <p>
+            {showLimit >= envoyFilter.length ? "نمایش کمتر" : "نمایش بیشتر "}
+          </p>{" "}
         </ShowMore>
       </Gallery>
     </Container>
