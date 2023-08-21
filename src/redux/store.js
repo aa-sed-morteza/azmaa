@@ -4,7 +4,7 @@ import voteReducer from "./slices/voteSlice";
 import ActivitySlice from "./slices/activitySlice";
 import blogReducer from "./slices/blogSlice";
 import cityReducer from "./slices/citySlice";
-import generalReducer from "./slices/generalSlice";
+import filterReducer from "./slices/filterSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import { combineReducers } from "redux";
@@ -21,7 +21,7 @@ const reducers = combineReducers({
   activity: ActivitySlice,
   blog: blogReducer,
   city: cityReducer,
-  general: generalReducer,
+  filter: filterReducer,
 });
 
 export const store = configureStore({

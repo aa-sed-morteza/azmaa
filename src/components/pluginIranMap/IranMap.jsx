@@ -5,7 +5,11 @@ import styles from "./IranMap.module.css";
 import styled from "styled-components";
 import arrow from "../../assets/ggArrow.svg";
 import { useSelector } from "react-redux";
-import { filterDataByCity } from "../../dataFunctions/publicDataFunctions";
+import {
+  filterDataByCity,
+  setFilteredCities,
+  setFilteredCitiesData,
+} from "../../dataFunctions/publicDataFunctions";
 
 const useMouse = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -26,9 +30,11 @@ const useMouse = () => {
 };
 
 const IranMap = ({ position, empty, style }) => {
-  const { isFilterActive } = useSelector((state) => state.general);
+  const { isFilterActive, filteredCities, filteredProvince } = useSelector(
+    (state) => state.filter
+  );
 
-  const { x, y } = useMouse();
+  // const { x, y } = useMouse();
   //
   const [selectedProvince, setSelectedProvince] = useState([]);
   const [availableCities, setAvailableCities] = useState([]);
@@ -37,18 +43,15 @@ const IranMap = ({ position, empty, style }) => {
   const [selectedCities, setSelectedCities] = useState([]);
 
   const onSubmit = () => {
-    console.log(selectedCities);
+    console.log("map");
+    setFilteredCitiesData(selectedProvince, selectedCities);
     filterDataByCity(selectedCities);
   };
-
-  const { envoyListToShow } = useSelector((state) => state.envoy);
-  console.log(envoyListToShow);
 
   const { cityList } = useSelector((state) => state.city);
 
   useEffect(() => {
     const newList = [];
-    console.log(selectedProvince);
     if (selectedProvince.length > 0) {
       for (const item of cityList) {
         if (
@@ -70,6 +73,15 @@ const IranMap = ({ position, empty, style }) => {
     }
   }, [isFilterActive]);
 
+  useEffect(() => {
+    console.log("hello agian");
+
+    if (selectedProvince.length === 0 && selectedCities.length === 0) {
+      setSelectedCities([...filteredCities]);
+      setSelectedProvince([...filteredProvince]);
+    }
+  }, []);
+
   return (
     <Container style={style}>
       {selectedProvince === null && (
@@ -89,7 +101,7 @@ const IranMap = ({ position, empty, style }) => {
 
       <span
         className={styles.show_title}
-        style={{ left: `${x - 70}px`, top: `${y - 120}px`, zIndex: 999 }}
+        // style={{ left: `${x - 70}px`, top: `${y - 120}px`, zIndex: 999 }}
       >
         {hoveredProvince}
       </span>
@@ -109,7 +121,7 @@ const IranMap = ({ position, empty, style }) => {
               </span>
               <span>{selectedProvince}</span>
             </p>
-            <form onSubmit={() => {}} autoComplete="off">
+            <form>
               {/* For select all */}
               <div>
                 <input

@@ -9,7 +9,11 @@ import {
 } from "../redux/slices/activitySlice";
 import { setAllCities, setAllDistricts } from "../redux/slices/citySlice";
 import { setAllPosts } from "../redux/slices/blogSlice";
-import { setIsFilterActive } from "../redux/slices/generalSlice";
+import {
+  setFilteredCities,
+  setFilteredProvince,
+  setIsFilterActive,
+} from "../redux/slices/filterSlice";
 
 export function getAllEnvoysData() {
   let config = {
@@ -18,7 +22,6 @@ export function getAllEnvoysData() {
   };
 
   axios(config).then((res) => {
-    console.log(res.data);
     if (res.data.length > 0) {
       store.dispatch(setAllEnvoys(res.data));
       store.dispatch(setEnvoyToShow(res.data));
@@ -156,4 +159,12 @@ export function clearFilterForAnyData() {
   store.dispatch(setVoteToShow([...allVotes]));
   store.dispatch(setActivityToShow([...allActivities]));
   store.dispatch(setIsFilterActive(false));
+  store.dispatch(setFilteredProvince([]));
+  store.dispatch(setFilteredCities([]));
+}
+
+export function setFilteredCitiesData(provinces, cities) {
+  console.log(provinces);
+  store.dispatch(setFilteredProvince(provinces));
+  store.dispatch(setFilteredCities(cities));
 }

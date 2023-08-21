@@ -7,6 +7,7 @@ import FilterBox from "../components/general/filterBox";
 import LastVotes from "../components/home/components/lastVotes";
 import LastActivities from "../components/home/components/lastActivities";
 import BestEnvoys from "../components/home/components/BestEnvoys";
+import TopBanner from "../components/home/components/topBanner";
 
 const HomeContainer = styled.section`
   overflow-x: hidden;
@@ -20,7 +21,7 @@ export default function Home() {
 
   return (
     <HomeContainer>
-      {width > 480 ? <Carousel /> : ""}
+      {width > 480 ? <TopBanner /> : ""}
       {/* <FirstBanner /> */}
       <FilterBox
         filterType={filterType}

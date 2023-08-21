@@ -35,7 +35,7 @@ function App() {
     getAllInitialData();
   }, []);
 
-  const { isFilterActive } = useSelector((state) => state.general);
+  const { isFilterActive } = useSelector((state) => state.filter);
   return (
     <div className="App">
       <UserState>

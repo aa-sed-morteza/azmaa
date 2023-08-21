@@ -6,7 +6,7 @@ import profile from "../../../assets/profile.webp";
 import note from "../../../assets/text.webp";
 import news from "../../../assets/news.webp";
 import report from "../../../assets/report.webp";
-import article from "../../../assets/report.webp"
+import article from "../../../assets/report.webp";
 import { useNavigate } from "react-router-dom";
 import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
 
@@ -107,8 +107,10 @@ const Content = styled.div`
         display: inline-flex;
         background-image: ${(props) => props.icon == "note" && `url(${note})`};
         background-image: ${(props) => props.icon == "news" && `url(${news})`};
-        background-image: ${(props) => props.icon == "report" && `url(${report})`};
-        background-image: ${(props) => props.icon == "article" && `url(${article})`};
+        background-image: ${(props) =>
+          props.icon == "report" && `url(${report})`};
+        background-image: ${(props) =>
+          props.icon == "article" && `url(${article})`};
         background-size: contain;
         background-repeat: no-repeat;
         width: 30px;
@@ -185,7 +187,6 @@ export default function Carousel({ posts }) {
     );
   });
 
-  // console.log('new',items)
   return (
     <Container>
       {items.map((x, i) => {
@@ -203,9 +204,9 @@ export default function Carousel({ posts }) {
               <div className="identity">
                 <p className="user">
                   {x.type == "note" && "یادداشت"}
-                  {x.type =='news'&& 'خبر'}
-                  {x.type =='report' &&'گزارش'}
-                  {x.type =='article' &&'مقاله'}
+                  {x.type == "news" && "خبر"}
+                  {x.type == "report" && "گزارش"}
+                  {x.type == "article" && "مقاله"}
                 </p>
                 <p className="date">{convertDateToFarsi(x.created)}</p>
               </div>

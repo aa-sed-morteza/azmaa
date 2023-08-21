@@ -70,26 +70,18 @@ export default function Carousel() {
       {postsElements}
       <ShowIndex>{index}</ShowIndex>
       {/* <SelectState /> */}
-      <IranMap
-        style={{
-          position: "absolute",
-          top: "20%",
-          bottom: "10%",
-          margin: "auto",
-        }}
-      />
     </Wrapper>
   );
 }
 
 const Wrapper = styled.section`
   height: 100vh;
+  width: 100vw;
   overflow: hidden;
   flex-wrap: nowrap;
   display: flex;
   padding: 0;
   margin: 0;
-  position: relative;
 `;
 
 const ShowIndex = styled.div`
