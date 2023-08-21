@@ -82,7 +82,7 @@ function App() {
             color: "#FFFFFF",
           }}
           className="scroll-your-role"
-          speed={1000}
+          speed={500}
           zindex={1000}
           // target={75}
         />
