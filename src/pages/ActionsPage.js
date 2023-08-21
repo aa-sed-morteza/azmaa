@@ -6,50 +6,35 @@ import Filtering from "../components/vote/components/filtering";
 import Calendar from "../components/actions/components/calendar";
 import { BaseBackURL } from "../constant/api";
 import ActionCard from "../components/home/components/actionCard";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import upArrow from "../assets/arrow.webp";
+import { useSelector } from "react-redux";
 
 export default function Actions() {
+  const { activityListToShow } = useSelector((state) => state.activity);
+
   const navigate = useNavigate();
   const [selectedFilter, setSelectedFilter] = useState(0);
   const [selectedTag, setSelectedTag] = useState("همه");
-  const [activities, setActivities] = useState([]);
-  const [filteredActivities, setFilteredActivities] = useState([]);
-  const [secondHide, setSecondHide] = useState(false);
-  const [searchparams, setsearchparams] = useSearchParams();
   const [showLimit, setShowLimit] = useState(3);
+  const [finalActivityList, setFinalActivityList] = useState([]);
 
   const showRef = useRef(null);
 
-  const getActivities = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter`,
-    };
-
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setActivities([...res.data]);
-      }
-    });
-  };
-
   useEffect(() => {
-    getActivities();
-  }, []);
-
-  useEffect(() => {
-    if (activities.filter((item) => item.tag[0].name === selectedTag)) {
-      setFilteredActivities(
-        activities.filter((item) => item.tag[0].name === selectedTag)
-      );
+    if (selectedTag === "همه") {
+      setFinalActivityList([...activityListToShow]);
     } else {
-      setActivities(activities);
-    }
-
-    if (selectedTag == "همه") {
-      setFilteredActivities(activities);
+      const newList = [];
+      for (const item of activityListToShow) {
+        for (const tag of item.tag) {
+          if (tag.name === selectedTag) {
+            newList.push(item);
+          }
+        }
+      }
+      console.log(newList);
+      setFinalActivityList([...newList]);
     }
   }, [selectedTag]);
 
@@ -77,25 +62,13 @@ export default function Actions() {
           <LastActions>
             <Title> عملکردها</Title>
             <ActionContainer ref={showRef}>
-              {activities
-                .filter((item) => {
-                  let filter = searchparams.get("filter");
-                  if (!filter) return true;
-                  // let name= item.writer + item.description ;
-                  let name = item.name;
-                  return name.includes(filter);
-                })
-                .filter((item) => {
-                  if (selectedTag === "همه") return true;
-                  let tag = item.tag[0].name;
-                  return tag.includes(selectedTag);
-                })
+              {finalActivityList
                 .sort((a, b) => {
-                  if (selectedFilter == 1) {
+                  if (selectedFilter === 1) {
                     return new Date(b.date) - new Date(a.date);
-                  } else if (selectedFilter == 2) {
+                  } else if (selectedFilter === 2) {
                     return new Date(a.date) - new Date(b.date);
-                  } else if (selectedFilter == 3) {
+                  } else if (selectedFilter === 3) {
                     return b.transparency - a.transparency;
                   } else {
                     return 0;
@@ -108,9 +81,9 @@ export default function Actions() {
             </ActionContainer>
 
             <ShowMore
-              arrow={showLimit >= activities.length}
+              arrow={showLimit >= finalActivityList.length}
               onClick={() => {
-                if (showLimit < activities.length) {
+                if (showLimit < finalActivityList.length) {
                   setShowLimit(showLimit + 10);
                 } else {
                   setShowLimit(3);
@@ -120,7 +93,9 @@ export default function Actions() {
               style={{ marginTop: "20px" }}
             >
               <p>
-                {showLimit >= activities.length ? "نمایش کمتر" : "نمایش بیشتر "}
+                {showLimit >= finalActivityList.length
+                  ? "نمایش کمتر"
+                  : "نمایش بیشتر "}
               </p>{" "}
             </ShowMore>
           </LastActions>
