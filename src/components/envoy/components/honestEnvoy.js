@@ -6,10 +6,8 @@ import BestEnvoy from "../../home/components/bestEnvoyCard";
 
 export default function HonestEnvoy({ envoys }) {
   const navigate = useNavigate();
-  console.log(envoys);
   const newList = [...envoys];
   newList.sort((a, b) => b.transparency - a.transparency);
-  console.log(newList);
 
   return (
     <Container>

@@ -5,55 +5,41 @@ import Controler from "../components/vote/components/controler";
 import Filtering from "../components/vote/components/filtering";
 import { BaseBackURL } from "../constant/api";
 import axios from "axios";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import VoteCard from "../components/home/components/voteCard";
 import upArrow from "../assets/arrow.webp";
+import { useSelector } from "react-redux";
 
 export default function Vote() {
+  const { voteListToShow } = useSelector((state) => state.vote);
   const navigate = useNavigate();
   const [selectedFilter, setSelectedFilter] = useState(0);
   const [selectedTag, setSelectedTag] = useState("همه");
-  const [bills, setBills] = useState([]);
-  const [filteredBills, setFilteredBills] = useState([]);
-  const [firstHide, setFirstHide] = useState(false);
-  const [searchparams, setsearchparams] = useSearchParams();
   const [showLimit, setShowLimit] = useState(3);
-
-  const showRef = useRef(null);
-
-  const getActivities = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter&ordering=name, date`,
-    };
-
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setBills([...res.data]);
-        setFilteredBills([...res.data]);
-      }
-    });
-  };
+  const [finalVoteList, setFinalVoteList] = useState([]);
 
   useEffect(() => {
-    getActivities();
-  }, []);
+    setFinalVoteList([...voteListToShow]);
+  }, [voteListToShow]);
 
   useEffect(() => {
-    if (bills.tag)
-      if (bills.filter((item) => item.tag[0].name === selectedTag)) {
-        setFilteredBills(
-          bills.filter((item) => item.tag[0].name === selectedTag)
-        );
-      } else {
-        setBills(bills);
+    if (selectedTag === "همه") {
+      setFinalVoteList([...voteListToShow]);
+    } else {
+      const newList = [];
+      for (const item of voteListToShow) {
+        for (const tag of item.tag) {
+          if (tag.name === selectedTag) {
+            newList.push(item);
+          }
+        }
       }
-
-    if (selectedTag == "همه") {
-      setFilteredBills(bills);
+      console.log(newList);
+      setFinalVoteList([...newList]);
     }
   }, [selectedTag]);
+
+  const showRef = useRef(null);
 
   return (
     <Container>
@@ -78,27 +64,13 @@ export default function Vote() {
         />
         {/* <Titleh1>آخرین رأی‌گیری‌ها</Titleh1> */}
         <VoterContainer ref={showRef}>
-          {bills
-            .filter((item) => {
-              let filter = searchparams.get("filter");
-              if (!filter) return true;
-              // let name= item.writer + item.description ;
-              let name = item.name;
-              console.log(item);
-              return name.includes(filter);
-            })
-            .filter((item) => {
-              if (selectedTag === "همه") return true;
-              let tag = "";
-              if (item.tag[0]) tag = item.tag[0].name;
-              return tag.includes(selectedTag);
-            })
+          {finalVoteList
             .sort((a, b) => {
-              if (selectedFilter == 1) {
+              if (selectedFilter === 1) {
                 return new Date(b.date) - new Date(a.date);
-              } else if (selectedFilter == 2) {
+              } else if (selectedFilter === 2) {
                 return new Date(a.date) - new Date(b.date);
-              } else if (selectedFilter == 3) {
+              } else if (selectedFilter === 3) {
                 return b.bill_transparency - a.bill_transparency;
               } else {
                 return 0;
@@ -110,9 +82,9 @@ export default function Vote() {
             })}
         </VoterContainer>
         <ShowMore
-          arrow={showLimit >= bills.length}
+          arrow={showLimit >= finalVoteList.length}
           onClick={() => {
-            if (showLimit < bills.length) {
+            if (showLimit < finalVoteList.length) {
               setShowLimit(showLimit + 10);
             } else {
               setShowLimit(3);
@@ -121,7 +93,9 @@ export default function Vote() {
           }}
           style={{ marginTop: "20px" }}
         >
-          <p>{showLimit >= bills.length ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
+          <p>
+            {showLimit >= finalVoteList.length ? "نمایش کمتر" : "نمایش بیشتر "}
+          </p>{" "}
         </ShowMore>
 
         {/* <Calendar bills={filteredBills} /> */}
