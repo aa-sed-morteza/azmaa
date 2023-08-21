@@ -93,22 +93,14 @@ export default function ActiveEnvoy({ envoys }) {
   const navigate = useNavigate();
   const [showMore, setShowMore] = useState(false);
   const [searchparams, setsearchparams] = useSearchParams();
+  const newEnvoyList = [...envoys];
   return (
     <Container>
       <Title>شفاف ترین نمایندگان</Title>
       <EnvoyContainer hide={showMore}>
         {/* {console.log(envoys)} */}
-        {envoys
+        {newEnvoyList
           .sort((a, b) => b.transparency - a.transparency)
-          .filter((item) => {
-            let filter = searchparams.get("filter");
-            if (!filter) return true;
-            // let name= item.writer + item.description ;
-            let name =
-              item.first_name + item.last_name + item.electoral_district_name;
-            // console.log(item);
-            return name.includes(filter);
-          })
           .map((item, i) => (
             <BestEnvoy
               key={i}

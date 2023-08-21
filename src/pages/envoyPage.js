@@ -17,12 +17,10 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function Envoy() {
-  const { enovyListToShow } = useSelector((state) => state.envoy);
+  const { envoyListToShow } = useSelector((state) => state.envoy);
   const width = useWidth();
   const navigate = useNavigate();
-  const { state, dispatch } = useUser();
-  const [envoys, setEnvoys] = useState([]);
-  const [filterEnvoy, setFilterEnvoy] = useState([]);
+  console.log(envoyListToShow);
 
   return (
     <Container>
@@ -33,7 +31,7 @@ export default function Envoy() {
             navigate("/");
           }}
         >
-          خانه /{" "}
+          خانه /
         </p>
         <p
           className="component"
@@ -41,8 +39,7 @@ export default function Envoy() {
             navigate("/envoy");
           }}
         >
-          {" "}
-          نمایندگان{" "}
+          نمایندگان
         </p>
       </Title>
       <Content>
@@ -51,46 +48,21 @@ export default function Envoy() {
           <IranMap />
         ) : (
           <Wraper>
-            {/* <Map />  */}
             <IranMap />
-            {filterEnvoy.length > 0 ? (
-              <HonestEnvoy envoys={filterEnvoy} />
-            ) : (
-              <HonestEnvoy envoys={envoys} />
-            )}
+            <HonestEnvoy envoys={envoyListToShow} />
           </Wraper>
         )}
-        <RemoveCitySearch
-          onClick={() => {
-            dispatch({ type: "SET_PROVICE", payload: "" });
-            dispatch({ type: "SET_CITY_SEARCH", payload: [] });
-            dispatch({ type: "REMOVE_CITY_FILTER", payload: true });
-          }}
-        >
-          حذف فیلتر نقشه
-        </RemoveCitySearch>
 
         <Search />
         {/* <AdvanceSearch  setEnvoys={setEnvoys} /> */}
-        {width < 481 &&
-          (filterEnvoy.length > 0 ? (
-            <EnvoyFiltering envoys={filterEnvoy} />
-          ) : (
-            <EnvoyFiltering envoys={envoys} />
-          ))}
+        {width < 481 && <EnvoyFiltering envoys={envoyListToShow} />}
         {width > 481 && (
           <>
-            {filterEnvoy.length > 0 ? (
-              <ActiveEnvoy envoys={filterEnvoy} />
-            ) : (
-              <ActiveEnvoy envoys={envoys} />
-            )}
+            <ActiveEnvoy envoys={envoyListToShow} />
+
             <Banner />
-            {filterEnvoy.length > 0 ? (
-              <NewEnvoy envoys={filterEnvoy} />
-            ) : (
-              <NewEnvoy envoys={envoys} />
-            )}
+
+            <NewEnvoy envoys={envoyListToShow} />
           </>
         )}
       </Content>

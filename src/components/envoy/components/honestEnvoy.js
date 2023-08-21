@@ -6,32 +6,24 @@ import BestEnvoy from "../../home/components/bestEnvoyCard";
 
 export default function HonestEnvoy({ envoys }) {
   const navigate = useNavigate();
-  const [searchparams, setsearchparams] = useSearchParams();
-  const newList = envoys.sort((a, b) => a.transparency > b.transparency);
+  console.log(envoys);
+  const newList = [...envoys];
+  newList.sort((a, b) => b.transparency - a.transparency);
+  console.log(newList);
 
   return (
     <Container>
       <Title>شفاف‌ترین نمایندگان</Title>
       <Gallery>
-        {newList
-          .filter((item) => {
-            let filter = searchparams.get("filter");
-            if (!filter) return true;
-            // let name= item.writer + item.description ;
-            let name =
-              item.first_name + item.last_name + item.electoral_district_name;
-            // console.log(item);
-            return name.includes(filter);
-          })
-          .map((item, i) => (
-            <BestEnvoy
-              key={i}
-              envoy={item}
-              click={() => {
-                navigate(`/envoy/${item.id}`);
-              }}
-            />
-          ))}
+        {newList.map((item, i) => (
+          <BestEnvoy
+            key={i}
+            envoy={item}
+            click={() => {
+              navigate(`/envoy/${item.id}`);
+            }}
+          />
+        ))}
       </Gallery>
     </Container>
   );

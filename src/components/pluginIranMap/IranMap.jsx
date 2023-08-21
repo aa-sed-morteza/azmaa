@@ -70,17 +70,11 @@ const IranMap = ({ position, empty, style }) => {
     if (!isFilterActive) {
       setSelectedProvince([]);
       setSelectedCities([]);
-    }
-  }, [isFilterActive]);
-
-  useEffect(() => {
-    console.log("hello agian");
-
-    if (selectedProvince.length === 0 && selectedCities.length === 0) {
+    } else if (selectedProvince.length === 0 && selectedCities.length === 0) {
       setSelectedCities([...filteredCities]);
       setSelectedProvince([...filteredProvince]);
     }
-  }, []);
+  }, [isFilterActive]);
 
   return (
     <Container style={style}>
