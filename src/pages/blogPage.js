@@ -8,28 +8,14 @@ import Carousel from "../components/blog/components/carousel";
 import axios from "axios";
 import { BaseBackURL } from "../constant/api";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Blog() {
+  const { postList } = useSelector((state) => state.blog);
   const width = useWidth();
   const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
-
-  const getPosts = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/blog/?writer__id&tag__id&is_suggested=True, False&ordering=created`,
-    };
-
-    axios(config).then((res) => {
-      // console.log(res);
-      if (res.data.length > 0) {
-        setPosts([...res.data]);
-      }
-    });
-  };
 
   useEffect(() => {
-    getPosts();
     window.scrollTo(0, 0);
   }, []);
 
@@ -46,10 +32,14 @@ export default function Blog() {
         </p>
         <p className="component"> بلاگ </p>
       </Title>
-      {width < 481 ? <Poster posts={posts} /> : <Carousel posts={posts} />}
+      {width < 481 ? (
+        <Poster posts={postList} />
+      ) : (
+        <Carousel posts={postList} />
+      )}
 
-      <Magazine posts={posts} />
-      <SelectNews posts={posts} />
+      <Magazine posts={postList} />
+      <SelectNews posts={postList} />
     </Container>
   );
 }

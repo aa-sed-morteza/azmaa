@@ -63,7 +63,7 @@ export default function SelectNews({ posts }) {
               navigate(`/blog/${x.id}`);
             }}
           >
-            ادامه  مطلب
+            ادامه مطلب
           </p>
 
           <p className="date">{convertDateToFarsi(x.created)}</p>
@@ -115,7 +115,9 @@ export default function SelectNews({ posts }) {
           }}
           style={{ marginTop: "20px" }}
         >
-          <p>{showLimit >= filteredPosts.length ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
+          <p>
+            {showLimit >= filteredPosts.length ? "نمایش کمتر" : "نمایش بیشتر "}
+          </p>{" "}
         </ShowMore>
       </ChangeBack>
     </Container>
