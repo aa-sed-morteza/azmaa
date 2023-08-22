@@ -6,6 +6,7 @@ export const VoteSlice = createSlice({
     voteList: [],
     voteData: {},
     voteListToShow: [],
+    isVoteLoaded: false,
   },
   reducers: {
     setAllVotes: (state, actions) => {
@@ -17,10 +18,14 @@ export const VoteSlice = createSlice({
     setVoteToShow: (state, actions) => {
       state.voteListToShow = actions.payload;
     },
+    setVoteIsLoaded: (state, actions) => {
+      state.isVoteLoaded = actions.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setAllVotes, setVoteData, setVoteToShow } = VoteSlice.actions;
+export const { setAllVotes, setVoteData, setVoteToShow, setVoteIsLoaded } =
+  VoteSlice.actions;
 
 export default VoteSlice.reducer;

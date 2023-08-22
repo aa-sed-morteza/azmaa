@@ -6,6 +6,8 @@ export const CitySlice = createSlice({
     cityList: [],
     districtList: [],
     districtToShow: [],
+    isCityLoaded: false,
+    isDistrictLoaded: false,
   },
   reducers: {
     setAllCities: (state, actions) => {
@@ -17,10 +19,21 @@ export const CitySlice = createSlice({
     setDistrictToShow: (state, actions) => {
       state.districtToShow = actions.payload;
     },
+    setCityIsLoaded: (state, actions) => {
+      state.isCityLoaded = actions.payload;
+    },
+    setDistrictIsLoaded: (state, actions) => {
+      state.isDistrictLoaded = actions.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setAllCities, setAllDistricts } = CitySlice.actions;
+export const {
+  setAllCities,
+  setAllDistricts,
+  setCityIsLoaded,
+  setDistrictIsLoaded,
+} = CitySlice.actions;
 
 export default CitySlice.reducer;

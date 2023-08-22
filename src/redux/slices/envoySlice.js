@@ -9,6 +9,7 @@ export const EnvoySlice = createSlice({
       lastName: "",
     },
     envoyListToShow: [],
+    isEnvoyLoaded: false,
   },
   reducers: {
     setAllEnvoys: (state, actions) => {
@@ -20,11 +21,14 @@ export const EnvoySlice = createSlice({
     setEnvoyToShow: (state, actions) => {
       state.envoyListToShow = actions.payload;
     },
+    setEnvoyIsLoaded: (state, actions) => {
+      state.isEnvoyLoaded = actions.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setAllEnvoys, setEnvoyData, setEnvoyToShow } =
+export const { setAllEnvoys, setEnvoyData, setEnvoyToShow, setEnvoyIsLoaded } =
   EnvoySlice.actions;
 
 export default EnvoySlice.reducer;

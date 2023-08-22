@@ -6,6 +6,7 @@ export const ActivitySlice = createSlice({
     activityList: [],
     activityData: {},
     activityListToShow: [],
+    isActivityLoaded: false,
   },
   reducers: {
     setAllActivity: (state, actions) => {
@@ -17,11 +18,18 @@ export const ActivitySlice = createSlice({
     setActivityToShow: (state, actions) => {
       state.activityListToShow = actions.payload;
     },
+    setActivityIsLoaded: (state, actions) => {
+      state.isActivityLoaded = actions.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setAllActivity, setActivityData, setActivityToShow } =
-  ActivitySlice.actions;
+export const {
+  setAllActivity,
+  setActivityData,
+  setActivityToShow,
+  setActivityIsLoaded,
+} = ActivitySlice.actions;
 
 export default ActivitySlice.reducer;
