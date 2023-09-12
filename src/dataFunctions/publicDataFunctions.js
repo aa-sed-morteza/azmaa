@@ -81,6 +81,7 @@ export async function getAllVotesData() {
       // console.log(res.data);
       if (res.data.length > 0) {
         store.dispatch(setAllVotes(res.data));
+        store.dispatch(setVoteToShow(res.data));
         store.dispatch(setVoteIsLoaded(true));
       }
     })

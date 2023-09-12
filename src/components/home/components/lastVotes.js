@@ -5,11 +5,15 @@ import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import EnvoyvoteCard from "./EnvoyvoteCard";
 import VoteCard from "./voteCard";
+import { useIsVisible } from "../../../hook/useIsVisible";
 
 export default function LastVotes({ vote_voter }) {
   const voterContainerRef = useRef(null);
   const { voteListToShow } = useSelector((state) => state.vote);
   const [voteCardLimit, setVoteCardLimit] = useState(3);
+
+  const isVisible = useIsVisible(voterContainerRef);
+  console.log(isVisible);
 
   return (
     <Section ref={voterContainerRef}>
