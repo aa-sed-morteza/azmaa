@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import EnvoyvoteCard from "./EnvoyvoteCard";
 import VoteCard from "./voteCard";
 import { useIsVisible } from "../../../hook/useIsVisible";
+import { useTrail, animated } from "react-spring";
 
 export default function LastVotes({ vote_voter }) {
   const voterContainerRef = useRef(null);
@@ -15,20 +16,33 @@ export default function LastVotes({ vote_voter }) {
   const isVisible = useIsVisible(voterContainerRef);
   console.log(isVisible);
 
+  const trails = useTrail(8, {
+    from: { opacity: 0 },
+    to: { opacity: isVisible ? 1 : 0 },
+    config: { duration: 1000 },
+    delay: 100,
+  });
+
   return (
-    <Section ref={voterContainerRef}>
-      <Title>آخرین رأی‌گیری‌ها</Title>
-      <VoterContainer>
+    <Section ref={voterContainerRef} style={trails[0]}>
+      <Title style={trails[1]}>آخرین رأی‌گیری‌ها</Title>
+      <VoterContainer style={trails[2]}>
         {voteListToShow.slice(0, voteCardLimit).map((item, i) => {
           if (vote_voter > 0)
             return (
               <EnvoyvoteCard
+                style={trails[3 + i]}
                 bill={item}
                 vote_voter={vote_voter}
                 key={"vote" + i}
               />
             );
-          else return <VoteCard bill={item} key={i} />;
+          else
+            return (
+              <animated.div style={trails[i + 3]} clas>
+                <VoteCard bill={item} key={i} />
+              </animated.div>
+            );
         })}
       </VoterContainer>
 
@@ -53,13 +67,13 @@ export default function LastVotes({ vote_voter }) {
   );
 }
 
-const Section = styled.div`
+const Section = styled(animated.div)`
   @media (min-width: 481px) {
     margin-bottom: 90px;
   }
 `;
 
-const Title = styled.h1`
+const Title = styled(animated.h1)`
   color: #9f9f9f;
   font-size: 4.65vw;
   font-weight: 300;
@@ -78,7 +92,7 @@ const Title = styled.h1`
   @media (min-width: 481px) {
     margin-top: 47px;
     font-size: 1.87vw;
-    margin-bottom: 24px;
+    margin-bottom: 50px;
     &:after {
       width: 75%;
     }
@@ -151,10 +165,16 @@ const ShowMore = styled.div`
   }
 `;
 
-const VoterContainer = styled.div`
+const VoterContainer = styled(animated.div)`
   /* & > :nth-of-type(1n + 2) {
     display: ${(props) => (!props.hide ? "none" : "")};
   } */
+  display: flex;
+
+  & > div {
+    width: 25%;
+  }
+
   @media (min-width: 481px) {
     display: flex;
     gap: 20px;
@@ -162,9 +182,7 @@ const VoterContainer = styled.div`
     flex-wrap: wrap;
     // margin-left:-7%;
     // margin-right:-7%;
-    & > :nth-of-type(1n + 2) {
-      display: flex;
-    }
+
     /* & > :nth-of-type(1n + 4) {
       display: ${(props) => (!props.hide ? "none" : "")};
     } */
