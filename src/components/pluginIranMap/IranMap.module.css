@@ -39,6 +39,7 @@
   transition: transform 2.5s ease;
   overflow: auto;
 }
+/*  */
 
 .map .border path {
   fill: #fff;
