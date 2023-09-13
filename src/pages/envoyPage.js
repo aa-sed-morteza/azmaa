@@ -76,7 +76,7 @@ const Container = styled.section`
   padding: 10px 20px;
   overflow: hidden;
   @media (min-width: 481px) {
-    padding: 20px 0;
+    padding: 7vw 0;
     background-color: #ffffff;
   }
 `;
@@ -120,8 +120,10 @@ const Content = styled.div`
 
 const Wraper = styled.div`
   display: flex;
+  gap: 2vw;
   justify-content: space-between;
   margin-bottom: 70px;
+  padding: 0 6%;
 `;
 
 const RemoveCitySearch = styled.div`

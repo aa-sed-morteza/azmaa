@@ -30,7 +30,7 @@ export default function HonestEnvoy({ envoys }) {
 const Container = styled.div`
   background-color: #f3f3f3;
   border: 1px solid #cbcbcb;
-  border-radius: 8px 0px 0px 8px;
+  border-radius: 8px 8px 8px 8px;
   padding: 2.292vw;
   padding-left: 9.792vw;
   max-height: 43.125vw;
