@@ -61,13 +61,13 @@ const Content = styled.div`
   width: 71%;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   justify-content: flex-start;
   height: 100%;
   .title {
     color: #707070;
     font-weight: 800;
-    font-size: 3.33vw;
+    font-size: 1.9vw;
     margin: 0;
     line-height: 5.78vw;
     -webkit-box-orient: vertical;
@@ -78,16 +78,15 @@ const Content = styled.div`
   }
   .text {
     font-weight: 400;
-    font-size: 1.66vw;
+    font-size: 1.2vw;
     line-height: 2.86vw;
     text-align: justify;
     color: #707070;
     margin: 0;
-    -webkit-box-orient: vertical;
+    padding: 0 16px;
     display: -webkit-box;
     text-overflow: ellipsis;
     overflow: hidden;
-    -webkit-line-clamp: 4;
   }
   .identity {
     display: flex;

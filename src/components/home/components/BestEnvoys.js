@@ -135,6 +135,11 @@ const ShowMore = styled.div`
 `;
 
 const SecondAlbum = styled.div`
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  padding: 0 40px;
   & > :nth-of-type(1n + 4) {
     display: ${(props) => (!props.hide ? "none" : "")};
   }

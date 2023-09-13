@@ -266,8 +266,13 @@ const IranMap = ({ position, empty, style }) => {
 export default IranMap;
 
 const Container = styled.div`
+<<<<<<< HEAD
   border: 1px solid #cbcbcb;
   border-radius: 8px;
+=======
+  border: 2px solid #095644;
+  border-radius: 4px;
+>>>>>>> hanji/fix/styles
   .input {
     display: flex;
     align-items: center;
@@ -293,8 +298,8 @@ const Container = styled.div`
     margin: 0;
     padding-top: 2.093vw;
     padding-right: 11.395vw;
-    color: #ffaa00;
-    font-weight: 300;
+    color: #095644;
+    font-weight: 500;
     font-size: 5.581vw;
     display: flex;
     gap: 5px;
