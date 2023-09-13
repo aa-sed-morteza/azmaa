@@ -349,7 +349,6 @@ const Nonvote = styled.div`
       background-color: #d8d8d8; */
       border-bottom: 4px solid #d8d8d8;
     }
-  }
   @media (min-width: 481px) {
     font-size: 1.458vw;
     font-weight: 400;

@@ -29,33 +29,10 @@ const useMouse = () => {
   return mousePosition;
 };
 
-<<<<<<< HEAD
-const IranMap = ({ position, empty }) => {
-  const { state, dispatch } = useUser();
-  const { x, y } = useMouse();
-  const [provinces, setProvinces] = useState(iranProvinces);
-  const [data, setData] = useState([]);
-  const [change, setChange] = useState(false);
-  const [provinceName, setProvinceName] = useState("");
-  const [provinceNameOnClick, setProvinceNameOnClick] = useState("");
-  const [mapZoom, setMapZoom] = useState(false);
-  const [provinceSelected, setProvinceSelected] = useState(false);
-  const [cities, setCities] = useState(["تمام ایران"]);
-  const [input, setInput] = useState("استان خود را انتخاب کنید");
-  const [envoys, setEnvoys] = useState([]);
-  const [citeis, setCiteis] = useState([]);
-  //get provinces of iran
-  const getProvince = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/city/`,
-    };
-=======
 const IranMap = ({ position, empty, style }) => {
   const { isFilterActive, filteredCities, filteredProvince } = useSelector(
     (state) => state.filter
   );
->>>>>>> hamid/fix/motions
 
   // const { x, y } = useMouse();
   //
