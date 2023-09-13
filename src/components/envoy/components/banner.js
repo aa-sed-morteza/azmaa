@@ -3,18 +3,17 @@ import styled from "styled-components";
 import pic from "../../../assets/banner5.webp";
 
 const Container = styled.section`
-margin-right:-12%;
-  img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
-`
+`;
 
-export default function Banner(){
-    return(
-        <Container>
-            <img src={pic} alt="banner"/>
-        </Container>
-    )
+export default function Banner() {
+  return (
+    <Container>
+      <img src={pic} alt="banner" />
+    </Container>
+  );
 }
