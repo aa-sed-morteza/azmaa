@@ -352,7 +352,7 @@ const IranMap = ({ position, empty }) => {
 export default IranMap;
 
 const Container = styled.div`
-  border: 1px solid #cbcbcb;
+  border: 2px solid #095644;
   border-radius: 4px;
   .input {
     display: flex;
@@ -379,8 +379,8 @@ const Container = styled.div`
     margin: 0;
     padding-top: 2.093vw;
     padding-right: 11.395vw;
-    color: #ffaa00;
-    font-weight: 300;
+    color: #095644;
+    font-weight: 500;
     font-size: 5.581vw;
     display: flex;
     gap: 5px;
@@ -392,7 +392,7 @@ const Container = styled.div`
       &:before {
         content: ">";
         display: inline-flex;
-        color: #fab732;
+        color: #095644;
         font-size: 6.977vw;
         font-weight: 300;
         padding-left: 5px;

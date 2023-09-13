@@ -110,11 +110,10 @@ const CardHeader = styled.div`
         }
       }
       h2 {
-        font-size: 1.667vw;
+        font-size: 1.2vw;
         font-weight: 700;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
+        text-align: right;
+        padding-right: 8px;
         overflow: hidden;
         min-height: 100px;
       }
@@ -150,6 +149,8 @@ const Success = styled.div`
   align-items: center;
   gap: 3px;
   cursor: pointer;
+  border-bottom: 4px solid transparent;
+  transition: all 0.3s ease;
   &:before {
     content: "";
     display: inline-flex;
@@ -161,15 +162,16 @@ const Success = styled.div`
   }
   &.active,
   &:hover {
-    font-weight: bold;
-    &:after {
+
+    border-bottom: 4px solid #6cbba9;
+    /* &:after {
       content: "";
       display: inline-flex;
       width: 100%;
       height: 0.93vw;
       background-color: #6cbba9;
     
-    }
+    } */
   }
   @media (min-width: 481px) {
     font-size: 1.458vw;
@@ -193,6 +195,8 @@ const Faild = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-bottom: 4px solid transparent;
+  transition: all 0.3s ease;
   gap: 3px;
   cursor: pointer;
   &:before {
@@ -207,15 +211,16 @@ const Faild = styled.div`
   }
   &.active,
   &:hover {
-    font-weight: bold;
-    &:after {
+    /* font-weight: bold; */
+    border-bottom: 4px solid #ffa5a5;
+    /* &:after {
       content: "";
       display: inline-flex;
       width:100%;
       height: 0.93vw;
       background-color: #ffa5a5;
 
-    }
+    } */
   }
   @media (min-width: 481px) {
     font-size: 1.458vw;
@@ -241,6 +246,8 @@ const Not = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  border-bottom: 4px solid transparent;
+  transition: all 0.3s ease;
   cursor: pointer;
   &:before {
     content: "";
@@ -255,15 +262,16 @@ const Not = styled.div`
 
   &.active,
   &:hover {
-    font-weight: bold;
-    &:after {
+    /* font-weight: bold; */
+    border-bottom: 4px solid #d8d8d8;
+    /* &:after {
       content: "";
       display: inline-flex;
       width: 100%;
       height: 0.93vw;
       background-color: #d8d8d8;
  
-    }
+    } */
   }
   @media (min-width: 481px) {
     font-size: 1.458vw;
@@ -288,6 +296,8 @@ const Absentdiv = styled.div`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  border-bottom: 4px solid transparent;
+  transition: all 0.3s ease;
   &:before {
     content: "";
     display: inline-flex;
@@ -301,14 +311,15 @@ const Absentdiv = styled.div`
 
   &.active,
   &:hover {
-    font-weight: bold;
+    /* font-weight: bold;
     &:after {
       content: "";
       display: inline-flex;
       width: 18.605vw;
       height: 0.93vw;
       background-color: #d8d8d8;
-    }
+    } */
+    border-bottom: 4px solid #d8d8d8;
   }
   @media (min-width: 481px) {
     font-size: 1.458vw;
@@ -333,6 +344,8 @@ const Nonvote = styled.div`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  border-bottom: 4px solid transparent;
+  transition: all 0.3s ease;
   &:before {
     content: "";
     display: inline-flex;
@@ -346,14 +359,14 @@ const Nonvote = styled.div`
 
   &.active,
   &:hover {
-    font-weight: bold;
+    /* font-weight: bold;
     &:after {
       content: "";
       display: inline-flex;
       width: 100%;
       height: 0.93vw;
-      background-color: #d8d8d8;
-  
+      background-color: #d8d8d8; */
+      border-bottom: 4px solid #d8d8d8;
     }
   }
   @media (min-width: 481px) {
@@ -478,6 +491,7 @@ const LargButton = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 5px;
+  margin-right: 8px;
   cursor: pointer;
   .content {
     margin: 0 auto;

@@ -165,12 +165,12 @@ const Slide = styled.div`
     right: 7%;
     z-index: 30;
     h1 {
-      color: #ffffff;
-      font-size: 3.33vw;
+      color: #ffaa00;
+      font-size: 2.5vw;
       font-weight: 800;
       line-height: 5.78vw;
       margin-top: 0;
-      margin-bottom: 28px;
+      margin-bottom: 16px;
       display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
