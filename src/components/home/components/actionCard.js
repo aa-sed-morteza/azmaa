@@ -573,6 +573,7 @@ const LargButton = styled.div`
   display: flex;
   padding: 5px;
   cursor: pointer;
+  margin-right: 8px;
   .content {
     margin: 0 auto;
     font-size: 4.65vw;

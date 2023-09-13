@@ -73,11 +73,11 @@ const Content = styled.div`
   h3 {
     color: #707070;
     font-size: 4.65vw;
-    font-weight: bold;
+    font-weight: 700;
     margin: 0;
     margin-bottom: 10px;
     @media (min-width: 481px) {
-      font-size: 1.667vw;
+      font-size: 1.4vw;
     }
   }
   .status {
@@ -120,7 +120,7 @@ const Content = styled.div`
       }
       .state,
       .position {
-        font-size: 1.042vw;
+        font-size: 0.8vw;
       }
     }
   }
@@ -130,10 +130,10 @@ const Content = styled.div`
     .content {
       color: #ffaa00;
       font-size: 3.25vw;
-      font-weight: 400;
+      font-weight: 700;
       margin: 0;
       @media (min-width: 481px) {
-        font-size: 1.042vw;
+        font-size: 1.2vw;
       }
     }
   }
