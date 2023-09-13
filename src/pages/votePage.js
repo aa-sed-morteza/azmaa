@@ -151,7 +151,7 @@ const Content = styled.div`
   flex-direction: column;
   gap: 10px;
   @media (min-width: 481px) {
-    margin-top: 25vh;
+    margin-top: 25vw;
     padding-bottom: 0;
     gap: 0;
   }

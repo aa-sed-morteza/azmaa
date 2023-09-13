@@ -267,13 +267,13 @@ export default IranMap;
 
 const Container = styled.div`
   border: 1px solid #cbcbcb;
-  border-radius: 4px;
+  border-radius: 8px;
   .input {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin: 0;
     padding: 0;
-    padding-right: 9.07vw;
     padding-top: 3.488vw;
     color: #095644;
     font-weight: 500;
@@ -321,7 +321,6 @@ const Container = styled.div`
     background-color: rgba(255, 255, 255, 0.5);
     .input {
       font-size: 1.458vw;
-      padding-right: 6.563vw;
       padding-top: 2.24vw;
       &:after {
         width: 0.938vw;

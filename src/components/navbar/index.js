@@ -211,14 +211,14 @@ const Panel = styled.div`
   }
   .content {
     background: #f3f3f3;
-    position: absolute;
+
     right: -15.5vw;
-    top: -2.885vw;
+
     padding: 11px;
     color: ${(props) => props.color};
     font-size: 2.25vw;
     font-weight: bold;
-    border-radius: 0px 0px 8px 8px;
+    border-radius: 8px 8px 8px 8px;
   }
 
   @media (min-width: 769px) {
@@ -229,16 +229,14 @@ const Panel = styled.div`
     .content {
       font-size: 1.25vw;
       right: -9.5vw;
-      top: -1.885vw;
     }
   }
 
   @media (min-width: 1201px) {
     .content {
       padding: 11px 22px;
-      font-size: 1.55vw;
+      font-size: 1.25vw;
       right: -10.5vw;
-      top: -1.2vw;
     }
   }
 `;

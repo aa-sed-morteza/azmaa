@@ -195,7 +195,7 @@ const Content = styled.div`
   border-radius: 4px;
   padding: 10px;
   @media (min-width: 480px) {
-    margin-top: 25vh;
+    margin-top: 25vw;
     padding-bottom: 0;
   }
 `;
