@@ -4,7 +4,7 @@ import CustomInput from "../../../../general/customInput";
 import Button from "../../../../general/button";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { useUser } from "../../../../context/userContext";
+import { useUser } from "../../../../../context/userContext";
 import { infoSchema } from "../../../../schema";
 import CustomDatePicker from "../../../../general/datePicker";
 import calendar from "../../../../../assets/calendar.webp";
@@ -77,7 +77,6 @@ export default function EditPersonalInformation() {
         }
       });
   };
-
 
   const {
     values,

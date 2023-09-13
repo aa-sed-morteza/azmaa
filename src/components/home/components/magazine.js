@@ -206,6 +206,7 @@ const Paper = styled.div`
     font-size: 14px;
     font-weight: bold;
     text-decoration: underline;
+    cursor: pointer;
   }
 
   @media (min-width: 481px) {
@@ -265,8 +266,6 @@ const Paper = styled.div`
 export default function Magazine() {
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
-
-  console.log('blog',blogs)
 
   const getBlogs = () => {
     let config = {

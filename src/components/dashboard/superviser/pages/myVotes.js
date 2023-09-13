@@ -10,7 +10,7 @@ import pic from "../../../../assets/vote-logo.webp";
 import icon from "../../../../assets/vote.webp";
 import pic2 from "../../../../assets/action-rate.webp";
 import title from "../../../../assets/title.svg";
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../../context/userContext";
 import axios from "axios";
 import { BaseBackURL } from "../../../../constant/api";
 
@@ -48,7 +48,6 @@ export default function MyVotes() {
 
     axios(config)
       .then((res) => {
-        console.log(res.data);
         setVotes([...res.data]);
       })
       .catch((err) => {
@@ -67,7 +66,6 @@ export default function MyVotes() {
     axios
       .request(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
         setVotes([...response.data]);
       })
       .catch((error) => {
@@ -146,8 +144,6 @@ export default function MyVotes() {
 
     // activityVoteUnconfirmed();
   }, [state.token]);
-
-  console.log("fili", votes);
 
   return (
     <Container>
@@ -372,7 +368,7 @@ const ActionGallery = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  .wraper{
+  .wraper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -385,10 +381,10 @@ const ActionGallery = styled.div`
     padding: 1.302vw 1.302vw 2.604vw 6.667vw;
     background-color: #ffffff;
     border-radius: 0px 8px 8px 0px;
-    .wraper{
+    .wraper {
       flex-direction: row;
       flex-wrap: wrap;
-      &>*{
+      & > * {
         align-self: flex-start;
       }
     }

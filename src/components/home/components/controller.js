@@ -8,18 +8,24 @@ import VoteCard from "./voteCard";
 import EnvoyvoteCard from "./EnvoyvoteCard";
 import HonestEnvoy from "../../envoy/components/honestEnvoy";
 import ActionCard from "./actionCard";
-import BestEnvoy from "./bestEnvoy";
+import BestEnvoy from "./bestEnvoyCard";
 import tik from "../../../assets/vote.webp";
 import ControlCore from "./controlCore";
 import SelectArea from "./selectArea";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
-import { useUser } from "../../context/userContext";
+import { useUser } from "../../../context/userContext";
 import { contentSchema } from "../../schema";
+import { useSelector } from "react-redux";
+import FilterBox from "../../general/filterBox";
 
 export default function Controller({ vote_voter }) {
-  const { state, dispatch } = useUser();
+  const { envoyListToShow } = useSelector((state) => state.envoy);
+  const { voteListToShow } = useSelector((state) => state.vote);
+  const { activityListToShow } = useSelector((state) => state.activity);
+  const { districtListToShow } = useSelector((state) => state.city);
+
   const [select, setSelect] = useState(0);
   const [bills, setBills] = useState([]);
   const [envoys, setEnvoys] = useState([]);
@@ -46,274 +52,243 @@ export default function Controller({ vote_voter }) {
   const [filterCities, setFilterCities] = useState([]);
   const [filterAreas, setFilterAreas] = useState([]);
 
-  const getBills = () => {
-    let config;
-    if (vote_voter > 0) {
-      config = {
-        method: "get",
-        url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter=${vote_voter}&ordering=name, date`,
-      };
-    } else {
-      config = {
-        method: "get",
-        url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter&ordering=name, date`,
-      };
-    }
+  // const getBills = () => {
+  //   let config;
+  //   if (vote_voter > 0) {
+  //     config = {
+  //       method: "get",
+  //       url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter=${vote_voter}&ordering=name, date`,
+  //     };
+  //   } else {
+  //     config = {
+  //       method: "get",
+  //       url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter&ordering=name, date`,
+  //     };
+  //   }
 
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setBills([...res.data]);
-      }
-    });
-  };
+  //   axios(config).then((res) => {
+  //     // console.log(res.data);
+  //     if (res.data.length > 0) {
+  //       setBills([...res.data]);
+  //     }
+  //   });
+  // };
 
-  const getDistrict = (id) => {
-    var config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/electoral_district/?city__id=${id}&city__province__id`,
-    };
-    axios(config)
-      .then(function (response) {
-        console.log("request", response.data);
-        setFilterCities([...response.data[0].agent]);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  // const getDistrict = (id) => {
+  //   var config = {
+  //     method: "get",
+  //     url: `${BaseBackURL}api/v1/electoral_district/?city__id=${id}&city__province__id`,
+  //   };
+  //   axios(config)
+  //     .then(function (response) {
+  //       setFilterCities([...response.data[0].agent]);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
 
-  const getCiteis = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/city/`,
-    };
+  // const getCiteis = () => {
+  //   let config = {
+  //     method: "get",
+  //     url: `${BaseBackURL}api/v1/city/`,
+  //   };
 
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setCiteis([...res.data]);
-      }
-    });
-  };
+  //   axios(config).then((res) => {
+  //     // console.log(res.data);
+  //     if (res.data.length > 0) {
+  //       setCiteis([...res.data]);
+  //     }
+  //   });
+  // };
 
-  const getEnvoys = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
-    };
+  // const getEnvoys = () => {
+  //   let config = {
+  //     method: "get",
+  //     url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
+  //   };
 
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setEnvoys([...res.data]);
-      }
-    });
-  };
+  //   axios(config).then((res) => {
+  //     // console.log(res.data);
+  //     if (res.data.length > 0) {
+  //       setEnvoys([...res.data]);
+  //     }
+  //   });
+  // };
 
-  const getActivities = () => {
-    let config;
-    // console.log("vote_voter="+vote_voter);
-    if (vote_voter > 0) {
-      config = {
-        method: "get",
-        url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter=${vote_voter}`,
-      };
-    } else {
-      config = {
-        method: "get",
-        url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter`,
-      };
-    }
+  // const getActivities = () => {
+  //   let config;
+  //   // console.log("vote_voter="+vote_voter);
+  //   if (vote_voter > 0) {
+  //     config = {
+  //       method: "get",
+  //       url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter=${vote_voter}`,
+  //     };
+  //   } else {
+  //     config = {
+  //       method: "get",
+  //       url: `${BaseBackURL}api/v1/activity/?ordering=name, date&name&tag__id&vote__voter`,
+  //     };
+  //   }
 
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setActivities([...res.data]);
-      }
-    });
-  };
+  //   axios(config).then((res) => {
+  //     // console.log(res.data);
+  //     if (res.data.length > 0) {
+  //       setActivities([...res.data]);
+  //     }
+  //   });
+  // };
 
-  const getElectoralDistrict = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
-    };
+  // const getElectoralDistrict = () => {
+  //   let config = {
+  //     method: "get",
+  //     url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
+  //   };
 
-    axios(config)
-      .then(function (response) {
-        // console.log(JSON.stringify(response.data));
-        setAreas([...response.data]);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  //   axios(config)
+  //     .then(function (response) {
+  //       // console.log(JSON.stringify(response.data));
+  //       setAreas([...response.data]);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
 
-  useEffect(() => {
-    getBills();
-    getActivities();
-    getElectoralDistrict();
-    getCiteis();
-    getEnvoys();
-  }, []);
+  // useEffect(() => {
+  //   getBills();
+  //   getActivities();
+  //   getElectoralDistrict();
+  //   getCiteis();
+  //   getEnvoys();
+  // }, []);
 
-  const filterEnvoyByCity = () => {
-    const result = envoys.filter((obj1) => {
-      return state.citySearch.some((obj2) => {
-        return obj1.electoral_district_name === obj2;
-      });
-    });
+  // const filterEnvoyByCity = () => {
+  //   const result = envoys.filter((obj1) => {
+  //     return state.citySearch.some((obj2) => {
+  //       return obj1.electoral_district_name === obj2;
+  //     });
+  //   });
 
-    setFilterCities(result);
-    getDistrict(result.map((x) => x.id));
-  };
+  //   setFilterCities(result);
+  //   getDistrict(result.map((x) => x.id));
+  // };
 
-  const filterAreaByCity = () => {
-    const district = areas.filter((obj1) => {
-      return state.citySearch.some((obj2) => {
-        return obj1.name === obj2;
-      });
-    });
+  // const filterAreaByCity = () => {
+  //   const district = areas.filter((obj1) => {
+  //     return state.citySearch.some((obj2) => {
+  //       return obj1.name === obj2;
+  //     });
+  //   });
 
-    if (district && state.citySearch.length > 0) {
-      setFilterAreas(district);
-    } else {
-      setFilterCities(envoys);
-    }
-  };
+  //   if (district && state.citySearch.length > 0) {
+  //     setFilterAreas(district);
+  //   } else {
+  //     setFilterCities(envoys);
+  //   }
+  // };
 
-  useEffect(() => {
-    filterEnvoyByCity();
-    filterAreaByCity();
-    if(state.citySearch.length>0){
-      setsearchparams({filter:state.citySearch.map(x=>x)})
-    }else{
-      setsearchparams({})
-      console.log('free')
-    }
-  }, [state.citySearch]);
-
-
+  // useEffect(() => {
+  //   filterEnvoyByCity();
+  //   filterAreaByCity();
+  //   if (state.citySearch.length > 0) {
+  //     setsearchparams({ filter: state.citySearch.map((x) => x) });
+  //   } else {
+  //     setsearchparams({});
+  //   }
+  // }, [state.citySearch]);
 
   const newList = envoys.sort((a, b) => b.transparency - a.transparency);
-  const filteredList = newList.filter((item) => {
-    let filter = searchparams.get("filter");
-    if (!filter) return true;
-    // let name= item.writer + item.description ;
-    let name = item.first_name + item.last_name + item.electoral_district_name;
-    // console.log(item);
-    return name.includes(filter);
-  });
+  // const envoyListToShow = newList.filter((item) => {
+  //   let filter = searchparams.get("filter");
+  //   if (!filter) return true;
+  //   // let name= item.writer + item.description ;
+  //   let name = item.first_name + item.last_name + item.electoral_district_name;
+  //   // console.log(item);
+  //   return name.includes(filter);
+  // });
 
-  const controllItem = data.controlPanel.map((x, i) => {
-    return (
-      <>
-        {vote_voter > 0 && (i === 1 || i === 2) ? (
-          ""
-        ) : (
-          <Tab
-            key={i}
-            onClick={() => setSelect(i)}
-            className={select === i ? "select" : ""}
-          >
-            {x.icon ? (
-              <div>
-                <img src={x.icon} />
-              </div>
-            ) : (
-              ""
-            )}
+  // const controllItem = data.controlPanel.map((x, i) => {
+  //   return (
+  //     <>
+  //       {vote_voter > 0 && (i === 1 || i === 2) ? (
+  //         ""
+  //       ) : (
+  //         <Tab
+  //           key={x.name + i}
+  //           onClick={() => setSelect(i)}
+  //           className={select === i ? "select" : ""}
+  //         >
+  //           {x.icon ? (
+  //             <div>
+  //               <img src={x.icon} />
+  //             </div>
+  //           ) : (
+  //             ""
+  //           )}
 
-            <p>{x.name}</p>
-          </Tab>
-        )}
-      </>
-    );
-  });
+  //           <p>{x.name}</p>
+  //         </Tab>
+  //       )}
+  //     </>
+  //   );
+  // });
 
-  const filteredAreas = areas.filter((item) => {
-    let filter = searchparams.get("filter");
-    if (!filter) return true;
-    // let name= item.writer + item.description ;
-    let name = item.name;
-    return name.includes(filter);
-  });
+  // const filteredAreas = areas.filter((item) => {
+  //   let filter = searchparams.get("filter");
+  //   if (!filter) return true;
+  //   // let name= item.writer + item.description ;
+  //   let name = item.name;
+  //   return name.includes(filter);
+  // });
 
-  var isDescending = true; //set to false for ascending
-  const sortBillsByDate = bills.sort((a, b) =>
-    isDescending
-      ? new Date(b.date).getTime() - new Date(a.date).getTime()
-      : new Date(a.date).getTime() - new Date(b.date).getTime()
-  );
+  // var isDescending = true; //set to false for ascending
+  // const sortBillsByDate = bills.sort((a, b) =>
+  //   isDescending
+  //     ? new Date(b.date).getTime() - new Date(a.date).getTime()
+  //     : new Date(a.date).getTime() - new Date(b.date).getTime()
+  // );
 
+  // const filteredBills = sortBillsByDate.filter((item) => {
+  //   let filter = searchparams.get("filter");
+  //   if (!filter) return true;
+  //   // let name= item.writer + item.description ;
+  //   let name = item.name;
+  //   // console.log(item);
+  //   return name.includes(filter);
+  // });
 
-  const filteredBills = sortBillsByDate.filter((item) => {
-    let filter = searchparams.get("filter");
-    if (!filter) return true;
-    // let name= item.writer + item.description ;
-    let name = item.name;
-    // console.log(item);
-    return name.includes(filter);
-  });
+  // var istDescending = true; //set to false for ascending
+  // const sortActivitiesByDate = activities.sort((a, b) =>
+  //   istDescending
+  //     ? new Date(b.date).getTime() - new Date(a.date).getTime()
+  //     : new Date(a.date).getTime() - new Date(b.date).getTime()
+  // );
 
-  var istDescending = true; //set to false for ascending
-  const sortActivitiesByDate = activities.sort((a, b) =>
-    istDescending
-      ? new Date(b.date).getTime() - new Date(a.date).getTime()
-      : new Date(a.date).getTime() - new Date(b.date).getTime()
-  );
-
-  const filteredActivities = sortActivitiesByDate.filter((item) => {
-    let filter = searchparams.get("filter");
-    if (!filter) return true;
-    // let name= item.writer + item.description ;
-    let name = item.name;
-    return name.includes(filter);
-  });
+  // const activityListToShow = sortActivitiesByDate.filter((item) => {
+  //   let filter = searchparams.get("filter");
+  //   if (!filter) return true;
+  //   // let name= item.writer + item.description ;
+  //   let name = item.name;
+  //   return name.includes(filter);
+  // });
 
   return (
     <ControllContainer>
-      <FilterContainer className="filter-box">
-        <SearchInput
-          value={searchparams.get("filter") || ""}
-          onChange={(event) => {
-            let filter = event.target.value;
-            if (filter) {
-              setsearchparams({ filter: filter });
-            } else {
-              setsearchparams({});
-            }
-          }}
-          type="text"
-          placeholder="&#xF002; جستجو کن..."
-        />
-        <TabContainer>{controllItem}</TabContainer>
-        <RemoveCitySearch
-          onClick={() => {
-            dispatch({ type: "SET_PROVICE", payload: "" });
-            dispatch({ type: "SET_CITY_SEARCH", payload: [] });
-            dispatch({ type: "REMOVE_CITY_FILTER", payload: true });
-          }}
-        >
-          حذف فیلتر نقشه
-        </RemoveCitySearch>
-      </FilterContainer>
-
-      {/* all */}
+      <FilterBox />
 
       <>
         {(select === 0 || select === 3) && (
           <LastVotes ref={voterContainerRef}>
             <Title>آخرین رأی‌گیری‌ها</Title>
             <VoterContainer>
-              {filteredBills.slice(0, voteCardLimit).map((item, i) => {
+              {voteListToShow.slice(0, voteCardLimit).map((item, i) => {
                 if (vote_voter > 0)
                   return (
                     <EnvoyvoteCard
                       bill={item}
                       vote_voter={vote_voter}
-                      key={i}
+                      key={"vote" + i}
                     />
                   );
                 else return <VoteCard bill={item} key={i} />;
@@ -322,17 +297,17 @@ export default function Controller({ vote_voter }) {
 
             <ShowMore
               onClick={() => {
-                if (voteCardLimit < filteredBills.length) {
+                if (voteCardLimit < voteListToShow.length) {
                   setVoteCardLimit(voteCardLimit + 10);
                 } else {
                   setVoteCardLimit(3);
                   voterContainerRef.current.scrollIntoView();
                 }
               }}
-              arrow={voteCardLimit >= filteredBills.length}
+              arrow={voteCardLimit >= voteListToShow.length}
             >
               <p>
-                {voteCardLimit < filteredBills.length
+                {voteCardLimit < voteListToShow.length
                   ? "نمایش بیشتر"
                   : "نمایش کمتر "}
               </p>{" "}
@@ -345,16 +320,18 @@ export default function Controller({ vote_voter }) {
               <LastActions ref={mobileActionContainerRef}>
                 <Title> آخرین عملکردها</Title>
                 <Album>
-                  {filteredActivities
+                  {activityListToShow
                     .slice(0, actionCardLimit)
                     .map((item, i) => {
-                      return <ActionCard activity={item} key={i} />;
+                      return (
+                        <ActionCard activity={item} key={"activity" + i} />
+                      );
                     })}
                 </Album>
                 <ShowMore
-                  arrow={actionCardLimit >= filteredActivities.length}
+                  arrow={actionCardLimit >= activityListToShow.length}
                   onClick={() => {
-                    if (voteCardLimit < filteredActivities.length) {
+                    if (voteCardLimit < activityListToShow.length) {
                       setActionCardLimit(voteCardLimit + 10);
                     } else {
                       setActionCardLimit(3);
@@ -362,7 +339,7 @@ export default function Controller({ vote_voter }) {
                     }
                   }}
                 >
-                  {actionCardLimit < filteredActivities.length
+                  {actionCardLimit < activityListToShow.length
                     ? "نمایش بیشتر"
                     : "نمایش کمتر "}
                 </ShowMore>
@@ -373,7 +350,7 @@ export default function Controller({ vote_voter }) {
                 <BestEnvoyContainer>
                   <Title>شفاف‌ترین نمایندگان</Title>
                   <SecondAlbum hide={thirdHide}>
-                    {newList
+                    {envoyListToShow
                       .filter((item) => {
                         let filter = searchparams.get("filter");
                         if (!filter) return true;
@@ -389,7 +366,7 @@ export default function Controller({ vote_voter }) {
                         return (
                           <BestEnvoy
                             envoy={item}
-                            key={i}
+                            key={"transparentEnvoy" + i}
                             click={() => {
                               navigate(`/envoy/${item.id}`);
                             }}
@@ -423,17 +400,19 @@ export default function Controller({ vote_voter }) {
               <LastActions ref={actionContainerRef}>
                 <Title> آخرین عملکردها</Title>
                 <ActionContainer>
-                  {filteredActivities
+                  {activityListToShow
                     .slice(0, actionCardLimit)
                     .map((item, i) => {
-                      return <ActionCard activity={item} key={i} />;
+                      return (
+                        <ActionCard activity={item} key={"lastAction" + i} />
+                      );
                     })}
                 </ActionContainer>
 
                 <ShowMore
-                  arrow={actionCardLimit >= filteredActivities.length}
+                  arrow={actionCardLimit >= activityListToShow.length}
                   onClick={() => {
-                    if (actionCardLimit < filteredActivities.length) {
+                    if (actionCardLimit < activityListToShow.length) {
                       setActionCardLimit(actionCardLimit + 10);
                     } else {
                       setActionCardLimit(3);
@@ -442,7 +421,7 @@ export default function Controller({ vote_voter }) {
                   }}
                 >
                   <p>
-                    {actionCardLimit < filteredActivities.length
+                    {actionCardLimit < activityListToShow.length
                       ? "نمایش بیشتر"
                       : "نمایش کمتر"}
                   </p>
@@ -456,11 +435,11 @@ export default function Controller({ vote_voter }) {
       {select === 1 && (
         <>
           <EnvoyGalley ref={envoyRef}>
-            {filteredList.slice(0, envoyLimit).map((item, i) => {
+            {envoyListToShow.slice(0, envoyLimit).map((item, i) => {
               return (
                 <BestEnvoy
                   envoy={item}
-                  key={i}
+                  key={"envoyGallery" + i}
                   click={() => {
                     navigate(`/envoy/${item.id}`);
                   }}
@@ -469,9 +448,9 @@ export default function Controller({ vote_voter }) {
             })}
           </EnvoyGalley>
           <ShowMore
-            arrow={envoyLimit >= filteredList.length}
+            arrow={envoyLimit >= envoyListToShow.length}
             onClick={() => {
-              if (envoyLimit < filteredList.length) {
+              if (envoyLimit < envoyListToShow.length) {
                 setEnvoyLimit(envoyLimit + 10);
               } else {
                 setEnvoyLimit(3);
@@ -481,7 +460,7 @@ export default function Controller({ vote_voter }) {
             style={{ marginTop: "20px" }}
           >
             <p>
-              {envoyLimit >= filteredList.length
+              {envoyLimit >= envoyListToShow.length
                 ? "نمایش کمتر"
                 : "نمایش بیشتر "}
             </p>{" "}
@@ -493,16 +472,20 @@ export default function Controller({ vote_voter }) {
       {select === 2 && (
         <>
           <AreaContainer ref={areaRef}>
-            {filteredAreas.slice(0, areaLimit).map((item, i) => {
+            {districtListToShow.slice(0, areaLimit).map((item, i) => {
               return (
-                <SelectArea area={item.name} envoys={item.agent} key={i} />
+                <SelectArea
+                  area={item.name}
+                  envoys={item.agent}
+                  key={"areaSelect" + i}
+                />
               );
             })}
           </AreaContainer>
           <ShowMore
-            arrow={areaLimit >= filteredAreas.length}
+            arrow={areaLimit >= districtListToShow.length}
             onClick={() => {
-              if (areaLimit < filteredAreas.length) {
+              if (areaLimit < districtListToShow.length) {
                 setAreaLimit(areaLimit + 10);
               } else {
                 setAreaLimit(3);
@@ -512,7 +495,7 @@ export default function Controller({ vote_voter }) {
             style={{ marginTop: "20px" }}
           >
             <p>
-              {areaLimit >= filteredAreas.length
+              {areaLimit >= districtListToShow.length
                 ? "نمایش کمتر"
                 : "نمایش بیشتر "}
             </p>{" "}

@@ -3,14 +3,13 @@ import styled from "styled-components";
 import useWidth from "../../../hook/useWidth";
 import data from "../../../data.json";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../context/userContext";
+import { useUser } from "../../../context/userContext";
 
 export default function DashboardMenu() {
   const width = useWidth();
   const navigate = useNavigate();
-  const {state,dispatch}=useUser();
+  const { state, dispatch } = useUser();
   const [active, setActive] = useState(0);
-
 
   const choiseItem = (num, path) => {
     setActive(num);
@@ -52,7 +51,9 @@ export default function DashboardMenu() {
 
   return (
     <Container>
-      <MenuList>{state.userType =="envoy" ? envoyDashboardItems :dashboardItem}</MenuList>
+      <MenuList>
+        {state.userType == "envoy" ? envoyDashboardItems : dashboardItem}
+      </MenuList>
     </Container>
   );
 }

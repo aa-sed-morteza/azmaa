@@ -2,18 +2,16 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import data from "../../../data.json";
 import leftArrow from "../../../assets/lightArrow.webp";
-import SelectState from "./selectState";
 import IranMap from "../../pluginIranMap/IranMap";
-import { BaseBackURL } from "../../../constant/api";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Carousel() {
-  const items = data.slider;
-  const [posts, setPosts] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const navigate =useNavigate();
+  const { postList } = useSelector((state) => state.blog);
 
+  const items = data.slider;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   function carouselInfiniteScroll() {
     if (currentIndex === data.slider.length - 1) {
@@ -30,105 +28,74 @@ export default function Carousel() {
     return () => clearInterval(interval);
   });
 
-  const getPosts = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/blog/?writer__id&tag__id&is_suggested=True, False&ordering=created`,
-    };
-
-    axios(config).then((res) => {
-      // console.log(res);
-      if (res.data.length > 0) {
-        setPosts([...res.data.slice(0, 4)]);
-      }
-    });
-  };
-
- 
-
-  useEffect(() => {
-    getPosts();
-  }, []);
-
   const index = items.map((x, i) => {
     return (
       <div
+        onClick={() => setCurrentIndex(i)}
         key={i}
         className={i === currentIndex ? "item active" : "item"}
       ></div>
     );
   });
 
-
-  return (
-    <Wraper>
-      {posts.map((item, i) => {
-        return (
-          <Slide
-            key={i}
-            photo={item.image}
-            style={{
-              transform: `translate(${currentIndex * 100}%)`,
-              backgroundColor: "#5e5e5e",
+  const postsElements = postList.map((item, i) => {
+    return (
+      <Slide
+        key={i}
+        photo={item.image}
+        style={{
+          transform: `translate(${currentIndex * 100}%)`,
+          backgroundColor: "#5e5e5e",
+        }}
+      >
+        <img className="cover" src={item.image} alt="news" />
+        <div className="content">
+          <h1>{item.title}</h1>
+          <p>{item.description}</p>
+          <div
+            className="show-more"
+            onClick={() => {
+              navigate(`/blog/${item.id}`);
             }}
           >
-            <img className="cover" src={item.image} alt='news-picture'/>
-            <div className="content">
-              <h1>{item.title}</h1>
-              <p>{item.description}</p>
-              <div className="show-more" onClick={()=>{navigate(`/blog/${item.id}`)}} >ادامه مطلب</div>
-            </div>
-          </Slide>
-        );
-      })}
+            ادامه مطلب
+          </div>
+        </div>
+      </Slide>
+    );
+  });
+
+  return (
+    <Wrapper>
+      {postsElements}
       <ShowIndex>{index}</ShowIndex>
       {/* <SelectState /> */}
-      <IranMap position="absolute" />
-    </Wraper>
+    </Wrapper>
   );
 }
 
-const Wraper = styled.section`
+const Wrapper = styled.section`
+  height: 100vh;
+  width: 100vw;
   overflow: hidden;
   flex-wrap: nowrap;
   display: flex;
   padding: 0;
   margin: 0;
-  margin-left: -3%;
-  margin-right: -3%;
-  margin-top: -10%;
-  position: relative;
-  @media (min-width: 1025px) {
-    margin-top: -9%;
-  }
-  @media (min-width: 1201px) {
-    margin-top: -7%;
-  }
-
-  // @media (max-width: 1600px) {
-  //   margin-left: -2%;
-  //   margin-top: -7%;
-  // }
-  // @media (max-width: 1600px) {
-  //   margin-top: -8%;
-  // }
-  // @media (max-width: 992px) {
-  //   margin-left: -3%;
-  //   margin-top: -9%;
-  // }
 `;
 
 const ShowIndex = styled.div`
   display: flex;
   gap: 10px;
   position: absolute;
-  bottom: 17%;
+  bottom: 10%;
   right: 8%;
   .item {
     width: 15px;
     height: 15px;
     border-radius: 15px;
     background-color: #cbcbcb;
+    cursor: pointer;
   }
   .active {
     background-color: #ffaa00;
@@ -140,27 +107,25 @@ const Slide = styled.div`
   display: flex;
   width: 100%;
   min-width: 100%;
-  height: 20rem;
   justify-content: center;
   align-items: center;
-  padding-top: 44%;
-  .cover{
+  transition: 0.3s ease-in-out;
+  .cover {
     position: absolute;
-      left: 0px;
-      top: 0px;
-      z-index: -1;
-      width: 100%;
-      height: 100%;
-      -webkit-filter:  brightness(0.5); /*Safari 6.0 - 9.0 */
-      filter: brightness(0.5);
-
- 
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    -webkit-filter: brightness(0.5); /*Safari 6.0 - 9.0 */
+    filter: brightness(0.5);
+    object-fit: cover;
   }
   .content {
     position: absolute;
     display: flex;
     flex-direction: column;
-    width: 35%;
+    width: 40%;
     top: 20%;
     right: 7%;
     z-index: 30;
@@ -172,9 +137,9 @@ const Slide = styled.div`
       margin-top: 0;
       margin-bottom: 16px;
       display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     p {
       color: #ffffff;

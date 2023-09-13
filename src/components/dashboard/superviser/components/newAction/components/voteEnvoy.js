@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { voteSchema } from "../../../../../schema/index";
 import Button from "../../../../../general/button";
-import { useUser } from "../../../../../context/userContext";
+import { useUser } from "../../../../../../context/userContext";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import activeAgree from "../../../../../../assets/agree.svg";
@@ -49,7 +49,6 @@ export default function VoteEnvoy() {
     actions.resetForm();
   };
 
-
   const {
     values,
     errors,
@@ -90,7 +89,6 @@ export default function VoteEnvoy() {
       </RadioButton>
     );
   });
-
 
   const checkActionsItems = actions.map((item, i) => {
     return (

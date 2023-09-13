@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../../../../../general/button";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../../../../context/userContext";
+import { useUser } from "../../../../../../context/userContext";
 import { useFormik } from "formik";
 import { selectEnvoyTypeSchema } from "../../../../../schema";
 import profile from "../../../../../../assets/profile.webp";
@@ -26,7 +26,6 @@ export default function SelectEnvoys() {
   const [states, setStates] = useState([]);
 
   const getEnvoys = () => {
-    console.log("getEnvoys");
     let config = {
       method: "get",
       url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${state.id}`,
@@ -43,7 +42,6 @@ export default function SelectEnvoys() {
   useEffect(() => {
     getEnvoys();
   }, []);
-
 
   const envoyList = envoys.map((x, i) => {
     return (

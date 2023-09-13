@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import BestEnvoy from "../../home/components/bestEnvoy";
+import BestEnvoy from "../../home/components/bestEnvoyCard";
 import upArrow from "../../../assets/arrow.webp";
 import { useNavigate } from "react-router-dom";
 
-export default function Absent({envoys}) {
+export default function Absent({ envoys }) {
   const navigate = useNavigate();
 
   const envoysList = envoys.map((item, i) => {
@@ -20,8 +20,6 @@ export default function Absent({envoys}) {
   });
   return (
     <Container>
-     
-
       <ShowMore>
         <p>نمایش بیشتر </p>
       </ShowMore>

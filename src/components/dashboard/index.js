@@ -6,7 +6,7 @@ import {
   Route,
   useNavigate,
 } from "react-router-dom";
-import { useUser } from "../context/userContext";
+import { useUser } from "../../context/userContext";
 import SuperviserDashboard from "./superviser";
 import EnvoyDashboard from "./envoy";
 import useWidth from "../../hook/useWidth";
@@ -44,8 +44,6 @@ export default function Dashboard() {
   const getPersonalInfo = (userId) => {
     let data = new FormData();
 
-    console.log(state.token);
-
     let config = {
       method: "put",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
@@ -63,7 +61,6 @@ export default function Dashboard() {
         console.log("error", err);
       });
   };
-
 
   const refreshToken = () => {
     const data = new FormData();

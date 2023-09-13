@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import profile from "../../../assets/g-profile.webp";
 import location from "../../../assets/g-location.webp";
-import BestEnvoy from "./bestEnvoy";
+import BestEnvoy from "./bestEnvoyCard";
 import HonestEnvoy from "../../envoy/components/honestEnvoy";
 import upArrow from "../../../assets/arrow.webp";
 import SelectArea from "./selectArea";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../context/userContext";
+import { useUser } from "../../../context/userContext";
 
 const Container = styled.section`
   display: flex;

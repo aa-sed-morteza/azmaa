@@ -1,29 +1,27 @@
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useUser } from "../../context/userContext";
+import { useUser } from "../../../context/userContext";
 
 export default function Tehran() {
-    const { state, dispatch } = useUser();
-    const [select, setSelect] = useState(0);
+  const { state, dispatch } = useUser();
+  const [select, setSelect] = useState(0);
 
-    const place = [
-        // { id: 12, name: "خراسان شمالی" },
-        // { id: 13, name: " همدان" },
-        // { id: 14, name: " گلستان" },
-        // { id: 15, name: " سیستان و بلوچستان" },
-    
-      ];
-    
+  const place = [
+    // { id: 12, name: "خراسان شمالی" },
+    // { id: 13, name: " همدان" },
+    // { id: 14, name: " گلستان" },
+    // { id: 15, name: " سیستان و بلوچستان" },
+  ];
 
-    useEffect(() => {
-        if (select !== 0) {
-          dispatch({
-            type: "SET_CITY_SEARCH",
-            payload: place.find((x) => x.id == select),
-          });
-          dispatch({ type: "SET_MAP_LEVEL", payload: 3 });
-        }
-      }, [select]);
+  useEffect(() => {
+    if (select !== 0) {
+      dispatch({
+        type: "SET_CITY_SEARCH",
+        payload: place.find((x) => x.id == select),
+      });
+      dispatch({ type: "SET_MAP_LEVEL", payload: 3 });
+    }
+  }, [select]);
   return (
     <svg
       width="347"

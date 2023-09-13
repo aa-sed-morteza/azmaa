@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import BestEnvoy from "../../home/components/bestEnvoy";
+import BestEnvoy from "../../home/components/bestEnvoyCard";
 import upArrow from "../../../assets/arrow.webp";
 import icon from "../../../assets/info.webp";
 import { useNavigate } from "react-router-dom";
@@ -8,23 +8,25 @@ import { useNavigate } from "react-router-dom";
 export default function UnKnown({ envoys }) {
   const navigate = useNavigate();
 
-  const envoysList =envoys && envoys.map((item, i) => {
-    return (
-      <BestEnvoy
-        key={i}
-        envoy={item.voter}
-        click={() => {
-          navigate(`/envoy/${item.voter.id}`);
-        }}
-      />
-    );
-  });
+  const envoysList =
+    envoys &&
+    envoys.map((item, i) => {
+      return (
+        <BestEnvoy
+          key={i}
+          envoy={item.voter}
+          click={() => {
+            navigate(`/envoy/${item.voter.id}`);
+          }}
+        />
+      );
+    });
 
-  
-  
   return (
     <Container>
-      <Title>{envoys && envoys.lenght>0 ? envoys[0].vote:'نمایندگان مخالف' }  </Title>
+      <Title>
+        {envoys && envoys.lenght > 0 ? envoys[0].vote : "نمایندگان مخالف"}{" "}
+      </Title>
       <Gallery>{envoysList}</Gallery>
       <ShowMore>
         <p>نمایش بیشتر </p>

@@ -1,106 +1,90 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import Calendar from "./components/calendar";
-import Controler from "./components/controler";
-import Filtering from "./components/filtering";
-import { BaseBackURL } from "../../constant/api";
+import Calendar from "../components/vote/components/calendar";
+import Controler from "../components/vote/components/controler";
+import Filtering from "../components/vote/components/filtering";
+import { BaseBackURL } from "../constant/api";
 import axios from "axios";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import VoteCard from "../home/components/voteCard";
-import upArrow from "../../assets/arrow.webp";
+import { useNavigate } from "react-router-dom";
+import VoteCard from "../components/home/components/voteCard";
+import upArrow from "../assets/arrow.webp";
+import { useSelector } from "react-redux";
 
 export default function Vote() {
+  const { voteListToShow } = useSelector((state) => state.vote);
   const navigate = useNavigate();
   const [selectedFilter, setSelectedFilter] = useState(0);
   const [selectedTag, setSelectedTag] = useState("همه");
-  const [bills, setBills] = useState([]);
-  const [filteredBills, setFilteredBills] = useState([]);
-  const [firstHide, setFirstHide] = useState(false);
-  const [searchparams, setsearchparams] = useSearchParams();
   const [showLimit, setShowLimit] = useState(3);
-
-  const showRef =useRef(null);
-
-  const getActivities = () => {
-    let config = {
-      method: "get",
-      url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter&ordering=name, date`,
-    };
-
-    axios(config).then((res) => {
-      // console.log(res.data);
-      if (res.data.length > 0) {
-        setBills([...res.data]);
-        setFilteredBills([...res.data])
-      }
-    });
-  };
+  const [finalVoteList, setFinalVoteList] = useState([]);
 
   useEffect(() => {
-    getActivities();
-  }, []);
-
-
+    setFinalVoteList([...voteListToShow]);
+  }, [voteListToShow]);
 
   useEffect(() => {
-    if(bills.tag)
-    if (bills.filter((item) =>item.tag[0].name === selectedTag )) {
-      setFilteredBills(bills.filter((item) => item.tag[0].name === selectedTag))
+    if (selectedTag === "همه") {
+      setFinalVoteList([...voteListToShow]);
     } else {
-      setBills(bills)
+      const newList = [];
+      for (const item of voteListToShow) {
+        for (const tag of item.tag) {
+          if (tag.name === selectedTag) {
+            newList.push(item);
+          }
+        }
+      }
+      console.log(newList);
+      setFinalVoteList([...newList]);
     }
-
-    if (selectedTag == 'همه') {
-      setFilteredBills(bills)
-    }
-
   }, [selectedTag]);
 
+  const showRef = useRef(null);
 
   return (
     <Container>
       <Title>
-        <p className="home" onClick={()=>{navigate("/")}} >خانه / </p>
+        <p
+          className="home"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          خانه /{" "}
+        </p>
         <p className="component"> رأی‌گیری‌ها </p>
       </Title>
 
       <Content>
         <Controler selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
         {/* {console.log(selectedTag)} */}
-        <Filtering selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
+        <Filtering
+          selectedFilter={selectedFilter}
+          setSelectedFilter={setSelectedFilter}
+        />
         {/* <Titleh1>آخرین رأی‌گیری‌ها</Titleh1> */}
-        <VoterContainer ref={showRef} >
-          {bills.filter((item) => {
-            let filter = searchparams.get("filter");
-            if (!filter) return true;
-            // let name= item.writer + item.description ;
-            let name = item.name;
-              console.log(item);
-            return name.includes(filter);
-          }).filter((item) => {
-            if (selectedTag === 'همه') return true;
-            let tag="";
-            if(item.tag[0])
-             tag = item.tag[0].name;
-            return tag.includes(selectedTag);
-          }).sort((a,b)=>{
-            if(selectedFilter== 1){
-              return new Date(b.date) - new Date(a.date);
-            }else if (selectedFilter== 2){
-              return new Date(a.date) - new Date(b.date);
-            }else if (selectedFilter== 3){
-              return b.bill_transparency - a.bill_transparency;
-            }else{
-              return 0;
-            }
-          }).slice(0,showLimit).map((item, i) => {
-            return <VoteCard bill={item} key={i} />;
-          })}
+        <VoterContainer ref={showRef}>
+          {finalVoteList
+            .sort((a, b) => {
+              if (selectedFilter === 1) {
+                return new Date(b.date) - new Date(a.date);
+              } else if (selectedFilter === 2) {
+                return new Date(a.date) - new Date(b.date);
+              } else if (selectedFilter === 3) {
+                return b.bill_transparency - a.bill_transparency;
+              } else {
+                return 0;
+              }
+            })
+            .slice(0, showLimit)
+            .map((item, i) => {
+              return <VoteCard bill={item} key={i} />;
+            })}
         </VoterContainer>
         <ShowMore
-          arrow={showLimit >= bills.length}
+          arrow={showLimit >= finalVoteList.length}
           onClick={() => {
-            if (showLimit < bills.length) {
+            if (showLimit < finalVoteList.length) {
               setShowLimit(showLimit + 10);
             } else {
               setShowLimit(3);
@@ -109,9 +93,10 @@ export default function Vote() {
           }}
           style={{ marginTop: "20px" }}
         >
-          <p>{showLimit >= bills.length ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
+          <p>
+            {showLimit >= finalVoteList.length ? "نمایش کمتر" : "نمایش بیشتر "}
+          </p>{" "}
         </ShowMore>
-
 
         {/* <Calendar bills={filteredBills} /> */}
       </Content>
@@ -173,7 +158,6 @@ const Content = styled.div`
 `;
 
 const VoterContainer = styled.div`
-
   @media (min-width: 481px) {
     display: flex;
     gap: 20px;
@@ -181,7 +165,6 @@ const VoterContainer = styled.div`
     flex-wrap: wrap;
     // margin-left:-7%;
     // margin-right:-7%;
-   
   }
   @media (min-width: 769px) {
     justify-content: center;
@@ -262,7 +245,7 @@ const ShowMore = styled.div`
   @media (min-width: 481px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
-    width:50%;
+    width: 50%;
     justify-content: center;
     align-items: center;
     margin: auto;

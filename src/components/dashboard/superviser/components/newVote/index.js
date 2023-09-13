@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { useUser } from "../../../../context/userContext";
+import { useUser } from "../../../../../context/userContext";
 import Document from "./components/document";
 import SelectActionType from "./components/selectActionType";
 import SelectEnvoys from "./components/selectEnvoys";
@@ -27,7 +27,6 @@ export default function NewVote() {
     dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 3 });
   };
 
-
   return (
     <Container>
       <Title>
@@ -38,7 +37,7 @@ export default function NewVote() {
       {state.addVoteLevel === 2 && (
         <>
           <SelectActionType />
-          {state.userType == "envoy"? goNextLevel() : <SelectEnvoys />}
+          {state.userType == "envoy" ? goNextLevel() : <SelectEnvoys />}
         </>
       )}
       {state.addVoteLevel === 3 && (

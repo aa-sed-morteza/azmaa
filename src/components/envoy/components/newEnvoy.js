@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import profile from "../../../assets/profile.webp";
 import upArrow from "../../../assets/arrow.webp";
-import BestEnvoy from "../../home/components/bestEnvoy";
+import BestEnvoy from "../../home/components/bestEnvoyCard";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Container = styled.section`

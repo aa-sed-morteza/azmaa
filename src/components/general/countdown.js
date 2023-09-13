@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useUser } from "../context/userContext";
+import { useUser } from "../../context/userContext";
 
 const Timer = ({ delayResend = "120" }) => {
   const { state, dispatch } = useUser();
@@ -44,7 +44,7 @@ const Swatch = styled.div`
   font-size: 5.581vw;
   font-weight: 300;
   margin: auto;
-  @media(min-width:480px){
-    font-size:1.563vw;
+  @media (min-width: 480px) {
+    font-size: 1.563vw;
   }
 `;

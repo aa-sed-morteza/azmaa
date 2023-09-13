@@ -10,7 +10,7 @@ import pic from "../../../../assets/vote-logo.webp";
 import icon from "../../../../assets/vote.webp";
 import pic2 from "../../../../assets/action-rate.webp";
 import title from "../../../../assets/title.svg";
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../../context/userContext";
 import axios from "axios";
 import { BaseBackURL } from "../../../../constant/api";
 
@@ -57,7 +57,6 @@ export default function MyActions() {
 
     axios(config)
       .then((res) => {
-        console.log(res.data);
         setActivities([...res.data]);
       })
       .catch((err) => {
@@ -94,7 +93,6 @@ export default function MyActions() {
 
     setFilteredActivities([...result]);
   };
-
 
   useEffect(() => {
     if (activities.length !== 0 && envoys.length !== 0) {

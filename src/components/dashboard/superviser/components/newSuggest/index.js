@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { useUser } from "../../../../context/userContext";
+import { useUser } from "../../../../../context/userContext";
 import SuggestDocument from "./components/document";
 import TypeSuggest from "./components/typeSuggest";
 
@@ -14,8 +14,13 @@ export default function AddNewSuggets() {
         <p className="home">پنل / درخواست ها /</p>
         <p className="component"> {title} </p>
       </Title>
-      {state.addSuggestLevel ==1 && <TypeSuggest/>}
-      {state.addSuggestLevel ==2 && <><TypeSuggest/><SuggestDocument/> </>}
+      {state.addSuggestLevel == 1 && <TypeSuggest />}
+      {state.addSuggestLevel == 2 && (
+        <>
+          <TypeSuggest />
+          <SuggestDocument />{" "}
+        </>
+      )}
     </Container>
   );
 }

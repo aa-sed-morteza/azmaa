@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useWidth from "../../hook/useWidth";
+import useWidth from "../hook/useWidth";
 import styled from "styled-components";
-import EnvoyCard from "../general/envoyCard";
-import Census from "./components/census";
-import EnvoyArea from "./components/envoyArea";
-import EnvoyHistory from "./components/envoyHistory";
-import Filtering from "./components/Filtering";
-import SocialNetwork from "./components/socialNetwork";
+import EnvoyCard from "../components/general/envoyCard";
+import Census from "../components/detailsEnvoy/components/census";
+import EnvoyArea from "../components/detailsEnvoy/components/envoyArea";
+import EnvoyHistory from "../components/detailsEnvoy/components/envoyHistory";
+import Filtering from "../components/detailsEnvoy/components/Filtering";
+import SocialNetwork from "../components/detailsEnvoy/components/socialNetwork";
 import axios from "axios";
-import { BaseBackURL } from "../../constant/api";
-import Controller from "../home/components/controller";
+import { BaseBackURL } from "../constant/api";
+import Controller from "../components/home/components/controller";
 
 export default function DetailsEnvoy() {
   const { title } = useParams();
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   const width = useWidth();
   const [envoys, setEnvoys] = useState([]);
   const [envoy, setEnvoy] = useState({});
@@ -33,7 +33,6 @@ export default function DetailsEnvoy() {
     });
   };
 
-
   useEffect(() => {
     window.scrollTo(0, 0);
     getEnvoys();
@@ -44,11 +43,18 @@ export default function DetailsEnvoy() {
     // console.log("title="+title);
   }, [envoys]);
 
-
   return (
     <Container>
       <Title>
-        <p className="home" onClick={()=>{navigate("/envoy")}} > خانه / نمایندگان /</p>
+        <p
+          className="home"
+          onClick={() => {
+            navigate("/envoy");
+          }}
+        >
+          {" "}
+          خانه / نمایندگان /
+        </p>
         <p className="component">
           {" "}
           {envoy && envoy.first_name + " " + envoy.last_name}
@@ -65,7 +71,7 @@ export default function DetailsEnvoy() {
             persantage={envoy.transparency}
             id={envoy.id}
             inBox={true}
-            position='sticky'
+            position="sticky"
           />
         )}
 
@@ -79,9 +85,7 @@ export default function DetailsEnvoy() {
         {envoy && <Controller vote_voter={title} />}
       </SecondSection>
       {/* socialNetwork */}
-      <ThirdSection>
-        {/* <SocialNetwork /> */}
-      </ThirdSection>
+      <ThirdSection>{/* <SocialNetwork /> */}</ThirdSection>
     </Container>
   );
 }
@@ -159,11 +163,11 @@ const SecondSection = styled.div`
   @media (min-width: 481px) {
     width: 65%;
     padding: 0.99vw 1.302vw 0 0;
-    &>* {
-      & .filter-box{
-      margin-top: 0;
+    & > * {
+      & .filter-box {
+        margin-top: 0;
+      }
     }
-  }
   }
 `;
 

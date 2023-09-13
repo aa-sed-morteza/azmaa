@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useUser } from "../../context/userContext";
+import { useUser } from "../../../context/userContext";
 import web from "../../../assets/web.svg";
 import telegram from "../../../assets/telegram.svg";
 import instagram from "../../../assets/instagram.svg";
@@ -31,7 +31,6 @@ export default function SocialNetwork() {
           <div className="text-wraper">
             {/* <p className="text">@Alireza.Pakfetrat</p> */}
             <p className="text">؟</p>
-
           </div>
         </NetworkRow>
       </Content>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useUser } from "../context/userContext";
+import { useUser } from "../../context/userContext";
 
 export default function IranMap() {
   const { state, dispatch } = useUser();
@@ -37,8 +37,6 @@ export default function IranMap() {
     { id: 40, name: "یزد " },
     { id: 41, name: "کهکیلویه " },
   ];
-
-
 
   useEffect(() => {
     if (select !== 0) {

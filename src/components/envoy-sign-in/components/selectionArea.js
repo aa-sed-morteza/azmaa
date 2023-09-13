@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CustomInput from "../../general/customInput";
 import Button from "../../general/button";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../context/userContext";
+import { useUser } from "../../../context/userContext";
 import { useFormik } from "formik";
 import { selectAreaSchema } from "../../schema";
 import Select from "../../general/select";
@@ -110,7 +110,7 @@ export default function SelectionArea() {
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValue
+    setFieldValue,
   } = useFormik({
     initialValues: {
       areaName: "",
@@ -121,15 +121,15 @@ export default function SelectionArea() {
     onSubmit,
   });
 
-    // Convert persianNumber to englishNumber
-    useEffect(() => {
-      setFieldValue(
-        "voteNumber",
-        values.voteNumber
-          .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
-          .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
-      );
-    }, [values.voteNumber]);
+  // Convert persianNumber to englishNumber
+  useEffect(() => {
+    setFieldValue(
+      "voteNumber",
+      values.voteNumber
+        .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+        .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    );
+  }, [values.voteNumber]);
 
   return (
     <>

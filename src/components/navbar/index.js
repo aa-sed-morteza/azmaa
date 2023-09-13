@@ -9,12 +9,10 @@ import signInMobile from "../../assets/signMobile.svg";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import useWidth from "../../hook/useWidth";
-import { useUser } from "../context/userContext";
 import exit from "../../assets/exit.webp";
 import Profile from "../dashboard/components/profile";
-import axios from "axios";
-import { BaseBackURL } from "../../constant/api";
 import Cookies from "js-cookie";
+import { useUser } from "../../context/userContext";
 
 // styled
 const TopBar = styled.section`
@@ -24,6 +22,10 @@ const TopBar = styled.section`
   display: flex;
   justify-content: space-between;
   z-index: 100;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
 
   @media (min-width: 481px) {
     justify-content: flex-start;

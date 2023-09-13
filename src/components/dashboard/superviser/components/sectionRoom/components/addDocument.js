@@ -6,7 +6,7 @@ import { LinkSchema } from "../../../../../schema/index";
 
 import Button from "../../../../../general/button";
 
-import { useUser } from "../../../../../context/userContext";
+import { useUser } from "../../../../../../context/userContext";
 import FileUploadInput from "../../../../../general/fileUploadInput";
 import CustomInput from "../../../../../general/customInput";
 import { BaseBackURL } from "../../../../../../constant/api";
@@ -60,7 +60,6 @@ export default function AddDocument() {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
         // dispatch({ type: "SET_DOC_ARTICLE", payload: values });
         dispatch({ type: "SET_ADD_ARTICLE", payload: 1 });
         navigate(`/dashboard/mySection`);

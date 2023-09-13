@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import BestEnvoy from "../../home/components/bestEnvoy";
+import BestEnvoy from "../../home/components/bestEnvoyCard";
 import upArrow from "../../../assets/arrow.webp";
 import ok from "../../../assets/ok.webp";
 import { useNavigate } from "react-router-dom";

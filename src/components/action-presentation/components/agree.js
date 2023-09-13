@@ -1,33 +1,44 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import BestEnvoy from "../../home/components/bestEnvoy";
+import BestEnvoy from "../../home/components/bestEnvoyCard";
 import upArrow from "../../../assets/arrow.webp";
 import ok from "../../../assets/ok.webp";
 import { useNavigate } from "react-router-dom";
 
 export default function Agree({ envoys }) {
   const navigate = useNavigate();
-  const [showMore,setShowMore]=useState(false);
+  const [showMore, setShowMore] = useState(false);
 
-  const envoysList =envoys !== undefined && envoys.length>0 && envoys.map((item, i) => {
-    return (
-      <BestEnvoy
-        key={i}
-        envoy={item.voter}
-        click={() => {
-          navigate(`/envoy/${item.voter.id}`);
-        }}
-      />
-    );
-  });
-
-
+  const envoysList =
+    envoys !== undefined &&
+    envoys.length > 0 &&
+    envoys.map((item, i) => {
+      return (
+        <BestEnvoy
+          key={i}
+          envoy={item.voter}
+          click={() => {
+            navigate(`/envoy/${item.voter.id}`);
+          }}
+        />
+      );
+    });
 
   return (
     <Container>
-      <Title>{envoys !== undefined && envoys.length>0 && envoys[0]?(envoys[0].vote ? envoys[0].vote :'نمایندگان موافق'):""}   </Title>
+      <Title>
+        {envoys !== undefined && envoys.length > 0 && envoys[0]
+          ? envoys[0].vote
+            ? envoys[0].vote
+            : "نمایندگان موافق"
+          : ""}{" "}
+      </Title>
       <Gallery>{envoysList}</Gallery>
-      <ShowMore onClick={()=>{setShowMore(!showMore)}}>
+      <ShowMore
+        onClick={() => {
+          setShowMore(!showMore);
+        }}
+      >
         <p>نمایش بیشتر </p>
       </ShowMore>
     </Container>
@@ -100,16 +111,16 @@ const Title = styled.h2`
 `;
 
 const Gallery = styled.div`
-@media (min-width: 481px) {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  & > div {
-    width: 45%;
+  @media (min-width: 481px) {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    & > div {
+      width: 45%;
+    }
   }
-}
-@media (min-width: 769px) {
-  gap: 15px;
-}
+  @media (min-width: 769px) {
+    gap: 15px;
+  }
 `;

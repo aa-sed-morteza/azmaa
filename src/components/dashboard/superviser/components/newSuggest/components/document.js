@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { documentSchema } from "../../../../../schema/index";
 import Button from "../../../../../general/button";
-import { useUser } from "../../../../../context/userContext";
+import { useUser } from "../../../../../../context/userContext";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import CustomInput from "../../../../../general/customInput";
@@ -15,7 +15,7 @@ export default function SuggestDocument() {
   const onSubmit = async (values, actions) => {
     // dispatch({ type: "SET_SUGGET_TYPE", payload: values.type });
     dispatch({ type: "SET_SUGGEST_LEVEL", payload: 1 });
-    navigate('/dashboard/inbox');
+    navigate("/dashboard/inbox");
     actions.resetForm();
   };
 
@@ -110,9 +110,9 @@ const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
-  @media(min-width:480px){
-    width:100%;
-    justify-content:center;
+  @media (min-width: 480px) {
+    width: 100%;
+    justify-content: center;
     margin: 1.302vw auto;
   }
 `;
@@ -125,9 +125,9 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
-  @media(min-width:480px){
-    margin-top:0;
-    font-size:1.042vw
+  @media (min-width: 480px) {
+    margin-top: 0;
+    font-size: 1.042vw;
   }
 `;
 
@@ -135,11 +135,9 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  @media(min-width:480px){
-    width:84%;
-    margin:auto;
-    gap:1.302vw;
+  @media (min-width: 480px) {
+    width: 84%;
+    margin: auto;
+    gap: 1.302vw;
   }
 `;
-
-

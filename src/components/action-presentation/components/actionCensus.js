@@ -20,7 +20,7 @@ export default function ActionsCensus({ total, data }) {
             {data.verified_vote
               ?toFarsiNumber(data.verified_vote.filter((x) => x.vote == item.name).length)  
               : ""}
-            /
+             &nbsp;از &nbsp;
           </span>
           {toFarsiNumber(total) }
         </Number>
@@ -29,7 +29,7 @@ export default function ActionsCensus({ total, data }) {
   });
   return (
     <Container>
-      <Title> آمار آراء</Title>
+      <Title> آمار </Title>
       <Row>
         {total > 0 ? dataOptions : <h5> هنوز عملکردی ثبت نشده</h5>}
         {/* <Item className="active">

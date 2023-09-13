@@ -1,5 +1,10 @@
 import storage from "redux-persist/lib/storage";
-import dataReducer from "./slices/dataSlice";
+import envoyReducer from "./slices/envoySlice";
+import voteReducer from "./slices/voteSlice";
+import ActivitySlice from "./slices/activitySlice";
+import blogReducer from "./slices/blogSlice";
+import cityReducer from "./slices/citySlice";
+import filterReducer from "./slices/filterSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import { combineReducers } from "redux";
@@ -11,15 +16,16 @@ const persistConfig = {
 };
 
 const reducers = combineReducers({
-  messages: dataReducer,
+  envoy: envoyReducer,
+  vote: voteReducer,
+  activity: ActivitySlice,
+  blog: blogReducer,
+  city: cityReducer,
+  filter: filterReducer,
 });
 
-const persistedReducer = persistReducer(persistConfig, reducers);
-
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: reducers,
   devTools: process.env.NODE_ENV !== "production",
   middleware: [thunk],
 });
-
-export const persistor = persistStore(store);

@@ -1,7 +1,7 @@
 import React, { useReducer, useContext, useEffect } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
-import { BaseBackURL } from "../../constant/api";
+import { BaseBackURL } from "../constant/api";
 
 const initialState = {
   userName: "",

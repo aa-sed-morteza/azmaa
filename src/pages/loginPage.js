@@ -1,27 +1,27 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 // import wellcome from "../../assets/welcome.webp";
-import wellcome from "../../assets/well.svg";
-import Button from "../general/button";
-import login from "../../assets/log.webp";
-import signin from "../../assets/signin.webp";
-import CustomInput from "../general/customInput";
-import profile from "../../assets/user-log.svg";
-import lock from "../../assets/lock.webp";
+import wellcome from "../assets/well.svg";
+import Button from "../components/general/button";
+import login from "../assets/log.webp";
+import signin from "../assets/signin.webp";
+import CustomInput from "../components/general/customInput";
+import profile from "../assets/user-log.svg";
+import lock from "../assets/lock.webp";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { useUser } from "../context/userContext";
-import { logInSchema } from "../schema";
+import { useUser } from "../components/../context/userContext";
+import { logInSchema } from "../components/schema";
 import axios from "axios";
-import { BaseBackURL } from "../../constant/api";
+import { BaseBackURL } from "../constant/api";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
-import useWidth from "../../hook/useWidth";
+import useWidth from "../hook/useWidth";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
-  const width =useWidth();
+  const width = useWidth();
   const navigate = useNavigate();
 
   const onSubmit = (values) => {
@@ -59,7 +59,7 @@ export default function LogIn() {
           }
 
           navigate("/dashboard");
-          dispatch({ type: "OPEN_MENU", payload:true });
+          dispatch({ type: "OPEN_MENU", payload: true });
         } else if (res.data.code === -1) {
           toast.error("نام کاربری یا رمز عبور اشتباه است!", {
             position: toast.POSITION.TOP_RIGHT,
@@ -182,10 +182,7 @@ export default function LogIn() {
             />
           </Box>
         </Form>
-        <Link  to="/forget" style={{color:'#FFAA00',textDecoration :'none'}} >
-        رمز عبور خود را فراموش کرده‌اید؟
-        </Link>
-
+        <Link to="/forget">رمز عبور خود را فراموش کرده‌اید؟</Link>
       </Content>
     </Container>
   );
@@ -234,10 +231,6 @@ const Form = styled.form`
     gap: 1.5vw;
   }
 `;
-
-
-
-
 
 const ErrorText = styled.p`
   color: #fc8181;

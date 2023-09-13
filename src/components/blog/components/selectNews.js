@@ -115,7 +115,9 @@ export default function SelectNews({ posts }) {
           }}
           style={{ marginTop: "20px" }}
         >
-          <p>{showLimit >= filteredPosts.length ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
+          <p>
+            {showLimit >= filteredPosts.length ? "نمایش کمتر" : "نمایش بیشتر "}
+          </p>{" "}
         </ShowMore>
       </ChangeBack>
     </Container>

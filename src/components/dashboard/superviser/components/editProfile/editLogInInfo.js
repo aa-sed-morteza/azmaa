@@ -4,7 +4,7 @@ import CustomInput from "../../../../general/customInput";
 import Button from "../../../../general/button";
 import lock from "../../../../../assets/lock.webp";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../../../context/userContext";
+import { useUser } from "../../../../../context/userContext";
 import { useFormik } from "formik";
 import { passSchema } from "../../../../schema";
 import axios from "axios";

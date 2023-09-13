@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
-import pic from "../../../assets/poster.webp";
-import profile from "../../../assets/profile.webp";
-import like from "../../../assets/like1.webp";
-import dislike from "../../../assets/dislike1.webp";
-import data from "../../../data.json";
-import user from "../../../assets/profile.webp";
-import note from "../../../assets/text.webp";
-import news from "../../../assets/news.webp";
-import report from "../../../assets/report.webp";
-import article from "../../../assets/report.webp";
-import Text from "../../../assets/text.webp";
-import useWidth from "../../../hook/useWidth";
-import upArrow from "../../../assets/arrow.webp";
-import ShareButton from "../../general/shareButton";
+import user from "../assets/profile.webp";
+import note from "../assets/text.webp";
+import news from "../assets/news.webp";
+import report from "../assets/report.webp";
+import article from "../assets/report.webp";
+import Text from "../assets/text.webp";
+import useWidth from "../hook/useWidth";
+import upArrow from "../assets/arrow.webp";
+import ShareButton from "../components/general/shareButton";
 import axios from "axios";
-import { BaseBackURL } from "../../../constant/api";
-import { convertDateToFarsi } from "../../../utils";
+import { BaseBackURL } from "../constant/api";
+import { convertDateToFarsi } from "../utils";
 
 export default function NewsPage() {
   const { title } = useParams();
@@ -65,6 +60,7 @@ export default function NewsPage() {
   useEffect(() => {
     getPost();
     getPosts();
+    window.scrollTo(0, 0);
   }, [title]);
 
   useEffect(() => {
@@ -162,7 +158,14 @@ export default function NewsPage() {
   return (
     <Container>
       <Title>
-        <p className="home" onClick={()=>{navigate("/blog")}} >خانه / بلاگ /</p>
+        <p
+          className="home"
+          onClick={() => {
+            navigate("/blog");
+          }}
+        >
+          خانه / بلاگ /
+        </p>
         <p className="component"> {post && post.title} </p>
       </Title>
       {width < 481 ? (
@@ -185,14 +188,14 @@ export default function NewsPage() {
 
               <Paragraph>{post && post.description}</Paragraph>
               {post.image ? (
-                    <Picture>
-                      <img src={post && post.image} alt="news-cover" />
-                    </Picture>
-                  ) : (
-                    ""
-                  )}
+                <Picture>
+                  <img src={post && post.image} alt="news-cover" />
+                </Picture>
+              ) : (
+                ""
+              )}
 
-                  <Writer icon="user"> نویسنده :  {post.writer}</Writer>
+              <Writer icon="user"> نویسنده : {post.writer}</Writer>
 
               <Feedback>
                 {/* <Button color="#6CBBA9" icon={like}>
@@ -249,7 +252,7 @@ export default function NewsPage() {
                     ""
                   )}
 
-                  <Writer icon="user"> نویسنده :  {post.writer}</Writer>
+                  <Writer icon="user"> نویسنده : {post.writer}</Writer>
 
                   <Feedback>
                     {/* <Button color="#6CBBA9" icon={like}>
@@ -464,8 +467,7 @@ const Type = styled.p`
   }
 `;
 
-const Writer =styled(Type)`
-`
+const Writer = styled(Type)``;
 const Date = styled.p`
   margin: 0;
   font-weight: 700;
@@ -686,6 +688,7 @@ const Paper = styled.div`
     font-size: 14px;
     font-weight: bold;
     text-decoration: underline;
+    cursor: pointer;
   }
 
   &:nth-child(5) {

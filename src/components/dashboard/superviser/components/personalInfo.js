@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../../context/userContext";
 import edit from "../../../../assets/left.svg";
 import { useNavigate } from "react-router-dom";
 import { convertDateToFarsi, toFarsiNumber } from "../../../../utils";
@@ -32,11 +32,12 @@ export default function PersonalInfo() {
       <Row>
         <p className="type"> تاریخ تولد: </p>
         <p className="expand">
-          {state.birth_place && toFarsiNumber(state.birth_date.slice(0, 4)) +
-            "/" +
-            toFarsiNumber(state.birth_date.slice(5, 7)) +
-            "/" +
-            toFarsiNumber(state.birth_date.slice(8, 10))}
+          {state.birth_place &&
+            toFarsiNumber(state.birth_date.slice(0, 4)) +
+              "/" +
+              toFarsiNumber(state.birth_date.slice(5, 7)) +
+              "/" +
+              toFarsiNumber(state.birth_date.slice(8, 10))}
         </p>
       </Row>
       <Row>

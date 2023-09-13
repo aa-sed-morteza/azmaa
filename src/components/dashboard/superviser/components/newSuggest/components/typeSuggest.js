@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { suggestSchema } from "../../../../../schema/index";
 import Button from "../../../../../general/button";
-import { useUser } from "../../../../../context/userContext";
+import { useUser } from "../../../../../../context/userContext";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-
 
 export default function TypeSuggest() {
   const { state, dispatch } = useUser();
@@ -34,7 +33,6 @@ export default function TypeSuggest() {
     validationSchema: suggestSchema,
     onSubmit,
   });
-
 
   return (
     <>
@@ -208,9 +206,9 @@ const Box = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
-  @media(min-width:480px){
-    width:100%;
-    justify-content:center;
+  @media (min-width: 480px) {
+    width: 100%;
+    justify-content: center;
     margin: 1.302vw auto;
   }
 `;
@@ -223,9 +221,9 @@ const ErrorText = styled.p`
   margin: 0;
   margin-right: 2%;
   margin-top: 2%;
-  @media(min-width:480px){
-    margin-top:0;
-    font-size:1.042vw
+  @media (min-width: 480px) {
+    margin-top: 0;
+    font-size: 1.042vw;
   }
 `;
 
@@ -262,19 +260,19 @@ const RadioButton = styled.div`
       font-weight: 400;
     }
   }
-  @media(min-width:480px){
-    width:80%;
-    margin:1.042vw auto;
-    input{
-      width:1.563vw;
-      height:1.563vw;
+  @media (min-width: 480px) {
+    width: 80%;
+    margin: 1.042vw auto;
+    input {
+      width: 1.563vw;
+      height: 1.563vw;
     }
-    label{
-      font-size:1.563vw;
+    label {
+      font-size: 1.563vw;
     }
-    img{
-      width:2.604vw;
-      height:2.604vw;
+    img {
+      width: 2.604vw;
+      height: 2.604vw;
     }
   }
 `;

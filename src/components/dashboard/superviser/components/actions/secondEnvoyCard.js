@@ -47,10 +47,8 @@ export default function SecondEnvoyCard({
     }
   };
 
-
-  console.log('sag',action)
   const checkAction = () => {
-    if (action === "موافق" || action=="positive") {
+    if (action === "موافق" || action == "positive") {
       setActColor("#6CBBA9");
       setActIcon([like]);
       setActionWord("موافق");
@@ -58,7 +56,7 @@ export default function SecondEnvoyCard({
       setActColor("#FFA5A5");
       setActIcon([dislike]);
       setActionWord("مخالف");
-    } else if (action === "ممتنع" || action =="none") {
+    } else if (action === "ممتنع" || action == "none") {
       setActColor("#D8D8D8");
       setActIcon([not]);
       setActionWord("ممتنع");
@@ -70,7 +68,7 @@ export default function SecondEnvoyCard({
       setActColor("#D8D8D8");
       setActIcon([not]);
       setActionWord("بدون رای");
-    }else if (action === "همراه") {
+    } else if (action === "همراه") {
       setActColor("#6CBBA9");
       setActIcon([like1]);
       setActionWord("همراه");
@@ -80,7 +78,6 @@ export default function SecondEnvoyCard({
       setActionWord("ناهمراه");
     }
   };
-
 
   useEffect(() => {
     calculateFillCircle();

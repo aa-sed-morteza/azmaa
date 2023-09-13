@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CustomInput from "../../../../general/customInput";
 import Button from "../../../../general/button";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../../../context/userContext";
+import { useUser } from "../../../../../context/userContext";
 import { useFormik } from "formik";
 import { contactSchema } from "../../../../schema";
 import axios from "axios";

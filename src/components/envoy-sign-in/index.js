@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../context/userContext";
+import { useUser } from "../../context/userContext";
 import PersonalInformation from "../sign-in/components/personalInfo";
 import SetPassword from "../sign-in/components/setPassword";
 import Contacts from "./components/contact";
 import SelectionArea from "./components/selectionArea";
 import DutiesHistory from "./components/duriesHistory";
 
-
 export default function SignIn() {
   const { state, dispatch } = useUser();
   const [step, setStep] = useState(0);
-  const navigate  =useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -20,12 +19,29 @@ export default function SignIn() {
         <p className="home">پنل / </p>
         <p className="component"> ثبت نام </p>
       </Title>
-      
-      {state.signInLevel === 1 && <PersonalInformation />}
-      {state.signInLevel === 2 && <><PersonalInformation /><Contacts/></>}
-      {state.signInLevel === 3 && <><PersonalInformation /><Contacts/><SelectionArea/></> }
-      {state.signInLevel === 4 && <><PersonalInformation /><Contacts/><SelectionArea/><DutiesHistory/></> }
 
+      {state.signInLevel === 1 && <PersonalInformation />}
+      {state.signInLevel === 2 && (
+        <>
+          <PersonalInformation />
+          <Contacts />
+        </>
+      )}
+      {state.signInLevel === 3 && (
+        <>
+          <PersonalInformation />
+          <Contacts />
+          <SelectionArea />
+        </>
+      )}
+      {state.signInLevel === 4 && (
+        <>
+          <PersonalInformation />
+          <Contacts />
+          <SelectionArea />
+          <DutiesHistory />
+        </>
+      )}
     </Container>
   );
 }
@@ -60,6 +76,3 @@ const Title = styled.div`
     }
   }
 `;
-
-
-

@@ -5,9 +5,9 @@ import pic from "../../../../assets/hamidreza.webp";
 import title from "../../../../assets/title.svg";
 import { BaseBackURL } from "../../../../constant/api";
 import axios from "axios";
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../../context/userContext";
 import { useNavigate } from "react-router-dom";
-import BestEnvoy from "../../../home/components/bestEnvoy";
+import BestEnvoy from "../../../home/components/bestEnvoyCard";
 
 export default function MyEnvoys() {
   const { state, dispatch } = useUser();
@@ -199,10 +199,9 @@ const EnvoyPart = styled.div`
   & > div {
     width: 100%;
   }
-  @media (min-width:481px){
+  @media (min-width: 481px) {
     & > div {
-    width: 45%;
+      width: 45%;
+    }
   }
-}
-  
 `;

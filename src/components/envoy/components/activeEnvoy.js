@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import profile from "../../../assets/profile.webp";
 import upArrow from "../../../assets/arrow.webp";
+<<<<<<< HEAD
 import BestEnvoy from "../../home/components/bestEnvoy";
+=======
+import BestEnvoy from "../../home/components/bestEnvoyCard";
+>>>>>>> hamid/fix/motions
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Container = styled.section`
@@ -94,22 +98,14 @@ export default function ActiveEnvoy({ envoys }) {
   const navigate = useNavigate();
   const [showMore, setShowMore] = useState(false);
   const [searchparams, setsearchparams] = useSearchParams();
+  const newEnvoyList = [...envoys];
   return (
     <Container>
       <Title>شفاف ترین نمایندگان</Title>
       <EnvoyContainer hide={showMore}>
         {/* {console.log(envoys)} */}
-        {envoys
+        {newEnvoyList
           .sort((a, b) => b.transparency - a.transparency)
-          .filter((item) => {
-            let filter = searchparams.get("filter");
-            if (!filter) return true;
-            // let name= item.writer + item.description ;
-            let name =
-              item.first_name + item.last_name + item.electoral_district_name;
-            // console.log(item);
-            return name.includes(filter);
-          })
           .map((item, i) => (
             <BestEnvoy
               key={i}

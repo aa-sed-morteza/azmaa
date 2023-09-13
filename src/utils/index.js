@@ -53,7 +53,6 @@ export function toFarsiNumber(n) {
 
 export function convertDateToFarsi(stringArg) {
   const farsiData = new Date(stringArg).toLocaleDateString("fa-IR");
-  console.log(farsiData);
   // const ETF = "۰۱۲۳۴۵۶۷۸۹";
   // const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
   // const ans = stringArg
