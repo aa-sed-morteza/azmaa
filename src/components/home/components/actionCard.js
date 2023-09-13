@@ -209,7 +209,7 @@ const VCContainer = styled.div`
     width: 25%;
     padding: 20px 17px;
     height: 43.229vw;
-    min-height: 0;
+    max-height: 600px;
   }
   @media (min-width: 1025px) {
     width: 28%;
