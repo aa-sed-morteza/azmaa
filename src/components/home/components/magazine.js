@@ -24,7 +24,7 @@ const MagazineContainer = styled.section`
   position: relative;
   @media (min-width: 481px) {
     padding: 20px;
-    margin-top: 0;
+    margin: 20px 0 ;
   }
   @media (min-width: 769px) {
     padding: 36px 0 50px;
