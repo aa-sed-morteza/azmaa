@@ -233,7 +233,7 @@ const Paper = styled.div`
   }
   .ReadMore {
     color: #fab732;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: bold;
     text-decoration: underline;
   }
