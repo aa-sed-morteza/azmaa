@@ -105,7 +105,6 @@ export default function Envoy() {
     }
   }, [state.citySearch]);
 
-  
   return (
     <Container>
       <Title>
@@ -186,7 +185,7 @@ const Container = styled.section`
   padding: 10px 20px;
   overflow: hidden;
   @media (min-width: 481px) {
-    padding: 20px 0;
+    padding: 25px 0;
     background-color: #ffffff;
   }
 `;
@@ -223,15 +222,12 @@ const Content = styled.div`
   border-radius: 4px;
   padding: 10px;
   position: relative;
-  @media (min-width: 481px) {
-    padding: 0;
-    padding-right: 10%;
-  }
 `;
 
 const Wraper = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 2vw;
   margin-bottom: 70px;
 `;
 

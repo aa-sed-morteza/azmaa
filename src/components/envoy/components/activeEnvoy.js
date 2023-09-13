@@ -3,13 +3,13 @@ import styled from "styled-components";
 import profile from "../../../assets/profile.webp";
 import upArrow from "../../../assets/arrow.webp";
 import BestEnvoy from "../../home/components/bestEnvoy";
-import { useNavigate,useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Container = styled.section`
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding-left: 9%;
+  padding: 2% 6%;
   margin-top: 70px;
   margin-bottom: 70px;
 `;
@@ -51,10 +51,11 @@ const Title = styled.h1`
 const EnvoyContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 15px;
   & > :nth-of-type(1n + 7) {
-      display: ${(props) => (!props.hide ? "none" : "")};
-    }
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
 `;
 
 const ShowMore = styled.div`
@@ -85,7 +86,6 @@ const ShowMore = styled.div`
       background-repeat: no-repeat;
       width: 15px;
       height: 8px;
-    
     }
   }
 `;
@@ -99,24 +99,33 @@ export default function ActiveEnvoy({ envoys }) {
       <Title>شفاف ترین نمایندگان</Title>
       <EnvoyContainer hide={showMore}>
         {/* {console.log(envoys)} */}
-        {envoys.sort((a, b) => b.transparency - a.transparency).filter((item)=>{
-                let filter= searchparams.get("filter");
-                if(!filter)return true;
-                // let name= item.writer + item.description ;
-                let name= item.first_name + item.last_name +item.electoral_district_name ;
-                // console.log(item);
-                return name.includes(filter);
-              }).map((item, i) => (
-          <BestEnvoy
-            key={i}
-            envoy={item}
-            click={() => {
-              navigate(`/envoy/${item.id}`);
-            }}
-          />
-        ))}
+        {envoys
+          .sort((a, b) => b.transparency - a.transparency)
+          .filter((item) => {
+            let filter = searchparams.get("filter");
+            if (!filter) return true;
+            // let name= item.writer + item.description ;
+            let name =
+              item.first_name + item.last_name + item.electoral_district_name;
+            // console.log(item);
+            return name.includes(filter);
+          })
+          .map((item, i) => (
+            <BestEnvoy
+              key={i}
+              envoy={item}
+              click={() => {
+                navigate(`/envoy/${item.id}`);
+              }}
+            />
+          ))}
       </EnvoyContainer>
-      <ShowMore arrow={showMore} onClick={() => { setShowMore(!showMore) }}>
+      <ShowMore
+        arrow={showMore}
+        onClick={() => {
+          setShowMore(!showMore);
+        }}
+      >
         <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
       </ShowMore>
     </Container>

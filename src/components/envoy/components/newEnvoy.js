@@ -9,7 +9,7 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding-left: 9%;
+  padding: 2% 6%;
   margin-top: 70px;
   margin-bottom: 70px;
 `;
@@ -50,6 +50,7 @@ const Title = styled.h1`
 
 const EnvoyContainer = styled.div`
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 15px;
   & > :nth-of-type(1n + 7) {
