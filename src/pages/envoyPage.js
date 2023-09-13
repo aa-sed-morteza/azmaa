@@ -76,7 +76,7 @@ const Container = styled.section`
   padding: 10px 20px;
   overflow: hidden;
   @media (min-width: 481px) {
-    padding: 7vw 0;
+    padding: 7vw 0 2vw;
     background-color: #ffffff;
   }
 `;
