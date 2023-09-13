@@ -209,14 +209,12 @@ const Panel = styled.div`
   }
   .content {
     background: #f3f3f3;
-    position: absolute;
     right: -15.5vw;
-    top: -2.885vw;
     padding: 11px;
     color: ${(props) => props.color};
     font-size: 2.25vw;
     font-weight: bold;
-    border-radius: 0px 0px 8px 8px;
+    border-radius: 8px 8px 8px 8px;
   }
 
   @media (min-width: 769px) {
@@ -227,16 +225,14 @@ const Panel = styled.div`
     .content {
       font-size: 1.25vw;
       right: -9.5vw;
-      top: -1.885vw;
     }
   }
 
   @media (min-width: 1201px) {
     .content {
       padding: 11px 22px;
-      font-size: 1.55vw;
+      font-size: 1.25vw;
       right: -10.5vw;
-      top: -1.2vw;
     }
   }
 `;
@@ -301,10 +297,10 @@ export default function Navbar() {
   const [active, setActive] = useState(0);
   const [dashboard, setDashboard] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     setDashboard(true);
-    setOpen(true)
-  },[state.openMenu])
+    setOpen(true);
+  }, [state.openMenu]);
 
   const menuItem = data.navbar.map((x, i) => {
     return (
@@ -370,7 +366,7 @@ export default function Navbar() {
       dispatch({ type: "OPEN_MENU", payload: false });
     } else {
       navigate("/dashboard");
-      setDashboard(true)
+      setDashboard(true);
     }
     setOpen(!open);
     // setDashboard(!dashboard);
@@ -396,12 +392,13 @@ export default function Navbar() {
     setOpen(!open);
   }
 
- 
-
-
   return (
     <TopBar>
-      <Logo onClick={()=>{navigate('/')}}>
+      <Logo
+        onClick={() => {
+          navigate("/");
+        }}
+      >
         <img src={LOGO} alt="logo" />
       </Logo>
 
@@ -420,12 +417,20 @@ export default function Navbar() {
               {state.loggedIn ? "خروج از پنل" : "ورود به پنل"}{" "}
               {/* <div className="icon"></div> */}
             </div>{" "}
-            
           </Panel>
         )}
 
         <Search></Search>
-        {width < 481 ? <Menu onClick={()=>{setOpen(!open)}} open={open}></Menu> : ""}
+        {width < 481 ? (
+          <Menu
+            onClick={() => {
+              setOpen(!open);
+            }}
+            open={open}
+          ></Menu>
+        ) : (
+          ""
+        )}
         {width < 481 ? (
           <MenuList open={open} back={dashboard && state.loggedIn}>
             {dashboard && state.loggedIn ? <Profile /> : ""}
