@@ -115,7 +115,6 @@ const Content = styled.div`
   position: relative;
   @media (min-width: 481px) {
     padding: 0;
-    padding-right: 10%;
   }
 `;
 

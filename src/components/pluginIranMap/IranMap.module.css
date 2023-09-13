@@ -35,7 +35,7 @@
 .map .svg {
   position: relative;
   width: 100%;
-  height: 31vw;
+  height: 48vh;
   transition: transform 2.5s ease;
   overflow: auto;
 }
