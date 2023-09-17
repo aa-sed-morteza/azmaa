@@ -201,7 +201,8 @@ const Content = styled.div`
 `;
 const ActionContainer = styled.div`
   @media (min-width: 481px) {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 25%);
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
@@ -244,6 +245,7 @@ const ShowMore = styled.div`
     justify-content: center;
     align-items: center;
     margin: auto;
+    margin-bottom: 2%;
     padding: 13px;
     p {
       font-size: 1.25vw;

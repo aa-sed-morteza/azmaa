@@ -753,7 +753,7 @@ const Title = styled.h1`
     font-size: 1.87vw;
     margin-bottom: 24px;
     &:after {
-      width: 75%;
+      width: 70%;
     }
     &:before {
       content: "";
@@ -833,7 +833,8 @@ const VoterContainer = styled.div`
     display: ${(props) => (!props.hide ? "none" : "")};
   } */
   @media (min-width: 481px) {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 37%);
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
@@ -861,7 +862,8 @@ const SecondAlbum = styled.div`
 
 const ActionContainer = styled.div`
   @media (min-width: 481px) {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 37%);
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;

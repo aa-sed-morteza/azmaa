@@ -164,7 +164,7 @@ const VoterContainer = styled.div`
     justify-content: center;
     flex-wrap: wrap; */
     display: grid;
-    grid-template-columns: repeat(3, 25%);
+    grid-template-columns: repeat(3, 29%);
     gap: 20px;
   }
   @media (min-width: 769px) {

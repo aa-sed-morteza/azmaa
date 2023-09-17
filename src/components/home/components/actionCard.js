@@ -206,16 +206,16 @@ const VCContainer = styled.div`
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     margin-bottom: 34px;
-    width: 25%;
+    /* width: 25%; */
     padding: 20px 17px;
     height: 43.229vw;
     max-height: 600px;
   }
   @media (min-width: 1025px) {
-    width: 28%;
+    /* width: 28%; */
   }
   @media (min-width: 1600px) {
-    width: 30%;
+    /* width: 30%; */
   }
 `;
 
@@ -279,13 +279,13 @@ const CardHeader = styled.div`
         }
       }
       h2 {
-        font-size: 1.667vw;
+        font-size: 1.4vw;
         font-weight: 700;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
-        min-height: 100px;
+        min-height: 112px;
       }
       .date {
         font-size: 1.25vw;
@@ -556,7 +556,7 @@ const ButtonWraper = styled.div`
   display: flex;
   margin-top: 10px;
   justify-content: space-between;
- 
+
   @media (min-width: 481px) {
     border-top: 1px solid #d8d8d8;
     padding-top: 14px;

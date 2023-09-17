@@ -26,22 +26,23 @@ const VCContainer = styled.div`
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     margin-bottom: 34px;
-    width: 25%;
+    /* width: 25%; */
     padding: 20px 17px;
     height: 26.229vw;
     min-height: 0;
   }
 
   @media (min-width: 1025px) {
-    width: 28%;
+    /* width: 28%; */
   }
   @media (min-width: 1600px) {
-    width: 30%;
+    /* width: 30%; */
   }
 `;
 
 const CardHeader = styled.div`
   display: flex;
+  gap: 10px;
   justify-content: space-between;
   & > .vote-logo {
     background-image: url(${symbol});
@@ -50,8 +51,8 @@ const CardHeader = styled.div`
     width: 20.698vw;
     height: 17.674vw;
     @media (min-width: 481px) {
-      width: 6.771vw;
-      height: 6.771vw;
+      width: 6vw;
+      height: 6vw;
     }
   }
   & > .vote-logo-reject {
@@ -110,13 +111,13 @@ const CardHeader = styled.div`
         }
       }
       h2 {
-        font-size: 1.667vw;
+        font-size: 1.5vw;
         font-weight: 700;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
-        min-height: 100px;
+        min-height: 112px;
       }
       .date {
         font-size: 1.25vw;
@@ -470,7 +471,6 @@ const Card = styled.div`
     border-bottom: 1px solid #ffffff;
     min-width: inherit;
     .picture {
-      
       width: 5vw;
       height: 5vw;
       border-radius: 5vw;
@@ -494,6 +494,7 @@ const Card = styled.div`
 
 const ButtonWraper = styled.div`
   display: flex;
+  gap: 10px;
   margin-top: 10px;
   justify-content: space-between;
   @media (min-width: 481px) {
@@ -564,15 +565,13 @@ const SmallButton = styled.div`
   }
 `;
 
-export default function EnvoyvoteCard({ bill,vote_voter }) {
+export default function EnvoyvoteCard({ bill, vote_voter }) {
   // const [active, setActive] = useState(0);
   // const [color, SetColor] = useState("#DFF5F0");
   // const [bColor, setBColor] = useState("#6cbba9");
   // const [envoyData, setEnvoyData] = useState(bill.positive_vote);
 
   const navigate = useNavigate();
-
-  
 
   // const envoyList = envoyData.map((x, i) => {
   //   return (
@@ -589,12 +588,12 @@ export default function EnvoyvoteCard({ bill,vote_voter }) {
   //   );
   // });
 
-
-
   return (
     <VCContainer>
       <CardHeader>
-        <div className={bill.is_approved?"vote-logo":"vote-logo-reject"}></div>
+        <div
+          className={bill.is_approved ? "vote-logo" : "vote-logo-reject"}
+        ></div>
         <div className="title-card">
           <p className="title">رأی‌گیری</p>
           <h2>{bill.name}</h2>
@@ -602,31 +601,51 @@ export default function EnvoyvoteCard({ bill,vote_voter }) {
         </div>
       </CardHeader>
       <Statistics>
-        {(bill.positive_vote.map((x, i)=> {
-          return (x.voter.id==vote_voter?true:false)
-}).includes(true))?(<Success>
-        موافق
-        </Success>):""}
-        {(bill.negative_vote.map((x, i)=> {
-            return (x.voter.id==vote_voter?true:false)
-}).includes(true))?(<Faild>
-         مخالف
-        </Faild>):""}
-        {(bill.without_vote.map((x, i)=> {
-          return (x.voter.id==vote_voter?true:false)
-}).includes(true))?(<Not>
-          بدون رای
-        </Not>):""}
-        {(bill.none_vote.map((x, i)=> {
-          return (x.voter.id==vote_voter?true:false)
-}).includes(true))?(<Nonvote>
-          ممتنع
-        </Nonvote>):""}
-        {(bill.absent_vote.map((x, i)=> {
-          return (x.voter.id==vote_voter?true:false)
-}).includes(true))?(<Absentdiv>
-          غایب
-        </Absentdiv>):""}
+        {bill.positive_vote
+          .map((x, i) => {
+            return x.voter.id == vote_voter ? true : false;
+          })
+          .includes(true) ? (
+          <Success>موافق</Success>
+        ) : (
+          ""
+        )}
+        {bill.negative_vote
+          .map((x, i) => {
+            return x.voter.id == vote_voter ? true : false;
+          })
+          .includes(true) ? (
+          <Faild>مخالف</Faild>
+        ) : (
+          ""
+        )}
+        {bill.without_vote
+          .map((x, i) => {
+            return x.voter.id == vote_voter ? true : false;
+          })
+          .includes(true) ? (
+          <Not>بدون رای</Not>
+        ) : (
+          ""
+        )}
+        {bill.none_vote
+          .map((x, i) => {
+            return x.voter.id == vote_voter ? true : false;
+          })
+          .includes(true) ? (
+          <Nonvote>ممتنع</Nonvote>
+        ) : (
+          ""
+        )}
+        {bill.absent_vote
+          .map((x, i) => {
+            return x.voter.id == vote_voter ? true : false;
+          })
+          .includes(true) ? (
+          <Absentdiv>غایب</Absentdiv>
+        ) : (
+          ""
+        )}
       </Statistics>
 
       {/* <EnvoyGallery color={color}>{envoyList}</EnvoyGallery> */}

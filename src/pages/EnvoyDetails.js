@@ -97,7 +97,7 @@ const Container = styled.section`
   /* overflow: hidden; */
   gap: 3.488vw;
   @media (min-width: 481px) {
-    padding: 20px 0;
+    padding: 7vw 0 6vw;
     background-color: #ffffff;
     gap: 0;
     flex-direction: row;
@@ -108,6 +108,8 @@ const Container = styled.section`
 const Title = styled.div`
   display: flex;
   margin-bottom: 12px;
+  position: relative;
+  z-index: 2;
   .home {
     font-size: 3.721vw;
     font-weight: 700;
@@ -124,7 +126,7 @@ const Title = styled.div`
   @media (min-width: 481px) {
     width: 100%;
     padding-bottom: 1.302vw;
-    margin-right: 10%;
+    padding-right: 10%;
     border-bottom: 1px solid #d8d8d8;
 
     .home,
@@ -162,6 +164,7 @@ const SecondSection = styled.div`
   padding: 2.326vw;
   @media (min-width: 481px) {
     width: 65%;
+    margin-top: -93px;
     padding: 0.99vw 1.302vw 0 0;
     & > * {
       & .filter-box {

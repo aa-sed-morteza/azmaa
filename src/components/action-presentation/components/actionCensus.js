@@ -8,7 +8,6 @@ import { toFarsiNumber } from "../../../utils";
 export default function ActionsCensus({ total, data }) {
   const [envoy, setEnvoy] = useState(267);
 
-
   const dataOptions = data.activity_choice.map((item, i) => {
     return (
       <Item className="active" key={i}>
@@ -18,11 +17,13 @@ export default function ActionsCensus({ total, data }) {
         <Number color="#6CBBA9">
           <span>
             {data.verified_vote
-              ?toFarsiNumber(data.verified_vote.filter((x) => x.vote == item.name).length)  
+              ? toFarsiNumber(
+                  data.verified_vote.filter((x) => x.vote == item.name).length
+                )
               : ""}
-             &nbsp;از &nbsp;
+            &nbsp;از &nbsp;
           </span>
-          {toFarsiNumber(total) }
+          {toFarsiNumber(total)}
         </Number>
       </Item>
     );
@@ -178,6 +179,6 @@ const Number = styled.div`
     font-weight: 700;
   }
   @media (min-width: 480px) {
-    font-size: 1.667vw;
+    font-size: 1.4vw;
   }
 `;

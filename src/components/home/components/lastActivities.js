@@ -92,7 +92,8 @@ const Title = styled.h1`
 
 const ActionContainer = styled.div`
   @media (min-width: 481px) {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 25%);
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;

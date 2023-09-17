@@ -172,7 +172,7 @@ const VoterContainer = styled(animated.div)`
   display: flex;
 
   & > div {
-    width: 25%;
+    width: 29%;
   }
 
   @media (min-width: 481px) {
