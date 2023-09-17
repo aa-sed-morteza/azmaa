@@ -139,7 +139,7 @@ const Success = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 6px;
   cursor: pointer;
   border-bottom: 4px solid transparent;
   transition: all 0.3s ease;
@@ -157,7 +157,7 @@ const Success = styled.div`
     border-bottom: 4px solid #6cbba9;
   }
   @media (min-width: 481px) {
-    font-size: 1.458vw;
+    font-size: 1.2vw;
     font-weight: 400;
     /* padding-bottom: 10px; */
     &:before {
@@ -178,7 +178,7 @@ const Faild = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 6px;
   cursor: pointer;
   border-bottom: 4px solid transparent;
   transition: all 0.3s ease;
@@ -196,7 +196,7 @@ const Faild = styled.div`
     border-bottom: 4px solid #ffa5a5;
   }
   @media (min-width: 481px) {
-    font-size: 1.458vw;
+    font-size: 1.2vw;
     font-weight: 400;
     &:before {
       width: 2.917vw;
@@ -216,6 +216,7 @@ const Not = styled.div`
 
   display: flex;
   align-items: center;
+  gap: 6px;
   flex-direction: column;
   cursor: pointer;
   border-bottom: 4px solid transparent;
@@ -235,7 +236,7 @@ const Not = styled.div`
     border-bottom: 4px solid #d8d8d8;
   }
   @media (min-width: 481px) {
-    font-size: 1.458vw;
+    font-size: 1.2vw;
     font-weight: 400;
     &:before {
       width: 2.917vw;
@@ -255,6 +256,7 @@ const Absentdiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 6px;
   cursor: pointer;
   border-bottom: 4px solid transparent;
   transition: all 0.3s ease;
@@ -273,7 +275,7 @@ const Absentdiv = styled.div`
     border-bottom: 4px solid #d8d8d8;
   }
   @media (min-width: 481px) {
-    font-size: 1.458vw;
+    font-size: 1.2vw;
     font-weight: 400;
     &:before {
       width: 2.917vw;
@@ -293,6 +295,7 @@ const Nonvote = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 6px;
   cursor: pointer;
   border-bottom: 4px solid transparent;
   transition: all 0.3s ease;
@@ -311,7 +314,7 @@ const Nonvote = styled.div`
     border-bottom: 4px solid #d8d8d8;
   }
   @media (min-width: 481px) {
-    font-size: 1.458vw;
+    font-size: 1.2vw;
     font-weight: 400;
     &:before {
       width: 2.917vw;
@@ -384,6 +387,7 @@ const Card = styled.div`
   }
   @media (min-width: 481px) {
     flex-wrap: wrap;
+    justify-content: center;
     max-height: 7.5vw;
     padding: 5px 0px;
     border-left: none;
@@ -419,6 +423,7 @@ const ButtonWraper = styled.div`
     border-top: 1px solid #d8d8d8;
     padding-top: 14px;
     flex-direction: row-reverse;
+    gap: 10px;
   }
 `;
 

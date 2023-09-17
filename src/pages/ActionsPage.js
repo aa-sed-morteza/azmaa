@@ -115,7 +115,7 @@ const Container = styled.section`
   overflow: hidden;
   @media (min-width: 480px) {
     background-color: #ffffff;
-    padding-bottom: 5%;
+    padding: 7vw 0 6vw;
   }
 `;
 const Title = styled.h1`

@@ -112,7 +112,7 @@ const Container = styled.section`
   overflow: hidden;
   @media (min-width: 481px) {
     background-color: #ffffff;
-    padding-bottom: 5%;
+    padding: 7vw 0 6vw;
   }
 `;
 
@@ -159,12 +159,13 @@ const Content = styled.div`
 
 const VoterContainer = styled.div`
   @media (min-width: 481px) {
-    display: flex;
+    /* display: flex;
     gap: 20px;
     justify-content: center;
-    flex-wrap: wrap;
-    // margin-left:-7%;
-    // margin-right:-7%;
+    flex-wrap: wrap; */
+    display: grid;
+    grid-template-columns: repeat(3, 25%);
+    gap: 20px;
   }
   @media (min-width: 769px) {
     justify-content: center;
@@ -245,7 +246,7 @@ const ShowMore = styled.div`
   @media (min-width: 481px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
-    width: 50%;
+    width: 31%;
     justify-content: center;
     align-items: center;
     margin: auto;

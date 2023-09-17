@@ -11,7 +11,6 @@ const Container = styled.section`
   gap: 30px;
   padding: 2% 6%;
   margin-top: 70px;
-  margin-bottom: 70px;
 `;
 
 const Title = styled.h1`
@@ -61,7 +60,7 @@ const EnvoyContainer = styled.div`
 const ShowMore = styled.div`
   border: 2px solid #9f9f9f;
   border-radius: 8px;
-  width: 50%;
+  width: 31%;
   display: flex;
   justify-content: center;
   align-items: center;

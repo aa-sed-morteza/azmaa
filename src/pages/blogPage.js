@@ -52,7 +52,7 @@ const Container = styled.section`
   overflow: hidden;
   @media (min-width: 481px) {
     background-color: #ffffff;
-    padding: 25px 10% 0;
+    padding: 7vw 0 6vw;
   }
 `;
 
