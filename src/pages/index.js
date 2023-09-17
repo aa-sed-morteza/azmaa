@@ -12,6 +12,7 @@ import TopBanner from "../components/home/components/topBanner";
 const HomeContainer = styled.section`
   overflow-x: hidden;
   overflow-y: auto;
+  padding-bottom: 6vw;
 `;
 
 export default function Home() {

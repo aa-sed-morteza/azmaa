@@ -20,23 +20,23 @@ const EnvoyCard = styled.div`
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     padding: 10px 5px;
-    width: 25%;
+    /* width: 25%; */
     align-items: center;
     justify-content: space-between;
   }
   @media (min-width: 769px) {
-    width: 30%;
+    /* width: 30%; */
   }
   @media (min-width: 1200px) {
-    width: 28%;
+    /* width: 28%; */
     padding: 15px;
   }
   @media (min-width: 1400px) {
-    width: 29%;
+    /* width: 29%; */
     padding: 31px 15px;
   }
   @media (min-width: 1600px) {
-    width: 30%;
+    /* width: 30%; */
   }
 `;
 
