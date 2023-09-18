@@ -151,7 +151,7 @@ const ShowMore = styled.div`
 `;
 
 const SecondAlbum = styled.div`
-    & > :nth-of-type(1n + 2) {
+    & > :nth-of-type(1n + 4) {
       display: ${(props) => (!props.hide ? "none" : "")};
     }
 
