@@ -2,28 +2,43 @@ import styled from "styled-components";
 import BestEnvoyCard from "./bestEnvoyCard";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import upArrow from "../../../assets/arrow.webp";
 import tik from "../../../assets/vote.webp";
+import { useIsVisible } from "../../../hook/useIsVisible";
+import { useTrail, animated } from "react-spring";
 
 export default function BestEnvoys() {
+  const envoyContainerRef = useRef(null);
   const navigate = useNavigate();
   const { envoyListToShow } = useSelector((state) => state.envoy);
   const [thirdHide, setThirdHide] = useState(false);
 
+  const isVisible = useIsVisible(envoyContainerRef);
+  console.log(isVisible);
+
+  const trails = useTrail(8, {
+    from: { opacity: 0 },
+    to: { opacity: isVisible ? 1 : 0 },
+    config: { duration: 1000 },
+    delay: 100,
+  });
+
   return (
-    <Section>
+    <Section ref={envoyContainerRef}>
       <Title>شفاف‌ترین نمایندگان</Title>
       <SecondAlbum hide={thirdHide}>
         {envoyListToShow.map((item, i) => {
           return (
-            <BestEnvoyCard
-              envoy={item}
-              key={"transparentEnvoy" + i}
-              click={() => {
-                navigate(`/envoy/${item.id}`);
-              }}
-            />
+            <animated.div style={trails[i + 3]} clas>
+              <BestEnvoyCard
+                envoy={item}
+                key={"transparentEnvoy" + i}
+                click={() => {
+                  navigate(`/envoy/${item.id}`);
+                }}
+              />
+          </animated.div>
           );
         })}
       </SecondAlbum>
