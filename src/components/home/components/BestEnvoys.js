@@ -15,7 +15,7 @@ export default function BestEnvoys() {
   const [thirdHide, setThirdHide] = useState(false);
 
   const isVisible = useIsVisible(envoyContainerRef);
-  console.log(isVisible);
+
 
   const trails = useTrail(8, {
     from: { opacity: 0 },
@@ -30,7 +30,7 @@ export default function BestEnvoys() {
       <SecondAlbum hide={thirdHide}>
         {envoyListToShow.map((item, i) => {
           return (
-            <animated.div style={trails[i + 3]} clas>
+            <animated.div style={trails[i + 3]}>
               <BestEnvoyCard
                 envoy={item}
                 key={"transparentEnvoy" + i}

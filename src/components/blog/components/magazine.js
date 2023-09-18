@@ -25,9 +25,10 @@ const MagazineContainer = styled.section`
   @media (min-width: 481px) {
     padding: 20px;
     // margin-top:70px;
-    margin-top: 0;
-    padding-left: 30px;
-    margin-inline: -12.5%;
+    /* margin-top: 0; */
+    /* margin: 0 20px; */
+    /* padding-left: 30px;
+    margin-inline: -12.5%; */
   }
   @media (min-width: 769px) {
     padding: 36px 0 50px;
