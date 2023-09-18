@@ -14,10 +14,11 @@ const Container = styled.section`
   overflow: hidden;
   flex-wrap: nowrap;
   display: flex;
-  padding: 0;
-  margin: 0;
+
+  /* padding: 0 20px; */
+  margin: 0 20px;
   position: relative;
-  padding-bottom: 82px;
+  /* padding-bottom: 82px; */
 `;
 
 const ShowIndex = styled.div`
