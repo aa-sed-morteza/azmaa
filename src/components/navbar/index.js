@@ -66,7 +66,7 @@ const LeftSection = styled.div`
 
 const Menu = styled.div`
   background-image: ${(props) =>
-    props.open ? `url(${close})` : `url(${menu})`};
+    props.open ? `url(${menu})` : `url(${close})`};
   background-size: contain;
   width: 20px;
   height: 20px;
@@ -436,7 +436,7 @@ export default function Navbar() {
           ""
         )}
         {width < 481 ? (
-          <MenuList open={open} back={dashboard && state.loggedIn}>
+          <MenuList open={!open} back={dashboard && state.loggedIn}>
             {dashboard && state.loggedIn ? <Profile /> : ""}
             {dashboard && state.loggedIn ? checkUserMenu() : menuItem}{" "}
             <MobilePanel

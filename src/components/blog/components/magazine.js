@@ -16,8 +16,8 @@ const MagazineContainer = styled.section`
   background-color: #ffaa00;
   padding: 13px 0;
   margin-top: 15px;
-  margin-right: -10px;
-  margin-left: -10px;
+  margin-right: -20px;
+  margin-left: -20px;
   display: flex;
   margin-bottom: 15px;
   position: relative;
@@ -67,7 +67,7 @@ const Ttitle = styled.div`
     background-repeat: no-repeat;
     width: 5px;
     height: 10px;
-    left: 5px;
+    left: 10px;
   }
 
   @media (min-width: 481px) {
