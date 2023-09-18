@@ -16,7 +16,6 @@ export default function BestEnvoys() {
 
   const isVisible = useIsVisible(envoyContainerRef);
 
-
   const trails = useTrail(8, {
     from: { opacity: 0 },
     to: { opacity: isVisible ? 1 : 0 },
@@ -30,15 +29,15 @@ export default function BestEnvoys() {
       <SecondAlbum hide={thirdHide}>
         {envoyListToShow.map((item, i) => {
           return (
-            <animated.div style={trails[i + 3]}>
-              <BestEnvoyCard
-                envoy={item}
-                key={"transparentEnvoy" + i}
-                click={() => {
-                  navigate(`/envoy/${item.id}`);
-                }}
-              />
-          </animated.div>
+            // <animated.div style={trails[i + 3]}>
+            <BestEnvoyCard
+              envoy={item}
+              key={"transparentEnvoy" + i}
+              click={() => {
+                navigate(`/envoy/${item.id}`);
+              }}
+            />
+            // </animated.div>
           );
         })}
       </SecondAlbum>
@@ -151,9 +150,9 @@ const ShowMore = styled.div`
 `;
 
 const SecondAlbum = styled.div`
-    & > :nth-of-type(1n + 4) {
-      display: ${(props) => (!props.hide ? "none" : "")};
-    }
+  & > :nth-of-type(1n + 4) {
+    display: ${(props) => (!props.hide ? "none" : "")};
+  }
 
   @media (min-width: 481px) {
     & > :nth-of-type(1n + 4) {
@@ -166,6 +165,5 @@ const SecondAlbum = styled.div`
     flex-wrap: wrap;
     margin-bottom: 30px;
     /* padding: 0 40px; */
-
   }
 `;
