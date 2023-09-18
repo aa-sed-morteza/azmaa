@@ -82,7 +82,7 @@ const CardHeader = styled.div`
     h2 {
       margin: 0;
       color: #707070;
-      font-size: 4.65vw;
+      font-size: 20px;
       font-weight: 400;
       margin-bottom: 10px;
     }

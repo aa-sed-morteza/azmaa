@@ -15,8 +15,8 @@ import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
 
 const MagazineContainer = styled.section`
   background-color: #ffaa00;
-  padding: 13px 0;
-  margin-top: 15px;
+  padding: 13px 16px;
+  margin-top: 16px;
   margin-right: -20px;
   margin-left: -20px;
   display: flex;
@@ -152,14 +152,14 @@ const Paper = styled.div`
   border-radius: 4px;
   cursor: pointer;
   .cover {
-    width: 160px;
+    width: 200px;
     height: 120px;
     border-radius: 2px;
     margin-bottom: 5px;
     img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
     }
   }
   .user {
@@ -186,9 +186,16 @@ const Paper = styled.div`
       height: 15px;
     }
   }
+  .content-title {
+    color: #707070;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 10px;
+  }
   .content {
     color: #707070;
-    font-size: 3.72vw;
+    font-size: 12px;
     font-weight: 400;
     margin: 0;
     margin-bottom: 10px;
@@ -309,7 +316,7 @@ export default function Magazine() {
           {x.type == "article" && "مقاله"}
         </p>
 
-        <p className="content">{x.title}</p>
+        <p className="content-title">{x.title}</p>
 
         <p className="content">{x.description.slice(0, 100) + " ..."}</p>
 

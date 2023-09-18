@@ -10,9 +10,14 @@ import BestEnvoys from "../components/home/components/BestEnvoys";
 import TopBanner from "../components/home/components/topBanner";
 
 const HomeContainer = styled.section`
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding-bottom: 6vw;
+
+  padding: 21vw 20px 0 20px;
+
+  @media (min-width: 481px) {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 6vw;
+  }
 `;
 
 export default function Home() {
