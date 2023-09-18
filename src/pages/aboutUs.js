@@ -16,7 +16,7 @@ const Content = styled.div`
   .text {
     margin: 0;
     font-weight: 400;
-    font-size: 24px;
+    font-size: 16px;
     line-height: 41px;
     text-align: justify;
     color: #707070;

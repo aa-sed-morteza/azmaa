@@ -45,6 +45,7 @@ const Section = styled.div``;
 const Album = styled.div``;
 
 const Title = styled.h1`
+  margin-top: 30px;
   color: #9f9f9f;
   font-size: 4.65vw;
   font-weight: 300;

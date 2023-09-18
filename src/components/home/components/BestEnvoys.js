@@ -44,11 +44,12 @@ const Section = styled.div``;
 
 const Title = styled.h1`
   color: #9f9f9f;
-  font-size: 4.65vw;
+  font-size: 4vw;
   font-weight: 300;
   overflow: hidden;
   text-align: center;
   margin-bottom: 10px;
+  margin-top: 30px;
   &:after {
     background-color: #9f9f9f;
     content: "";
