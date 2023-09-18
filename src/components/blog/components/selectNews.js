@@ -48,7 +48,7 @@ export default function SelectNews({ posts }) {
     .slice(0, showLimit)
     .map((x, i) => {
       return (
-        <animated.div style={trails[i + 3]}>
+        // <animated.div style={trails[i + 3]}>
         <Paper
         key={i}
         icon={x.type}
@@ -81,7 +81,7 @@ export default function SelectNews({ posts }) {
 
         <p className="date">{convertDateToFarsi(x.created)}</p>
         </Paper>
-        </animated.div>
+        // </animated.div>
       );
     });
 
