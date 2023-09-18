@@ -10,6 +10,8 @@ import article from "../../../assets/report.webp";
 import upArrow from "../../../assets/arrow.webp";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { convertDateToFarsi } from "../../../utils";
+import { useIsVisible } from "../../../hook/useIsVisible";
+import { useTrail, animated } from "react-spring";
 
 export default function SelectNews({ posts }) {
   const navigate = useNavigate();
@@ -19,8 +21,18 @@ export default function SelectNews({ posts }) {
   const [lastNewsMore, setLastNewsMore] = useState(false);
   const [searchparams, setsearchparams] = useSearchParams();
   const [showLimit, setShowLimit] = useState(4);
-
+  const newsContainerRef = useRef(null);
   const showRef = useRef(null);
+
+  const isVisible = useIsVisible(newsContainerRef);
+
+
+  const trails = useTrail(8, {
+    from: { opacity: 0 },
+    to: { opacity: isVisible ? 1 : 0 },
+    config: { duration: 1000 },
+    delay: 100,
+  });
 
   useEffect(() => {
     setFilteredPosts(posts);
@@ -36,38 +48,40 @@ export default function SelectNews({ posts }) {
     .slice(0, showLimit)
     .map((x, i) => {
       return (
+        <animated.div style={trails[i + 3]}>
         <Paper
-          key={i}
-          icon={x.type}
+        key={i}
+        icon={x.type}
+        onClick={() => {
+          navigate(`/blog/${x.id}`);
+        }}
+      >
+        <div className="cover">
+          <img src={x.main_image} alt={x.date} />
+        </div>
+
+        {/* <p className="user">{x.writer}</p> */}
+        <p className="user">
+          {x.type == "note" && "یادداشت"}
+          {x.type == "news" && "خبر"}
+          {x.type == "report" && "گزارش"}
+          {x.type == "article" && "مقاله"}
+        </p>
+        <h5 className="title">{x.title}</h5>
+        <p className="content">{x.description.slice(0, 100) + " ..."}</p>
+
+        <p
+          className="ReadMore"
           onClick={() => {
             navigate(`/blog/${x.id}`);
           }}
         >
-          <div className="cover">
-            <img src={x.main_image} alt={x.date} />
-          </div>
+          ادامه مطلب
+        </p>
 
-          {/* <p className="user">{x.writer}</p> */}
-          <p className="user">
-            {x.type == "note" && "یادداشت"}
-            {x.type == "news" && "خبر"}
-            {x.type == "report" && "گزارش"}
-            {x.type == "article" && "مقاله"}
-          </p>
-          <h5 className="title">{x.title}</h5>
-          <p className="content">{x.description.slice(0, 100) + " ..."}</p>
-
-          <p
-            className="ReadMore"
-            onClick={() => {
-              navigate(`/blog/${x.id}`);
-            }}
-          >
-            ادامه مطلب
-          </p>
-
-          <p className="date">{convertDateToFarsi(x.created)}</p>
+        <p className="date">{convertDateToFarsi(x.created)}</p>
         </Paper>
+        </animated.div>
       );
     });
 
@@ -100,7 +114,7 @@ export default function SelectNews({ posts }) {
         <p>{mostVisitedMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>
       </ShowMore> */}
 
-      <ChangeBack>
+      <ChangeBack ref={newsContainerRef}>
         <Title> آخرین مطالب</Title>
         <NewsWraper ref={showRef}>{magPaper}</NewsWraper>
         <ShowMore
