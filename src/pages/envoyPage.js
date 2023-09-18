@@ -73,7 +73,7 @@ export default function Envoy() {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  padding: 10px 20px;
+  padding: 21vw 20px;
   overflow: hidden;
   @media (min-width: 481px) {
     padding: 7vw 0 6vw;

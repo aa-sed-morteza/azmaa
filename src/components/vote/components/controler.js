@@ -6,14 +6,13 @@ import { useSearchParams } from "react-router-dom";
 import { renderIntoDocument } from "react-dom/test-utils";
 // import 'font-awesome/css/font-awesome.min.css';
 
-
 const Container = styled.div`
   background-image: url(${background});
   background-size: cover;
   background-repeat: no-repeat;
   padding: 19px;
   border-radius: 2px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   @media (min-width: 481px) {
     padding: 20;
     border-radius: 8px;

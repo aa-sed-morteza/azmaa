@@ -111,7 +111,7 @@ const Container = styled.section`
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
-  padding: 10px 20px;
+  padding: 21vw 20px;
   overflow: hidden;
   @media (min-width: 480px) {
     background-color: #ffffff;
@@ -132,7 +132,7 @@ const Title = styled.h1`
     height: 1px;
     position: relative;
     // vertical-align: middle;
-    width: 58%;
+    width: 78%;
   }
   @media (min-width: 481px) {
     margin-top: 47px;
@@ -194,9 +194,13 @@ const Content = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   @media (min-width: 480px) {
     margin-top: 25vw;
     padding-bottom: 0;
+    gap: 0;
   }
 `;
 const ActionContainer = styled.div`

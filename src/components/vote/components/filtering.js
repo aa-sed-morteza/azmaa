@@ -6,6 +6,8 @@ const FilterBox = styled.div`
   border-radius: 4px;
   padding: 8px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 10px;
   @media (min-width: 481px) {
     max-width: 56.25vw;
@@ -19,7 +21,7 @@ const FilterBox = styled.div`
 const FilterItem = styled.p`
   background-color: #ffffff;
   color: #9f9f9f;
-  font-size: 3.721vw;
+  font-size: 3.2vw;
   font-weight: 300;
   border-radius: 2px;
   margin: 0;
@@ -38,7 +40,7 @@ const FilterItem = styled.p`
   }
 `;
 
-export default function Filtering({selectedFilter ,setSelectedFilter}) {
+export default function Filtering({ selectedFilter, setSelectedFilter }) {
   // const [select, setSelect] = useState(1);
   return (
     <FilterBox>

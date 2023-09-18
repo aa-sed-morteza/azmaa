@@ -35,6 +35,7 @@ const VCContainer = styled.div`
 const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   & > .vote-logo {
     background-image: url(${symbol});
     background-size: contain;
@@ -82,7 +83,7 @@ const CardHeader = styled.div`
     h2 {
       margin: 0;
       color: #707070;
-      font-size: 4.65vw;
+      font-size: 4vw;
       font-weight: 400;
       margin-bottom: 10px;
     }
@@ -437,7 +438,7 @@ const LargButton = styled.div`
   cursor: pointer;
   .content {
     margin: 0 auto;
-    font-size: 4.65vw;
+    font-size: 4vw;
     font-weight: bold;
     color: #ffffff;
   }
@@ -474,7 +475,7 @@ const SmallButton = styled.div`
   padding: 5px;
   .content {
     margin: 0 auto;
-    font-size: 4.65vw;
+    font-size: 4vw;
     font-weight: 300;
     color: #095644;
   }
