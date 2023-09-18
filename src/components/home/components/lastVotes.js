@@ -169,17 +169,16 @@ const VoterContainer = styled(animated.div)`
   /* & > :nth-of-type(1n + 2) {
     display: ${(props) => (!props.hide ? "none" : "")};
   } */
-  display: flex;
-
-  & > div {
-    width: 29%;
-  }
+  
 
   @media (min-width: 481px) {
     display: flex;
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
+    & > div {
+    width: 29%;
+  }
     // margin-left:-7%;
     // margin-right:-7%;
 

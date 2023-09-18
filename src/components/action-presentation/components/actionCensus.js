@@ -72,7 +72,7 @@ const Container = styled.div`
   border-radius: 4px;
   padding: 0px 29px 20px;
   margin-top: 40px;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     padding: 0px 45px 30px 40px;
     margin-top: 60px;
   }
@@ -88,7 +88,7 @@ const Title = styled.h4`
   margin: 0;
   text-align: center;
   margin-right: -5%;
-  @media (min-width: 480px) {
+  @media (min-width: 481px) {
     font-size: 1.875vw;
     transform: translateY(-1.615vw);
     width: 40%;
@@ -100,7 +100,11 @@ const Row = styled.div`
   flex-wrap: wrap;
   margin-bottom: 5px;
   gap: 10px;
-  @media (min-width: 480px) {
+
+     p {
+      font-size: 20px;
+    }
+  @media (min-width: 481px) {
     flex-direction: column;
     gap: 15px;
   }

@@ -135,14 +135,21 @@ const ShowMore = styled.div`
 `;
 
 const SecondAlbum = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 29%);
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
-  /* padding: 0 40px; */
-  & > :nth-of-type(1n + 4) {
-    display: ${(props) => (!props.hide ? "none" : "")};
+    & > :nth-of-type(1n + 2) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
+
+  @media (min-width: 481px) {
+    & > :nth-of-type(1n + 4) {
+      display: ${(props) => (!props.hide ? "none" : "")};
+    }
+    display: grid;
+    grid-template-columns: repeat(3, 29%);
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    /* padding: 0 40px; */
+
   }
 `;
