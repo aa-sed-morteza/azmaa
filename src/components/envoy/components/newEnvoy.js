@@ -48,10 +48,11 @@ const Title = styled.h1`
 `;
 
 const EnvoyContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 29%);
   justify-content: center;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
   & > :nth-of-type(1n + 7) {
     display: ${(props) => (!props.hide ? "none" : "")};
   }
