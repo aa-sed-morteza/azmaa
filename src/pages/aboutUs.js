@@ -10,8 +10,9 @@ export default function AboutMe() {
 }
 
 const Content = styled.div`
+
   width: 90%;
-  margin: auto;
+  margin: 10vw auto;
   .text {
     margin: 0;
     font-weight: 400;
@@ -19,5 +20,9 @@ const Content = styled.div`
     line-height: 41px;
     text-align: justify;
     color: #707070;
+  }
+  @media (max-width: 481px) {
+    padding-top: 10vw;
+    padding-bottom: 4vw;
   }
 `;

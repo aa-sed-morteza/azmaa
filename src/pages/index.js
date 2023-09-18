@@ -14,6 +14,7 @@ const HomeContainer = styled.section`
   padding: 21vw 20px 0 20px;
 
   @media (min-width: 481px) {
+    padding: 0;
     overflow-x: hidden;
     overflow-y: auto;
     padding-bottom: 6vw;
