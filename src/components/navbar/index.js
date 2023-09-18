@@ -16,7 +16,7 @@ import { useUser } from "../../context/userContext";
 
 // styled
 const TopBar = styled.section`
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color: #095644;
   padding: 20px 30px;
   display: flex;
