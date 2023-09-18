@@ -146,7 +146,7 @@ const Title = styled.h1`
     height: 1px;
     position: relative;
     vertical-align: middle;
-    width: 59%;
+    width: 64%;
   }
   @media (min-width: 481px) {
     margin-top: 75px;
@@ -168,7 +168,7 @@ const NewsWraper = styled.div`
   } */
   @media (min-width: 481px) {
     margin-bottom: 45px;
-    justify-content: flex-start;
+    justify-content: center;
   }
 `;
 const Paper = styled.div`
@@ -179,10 +179,11 @@ const Paper = styled.div`
   box-shadow: 0px 0px 25px -5px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
   /* width: 43%; */
+
   cursor: pointer;
   .cover {
-    width: 160px;
-    height: 120px;
+    width: 79vw;
+    /* height: 120px; */
     border-radius: 2px;
     margin-bottom: 5px;
     img {
@@ -222,7 +223,7 @@ const Paper = styled.div`
     font-weight: 400;
     margin: 0;
     margin-bottom: 10px;
-    max-width: 160px;
+    width: 100%;
   }
 
   .date {
@@ -278,10 +279,11 @@ const Paper = styled.div`
   }
   @media (min-width: 1200px) {
     .cover {
-      width: 15vw;
+      width: 19vw;
     }
     .content {
-      max-width: 14vw;
+      width: 100%;
+      text-align: justify;
     }
   }
 `;
@@ -316,7 +318,7 @@ const ShowMore = styled.div`
   @media (min-width: 481px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
-    width: 50%;
+    width: 31%;
     justify-content: center;
     align-items: center;
     margin: auto;
