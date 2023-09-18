@@ -4,18 +4,32 @@ import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import ActionCard from "./actionCard";
 import upArrow from "../../../assets/arrow.webp";
+import { useIsVisible } from "../../../hook/useIsVisible";
+import { useTrail, animated } from "react-spring";
 
 export default function LastActivities() {
   const actionContainerRef = useRef(null);
   const [actionCardLimit, setActionCardLimit] = useState(3);
+  const isVisible = useIsVisible(actionContainerRef);
   const { activityListToShow } = useSelector((state) => state.activity);
 
+  const trails = useTrail(8, {
+    from: { opacity: 0 },
+    to: { opacity: isVisible ? 1 : 0 },
+    config: { duration: 1000 },
+    delay: 100,
+  });
   return (
-    <Section ref={actionContainerRef}>
-      <Title> آخرین عملکردها</Title>
-      <ActionContainer>
+    <Section ref={actionContainerRef} style={trails[0]}>
+      <Title style={trails[1]}> آخرین عملکردها</Title>
+      <ActionContainer style={trails[2]}>
         {activityListToShow.slice(0, actionCardLimit).map((item, i) => {
-          return <ActionCard activity={item} key={"lastAction" + i} />;
+          return (
+            // <animated.div style={trails[i + 3]} clas>
+
+            // </animated.div>
+            <ActionCard activity={item} key={"lastAction" + i} />
+          );
         })}
       </ActionContainer>
 
