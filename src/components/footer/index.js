@@ -73,6 +73,9 @@ const ContactUs = styled.div`
         object-fit: contain;
       }
     }
+    .content{
+      height: 11vw;
+    }
 
     // .content {
     //   width: 85%;
