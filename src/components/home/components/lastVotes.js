@@ -80,6 +80,7 @@ const Title = styled(animated.h1)`
   overflow: hidden;
   text-align: center;
   margin-bottom: 10px;
+  margin-top: 30px;
   &:after {
     background-color: #9f9f9f;
     content: "";

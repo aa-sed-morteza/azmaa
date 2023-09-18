@@ -16,9 +16,11 @@ import { convertDateToFarsi, toFarsiNumber } from "../../../utils";
 const MagazineContainer = styled.section`
   background-color: #ffaa00;
   padding: 13px 16px;
-  margin-top: 16px;
+  /* margin-top: 30px;
+  margin-bottom: 30px;
   margin-right: -20px;
-  margin-left: -20px;
+  margin-left: -20px; */
+  margin: 30px -20px;
   display: flex;
   flex-wrap: wrap;
   position: relative;

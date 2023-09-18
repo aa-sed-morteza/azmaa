@@ -99,14 +99,16 @@ const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 5px;
-  gap: 10px;
-
-     p {
-      font-size: 20px;
+  gap: 5px;
+  flex-direction: column;
+   p {
+      font-size: 12px;
     }
   @media (min-width: 481px) {
-    flex-direction: column;
     gap: 15px;
+    p {
+      font-size: 20px;
+    }
   }
   & > :nth-child(2) {
     & > p {
