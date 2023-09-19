@@ -64,7 +64,7 @@ const Container = styled.section`
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
-  padding: 10px 20px;
+  padding: 21vw 20px;
   overflow: hidden;
   @media (min-width: 480px) {
     background-color: #ffffff;
@@ -86,6 +86,7 @@ const Title = styled.div`
     font-size: 3.721vw;
     font-weight: 700;
     margin: 0;
+    margin-right: 5px;
     color: rgba(112, 112, 112, 1);
   }
   @media (min-width: 480px) {

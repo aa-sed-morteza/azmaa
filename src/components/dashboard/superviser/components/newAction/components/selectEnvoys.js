@@ -279,7 +279,7 @@ const Container = styled.div`
   margin-top: 15px;
 `;
 const Title = styled.h2`
-  padding-right: 36px;
+  /* padding-right: 36px; */
   margin: 0;
   color: #707070;
   font-size: 4.651vw;

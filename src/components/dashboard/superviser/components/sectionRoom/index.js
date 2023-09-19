@@ -323,7 +323,7 @@ const ShowMore = styled.div`
   @media (min-width: 480px) {
     border: 2px solid #9f9f9f;
     border-radius: 8px;
-    width: 61%;
+    width: 31%;
     justify-content: center;
     align-items: center;
     margin: auto;
@@ -349,7 +349,7 @@ const Gallery = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 1.302vw 1.302vw 2.604vw 22.396vw;
+    padding: 1.302vw 1.302vw 2.604vw 6.667vw;
     background-color: #ffffff;
     border-radius: 0px 8px 8px 0px;
   }

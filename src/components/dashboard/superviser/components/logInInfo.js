@@ -107,7 +107,7 @@ const Edit = styled.div`
   background-size: contain;
   cursor: pointer;
   @media (min-width: 480px) {
-    width: 1.042vw;
-    height: 0.521vw;
+    width: 1.2vw;
+    height: 1.2vw;
   }
 `;

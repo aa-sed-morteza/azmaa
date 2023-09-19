@@ -76,7 +76,11 @@ export default function News() {
 }
 
 const Container = styled.div`
-  padding: 10px 20px;
+  padding: 21vw 20px;
+  @media (min-width: 480px) {
+    background-color: #ffffff;
+    padding: 25px 10% 0;
+  }
 `;
 
 const Title = styled.div`
@@ -94,6 +98,7 @@ const Title = styled.div`
     font-size: 3.721vw;
     font-weight: 700;
     margin: 0;
+    margin-right: 5px;
     color: rgba(112, 112, 112, 1);
     overflow: hidden;
     text-overflow: ellipsis;

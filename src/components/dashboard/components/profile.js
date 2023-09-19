@@ -202,8 +202,8 @@ const Image = styled.div`
     object-fit: contain;
   }
   @media (min-width: 480px) {
-    width: 7.292vw;
-    height: 7.552vw;
+    width: 7.552vw;
+    /* height: auto; */
     padding: 4px;
     &:after {
       width: 1.042vw;

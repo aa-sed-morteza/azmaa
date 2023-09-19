@@ -9,7 +9,7 @@ export default function MySection() {
         <p className="home">پنل / </p>
         <p className="component"> مطالب من </p>
       </Title>
-      <SectionRoom/>
+      <SectionRoom />
     </Container>
   );
 }
@@ -18,7 +18,7 @@ const Container = styled.section`
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
-  padding: 10px 20px;
+  padding: 21vw 20px;
   overflow: hidden;
   @media (min-width: 480px) {
     background-color: #f5f5f5;
@@ -43,6 +43,6 @@ const Title = styled.div`
     color: rgba(112, 112, 112, 1);
   }
   @media (min-width: 480px) {
-    display:none;
+    display: none;
   }
 `;

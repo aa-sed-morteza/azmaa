@@ -204,7 +204,7 @@ const Container = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
   h2 {
-    padding-right: 26px;
+    /* padding-right: 26px; */
     color: #707070;
     font-size: 4.651vw;
     font-weight: 400;

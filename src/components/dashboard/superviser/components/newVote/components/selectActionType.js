@@ -218,7 +218,7 @@ const Container = styled.div`
   margin-top: 15px;
 `;
 const Title = styled.h2`
-  padding-right: 36px;
+  /* padding-right: 36px; */
   margin: 0;
   color: #707070;
   font-size: 4.651vw;
@@ -237,7 +237,7 @@ const Box = styled.div`
   @media (min-width: 480px) {
     width: 100%;
     justify-content: center;
-    margin: 1.302vw auto;
+    margin: 3vw auto;
   }
 `;
 
@@ -513,6 +513,7 @@ const ShowMore = styled.div`
   border-radius: 4px;
   display: flex;
   padding: 8px;
+
   cursor: pointer;
   p {
     margin: auto;
@@ -541,6 +542,7 @@ const ShowMore = styled.div`
     justify-content: center;
     align-items: center;
     margin: auto;
+
     padding: 13px;
     p {
       font-size: 1.25vw;
