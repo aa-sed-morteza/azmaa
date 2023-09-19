@@ -78,15 +78,15 @@ const Edit = styled.div`
   position: absolute;
   top: 50%;
   left: 5.885vw;
-  height: 2.326vw;
-  width: 1.163vw;
+  height: 4vw;
+  width: 2vw;
   transform: translate(0%, -50%);
   background-repeat: no-repeat;
   background-image: url(${edit});
   background-size: contain;
   cursor: pointer;
   @media (min-width: 480px) {
-    width: 1.042vw;
-    height: 0.521vw;
+    width: 1.2vw;
+    height: 1.2vw;
   }
 `;

@@ -165,26 +165,26 @@ export default function EditContactInformation() {
               <ErrorText>{errors.phoneNubmer}</ErrorText>
             )}
           </Form>
+          <Box>
+            <Button
+              text="لغو"
+              textColor="#095644"
+              borderColor="#095644"
+              simple={true}
+              width="35%"
+              click={() => {
+                navigate(-1);
+              }}
+            />
+            <Button
+              text="ثبت"
+              textColor="#FFFFFF"
+              background="#095644"
+              width="62%"
+              type="submit"
+            />
+          </Box>
         </Container>
-        <Box>
-          <Button
-            text="لغو"
-            textColor="#095644"
-            borderColor="#095644"
-            simple={true}
-            width="35%"
-            click={() => {
-              navigate(-1);
-            }}
-          />
-          <Button
-            text="ثبت"
-            textColor="#FFFFFF"
-            background="#095644"
-            width="62%"
-            type="submit"
-          />
-        </Box>
       </form>
     </Wraper>
   );
@@ -193,7 +193,10 @@ export default function EditContactInformation() {
 const Wraper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px 20px;
+  padding: 21vw 20px;
+  @media (min-width: 480px) {
+    padding: 10px 0;
+  }
 `;
 
 const FirstTitle = styled.div`
@@ -224,7 +227,7 @@ const FirstTitle = styled.div`
 const Container = styled.div`
   background: #ffffff;
   border-radius: 4px;
-  padding: 14px 10px 11px;
+  padding: 14px 10px 14px;
   margin-top: 15px;
   @media (min-width: 480px) {
     padding: 2.083vw 2.604vw;
