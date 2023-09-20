@@ -48,14 +48,15 @@ export default function SelectNews({ posts }) {
     .slice(0, showLimit)
     .map((x, i) => {
       return (
-        // <animated.div style={trails[i + 3]}>
         <Paper
+        ref={newsContainerRef}
         key={i}
         icon={x.type}
         onClick={() => {
           navigate(`/blog/${x.id}`);
         }}
       >
+         <animated.div style={trails[3]}>
         <div className="cover">
           <img src={x.main_image} alt={x.date} />
         </div>
@@ -80,8 +81,8 @@ export default function SelectNews({ posts }) {
         </p>
 
         <p className="date">{convertDateToFarsi(x.created)}</p>
+        </animated.div>
         </Paper>
-        // </animated.div>
       );
     });
 

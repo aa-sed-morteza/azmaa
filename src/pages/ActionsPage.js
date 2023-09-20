@@ -9,6 +9,8 @@ import ActionCard from "../components/home/components/actionCard";
 import { useNavigate } from "react-router-dom";
 import upArrow from "../assets/arrow.webp";
 import { useSelector } from "react-redux";
+import { useIsVisible } from "../hook/useIsVisible";
+import { useTrail, animated } from "react-spring";
 
 export default function Actions() {
   const { activityListToShow } = useSelector((state) => state.activity);
@@ -20,6 +22,16 @@ export default function Actions() {
   const [finalActivityList, setFinalActivityList] = useState([]);
 
   const showRef = useRef(null);
+  const ActionContainerRef = useRef(null);
+
+  const isVisible = useIsVisible(ActionContainerRef);
+
+  const trails = useTrail(8, {
+    from: { opacity: 0 },
+    to: { opacity: isVisible ? 1 : 0 },
+    config: { duration: 1000 },
+    delay: 100,
+  });
 
   useEffect(() => {
     if (selectedTag === "همه") {
@@ -39,7 +51,7 @@ export default function Actions() {
   }, [selectedTag]);
 
   return (
-    <Container>
+    <Container ref={ActionContainerRef}>
       <DivTitle>
         <p
           className="home"
@@ -60,8 +72,9 @@ export default function Actions() {
         />
         <>
           <LastActions>
-            <Title> عملکردها</Title>
-            <ActionContainer ref={showRef}>
+              <animated.div style={trails[3]}>
+              <Title> عملکردها</Title>
+              <ActionContainer ref={showRef}>
               {finalActivityList
                 .sort((a, b) => {
                   if (selectedFilter === 1) {
@@ -79,6 +92,7 @@ export default function Actions() {
                   return <ActionCard activity={item} key={i} />;
                 })}
             </ActionContainer>
+            </animated.div>
 
             <ShowMore
               arrow={showLimit >= finalActivityList.length}

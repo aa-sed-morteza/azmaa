@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState , useRef } from "react";
 import styled from "styled-components";
 import profile from "../../../assets/profile.webp";
 import upArrow from "../../../assets/arrow.webp";
 import BestEnvoy from "../../home/components/bestEnvoyCard";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useIsVisible } from "../../../hook/useIsVisible";
+import { useTrail, animated } from "react-spring";
 
 const Container = styled.section`
   display: grid;
@@ -96,8 +98,20 @@ export default function ActiveEnvoy({ envoys }) {
   const [showMore, setShowMore] = useState(false);
   const [searchparams, setsearchparams] = useSearchParams();
   const newEnvoyList = [...envoys];
+  const envoyContainerRef = useRef(null);
+
+  const isVisible = useIsVisible(envoyContainerRef);
+
+  const trails = useTrail(8, {
+    from: { opacity: 0 },
+    to: { opacity: isVisible ? 1 : 0 },
+    config: { duration: 1000 },
+    delay: 100,
+  });
   return (
-    <Container>
+    <Container ref={envoyContainerRef}>
+      <animated.div style={trails[3]}>
+
       <Title>شفاف ترین نمایندگان</Title>
       <EnvoyContainer hide={showMore}>
         {/* {console.log(envoys)} */}
@@ -121,6 +135,7 @@ export default function ActiveEnvoy({ envoys }) {
       >
         <p>{showMore ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
       </ShowMore>
+      </animated.div>
     </Container>
   );
 }

@@ -25,11 +25,11 @@ export default function BestEnvoys() {
 
   return (
     <Section ref={envoyContainerRef}>
+      <animated.div style={trails[3]}>
       <Title>شفاف‌ترین نمایندگان</Title>
       <SecondAlbum hide={thirdHide}>
         {envoyListToShow.map((item, i) => {
           return (
-            // <animated.div style={trails[i + 3]}>
             <BestEnvoyCard
               envoy={item}
               key={"transparentEnvoy" + i}
@@ -37,10 +37,10 @@ export default function BestEnvoys() {
                 navigate(`/envoy/${item.id}`);
               }}
             />
-            // </animated.div>
-          );
-        })}
+            );
+          })}
       </SecondAlbum>
+          </animated.div>
 
       <ShowMore
         arrow={thirdHide}

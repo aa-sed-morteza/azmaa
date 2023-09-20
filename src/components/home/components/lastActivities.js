@@ -21,17 +21,17 @@ export default function LastActivities() {
   });
   return (
     <Section ref={actionContainerRef} style={trails[0]}>
+        <animated.div style={trails[3]}>
       <Title style={trails[1]}> آخرین عملکردها</Title>
-      <ActionContainer style={trails[2]}>
+          <ActionContainer>
         {activityListToShow.slice(0, actionCardLimit).map((item, i) => {
           return (
-            // <animated.div style={trails[i + 3]} clas>
 
-            // </animated.div>
-            <ActionCard activity={item} key={"lastAction" + i} />
-          );
-        })}
-      </ActionContainer>
+              <ActionCard activity={item} key={"lastAction" + i} />
+              );
+            })}
+          </ActionContainer>
+        </animated.div>
 
       <ShowMore
         arrow={actionCardLimit >= activityListToShow.length}
