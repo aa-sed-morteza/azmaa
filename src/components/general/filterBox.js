@@ -3,6 +3,7 @@ import data from "../../data.json";
 import styled from "styled-components";
 import background from "../../assets/back-controll.webp";
 import { useTrail, animated } from "react-spring";
+import { useIsVisible } from "../../hook/useIsVisible";
 export default function FilterBox({
   filterType,
   setFilterType,
@@ -10,10 +11,11 @@ export default function FilterBox({
   setSearchPhrase,
 }) {
   const filterRef = useRef(null);
-  const trails = useTrail(1, {
+  const isVisible = useIsVisible(filterRef);
+  const trails = useTrail(8, {
     from: { opacity: 0 },
-    to: { opacity: 1 },
-    config: { duration: 1000 },
+    to: { opacity: isVisible ? 1 : 0 },
+    config: { duration: 800 },
     delay: 100,
   });
   const controllItem = data.controlPanel.map((item, i) => {
