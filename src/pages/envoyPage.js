@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import useWidth from "../hook/useWidth";
 import ActiveEnvoy from "../components/envoy/components/activeEnvoy";
@@ -15,12 +15,20 @@ import axios from "axios";
 import { useUser } from "../context/userContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useTrail, animated } from "react-spring";
 
 export default function Envoy() {
   const { envoyListToShow } = useSelector((state) => state.envoy);
   const width = useWidth();
   const navigate = useNavigate();
   console.log(envoyListToShow);
+  const SearchrRef = useRef(null);
+  const trails = useTrail(1, {
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    config: { duration: 1000 },
+    delay: 100,
+  });
 
   return (
     <Container>
@@ -42,7 +50,7 @@ export default function Envoy() {
           نمایندگان
         </p>
       </Title>
-      <Content>
+      <Content ref={SearchrRef}>
         {width < 481 ? (
           // <Map />
           <IranMap />
@@ -52,8 +60,10 @@ export default function Envoy() {
             <HonestEnvoy envoys={envoyListToShow} />
           </Wraper>
         )}
+        <animated.div style={trails[1]} clas>
+          <Search />
+        </animated.div>
 
-        <Search />
         {/* <AdvanceSearch  setEnvoys={setEnvoys} /> */}
         {width < 481 && <EnvoyFiltering envoys={envoyListToShow} />}
         {width > 481 && (

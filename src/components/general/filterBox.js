@@ -1,13 +1,21 @@
+import React, { useRef } from "react";
 import data from "../../data.json";
 import styled from "styled-components";
 import background from "../../assets/back-controll.webp";
-
+import { useTrail, animated } from "react-spring";
 export default function FilterBox({
   filterType,
   setFilterType,
   searchPhrase,
   setSearchPhrase,
 }) {
+  const filterRef = useRef(null);
+  const trails = useTrail(1, {
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    config: { duration: 1000 },
+    delay: 100,
+  });
   const controllItem = data.controlPanel.map((item, i) => {
     return (
       <>
@@ -31,18 +39,23 @@ export default function FilterBox({
       </>
     );
   });
+
   return (
-    <FilterContainer>
-      <SearchInput
-        onChange={(e) => {
-          setSearchPhrase(e.target.value);
-        }}
-        type="text"
-        value={searchPhrase}
-        placeholder="&#xF002; جستجو کن..."
-      />
-      <TabContainer>{controllItem}</TabContainer>
-    </FilterContainer>
+    <div ref={filterRef}>
+      <animated.div style={trails[1]} clas>
+        <FilterContainer>
+          <SearchInput
+            onChange={(e) => {
+              setSearchPhrase(e.target.value);
+            }}
+            type="text"
+            value={searchPhrase}
+            placeholder="&#xF002; جستجو کن..."
+          />
+          <TabContainer>{controllItem}</TabContainer>
+        </FilterContainer>
+      </animated.div>
+    </div>
   );
 }
 

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import data from "../../../data.json";
 import background from "../../../assets/back-controll.webp";
 import { useSearchParams } from "react-router-dom";
 import { renderIntoDocument } from "react-dom/test-utils";
 // import 'font-awesome/css/font-awesome.min.css';
+import { useTrail, animated } from "react-spring";
 
 const Container = styled.div`
   background-image: url(${background});
@@ -130,7 +131,13 @@ const TabContainer = styled.div`
 
 export default function Controler({ activities, selectedTag, setSelectedTag }) {
   const [searchparams, setsearchparams] = useSearchParams();
-
+  const controllerRef = useRef(null);
+  const trails = useTrail(8, {
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    config: { duration: 800 },
+    delay: 50,
+  });
   const controllItem = data.controlItem.map((x, i) => {
     return (
       <Tab
@@ -152,22 +159,26 @@ export default function Controler({ activities, selectedTag, setSelectedTag }) {
   });
 
   return (
-    <Container>
-      <SearchInput
-        value={searchparams.get("filter") || ""}
-        onChange={(event) => {
-          let filter = event.target.value;
-          if (filter) {
-            setsearchparams({ filter: filter });
-          } else {
-            setsearchparams({});
-          }
-        }}
-        type="text"
-        placeholder="&#xF002; جستجو کن..."
-      />
+    <div ref={controllerRef}>
+      <animated.div style={trails[1]} clas>
+        <Container>
+          <SearchInput
+            value={searchparams.get("filter") || ""}
+            onChange={(event) => {
+              let filter = event.target.value;
+              if (filter) {
+                setsearchparams({ filter: filter });
+              } else {
+                setsearchparams({});
+              }
+            }}
+            type="text"
+            placeholder="&#xF002; جستجو کن..."
+          />
 
-      <TabContainer>{controllItem}</TabContainer>
-    </Container>
+          <TabContainer>{controllItem}</TabContainer>
+        </Container>
+      </animated.div>
+    </div>
   );
 }
