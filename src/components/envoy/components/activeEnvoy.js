@@ -110,9 +110,8 @@ export default function ActiveEnvoy({ envoys }) {
   });
   return (
     <Container ref={envoyContainerRef}>
-      <animated.div style={trails[3]}>
-
       <Title>شفاف ترین نمایندگان</Title>
+      <animated.div style={trails[3]}>
       <EnvoyContainer hide={showMore}>
         {/* {console.log(envoys)} */}
         {newEnvoyList
