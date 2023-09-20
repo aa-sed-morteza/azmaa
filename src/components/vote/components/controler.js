@@ -6,6 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import { renderIntoDocument } from "react-dom/test-utils";
 // import 'font-awesome/css/font-awesome.min.css';
 import { useTrail, animated } from "react-spring";
+import { useIsVisible } from "../../../hook/useIsVisible";
 
 const Container = styled.div`
   background-image: url(${background});
@@ -132,11 +133,12 @@ const TabContainer = styled.div`
 export default function Controler({ activities, selectedTag, setSelectedTag }) {
   const [searchparams, setsearchparams] = useSearchParams();
   const controllerRef = useRef(null);
+  const isVisible = useIsVisible(controllerRef);
   const trails = useTrail(8, {
     from: { opacity: 0 },
     to: { opacity: 1 },
     config: { duration: 800 },
-    delay: 50,
+    delay: 100,
   });
   const controllItem = data.controlItem.map((x, i) => {
     return (
