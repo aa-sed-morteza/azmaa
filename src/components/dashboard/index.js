@@ -101,8 +101,8 @@ export default function Dashboard() {
       dispatch({ type: "SET_LOGGED_IN", payload: true });
       handleAutoLogin(Cookies.get("userId"));
     } else {
-      dispatch({ type: "SET_LOGGED_IN", payload: true });
-      // navigate("/log-in");
+      dispatch({ type: "SET_LOGGED_IN", payload: false });
+      navigate("/log-in");
     }
   }, [state.loggedIn]);
 
