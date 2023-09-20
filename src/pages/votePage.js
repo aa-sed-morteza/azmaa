@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import VoteCard from "../components/home/components/voteCard";
 import upArrow from "../assets/arrow.webp";
 import { useSelector } from "react-redux";
+import { useTrail, animated } from "react-spring";
+import { useIsVisible } from "../hook/useIsVisible";
 
 export default function Vote() {
   const { voteListToShow } = useSelector((state) => state.vote);
@@ -40,7 +42,13 @@ export default function Vote() {
   }, [selectedTag]);
 
   const showRef = useRef(null);
-
+  const isVisible = useIsVisible(showRef);
+  const trails = useTrail(8, {
+    from: { opacity: 0 },
+    to: { opacity: isVisible ? 1 : 0 },
+    config: { duration: 1000 },
+    delay: 100,
+  });
   return (
     <Container>
       <Title>
@@ -78,7 +86,11 @@ export default function Vote() {
             })
             .slice(0, showLimit)
             .map((item, i) => {
-              return <VoteCard bill={item} key={i} />;
+              return (
+                <animated.div style={trails[i + 3]} clas>
+                  <VoteCard bill={item} key={i} />
+                </animated.div>
+              );
             })}
         </VoterContainer>
         <ShowMore
