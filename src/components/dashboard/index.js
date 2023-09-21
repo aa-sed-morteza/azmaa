@@ -35,11 +35,18 @@ import { toast } from "react-toastify";
 import GeneralEditInformation from "./superviser/components/editProfile/generalEditInformation";
 import MyVotes from "./superviser/pages/myVotes";
 import NewVote from "./superviser/components/newVote";
+import { login, logout } from "../../redux/slices/isLoginSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 
 export default function Dashboard() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
   const width = useWidth();
+
+  const dispathRedux = useDispatch();
+
+  const islogin = useSelector(state => state.islogin.islogin);
 
   const getPersonalInfo = (userId) => {
     let data = new FormData();
@@ -94,20 +101,26 @@ export default function Dashboard() {
   }, [state.token]);
 
   useEffect(() => {
-    // if (state.loggedIn === false) {
-    //   navigate("/log-in");
-    // }
-    if (Cookies.get("userId")) {
-      dispatch({ type: "SET_LOGGED_IN", payload: true });
-      handleAutoLogin(Cookies.get("userId"));
-    } else {
-      dispatch({ type: "SET_LOGGED_IN", payload: false });
+    if (islogin) {
       navigate("/log-in");
     }
-  }, [state.loggedIn]);
+    if (Cookies.get("userId")) {
+      // dispatch({ type: "SET_LOGGED_IN", payload: false });
+      dispathRedux(logout());
+
+      handleAutoLogin(Cookies.get("userId"));
+    } else {
+      // dispatch({ type: "SET_LOGGED_IN", payload: false });
+      dispathRedux(logout());
+      navigate("/log-in");
+    }
+  }, [islogin]);
+
+
 
   const handleAutoLogin = (userId) => {
-    dispatch({ type: "SET_LOGGED_IN", payload: true });
+    // dispatch({ type: "SET_LOGGED_IN", payload: true });
+    dispathRedux(login());
     let config = {
       method: "get",
       url: `${BaseBackURL}api/v1/accounts/member/${userId}`,
@@ -117,7 +130,8 @@ export default function Dashboard() {
       // console.log(res);
       if (res.data.id) {
         Cookies.set("userId", res.data.id);
-        dispatch({ type: "SET_LOGGED_IN", payload: true });
+        // dispatch({ type: "SET_LOGGED_IN", payload: true });
+        dispathRedux(login());
         dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
         dispatch({ type: "SET_USERNAME", payload: Cookies.get("userName") });
         dispatch({ type: "SET_TYPE_USER", payload: Cookies.get("userType") });

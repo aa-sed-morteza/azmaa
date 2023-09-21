@@ -13,6 +13,9 @@ import exit from "../../assets/exit.webp";
 import Profile from "../dashboard/components/profile";
 import Cookies from "js-cookie";
 import { useUser } from "../../context/userContext";
+import { useDispatch, useSelector } from "react-redux";
+import { login , logout } from "../../redux/slices/isLoginSlice";
+
 
 // styled
 const TopBar = styled.section`
@@ -301,6 +304,11 @@ export default function Navbar() {
   const [active, setActive] = useState(0);
   const [dashboard, setDashboard] = useState(false);
 
+  const islogin = useSelector(state => state.islogin.islogin);
+
+  const dispatchRedux = useDispatch();
+
+
   useEffect(() => {
     setDashboard(true);
     setOpen(true);
@@ -327,7 +335,7 @@ export default function Navbar() {
         key={i}
         onClick={() => choiseItem(i, g.path)}
         className={i === active ? "active" : ""}
-        active={state.loggedIn}
+        active={islogin}
       >
         <span>
           <img src={active === i ? g.active_icon : g.icon} alt={g.title} />
@@ -343,7 +351,7 @@ export default function Navbar() {
         key={i}
         onClick={() => choiseItem(i, g.path)}
         className={i === active ? "active" : ""}
-        active={state.loggedIn}
+        active={islogin}
       >
         <span>
           <img src={active === i ? g.active_icon : g.icon} alt={g.title} />
@@ -362,10 +370,11 @@ export default function Navbar() {
   };
 
   const goDashboard = () => {
-    if (state.loggedIn) {
+    if (islogin) {
       Cookies.remove("userId");
       Cookies.remove("userName");
-      dispatch({ type: "SET_LOGGED_IN", payload: false });
+      // dispatch({ type: "SET_LOGGED_IN", payload: false });
+      dispatchRedux(logout());
       dispatch({ type: "SET_TOKEN", payload: null });
       dispatch({ type: "OPEN_MENU", payload: false });
     } else {
@@ -412,13 +421,13 @@ export default function Navbar() {
           ""
         ) : (
           <Panel
-            icon={state.loggedIn ? exit : signIn}
-            color={state.loggedIn ? "#FF5A5A" : "#095644"}
+            icon={islogin ? exit : signIn}
+            color={islogin ? "#FF5A5A" : "#095644"}
             onClick={goDashboard}
           >
             <div className="content">
               {" "}
-              {state.loggedIn ? "خروج از پنل" : "ورود به پنل"}{" "}
+              {islogin ? "خروج از پنل" : "ورود به پنل"}{" "}
               {/* <div className="icon"></div> */}
             </div>{" "}
           </Panel>
@@ -436,19 +445,19 @@ export default function Navbar() {
           ""
         )}
         {width < 481 ? (
-          <MenuList open={!open} back={dashboard && state.loggedIn}>
-            {dashboard && state.loggedIn ? <Profile /> : ""}
-            {dashboard && state.loggedIn ? checkUserMenu() : menuItem}{" "}
+          <MenuList open={!open} back={dashboard && islogin}>
+            {dashboard && islogin ? <Profile /> : ""}
+            {dashboard && islogin ? checkUserMenu() : menuItem}{" "}
             <MobilePanel
-              color={state.loggedIn ? "#FF5A5A" : "#FFAA00"}
+              color={islogin ? "#FF5A5A" : "#FFAA00"}
               onClick={goDashboard}
             >
               <div className="icon">
-                <img src={state.loggedIn ? exit : signInMobile} />
+                <img src={islogin ? exit : signInMobile} />
               </div>
               <p className="content">
                 {" "}
-                {state.loggedIn ? "خروج از پنل" : "ورود به پنل"}{" "}
+                {islogin ? "خروج از پنل" : "ورود به پنل"}{" "}
               </p>{" "}
             </MobilePanel>
           </MenuList>

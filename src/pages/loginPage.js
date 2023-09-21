@@ -3,7 +3,7 @@ import styled from "styled-components";
 // import wellcome from "../../assets/welcome.webp";
 import wellcome from "../assets/well.svg";
 import Button from "../components/general/button";
-import login from "../assets/log.webp";
+import loginimg from "../assets/log.webp";
 import signin from "../assets/signin.webp";
 import CustomInput from "../components/general/customInput";
 import profile from "../assets/user-log.svg";
@@ -18,11 +18,17 @@ import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import useWidth from "../hook/useWidth";
+import { useDispatch, useSelector } from "react-redux";
+import { login , logout } from "../redux/slices/isLoginSlice";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
   const width = useWidth();
   const navigate = useNavigate();
+
+  const dispatchRedux = useDispatch();
+
+  const islogin = useSelector(state => state.islogin.islogin);
 
   const onSubmit = (values) => {
     const data = new FormData();
@@ -46,7 +52,8 @@ export default function LogIn() {
           });
           Cookies.set("userId", res.data.id);
           Cookies.set("userName", values.userName);
-          dispatch({ type: "SET_LOGGED_IN", payload: true });
+          // dispatch({ type: "SET_LOGGED_IN", payload: true });
+            dispatchRedux(login());
           dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
           dispatch({ type: "SET_USERNAME", payload: values.userName });
           getToken(values);
@@ -166,7 +173,7 @@ export default function LogIn() {
               text="ورود"
               background="#095644"
               textColor="#FFFFFF"
-              icon={login}
+              icon={loginimg}
               type="submit"
             />
             <Button
