@@ -10,9 +10,8 @@ import { persistReducer, persistStore } from "redux-persist";
 import { combineReducers } from "redux";
 import thunk from "redux-thunk";
 
-
 import isloginreducers from "./slices/isLoginSlice";
-
+import userTypeReducers from "./slices/userTypeSlice";
 
 const persistConfig = {
   key: "azmaa",
@@ -26,7 +25,8 @@ const reducers = combineReducers({
   blog: blogReducer,
   city: cityReducer,
   filter: filterReducer,
-  islogin: isloginreducers
+  islogin: isloginreducers,
+  userType: userTypeReducers,
 });
 
 export const store = configureStore({

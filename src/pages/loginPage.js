@@ -19,7 +19,8 @@ import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import useWidth from "../hook/useWidth";
 import { useDispatch, useSelector } from "react-redux";
-import { login , logout } from "../redux/slices/isLoginSlice";
+import { login, logout } from "../redux/slices/isLoginSlice";
+import { envoy, Superviser } from "../redux/slices/userTypeSlice";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
@@ -28,8 +29,8 @@ export default function LogIn() {
 
   const dispatchRedux = useDispatch();
 
-  const islogin = useSelector(state => state.islogin.islogin);
-
+  const islogin = useSelector((state) => state.islogin.islogin);
+  const userType = useSelector((state) => state.userType.isSuperviser);
   const onSubmit = (values) => {
     const data = new FormData();
     data.append("username", values.userName);
@@ -53,15 +54,17 @@ export default function LogIn() {
           Cookies.set("userId", res.data.id);
           Cookies.set("userName", values.userName);
           // dispatch({ type: "SET_LOGGED_IN", payload: true });
-            dispatchRedux(login());
+          dispatchRedux(login());
           dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
           dispatch({ type: "SET_USERNAME", payload: values.userName });
           getToken(values);
           if (res.data.electoral_district_name === null) {
-            dispatch({ type: "SET_TYPE_USER", payload: "superviser" });
+            // dispatch({ type: "SET_TYPE_USER", payload: "superviser" });
+            dispatchRedux(Superviser());
             Cookies.set("userType", "superviser");
           } else {
-            dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
+            // dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
+            dispatchRedux(envoy());
             Cookies.set("userType", "envoy");
           }
 
