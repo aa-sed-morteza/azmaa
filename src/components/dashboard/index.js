@@ -38,7 +38,6 @@ import NewVote from "./superviser/components/newVote";
 import { login, logout } from "../../redux/slices/isLoginSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-
 export default function Dashboard() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
@@ -46,7 +45,7 @@ export default function Dashboard() {
 
   const dispathRedux = useDispatch();
 
-  const islogin = useSelector(state => state.islogin.islogin);
+  const islogin = useSelector((state) => state.islogin.islogin);
 
   const getPersonalInfo = (userId) => {
     let data = new FormData();
@@ -101,9 +100,9 @@ export default function Dashboard() {
   }, [state.token]);
 
   useEffect(() => {
-    if (islogin) {
-      navigate("/log-in");
-    }
+    // if (islogin) {
+    //   navigate("/log-in");
+    // }
     if (Cookies.get("userId")) {
       // dispatch({ type: "SET_LOGGED_IN", payload: false });
       dispathRedux(logout());
@@ -115,8 +114,6 @@ export default function Dashboard() {
       navigate("/log-in");
     }
   }, [islogin]);
-
-
 
   const handleAutoLogin = (userId) => {
     // dispatch({ type: "SET_LOGGED_IN", payload: true });

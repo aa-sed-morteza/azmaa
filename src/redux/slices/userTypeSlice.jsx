@@ -8,7 +8,7 @@ export const userType = createSlice({
   },
   reducers: {
     envoy(state) {
-      state.isEnvoy = "envoy";
+      state.isParliament_member = "parliament_member";
     },
     Superviser(state) {
       state.isSuperviser = "superviser";

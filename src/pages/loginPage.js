@@ -65,7 +65,7 @@ export default function LogIn() {
           } else {
             // dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
             dispatchRedux(envoy());
-            Cookies.set("userType", "envoy");
+            Cookies.set("userType", "parliament_member");
           }
 
           navigate("/dashboard");
