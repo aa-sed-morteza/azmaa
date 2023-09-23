@@ -12,6 +12,11 @@ import thunk from "redux-thunk";
 
 
 import isloginreducers from "./slices/isLoginSlice";
+import menuOpenSlice from "./slices/menuOpenSlice";
+import seTimOutSlice from "./slices/seTimOutSlice";
+import setPasswordSlice from "./slices/setPasswordSlice";
+
+
 
 
 const persistConfig = {
@@ -26,7 +31,10 @@ const reducers = combineReducers({
   blog: blogReducer,
   city: cityReducer,
   filter: filterReducer,
-  islogin: isloginreducers
+  islogin: isloginreducers ,
+  ismenuopen: menuOpenSlice ,
+  istimeout: seTimOutSlice ,
+  password : setPasswordSlice
 });
 
 export const store = configureStore({

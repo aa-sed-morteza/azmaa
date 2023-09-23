@@ -14,6 +14,10 @@ import { toast } from "react-toastify";
 import Select from "../../general/select";
 import Cookies from "js-cookie";
 
+import { useDispatch, useSelector } from "react-redux";
+import { timeout , notimeout } from "../../../redux/slices/seTimOutSlice";
+
+
 export default function SetMobileNumber() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
@@ -23,6 +27,10 @@ export default function SetMobileNumber() {
   const [update, setUpdate] = useState(false);
   const [type, setType] = useState(["نماینده", "ناظر"]);
   const [password, setPassword] = useState("");
+
+  const dispatchRedux = useDispatch();
+  const istimeout = useSelector(state => state.istimeout.istimeout);
+  
 
   const checkCode = (e) => {
     e.preventDefault();
@@ -123,7 +131,9 @@ export default function SetMobileNumber() {
     } else {
       dispatch({ type: "SET_TYPE_USER", payload: "supervisor" });
     }
-    dispatch({ type: "SET_TIME_OUT", payload: false });
+    // dispatch({ type: "SET_TIME_OUT", payload: false });
+    dispatchRedux(notimeout());
+    
 
     const data = new FormData();
     data.append("phone", values.phoneNember);
@@ -260,7 +270,8 @@ export default function SetMobileNumber() {
                 background="#095644"
                 type="submit"
                 click={() => {
-                  dispatch({ type: "SET_TIME_OUT", payload: false });
+                  // dispatch({ type: "SET_TIME_OUT", payload: false });
+                  dispatchRedux(notimeout());
                 }}
               />
             </Box>

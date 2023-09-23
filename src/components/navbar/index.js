@@ -15,6 +15,9 @@ import Cookies from "js-cookie";
 import { useUser } from "../../context/userContext";
 import { useDispatch, useSelector } from "react-redux";
 import { login , logout } from "../../redux/slices/isLoginSlice";
+import {togglmenu , openmenu , closemenu} from "../../redux/slices/menuOpenSlice";
+
+
 
 
 // styled
@@ -305,14 +308,16 @@ export default function Navbar() {
   const [dashboard, setDashboard] = useState(false);
 
   const islogin = useSelector(state => state.islogin.islogin);
+  const ismenuopen = useSelector(state => state.ismenuopen.ismenuopen);
 
   const dispatchRedux = useDispatch();
 
 
   useEffect(() => {
     setDashboard(true);
-    setOpen(true);
-  }, [state.openMenu]);
+    // setOpen(true);
+    dispatchRedux(openmenu());
+  }, [ismenuopen]);
 
   const menuItem = data.navbar.map((x, i) => {
     return (
@@ -376,7 +381,8 @@ export default function Navbar() {
       // dispatch({ type: "SET_LOGGED_IN", payload: false });
       dispatchRedux(logout());
       dispatch({ type: "SET_TOKEN", payload: null });
-      dispatch({ type: "OPEN_MENU", payload: false });
+      // dispatch({ type: "OPEN_MENU", payload: false });
+      dispatchRedux(closemenu());
     } else {
       navigate("/dashboard");
       setDashboard(true);
@@ -402,7 +408,8 @@ export default function Navbar() {
   function choiseItem(num, path) {
     setActive(num);
     navigate(path);
-    setOpen(!open);
+    // setOpen(!open);
+    dispatchRedux(togglmenu());
   }
 
   return (
@@ -437,15 +444,16 @@ export default function Navbar() {
         {width < 481 ? (
           <Menu
             onClick={() => {
-              setOpen(!open);
+              // setOpen(!open);
+              dispatchRedux(togglmenu());
             }}
-            open={open}
+            open={ismenuopen}
           ></Menu>
         ) : (
           ""
         )}
         {width < 481 ? (
-          <MenuList open={!open} back={dashboard && islogin}>
+          <MenuList open={!ismenuopen} back={dashboard && islogin}>
             {dashboard && islogin ? <Profile /> : ""}
             {dashboard && islogin ? checkUserMenu() : menuItem}{" "}
             <MobilePanel

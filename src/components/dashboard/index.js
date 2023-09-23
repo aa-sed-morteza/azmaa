@@ -101,9 +101,9 @@ export default function Dashboard() {
   }, [state.token]);
 
   useEffect(() => {
-    if (islogin) {
-      navigate("/log-in");
-    }
+    // if (islogin) {
+    //   navigate("/log-in");
+    // }
     if (Cookies.get("userId")) {
       // dispatch({ type: "SET_LOGGED_IN", payload: false });
       dispathRedux(logout());

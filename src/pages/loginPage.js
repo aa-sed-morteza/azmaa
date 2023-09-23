@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 import useWidth from "../hook/useWidth";
 import { useDispatch, useSelector } from "react-redux";
 import { login , logout } from "../redux/slices/isLoginSlice";
+import {togglmenu , openmenu , closemenu} from "../redux/slices/menuOpenSlice";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
@@ -29,6 +30,7 @@ export default function LogIn() {
   const dispatchRedux = useDispatch();
 
   const islogin = useSelector(state => state.islogin.islogin);
+  const ismenuopen = useSelector(state => state.ismenuopen.ismenuopen);
 
   const onSubmit = (values) => {
     const data = new FormData();
@@ -66,7 +68,8 @@ export default function LogIn() {
           }
 
           navigate("/dashboard");
-          dispatch({ type: "OPEN_MENU", payload: true });
+          // dispatch({ type: "OPEN_MENU", payload: true });
+          dispatchRedux(openmenu());
         } else if (res.data.code === -1) {
           toast.error("نام کاربری یا رمز عبور اشتباه است!", {
             position: toast.POSITION.TOP_RIGHT,

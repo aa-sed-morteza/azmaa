@@ -2,11 +2,18 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useUser } from "../../context/userContext";
 
+import { useDispatch, useSelector } from "react-redux";
+import { timeout , notimeout } from "../../redux/slices/seTimOutSlice";
+
+
 const Timer = ({ delayResend = "120" }) => {
   const { state, dispatch } = useUser();
   const [delay, setDelay] = useState(+delayResend);
   const minutes = Math.floor(delay / 60).toLocaleString("fa");
   const seconds = Math.floor(delay % 60).toLocaleString("fa");
+
+  const istimeout = useSelector(state => state.istimeout.istimeout);
+  const dispatchRedux = useDispatch();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -24,7 +31,9 @@ const Timer = ({ delayResend = "120" }) => {
 
   useEffect(() => {
     if (delay === 0) {
-      dispatch({ type: "SET_TIME_OUT", payload: true });
+      // dispatch({ type: "SET_TIME_OUT", payload: true });
+      dispatchRedux(timeout());
+
     }
   }, [delay === 0]);
 

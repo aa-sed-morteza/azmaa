@@ -16,6 +16,9 @@ import Select from "../../general/select";
 import Cookies from "js-cookie";
 import * as yup from "yup";
 
+import { useDispatch, useSelector } from "react-redux";
+import { timeout , notimeout } from "../../../redux/slices/seTimOutSlice";
+
 export default function ForgetMobileNumber() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
@@ -78,6 +81,9 @@ export default function ForgetMobileNumber() {
     }
   };
 
+  const istimeout = useSelector(state => state.istimeout.istimeout);
+  const dispatchRedux = useDispatch();
+
   // const getToken = (pass, user) => {
   //   const data = new FormData();
   //   data.append("username", user);
@@ -109,12 +115,12 @@ export default function ForgetMobileNumber() {
   }, []);
 
   useEffect(() => {
-    if (state.timeOut) {
+    if (istimeout) {
       setUpdate(true);
     } else {
       setUpdate(false);
     }
-  }, [state.timeOut]);
+  }, [istimeout]);
 
   const onSubmit = async (values, actions) => {
     // dispatch({ type: "SET_USERNAME", payload: values.phoneNember });
@@ -123,7 +129,8 @@ export default function ForgetMobileNumber() {
     // } else {
     //   dispatch({ type: "SET_TYPE_USER", payload: "supervisor" });
     // }
-    dispatch({ type: "SET_TIME_OUT", payload: false });
+    // dispatch({ type: "SET_TIME_OUT", payload: false });
+    dispatchRedux(notimeout());
 
     const data = new FormData();
     data.append("user_name", values.phoneNember);
@@ -267,7 +274,8 @@ export default function ForgetMobileNumber() {
                 background="#095644"
                 type="submit"
                 click={() => {
-                  dispatch({ type: "SET_TIME_OUT", payload: false });
+                  // dispatch({ type: "SET_TIME_OUT", payload: false });
+                  dispatchRedux(notimeout());
                 }}
               />
             </Box>

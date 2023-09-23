@@ -10,10 +10,13 @@ import { passSchema } from "../../../../schema";
 import axios from "axios";
 import { BaseBackURL } from "../../../../../constant/api";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 export default function EditLogInformation() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
+  
+  const password = useSelector(state => state.password.password);
 
   const refreshToken = () => {
     const data = new FormData();
@@ -72,6 +75,7 @@ export default function EditLogInformation() {
       });
   };
 
+
   const {
     values,
     errors,
@@ -83,7 +87,7 @@ export default function EditLogInformation() {
   } = useFormik({
     initialValues: {
       userName: state.userName,
-      password: state.password,
+      password: password,
     },
     validationSchema: passSchema,
     onSubmit,

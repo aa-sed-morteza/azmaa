@@ -6,13 +6,19 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../context/userContext";
 import { useFormik } from "formik";
 import { passSchema } from "../../schema";
+import { useSelector , useDispatch } from "react-redux";
+import { setpassword } from "../../../redux/slices/setPasswordSlice";
+
+
 
 export default function SetPassword() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
 
   const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_PASSWORD", payload: values.password });
+    // dispatch({ type: "SET_PASSWORD", payload: values.password });
+    console.log(values.password);
+    dispatchRedux(setpassword(values.password));
     dispatch({ type: "SET_SIGN_LEVEL", payload: 3 });
     actions.resetForm();
   };
@@ -32,6 +38,10 @@ export default function SetPassword() {
     validationSchema: passSchema,
     onSubmit,
   });
+
+  const dispatchRedux = useDispatch();
+  const password = useSelector(state => state.password.password);
+  console.log(password);
 
   return (
     <>
@@ -88,7 +98,7 @@ export default function SetPassword() {
             <CustomInput
               label="رمز عبور "
               back="#ffffff"
-              value={state.password}
+              value={password}
             />
           </Form>
         </Container>

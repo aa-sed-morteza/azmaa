@@ -4,10 +4,14 @@ import styled from "styled-components";
 import edit from "../../../../assets/left.svg";
 import { useUser } from "../../../../context/userContext";
 import { toFarsiNumber } from "../../../../utils";
+import { useSelector } from "react-redux";
 
 export default function LogInInfo() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
+
+  const password = useSelector(state => state.password.password);
+  
   return (
     <Container>
       <Edit
@@ -22,7 +26,7 @@ export default function LogInInfo() {
       </Row>
       <Row>
         <p className="type">رمز ورود: </p>
-        <input type="password" className="expand" value={state.password} />
+        <input type="password" className="expand" value={password} />
       </Row>
     </Container>
   );
