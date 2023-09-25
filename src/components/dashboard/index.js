@@ -145,7 +145,7 @@ export default function Dashboard() {
         // dispatch({ type: "SET_USERNAME", payload: Cookies.get("userName") });
         dispathRedux(setusername(Cookies.get("userName")));
         // dispatch({ type: "SET_TYPE_USER", payload: Cookies.get("userType") });
-        dispatchRedux(setUserType(Cookies.get("userType")));
+        dispathRedux(setUserType(Cookies.get("userType")));
 
         getPersonalInfo(userId);
         navigate("/dashboard");

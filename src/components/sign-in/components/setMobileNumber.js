@@ -17,7 +17,6 @@ import { setUserType } from "../../../redux/slices/userTypeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setID } from "../../../redux/slices/setId";
 
-import { useDispatch, useSelector } from "react-redux";
 import { timeout , notimeout } from "../../../redux/slices/seTimOutSlice";
 import { settoken } from "../../../redux/slices/setTokenSlice";
 import { setusername } from "../../../redux/slices/setUserNameSlice";

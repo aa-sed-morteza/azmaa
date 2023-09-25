@@ -11,7 +11,6 @@ import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import DefaultAvatar from "../../../assets/default-avatar.png";
 import { setUserType } from "../../../redux/slices/userTypeSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../redux/slices/setTokenSlice";
@@ -22,7 +21,7 @@ export default function Profile() {
   const { isShowing, toggle } = useModal();
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
-  const dispatchRedux = useDispatch();
+
   const userType = useSelector((state) => state.userType.userType);
 
   const dispathRedux = useDispatch();
