@@ -15,6 +15,7 @@ import Select from "../../general/select";
 import Cookies from "js-cookie";
 import { setUserType } from "../../../redux/slices/userTypeSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { setID } from "../../../redux/slices/setId";
 
 export default function SetMobileNumber() {
   const { state, dispatch } = useUser();
@@ -26,6 +27,8 @@ export default function SetMobileNumber() {
   const [type, setType] = useState(["نماینده", "ناظر"]);
   const [password, setPassword] = useState("");
   const userType = useSelector((state) => state.userType.userType);
+  const setID = useSelector((state) => state.userID.id);
+
   const dispatchRedux = useDispatch();
 
   const checkCode = (e) => {
@@ -36,7 +39,7 @@ export default function SetMobileNumber() {
     } else {
       const data = new FormData();
       data.append("phone", state.userName);
-      if (state.userType == "envoy") {
+      if (userType === "parliament_member") {
         data.append("type", "parliament_member");
       } else {
         data.append("type", state.userType);
@@ -55,7 +58,8 @@ export default function SetMobileNumber() {
         .then((res) => {
           // console.log(res);
           setValidate(0);
-          dispatch({ type: "SET_ID", payload: res.data.id });
+          // dispatch({ type: "SET_ID", payload: res.data.id });
+          dispatchRedux(setID(res.data.id));
           navigate(`/sign-in/${state.userType}`);
           setStep(1);
           getToken(password, state.userName);
