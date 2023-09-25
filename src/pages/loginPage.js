@@ -24,7 +24,7 @@ import {togglmenu , openmenu , closemenu} from "../redux/slices/menuOpenSlice";
 import { settoken } from "../redux/slices/setTokenSlice";
 import { setusername } from "../redux/slices/setUserNameSlice";
 import { setRefreshToken } from "../redux/slices/setRefreshTokenSlice";
-
+import { setUserType } from "../redux/slices/userTypeSlice";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
@@ -37,7 +37,7 @@ export default function LogIn() {
   const ismenuopen = useSelector(state => state.ismenuopen.ismenuopen);
   const token = useSelector(state => state.token.token);
   const username = useSelector(state => state.username.username);
-
+  const userType = useSelector((state) => state.userType.userType);
 
   const onSubmit = (values) => {
     const data = new FormData();
@@ -62,17 +62,19 @@ export default function LogIn() {
           Cookies.set("userId", res.data.id);
           Cookies.set("userName", values.userName);
           // dispatch({ type: "SET_LOGGED_IN", payload: true });
-            dispatchRedux(login());
+          dispatchRedux(login());
           dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
           // dispatch({ type: "SET_USERNAME", payload: values.userName });
           dispatchRedux(setusername(values.userName));
           getToken(values);
           if (res.data.electoral_district_name === null) {
-            dispatch({ type: "SET_TYPE_USER", payload: "superviser" });
+            // dispatch({ type: "SET_TYPE_USER", payload: "superviser" });
+            dispatchRedux(setUserType("superviser"));
             Cookies.set("userType", "superviser");
           } else {
-            dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
-            Cookies.set("userType", "envoy");
+            // dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
+            dispatchRedux(setUserType("parliament_member"));
+            Cookies.set("userType", "parliament_member");
           }
 
           navigate("/dashboard");

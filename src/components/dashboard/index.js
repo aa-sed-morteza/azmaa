@@ -42,6 +42,7 @@ import { setuserdata } from "../../redux/slices/setuserDataSlice";
 import { setusername } from "../../redux/slices/setUserNameSlice";
 
 
+import { setUserType } from "../../redux/slices/userTypeSlice";
 
 export default function Dashboard() {
   const { state, dispatch } = useUser();
@@ -53,6 +54,7 @@ export default function Dashboard() {
   const islogin = useSelector(state => state.islogin.islogin);
   const token = useSelector(state => state.token.token);
   const userdata = useSelector(state => state.userdata);
+  const userType = useSelector((state) => state.userType.userType);
 
 
   const getPersonalInfo = (userId) => {
@@ -125,8 +127,6 @@ export default function Dashboard() {
     }
   }, [islogin]);
 
-
-
   const handleAutoLogin = (userId) => {
     // dispatch({ type: "SET_LOGGED_IN", payload: true });
     dispathRedux(login());
@@ -144,7 +144,9 @@ export default function Dashboard() {
         dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
         // dispatch({ type: "SET_USERNAME", payload: Cookies.get("userName") });
         dispathRedux(setusername(Cookies.get("userName")));
-        dispatch({ type: "SET_TYPE_USER", payload: Cookies.get("userType") });
+        // dispatch({ type: "SET_TYPE_USER", payload: Cookies.get("userType") });
+        dispatchRedux(setUserType(Cookies.get("userType")));
+
         getPersonalInfo(userId);
         navigate("/dashboard");
       } else if (res.data.code === -1) {
@@ -168,7 +170,7 @@ export default function Dashboard() {
       )}
 
       <PageWraper>
-        {state.userType === "superviser" ? (
+        {userType === "superviser" ? (
           // <SuperviserDashboard />
 
           <Routes>

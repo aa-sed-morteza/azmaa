@@ -13,6 +13,9 @@ import { BaseBackURL } from "../../../constant/api";
 import { toast } from "react-toastify";
 import Select from "../../general/select";
 import Cookies from "js-cookie";
+import { setUserType } from "../../../redux/slices/userTypeSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setID } from "../../../redux/slices/setId";
 
 import { useDispatch, useSelector } from "react-redux";
 import { timeout , notimeout } from "../../../redux/slices/seTimOutSlice";
@@ -30,8 +33,11 @@ export default function SetMobileNumber() {
   const [update, setUpdate] = useState(false);
   const [type, setType] = useState(["نماینده", "ناظر"]);
   const [password, setPassword] = useState("");
+  const userType = useSelector((state) => state.userType.userType);
+  const setID = useSelector((state) => state.userID.id);
 
   const dispatchRedux = useDispatch();
+
   const istimeout = useSelector(state => state.istimeout.istimeout);
   const token = useSelector(state => state.token.token);
   const username = useSelector(state => state.username.username);
@@ -46,7 +52,7 @@ export default function SetMobileNumber() {
     } else {
       const data = new FormData();
       data.append("phone", username);
-      if (state.userType == "envoy") {
+      if (userType === "parliament_member") {
         data.append("type", "parliament_member");
       } else {
         data.append("type", state.userType);
@@ -65,7 +71,8 @@ export default function SetMobileNumber() {
         .then((res) => {
           // console.log(res);
           setValidate(0);
-          dispatch({ type: "SET_ID", payload: res.data.id });
+          // dispatch({ type: "SET_ID", payload: res.data.id });
+          dispatchRedux(setID(res.data.id));
           navigate(`/sign-in/${state.userType}`);
           setStep(1);
           getToken(password, username);
@@ -136,9 +143,11 @@ export default function SetMobileNumber() {
     // dispatch({ type: "SET_USERNAME", payload: values.phoneNember });
     dispatchRedux(setusername(values.phoneNember ));
     if (values.type == "نماینده") {
-      dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
+      // dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
+      dispatchRedux(setUserType("parliament_member"));
     } else {
-      dispatch({ type: "SET_TYPE_USER", payload: "supervisor" });
+      // dispatch({ type: "SET_TYPE_USER", payload: "supervisor" });
+      dispatchRedux(setUserType("supervisor"));
     }
     // dispatch({ type: "SET_TIME_OUT", payload: false });
     dispatchRedux(notimeout());

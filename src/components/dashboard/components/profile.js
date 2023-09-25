@@ -10,6 +10,8 @@ import useModal from "../../../hook/useModal";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import DefaultAvatar from "../../../assets/default-avatar.png";
+import { setUserType } from "../../../redux/slices/userTypeSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../redux/slices/setTokenSlice";
@@ -20,6 +22,8 @@ export default function Profile() {
   const { isShowing, toggle } = useModal();
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
+  const dispatchRedux = useDispatch();
+  const userType = useSelector((state) => state.userType.userType);
 
   const dispathRedux = useDispatch();
 
@@ -100,6 +104,9 @@ export default function Profile() {
         }
       });
   };
+  // *************
+  console.log("*************8");
+  console.log(userType);
 
   return (
     <Container>
@@ -116,7 +123,7 @@ export default function Profile() {
         </Image>
         <Label color={state.userType}>
           <p className="title">
-            {state.userType == "envoy"
+            {userType === "parliament_member"
               ? "نمایندۀ مجلس شورای اسلامی"
               : " ناظر نمایندگان"}{" "}
           </p>
