@@ -13,6 +13,7 @@ import thunk from "redux-thunk";
 import isloginreducers from "./slices/isLoginSlice";
 import userTypeReducers from "./slices/userTypeSlice";
 import setIDReducers from "./slices/setId";
+import activityChoiceReducers from "./slices/activity-choiceSlice";
 
 const persistConfig = {
   key: "azmaa",
@@ -29,6 +30,7 @@ const reducers = combineReducers({
   islogin: isloginreducers,
   userType: userTypeReducers,
   userID: setIDReducers,
+  userActivity: activityChoiceReducers,
 });
 
 export const store = configureStore({

@@ -15,7 +15,8 @@ import actionsymbol from "../../../../../../assets/action-rate.webp";
 import axios from "axios";
 import { BaseBackURL } from "../../../../../../constant/api";
 import { convertDateToFarsi } from "../../../../../../utils";
-
+import { setActivity } from "../../../../../../redux/slices/activity-choiceSlice";
+import { useDispatch, useSelector } from "react-redux";
 export default function SelectActionType() {
   const navigate = useNavigate();
   const [select, setSelect] = useState(1);
@@ -24,6 +25,8 @@ export default function SelectActionType() {
   const [voteItems, setVoteItems] = useState([]);
   const [actionItems, setActionItems] = useState([]);
   const [searchparams, setsearchparams] = useSearchParams();
+  const activityChoice = useSelector((state) => state.userActivity.activity);
+  const dispathRedux = useDispatch();
 
   const getVoteItems = () => {
     let config = {
@@ -118,10 +121,11 @@ export default function SelectActionType() {
           onClick={() => {
             setCheck(i);
             setFieldValue("description", x.id);
-            dispatch({
-              type: "SET_ACTIVITY_CHOICE",
-              payload: x.activity_choice,
-            });
+            // dispatch({
+            //   type: "SET_ACTIVITY_CHOICE",
+            //   payload: x.activity_choice,
+            // });
+            dispathRedux(setActivity(x.activity_choice));
           }}
         >
           <div className="symbol"></div>
