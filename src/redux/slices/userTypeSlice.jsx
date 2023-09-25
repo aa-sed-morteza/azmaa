@@ -1,21 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import React from "react";
 
-export const userType = createSlice({
+export const userTypeSlice = createSlice({
   name: "userType",
   initialState: {
-    isSuperviser: "superviser",
+    superviser: "superviser",
   },
   reducers: {
     envoy(state) {
-      state.isParliament_member = "parliament_member";
+      state.envoy = "parliament_member";
     },
     Superviser(state) {
-      state.isSuperviser = "superviser";
+      state.superviser = "superviser";
     },
   },
 });
 
-export const { Superviser, envoy } = userType.actions;
+export const { Superviser, envoy } = userTypeSlice.actions;
 
-export default userType.reducer;
+export default userTypeSlice.reducer;

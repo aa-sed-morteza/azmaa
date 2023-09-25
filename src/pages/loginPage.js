@@ -30,7 +30,7 @@ export default function LogIn() {
   const dispatchRedux = useDispatch();
 
   const islogin = useSelector((state) => state.islogin.islogin);
-  const userType = useSelector((state) => state.userType.isSuperviser);
+  const userType = useSelector((state) => state.userType.superviser);
   const onSubmit = (values) => {
     const data = new FormData();
     data.append("username", values.userName);

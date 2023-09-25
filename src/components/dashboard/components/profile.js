@@ -10,12 +10,16 @@ import useModal from "../../../hook/useModal";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import DefaultAvatar from "../../../assets/default-avatar.png";
+import { envoy, Superviser } from "../../../redux/slices/userTypeSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Profile() {
   const { state, dispatch } = useUser();
   const { isShowing, toggle } = useModal();
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
+  const dispatchRedux = useDispatch();
+  const userType = useSelector((state) => state.userType.isSuperviser);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -104,7 +108,7 @@ export default function Profile() {
         </Image>
         <Label color={state.userType}>
           <p className="title">
-            {state.userType == "envoy"
+            {userType === "parliament_member"
               ? "نمایندۀ مجلس شورای اسلامی"
               : " ناظر نمایندگان"}{" "}
           </p>
