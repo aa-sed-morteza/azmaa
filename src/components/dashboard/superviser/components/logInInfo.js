@@ -11,6 +11,7 @@ export default function LogInInfo() {
   const navigate = useNavigate();
 
   const password = useSelector(state => state.password.password);
+  const username = useSelector(state => state.username.username);
   
   return (
     <Container>
@@ -22,7 +23,7 @@ export default function LogInInfo() {
       <Title> اطلاعات ورود</Title>
       <Row>
         <p className="type">نام کاربری : </p>
-        <p className="expand">{toFarsiNumber(state.userName)}</p>
+        <p className="expand">{toFarsiNumber(username)}</p>
       </Row>
       <Row>
         <p className="type">رمز ورود: </p>

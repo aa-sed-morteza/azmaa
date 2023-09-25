@@ -4,10 +4,13 @@ import { useUser } from "../../../../context/userContext";
 import edit from "../../../../assets/left.svg";
 import { useNavigate } from "react-router-dom";
 import { convertDateToFarsi, toFarsiNumber } from "../../../../utils";
+import { useSelector } from "react-redux";
 
 export default function PersonalInfo() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
+
+  const userdata = useSelector(state => state.userdata);
 
   return (
     <Container>
@@ -19,30 +22,30 @@ export default function PersonalInfo() {
       <Title>اطلاعات شخصی</Title>
       <Row>
         <p className="type">نام : </p>
-        <p className="expand">{state.first_name}</p>
+        <p className="expand">{userdata.first_name}</p>
       </Row>
       <Row>
         <p className="type">نام خانوادگی : </p>
-        <p className="expand">{state.last_name}</p>
+        <p className="expand">{userdata.last_name}</p>
       </Row>
       <Row>
         <p className="type"> محل تولد : </p>
-        <p className="expand">{state.birth_place}</p>
+        <p className="expand">{userdata.birth_place}</p>
       </Row>
       <Row>
         <p className="type"> تاریخ تولد: </p>
         <p className="expand">
-          {state.birth_place &&
-            toFarsiNumber(state.birth_date.slice(0, 4)) +
+          {userdata.birth_place &&
+            toFarsiNumber(userdata.birth_date.slice(0, 4)) +
               "/" +
-              toFarsiNumber(state.birth_date.slice(5, 7)) +
+              toFarsiNumber(userdata.birth_date.slice(5, 7)) +
               "/" +
-              toFarsiNumber(state.birth_date.slice(8, 10))}
+              toFarsiNumber(userdata.birth_date.slice(8, 10))}
         </p>
       </Row>
       <Row>
         <p className="type"> کد ملی: </p>
-        <p className="expand">{toFarsiNumber(state.national_code)}</p>
+        <p className="expand">{toFarsiNumber(userdata.national_code)}</p>
       </Row>
     </Container>
   );

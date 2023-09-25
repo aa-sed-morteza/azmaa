@@ -12,14 +12,25 @@ import axios from "axios";
 import { BaseBackURL } from "../../../../../constant/api";
 import { toast } from "react-toastify";
 
+import { useDispatch, useSelector } from "react-redux";
+import { settoken } from "../../../../../redux/slices/setTokenSlice";
+import { setuserdata } from "../../../../../redux/slices/setuserDataSlice";
+
 export default function EditPersonalInformation() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const [order, setOrder] = useState(false);
 
+  const dispathRedux = useDispatch();
+  const token = useSelector(state => state.token.token);
+  const userdata = useSelector(state => state.userdata);
+  const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
+
+
+
   const refreshToken = () => {
     const data = new FormData();
-    data.append("refresh", state.refreshToken);
+    data.append("refresh", refreshTokenstate);
 
     let config = {
       method: "post",
@@ -33,7 +44,8 @@ export default function EditPersonalInformation() {
     axios(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispathRedux(settoken(response.data.access));
       })
       .catch(function (error) {
         console.log(error);
@@ -52,7 +64,7 @@ export default function EditPersonalInformation() {
       method: "put",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
       headers: {
-        Authorization: `Bearer ${state.token}`,
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };
@@ -60,7 +72,8 @@ export default function EditPersonalInformation() {
     axios(config)
       .then((res) => {
         // console.log(JSON.stringify(res.data));
-        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        dispathRedux(setuserdata(res.data ))
         navigate("/dashboard");
         actions.resetForm();
         toast.success("اصلاح با موفقیت انجام شد!", {
@@ -89,11 +102,11 @@ export default function EditPersonalInformation() {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      firstName: state.first_name,
-      lastName: state.last_name,
-      birthPlace: state.birth_place,
-      personalCode: state.national_code,
-      birthDay: state.birth_date,
+      firstName: userdata.first_name,
+      lastName: userdata.last_name,
+      birthPlace: userdata.birth_place,
+      personalCode: userdata.national_code,
+      birthDay: userdata.birth_date,
     },
     validationSchema: infoSchema,
     onSubmit,

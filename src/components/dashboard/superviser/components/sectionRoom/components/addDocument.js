@@ -13,13 +13,21 @@ import { BaseBackURL } from "../../../../../../constant/api";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+import { useDispatch, useSelector } from "react-redux";
+import { settoken } from "../../../../../../redux/slices/setTokenSlice";
+
 export default function AddDocument() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
 
+  const dispathRedux = useDispatch();
+  const token = useSelector(state => state.token.token);
+  const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
+
+
   const refreshToken = () => {
     const data = new FormData();
-    data.append("refresh", state.refreshToken);
+    data.append("refresh", refreshTokenstate);
 
     let config = {
       method: "post",
@@ -33,7 +41,8 @@ export default function AddDocument() {
     axios(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispathRedux(settoken(response.data.access));
       })
       .catch(function (error) {
         console.log(error);
@@ -53,7 +62,7 @@ export default function AddDocument() {
       method: "post",
       url: `${BaseBackURL}api/v1/blog/`,
       headers: {
-        Authorization: `Bearer ${state.token}`,
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };

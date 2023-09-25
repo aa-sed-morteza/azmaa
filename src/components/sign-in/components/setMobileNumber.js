@@ -16,6 +16,9 @@ import Cookies from "js-cookie";
 
 import { useDispatch, useSelector } from "react-redux";
 import { timeout , notimeout } from "../../../redux/slices/seTimOutSlice";
+import { settoken } from "../../../redux/slices/setTokenSlice";
+import { setusername } from "../../../redux/slices/setUserNameSlice";
+import { setRefreshToken } from "../../../redux/slices/setRefreshTokenSlice";
 
 
 export default function SetMobileNumber() {
@@ -30,6 +33,9 @@ export default function SetMobileNumber() {
 
   const dispatchRedux = useDispatch();
   const istimeout = useSelector(state => state.istimeout.istimeout);
+  const token = useSelector(state => state.token.token);
+  const username = useSelector(state => state.username.username);
+
   
 
   const checkCode = (e) => {
@@ -39,7 +45,7 @@ export default function SetMobileNumber() {
       setValidate(2);
     } else {
       const data = new FormData();
-      data.append("phone", state.userName);
+      data.append("phone", username);
       if (state.userType == "envoy") {
         data.append("type", "parliament_member");
       } else {
@@ -62,7 +68,7 @@ export default function SetMobileNumber() {
           dispatch({ type: "SET_ID", payload: res.data.id });
           navigate(`/sign-in/${state.userType}`);
           setStep(1);
-          getToken(password, state.userName);
+          getToken(password, username);
         })
         .catch((err) => {
           // console.log(err.response.data);
@@ -100,8 +106,10 @@ export default function SetMobileNumber() {
     axios(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
-        dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
+        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispatchRedux(settoken(response.data.access));
+        // dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
+        dispatchRedux(setRefreshToken(response.data.refresh));
         Cookies.set("refreshToken", response.data.refresh);
         Cookies.set("token", response.data.access);
       })
@@ -125,7 +133,8 @@ export default function SetMobileNumber() {
   }, [state.timeOut]);
 
   const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_USERNAME", payload: values.phoneNember });
+    // dispatch({ type: "SET_USERNAME", payload: values.phoneNember });
+    dispatchRedux(setusername(values.phoneNember ));
     if (values.type == "نماینده") {
       dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
     } else {

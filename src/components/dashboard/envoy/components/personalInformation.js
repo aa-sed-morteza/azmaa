@@ -15,6 +15,7 @@ import Modal from "../../../general/modal";
 import useModal from "../../../../hook/useModal";
 import { Navigate, useNavigate } from "react-router-dom";
 import DefaultAvatar from "../../../../assets/default-avatar.png";
+import { useSelector } from "react-redux";
 
 export default function PersonalInformation() {
   const { state, dispatch } = useUser();
@@ -23,6 +24,9 @@ export default function PersonalInformation() {
   const [preview, setPreview] = useState();
   const inputRef = useRef();
   const navigate = useNavigate();
+
+  const userdata = useSelector(state => state.userdata);
+
 
   useEffect(() => {
     if (!selectedFile) {
@@ -63,7 +67,7 @@ export default function PersonalInformation() {
         </Image>
         <Label>
           <p className="title">نمایندۀ مجلس شورای اسلامی</p>
-          <p className="name">{`${state.first_name}   ${state.last_name}`}</p>
+          <p className="name">{`${userdata.first_name}   ${userdata.last_name}`}</p>
           <p className="edit" onClick={toggle}>
             ویرایش تصویر
           </p>

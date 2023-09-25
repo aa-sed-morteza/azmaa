@@ -35,8 +35,12 @@ import { toast } from "react-toastify";
 import GeneralEditInformation from "./superviser/components/editProfile/generalEditInformation";
 import MyVotes from "./superviser/pages/myVotes";
 import NewVote from "./superviser/components/newVote";
-import { login, logout } from "../../redux/slices/isLoginSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { login, logout } from "../../redux/slices/isLoginSlice";
+import { settoken } from "../../redux/slices/setTokenSlice";
+import { setuserdata } from "../../redux/slices/setuserDataSlice";
+import { setusername } from "../../redux/slices/setUserNameSlice";
+
 
 
 export default function Dashboard() {
@@ -47,6 +51,9 @@ export default function Dashboard() {
   const dispathRedux = useDispatch();
 
   const islogin = useSelector(state => state.islogin.islogin);
+  const token = useSelector(state => state.token.token);
+  const userdata = useSelector(state => state.userdata);
+
 
   const getPersonalInfo = (userId) => {
     let data = new FormData();
@@ -55,14 +62,15 @@ export default function Dashboard() {
       method: "put",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
       headers: {
-        Authorization: `Bearer ${state.token}`,
+        Authorization: `Bearer ${token}`,
       },
     };
 
     axios(config)
       .then((res) => {
         // console.log('data;', res.data);
-        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        dispathRedux(setuserdata(res.data ));
       })
       .catch((err) => {
         console.log("error", err);
@@ -85,7 +93,8 @@ export default function Dashboard() {
     axios(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispathRedux(settoken(response.data.access));
       })
       .catch(function (error) {
         console.log(error);
@@ -98,7 +107,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     getPersonalInfo(Cookies.get("userId"));
-  }, [state.token]);
+  }, [token]);
 
   useEffect(() => {
     // if (islogin) {
@@ -133,7 +142,8 @@ export default function Dashboard() {
         // dispatch({ type: "SET_LOGGED_IN", payload: true });
         dispathRedux(login());
         dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
-        dispatch({ type: "SET_USERNAME", payload: Cookies.get("userName") });
+        // dispatch({ type: "SET_USERNAME", payload: Cookies.get("userName") });
+        dispathRedux(setusername(Cookies.get("userName")));
         dispatch({ type: "SET_TYPE_USER", payload: Cookies.get("userType") });
         getPersonalInfo(userId);
         navigate("/dashboard");

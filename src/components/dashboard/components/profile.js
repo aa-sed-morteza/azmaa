@@ -11,11 +11,22 @@ import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import DefaultAvatar from "../../../assets/default-avatar.png";
 
+import { useDispatch, useSelector } from "react-redux";
+import { settoken } from "../../../redux/slices/setTokenSlice";
+
+
 export default function Profile() {
   const { state, dispatch } = useUser();
   const { isShowing, toggle } = useModal();
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
+
+  const dispathRedux = useDispatch();
+
+  const token = useSelector(state => state.token.token);
+  const userdata = useSelector(state => state.userdata);
+
+  const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -43,7 +54,7 @@ export default function Profile() {
 
   const refreshToken = () => {
     const data = new FormData();
-    data.append("refresh", state.refreshToken);
+    data.append("refresh", refreshTokenstate);
 
     let config = {
       method: "post",
@@ -57,7 +68,8 @@ export default function Profile() {
     axios(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispathRedux(settoken(response.data.access));
       })
       .catch(function (error) {
         console.log(error);
@@ -72,7 +84,7 @@ export default function Profile() {
       method: "put",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
       headers: {
-        Authorization: `Bearer ${state.token}`,
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };
@@ -108,7 +120,7 @@ export default function Profile() {
               ? "نمایندۀ مجلس شورای اسلامی"
               : " ناظر نمایندگان"}{" "}
           </p>
-          <p className="name">{`${state.first_name}   ${state.last_name}`}</p>
+          <p className="name">{`${userdata.first_name}   ${userdata.last_name}`}</p>
           <p className="edit" onClick={toggle}>
             ویرایش تصویر
           </p>
@@ -251,6 +263,7 @@ const Label = styled.div`
       font-weight: 400;
       font-size: 1.25vw;
       margin: 0;
+      cursor: pointer;
     }
   }
 `;

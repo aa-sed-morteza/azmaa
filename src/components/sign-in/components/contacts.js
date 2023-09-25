@@ -9,14 +9,26 @@ import { contactSchema } from "../../schema";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { settoken } from "../../../redux/slices/setTokenSlice";
+import { setuserdata } from "../../../redux/slices/setuserDataSlice";
+import { setsigninLevel } from "../../../redux/slices/setSignLevelSlice";
+
 
 export default function Contacts() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
 
+  const dispathRedux = useDispatch();
+  const token = useSelector(state => state.token.token);
+  const signInLevel = useSelector(state => state.signInLevel.signInLevel);
+  const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
+
+
+
   const refreshToken = () => {
     const data = new FormData();
-    data.append("refresh", state.refreshToken);
+    data.append("refresh", refreshTokenstate);
 
     let config = {
       method: "post",
@@ -30,7 +42,8 @@ export default function Contacts() {
     axios(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispathRedux(settoken(response.data.access));
       })
       .catch(function (error) {
         console.log(error);
@@ -48,15 +61,17 @@ export default function Contacts() {
       method: "put",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${state.userId}`,
       headers: {
-        Authorization: `Bearer ${state.token}`,
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };
     axios(config)
       .then((res) => {
         // console.log(JSON.stringify(res.data));
-        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
-        dispatch({ type: "SET_SIGN_LEVEL", payload: 1 });
+        // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        dispathRedux(setuserdata(res.data ));
+        // dispatch({ type: "SET_SIGN_LEVEL", payload: 1 });
+        dispathRedux(setsigninLevel(1));
         dispatch({ type: "SET_LOGGED_IN", payload: true });
         actions.resetForm();
         navigate("/dashboard");

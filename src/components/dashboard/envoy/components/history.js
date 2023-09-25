@@ -6,10 +6,18 @@ import { useUser } from "../../../../context/userContext";
 import axios from "axios";
 import { BaseBackURL } from "../../../../constant/api";
 
+import { useDispatch, useSelector } from "react-redux";
+import { settoken } from "../../../../redux/slices/setTokenSlice";
+import { setuserdata } from "../../../../redux/slices/setuserDataSlice";
+
+
 export default function HistoryEnvoy() {
   const { state, dispatch } = useUser();
   const [hisroty, setHistory] = useState(state.experiences);
   const navigate = useNavigate();
+
+  const dispathRedux = useDispatch();
+  const token = useSelector(state => state.token.token);
 
   const refreshToken = () => {
     const data = new FormData();
@@ -27,7 +35,8 @@ export default function HistoryEnvoy() {
     axios(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispathRedux(settoken(response.data.access));
       })
       .catch(function (error) {
         console.log(error);
@@ -39,14 +48,15 @@ export default function HistoryEnvoy() {
       method: "get",
       url: `${BaseBackURL}api/v1/accounts/experiences/`,
       headers: {
-        Authorization: `Bearer ${state.token}`,
+        Authorization: `Bearer ${token}`,
       },
     };
 
     axios(config)
       .then((res) => {
         // console.log(JSON.stringify(res.data));
-        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        // dispathRedux(setuserdata(res.data ));
         setHistory([...res.data]);
       })
       .catch((error) => {
@@ -58,7 +68,7 @@ export default function HistoryEnvoy() {
 
   useEffect(() => {
     getExpriences();
-  }, [state.token]);
+  }, [token]);
 
   return (
     <Container>

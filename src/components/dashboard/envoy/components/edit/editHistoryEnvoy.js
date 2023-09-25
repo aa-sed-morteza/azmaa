@@ -10,11 +10,20 @@ import axios from "axios";
 import { BaseBackURL } from "../../../../../constant/api";
 import { toast } from "react-toastify";
 
+import { useDispatch, useSelector } from "react-redux";
+import { settoken } from "../../../../../redux/slices/setTokenSlice";
+
 export default function EditHistoryEnvoy() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const [count, setCount] = useState(1);
   const [check, setCkeck] = useState(false);
+
+  const dispathRedux = useDispatch();
+  const token = useSelector(state => state.token.token);
+
+  const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
+
 
   const checkAddHistory = () => {
     setCkeck(true);
@@ -35,7 +44,7 @@ export default function EditHistoryEnvoy() {
 
   const refreshToken = () => {
     const data = new FormData();
-    data.append("refresh", state.refreshToken);
+    data.append("refresh", refreshTokenstate);
 
     let config = {
       method: "post",
@@ -49,7 +58,8 @@ export default function EditHistoryEnvoy() {
     axios(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispathRedux(settoken(response.data.access));
       })
       .catch(function (error) {
         console.log(error);
@@ -66,7 +76,7 @@ export default function EditHistoryEnvoy() {
       method: "post",
       url: `${BaseBackURL}api/v1/accounts/experiences/`,
       headers: {
-        Authorization: `Bearer ${state.token}`,
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };

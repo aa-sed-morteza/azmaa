@@ -4,10 +4,15 @@ import styled from "styled-components";
 import edit from "../../../../assets/left.svg";
 import { useUser } from "../../../../context/userContext";
 import { toFarsiNumber } from "../../../../utils";
+import { useSelector } from "react-redux";
 
 export default function ContactInfo() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
+
+  const userdata = useSelector(state => state.userdata);
+  const username = useSelector(state => state.username.username);
+
 
   return (
     <Container>
@@ -19,20 +24,20 @@ export default function ContactInfo() {
       <Title> اطلاعات تماس</Title>
       <Row>
         <p className="type"> شمارۀ همراه: </p>
-        <p className="expand">{toFarsiNumber(state.userName)}</p>
+        <p className="expand">{toFarsiNumber(username)}</p>
       </Row>
       <Row>
         <p className="type">ایمیل : </p>
-        <p className="expand">{state.email}</p>
+        <p className="expand">{userdata.email}</p>
       </Row>
 
       <Row>
         <p className="type">نشانی : </p>
-        <p className="expand"> {state.address}</p>
+        <p className="expand"> {userdata.address}</p>
       </Row>
       <Row>
         <p className="type">شمارۀ ثابت:: </p>
-        <p className="expand">{toFarsiNumber(state.telephone)}</p>
+        <p className="expand">{toFarsiNumber(userdata.telephone)}</p>
       </Row>
     </Container>
   );

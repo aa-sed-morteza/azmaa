@@ -14,6 +14,9 @@ import { useUser } from "../../../../context/userContext";
 import axios from "axios";
 import { BaseBackURL } from "../../../../constant/api";
 
+import { useDispatch, useSelector } from "react-redux";
+import { settoken } from "../../../../redux/slices/setTokenSlice";
+
 export default function MyActions() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
@@ -23,9 +26,14 @@ export default function MyActions() {
   const [envoys, setEnvoys] = useState([]);
   const [filteredActivities, setFilteredActivities] = useState([]);
 
+  const dispathRedux = useDispatch();
+  const token = useSelector(state => state.token.token);
+  const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
+
+
   const refreshToken = () => {
     const data = new FormData();
-    data.append("refresh", state.refreshToken);
+    data.append("refresh", refreshTokenstate);
 
     let config = {
       method: "post",
@@ -39,7 +47,8 @@ export default function MyActions() {
     axios(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispathRedux(settoken(response.data.access));
       })
       .catch(function (error) {
         console.log(error);
@@ -51,7 +60,7 @@ export default function MyActions() {
       method: "get",
       url: `${BaseBackURL}api/v1/vote/activity/`,
       headers: {
-        Authorization: `Bearer ${state.token}`,
+        Authorization: `Bearer ${token}`,
       },
     };
 
@@ -103,7 +112,7 @@ export default function MyActions() {
   useEffect(() => {
     activityVoteUnconfirmed();
     getEnvoys();
-  }, [state.token]);
+  }, [token]);
 
   return (
     <Container>

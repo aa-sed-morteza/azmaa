@@ -12,15 +12,28 @@ import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { toast } from "react-toastify";
 
+import { useDispatch, useSelector } from "react-redux";
+import { settoken } from "../../../redux/slices/setTokenSlice";
+import { setuserdata } from "../../../redux/slices/setuserDataSlice";
+import { setsigninLevel } from "../../../redux/slices/setSignLevelSlice";
+
+
 export default function SelectionArea() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const [areaName, setAreaName] = useState([]);
   const commission = ["امنیت ملی", "سلامت", "ورزش", "عمران"];
 
+  const dispathRedux = useDispatch();
+  const token = useSelector(state => state.token.token);
+  const signInLevel = useSelector(state => state.signInLevel.signInLevel);
+  const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
+
+
+
   const refreshToken = () => {
     const data = new FormData();
-    data.append("refresh", state.refreshToken);
+    data.append("refresh", refreshTokenstate);
 
     let config = {
       method: "post",
@@ -34,7 +47,8 @@ export default function SelectionArea() {
     axios(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispathRedux(settoken(response.data.access));
       })
       .catch(function (error) {
         console.log(error);
@@ -71,7 +85,7 @@ export default function SelectionArea() {
       method: "put",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${state.userId}`,
       headers: {
-        Authorization: `Bearer ${state.token}`,
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };
@@ -79,8 +93,10 @@ export default function SelectionArea() {
     axios(config)
       .then((res) => {
         // console.log(JSON.stringify(res.data));
-        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
-        dispatch({ type: "SET_SIGN_LEVEL", payload: 4 });
+        // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        dispathRedux(setuserdata(res.data ));
+        // dispatch({ type: "SET_SIGN_LEVEL", payload: 4 });
+        dispathRedux(setsigninLevel(4));
         actions.resetForm();
         toast.success(" ثبت با موفقیت انجام شد!", {
           position: toast.POSITION.TOP_RIGHT,
@@ -133,7 +149,7 @@ export default function SelectionArea() {
 
   return (
     <>
-      {state.signInLevel === 3 ? (
+      {signInLevel === 3 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <Title>۳. اطلاعات حوزۀ انتخابیه را وارد کنید:</Title>

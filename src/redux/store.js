@@ -15,6 +15,14 @@ import isloginreducers from "./slices/isLoginSlice";
 import menuOpenSlice from "./slices/menuOpenSlice";
 import seTimOutSlice from "./slices/seTimOutSlice";
 import setPasswordSlice from "./slices/setPasswordSlice";
+import setTokenSlice from "./slices/setTokenSlice";
+import setuserDataSlice from "./slices/setuserDataSlice";
+import setSignLevelSlice from "./slices/setSignLevelSlice";
+import setUserNameSlice from "./slices/setUserNameSlice";
+import setRefreshToken from "./slices/setRefreshTokenSlice";
+import setRefreshTokenSlice from "./slices/setRefreshTokenSlice";
+
+
 
 
 
@@ -34,7 +42,12 @@ const reducers = combineReducers({
   islogin: isloginreducers ,
   ismenuopen: menuOpenSlice ,
   istimeout: seTimOutSlice ,
-  password : setPasswordSlice
+  password : setPasswordSlice ,
+  token: setTokenSlice ,
+  userdata: setuserDataSlice ,
+  signInLevel : setSignLevelSlice,
+  username : setUserNameSlice ,
+  refreshTokenstate : setRefreshTokenSlice
 });
 
 export const store = configureStore({

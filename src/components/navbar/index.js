@@ -16,6 +16,8 @@ import { useUser } from "../../context/userContext";
 import { useDispatch, useSelector } from "react-redux";
 import { login , logout } from "../../redux/slices/isLoginSlice";
 import {togglmenu , openmenu , closemenu} from "../../redux/slices/menuOpenSlice";
+import { settoken } from "../../redux/slices/setTokenSlice";
+
 
 
 
@@ -312,6 +314,8 @@ export default function Navbar() {
 
   const dispatchRedux = useDispatch();
 
+  const token = useSelector(state => state.token.token);
+
 
   useEffect(() => {
     setDashboard(true);
@@ -380,7 +384,8 @@ export default function Navbar() {
       Cookies.remove("userName");
       // dispatch({ type: "SET_LOGGED_IN", payload: false });
       dispatchRedux(logout());
-      dispatch({ type: "SET_TOKEN", payload: null });
+      // dispatch({ type: "SET_TOKEN", payload: null });
+      dispatchRedux(settoken(null));
       // dispatch({ type: "OPEN_MENU", payload: false });
       dispatchRedux(closemenu());
     } else {

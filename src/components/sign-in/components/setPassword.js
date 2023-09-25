@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import { passSchema } from "../../schema";
 import { useSelector , useDispatch } from "react-redux";
 import { setpassword } from "../../../redux/slices/setPasswordSlice";
+import { setsigninLevel } from "../../../redux/slices/setSignLevelSlice";
 
 
 
@@ -15,11 +16,14 @@ export default function SetPassword() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
 
+  const signInLevel = useSelector(state => state.signInLevel.signInLevel);
+
   const onSubmit = async (values, actions) => {
     // dispatch({ type: "SET_PASSWORD", payload: values.password });
     console.log(values.password);
     dispatchRedux(setpassword(values.password));
-    dispatch({ type: "SET_SIGN_LEVEL", payload: 3 });
+    // dispatch({ type: "SET_SIGN_LEVEL", payload: 3 });
+    dispatchRedux(setsigninLevel(3));
     actions.resetForm();
   };
 
@@ -45,7 +49,7 @@ export default function SetPassword() {
 
   return (
     <>
-      {state.signInLevel === 2 ? (
+      {signInLevel === 2 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <Title>۲. رمز عبور خود را تعیین کنید:</Title>

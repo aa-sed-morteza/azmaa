@@ -21,6 +21,10 @@ import useWidth from "../hook/useWidth";
 import { useDispatch, useSelector } from "react-redux";
 import { login , logout } from "../redux/slices/isLoginSlice";
 import {togglmenu , openmenu , closemenu} from "../redux/slices/menuOpenSlice";
+import { settoken } from "../redux/slices/setTokenSlice";
+import { setusername } from "../redux/slices/setUserNameSlice";
+import { setRefreshToken } from "../redux/slices/setRefreshTokenSlice";
+
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
@@ -31,6 +35,9 @@ export default function LogIn() {
 
   const islogin = useSelector(state => state.islogin.islogin);
   const ismenuopen = useSelector(state => state.ismenuopen.ismenuopen);
+  const token = useSelector(state => state.token.token);
+  const username = useSelector(state => state.username.username);
+
 
   const onSubmit = (values) => {
     const data = new FormData();
@@ -57,7 +64,8 @@ export default function LogIn() {
           // dispatch({ type: "SET_LOGGED_IN", payload: true });
             dispatchRedux(login());
           dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
-          dispatch({ type: "SET_USERNAME", payload: values.userName });
+          // dispatch({ type: "SET_USERNAME", payload: values.userName });
+          dispatchRedux(setusername(values.userName));
           getToken(values);
           if (res.data.electoral_district_name === null) {
             dispatch({ type: "SET_TYPE_USER", payload: "superviser" });
@@ -104,8 +112,10 @@ export default function LogIn() {
     axios(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
-        dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
+        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispatchRedux(settoken(response.data.access));
+        // dispatch({ type: "SET_REFRESH_TOKEN", payload: response.data.refresh });
+        dispatchRedux(setRefreshToken(response.data.refresh));
         Cookies.set("refreshToken", response.data.refresh);
         Cookies.set("token", response.data.access);
       })

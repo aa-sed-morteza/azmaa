@@ -10,12 +10,16 @@ import { passSchema } from "../../../../schema";
 import axios from "axios";
 import { BaseBackURL } from "../../../../../constant/api";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { settoken } from "../../../../../redux/slices/setTokenSlice";
+import { setuserdata } from "../../../../../redux/slices/setuserDataSlice";
 
 export default function EditLogInformation() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
-  
+
+  const dispathRedux = useDispatch();
+  const token = useSelector(state => state.token.token);
   const password = useSelector(state => state.password.password);
 
   const refreshToken = () => {
@@ -34,7 +38,8 @@ export default function EditLogInformation() {
     axios(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispathRedux(settoken(response.data.access));
       })
       .catch(function (error) {
         console.log(error);
@@ -49,7 +54,7 @@ export default function EditLogInformation() {
       method: "put",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
       headers: {
-        Authorization: `Bearer ${state.token}`,
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };
@@ -57,7 +62,8 @@ export default function EditLogInformation() {
     axios(config)
       .then((res) => {
         // console.log(JSON.stringify(res.data));
-        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        dispathRedux(setuserdata(res.data ));
         navigate("/dashboard");
         actions.resetForm();
         toast.success(" تغییر رمز موفقیت انجام شد!", {

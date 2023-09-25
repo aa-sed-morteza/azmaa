@@ -10,13 +10,25 @@ import axios from "axios";
 import { BaseBackURL } from "../../../../../constant/api";
 import { toast } from "react-toastify";
 
+import { useDispatch, useSelector } from "react-redux";
+import { settoken } from "../../../../../redux/slices/setTokenSlice";
+import { setuserdata } from "../../../../../redux/slices/setuserDataSlice";
+
 export default function EditContactInformation() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
 
+  const dispathRedux = useDispatch();
+  const token = useSelector(state => state.token.token);
+  const userdata = useSelector(state => state.userdata);
+
+  const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
+
+  console.log(userdata);
+
   const refreshToken = () => {
     const data = new FormData();
-    data.append("refresh", state.refreshToken);
+    data.append("refresh", refreshTokenstate);
 
     let config = {
       method: "post",
@@ -30,7 +42,8 @@ export default function EditContactInformation() {
     axios(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispathRedux(settoken(response.data.access));
       })
       .catch(function (error) {
         console.log(error);
@@ -48,14 +61,15 @@ export default function EditContactInformation() {
       method: "put",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
       headers: {
-        Authorization: `Bearer ${state.token}`,
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };
     axios(config)
       .then((res) => {
         // console.log(JSON.stringify(res.data));
-        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        dispathRedux(setuserdata(res.data ));
         navigate("/dashboard");
         actions.resetForm();
         toast.success(" اصلاحات با موفقیت انجام شد!", {
@@ -85,9 +99,9 @@ export default function EditContactInformation() {
   } = useFormik({
     initialValues: {
       mobileNumber: state.userName,
-      email: state.email,
-      address: state.address,
-      phoneNubmer: state.phoneNubmer,
+      email: userdata.email,
+      address: userdata.address,
+      phoneNubmer: userdata.telephone,
     },
     validationSchema: contactSchema,
     onSubmit,

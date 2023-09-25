@@ -12,14 +12,30 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 
+import { useDispatch, useSelector } from "react-redux";
+import { settoken } from "../../../redux/slices/setTokenSlice";
+import { setuserdata } from "../../../redux/slices/setuserDataSlice";
+import { setsigninLevel } from "../../../redux/slices/setSignLevelSlice";
+
+
 export default function PersonalInformation() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const [order, setOrder] = useState(false);
 
+  const dispathRedux = useDispatch();
+  const token = useSelector(state => state.token.token);
+  const userdata = useSelector(state => state.userdata);
+  const signInLevel = useSelector(state => state.signInLevel.signInLevel);
+  const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
+
+
+  console.log(userdata);
+
+
   const refreshToken = () => {
     const data = new FormData();
-    data.append("refresh", state.refreshToken);
+    data.append("refresh", refreshTokenstate);
 
     let config = {
       method: "post",
@@ -33,7 +49,8 @@ export default function PersonalInformation() {
     axios(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+        dispathRedux(settoken(response.data.access))
       })
       .catch(function (error) {
         console.log(error);
@@ -52,7 +69,7 @@ export default function PersonalInformation() {
       method: "put",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${state.userId}`,
       headers: {
-        Authorization: `Bearer ${state.token}`,
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };
@@ -60,8 +77,10 @@ export default function PersonalInformation() {
     axios(config)
       .then((res) => {
         // console.log(JSON.stringify(res.data));
-        dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
-        dispatch({ type: "SET_SIGN_LEVEL", payload: 2 });
+        // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        dispathRedux(setuserdata(res.data ));
+        // dispatch({ type: "SET_SIGN_LEVEL", payload: 2 });
+        dispathRedux(setsigninLevel(2));
         actions.resetForm();
         toast.success("ثبت با موفقیت انجام شد!", {
           position: toast.POSITION.TOP_RIGHT,
@@ -121,7 +140,7 @@ export default function PersonalInformation() {
 
   return (
     <>
-      {state.signInLevel === 1 ? (
+      {signInLevel === 1 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <Title>۱. اطلاعات شخصی خود را بنویسید:</Title>
@@ -207,35 +226,35 @@ export default function PersonalInformation() {
             <CustomInput
               label="نام"
               back="#ffffff"
-              value={state.first_name}
+              value={userdata.first_name}
               id="firstName"
             />
 
             <CustomInput
               label="نام خانوادگی"
               back="#ffffff"
-              value={state.last_name}
+              value={userdata.last_name}
               id="lastName"
             />
 
             <CustomInput
               label="محل تولد"
               back="#ffffff"
-              value={state.birth_place}
+              value={userdata.birth_place}
               id="birthPlace"
             />
 
             <CustomInput
               label="کد ملی"
               back="#ffffff"
-              value={state.national_code}
+              value={userdata.national_code}
               id="personalCode"
             />
 
             <CustomInput
               label="تاریخ تولد"
               back="#ffffff"
-              value={state.birth_date}
+              value={userdata.birth_date}
               id="birthDay"
             />
           </Form>
