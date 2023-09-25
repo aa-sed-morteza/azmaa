@@ -37,6 +37,7 @@ import MyVotes from "./superviser/pages/myVotes";
 import NewVote from "./superviser/components/newVote";
 import { login, logout } from "../../redux/slices/isLoginSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { setUserType } from "../../redux/slices/userTypeSlice";
 
 export default function Dashboard() {
   const { state, dispatch } = useUser();
@@ -46,7 +47,8 @@ export default function Dashboard() {
   const dispathRedux = useDispatch();
 
   const islogin = useSelector((state) => state.islogin.islogin);
-
+  const userType = useSelector((state) => state.userType.userType);
+  const dispatchRedux = useDispatch();
   const getPersonalInfo = (userId) => {
     let data = new FormData();
 
@@ -131,7 +133,9 @@ export default function Dashboard() {
         dispathRedux(login());
         dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
         dispatch({ type: "SET_USERNAME", payload: Cookies.get("userName") });
-        dispatch({ type: "SET_TYPE_USER", payload: Cookies.get("userType") });
+        // dispatch({ type: "SET_TYPE_USER", payload: Cookies.get("userType") });
+        dispatchRedux(setUserType(Cookies.get("userType")));
+
         getPersonalInfo(userId);
         navigate("/dashboard");
       } else if (res.data.code === -1) {
@@ -155,7 +159,7 @@ export default function Dashboard() {
       )}
 
       <PageWraper>
-        {state.userType === "superviser" ? (
+        {userType === "superviser" ? (
           // <SuperviserDashboard />
 
           <Routes>

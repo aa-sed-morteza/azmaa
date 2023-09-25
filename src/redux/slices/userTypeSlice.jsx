@@ -4,18 +4,15 @@ import React from "react";
 export const userTypeSlice = createSlice({
   name: "userType",
   initialState: {
-    superviser: "superviser",
+    userType: "",
   },
   reducers: {
-    envoy(state) {
-      state.envoy = "parliament_member";
-    },
-    Superviser(state) {
-      state.superviser = "superviser";
+    setUserType(state, action) {
+      state.userType = action.payload;
     },
   },
 });
 
-export const { Superviser, envoy } = userTypeSlice.actions;
+export const { setUserType } = userTypeSlice.actions;
 
 export default userTypeSlice.reducer;

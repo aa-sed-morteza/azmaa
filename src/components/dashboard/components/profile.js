@@ -10,7 +10,7 @@ import useModal from "../../../hook/useModal";
 import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import DefaultAvatar from "../../../assets/default-avatar.png";
-import { envoy, Superviser } from "../../../redux/slices/userTypeSlice";
+import { setUserType } from "../../../redux/slices/userTypeSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Profile() {
@@ -19,7 +19,7 @@ export default function Profile() {
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
   const dispatchRedux = useDispatch();
-  const userType = useSelector((state) => state.userType.isSuperviser);
+  const userType = useSelector((state) => state.userType.userType);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -92,6 +92,9 @@ export default function Profile() {
         }
       });
   };
+  // *************
+  console.log("*************8");
+  console.log(userType);
 
   return (
     <Container>
@@ -112,6 +115,7 @@ export default function Profile() {
               ? "نمایندۀ مجلس شورای اسلامی"
               : " ناظر نمایندگان"}{" "}
           </p>
+
           <p className="name">{`${state.first_name}   ${state.last_name}`}</p>
           <p className="edit" onClick={toggle}>
             ویرایش تصویر

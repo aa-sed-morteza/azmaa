@@ -13,6 +13,8 @@ import { BaseBackURL } from "../../../constant/api";
 import { toast } from "react-toastify";
 import Select from "../../general/select";
 import Cookies from "js-cookie";
+import { setUserType } from "../../../redux/slices/userTypeSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function SetMobileNumber() {
   const { state, dispatch } = useUser();
@@ -23,6 +25,8 @@ export default function SetMobileNumber() {
   const [update, setUpdate] = useState(false);
   const [type, setType] = useState(["نماینده", "ناظر"]);
   const [password, setPassword] = useState("");
+  const userType = useSelector((state) => state.userType.userType);
+  const dispatchRedux = useDispatch();
 
   const checkCode = (e) => {
     e.preventDefault();
@@ -119,9 +123,11 @@ export default function SetMobileNumber() {
   const onSubmit = async (values, actions) => {
     dispatch({ type: "SET_USERNAME", payload: values.phoneNember });
     if (values.type == "نماینده") {
-      dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
+      // dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
+      dispatchRedux(setUserType("parliament_member"));
     } else {
-      dispatch({ type: "SET_TYPE_USER", payload: "supervisor" });
+      // dispatch({ type: "SET_TYPE_USER", payload: "supervisor" });
+      dispatchRedux(setUserType("supervisor"));
     }
     dispatch({ type: "SET_TIME_OUT", payload: false });
 

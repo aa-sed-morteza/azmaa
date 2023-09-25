@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 import useWidth from "../hook/useWidth";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "../redux/slices/isLoginSlice";
-import { envoy, Superviser } from "../redux/slices/userTypeSlice";
+import { setUserType } from "../redux/slices/userTypeSlice";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
@@ -30,7 +30,8 @@ export default function LogIn() {
   const dispatchRedux = useDispatch();
 
   const islogin = useSelector((state) => state.islogin.islogin);
-  const userType = useSelector((state) => state.userType.superviser);
+  const userType = useSelector((state) => state.userType.userType);
+
   const onSubmit = (values) => {
     const data = new FormData();
     data.append("username", values.userName);
@@ -60,11 +61,11 @@ export default function LogIn() {
           getToken(values);
           if (res.data.electoral_district_name === null) {
             // dispatch({ type: "SET_TYPE_USER", payload: "superviser" });
-            dispatchRedux(Superviser());
+            dispatchRedux(setUserType("superviser"));
             Cookies.set("userType", "superviser");
           } else {
             // dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
-            dispatchRedux(envoy());
+            dispatchRedux(setUserType("parliament_member"));
             Cookies.set("userType", "parliament_member");
           }
 
