@@ -10,6 +10,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import { combineReducers } from "redux";
 import thunk from "redux-thunk";
 
+
 import isloginreducers from "./slices/isLoginSlice";
 import menuOpenSlice from "./slices/menuOpenSlice";
 import seTimOutSlice from "./slices/seTimOutSlice";
@@ -18,10 +19,21 @@ import setTokenSlice from "./slices/setTokenSlice";
 import setuserDataSlice from "./slices/setuserDataSlice";
 import setSignLevelSlice from "./slices/setSignLevelSlice";
 import setUserNameSlice from "./slices/setUserNameSlice";
-import setRefreshToken from "./slices/setRefreshTokenSlice";
 import setRefreshTokenSlice from "./slices/setRefreshTokenSlice";
-
-
+import addVoteLevelSlice from "./slices/addVoteLevelSlice";
+import addSuggestLevelSlice from "./slices/addSuggestLevelSlice";
+import addMapLevelSlice from "./slices/addMapLevelSlice";
+import addActionLevelSlice from "./slices/addActionLevelSlice";
+import setSuggetTypeSlice from "./slices/setSuggetTypeSlice";
+import addArticleLevelSlice from "./slices/addArticleLevelSlice";
+import setTypeArticleSlice from "./slices/setTypeArticleSlice";
+import setContentArticleSlice from "./slices/setContentArticleSlice";
+import setImgArticleSlice from "./slices/setImgArticleSlice";
+import setSelectEnvoySlice from "./slices/setSelectEnvoySlice";
+import setVoteEnvoySlice from "./slices/setVoteEnvoySlice";
+import setProvinceSearchSlice from "./slices/setProvinceSearchSlice";
+import setCitySearchSlice from "./slices/setCitySearchSlice";
+import setImageSlice from "./slices/setImageSlice";
 
 
 
@@ -53,6 +65,20 @@ const reducers = combineReducers({
   userType: userTypeReducers,
   userID: setIDReducers,
   userActivity: activityChoiceReducers,
+  addVoteLevel: addVoteLevelSlice ,
+  addSuggestLevel: addSuggestLevelSlice ,
+  mapLevel: addMapLevelSlice ,
+  addActionLevel: addActionLevelSlice ,
+  suggestType: setSuggetTypeSlice ,
+  addArticleLevel: addArticleLevelSlice ,
+  typeArticle: setTypeArticleSlice ,
+  contentArticle: setContentArticleSlice ,
+  imageArticle: setImgArticleSlice ,
+  selectEnvoy: setSelectEnvoySlice ,
+  voteEnvoy: setVoteEnvoySlice ,
+  provinceSearch: setProvinceSearchSlice ,
+  setcitySearch: setCitySearchSlice ,
+  image : setImageSlice
 });
 
 export const store = configureStore({

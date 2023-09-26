@@ -5,26 +5,28 @@ import AddDocument from "./addDocument";
 import ContentSection from "./contentSection";
 import ImageSection from "./imageSection";
 import TypeSection from "./typeSection";
+import { useSelector } from "react-redux";
 
 export default function AddSection() {
   const { state, dispatch } = useUser();
+  const addArticleLevel = useSelector(state => state.addArticleLevel.addArticleLevel);
   return (
     <Container>
-      {state.addArticleLevel === 1 && <TypeSection />}
-      {state.addArticleLevel === 2 && (
+      {addArticleLevel === 1 && <TypeSection />}
+      {addArticleLevel === 2 && (
         <>
           <TypeSection />
           <ContentSection />
         </>
       )}
-      {state.addArticleLevel === 3 && (
+      {addArticleLevel === 3 && (
         <>
           <TypeSection />
           <ContentSection />
           <ImageSection />
         </>
       )}
-      {state.addArticleLevel === 4 && (
+      {addArticleLevel === 4 && (
         <>
           <TypeSection />
           <ContentSection />

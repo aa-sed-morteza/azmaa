@@ -16,6 +16,9 @@ import EnvoyCard from "../../../../../general/envoyCard";
 import SelectArea from "../../../../../home/components/selectArea";
 import axios from "axios";
 import { BaseBackURL } from "../../../../../../constant/api";
+import { useDispatch, useSelector } from "react-redux";
+import { setselectEnvoy } from "../../../../../../redux/slices/setSelectEnvoySlice";
+import { setactionlevel } from "../../../../../../redux/slices/addActionLevelSlice";
 
 export default function SelectEnvoys() {
   const navigate = useNavigate();
@@ -24,6 +27,11 @@ export default function SelectEnvoys() {
   const { state, dispatch } = useUser();
   const [envoys, setEnvoys] = useState([]);
   const [states, setStates] = useState([]);
+
+  const dispathRedux = useDispatch();
+  const addActionLevel = useSelector(state => state.addActionLevel.addActionLevel);
+  const selectEnvoy = useSelector(state => state.selectEnvoy.selectEnvoy);
+
 
   const getEnvoys = () => {
     let config = {
@@ -69,7 +77,7 @@ export default function SelectEnvoys() {
     return (
       <SelectItem
         key={i}
-        className={x.id === state.selectEnvoy.envoy ? "active" : ""}
+        className={x.id === selectEnvoy.envoy ? "active" : ""}
       >
         <EnvoyCard
           key={i}
@@ -131,7 +139,7 @@ export default function SelectEnvoys() {
     return (
       <ActiveOrder
         key={i}
-        className={x.id === state.selectEnvoy.envoy ? "active" : ""}
+        className={x.id === selectEnvoy.envoy ? "active" : ""}
       >
         <div className="symbol"></div>
         <div className="content">
@@ -145,8 +153,10 @@ export default function SelectEnvoys() {
   });
 
   const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_SELECT_ENVOUY", payload: values });
-    dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 3 });
+    // dispatch({ type: "SET_SELECT_ENVOUY", payload: values });
+    dispathRedux(setselectEnvoy(values));
+    // dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 3 });
+    dispathRedux(setactionlevel(3));
     actions.resetForm();
   };
 
@@ -179,7 +189,7 @@ export default function SelectEnvoys() {
 
   return (
     <>
-      {state.addActionLevel === 2 ? (
+      {addActionLevel === 2 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <Title>۲. نمایندگان خود را انتخاب کنید:</Title>
@@ -244,26 +254,26 @@ export default function SelectEnvoys() {
             <Items>
               <Item
                 icon={
-                  state.selectEnvoy.type == "envoy" ? profileActive : profile
+                  selectEnvoy.type == "envoy" ? profileActive : profile
                 }
-                className={state.selectEnvoy.type == "envoy" ? "active" : ""}
+                className={selectEnvoy.type == "envoy" ? "active" : ""}
               >
                 نمایندگان
               </Item>
               <Item
                 icon={
-                  state.selectEnvoy.type == "state" ? locationActive : location
+                  selectEnvoy.type == "state" ? locationActive : location
                 }
-                className={state.selectEnvoy.type == "state" ? "active" : ""}
+                className={selectEnvoy.type == "state" ? "active" : ""}
               >
                 حوزه‌ها
               </Item>
             </Items>
           </Filtering>
-          {state.selectEnvoy.type == "envoy" && (
+          {selectEnvoy.type == "envoy" && (
             <Gallery>{checkEnvoyList}</Gallery>
           )}
-          {state.selectEnvoy.type == "state" && (
+          {selectEnvoy.type == "state" && (
             <Gallery>{checkStateList}</Gallery>
           )}
         </Container>

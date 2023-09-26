@@ -17,6 +17,8 @@ import upArrow from "../../../../../../assets/arrow.webp";
 import axios from "axios";
 import { BaseBackURL } from "../../../../../../constant/api";
 import { convertDateToFarsi } from "../../../../../../utils";
+import { setvotelevel } from "../../../../../../redux/slices/addVoteLevelSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function SelectActionType() {
   const navigate = useNavigate();
@@ -29,6 +31,10 @@ export default function SelectActionType() {
   const [searchparams, setsearchparams] = useSearchParams();
 
   const showRef = useRef(null);
+
+  const dispatchRedux = useDispatch();
+
+  const addVoteLevel = useSelector(state => state.addVoteLevel.addVoteLevel);
 
   const getVoteItems = () => {
     let config = {
@@ -102,7 +108,8 @@ export default function SelectActionType() {
 
   const onSubmit = async (values, actions) => {
     dispatch({ type: "SET_TYPE_ACTION", payload: values });
-    dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 2 });
+    // dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 2 });
+    dispatchRedux(setvotelevel(1));
     actions.resetForm();
   };
 
@@ -135,7 +142,7 @@ export default function SelectActionType() {
 
   return (
     <>
-      {state.addVoteLevel === 1 ? (
+      {addVoteLevel === 1 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <Title>۱. فعالیت موردنظر خود را انتخاب کنید:</Title>

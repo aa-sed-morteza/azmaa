@@ -5,15 +5,24 @@ import Button from "../../../../../general/button";
 import { useUser } from "../../../../../../context/userContext";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setSuggestLevel } from "../../../../../../redux/slices/addSuggestLevelSlice";
+import { setSuggetType } from "../../../../../../redux/slices/setSuggetTypeSlice";
 
 export default function TypeSuggest() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
   const [select, setSelect] = useState(0);
 
+  const dispatchRedux = useDispatch();
+  const addSuggestLevel = useSelector(state => state.addSuggestLevel.addSuggestLevel);
+  const suggestType = useSelector(state => state.suggestType.suggestType);
+
   const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_SUGGET_TYPE", payload: values.type });
-    dispatch({ type: "SET_SUGGEST_LEVEL", payload: 2 });
+    // dispatch({ type: "SET_SUGGET_TYPE", payload: values.type });
+    dispatchRedux(setSuggetType(values.type));
+    // dispatch({ type: "SET_SUGGEST_LEVEL", payload: 2 });
+    dispatchRedux(setSuggestLevel(2));
     actions.resetForm();
   };
 
@@ -36,7 +45,7 @@ export default function TypeSuggest() {
 
   return (
     <>
-      {state.addSuggestLevel === 1 ? (
+      {addSuggestLevel === 1 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <Title>۱. درخواست خود را انتخاب کنید:</Title>
@@ -142,8 +151,8 @@ export default function TypeSuggest() {
             <input
               type="radio"
               name="type"
-              value={state.suggestType}
-              checked={state.suggestType == "ثبت فعالیت"}
+              value={suggestType}
+              checked={suggestType == "ثبت فعالیت"}
             />
             <label htmlFor="text">ثبت فعالیت</label>
           </RadioButton>
@@ -152,8 +161,8 @@ export default function TypeSuggest() {
             <input
               type="radio"
               name="type"
-              value={state.suggestType}
-              checked={state.suggestType == "ثبت مطلب"}
+              value={suggestType}
+              checked={suggestType == "ثبت مطلب"}
             />
             <label htmlFor="text">ثبت مطلب</label>
           </RadioButton>
@@ -162,8 +171,8 @@ export default function TypeSuggest() {
             <input
               type="radio"
               name="type"
-              value={state.suggestType}
-              checked={state.suggestType == "ویرایش فعالیت"}
+              value={suggestType}
+              checked={suggestType == "ویرایش فعالیت"}
             />
             <label htmlFor="text">ویرایش فعالیت</label>
           </RadioButton>
@@ -172,8 +181,8 @@ export default function TypeSuggest() {
             <input
               type="radio"
               name="type"
-              value={state.suggestType}
-              checked={state.suggestType == "سایر"}
+              value={suggestType}
+              checked={suggestType == "سایر"}
             />
             <label htmlFor="text">سایر</label>
           </RadioButton>

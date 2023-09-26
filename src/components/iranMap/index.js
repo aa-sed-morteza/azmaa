@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useUser } from "../../context/userContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setmaplevel } from "../../redux/slices/addMapLevelSlice";
+import { setprovinceSearch } from "../../redux/slices/setProvinceSearchSlice";
 
 export default function IranMap() {
   const { state, dispatch } = useUser();
@@ -38,13 +41,19 @@ export default function IranMap() {
     { id: 41, name: "کهکیلویه " },
   ];
 
+  const dispatchRedux = useDispatch();
+  const mapLevel = useSelector(state => state.mapLevel.mapLevel);
+  const provinceSearch = useSelector(state => state.provinceSearch.provinceSearch);
+
   useEffect(() => {
     if (select !== 0) {
-      dispatch({
-        type: "SET_PROVINCE_SEARCH",
-        payload: place.find((x) => x.id == select),
-      });
-      dispatch({ type: "SET_MAP_LEVEL", payload: 2 });
+      // dispatch({
+      //   type: "SET_PROVINCE_SEARCH",
+      //   payload: place.find((x) => x.id == select),
+      // });
+      dispatchRedux(setprovinceSearch(place.find((x) => x.id == select)));
+      // dispatch({ type: "SET_MAP_LEVEL", payload: 2 });
+      dispatchRedux(setmaplevel(2));
     }
   }, [select]);
 

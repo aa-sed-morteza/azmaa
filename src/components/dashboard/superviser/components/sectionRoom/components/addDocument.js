@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 
 import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../../../../redux/slices/setTokenSlice";
+import { setArticleLevel } from "../../../../../../redux/slices/addArticleLevelSlice";
 
 export default function AddDocument() {
   const { state, dispatch } = useUser();
@@ -23,6 +24,12 @@ export default function AddDocument() {
   const dispathRedux = useDispatch();
   const token = useSelector(state => state.token.token);
   const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
+  const addArticleLevel = useSelector(state => state.addArticleLevel.addArticleLevel);
+  const typeArticle = useSelector(state => state.typeArticle.typeArticle);
+  const contentArticle = useSelector(state => state.contentArticle.contentArticle);
+  const imageArticle = useSelector (state => state.imageArticle.Article);
+
+
 
 
   const refreshToken = () => {
@@ -51,11 +58,11 @@ export default function AddDocument() {
 
   const onSubmit = async (values, actions) => {
     const data = new FormData();
-    data.append("type", state.typeArticle);
+    data.append("type", typeArticle);
     data.append("tag", "1");
-    data.append("title", state.contentArticle.title);
-    data.append("description", state.contentArticle.expand);
-    data.append("main_image", state.imageArticle.picOne);
+    data.append("title", contentArticle.title);
+    data.append("description", contentArticle.expand);
+    data.append("main_image", imageArticle.picOne);
     // data.append("related_blog",'test')
 
     let config = {
@@ -70,7 +77,8 @@ export default function AddDocument() {
     axios(config)
       .then(function (response) {
         // dispatch({ type: "SET_DOC_ARTICLE", payload: values });
-        dispatch({ type: "SET_ADD_ARTICLE", payload: 1 });
+        // dispatch({ type: "SET_ADD_ARTICLE", payload: 1 });
+        dispathRedux(setArticleLevel(1));
         navigate(`/dashboard/mySection`);
         actions.resetForm();
         toast.success(" بلاگ با موفقیت ثبت شد!", {

@@ -5,8 +5,9 @@ import Tehran from "./tehran";
 
 export default function SelectCity() {
   const { state, dispatch } = useUser();
+  const provinceSearch = useSelector(state => state.provinceSearch.provinceSearch);
   return (
-    <Container>{state.provinceSearch.name == "تهران" && <Tehran />}</Container>
+    <Container>{provinceSearch.name == "تهران" && <Tehran />}</Container>
   );
 }
 

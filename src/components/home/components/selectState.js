@@ -4,37 +4,45 @@ import IranMap from "../../iranMap";
 import arrow from "../../../assets/ggArrow.svg";
 import { useUser } from "../../../context/userContext";
 import SelectCity from "../../iranMap/components/selectCity";
+import { useSelector } from "react-redux";
 
 export default function SelectState() {
   const { state, dispatch } = useUser();
   const [input, setInput] = useState("استان خود را انتخاب کنید");
 
+  const mapLevel = useSelector(state => state.mapLevel.mapLevel);
+  const provinceSearch = useSelector(state => state.provinceSearch.provinceSearch);
+  const citySearch = useSelector(state => state.citySearch.citySearch);
+
+
+
+
   useEffect(() => {
-    if (state.mapLevel == 2) {
+    if (mapLevel == 2) {
       setInput("حوزۀ انتخابی خود را انتخاب کنید");
     }
-  }, [state.mapLevel]);
+  }, [mapLevel]);
 
   return (
     <StateContainer>
-      {state.mapLevel == 2 && (
+      {mapLevel == 2 && (
         <p className="select">
-          ایران <span>{state.provinceSearch.name}</span>
+          ایران <span>{provinceSearch.name}</span>
         </p>
       )}
-      {state.mapLevel == 3 && (
+      {ma == 3 && (
         <p className="select">
-          ایران <span>{state.provinceSearch.name}</span>{" "}
-          <span>{state.citySearch.name}</span>
+          ایران <span>{provinceSearch.name}</span>{" "}
+          <span>{citySearch.name}</span>
         </p>
       )}
 
-      {state.mapLevel !== 3 && <p className="input">{input}</p>}
+      {mapLevel !== 3 && <p className="input">{input}</p>}
 
       <div className="map">
-        {state.mapLevel === 1 && <IranMap />}
-        {state.mapLevel === 2 && <SelectCity />}
-        {state.mapLevel === 3 && <h1>tamam</h1>}
+        {mapLevel === 1 && <IranMap />}
+        {mapLevel === 2 && <SelectCity />}
+        {mapLevel === 3 && <h1>tamam</h1>}
       </div>
     </StateContainer>
   );

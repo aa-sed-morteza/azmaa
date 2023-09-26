@@ -13,6 +13,9 @@ import not from "../../../../../../assets/not.svg";
 import activeNot from "../../../../../../assets/not1.svg";
 import { BaseBackURL } from "../../../../../../constant/api";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setactionlevel } from "../../../../../../redux/slices/addActionLevelSlice";
+import { setvoteEnvoy } from "../../../../../../redux/slices/setVoteEnvoySlice";
 
 export default function VoteEnvoy() {
   const { state, dispatch } = useUser();
@@ -26,6 +29,10 @@ export default function VoteEnvoy() {
     { name: "without_vote", text: "بدون رای" },
     { name: "absent", text: "غایب" },
   ]);
+
+  const dispathRedux = useDispatch();
+  const addActionLevel = useSelector(state => state.addActionLevel.addActionLevel);
+  const voteEnvoy = useSelector(state => state.voteEnvoy.voteEnvoy);
 
   const getActions = () => {
     let config = {
@@ -44,8 +51,10 @@ export default function VoteEnvoy() {
   }, [state.typeAction.description]);
 
   const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_VOTE_ENVOY", payload: values.vote });
-    dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 4 });
+    // dispatch({ type: "SET_VOTE_ENVOY", payload: values.vote });
+    dispathRedux(setvoteEnvoy(values.vote));
+    // dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 4 });
+    dispathRedux(setactionlevel(4));
     actions.resetForm();
   };
 
@@ -96,11 +105,11 @@ export default function VoteEnvoy() {
         <input
           type="radio"
           name="vote"
-          value={state.voteEnvoy}
-          checked={state.voteEnvoy == item.id}
+          value={voteEnvoy}
+          checked={voteEnvoy == item.id}
         />
         <label htmlFor="text">{item.name}</label>
-        <img src={state.voteEnvoy == item.id ? activeAgree : agree} />
+        <img src={voteEnvoy == item.id ? activeAgree : agree} />
       </RadioButton>
     );
   });
@@ -135,18 +144,18 @@ export default function VoteEnvoy() {
         <input
           type="radio"
           name="vote"
-          value={state.voteEnvoy}
-          checked={state.voteEnvoy == item.name}
+          value={voteEnvoy}
+          checked={voteEnvoy == item.name}
         />
         <label htmlFor="text">{item.text}</label>
-        <img src={state.voteEnvoy == item.name ? activeAgree : agree} />
+        <img src={voteEnvoy == item.name ? activeAgree : agree} />
       </RadioButton>
     );
   });
 
   return (
     <>
-      {state.addActionLevel === 3 ? (
+      {addActionLevel === 3 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <Title>۳. عملکرد نماینده را انتخاب کنید:</Title>

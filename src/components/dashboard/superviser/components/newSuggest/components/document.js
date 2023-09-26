@@ -7,14 +7,20 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import CustomInput from "../../../../../general/customInput";
 import FileUploadInput from "../../../../../general/fileUploadInput";
+import { useDispatch, useSelector } from "react-redux";
+import { setSuggestLevel } from "../../../../../../redux/slices/addSuggestLevelSlice";
 
 export default function SuggestDocument() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
 
+  const dispatchRedux = useDispatch();
+  const addSuggestLevel = useSelector(state => state.addSuggestLevel.addSuggestLevel);
+
   const onSubmit = async (values, actions) => {
     // dispatch({ type: "SET_SUGGET_TYPE", payload: values.type });
-    dispatch({ type: "SET_SUGGEST_LEVEL", payload: 1 });
+    // dispatch({ type: "SET_SUGGEST_LEVEL", payload: 1 });
+    dispatchRedux(setSuggestLevel(1));
     navigate("/dashboard/inbox");
     actions.resetForm();
   };

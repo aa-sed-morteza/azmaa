@@ -10,6 +10,7 @@ import axios from "axios";
 import { BaseBackURL } from "../../../constant/api";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../context/userContext";
+import { useSelector } from "react-redux";
 
 const Container = styled.section`
   display: flex;
@@ -123,11 +124,13 @@ export default function ControlCore(props) {
   const [areaMore, setAreaMore] = useState(false);
   const [envoyMore, setEnvoyMore] = useState(false);
   const navigate = useNavigate();
+  const citySearch = useSelector(state => state.citySearch.citySearch);
+
 
   useEffect(() => {
     setEnvoys(props.envoys);
     setAreas(props.areas);
-  }, [state.citySearch]);
+  }, [citySearch]);
 
   const newList = envoys.sort((a, b) => b.transparency - a.transparency);
 

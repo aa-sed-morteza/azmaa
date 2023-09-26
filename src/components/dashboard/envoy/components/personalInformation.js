@@ -26,6 +26,8 @@ export default function PersonalInformation() {
   const navigate = useNavigate();
 
   const userdata = useSelector(state => state.userdata);
+  const image = useSelector(state => state.image.image);
+
 
 
   useEffect(() => {
@@ -60,7 +62,7 @@ export default function PersonalInformation() {
             <img src={preview} alt="profile-picture" />
           ) : (
             <img
-              src={state.image ? state.image : DefaultAvatar}
+              src={image ? image : DefaultAvatar}
               alt="profile-picture"
             />
           )}

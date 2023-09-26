@@ -315,6 +315,8 @@ export default function Navbar() {
   const dispatchRedux = useDispatch();
 
   const token = useSelector(state => state.token.token);
+  const userType = useSelector((state) => state.userType.userType);
+
 
 
   useEffect(() => {
@@ -371,7 +373,7 @@ export default function Navbar() {
   });
 
   const checkUserMenu = () => {
-    if (state.userType == "envoy") {
+    if (userType == "envoy") {
       return dashboardEnvoyItem;
     } else {
       return dashboardSuperviserItem;

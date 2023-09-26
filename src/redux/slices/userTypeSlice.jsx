@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import React from "react";
 
 export const userTypeSlice = createSlice({
-  name: "userType",
+  name: "userTypeSlice",
   initialState: {
     userType: "",
   },

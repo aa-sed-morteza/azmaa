@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 
 import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../../../../redux/slices/setTokenSlice";
+import { setvotelevel } from "../../../../../../redux/slices/addVoteLevelSlice";
 
 export default function Document() {
   const { state, dispatch } = useUser();
@@ -21,6 +22,14 @@ export default function Document() {
   const dispathRedux = useDispatch();
   const token = useSelector(state => state.token.token);
   const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
+  const addVoteLevel = useSelector(state => state.addVoteLevel.addVoteLevel);
+  const addActionLevel = useSelector(state => state.addActionLevel.addActionLevel);
+  const selectEnvoy = useSelector(state => state.selectEnvoy.selectEnvoy);
+  const voteEnvoy = useSelector(state => state.voteEnvoy.voteEnvoy);
+  const userType = useSelector((state) => state.userType.userType);
+
+
+
 
 
   const refreshToken = () => {
@@ -48,12 +57,12 @@ export default function Document() {
   };
 
   const onSubmit = async (values, actions) => {
-    if (state.userType == "superviser") {
+    if (userType == "superviser") {
       if (state.typeAction.type == "vote") {
         const data = new FormData();
         data.append("bill_id", state.typeAction.description);
-        data.append("vote", state.voteEnvoy);
-        data.append("voter_id", state.selectEnvoy.envoy);
+        data.append("vote", voteEnvoy);
+        data.append("voter_id", selectEnvoy.envoy);
 
         let config = {
           method: "post",
@@ -69,7 +78,8 @@ export default function Document() {
             toast.success(" فعالیت با موفقیت ثبت شد!", {
               position: toast.POSITION.TOP_RIGHT,
             });
-            dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
+            // dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
+            dispathRedux(setvotelevel(1));
             navigate("/dashboard/myVotes");
             actions.resetForm();
           })
@@ -85,8 +95,8 @@ export default function Document() {
       } else {
         const data = new FormData();
         data.append("activity_id", state.typeAction.description);
-        data.append("activity_choice_id", state.voteEnvoy);
-        data.append("voter_id", state.selectEnvoy.envoy);
+        data.append("activity_choice_id", voteEnvoy);
+        data.append("voter_id", selectEnvoy.envoy);
 
         let config = {
           method: "post",
@@ -103,7 +113,8 @@ export default function Document() {
             toast.success(" فعالیت با موفقیت ثبت شد!", {
               position: toast.POSITION.TOP_RIGHT,
             });
-            dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
+            // dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
+            dispathRedux(setvotelevel(1));
             navigate("/dashboard/myVotes");
             actions.resetForm();
           })
@@ -121,7 +132,7 @@ export default function Document() {
       if (state.typeAction.type == "vote") {
         const data = new FormData();
         data.append("bill_id", state.typeAction.description);
-        data.append("vote", state.voteEnvoy);
+        data.append("vote", voteEnvoy);
 
         let config = {
           method: "post",
@@ -137,7 +148,8 @@ export default function Document() {
             toast.success(" فعالیت با موفقیت ثبت شد!", {
               position: toast.POSITION.TOP_RIGHT,
             });
-            dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
+            // dispatch({ type: "SET_ADD_VOTE_LEVEL", payload: 1 });
+            dispathRedux(setvotelevel(1));
             navigate("/dashboard/myVotes");
             actions.resetForm();
           })

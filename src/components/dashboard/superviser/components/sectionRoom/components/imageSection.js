@@ -8,14 +8,22 @@ import Button from "../../../../../general/button";
 
 import { useUser } from "../../../../../../context/userContext";
 import FileUploadInput from "../../../../../general/fileUploadInput";
+import { useDispatch, useSelector } from "react-redux";
+import { setArticleLevel } from "../../../../../../redux/slices/addArticleLevelSlice";
+import { setimgArticle } from "../../../../../../redux/slices/setImgArticleSlice";
 
 export default function ImageSection() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
+  const dispathRedux = useDispatch();
+  const addArticleLevel = useSelector(state => state.addArticleLevel.addArticleLevel);
+  const imageArticle = useSelector (state => state.imageArticle.imageArticle);
 
   const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_IMG_ARTICLE", payload: values });
-    dispatch({ type: "SET_ADD_ARTICLE", payload: 4 });
+    // dispatch({ type: "SET_IMG_ARTICLE", payload: values });
+    dispathRedux(setimgArticle(values));
+    // dispatch({ type: "SET_ADD_ARTICLE", payload: 4 });
+    dispathRedux(setArticleLevel(4));
     actions.resetForm();
   };
 
@@ -38,7 +46,7 @@ export default function ImageSection() {
 
   return (
     <>
-      {state.addArticleLevel == 3 ? (
+      {addArticleLevel == 3 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <h2>۳. تصویر مطلب را بارگذاری کنید:</h2>
@@ -99,14 +107,14 @@ export default function ImageSection() {
             placeholder="بارگذاری تصویر اصلی"
             id="picOne"
             name="picOne"
-            value={state.imageArticle.picOne.file}
+            value={imageArticle.picOne.file}
           />
           <FileUploadInput
             placeholder="بارگذاری تصویر دوم"
             id="picTwo"
             name="picTwo"
             value={
-              state.imageArticle.picTwo ? state.imageArticle.picTwo.file : null
+              imageArticle.picTwo ? imageArticle.picTwo.file : null
             }
           />
         </Container>

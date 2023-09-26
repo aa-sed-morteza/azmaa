@@ -8,14 +8,24 @@ import Button from "../../../../../general/button";
 import CustomInput from "../../../../../general/customInput";
 
 import { useUser } from "../../../../../../context/userContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setArticleLevel } from "../../../../../../redux/slices/addArticleLevelSlice";
+import { setcontentArticle } from "../../../../../../redux/slices/setContentArticleSlice";
 
 export default function ContentSection() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
+  const dispathRedux = useDispatch();
+  const addArticleLevel = useSelector(state => state.addArticleLevel.addArticleLevel);
+  const contentArticle = useSelector(state => state.contentArticle.contentArticle);
+
+
 
   const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_CONTENT_ARTICLE", payload: values });
-    dispatch({ type: "SET_ADD_ARTICLE", payload: 3 });
+    // dispatch({ type: "SET_CONTENT_ARTICLE", payload: values });
+    dispathRedux(setcontentArticle(values));
+    // dispatch({ type: "SET_ADD_ARTICLE", payload: 3 });
+    dispathRedux(setArticleLevel(3));
     actions.resetForm();
   };
 
@@ -31,7 +41,7 @@ export default function ContentSection() {
 
   return (
     <>
-      {state.addArticleLevel == 2 ? (
+      {addArticleLevel == 2 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <h2>۲. محتوای مطلب را بنویسید:</h2>
@@ -84,12 +94,12 @@ export default function ContentSection() {
           <h2>۲. محتوای مطلب را بنویسید:</h2>
           <CustomInput
             label="درج عنوان"
-            value={state.contentArticle.title}
+            value={contentArticle.title}
             back="#FFFFFF"
           />
           <CustomInput
             label="درج متن "
-            value={state.contentArticle.expand}
+            value={contentArticle.expand}
             back="#FFFFFF"
             type="textarea"
           />

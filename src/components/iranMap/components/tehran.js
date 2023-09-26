@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useUser } from "../../../context/userContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setmaplevel } from "../../../redux/slices/addMapLevelSlice";
+import { setcitySearch } from "../../../redux/slices/setCitySearchSlice";
 
 export default function Tehran() {
   const { state, dispatch } = useUser();
   const [select, setSelect] = useState(0);
+
+  const dispatchRedux = useDispatch();
+  const mapLevel = useSelector(state => state.mapLevel.mapLevel);
+  const citySearch = useSelector(state => state.citySearch.citySearch);
 
   const place = [
     // { id: 12, name: "خراسان شمالی" },
@@ -15,11 +22,13 @@ export default function Tehran() {
 
   useEffect(() => {
     if (select !== 0) {
-      dispatch({
-        type: "SET_CITY_SEARCH",
-        payload: place.find((x) => x.id == select),
-      });
-      dispatch({ type: "SET_MAP_LEVEL", payload: 3 });
+      // dispatch({
+      //   type: "SET_CITY_SEARCH",
+      //   payload: place.find((x) => x.id == select),
+      // });
+      dispatchRedux(setcitySearch(place.find((x) => x.id == select)));
+      // dispatch({ type: "SET_MAP_LEVEL", payload: 3 });
+      dispatchRedux(setmaplevel(3));
     }
   }, [select]);
   return (

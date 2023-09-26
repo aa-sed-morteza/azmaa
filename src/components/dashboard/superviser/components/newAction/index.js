@@ -6,26 +6,38 @@ import Document from "./components/document";
 import SelectActionType from "./components/selectActionType";
 import SelectEnvoys from "./components/selectEnvoys";
 import VoteEnvoy from "./components/voteEnvoy";
+import { useDispatch, useSelector } from "react-redux";
+import { setactionlevel } from "../../../../../redux/slices/addActionLevelSlice";
+import { setselectEnvoy } from "../../../../../redux/slices/setSelectEnvoySlice";
 
 export default function NewAction() {
   const { state, dispatch } = useUser();
   const { title } = useParams();
 
+  const dispatchRedux = useDispatch();
+  const addActionLevel = useSelector(state => state.addActionLevel.addActionLevel);
+  const selectEnvoy = useSelector(state => state.selectEnvoy.selectEnvoy);
+  const userType = useSelector((state) => state.userType.userType);
+  
+
   useEffect(() => {
     return () => {
       console.log("end");
-      dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
+      // dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
+      dispatchRedux(setactionlevel(1));
     };
   }, []);
 
   useEffect(() => {
-    if (state.userType == "envoy") {
-      dispatch({ type: "SET_SELECT_ENVOUY", payload: state });
+    if (userType == "envoy") {
+      // dispatch({ type: "SET_SELECT_ENVOUY", payload: state });
+      dispatchRedux(setselectEnvoy(selectEnvoy));
     }
   }, []);
 
   const goNextLevel = () => {
-    dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 3 });
+    // dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 3 });
+    dispatchRedux(setactionlevel(3));
   };
 
   return (
@@ -34,24 +46,24 @@ export default function NewAction() {
         <p className="home">پنل / فعالیت ها /</p>
         <p className="component"> {title} </p>
       </Title>
-      {state.addActionLevel === 1 && <SelectActionType />}
-      {state.addActionLevel === 2 && (
+      {addActionLevel === 1 && <SelectActionType />}
+      {addActionLevel === 2 && (
         <>
           <SelectActionType />
-          {state.userType == "envoy" ? goNextLevel() : <SelectEnvoys />}
+          {userType == "envoy" ? goNextLevel() : <SelectEnvoys />}
         </>
       )}
-      {state.addActionLevel === 3 && (
+      {addActionLevel === 3 && (
         <>
           <SelectActionType />
-          {state.userType !== "envoy" && <SelectEnvoys />}
+          {userType !== "envoy" && <SelectEnvoys />}
           <VoteEnvoy />
         </>
       )}
-      {state.addActionLevel === 4 && (
+      {addActionLevel === 4 && (
         <>
           <SelectActionType />
-          {state.userType !== "envoy" && <SelectEnvoys />}
+          {userType !== "envoy" && <SelectEnvoys />}
           <VoteEnvoy />
           <Document />
         </>

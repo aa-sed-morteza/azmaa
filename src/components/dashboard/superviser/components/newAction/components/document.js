@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 
 import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../../../../redux/slices/setTokenSlice";
+import { setactionlevel } from "../../../../../../redux/slices/addActionLevelSlice";
 
 
 export default function Document() {
@@ -22,6 +23,11 @@ export default function Document() {
   const dispathRedux = useDispatch();
   const token = useSelector(state => state.token.token);
   const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
+  const selectEnvoy = useSelector(state => state.selectEnvoy.selectEnvoy);
+  const voteEnvoy = useSelector(state => state.voteEnvoy.voteEnvoy);
+  const userType = useSelector((state) => state.userType.userType);
+
+
 
 
   const refreshToken = () => {
@@ -49,11 +55,11 @@ export default function Document() {
   };
 
   const onSubmit = async (values, actions) => {
-    if (state.userType === "superviser") {
+    if (userType === "superviser") {
       const data = new FormData();
       data.append("activity_id", state.typeAction.description);
-      data.append("activity_choice_id", state.voteEnvoy);
-      data.append("voter_id", state.selectEnvoy.envoy);
+      data.append("activity_choice_id", voteEnvoy);
+      data.append("voter_id", selectEnvoy.envoy);
 
       let config = {
         method: "post",
@@ -69,7 +75,8 @@ export default function Document() {
           toast.success(" فعالیت با موفقیت ثبت شد!", {
             position: toast.POSITION.TOP_RIGHT,
           });
-          dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
+          // dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
+          dispathRedux(setactionlevel(1));
           navigate("/dashboard/myActions");
           actions.resetForm();
         })
@@ -103,7 +110,8 @@ export default function Document() {
           toast.success(" فعالیت با موفقیت ثبت شد!", {
             position: toast.POSITION.TOP_RIGHT,
           });
-          dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
+          // dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
+          dispathRedux(setactionlevel(1));
           navigate("/dashboard/myActions");
           actions.resetForm();
         })

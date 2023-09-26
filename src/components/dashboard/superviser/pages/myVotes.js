@@ -13,6 +13,7 @@ import title from "../../../../assets/title.svg";
 import { useUser } from "../../../../context/userContext";
 import axios from "axios";
 import { BaseBackURL } from "../../../../constant/api";
+import { useSelector } from "react-redux";
 
 export default function MyVotes() {
   const { state, dispatch } = useUser();
@@ -22,6 +23,8 @@ export default function MyVotes() {
   const [filteredVotes, setFilteredVotes] = useState([]);
   const [activities, setActivities] = useState([]);
   const [envoys, setEnvoys] = useState([]);
+  const userType = useSelector((state) => state.userType.userType);
+
 
   const getEnvoys = () => {
     let config = {
@@ -134,7 +137,7 @@ export default function MyVotes() {
   }, [votes, envoys]);
 
   useEffect(() => {
-    if (state.userType == "envoy") {
+    if (userType == "envoy") {
       setEnvoys([state]);
       getBills();
     } else {

@@ -15,15 +15,24 @@ import report from "../../../../../../assets/report.webp";
 import reportGreen from "../../../../../../assets/report-green.webp";
 
 import { useUser } from "../../../../../../context/userContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setArticleLevel } from "../../../../../../redux/slices/addArticleLevelSlice";
+import { setArticleType } from "../../../../../../redux/slices/setTypeArticleSlice";
+
 
 export default function TypeSection() {
   const { state, dispatch } = useUser();
   const [select, setSelect] = useState(0);
   const navigate = useNavigate();
+  const dispathRedux = useDispatch();
+  const addArticleLevel = useSelector(state => state.addArticleLevel.addArticleLevel);
+  const typeArticle = useSelector(state => state.typeArticle.typeArticle);
 
   const onSubmit = async (values, actions) => {
-    dispatch({ type: "SET_TYPE_ARTICLE", payload: values.type });
-    dispatch({ type: "SET_ADD_ARTICLE", payload: 2 });
+    // dispatch({ type: "SET_TYPE_ARTICLE", payload: values.type });
+    dispathRedux(setArticleType(values.type));
+    // dispatch({ type: "SET_ADD_ARTICLE", payload: 2 });
+    dispathRedux(setArticleLevel(2));
 
     actions.resetForm();
   };
@@ -37,20 +46,20 @@ export default function TypeSection() {
   });
 
   useEffect(() => {
-    if (state.typeArticle == "یادداشت") {
+    if (typeArticle == "یادداشت") {
       setSelect(1);
-    } else if (state.typeArticle == "خبر") {
+    } else if (typeArticle == "خبر") {
       setSelect(2);
-    } else if (state.typeArticle == "گزارش") {
+    } else if (typeArticle == "گزارش") {
       setSelect(3);
-    } else if (state.typeArticle == "مقاله") {
+    } else if (typeArticle == "مقاله") {
       setSelect(4);
     }
-  }, [state.addArticleLevel !== 1]);
+  }, [addArticleLevel !== 1]);
 
   return (
     <>
-      {state.addArticleLevel == 1 ? (
+      {addArticleLevel == 1 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <h2>۱. نوع مطلب خود را انتخاب کنید:</h2>
@@ -158,7 +167,7 @@ export default function TypeSection() {
               type="radio"
               name="type"
               value={state.type}
-              checked={state.typeArticle == "note"}
+              checked={typeArticle == "note"}
             />
             <label htmlFor="text">یادداشت</label>
             <img src={select == 1 ? textGreen : text} />
@@ -168,7 +177,7 @@ export default function TypeSection() {
               type="radio"
               name="type"
               value={state.type}
-              checked={state.typeArticle == "news"}
+              checked={typeArticle == "news"}
             />
             <label htmlFor="news">خبر</label>
             <img src={select == 2 ? newsGreen : news} />
@@ -178,7 +187,7 @@ export default function TypeSection() {
               type="radio"
               name="type"
               value={state.type}
-              checked={state.typeArticle == "report"}
+              checked={typeArticle == "report"}
             />
             <label htmlFor="report">گزارش</label>
             <img src={select == 3 ? reportGreen : article} />
@@ -188,7 +197,7 @@ export default function TypeSection() {
               type="radio"
               name="type"
               value={state.type}
-              checked={state.typeArticle == "article"}
+              checked={typeArticle == "article"}
             />
             <label htmlFor="article">مقاله</label>
             <img src={select == 4 ? atricleGreen : report} />

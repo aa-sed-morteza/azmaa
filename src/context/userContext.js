@@ -57,50 +57,50 @@ const reducer = (state, action) => {
       return { ...state, userId: action.payload };
     case "SET_LOGGED_IN":
       return { ...state, loggedIn: action.payload };
-    case "REMOVE_CITY_FILTER":
-      return { ...state, removeCityFilter: action.payload };
+    // case "REMOVE_CITY_FILTER":
+    //   return { ...state, removeCityFilter: action.payload };
     case "SET_LOGIN_INFO":
       return { ...state, ...action.payload };
     case "SET_USER_DATA":
       return { ...state, ...action.payload };
-    case "SET_AREA_NAME":
-      return { ...state, areaName: action.payload };
+    // case "SET_AREA_NAME":
+    //   return { ...state, areaName: action.payload };
     case "SET_TYPE_USER":
       return { ...state, userType: action.payload };
     case "SET_PASSWORD":
       return { ...state, password: action.payload };
     case "SET_SIGN_LEVEL":
       return { ...state, signInLevel: action.payload };
-    case "SET_FNAME":
-      return { ...state, firstName: action.payload };
-    case "SET_LNAME":
-      return { ...state, lastName: action.payload };
+    // case "SET_FNAME":
+    //   return { ...state, firstName: action.payload };
+    // case "SET_LNAME":
+    //   return { ...state, lastName: action.payload };
     case "OPEN_MENU":
       return { ...state, openMenu: action.payload };
     case "SET_USERNAME":
       return { ...state, userName: action.payload };
     case "SET_TIME_OUT":
       return { ...state, timeOut: action.payload };
-    case "SET_MOBILEN":
-      return { ...state, mobileNumber: action.payload };
-    case "SET_PHONEN":
-      return { ...state, phoneNubmer: action.payload };
-    case "SET_BIRTH_DAY":
-      return { ...state, birthDay: action.payload };
-    case "SET_BIRTH_PLACE":
-      return { ...state, birthPlace: action.payload };
-    case "SET_MAIL":
-      return { ...state, email: action.payload };
-    case "SET_PERSONALCODE":
-      return { ...state, personalCode: action.payload };
-    case "SET_ADDRESS":
-      return { ...state, address: action.payload };
-    case "SET_COMMISSION":
-      return { ...state, commission: action.payload };
-    case "SET_VOTE_NUMBER":
-      return { ...state, voteNumber: action.payload };
-    case "SET_DUTIE_HISTORY":
-      return { ...state, dutieHistory: action.payload };
+    // case "SET_MOBILEN":
+    //   return { ...state, mobileNumber: action.payload };
+    // case "SET_PHONEN":
+    //   return { ...state, phoneNubmer: action.payload };
+    // case "SET_BIRTH_DAY":
+    //   return { ...state, birthDay: action.payload };
+    // case "SET_BIRTH_PLACE":
+    //   return { ...state, birthPlace: action.payload };
+    // case "SET_MAIL":
+    //   return { ...state, email: action.payload };
+    // case "SET_PERSONALCODE":
+    //   return { ...state, personalCode: action.payload };
+    // case "SET_ADDRESS":
+    //   return { ...state, address: action.payload };
+    // case "SET_COMMISSION":
+    //   return { ...state, commission: action.payload };
+    // case "SET_VOTE_NUMBER":
+    //   return { ...state, voteNumber: action.payload };
+    // case "SET_DUTIE_HISTORY":
+    //   return { ...state, dutieHistory: action.payload };
     case "SET_ADD_ARTICLE":
       return { ...state, addArticleLevel: action.payload };
     case "SET_TYPE_ARTICLE":
@@ -133,8 +133,8 @@ const reducer = (state, action) => {
       return { ...state, provinceSearch: action.payload };
     case "SET_CITY_SEARCH":
       return { ...state, citySearch: action.payload };
-    case "SET_CITY":
-      return { ...state, city: action.payload };
+    // case "SET_CITY":
+    //   return { ...state, city: action.payload };
     case "SET_IMAGE":
       return { ...state, image: action.payload };
 

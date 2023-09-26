@@ -28,6 +28,7 @@ export default function Profile() {
 
   const token = useSelector(state => state.token.token);
   const userdata = useSelector(state => state.userdata);
+  const image = useSelector(state => state.image.image);
 
   const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
 
@@ -110,17 +111,17 @@ export default function Profile() {
   return (
     <Container>
       <Content>
-        <Image show={state.userType} onClick={toggle}>
+        <Image show={userType} onClick={toggle}>
           {selectedFile ? (
             <img src={preview} alt="profile-picture" />
           ) : (
             <img
-              src={state.image ? state.image : DefaultAvatar}
+              src={image ? image : DefaultAvatar}
               alt="profile-picture"
             />
           )}
         </Image>
-        <Label color={state.userType}>
+        <Label color={userType}>
           <p className="title">
             {userType === "parliament_member"
               ? "نمایندۀ مجلس شورای اسلامی"

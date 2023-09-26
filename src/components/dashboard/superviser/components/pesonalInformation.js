@@ -12,6 +12,7 @@ import gallery from "../../../../assets/gallery.svg";
 import Button from "../../../general/button";
 import { useNavigate } from "react-router-dom";
 import DefaultAvatar from "../../../../assets/default-avatar.png";
+import { useSelector } from "react-redux";
 
 export default function PersonalInformation() {
   const { state, dispatch } = useUser();
@@ -20,6 +21,8 @@ export default function PersonalInformation() {
   const [preview, setPreview] = useState();
   const inputRef = useRef();
   const navigate = useNavigate();
+  const image = useSelector(state => state.image.image);
+  const userdata = useSelector(state => state.userdata);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -53,14 +56,14 @@ export default function PersonalInformation() {
             <img src={preview} alt="profile-picture" />
           ) : (
             <img
-              src={state.image ? state.image : DefaultAvatar}
+              src={image ? image : DefaultAvatar}
               alt="profile-picture"
             />
           )}
         </Image>
         <Label>
           <p className="title">ناظر نمایندگان</p>
-          <p className="name">{`${state.firstName}   ${state.lastName}`}</p>
+          <p className="name">{`${userdata.first_name}   ${userdata.last_name}`}</p>
           <p className="edit" onClick={toggle}>
             ویرایش تصویر{" "}
           </p>

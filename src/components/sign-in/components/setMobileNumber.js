@@ -54,7 +54,7 @@ export default function SetMobileNumber() {
       if (userType === "parliament_member") {
         data.append("type", "parliament_member");
       } else {
-        data.append("type", state.userType);
+        data.append("type", userType);
       }
 
       data.append("code", code);

@@ -17,6 +17,7 @@ import { BaseBackURL } from "../../../../../../constant/api";
 import { convertDateToFarsi } from "../../../../../../utils";
 import { setActivity } from "../../../../../../redux/slices/activity-choiceSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { setactionlevel } from "../../../../../../redux/slices/addActionLevelSlice";
 export default function SelectActionType() {
   const navigate = useNavigate();
   const [select, setSelect] = useState(1);
@@ -27,6 +28,8 @@ export default function SelectActionType() {
   const [searchparams, setsearchparams] = useSearchParams();
   const activityChoice = useSelector((state) => state.userActivity.activity);
   const dispathRedux = useDispatch();
+  const addActionLevel = useSelector(state => state.addActionLevel.addActionLevel);
+
 
   const getVoteItems = () => {
     let config = {
@@ -156,7 +159,8 @@ export default function SelectActionType() {
 
   const onSubmit = async (values, actions) => {
     dispatch({ type: "SET_TYPE_ACTION", payload: values });
-    dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 2 });
+    // dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 2 });
+    dispathRedux(setactionlevel(2));
     actions.resetForm();
   };
 
@@ -189,7 +193,7 @@ export default function SelectActionType() {
 
   return (
     <>
-      {state.addActionLevel === 1 ? (
+      {addActionLevel === 1 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
             <Title>۱. فعالیت موردنظر خود را انتخاب کنید:</Title>
