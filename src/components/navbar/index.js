@@ -323,7 +323,7 @@ export default function Navbar() {
     setDashboard(true);
     // setOpen(true);
     dispatchRedux(openmenu());
-  }, [ismenuopen]);
+  }, []);
 
   const menuItem = data.navbar.map((x, i) => {
     return (
