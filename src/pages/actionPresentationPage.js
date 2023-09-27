@@ -92,7 +92,7 @@ const Container = styled.section`
   padding: 10px 20px;
   @media (min-width: 480px) {
     background-color: #ffffff;
-    padding: 25px 0;
+    padding: 25px 20px;
   }
 `;
 

@@ -24,6 +24,7 @@ const EnvoyCard = styled.div`
     /* width: 25%; */
     align-items: center;
     justify-content: space-between;
+    max-height: 150px;
   }
   @media (min-width: 769px) {
     /* width: 30%; */
