@@ -105,8 +105,7 @@ export default function Profile() {
       });
   };
   // *************
-  console.log("*************8");
-  console.log(userType);
+
 
   return (
     <Container>
