@@ -64,7 +64,7 @@ function App() {
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route path="/envoy" element={<Envoy />} />
-              <Route path="/envoy/:title" element={<DetailsEnvoy />} />
+              <Route path="/envoy/:id" element={<DetailsEnvoy />} />
 
               <Route path="/votes" element={<Vote />} />
               <Route

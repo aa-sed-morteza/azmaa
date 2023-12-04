@@ -90,7 +90,7 @@ const ShowMore = styled.div`
 `;
 
 export default function EnvoyFiltering({ envoys }) {
-  const [select, setSelect] = useState(1);
+  const [select, setSelect] = useState(2);
   const [showLimit, setShowLimit] = useState(10);
   const [searchparams, setsearchparams] = useSearchParams();
   const [envoyFilter, setEnvoyFilter] = useState([]);
@@ -99,22 +99,37 @@ export default function EnvoyFiltering({ envoys }) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    let newFilteredList = [];
     if (searchparams.get("filter") !== "") {
-      setEnvoyFilter([
+      newFilteredList = [
         ...envoys.filter((item) => {
           let filter = searchparams.get("filter");
           if (!filter) return true;
           // let name= item.writer + item.description ;
           let name =
             item.first_name + item.last_name + item.electoral_district_name;
-          // console.log(item);
           return name.includes(filter);
         }),
-      ]);
+      ];
     } else {
-      setEnvoyFilter([...envoys]);
+      newFilteredList = [...envoys];
     }
-  }, [searchparams]);
+
+    if (select === 1) {
+      const newList = newFilteredList.sort();
+      setEnvoyFilter([...newList]);
+    } else if (select === 2) {
+      const newList = newFilteredList.sort(
+        (a, b) => b.transparency - a.transparency
+      );
+      setEnvoyFilter([...newList]);
+    } else if (select === 3) {
+      const newList = newFilteredList.sort(
+        (a, b) => a.transparency - b.transparency
+      );
+      setEnvoyFilter([...newList]);
+    }
+  }, [searchparams, select]);
 
   return (
     <Container>
@@ -125,7 +140,7 @@ export default function EnvoyFiltering({ envoys }) {
           }}
           className={select === 1 ? "select" : ""}
         >
-          جوان‌ترین
+          الفبا
         </FilterItem>
         <FilterItem
           onClick={() => {
@@ -133,7 +148,7 @@ export default function EnvoyFiltering({ envoys }) {
           }}
           className={select === 2 ? "select" : ""}
         >
-          جدیدترین
+          شفاف‌ ترین
         </FilterItem>
         <FilterItem
           onClick={() => {
@@ -141,15 +156,7 @@ export default function EnvoyFiltering({ envoys }) {
           }}
           className={select === 3 ? "select" : ""}
         >
-          شفاف‌ترین
-        </FilterItem>
-        <FilterItem
-          onClick={() => {
-            setSelect(4);
-          }}
-          className={select === 4 ? "select" : ""}
-        >
-          فعال‌ترین
+          جوان‌ترین
         </FilterItem>
       </FilterBox>
 

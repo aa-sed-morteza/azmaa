@@ -26,7 +26,7 @@ export default function DetailsEnvoy() {
     };
 
     axios(config).then((res) => {
-      //  console.log(res.data);
+      console.log(res.data);
       if (res.data.length > 0) {
         setEnvoys([...res.data]);
       }
@@ -43,6 +43,8 @@ export default function DetailsEnvoy() {
     // console.log("title="+title);
   }, [envoys]);
 
+  console.log(envoy);
+
   return (
     <Container>
       <Title>
@@ -52,7 +54,6 @@ export default function DetailsEnvoy() {
             navigate("/envoy");
           }}
         >
-          {" "}
           خانه / نمایندگان /
         </p>
         <p className="component">

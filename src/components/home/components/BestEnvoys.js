@@ -12,7 +12,7 @@ export default function BestEnvoys() {
   const envoyContainerRef = useRef(null);
   const navigate = useNavigate();
   const { envoyListToShow } = useSelector((state) => state.envoy);
-  const [thirdHide, setThirdHide] = useState(false);
+  const [showLimit, setShowLimit] = useState(3);
 
   const isVisible = useIsVisible(envoyContainerRef);
 
@@ -26,29 +26,36 @@ export default function BestEnvoys() {
   return (
     <Section ref={envoyContainerRef}>
       <animated.div style={trails[3]}>
-      <Title>شفاف‌ترین نمایندگان</Title>
-      <SecondAlbum hide={thirdHide}>
-        {envoyListToShow.map((item, i) => {
-          return (
-            <BestEnvoyCard
-              envoy={item}
-              key={"transparentEnvoy" + i}
-              click={() => {
-                navigate(`/envoy/${item.id}`);
-              }}
-            />
+        <Title>شفاف‌ترین نمایندگان</Title>
+        <SecondAlbum>
+          {envoyListToShow.slice(0, showLimit).map((item, i) => {
+            return (
+              <BestEnvoyCard
+                envoy={item}
+                key={"transparentEnvoy" + i}
+                click={() => {
+                  navigate(`/envoy/${item.id}`);
+                }}
+              />
             );
           })}
-      </SecondAlbum>
-          </animated.div>
+        </SecondAlbum>
+      </animated.div>
 
       <ShowMore
-        arrow={thirdHide}
+        arrow={showLimit >= envoyListToShow.length}
         onClick={() => {
-          setThirdHide(!thirdHide);
+          if (showLimit < envoyListToShow.length) {
+            setShowLimit(showLimit + 10);
+          } else {
+            setShowLimit(3);
+            envoyContainerRef.current.scrollIntoView();
+          }
         }}
       >
-        <p>{thirdHide ? "نمایش کمتر" : "نمایش بیشتر "}</p>{" "}
+        <p>
+          {showLimit < envoyListToShow.length ? "نمایش بیشتر" : "نمایش کمتر "}
+        </p>{" "}
       </ShowMore>
     </Section>
   );
@@ -150,14 +157,7 @@ const ShowMore = styled.div`
 `;
 
 const SecondAlbum = styled.div`
-  & > :nth-of-type(1n + 4) {
-    display: ${(props) => (!props.hide ? "none" : "")};
-  }
-
   @media (min-width: 481px) {
-    & > :nth-of-type(1n + 4) {
-      display: ${(props) => (!props.hide ? "none" : "")};
-    }
     display: grid;
     grid-template-columns: repeat(3, 29%);
     justify-content: center;

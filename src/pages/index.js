@@ -8,9 +8,9 @@ import LastVotes from "../components/home/components/lastVotes";
 import LastActivities from "../components/home/components/lastActivities";
 import BestEnvoys from "../components/home/components/BestEnvoys";
 import TopBanner from "../components/home/components/topBanner";
+import IranMap from "../components/pluginIranMap/IranMap";
 
 const HomeContainer = styled.section`
-
   padding: 21vw 20px 0 20px;
 
   @media (min-width: 481px) {
@@ -28,7 +28,7 @@ export default function Home() {
 
   return (
     <HomeContainer>
-      {width > 480 ? <TopBanner /> : ""}
+      {width > 480 ? <TopBanner /> : <IranMap />}
       {/* <FirstBanner /> */}
       <FilterBox
         filterType={filterType}

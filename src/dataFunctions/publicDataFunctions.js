@@ -169,7 +169,8 @@ export function filterDataByCity(cityList) {
 
   for (const item of cityList) {
     for (const envoy of allEnvoys) {
-      if (envoy.electoral_district_name.includes(item)) {
+      console.log(envoy);
+      if (envoy.electoral_district_name?.includes(item)) {
         if (!filteredEnvoyList.includes(envoy)) {
           filteredEnvoyList.push(envoy);
         }
@@ -184,7 +185,8 @@ export function filterDataByCity(cityList) {
     // }
     for (const activity of allActivities) {
       for (const vote of activity.verified_vote) {
-        if (vote.voter.electoral_district_name.includes(item)) {
+        console.log(vote);
+        if (vote.voter.electoral_district_name?.includes(item)) {
           if (!filteredActivitiesList.includes(activity)) {
             filteredActivitiesList.push(activity);
           }
