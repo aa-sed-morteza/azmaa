@@ -13,6 +13,7 @@ export default function EnvoyArea({ data }) {
   const handleClick = () => {
     setOpen(!open);
   };
+  
 
   return (
     <Container onClick={handleClick} className={open ? "active" : ""}>

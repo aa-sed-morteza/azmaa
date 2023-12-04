@@ -72,7 +72,7 @@ const Container = styled.div`
   justify-content: space-between;
   padding: 15px 20px;
   background: #ffffff;
-  box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 20px -5px
   border-radius: 4px;
   direction: rtl;
   cursor: pointer;
