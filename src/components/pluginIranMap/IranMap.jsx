@@ -76,6 +76,19 @@ const IranMap = ({ position, empty, style }) => {
   }, [isFilterActive]);
 
   console.log("selected province", selectedProvince);
+  const handleSelectAll = () => {
+    const list = [...selectedCities];
+    console.log(availableCities);
+    for (const city of availableCities) {
+      if (!list.includes(city)) {
+        list.push(city);
+      }
+    }
+    setSelectedCities([...list]);
+  };
+
+  console.log(availableCities);
+  console.log(selectedCities);
 
   return (
     <Container style={style}>
@@ -122,7 +135,7 @@ const IranMap = ({ position, empty, style }) => {
                   type="checkbox"
                   name="all"
                   id="all"
-                  onChange={() => {}}
+                  onChange={handleSelectAll}
                 />
                 <label htmlFor="all" className={styles.city_label}>
                   انتخاب همه
