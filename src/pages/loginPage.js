@@ -19,13 +19,12 @@ import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import useWidth from "../hook/useWidth";
 import { useDispatch, useSelector } from "react-redux";
-import { login , logout } from "../redux/slices/isLoginSlice";
+import { login, logout } from "../redux/slices/isLoginSlice";
 
 import { settoken } from "../redux/slices/setTokenSlice";
 import { setusername } from "../redux/slices/setUserNameSlice";
 import { setRefreshToken } from "../redux/slices/setRefreshTokenSlice";
 import { setUserType } from "../redux/slices/userTypeSlice";
-import { openmenu } from "../redux/slices/menuOpenSlice";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
@@ -34,10 +33,10 @@ export default function LogIn() {
 
   const dispatchRedux = useDispatch();
 
-  const islogin = useSelector(state => state.islogin.islogin);
-  const ismenuopen = useSelector(state => state.ismenuopen.ismenuopen);
-  const token = useSelector(state => state.token.token);
-  const username = useSelector(state => state.username.username);
+  const islogin = useSelector((state) => state.islogin.islogin);
+  const ismenuopen = useSelector((state) => state.ismenuopen.ismenuopen);
+  const token = useSelector((state) => state.token.token);
+  const username = useSelector((state) => state.username.username);
   const userType = useSelector((state) => state.userType.userType);
 
   const onSubmit = (values) => {
@@ -80,7 +79,6 @@ export default function LogIn() {
 
           navigate("/dashboard");
           // dispatch({ type: "OPEN_MENU", payload: true });
-          dispatchRedux(openmenu());
         } else if (res.data.code === -1) {
           toast.error("نام کاربری یا رمز عبور اشتباه است!", {
             position: toast.POSITION.TOP_RIGHT,

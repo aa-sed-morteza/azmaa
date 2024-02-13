@@ -15,11 +15,7 @@ import Cookies from "js-cookie";
 import { useUser } from "../../context/userContext";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "../../redux/slices/isLoginSlice";
-import {
-  togglmenu,
-  openmenu,
-  closemenu,
-} from "../../redux/slices/menuOpenSlice";
+import { togglmenu, closemenu } from "../../redux/slices/menuOpenSlice";
 import { settoken } from "../../redux/slices/setTokenSlice";
 
 // styled
@@ -416,6 +412,8 @@ export default function Navbar() {
     dispatchRedux(togglmenu());
   }
 
+  console.log(ismenuopen);
+
   return (
     <TopBar>
       <Logo
@@ -451,13 +449,13 @@ export default function Navbar() {
               // setOpen(!open);
               dispatchRedux(togglmenu());
             }}
-            open={ismenuopen}
+            open={!ismenuopen}
           ></Menu>
         ) : (
           ""
         )}
         {width < 481 ? (
-          <MenuList open={!ismenuopen} back={dashboard && islogin}>
+          <MenuList open={ismenuopen} back={dashboard && islogin}>
             {dashboard && islogin ? <Profile /> : ""}
             {dashboard && islogin ? checkUserMenu() : menuItem}{" "}
             <MobilePanel
