@@ -43,7 +43,6 @@ const IranMap = ({ position, empty, style }) => {
   const [selectedCities, setSelectedCities] = useState([]);
 
   const onSubmit = () => {
-    console.log("map");
     setFilteredCitiesData(selectedProvince, selectedCities);
     filterDataByCity(selectedCities);
   };

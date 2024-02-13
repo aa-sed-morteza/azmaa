@@ -11,7 +11,7 @@ import { useEffect } from "react";
 
 export default function LastVotes({ vote_voter, searchPhrase }) {
   const voterContainerRef = useRef(null);
-  const { voteList } = useSelector((state) => state.vote);
+  const voteList = useSelector((state) => state.vote.voteListToShow);
   const [voteListToShow, setVoteListToShow] = useState([...voteList]);
   const [voteCardLimit, setVoteCardLimit] = useState(3);
 
@@ -38,6 +38,10 @@ export default function LastVotes({ vote_voter, searchPhrase }) {
       setVoteListToShow([...voteList]);
     }
   }, [searchPhrase]);
+
+  useEffect(() => {
+    setVoteListToShow([...voteList]);
+  }, [voteList]);
 
   return (
     <Section ref={voterContainerRef} style={trails[0]}>

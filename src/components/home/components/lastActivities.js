@@ -10,7 +10,9 @@ import { useTrail, animated } from "react-spring";
 export default function LastActivities({ searchPhrase }) {
   const actionContainerRef = useRef(null);
   const [actionCardLimit, setActionCardLimit] = useState(3);
-  const { activityList } = useSelector((state) => state.activity);
+  const activityList = useSelector(
+    (state) => state.activity.activityListToShow
+  );
   const [activityListToShow, setActivityListToShow] = useState([
     ...activityList,
   ]);
@@ -39,6 +41,10 @@ export default function LastActivities({ searchPhrase }) {
       setActivityListToShow([...activityList]);
     }
   }, [searchPhrase]);
+
+  useEffect(() => {
+    setActivityListToShow([...activityList]);
+  }, [activityList]);
   return (
     <Section ref={actionContainerRef} style={trails[0]}>
       <animated.div style={trails[3]}>

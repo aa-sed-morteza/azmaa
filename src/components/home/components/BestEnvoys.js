@@ -11,9 +11,11 @@ import { useTrail, animated } from "react-spring";
 export default function BestEnvoys({ searchPhrase }) {
   const envoyContainerRef = useRef(null);
   const navigate = useNavigate();
-  const { envoyList } = useSelector((state) => state.envoy);
+  const envoyList = useSelector((state) => state.envoy.envoyListToShow);
   const [envoyListToShow, setEnvoyListToShow] = useState([...envoyList]);
   const [showLimit, setShowLimit] = useState(3);
+
+  console.log(envoyListToShow);
 
   const isVisible = useIsVisible(envoyContainerRef);
 
@@ -38,6 +40,10 @@ export default function BestEnvoys({ searchPhrase }) {
       setEnvoyListToShow([...envoyList]);
     }
   }, [searchPhrase]);
+
+  useEffect(() => {
+    setEnvoyListToShow([...envoyList]);
+  }, [envoyList]);
 
   return (
     <Section ref={envoyContainerRef}>
