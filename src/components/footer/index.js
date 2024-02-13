@@ -58,81 +58,23 @@ const AboutUs = styled.div`
 `;
 
 const ContactUs = styled.div`
-  & > .item {
-    display: inline-block;
-    margin-bottom: 10px;
-    gap: 17px;
-    align-items:center;
-    padding: 5px 5px 5px 5px;
-    span {
-      width: 45px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 25vw;
+  gap: 10px;
+  & > a {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    background: #ffaa00;
+    border-radius: 3px;
+    justify-content: center;
+    align-items: center;
+    & > img {
+      width: 40px;
       height: 40px;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
-    }
-    .content{
-      height: 11vw;
-    }
-
-    // .content {
-    //   width: 85%;
-    //   background-color: #f3f3f3;
-    //   border-radius: 4px;
-    //   display: flex;
-     
-      // a {
-      //   margin: auto 10px;
-      //   color: #095644;
-      //   text-decoration: none;
-      //   width: 100%;
-      //   text-align: left;
-      //   font-size: 5.85vw;
-      //   font-weight: light;
-      //   direction: ltr;
-      // }
-    }
-  }
-
-  @media (min-width: 481px) {
-    width: 40%;
-    & > .item {
-      // margin-bottom: 20px;
-     
-      .content {
-        width: 80%;
-        height:55px;
-        a {
-          font-size: 1.87vw;
-        }
-      }
-    }
-  }
-
-  @media (min-width: 769px) {
-    width: 40%;
-    display: grid;
-      grid-template-columns: repeat(5,4vw);
-    & > .item {
-      // margin-bottom: 20px;
-    
-      .content {
-        width: auto;
-        height:55px;
-        a {
-          font-size: 1.87vw;
-        }
-      }
-    }
-  }
-  @media (min-width: 1025px) {
-    & > .item {
-      .content {
-        height:2.5vw;
-       
-      }
+      object-fit: contain;
     }
   }
 `;
@@ -161,15 +103,9 @@ const Copyright = styled.div`
 export default function Footer() {
   const contactItem = data.footer.map((x, i) => {
     return (
-      <div className="item" key={i}>
-        <div className="content">
-          <a href={x.href}>
-            <span>
-              <img src={x.icon} />
-            </span>
-          </a>
-        </div>
-      </div>
+      <a href={x.href} className="item" key={x.href + i}>
+        <img src={x.icon} />
+      </a>
     );
   });
 
