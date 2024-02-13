@@ -77,6 +77,11 @@ const ContactUs = styled.div`
       object-fit: contain;
     }
   }
+
+  @media (max-width: 480px) {
+    max-width: 100vw;
+    gap: 1vw;
+  }
 `;
 
 const Copyright = styled.div`
