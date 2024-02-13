@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function Census({ select, complete, envoy }) {
+export default function Census({ data, complete, envoy }) {
   const checkCensus = (num1, num2) => {
     let bgColor;
     if (num2 / num1 > 0.5) {
@@ -28,12 +28,14 @@ export default function Census({ select, complete, envoy }) {
     );
   };
 
+  console.log(data);
+
   return (
     <Container>
       <Title> آمار شفافیت</Title>
       <Row>
         <p className="type">آراء ثبت‌شده:</p>
-        {checkCensus("?", select)}
+        {checkCensus(data, data)}
       </Row>
       <Row>
         <p className="type">عملکردهای ثبت‌شده:</p>

@@ -11,39 +11,50 @@ import SocialNetwork from "../components/detailsEnvoy/components/socialNetwork";
 import axios from "axios";
 import { BaseBackURL } from "../constant/api";
 import Controller from "../components/home/components/controller";
+import { useSelector } from "react-redux";
 
 export default function DetailsEnvoy() {
-  const { title } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const width = useWidth();
-  const [envoys, setEnvoys] = useState([]);
   const [envoy, setEnvoy] = useState({});
+  const [envoyVotes, setEnvoyVotes] = useState([]);
+  const { voteList } = useSelector((state) => state.vote);
+  console.log(voteList);
 
-  const getEnvoys = () => {
+  const getEnvoyDetail = () => {
     let config = {
       method: "get",
-      url: `${BaseBackURL}api/v1/accounts/parliament_member/`,
+      url: `${BaseBackURL}api/v1/accounts/member/${id}`,
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
-      if (res.data.length > 0) {
-        setEnvoys([...res.data]);
-      }
+      setEnvoy(res.data);
     });
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    getEnvoys();
-  }, []);
+  const handleEnvoyVotes = () => {
+    const list = [];
+    for (const vote of voteList) {
+      for (const item of vote.negative_vote) {
+        if (item.voter.id === +id) list.push(vote);
+      }
+      console.log(vote.positive_vote);
+      for (const item of vote.positive_vote) {
+        if (item.voter.id === +id) list.push(vote);
+      }
+      for (const item of vote.none_vote) {
+        if (item.voter.id === +id) list.push(vote);
+      }
+    }
+    console.log(list);
+    setEnvoyVotes([...list]);
+  };
 
   useEffect(() => {
-    setEnvoy(envoys.find((x) => x.id === parseInt(title)));
-    // console.log("title="+title);
-  }, [envoys]);
-
-  console.log(envoy);
+    getEnvoyDetail();
+    handleEnvoyVotes();
+  }, [id]);
 
   return (
     <Container>
@@ -75,15 +86,13 @@ export default function DetailsEnvoy() {
           />
         )}
 
-        <Census data={"?"} complete={"?"} envoy={"?"} />
+        <Census data={envoyVotes.length} complete={"?"} envoy={"?"} />
         <EnvoyArea data={envoy} />
-        <EnvoyHistory id={title} />
+        <EnvoyHistory id={id} />
         {/* {width > 481 ? <SocialNetwork /> : ""} */}
       </FirstSection>
       {/* filtering */}
-      <SecondSection>
-        {envoy && <Controller vote_voter={title} />}
-      </SecondSection>
+      <SecondSection>{envoy && <Controller vote_voter={id} />}</SecondSection>
       {/* socialNetwork */}
       <ThirdSection>{/* <SocialNetwork /> */}</ThirdSection>
     </Container>
