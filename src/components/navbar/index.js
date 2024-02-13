@@ -14,13 +14,13 @@ import Profile from "../dashboard/components/profile";
 import Cookies from "js-cookie";
 import { useUser } from "../../context/userContext";
 import { useDispatch, useSelector } from "react-redux";
-import { login , logout } from "../../redux/slices/isLoginSlice";
-import {togglmenu , openmenu , closemenu} from "../../redux/slices/menuOpenSlice";
+import { login, logout } from "../../redux/slices/isLoginSlice";
+import {
+  togglmenu,
+  openmenu,
+  closemenu,
+} from "../../redux/slices/menuOpenSlice";
 import { settoken } from "../../redux/slices/setTokenSlice";
-
-
-
-
 
 // styled
 const TopBar = styled.section`
@@ -309,20 +309,17 @@ export default function Navbar() {
   const [active, setActive] = useState(0);
   const [dashboard, setDashboard] = useState(false);
 
-  const islogin = useSelector(state => state.islogin.islogin);
-  const ismenuopen = useSelector(state => state.ismenuopen.ismenuopen);
+  const islogin = useSelector((state) => state.islogin.islogin);
+  const ismenuopen = useSelector((state) => state.ismenuopen.ismenuopen);
 
   const dispatchRedux = useDispatch();
 
-  const token = useSelector(state => state.token.token);
+  const token = useSelector((state) => state.token.token);
   const userType = useSelector((state) => state.userType.userType);
-
-
 
   useEffect(() => {
     setDashboard(true);
     // setOpen(true);
-    dispatchRedux(openmenu());
   }, []);
 
   const menuItem = data.navbar.map((x, i) => {
