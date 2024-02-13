@@ -21,7 +21,6 @@ export default function Envoy() {
   const { envoyListToShow } = useSelector((state) => state.envoy);
   const width = useWidth();
   const navigate = useNavigate();
-  console.log(envoyListToShow);
   const SearchrRef = useRef(null);
   const trails = useTrail(1, {
     from: { opacity: 0 },

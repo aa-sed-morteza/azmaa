@@ -2,16 +2,17 @@ import styled from "styled-components";
 import BestEnvoyCard from "./bestEnvoyCard";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import upArrow from "../../../assets/arrow.webp";
 import tik from "../../../assets/vote.webp";
 import { useIsVisible } from "../../../hook/useIsVisible";
 import { useTrail, animated } from "react-spring";
 
-export default function BestEnvoys() {
+export default function BestEnvoys({ searchPhrase }) {
   const envoyContainerRef = useRef(null);
   const navigate = useNavigate();
-  const { envoyListToShow } = useSelector((state) => state.envoy);
+  const { envoyList } = useSelector((state) => state.envoy);
+  const [envoyListToShow, setEnvoyListToShow] = useState([...envoyList]);
   const [showLimit, setShowLimit] = useState(3);
 
   const isVisible = useIsVisible(envoyContainerRef);
@@ -22,6 +23,21 @@ export default function BestEnvoys() {
     config: { duration: 1000 },
     delay: 100,
   });
+
+  useEffect(() => {
+    if (searchPhrase.length > 0) {
+      let newFilteredList = [];
+      for (const item of envoyList) {
+        const name = item.first_name + " " + item.last_name;
+        if (name.includes(searchPhrase)) {
+          newFilteredList.push(item);
+        }
+      }
+      setEnvoyListToShow([...newFilteredList]);
+    } else {
+      setEnvoyListToShow([...envoyList]);
+    }
+  }, [searchPhrase]);
 
   return (
     <Section ref={envoyContainerRef}>

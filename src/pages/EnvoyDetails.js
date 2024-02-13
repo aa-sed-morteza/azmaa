@@ -72,7 +72,6 @@ export default function DetailsEnvoy() {
             persantage={envoy.transparency}
             id={envoy.id}
             inBox={true}
-            
           />
         )}
 

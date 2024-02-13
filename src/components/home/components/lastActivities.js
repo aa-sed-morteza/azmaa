@@ -1,17 +1,20 @@
 import styled from "styled-components";
 import tik from "../../../assets/vote.webp";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import ActionCard from "./actionCard";
 import upArrow from "../../../assets/arrow.webp";
 import { useIsVisible } from "../../../hook/useIsVisible";
 import { useTrail, animated } from "react-spring";
 
-export default function LastActivities() {
+export default function LastActivities({ searchPhrase }) {
   const actionContainerRef = useRef(null);
   const [actionCardLimit, setActionCardLimit] = useState(3);
+  const { activityList } = useSelector((state) => state.activity);
+  const [activityListToShow, setActivityListToShow] = useState([
+    ...activityList,
+  ]);
   const isVisible = useIsVisible(actionContainerRef);
-  const { activityListToShow } = useSelector((state) => state.activity);
 
   const trails = useTrail(8, {
     from: { opacity: 0 },
@@ -19,19 +22,33 @@ export default function LastActivities() {
     config: { duration: 1000 },
     delay: 100,
   });
+
+  useEffect(() => {
+    if (searchPhrase.length > 0) {
+      let newFilteredList = [];
+      for (const item of activityList) {
+        console.log(item.name);
+        if (item.name.includes(searchPhrase)) {
+          console.log(searchPhrase);
+          newFilteredList.push(item);
+        }
+      }
+      console.log(newFilteredList);
+      setActivityListToShow([...newFilteredList]);
+    } else {
+      setActivityListToShow([...activityList]);
+    }
+  }, [searchPhrase]);
   return (
     <Section ref={actionContainerRef} style={trails[0]}>
-        <animated.div style={trails[3]}>
-      <Title style={trails[1]}> آخرین عملکردها</Title>
-          <ActionContainer>
-        {activityListToShow.slice(0, actionCardLimit).map((item, i) => {
-          return (
-
-              <ActionCard activity={item} key={"lastAction" + i} />
-              );
-            })}
-          </ActionContainer>
-        </animated.div>
+      <animated.div style={trails[3]}>
+        <Title style={trails[1]}> آخرین عملکردها</Title>
+        <ActionContainer>
+          {activityListToShow.slice(0, actionCardLimit).map((item, i) => {
+            return <ActionCard activity={item} key={"lastAction" + i} />;
+          })}
+        </ActionContainer>
+      </animated.div>
 
       <ShowMore
         arrow={actionCardLimit >= activityListToShow.length}

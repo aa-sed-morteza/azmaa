@@ -7,14 +7,16 @@ import EnvoyvoteCard from "./EnvoyvoteCard";
 import VoteCard from "./voteCard";
 import { useIsVisible } from "../../../hook/useIsVisible";
 import { useTrail, animated } from "react-spring";
+import { useEffect } from "react";
 
-export default function LastVotes({ vote_voter }) {
+export default function LastVotes({ vote_voter, searchPhrase }) {
   const voterContainerRef = useRef(null);
-  const { voteListToShow } = useSelector((state) => state.vote);
+  const { voteList } = useSelector((state) => state.vote);
+  const [voteListToShow, setVoteListToShow] = useState([...voteList]);
   const [voteCardLimit, setVoteCardLimit] = useState(3);
 
   const isVisible = useIsVisible(voterContainerRef);
-  console.log(isVisible);
+  console.log(voteList);
 
   const trails = useTrail(8, {
     from: { opacity: 0 },
@@ -22,6 +24,20 @@ export default function LastVotes({ vote_voter }) {
     config: { duration: 1000 },
     delay: 100,
   });
+
+  useEffect(() => {
+    if (searchPhrase.length > 0) {
+      let newFilteredList = [];
+      for (const item of voteList) {
+        if (item.name.includes(searchPhrase)) {
+          newFilteredList.push(item);
+        }
+      }
+      setVoteListToShow([...newFilteredList]);
+    } else {
+      setVoteListToShow([...voteList]);
+    }
+  }, [searchPhrase]);
 
   return (
     <Section ref={voterContainerRef} style={trails[0]}>
@@ -170,7 +186,6 @@ const VoterContainer = styled(animated.div)`
   /* & > :nth-of-type(1n + 2) {
     display: ${(props) => (!props.hide ? "none" : "")};
   } */
-  
 
   @media (min-width: 481px) {
     display: flex;
@@ -178,8 +193,8 @@ const VoterContainer = styled(animated.div)`
     justify-content: center;
     flex-wrap: wrap;
     & > div {
-    width: 29%;
-  }
+      width: 29%;
+    }
     // margin-left:-7%;
     // margin-right:-7%;
 

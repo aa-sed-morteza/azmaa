@@ -9,6 +9,7 @@ import LastActivities from "../components/home/components/lastActivities";
 import BestEnvoys from "../components/home/components/BestEnvoys";
 import TopBanner from "../components/home/components/topBanner";
 import IranMap from "../components/pluginIranMap/IranMap";
+import { useFetcher } from "react-router-dom";
 
 const HomeContainer = styled.section`
   padding: 21vw 20px 0 20px;
@@ -36,12 +37,15 @@ export default function Home() {
         searchPhrase={searchPhrase}
         setSearchPhrase={setSearchPhrase}
       />
-      {(filterType === "all" || filterType === "vote") && <LastVotes />}
-      {(filterType === "all" || filterType === "envoy") && <BestEnvoys />}
-      {(filterType === "all" || filterType === "activity") && (
-        <LastActivities />
+      {(filterType === "all" || filterType === "vote") && (
+        <LastVotes searchPhrase={searchPhrase} />
       )}
-
+      {(filterType === "all" || filterType === "envoy") && (
+        <BestEnvoys searchPhrase={searchPhrase} />
+      )}
+      {(filterType === "all" || filterType === "activity") && (
+        <LastActivities searchPhrase={searchPhrase} />
+      )}
       {/* <HomeDetails /> */}
       <Magazine />
       {/* <SecondBanner /> */}
