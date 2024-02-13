@@ -12,6 +12,7 @@ import axios from "axios";
 import { BaseBackURL } from "../constant/api";
 import Controller from "../components/home/components/controller";
 import { useSelector } from "react-redux";
+import NormalController from "../components/home/components/normalController";
 
 export default function DetailsEnvoy() {
   const { id } = useParams();
@@ -92,7 +93,9 @@ export default function DetailsEnvoy() {
         {/* {width > 481 ? <SocialNetwork /> : ""} */}
       </FirstSection>
       {/* filtering */}
-      <SecondSection>{envoy && <Controller vote_voter={id} />}</SecondSection>
+      <SecondSection>
+        {envoy && <NormalController vote_voter={id} />}
+      </SecondSection>
       {/* socialNetwork */}
       <ThirdSection>{/* <SocialNetwork /> */}</ThirdSection>
     </Container>
