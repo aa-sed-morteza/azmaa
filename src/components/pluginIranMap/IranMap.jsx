@@ -76,22 +76,23 @@ const IranMap = ({ position, empty, style }) => {
     }
   }, [isFilterActive]);
 
+  console.log("selected province", selectedProvince);
+
   return (
     <Container style={style}>
-      {selectedProvince === null && (
+      {/* {(selectedProvince === null || selectedProvince.length === 0) && (
         <p className="input">استان خود را انتخاب کنید</p>
-      )}
-      {selectedProvince && (
-        <p className="select">
-          ایران{" "}
-          <span>
-            {selectedProvince.length > 1 ? "چند استان" : selectedProvince[0]}
-          </span>
-          <span>
-            {selectedCities.length > 1 ? "چند شهر" : selectedCities[0]}
-          </span>
-        </p>
-      )}
+      )} */}
+
+      <p className="select">
+        ایران{" "}
+        {selectedProvince.length > 0 && <span className="mapArrow">{">"}</span>}
+        <span>
+          {selectedProvince.length > 1 ? "چند استان" : selectedProvince[0]}
+        </span>
+        {selectedCities.length > 0 && <span className="mapArrow">{">"}</span>}
+        <span>{selectedCities.length > 1 ? "چند شهر" : selectedCities[0]}</span>
+      </p>
 
       <span
         className={styles.show_title}
@@ -303,15 +304,15 @@ const Container = styled.div`
       font-weight: 500;
       display: flex;
       align-items: center;
-      &:before {
-        content: ">";
-        display: inline-flex;
-        color: #fab732;
-        font-size: 6.977vw;
-        font-weight: 300;
-        padding-left: 5px;
-      }
     }
+  }
+
+  .mapArrow {
+    display: inline-flex;
+    color: #fab732;
+    font-size: 1.5vw;
+    font-weight: 300;
+    padding-left: 5px;
   }
   @media (min-width: 481px) {
     position: ${(props) => props.position};
