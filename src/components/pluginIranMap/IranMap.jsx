@@ -235,11 +235,13 @@ const IranMap = ({ position, empty, style }) => {
                   onMouseLeave={() => setHoveredProvince("")}
                   onClick={() => {
                     if (selectedProvince.includes(province.name)) {
-                      selectedProvince.splice(
-                        selectedProvince.indexOf(province.name),
-                        1
+                      const updatedSelectedProvince = [...selectedProvince]; // Create a copy
+                      updatedSelectedProvince.splice(
+                          updatedSelectedProvince.indexOf(province.name),
+                          1
                       );
-                    }
+                      setSelectedProvince(updatedSelectedProvince); // Update the state
+                  }
                     setSelectedProvince([...selectedProvince, province.name]);
                     setShowSelectModal(true);
                   }}
