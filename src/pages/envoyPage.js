@@ -17,9 +17,13 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useTrail, animated } from "react-spring";
 import { useIsVisible } from "../hook/useIsVisible";
+import FilterBox from "../components/general/filterBox";
 
 export default function Envoy() {
+  const [searchparams, setsearchparams] = useState("");
   const { envoyListToShow } = useSelector((state) => state.envoy);
+  const [TheEnvoyListToShow, setTheEnvoyListToShow] = useState([...envoyListToShow]);
+
   const width = useWidth();
   const navigate = useNavigate();
   const SearchrRef = useRef(null);
@@ -41,6 +45,23 @@ export default function Envoy() {
     config: { duration: 300 },
     delay: 100,
   });
+  console.log(searchparams)
+
+  useEffect(() => {
+    if (searchparams.length > 0) {
+      let newFilteredList = [];
+      for (const item of envoyListToShow) {
+        const name = item.first_name + " " + item.last_name;
+        console.log(item)
+        if (name.includes(searchparams)) {
+          newFilteredList.push(item);
+        }
+      }
+      setTheEnvoyListToShow([...newFilteredList]);
+    } else {
+      setTheEnvoyListToShow([...envoyListToShow]);
+    }
+  }, [searchparams]);
 
   return (
     <Container>
@@ -73,18 +94,19 @@ export default function Envoy() {
           </Wraper>
         )}
         <animated.div style={trails[1]} ref={ActionContainerRef}>
-          <Search />
+          <Search searchparams={searchparams} setsearchparams={setsearchparams}/>
+
         </animated.div>
 
         {/* <AdvanceSearch  setEnvoys={setEnvoys} /> */}
         {width < 481 && <EnvoyFiltering envoys={envoyListToShow} />}
         {width > 481 && (
           <>
-            <ActiveEnvoy envoys={envoyListToShow} />
+            <ActiveEnvoy envoys={TheEnvoyListToShow} />
 
             <Banner />
 
-            <NewEnvoy envoys={envoyListToShow} />
+            <NewEnvoy envoys={TheEnvoyListToShow} />
           </>
         )}
       </Content>

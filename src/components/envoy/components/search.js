@@ -48,18 +48,23 @@ const Container = styled.div`
   }
 `;
 
-export default function Search() {
-  const [searchparams, setsearchparams] = useSearchParams();
+export default function Search({searchparams , setsearchparams}) {
+
   return (
     <Container>
-      <input value={searchparams.get("filter") || ""} onChange={event => { 
-        let filter = event.target.value;
-        if(filter){
-          setsearchparams({filter : filter});
-        }else{
-          setsearchparams({});
-        }
-      }} type="text"  placeholder="&#xF002; جستجو کن..."/>      
+      <input value={searchparams}
+      onChange={(e) => {
+        console.log(e.target.value)
+        setsearchparams(e.target.value);
+      }}
+      //  onChange={event => { 
+      //   let filter = event.target.value;
+      //   if(filter){
+      //     setsearchparams( filter);
+      //   }else{
+      //     setsearchparams({});
+      //   }
+ type="text"  placeholder="&#xF002; جستجو کن..."/>      
     </Container>
   );
 }
