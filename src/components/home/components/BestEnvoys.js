@@ -15,16 +15,25 @@ export default function BestEnvoys({ searchPhrase }) {
   const [envoyListToShow, setEnvoyListToShow] = useState([...envoyList]);
   const [showLimit, setShowLimit] = useState(3);
 
-  console.log(envoyListToShow);
+
 
   const isVisible = useIsVisible(envoyContainerRef);
+  const [isseen , setIsseen] = useState(false);
+  useEffect( 
+  () => {
+    if(isVisible) {
+      setIsseen(true);
+    }
+  }
+  , [isVisible])
 
   const trails = useTrail(8, {
     from: { opacity: 0 },
-    to: { opacity: isVisible ? 1 : 0 },
-    config: { duration: 1000 },
+    to: { opacity: isseen ? 1 : 0 },
+    config: { duration: 300 },
     delay: 100,
   });
+
 
   useEffect(() => {
     if (searchPhrase.length > 0) {

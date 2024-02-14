@@ -1,4 +1,4 @@
-import React, { useState , useRef } from "react";
+import React, { useState , useRef, useEffect } from "react";
 import styled from "styled-components";
 import profile from "../../../assets/profile.webp";
 import upArrow from "../../../assets/arrow.webp";
@@ -102,10 +102,19 @@ export default function ActiveEnvoy({ envoys }) {
 
   const isVisible = useIsVisible(envoyContainerRef);
 
+  const [isseen , setIsseen] = useState(false);
+    useEffect( 
+    () => {
+      if(isVisible) {
+        setIsseen(true);
+      }
+    }
+    , [isVisible])
+
   const trails = useTrail(8, {
     from: { opacity: 0 },
-    to: { opacity: isVisible ? 1 : 0 },
-    config: { duration: 1000 },
+    to: { opacity: isseen ? 1 : 0 },
+    config: { duration: 300 },
     delay: 100,
   });
   return (

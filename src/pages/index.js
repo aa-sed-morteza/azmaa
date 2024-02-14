@@ -29,8 +29,12 @@ export default function Home() {
 
   return (
     <HomeContainer>
-      {width > 480 ? <TopBanner /> : <IranMap />}
+       <TopBanner /> 
       {/* <FirstBanner /> */}
+      <IranMap style={{
+        width: "63.5%" ,
+        margin : "auto"
+      }}/>
       <FilterBox
         filterType={filterType}
         setFilterType={setFilterType}

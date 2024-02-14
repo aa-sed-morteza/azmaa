@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import data from "../../../data.json";
 import background from "../../../assets/back-controll.webp";
@@ -134,10 +134,19 @@ export default function Controler({ activities, selectedTag, setSelectedTag }) {
   const [searchparams, setsearchparams] = useSearchParams();
   const controllerRef = useRef(null);
   const isVisible = useIsVisible(controllerRef);
+  const [isseen , setIsseen] = useState(false);
+    useEffect( 
+    () => {
+      if(isVisible) {
+        setIsseen(true);
+      }
+    }
+    , [isVisible])
+
   const trails = useTrail(8, {
     from: { opacity: 0 },
-    to: { opacity: 1 },
-    config: { duration: 800 },
+    to: { opacity: isseen ? 1 : 0 },
+    config: { duration: 300 },
     delay: 100,
   });
   const controllItem = data.controlItem.map((x, i) => {

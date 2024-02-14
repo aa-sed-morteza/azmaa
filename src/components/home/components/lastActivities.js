@@ -17,13 +17,22 @@ export default function LastActivities({ searchPhrase }) {
     ...activityList,
   ]);
   const isVisible = useIsVisible(actionContainerRef);
+  const [isseen , setIsseen] = useState(false);
+  useEffect( 
+  () => {
+    if(isVisible) {
+      setIsseen(true);
+    }
+  }
+  , [isVisible])
 
-  const trails = useTrail(8, {
-    from: { opacity: 0 },
-    to: { opacity: isVisible ? 1 : 0 },
-    config: { duration: 1000 },
-    delay: 100,
-  });
+const trails = useTrail(8, {
+  from: { opacity: 0 },
+  to: { opacity: isseen ? 1 : 0 },
+  config: { duration: 300 },
+  delay: 100,
+});
+
 
   useEffect(() => {
     if (searchPhrase.length > 0) {

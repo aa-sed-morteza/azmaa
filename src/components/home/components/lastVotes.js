@@ -16,14 +16,21 @@ export default function LastVotes({ vote_voter, searchPhrase }) {
   const [voteCardLimit, setVoteCardLimit] = useState(3);
 
   const isVisible = useIsVisible(voterContainerRef);
-  console.log(voteList);
+  const [isseen , setIsseen] = useState(false);
+  useEffect( 
+  () => {
+    if(isVisible) {
+      setIsseen(true);
+    }
+  }
+  , [isVisible])
 
-  const trails = useTrail(8, {
-    from: { opacity: 0 },
-    to: { opacity: isVisible ? 1 : 0 },
-    config: { duration: 1000 },
-    delay: 100,
-  });
+const trails = useTrail(8, {
+  from: { opacity: 0 },
+  to: { opacity: isseen ? 1 : 0 },
+  config: { duration: 300 },
+  delay: 100,
+});
 
   useEffect(() => {
     if (searchPhrase.length > 0) {

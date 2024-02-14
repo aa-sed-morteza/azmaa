@@ -8,14 +8,6 @@ export default function TopBanner() {
     <Wrapper>
       <Carousel />
       {/* <SelectState /> */}
-      <IranMap
-        style={{
-          position: "absolute",
-          top: "20%",
-          bottom: "10%",
-          margin: "auto",
-        }}
-      />
     </Wrapper>
   );
 }
@@ -26,6 +18,6 @@ const Wrapper = styled.section`
   flex-wrap: nowrap;
   display: flex;
   padding: 0;
-  margin: 0;
-  position: relative;
+  margin: 0 0 50px 0;
+  position: relative; 
 `;

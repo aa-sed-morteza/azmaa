@@ -16,16 +16,29 @@ import { useUser } from "../context/userContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useTrail, animated } from "react-spring";
+import { useIsVisible } from "../hook/useIsVisible";
 
 export default function Envoy() {
   const { envoyListToShow } = useSelector((state) => state.envoy);
   const width = useWidth();
   const navigate = useNavigate();
   const SearchrRef = useRef(null);
-  const trails = useTrail(1, {
+  const ActionContainerRef = useRef(null);
+  const isVisible = useIsVisible(ActionContainerRef);
+
+  const [isseen , setIsseen] = useState(false);
+    useEffect( 
+    () => {
+      if(isVisible) {
+        setIsseen(true);
+      }
+    }
+    , [isVisible])
+
+  const trails = useTrail(8, {
     from: { opacity: 0 },
-    to: { opacity: 1 },
-    config: { duration: 1000 },
+    to: { opacity: isseen ? 1 : 0 },
+    config: { duration: 300 },
     delay: 100,
   });
 
@@ -59,7 +72,7 @@ export default function Envoy() {
             <HonestEnvoy envoys={envoyListToShow} />
           </Wraper>
         )}
-        <animated.div style={trails[1]} clas>
+        <animated.div style={trails[1]} ref={ActionContainerRef}>
           <Search />
         </animated.div>
 

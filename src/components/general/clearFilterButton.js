@@ -14,12 +14,11 @@ export default function ClearFilterButton() {
 }
 
 const Button = styled.button`
-  position: fixed;
-  bottom: 10%;
-  right: 15%;
+  /* position: fixed; */
   padding: 15px 20px;
   border-radius: 10px;
   background-color: rgb(9, 86, 68);
   border-color: rgb(255, 255, 255);
   color: rgb(255, 255, 255);
+  cursor: pointer;
 `;

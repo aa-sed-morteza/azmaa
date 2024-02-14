@@ -112,7 +112,6 @@ function App() {
               zindex={1000}
               // target={75}
             />
-            {isFilterActive && <ClearFilterButton />}
             <ToastContainer />
           </>
         ) : (

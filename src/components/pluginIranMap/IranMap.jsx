@@ -10,10 +10,11 @@ import {
   setFilteredCities,
   setFilteredCitiesData,
 } from "../../dataFunctions/publicDataFunctions";
+import ClearFilterButton from "../general/clearFilterButton";
 
 const useMouse = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
+  const { isFilterActive } = useSelector((state) => state.filter);
   useEffect(() => {
     function handle(e) {
       setMousePosition({
@@ -272,6 +273,9 @@ const IranMap = ({ position, empty, style }) => {
           </svg>
         </div>
       </div>
+      <ButtonContainer >
+        {isFilterActive && <ClearFilterButton /> }
+      </ButtonContainer>
     </Container>
   );
 };
@@ -281,6 +285,7 @@ export default IranMap;
 const Container = styled.div`
   border: 1px solid #cbcbcb;
   border-radius: 8px;
+  padding: 0 0 15px 15px;
   .input {
     display: flex;
     align-items: center;
@@ -352,3 +357,9 @@ const Container = styled.div`
     }
   }
 `;
+
+const ButtonContainer = styled.div`
+  display: flex ; 
+  justify-content: end;
+  align-items: center;
+`

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import data from "../../data.json";
 import styled from "styled-components";
 import background from "../../assets/back-controll.webp";
@@ -12,10 +12,19 @@ export default function FilterBox({
 }) {
   const filterRef = useRef(null);
   const isVisible = useIsVisible(filterRef);
+  const [isseen , setIsseen] = useState(false);
+    useEffect( 
+    () => {
+      if(isVisible) {
+        setIsseen(true);
+      }
+    }
+    , [isVisible])
+
   const trails = useTrail(8, {
     from: { opacity: 0 },
-    to: { opacity: isVisible ? 1 : 0 },
-    config: { duration: 800 },
+    to: { opacity: isseen ? 1 : 0 },
+    config: { duration: 300 },
     delay: 100,
   });
   const controllItem = data.controlPanel.map((item, i) => {
@@ -78,7 +87,7 @@ const FilterContainer = styled.div`
     border-radius: 8px;
     width: 58%;
     margin: auto;
-    margin-top: 93px;
+    margin-top: 50px;
   }
 `;
 
