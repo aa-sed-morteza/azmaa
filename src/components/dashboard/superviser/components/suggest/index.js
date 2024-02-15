@@ -212,7 +212,7 @@ const Content = styled.div`
     font-size: 3.721vw;
     margin: 0;
     &:after {
-      content: "ناظر";
+      content: "همیار";
       display: flex;
       color: rgba(0, 0, 0, 0.2);
       font-weight: 300;

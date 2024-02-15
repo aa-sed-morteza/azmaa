@@ -101,15 +101,15 @@ export default function EditCommission() {
     <Wraper>
       <FirstTitle>
         <p className="home">پنل / </p>
-        <p className="component"> ویرایش کمیسیون </p>
+        <p className="component"> ویرایش کمیسیون مورد نظر </p>
       </FirstTitle>
 
       <form onSubmit={handleSubmit} autoComplete="off">
         <Container>
-          <Title>۱. کمیسیون خود را تعیین کنید:</Title>
+          <Title>۱. کمیسیون مورد نظر خود را تعیین کنید:</Title>
           <Form>
             <CustomInput
-              label="کمیسیون"
+              label="کمیسیون مورد نظر"
               back="#ffffff"
               value={values.commission}
               onChange={handleChange}

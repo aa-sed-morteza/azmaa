@@ -8,7 +8,7 @@ export default function MyHistory() {
     <Container>
       <Title>
         <p className="home">پنل / </p>
-        <p className="component"> سابقه عملکرد </p>
+        <p className="component"> سابقه دیدگاه </p>
       </Title>
       <HistoryWraper>
         <GalleryTitle>آخرین رویدادها </GalleryTitle>

@@ -66,7 +66,7 @@ function App() {
               <Route path="/envoy" element={<Envoy />} />
               <Route path="/envoy/:id" element={<DetailsEnvoy />} />
 
-              <Route path="/votes" element={<Vote />} />
+              {/* <Route path="/votes" element={<Vote />} /> */}
               <Route
                 path="votes/presentation/:title"
                 element={<Presentation />}

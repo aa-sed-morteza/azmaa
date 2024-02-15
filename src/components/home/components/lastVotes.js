@@ -52,7 +52,7 @@ const trails = useTrail(8, {
 
   return (
     <Section ref={voterContainerRef} style={trails[0]}>
-      <Title style={trails[1]}>آخرین رأی‌گیری‌ها</Title>
+      {/* <Title style={trails[1]}>آخرین رأی‌گیری‌ها</Title>
       <VoterContainer style={trails[2]}>
         {voteListToShow.slice(0, voteCardLimit).map((item, i) => {
           if (vote_voter > 0)
@@ -71,9 +71,9 @@ const trails = useTrail(8, {
               </animated.div>
             );
         })}
-      </VoterContainer>
+      </VoterContainer> */}
 
-      <ShowMore
+      {/* <ShowMore
         onClick={() => {
           if (voteCardLimit < voteListToShow.length) {
             setVoteCardLimit(voteCardLimit + 10);
@@ -89,7 +89,7 @@ const trails = useTrail(8, {
             ? "نمایش بیشتر"
             : "نمایش کمتر "}
         </p>{" "}
-      </ShowMore>
+      </ShowMore> */}
     </Section>
   );
 }

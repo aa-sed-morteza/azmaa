@@ -142,7 +142,7 @@ export default function ActionCard({ activity }) {
       <CardHeader>
         <div className="action-logo"></div>
         <div className="title-card">
-          <p className="title">عملکرد</p>
+          <p className="title">دیدگاه</p>
           <h2> {activity.name}</h2>
           <p className="date">
             {activity.date && convertDateToFarsi(activity.date)}
@@ -188,7 +188,7 @@ export default function ActionCard({ activity }) {
         {/* <SmallButton>
           <p className="content">بازنشر</p>
         </SmallButton> */}
-        <ShareButton text={activity.name} title="اطلاع رسانی نماینده" />
+        <ShareButton text={activity.name} title="اطلاع رسانی نامزد" />
       </ButtonWraper>
     </VCContainer>
   );

@@ -144,7 +144,7 @@ export default function ControlCore(props) {
             setSelect("transparent");
           }}
         >
-          شفاف‌ترین نمایندگان
+          شفاف‌ترین نامزد ها
         </Title>
         <Title
           icon={location}

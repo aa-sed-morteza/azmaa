@@ -29,7 +29,7 @@ export default function GeneralActionCard(props) {
       setSymbol(voteSymbol);
     }
     if (props.act === "action") {
-      setAct("عملکرد");
+      setAct("دیدگاه");
       setActIcon(action);
       setSymbol(actionSymbol);
     }

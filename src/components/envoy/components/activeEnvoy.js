@@ -119,7 +119,7 @@ export default function ActiveEnvoy({ envoys }) {
   });
   return (
     <Container ref={envoyContainerRef}>
-      <Title>شفاف ترین نمایندگان</Title>
+      <Title>شفاف ترین نامزد ها</Title>
       <animated.div style={trails[3]}>
       <EnvoyContainer hide={showMore}>
         {/* {console.log(envoys)} */}

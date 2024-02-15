@@ -192,7 +192,7 @@ export default function SelectEnvoys() {
       {addActionLevel === 2 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
-            <Title>۲. نمایندگان خود را انتخاب کنید:</Title>
+            <Title>۲. نامزد ها خود را انتخاب کنید:</Title>
             <Filtering>
               <input placeholder="جستجو کن..." />
               <Items>
@@ -203,7 +203,7 @@ export default function SelectEnvoys() {
                   }}
                   className={select == 1 ? "active" : ""}
                 >
-                  نمایندگان
+                  نامزد ها
                 </Item>
                 <Item
                   icon={select == 2 ? locationActive : location}
@@ -247,7 +247,7 @@ export default function SelectEnvoys() {
         </form>
       ) : (
         <Container>
-          <Title>۲. نمایندگان خود را انتخاب کنید:</Title>
+          <Title>۲. نامزد ها خود را انتخاب کنید:</Title>
 
           <Filtering>
             <input placeholder="جستجو کن..." />
@@ -258,7 +258,7 @@ export default function SelectEnvoys() {
                 }
                 className={selectEnvoy.type == "envoy" ? "active" : ""}
               >
-                نمایندگان
+                نامزد ها
               </Item>
               <Item
                 icon={

@@ -21,7 +21,7 @@ export default function NoComment({ envoys }) {
   });
   return (
     <Container>
-      <Title>نمایندگان ممتنع</Title>
+      <Title>نامزد ها ممتنع</Title>
       <Gallery>{envoysList}</Gallery>
       <ShowMore>
         <p>نمایش بیشتر </p>

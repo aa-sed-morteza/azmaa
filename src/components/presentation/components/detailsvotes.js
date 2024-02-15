@@ -17,7 +17,7 @@ export default function DetailsVotes({ title, fraction, approved }) {
         </p>
       </Row>
       <Row>
-        <p className="type"> کمیسیون: </p>
+        <p className="type"> کمیسیون مورد نظر: </p>
         <p className="expand">{fraction.name}</p>
       </Row>
     </Container>

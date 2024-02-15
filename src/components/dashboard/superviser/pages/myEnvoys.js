@@ -36,16 +36,16 @@ export default function MyEnvoys() {
     <Container>
       <Title>
         <p className="home">پنل / </p>
-        <p className="component"> نمایندگان من </p>
+        <p className="component"> نامزد ها من </p>
       </Title>
       <Gallery>
         {/* <AddEnvoy>
           <p className="text">ثبــت نمایندۀ جـدید</p>
         </AddEnvoy> */}
         <CardGallery>
-          <GalleryTitle>نمایندگان من</GalleryTitle>
+          <GalleryTitle>نامزد ها من</GalleryTitle>
           {envoy.length === 0 ? (
-            "در حال حاضر نماینده‌ای برای شما ثبت نشده است"
+            "در حال حاضر نامزد‌ای برای شما ثبت نشده است"
           ) : (
             <EnvoyPart>
               {envoy.map((item, i) => (

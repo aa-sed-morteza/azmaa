@@ -179,7 +179,7 @@ export default function SelectionArea() {
               )}
 
               <Select
-                label="نام کمیسیون"
+                label="نام کمیسیون مورد نظر"
                 background="#FFFFFF"
                 value={values.commission}
                 onChange={handleChange}
@@ -228,7 +228,7 @@ export default function SelectionArea() {
             />
 
             <Select
-              label="نام کمیسیون"
+              label="نام کمیسیون مورد نظر"
               background="#FFFFFF"
               value={state.fraction.name}
               options={commission}

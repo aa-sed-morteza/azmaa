@@ -14,7 +14,7 @@ export default function CommissinInfo() {
           navigate("edit-commission-info");
         }}
       ></Edit>
-      <Title> کمیسیون</Title>
+      <Title> کمیسیون مورد نظر</Title>
       <Row>
         {state.fraction && <p className="text">{state.fraction.name}</p>}
       </Row>

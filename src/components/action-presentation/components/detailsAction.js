@@ -4,7 +4,7 @@ import styled from "styled-components";
 export default function DetailsAction({title}) {
   return (
     <Container>
-      <Title>جزئیات عملکرد</Title>
+      <Title>جزئیات دیدگاه</Title>
       <Row>
         <p className="type">نام طرح: </p>
         <p className="expand">{title}</p>
@@ -14,7 +14,7 @@ export default function DetailsAction({title}) {
         <p className="expand">?</p>
       </Row>
       <Row>
-        <p className="type"> کمیسیون: </p>
+        <p className="type"> کمیسیون مورد نظر: </p>
         <p className="expand">?</p>
       </Row> */}
     </Container>

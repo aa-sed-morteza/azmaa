@@ -28,7 +28,7 @@ export default function Disagree({ envoys }) {
         {envoys && envoys[0]
           ? envoys[0].vote
             ? envoys[0].vote
-            : "نمایندگان مخالف"
+            : "نامزد ها مخالف"
           : ""}{" "}
       </Title>
       <Gallery>{envoysList}</Gallery>

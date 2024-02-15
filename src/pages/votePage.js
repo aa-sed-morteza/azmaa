@@ -69,7 +69,7 @@ export default function Vote() {
         >
           خانه /{" "}
         </p>
-        <p className="component"> رأی‌گیری‌ها </p>
+        {/* <p className="component"> رأی‌گیری‌ها </p> */}
       </Title>
 
       <Content>
@@ -80,7 +80,7 @@ export default function Vote() {
           setSelectedFilter={setSelectedFilter}
         />
         {/* <Titleh1>آخرین رأی‌گیری‌ها</Titleh1> */}
-        <VoterContainer ref={showRef}>
+        {/* <VoterContainer ref={showRef}>
           {finalVoteList
             .sort((a, b) => {
               if (selectedFilter === 1) {
@@ -101,8 +101,8 @@ export default function Vote() {
                 </animated.div>
               );
             })}
-        </VoterContainer>
-        <ShowMore
+        </VoterContainer> */}
+        {/* <ShowMore
           arrow={showLimit >= finalVoteList.length}
           onClick={() => {
             if (showLimit < finalVoteList.length) {
@@ -117,7 +117,7 @@ export default function Vote() {
           <p>
             {showLimit >= finalVoteList.length ? "نمایش کمتر" : "نمایش بیشتر "}
           </p>{" "}
-        </ShowMore>
+        </ShowMore> */}
 
         {/* <Calendar bills={filteredBills} /> */}
       </Content>

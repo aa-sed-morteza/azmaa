@@ -30,7 +30,7 @@ export default function SetMobileNumber() {
   const [validate, setValidate] = useState(0);
   const [code, setCode] = useState("");
   const [update, setUpdate] = useState(false);
-  const [type, setType] = useState(["نماینده", "ناظر"]);
+  const [type, setType] = useState(["نامزد", "همیار"]);
   const [password, setPassword] = useState("");
   const userType = useSelector((state) => state.userType.userType);
   const setID = useSelector((state) => state.userID.id);
@@ -141,7 +141,7 @@ export default function SetMobileNumber() {
   const onSubmit = async (values, actions) => {
     // dispatch({ type: "SET_USERNAME", payload: values.phoneNember });
     dispatchRedux(setusername(values.phoneNember ));
-    if (values.type == "نماینده") {
+    if (values.type == "نامزد") {
       // dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
       dispatchRedux(setUserType("parliament_member"));
     } else {

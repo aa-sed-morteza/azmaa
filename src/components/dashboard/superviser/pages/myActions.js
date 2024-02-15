@@ -141,7 +141,7 @@ export default function MyActions() {
               {filteredActivities.map((item, i) => (
                 <ActionCard
                   img={pic2}
-                  titr="عملکرد"
+                  titr="دیدگاه"
                   title={item.activity}
                   date="?"
                   icon={icon}

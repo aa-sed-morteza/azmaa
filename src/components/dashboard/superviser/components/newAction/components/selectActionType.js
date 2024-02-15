@@ -133,7 +133,7 @@ export default function SelectActionType() {
         >
           <div className="symbol"></div>
           <div className="content">
-            <p className="titr">عملکرد ها</p>
+            <p className="titr">دیدگاه ها</p>
             <h2 className="title">{x.name}</h2>
             <p className="date">{convertDateToFarsi(x.date)}</p>
           </div>
@@ -149,7 +149,7 @@ export default function SelectActionType() {
       >
         <div className="symbol"></div>
         <div className="content">
-          <p className="titr">عملکرد ها</p>
+          <p className="titr">دیدگاه ها</p>
           <h2 className="title">{x.name}</h2>
           <p className="date">{convertDateToFarsi(x.date)}</p>
         </div>

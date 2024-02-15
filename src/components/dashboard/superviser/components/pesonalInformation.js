@@ -62,7 +62,7 @@ export default function PersonalInformation() {
           )}
         </Image>
         <Label>
-          <p className="title">ناظر نمایندگان</p>
+          <p className="title">همیار نامزد ها</p>
           <p className="name">{`${userdata.first_name}   ${userdata.last_name}`}</p>
           <p className="edit" onClick={toggle}>
             ویرایش تصویر{" "}

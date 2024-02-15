@@ -8,7 +8,7 @@ import { BaseBackURL } from "../../../constant/api";
 export default function AdvanceSearch({setEnvoys}) {
   const [open, setOpen] = useState(false);
   const [commission, setCommission] = useState(false);
-  const [commissionText, setCommissionText] = useState("همۀ کمیسیون‌ها");
+  const [commissionText, setCommissionText] = useState("همۀ کمیسیون مورد نظر‌ها");
   const [area, setArea] = useState(false);
   const [areaText, setAreaText] = useState("همۀ حوزه‌ها");
   const [district, setDistrict] = useState([]);

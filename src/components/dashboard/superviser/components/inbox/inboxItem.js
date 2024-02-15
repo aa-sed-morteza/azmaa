@@ -90,7 +90,7 @@ export default function InboxItem(props) {
               <ActionCard>
                 <div className="symbol"></div>
                 <div className="content">
-                  <p className="titr">عملکرد ها</p>
+                  <p className="titr">دیدگاه ها</p>
                   <h2 className="title">{props.detailTitle}</h2>
                   <p className="date">{props.detailDate}</p>
                 </div>

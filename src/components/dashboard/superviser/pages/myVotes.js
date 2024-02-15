@@ -152,7 +152,7 @@ export default function MyVotes() {
     <Container>
       <Title>
         <p className="home">پنل / </p>
-        <p className="component"> رأی‌گیری‌ها </p>
+        {/* <p className="component"> رأی‌گیری‌ها </p> */}
       </Title>
       <Wraper>
         <AddnewAction

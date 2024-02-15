@@ -77,7 +77,7 @@ export default function HistoryEnvoy() {
           navigate("edit-history-info");
         }}
       ></Edit>
-      <Title>سوابق نماینده</Title>
+      <Title>سوابق نامزد</Title>
       <Row>
         {hisroty &&
           hisroty.map((item, i) => {

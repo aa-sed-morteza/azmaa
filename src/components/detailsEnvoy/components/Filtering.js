@@ -368,29 +368,20 @@ export default function Filtering({ id }) {
             فعالیت‌ها
           </Item>
           <Item
-            icon={select == 3 ? voteAction : vote}
-            onClick={() => {
-              setSelect(3);
-            }}
-            className={select == 3 ? "active" : ""}
-          >
-            رأی‌گیری‌ها
-          </Item>
-          <Item
             icon={select == 4 ? action : action}
             onClick={() => {
               setSelect(4);
             }}
             className={select == 4 ? "active" : ""}
           >
-            عملکردها
+            دیدگاهها
           </Item>
         </Items>
       </FilteringWraper>
 
       {select == 1 && (
         <Calendar>
-          <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
+          <CalendarTitle>کارنامۀ نامزد</CalendarTitle>
           {/* <SubTitile>مرداد ۱۴۰۱</SubTitile>
           <Gallery>
             {positiveVote}
@@ -412,7 +403,7 @@ export default function Filtering({ id }) {
       {select == 2 && <>همه با فعالیت ها چه فرقی داره ؟</>}
       {select == 3 && (
         <Calendar>
-          <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
+          <CalendarTitle>کارنامۀ نامزد</CalendarTitle>
           {/* <SubTitile>مرداد ۱۴۰۰</SubTitile> */}
           {/* <Gallery> */}
           {/* {positiveVote} */}
@@ -426,7 +417,7 @@ export default function Filtering({ id }) {
       )}
       {select == 4 && (
         <Calendar>
-          <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
+          <CalendarTitle>کارنامۀ نامزد</CalendarTitle>
           {/* <SubTitile>مرداد ۱۴۰۰</SubTitile> */}
           {/* <Gallery>{activity}</Gallery> */}
           {activityElements}

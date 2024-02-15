@@ -317,7 +317,7 @@ export default function NormalController({ vote_voter }) {
       <FilterBox />
 
       <>
-        {(select === 0 || select === 3) && (
+        {/* {(select === 0 || select === 3) && (
           <LastVotes ref={voterContainerRef}>
             <Title>آخرین رأی‌گیری‌ها</Title>
             <VoterContainer>
@@ -350,12 +350,12 @@ export default function NormalController({ vote_voter }) {
               </p>{" "}
             </ShowMore>
           </LastVotes>
-        )}
+        )} */}
         {(select === 0 || select === 4) &&
           (width < 481 ? (
             <>
               <LastActions ref={mobileActionContainerRef}>
-                <Title> آخرین عملکردها</Title>
+                <Title> آخرین دیدگاهها</Title>
                 <Album>
                   {activities.slice(0, actionCardLimit).map((item, i) => {
                     return <ActionCard activity={item} key={"activity" + i} />;
@@ -381,7 +381,7 @@ export default function NormalController({ vote_voter }) {
                 <hr />
               ) : (
                 <BestEnvoyContainer>
-                  <Title>شفاف‌ترین نمایندگان</Title>
+                  <Title>شفاف‌ترین نامزد ها</Title>
                   <SecondAlbum hide={thirdHide}>
                     {envoyListToShow
                       .filter((item) => {
@@ -431,7 +431,7 @@ export default function NormalController({ vote_voter }) {
               )}
 
               <LastActions ref={actionContainerRef}>
-                <Title> آخرین عملکردها</Title>
+                <Title> آخرین دیدگاهها</Title>
                 <ActionContainer>
                   {activities.slice(0, actionCardLimit).map((item, i) => {
                     return (
@@ -575,7 +575,7 @@ export default function NormalController({ vote_voter }) {
       {/* just actions */}
       {/* {select == 4 && (
         <LastActions>
-          <Title> آخرین عملکردها</Title>
+          <Title> آخرین دیدگاهها</Title>
           <ActionContainer hide={secondHide}>
             {activities
               .filter((item) => {

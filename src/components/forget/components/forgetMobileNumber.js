@@ -26,7 +26,7 @@ export default function ForgetMobileNumber() {
   const [validate, setValidate] = useState(0);
   const [code, setCode] = useState("");
   const [update, setUpdate] = useState(false);
-  const [type, setType] = useState(["نماینده", "ناظر"]);
+  const [type, setType] = useState(["نامزد", "همیار"]);
   const [password, setPassword] = useState("");
   const [phon, setPhon] = useState("");
   const [limitTime, setLimitTime] = useState(false);
@@ -124,7 +124,7 @@ export default function ForgetMobileNumber() {
 
   const onSubmit = async (values, actions) => {
     // dispatch({ type: "SET_USERNAME", payload: values.phoneNember });
-    // if (values.type == "نماینده") {
+    // if (values.type == "نامزد") {
     //   dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
     // } else {
     //   dispatch({ type: "SET_TYPE_USER", payload: "supervisor" });

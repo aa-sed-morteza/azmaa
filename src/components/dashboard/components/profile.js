@@ -124,7 +124,7 @@ export default function Profile() {
           <p className="title">
             {userType === "parliament_member"
               ? "نمایندۀ مجلس شورای اسلامی"
-              : " ناظر نمایندگان"}{" "}
+              : " همیار نامزد ها"}{" "}
           </p>
           <p className="name">{`${userdata.first_name}   ${userdata.last_name}`}</p>
           <p className="edit" onClick={toggle}>

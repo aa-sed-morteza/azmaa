@@ -41,14 +41,14 @@ export default function Presentation() {
   return (
     <Container>
       <Title>
-        <p
+        {/* <p
           className="home"
           onClick={() => {
             navigate("/votes");
           }}
         >
           خانه / رأی‌گیری‌ها /
-        </p>
+        </p> */}
         <p className="component"> {bill && bill.name} </p>
       </Title>
       <Content>

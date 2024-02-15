@@ -32,7 +32,7 @@ export default function ActionsCensus({ total, data }) {
     <Container>
       <Title> آمار </Title>
       <Row>
-        {total > 0 ? dataOptions : <h5> هنوز عملکردی ثبت نشده</h5>}
+        {total > 0 ? dataOptions : <h5> هنوز دیدگاهی ثبت نشده</h5>}
         {/* <Item className="active">
           <Type color="#6CBBA9" icon={ok}>
             همراه:

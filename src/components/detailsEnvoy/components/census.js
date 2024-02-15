@@ -38,7 +38,7 @@ export default function Census({ data, complete, envoy }) {
         {checkCensus(data, data)}
       </Row>
       <Row>
-        <p className="type">عملکردهای ثبت‌شده:</p>
+        <p className="type">دیدگاههای ثبت‌شده:</p>
         {checkCensus(envoy, complete)}
       </Row>
     </Container>

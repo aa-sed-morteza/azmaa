@@ -56,7 +56,7 @@ export default function ActionPresentation() {
             navigate("/actions");
           }}
         >
-          خانه / عملکردها /
+          خانه / دیدگاهها /
         </p>
         <p className="component">{action && action.name} </p>
       </Title>
@@ -66,7 +66,7 @@ export default function ActionPresentation() {
             <Header
               img={symbol}
               icon={action}
-              type="عملکرد"
+              type="دیدگاه"
               title={action.name}
               date={action.date && convertDateToFarsi(action.date)}
             />

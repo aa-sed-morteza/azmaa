@@ -57,7 +57,7 @@ const trails = useTrail(8, {
   return (
     <Section ref={actionContainerRef} style={trails[0]}>
       <animated.div style={trails[3]}>
-        <Title style={trails[1]}> آخرین عملکردها</Title>
+        <Title style={trails[1]}> آخرین دیدگاهها</Title>
         <ActionContainer>
           {activityListToShow.slice(0, actionCardLimit).map((item, i) => {
             return <ActionCard activity={item} key={"lastAction" + i} />;

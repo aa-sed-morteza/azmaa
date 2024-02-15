@@ -149,7 +149,7 @@ export default function VoteEnvoy() {
       {addVoteLevel === 3 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
-            <Title>۳. رأی نماینده را انتخاب کنید:</Title>
+            <Title>۳. رأی نامزد را انتخاب کنید:</Title>
             {state.typeAction.type == "vote" ? voteItems : actionsItems}
 
             {/* <RadioButton
@@ -252,7 +252,7 @@ export default function VoteEnvoy() {
         </form>
       ) : (
         <Container>
-          <Title>۳. رأی نماینده را انتخاب کنید:</Title>
+          <Title>۳. رأی نامزد را انتخاب کنید:</Title>
           {state.typeAction.type == "vote" ? checkVoteItems : checkActionsItems}
 
           {/* <RadioButton>

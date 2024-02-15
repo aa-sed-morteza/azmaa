@@ -53,10 +53,10 @@ export default function EnvoyCard({name,state,commission,img,persantage,id,inBox
         </b>
       </EnvoyImage>
       <Content color={color}>
-        <h3>{name || "نام نماینده"}</h3>
+        <h3>{name || "نام نامزد"}</h3>
         <div className="status">
-          <p className="state"> {state || "حوزه نماینده"}</p>
-          <p className="position"> {commission || "کمیسیون"}</p>
+          <p className="state"> {state || "حوزه نامزد"}</p>
+          <p className="position"> {commission || "کمیسیون مورد نظر"}</p>
         </div>
         <div className="persantage">
           <p className="text">شفافیت: ٪</p>

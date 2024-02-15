@@ -22,7 +22,7 @@ export default function Agree({ envoys }) {
 
   return (
     <Container>
-      <Title>نمایندگان موافق</Title>
+      <Title>نامزد ها موافق</Title>
       <Gallery>{envoysList}</Gallery>
       <ShowMore>
         <p>نمایش بیشتر </p>
