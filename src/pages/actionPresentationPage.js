@@ -56,7 +56,7 @@ export default function ActionPresentation() {
             navigate("/actions");
           }}
         >
-          خانه / دیدگاهها /
+          خانه / دیدگاه ها /
         </p>
         <p className="component">{action && action.name} </p>
       </Title>

@@ -355,7 +355,7 @@ export default function NormalController({ vote_voter }) {
           (width < 481 ? (
             <>
               <LastActions ref={mobileActionContainerRef}>
-                <Title> آخرین دیدگاهها</Title>
+                <Title> آخرین دیدگاه ها</Title>
                 <Album>
                   {activities.slice(0, actionCardLimit).map((item, i) => {
                     return <ActionCard activity={item} key={"activity" + i} />;
@@ -431,7 +431,7 @@ export default function NormalController({ vote_voter }) {
               )}
 
               <LastActions ref={actionContainerRef}>
-                <Title> آخرین دیدگاهها</Title>
+                <Title> آخرین دیدگاه ها</Title>
                 <ActionContainer>
                   {activities.slice(0, actionCardLimit).map((item, i) => {
                     return (
@@ -575,7 +575,7 @@ export default function NormalController({ vote_voter }) {
       {/* just actions */}
       {/* {select == 4 && (
         <LastActions>
-          <Title> آخرین دیدگاهها</Title>
+          <Title> آخرین دیدگاه ها</Title>
           <ActionContainer hide={secondHide}>
             {activities
               .filter((item) => {

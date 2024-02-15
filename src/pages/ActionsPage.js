@@ -70,7 +70,7 @@ export default function Actions() {
         >
           خانه /{" "}
         </p>
-        <p className="component"> دیدگاهها </p>
+        <p className="component"> دیدگاه ها </p>
       </DivTitle>
 
       <Content>
@@ -82,7 +82,7 @@ export default function Actions() {
         <>
           <LastActions>
               <animated.div style={trails[3]}>
-              <Title> دیدگاهها</Title>
+              <Title> دیدگاه ها</Title>
               <ActionContainer ref={showRef}>
               {finalActivityList
                 .sort((a, b) => {

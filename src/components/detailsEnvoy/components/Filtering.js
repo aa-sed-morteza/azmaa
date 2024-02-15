@@ -374,7 +374,7 @@ export default function Filtering({ id }) {
             }}
             className={select == 4 ? "active" : ""}
           >
-            دیدگاهها
+            دیدگاه ها
           </Item>
         </Items>
       </FilteringWraper>

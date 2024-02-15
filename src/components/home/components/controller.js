@@ -318,7 +318,7 @@ export default function Controller({ vote_voter }) {
           (width < 481 ? (
             <>
               <LastActions ref={mobileActionContainerRef}>
-                <Title> آخرین دیدگاهها</Title>
+                <Title> آخرین دیدگاه ها</Title>
                 <Album>
                   {activityListToShow
                     .slice(0, actionCardLimit)
@@ -398,7 +398,7 @@ export default function Controller({ vote_voter }) {
               )}
 
               <LastActions ref={actionContainerRef}>
-                <Title> آخرین دیدگاهها</Title>
+                <Title> آخرین دیدگاه ها</Title>
                 <ActionContainer>
                   {activityListToShow
                     .slice(0, actionCardLimit)
@@ -544,7 +544,7 @@ export default function Controller({ vote_voter }) {
       {/* just actions */}
       {/* {select == 4 && (
         <LastActions>
-          <Title> آخرین دیدگاهها</Title>
+          <Title> آخرین دیدگاه ها</Title>
           <ActionContainer hide={secondHide}>
             {activities
               .filter((item) => {

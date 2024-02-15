@@ -45,7 +45,7 @@
       "active_icon": "../../assets/envoys-active.webp"
     },
     {
-      "title": "دیدگاهها",
+      "title": "دیدگاه ها",
       "path": "/dashboard/myActions",
       "icon": "../../assets/history.webp",
       "active_icon": "../../assets/history-active.webp"
@@ -91,7 +91,7 @@
       "active_icon": "../../assets/account.webp"
     },
     {
-      "title": "دیدگاهها",
+      "title": "دیدگاه ها",
       "path": "/dashboard/myActions",
       "icon": "../../assets/history.webp",
       "active_icon": "../../assets/history-active.webp"
@@ -305,7 +305,7 @@
       "value": "district"
     },
     {
-      "name": "دیدگاهها",
+      "name": "دیدگاه ها",
       "icon": "../../assets/act.webp",
       "value": "activity"
     }
