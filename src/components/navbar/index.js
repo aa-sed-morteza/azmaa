@@ -25,11 +25,7 @@ const TopBar = styled.section`
   padding: 20px 30px;
   display: flex;
   justify-content: space-between;
-  z-index: 100;
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
+
 
   @media (min-width: 481px) {
     justify-content: flex-start;
