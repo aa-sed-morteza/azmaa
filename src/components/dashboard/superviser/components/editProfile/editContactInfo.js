@@ -109,22 +109,26 @@ export default function EditContactInformation() {
 
   // Convert persianNumber to englishNumber
   useEffect(() => {
-    setFieldValue(
-      "mobileNumber",
-      values.mobileNumber
-        .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
-        .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
-    );
+    if(values.mobileNumber) {
+      setFieldValue(
+        "mobileNumber",
+        values.mobileNumber
+          .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+          .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+      );
+    }
   }, [values.mobileNumber]);
 
   // Convert persianNumber to englishNumber
   useEffect(() => {
-    setFieldValue(
-      "phoneNubmer",
-      values.phoneNubmer
-        .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
-        .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
-    );
+    if(values.phoneNubmer) {
+      setFieldValue(
+        "phoneNubmer",
+        values.phoneNubmer
+          .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
+          .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+      );
+    }
   }, [values.phoneNubmer]);
 
   return (
