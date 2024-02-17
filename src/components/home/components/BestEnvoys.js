@@ -14,6 +14,7 @@ export default function BestEnvoys({ searchPhrase }) {
   const envoyList = useSelector((state) => state.envoy.envoyListToShow);
   const [envoyListToShow, setEnvoyListToShow] = useState([...envoyList]);
   const [showLimit, setShowLimit] = useState(3);
+  
 
 
 

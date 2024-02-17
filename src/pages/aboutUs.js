@@ -35,17 +35,21 @@ export default function AboutMe() {
 const Content = styled.div`
 
   width: 90%;
-  margin: 10vw auto;
+  margin: 5vw auto;
   .text {
     margin: 0;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 1.25vw;
     line-height: 41px;
     text-align: justify;
     color: #707070;
+    @media (max-width: 481px){
+      font-size: 3.725vw;
+    }
   }
   @media (max-width: 481px) {
     padding-top: 10vw;
     padding-bottom: 4vw;
+   
   }
 `;

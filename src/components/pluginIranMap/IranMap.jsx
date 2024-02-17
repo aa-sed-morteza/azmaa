@@ -286,6 +286,7 @@ const Container = styled.div`
   border: 1px solid #cbcbcb;
   border-radius: 8px;
   padding: 0 0 15px 15px;
+  
   .input {
     display: flex;
     align-items: center;
@@ -322,7 +323,11 @@ const Container = styled.div`
       display: flex;
       align-items: center;
     }
+    @media (max-width: 768px){
+      font-size: 4vw;
+    }
   }
+
 
   .mapArrow {
     display: inline-flex;

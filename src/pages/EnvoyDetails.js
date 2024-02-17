@@ -107,7 +107,7 @@ const Container = styled.section`
   /* overflow: hidden; */
   gap: 3.488vw;
   @media (min-width: 481px) {
-    padding: 7vw 0 6vw;
+    padding: 2vw 0 6vw;
     background-color: #ffffff;
     gap: 0;
     flex-direction: row;
@@ -174,7 +174,6 @@ const SecondSection = styled.div`
   padding: 2.326vw;
   @media (min-width: 481px) {
     width: 65%;
-    margin-top: -93px;
     padding: 0.99vw 1.302vw 0 0;
     & > * {
       & .filter-box {

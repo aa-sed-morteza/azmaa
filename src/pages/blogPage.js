@@ -48,18 +48,18 @@ const Container = styled.section`
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
-  padding: 21vw 20px;
+  padding: 6vw 20px;
   overflow: hidden;
   @media (min-width: 481px) {
     background-color: #ffffff;
-    padding: 7vw 0 6vw;
+    padding: 2vw 0 6vw;
   }
 `;
 
 const Title = styled.div`
   display: flex;
   margin-bottom: 12px;
-  padding-right: 10px;
+  padding-right: 10%;
   white-space: nowrap;
   .home {
     font-size: 3.721vw;
