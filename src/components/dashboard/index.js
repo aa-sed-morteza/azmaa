@@ -71,7 +71,6 @@ export default function Dashboard() {
 
     axios(config)
       .then((res) => {
-        console.log( res.data);
         // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
         dispathRedux(setuserdata(res.data ));
       })
