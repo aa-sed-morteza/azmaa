@@ -7,9 +7,7 @@ export const setPasswordSlice = createSlice({
   },
   reducers: {
     setpassword(state , action) {
-      console.log(action.payload);
         state.password = action.payload ;
-        console.log(action.payload); 
     }
     }
 });

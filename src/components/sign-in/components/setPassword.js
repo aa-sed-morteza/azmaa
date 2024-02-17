@@ -20,7 +20,6 @@ export default function SetPassword() {
 
   const onSubmit = async (values, actions) => {
     // dispatch({ type: "SET_PASSWORD", payload: values.password });
-    console.log(values.password);
     dispatchRedux(setpassword(values.password));
     // dispatch({ type: "SET_SIGN_LEVEL", payload: 3 });
     dispatchRedux(setsigninLevel(3));
@@ -45,7 +44,6 @@ export default function SetPassword() {
 
   const dispatchRedux = useDispatch();
   const password = useSelector(state => state.password.password);
-  console.log(password);
 
   return (
     <>

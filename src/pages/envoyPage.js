@@ -45,14 +45,13 @@ export default function Envoy() {
     config: { duration: 300 },
     delay: 100,
   });
-  console.log(searchparams)
+
 
   useEffect(() => {
     if (searchparams.length > 0) {
       let newFilteredList = [];
       for (const item of envoyListToShow) {
         const name = item.first_name + " " + item.last_name;
-        console.log(item)
         if (name.includes(searchparams)) {
           newFilteredList.push(item);
         }

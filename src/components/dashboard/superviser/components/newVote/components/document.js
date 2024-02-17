@@ -109,7 +109,7 @@ export default function Document() {
 
         axios(config)
           .then(function (response) {
-            console.log(JSON.stringify(response.data));
+            // console.log(JSON.stringify(response.data));
             toast.success(" فعالیت با موفقیت ثبت شد!", {
               position: toast.POSITION.TOP_RIGHT,
             });
@@ -144,7 +144,7 @@ export default function Document() {
         };
         axios(config)
           .then(function (response) {
-            console.log(response.data);
+            // console.log(response.data);
             toast.success(" فعالیت با موفقیت ثبت شد!", {
               position: toast.POSITION.TOP_RIGHT,
             });

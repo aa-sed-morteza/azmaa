@@ -54,7 +54,6 @@ export default function Actions() {
           }
         }
       }
-      console.log(newList);
       setFinalActivityList([...newList]);
     }
   }, [selectedTag]);

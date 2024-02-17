@@ -76,10 +76,9 @@ const IranMap = ({ position, empty, style }) => {
     }
   }, [isFilterActive]);
 
-  console.log("selected province", selectedProvince);
+  // console.log("selected province", selectedProvince);
   const handleSelectAll = () => {
     const list = [...selectedCities];
-    console.log(availableCities);
     for (const city of availableCities) {
       if (!list.includes(city)) {
         list.push(city);
@@ -88,8 +87,7 @@ const IranMap = ({ position, empty, style }) => {
     setSelectedCities([...list]);
   };
 
-  console.log(availableCities);
-  console.log(selectedCities);
+
 
   return (
     <Container style={style}>

@@ -41,7 +41,7 @@ export default function VoteEnvoy() {
     };
 
     axios(config).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setActions([...res.data.activity_choice]);
     });
   };

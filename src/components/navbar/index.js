@@ -412,7 +412,6 @@ export default function Navbar() {
     dispatchRedux(togglmenu());
   }
 
-  console.log(ismenuopen);
 
   return (
     <TopBar>

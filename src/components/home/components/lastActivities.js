@@ -38,13 +38,10 @@ const trails = useTrail(8, {
     if (searchPhrase.length > 0) {
       let newFilteredList = [];
       for (const item of activityList) {
-        console.log(item.name);
         if (item.name.includes(searchPhrase)) {
-          console.log(searchPhrase);
           newFilteredList.push(item);
         }
       }
-      console.log(newFilteredList);
       setActivityListToShow([...newFilteredList]);
     } else {
       setActivityListToShow([...activityList]);

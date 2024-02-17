@@ -28,7 +28,7 @@ export default function Census({ data, complete, envoy }) {
     );
   };
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <Container>

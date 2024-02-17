@@ -150,7 +150,7 @@ export default function Dashboard() {
         getPersonalInfo(userId);
         navigate("/dashboard");
       } else if (res.data.code === -1) {
-        console.log(res);
+        // console.log(res);
         Cookies.remove("userId");
         Cookies.remove("userName");
         Cookies.remove("userType");

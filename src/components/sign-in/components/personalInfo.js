@@ -30,7 +30,6 @@ export default function PersonalInformation() {
   const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
 
 
-  console.log(userdata);
 
 
   const refreshToken = () => {

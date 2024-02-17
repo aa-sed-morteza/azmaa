@@ -98,8 +98,7 @@ export default function EnvoyFiltering({ envoys }) {
 
   const navigate = useNavigate();
 
-  console.log(envoys);
-  console.log(envoyFilter);
+
 
   useEffect(() => {
     let newFilteredList = [];
@@ -133,7 +132,7 @@ export default function EnvoyFiltering({ envoys }) {
       setEnvoyFilter([...newList]);
     }
 
-    console.log(newFilteredList);
+    // console.log(newFilteredList);
   }, [searchparams, select, envoys]);
 
   return (

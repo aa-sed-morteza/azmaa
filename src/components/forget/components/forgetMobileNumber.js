@@ -54,7 +54,6 @@ export default function ForgetMobileNumber() {
 
       axios(config)
         .then((res) => {
-          console.log(res);
           setValidate(0);
           navigate(`/log-in/`);
           setStep(1);
@@ -142,7 +141,6 @@ export default function ForgetMobileNumber() {
 
     axios(config)
       .then((res) => {
-        console.log(res);
         if (res.data.msg === "code send") {
           toast.success("کد بازیابی برای شما ارسال شد!", {
             position: toast.POSITION.TOP_RIGHT,

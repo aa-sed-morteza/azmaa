@@ -37,7 +37,6 @@ export async function getAllEnvoysData() {
 
   return axios(config)
     .then((res) => {
-      console.log("hello");
       if (res.data.length > 0) {
         store.dispatch(setAllEnvoys(res.data));
         store.dispatch(setEnvoyToShow(res.data));
@@ -169,7 +168,6 @@ export function filterDataByCity(cityList) {
 
   for (const item of cityList) {
     for (const envoy of allEnvoys) {
-      console.log(envoy);
       if (envoy.electoral_district_name?.includes(item)) {
         if (!filteredEnvoyList.includes(envoy)) {
           filteredEnvoyList.push(envoy);
@@ -185,7 +183,6 @@ export function filterDataByCity(cityList) {
     // }
     for (const activity of allActivities) {
       for (const vote of activity.verified_vote) {
-        console.log(vote);
         if (vote.voter.electoral_district_name?.includes(item)) {
           if (!filteredActivitiesList.includes(activity)) {
             filteredActivitiesList.push(activity);
@@ -215,7 +212,6 @@ export function clearFilterForAnyData() {
 }
 
 export function setFilteredCitiesData(provinces, cities) {
-  console.log(provinces);
   store.dispatch(setFilteredProvince(provinces));
   store.dispatch(setFilteredCities(cities));
 }

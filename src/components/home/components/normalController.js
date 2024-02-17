@@ -65,7 +65,6 @@ export default function NormalController({ vote_voter }) {
       for (const item of vote.negative_vote) {
         if (item.voter.id === +vote_voter) list.push(vote);
       }
-      console.log(vote.positive_vote);
       for (const item of vote.positive_vote) {
         if (item.voter.id === +vote_voter) list.push(vote);
       }
@@ -73,12 +72,10 @@ export default function NormalController({ vote_voter }) {
         if (item.voter.id === +vote_voter) list.push(vote);
       }
     }
-    console.log(list);
     setVotes([...list]);
   };
 
   const handleEnvoyActivity = () => {
-    console.log(activityList);
     const list = [];
     for (const activity of activityList) {
       for (const item of activity.verified_vote) {
@@ -87,7 +84,6 @@ export default function NormalController({ vote_voter }) {
         }
       }
     }
-    console.log(list);
     setActivities([...list]);
   };
 

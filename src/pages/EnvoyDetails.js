@@ -21,7 +21,7 @@ export default function DetailsEnvoy() {
   const [envoy, setEnvoy] = useState({});
   const [envoyVotes, setEnvoyVotes] = useState([]);
   const { voteList } = useSelector((state) => state.vote);
-  console.log(voteList);
+
 
   const getEnvoyDetail = () => {
     let config = {
@@ -40,7 +40,6 @@ export default function DetailsEnvoy() {
       for (const item of vote.negative_vote) {
         if (item.voter.id === +id) list.push(vote);
       }
-      console.log(vote.positive_vote);
       for (const item of vote.positive_vote) {
         if (item.voter.id === +id) list.push(vote);
       }
@@ -48,7 +47,6 @@ export default function DetailsEnvoy() {
         if (item.voter.id === +id) list.push(vote);
       }
     }
-    console.log(list);
     setEnvoyVotes([...list]);
   };
 

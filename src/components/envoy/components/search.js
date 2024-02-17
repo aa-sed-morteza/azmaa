@@ -54,7 +54,6 @@ export default function Search({searchparams , setsearchparams}) {
     <Container>
       <input value={searchparams}
       onChange={(e) => {
-        console.log(e.target.value)
         setsearchparams(e.target.value);
       }}
       //  onChange={event => { 

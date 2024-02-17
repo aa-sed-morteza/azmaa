@@ -36,7 +36,6 @@ export default function Presentation() {
     getBill();
   }, []);
 
-  console.log(bill);
 
   return (
     <Container>
