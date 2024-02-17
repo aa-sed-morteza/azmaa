@@ -24,7 +24,7 @@ export default function EditContactInformation() {
 
   const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
 
-  console.log(userdata);
+
 
   const refreshToken = () => {
     const data = new FormData();
