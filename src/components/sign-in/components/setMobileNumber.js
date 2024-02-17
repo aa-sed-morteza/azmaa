@@ -33,7 +33,7 @@ export default function SetMobileNumber() {
   const [type, setType] = useState(["نامزد", "همیار"]);
   const [password, setPassword] = useState("");
   const userType = useSelector((state) => state.userType.userType);
-  const setID = useSelector((state) => state.userID.id);
+
 
   const dispatchRedux = useDispatch();
 
