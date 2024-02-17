@@ -60,7 +60,7 @@ const Title = styled.h4`
   @media (min-width: 480px) {
     font-size: 1.875vw;
     transform: translateY(-60%);
-    width: 21%;
+    width: 24%;
     margin-right: 1.646vw;
     margin-bottom: -1.042vw;
   }
