@@ -20,7 +20,9 @@ export default function EditCommission() {
   const dispathRedux = useDispatch();
   const token = useSelector(state => state.token.token);
   const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
-
+  const userId = useSelector(state => {
+    return state.userID.id
+  } );
 
   const refreshToken = () => {
     const data = new FormData();
@@ -29,9 +31,9 @@ export default function EditCommission() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      // headers: {
-      //   Authorization: `Bearer ${state.token}`,
-      // },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       data: data,
     };
 
@@ -52,7 +54,7 @@ export default function EditCommission() {
 
     let config = {
       method: "put",
-      url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },

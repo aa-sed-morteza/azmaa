@@ -51,9 +51,9 @@ export default function EditEnvoyState() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      // headers: {
-      //   Authorization: `Bearer ${state.token}`,
-      // },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       data: data,
     };
 

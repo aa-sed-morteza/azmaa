@@ -43,6 +43,7 @@ import { setusername } from "../../redux/slices/setUserNameSlice";
 
 
 import { setUserType } from "../../redux/slices/userTypeSlice";
+import { setID } from "../../redux/slices/setId";
 
 export default function Dashboard() {
   const { state, dispatch } = useUser();
@@ -70,7 +71,6 @@ export default function Dashboard() {
 
     axios(config)
       .then((res) => {
-        // console.log('data;', res.data);
         // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
         dispathRedux(setuserdata(res.data ));
       })
@@ -140,6 +140,7 @@ export default function Dashboard() {
       if (res.data.id) {
         Cookies.set("userId", res.data.id);
         // dispatch({ type: "SET_LOGGED_IN", payload: true });
+        dispathRedux(setID(res.data.id));
         dispathRedux(login());
         dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
         // dispatch({ type: "SET_USERNAME", payload: Cookies.get("userName") });

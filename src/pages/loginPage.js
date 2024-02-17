@@ -25,6 +25,7 @@ import { settoken } from "../redux/slices/setTokenSlice";
 import { setusername } from "../redux/slices/setUserNameSlice";
 import { setRefreshToken } from "../redux/slices/setRefreshTokenSlice";
 import { setUserType } from "../redux/slices/userTypeSlice";
+import { setID } from "../redux/slices/setId";
 
 export default function LogIn() {
   const { state, dispatch } = useUser();
@@ -54,7 +55,8 @@ export default function LogIn() {
 
     axios(config)
       .then((res) => {
-        // console.log(res);
+
+        dispatchRedux(setID(res.data.id))
         if (res.data.id) {
           toast.success("ورود با موفقیت انجام شد!", {
             position: toast.POSITION.TOP_RIGHT,

@@ -29,6 +29,10 @@ export default function Profile() {
   const token = useSelector(state => state.token.token);
   const userdata = useSelector(state => state.userdata);
   const image = useSelector(state => state.image.image);
+  const userId = useSelector(state => {
+    return state.userID.id
+  } );
+
 
   const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
 
@@ -63,9 +67,9 @@ export default function Profile() {
     let config = {
       method: "post",
       url: `${BaseBackURL}api/token/refresh/`,
-      // headers: {
-      //   Authorization: `Bearer ${state.token}`,
-      // },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       data: data,
     };
 
@@ -83,10 +87,10 @@ export default function Profile() {
   const changePicture = () => {
     const data = new FormData();
     data.append("image", selectedFile);
-
+    console.log(data);
     let config = {
       method: "put",
-      url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
