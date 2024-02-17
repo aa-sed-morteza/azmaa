@@ -61,7 +61,7 @@ const Title = styled.h4`
   color: #9f9f9f;
   transform: translateY(-63%);
   background: #ffffff;
-  width: 40%;
+  width: 43%;
   margin: 0;
   text-align: center;
   margin-right: -5%;
