@@ -12,7 +12,7 @@ import IranMap from "../components/pluginIranMap/IranMap";
 import { useFetcher } from "react-router-dom";
 
 const HomeContainer = styled.section`
-  padding: 21vw 20px 0 20px;
+  padding: 6vw 20px 0 20px;
 
   @media (min-width: 481px) {
     padding: 0;
@@ -26,15 +26,18 @@ export default function Home() {
   const width = useWidth();
   const [filterType, setFilterType] = useState("all");
   const [searchPhrase, setSearchPhrase] = useState("");
+  const isMobile = window.innerWidth <= 768;
 
   return (
     <HomeContainer>
        <TopBanner /> 
       {/* <FirstBanner /> */}
-      <IranMap style={{
-        width: "63.5%" ,
-        margin : "auto"
-      }}/>
+      
+<IranMap style={{
+  width: "63.5%",
+  margin: "auto",
+  marginBottom: isMobile ? "25px" : "0",
+}}/>
       <FilterBox
         filterType={filterType}
         setFilterType={setFilterType}

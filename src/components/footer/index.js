@@ -64,8 +64,8 @@ const ContactUs = styled.div`
   gap: 10px;
   & > a {
     display: flex;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
     background: #ffaa00;
     border-radius: 3px;

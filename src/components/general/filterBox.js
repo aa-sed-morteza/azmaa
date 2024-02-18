@@ -101,6 +101,7 @@ const SearchInput = styled.input`
   font-family: FontAwesome !important;
   &:placeholder {
     // color:#D8D8D8;
+    
   }
   @media (min-width: 481px) {
     width: 90%;

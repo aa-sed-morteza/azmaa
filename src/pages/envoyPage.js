@@ -116,10 +116,10 @@ export default function Envoy() {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  padding: 21vw 20px;
+  padding: 6vw 20px;
   overflow: hidden;
   @media (min-width: 481px) {
-    padding: 7vw 0 6vw;
+    padding: 2vw 0 6vw;
     background-color: #ffffff;
   }
 `;

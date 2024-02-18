@@ -336,7 +336,7 @@ const RelatedContainer = styled.div`
       content: "";
       display: inline-flex;
       background-image: url(${Text});
-      background-size: cover;
+      background-size: contain;
       background-repeat: no-repeat;
       width: 15px;
       height: 18px;
