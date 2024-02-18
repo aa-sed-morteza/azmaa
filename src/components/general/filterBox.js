@@ -61,7 +61,7 @@ export default function FilterBox({
             }}
             type="text"
             value={searchPhrase}
-            placeholder="&#xF002; جستجو کن..."
+            placeholder="جستجو کن..."
           />
           <TabContainer>{controllItem}</TabContainer>
         </FilterContainer>
@@ -98,9 +98,14 @@ const SearchInput = styled.input`
   border: none;
   font-size: 3.72vw;
   margin-bottom: 19px;
-  font-family: FontAwesome !important;
-  &:placeholder {
+  background: #ffffff url("/assets/Search.svg") no-repeat left center ;
+  background-size:35px 35px;
+  
+  &:placeholder{
     // color:#D8D8D8;
+    font-family: FontAwesome !important;
+    
+    
     
   }
   @media (min-width: 481px) {
@@ -114,7 +119,10 @@ const SearchInput = styled.input`
   @media (min-width: 769px) {
     font-size: 1.563vw;
     padding: 25px;
+    padding-right:56px;
     margin-bottom: 30px;
+    background-size:54px 54px;
+    background: #ffffff url("/assets/Search.svg") no-repeat right center ;
   }
 `;
 
