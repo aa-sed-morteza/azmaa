@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { clearFilterForAnyData } from "../../dataFunctions/publicDataFunctions";
 
-export default function ClearFilterButton() {
+export default function ClearFilterButton( {setSelectAll }) {
   return (
     <Button
       onClick={() => {
         clearFilterForAnyData();
+        setSelectAll(false);
       }}
     >
       حذف فیلتر{" "}

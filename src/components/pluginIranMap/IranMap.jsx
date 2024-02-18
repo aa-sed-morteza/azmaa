@@ -42,6 +42,7 @@ const IranMap = ({ position, empty, style }) => {
   const [showSelectModal, setShowSelectModal] = useState(false);
   const [hoveredProvince, setHoveredProvince] = useState("");
   const [selectedCities, setSelectedCities] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
 
   const onSubmit = () => {
     setFilteredCitiesData(selectedProvince, selectedCities);
@@ -78,13 +79,20 @@ const IranMap = ({ position, empty, style }) => {
 
   // console.log("selected province", selectedProvince);
   const handleSelectAll = () => {
+    if (!selectAll) {
     const list = [...selectedCities];
     for (const city of availableCities) {
       if (!list.includes(city)) {
         list.push(city);
       }
     }
-    setSelectedCities([...list]);
+      setSelectedCities([...availableCities]);
+      setSelectAll(true);
+      setSelectedCities([...list]);
+    } else {
+      setSelectedCities([]);
+      setSelectAll(false);
+    }
   };
 
 
@@ -118,6 +126,7 @@ const IranMap = ({ position, empty, style }) => {
             onClick={() => {
               selectedProvince.splice(selectedProvince.length - 1, 1);
               setShowSelectModal(false);
+              setSelectAll(false);
             }}
           ></div>
           <div className={styles.cities}>
@@ -177,6 +186,7 @@ const IranMap = ({ position, empty, style }) => {
                     setShowSelectModal(false);
                     setSelectedProvince([]);
                     setSelectedCities([]);
+                    setSelectAll(false);
                   }}
                 >
                   بازگشت و حذف فیلتر
@@ -187,6 +197,7 @@ const IranMap = ({ position, empty, style }) => {
                     setShowSelectModal(false);
                     onSubmit();
                     setAvailableCities([]);
+                    setSelectAll(false);
                   }}
                   value="تایید"
                 />
@@ -274,7 +285,7 @@ const IranMap = ({ position, empty, style }) => {
         </div>
       </div>
       <ButtonContainer >
-        {isFilterActive && <ClearFilterButton /> }
+        {isFilterActive && <ClearFilterButton setSelectAll={setSelectAll}/> }
       </ButtonContainer>
     </Container>
   );
