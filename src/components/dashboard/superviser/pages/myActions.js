@@ -29,7 +29,9 @@ export default function MyActions() {
   const dispathRedux = useDispatch();
   const token = useSelector(state => state.token.token);
   const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
-
+  const userId = useSelector(state => {
+    return state.userID.id
+  } );
 
   const refreshToken = () => {
     const data = new FormData();
@@ -78,7 +80,7 @@ export default function MyActions() {
   const getEnvoys = () => {
     let config = {
       method: "get",
-      url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${state.id}`,
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${userId}`,
     };
 
     axios(config).then((res) => {

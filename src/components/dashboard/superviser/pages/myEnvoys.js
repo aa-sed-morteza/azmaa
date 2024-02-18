@@ -8,16 +8,19 @@ import axios from "axios";
 import { useUser } from "../../../../context/userContext";
 import { useNavigate } from "react-router-dom";
 import BestEnvoy from "../../../home/components/bestEnvoyCard";
+import {useSelector} from "react-redux"
 
 export default function MyEnvoys() {
   const { state, dispatch } = useUser();
   const [envoy, setEnvoys] = useState([]);
   const navigate = useNavigate();
-
+  const userId = useSelector(state => {
+    return state.userID.id
+  } );
   const getEnvoys = () => {
     let config = {
       method: "get",
-      url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${state.id}`,
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${userId}`,
     };
 
     axios(config).then((res) => {

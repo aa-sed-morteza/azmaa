@@ -31,12 +31,14 @@ export default function SelectEnvoys() {
   const dispatchRedux = useDispatch();
   const addVoteLevel = useSelector(state => state.addVoteLevel.addVoteLevel);
   const selectEnvoy = useSelector(state => state.selectEnvoy.selectEnvoy);
-
+  const userId = useSelector(state => {
+    return state.userID.id
+  } );
 
   const getEnvoys = () => {
     let config = {
       method: "get",
-      url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${state.id}`,
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${userId}`,
     };
 
     axios(config).then((res) => {
