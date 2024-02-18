@@ -24,6 +24,7 @@ export default function Profile() {
   const [preview, setPreview] = useState();
 
   const userType = useSelector((state) => state.userType.userType);
+  
 
   const dispathRedux = useDispatch();
 
@@ -252,7 +253,7 @@ const Image = styled.div`
     object-fit: contain;
   }
   @media (min-width: 480px) {
-    width: 7.552vw;
+    width: 90px;
     /* height: auto; */
     padding: 4px;
     &:after {
