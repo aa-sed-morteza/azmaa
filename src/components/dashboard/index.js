@@ -57,6 +57,7 @@ export default function Dashboard() {
   const token = useSelector(state => state.token.token);
   const userdata = useSelector(state => state.userdata);
   const userType = useSelector((state) => state.userType.userType);
+  
 
 
   const getPersonalInfo = (userId) => {
@@ -149,6 +150,7 @@ export default function Dashboard() {
         dispathRedux(setusername(Cookies.get("userName")));
         // dispatch({ type: "SET_TYPE_USER", payload: Cookies.get("userType") });
         dispathRedux(setUserType(Cookies.get("userType")));
+     
 
         getPersonalInfo(userId);
         navigate("/dashboard");
@@ -239,7 +241,7 @@ const Container = styled.section`
   @media (min-width: 480px) {
     display: flex;
     padding-right: 10vw;
-    padding-top: 9vw;
+    padding-top: 3vw;
     padding-bottom: 4.583vw;
     justify-content: space-between;
   }
