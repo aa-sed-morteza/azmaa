@@ -24,12 +24,15 @@ export default function MyVotes() {
   const [activities, setActivities] = useState([]);
   const [envoys, setEnvoys] = useState([]);
   const userType = useSelector((state) => state.userType.userType);
+  
 
-
+  const userId = useSelector(state => {
+    return state.userID.id
+  } );
   const getEnvoys = () => {
     let config = {
       method: "get",
-      url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${state.id}`,
+      url: `${BaseBackURL}api/v1/accounts/parliament_member/?super_visor__id=${userId}`,
     };
 
     axios(config).then((res) => {
@@ -63,7 +66,7 @@ export default function MyVotes() {
   const getBills = () => {
     let config = {
       method: "get",
-      url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter=${state.id}&ordering=name, date`,
+      url: `${BaseBackURL}api/v1/bill/?name&tag__id&vote__voter=${userId}&ordering=name, date`,
     };
 
     axios

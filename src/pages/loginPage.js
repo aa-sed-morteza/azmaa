@@ -28,7 +28,6 @@ import { setUserType } from "../redux/slices/userTypeSlice";
 import { setID } from "../redux/slices/setId";
 
 export default function LogIn() {
-  const { state, dispatch } = useUser();
   const width = useWidth();
   const navigate = useNavigate();
 
@@ -55,8 +54,7 @@ export default function LogIn() {
 
     axios(config)
       .then((res) => {
-
-        dispatchRedux(setID(res.data.id))
+        dispatchRedux(setID(res.data.id));
         if (res.data.id) {
           toast.success("ورود با موفقیت انجام شد!", {
             position: toast.POSITION.TOP_RIGHT,
@@ -65,7 +63,6 @@ export default function LogIn() {
           Cookies.set("userName", values.userName);
           // dispatch({ type: "SET_LOGGED_IN", payload: true });
           dispatchRedux(login());
-          dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
           // dispatch({ type: "SET_USERNAME", payload: values.userName });
           dispatchRedux(setusername(values.userName));
           getToken(values);

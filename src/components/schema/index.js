@@ -1,6 +1,8 @@
 import { faMinimize } from "@fortawesome/free-solid-svg-icons";
 import * as yup from "yup";
 
+const emailValidate =
+/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 // min 5 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit.
 
 export const phoneSchema = yup.object().shape({
@@ -43,12 +45,13 @@ export const passSchema = yup.object().shape({
 
 export const contactSchema = yup.object().shape({
   mobileNumber: yup.number().required("لطفا شماره مویابل خود را وارد کنید"),
-  email: yup.string().required("لطفا  ایمیل خود را وارد کنید"),
+  email: yup.string().matches(emailValidate, "ایمیل صحیح وارد کنید").required("لطفا  ایمیل خود را وارد کنید"),
   address: yup.string().required("لطفا آدرس  خود را وارد کنید"),
   phoneNubmer: yup
-    .number()
-    .min(10, "حداقل ۸ رقم وارد کنید")
-    .required("لطفا شماره تلفن ثابت  خود را وارد کنید"),
+  .number()
+  .typeError("لطفا  عدد وارد کنید")
+  .min(10, "حداقل ۸ رقم وارد کنید")
+  .required("لطفا شماره تلفن ثابت  خود را وارد کنید"),
 });
 
 export const selectAreaSchema = yup.object().shape({
