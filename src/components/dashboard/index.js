@@ -44,6 +44,7 @@ import { setusername } from "../../redux/slices/setUserNameSlice";
 
 import { setUserType } from "../../redux/slices/userTypeSlice";
 import { setID } from "../../redux/slices/setId";
+import { setimage } from "../../redux/slices/setImageSlice";
 
 export default function Dashboard() {
   const { state, dispatch } = useUser();
@@ -140,6 +141,7 @@ export default function Dashboard() {
       if (res.data.id) {
         Cookies.set("userId", res.data.id);
         // dispatch({ type: "SET_LOGGED_IN", payload: true });
+        dispathRedux(setimage(res.data.image));
         dispathRedux(setID(res.data.id));
         dispathRedux(login());
         dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
