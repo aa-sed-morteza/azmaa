@@ -245,6 +245,9 @@ export default function SetMobileNumber() {
               background="#095644"
               disabled={isSubmitting}
               type="submit"
+              click={() => {
+                navigate("/log-in");
+              }}
             />
           </Box>
         </Form>

@@ -18,7 +18,7 @@ const Container = styled.section`
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
-  padding: 21vw 20px;
+  padding: 5vw 20px;
   overflow: hidden;
   @media (min-width: 480px) {
     background-color: #ffffff;
