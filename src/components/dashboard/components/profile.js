@@ -14,6 +14,7 @@ import { setUserType } from "../../../redux/slices/userTypeSlice";
 
 import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../redux/slices/setTokenSlice";
+import { setimage } from "../../../redux/slices/setImageSlice";
 
 
 export default function Profile() {
@@ -87,7 +88,6 @@ export default function Profile() {
   const changePicture = () => {
     const data = new FormData();
     data.append("image", selectedFile);
-    console.log(data);
     let config = {
       method: "put",
       url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
@@ -108,6 +108,29 @@ export default function Profile() {
         }
       });
   };
+  // const deletePicture = () => {
+  //   const data = new FormData();
+  //   data.append("image", selectedFile);
+  //   let config = {
+  //     method: "put",
+  //     url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //     data: data,
+  //   };
+
+  //   axios(config)
+  //     .then(function (response) {
+  //       // console.log(JSON.stringify(response.data));
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //       if (error.response.status == 401) {
+  //         // refreshToken();
+  //       }
+  //     });
+  // };
   // *************
 
 
@@ -145,10 +168,15 @@ export default function Profile() {
           <input type="file" onChange={onSelectFile} />
           <span></span>
         </Input>
-        <Input icon={remove}>
-          <p className="text">حذف عکس</p>
-          <span></span>
-        </Input>
+        <div onClick={() => {
+          // dispathRedux(setimage(""));
+          // deletePicture();
+        }}>
+          <Input icon={remove} >
+            <p className="text">حذف عکس</p>
+            <span></span>
+          </Input>
+        </div>
 
         <Box>
           <Button
