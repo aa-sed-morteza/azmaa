@@ -23,7 +23,10 @@ export default function EditContactInformation() {
   const userdata = useSelector(state => state.userdata);
 
   const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
-
+  const userId = useSelector(state => {
+    return state.userID.id
+  } );
+  const username = useSelector(state => state.username.username);
 
 
   const refreshToken = () => {
@@ -59,7 +62,7 @@ export default function EditContactInformation() {
 
     let config = {
       method: "put",
-      url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -67,6 +70,7 @@ export default function EditContactInformation() {
     };
     axios(config)
       .then((res) => {
+        console.log(res.data);
         // console.log(JSON.stringify(res.data));
         // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
         dispathRedux(setuserdata(res.data ));
@@ -98,7 +102,7 @@ export default function EditContactInformation() {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      mobileNumber: state.userName,
+      mobileNumber: username,
       email: userdata.email,
       address: userdata.address,
       phoneNubmer: userdata.telephone,

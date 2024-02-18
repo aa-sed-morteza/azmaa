@@ -21,6 +21,10 @@ export default function EditLogInformation() {
   const dispathRedux = useDispatch();
   const token = useSelector(state => state.token.token);
   const password = useSelector(state => state.password.password);
+  const userId = useSelector(state => {
+    return state.userID.id
+  } );
+  const username = useSelector(state => state.username.username);
 
   const refreshToken = () => {
     const data = new FormData();
@@ -52,7 +56,7 @@ export default function EditLogInformation() {
 
     let config = {
       method: "put",
-      url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -61,6 +65,7 @@ export default function EditLogInformation() {
 
     axios(config)
       .then((res) => {
+        console.log(res);
         // console.log(JSON.stringify(res.data));
         // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
         dispathRedux(setuserdata(res.data ));
@@ -92,7 +97,7 @@ export default function EditLogInformation() {
     handleSubmit,
   } = useFormik({
     initialValues: {
-      userName: state.userName,
+      userName: username,
       password: password,
     },
     validationSchema: passSchema,
