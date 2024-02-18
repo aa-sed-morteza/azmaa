@@ -8,17 +8,19 @@ import title from "../../../../../assets/text.webp";
 import axios from "axios";
 import { BaseBackURL } from "../../../../../constant/api";
 import { useUser } from "../../../../../context/userContext";
-
+import {useSelector} from "react-redux"
 export default function SectionRoom() {
   const { state, dispatch } = useUser();
   const [select, setSelect] = useState();
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
-
+  const userId = useSelector(state => {
+    return state.userID.id
+  } );
   const getBlogs = () => {
     let config = {
       method: "get",
-      url: `${BaseBackURL}api/v1/blog/?writer__id=${state.id}&tag__id&is_suggested=True, False&ordering=created`,
+      url: `${BaseBackURL}api/v1/blog/?writer__id=${userId}&tag__id&is_suggested=True, False&ordering=created`,
     };
 
     axios(config)

@@ -23,7 +23,9 @@ export default function EditEnvoyState() {
   const dispathRedux = useDispatch();
   const token = useSelector(state => state.token.token);
   const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
-
+  const userId = useSelector(state => {
+    return state.userID.id
+  } );
 
 
   const getElectoralDistrict = () => {
@@ -75,7 +77,7 @@ export default function EditEnvoyState() {
 
     let config = {
       method: "put",
-      url: `${BaseBackURL}api/v1/accounts/profile/update/${state.id}`,
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
