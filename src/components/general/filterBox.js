@@ -33,7 +33,9 @@ export default function FilterBox({
         <Tab
           key={item.name + i}
           onClick={() => {
-            setFilterType(item.value);
+            if(setFilterType) {
+              setFilterType(item.value);
+            }
           }}
           className={item.value === filterType ? "select" : ""}
         >
@@ -57,7 +59,9 @@ export default function FilterBox({
         <FilterContainer>
           <SearchInput
             onChange={(e) => {
-              setSearchPhrase(e.target.value);
+              if(setSearchPhrase) {
+                setSearchPhrase(e.target.value);
+              }
             }}
             type="text"
             value={searchPhrase}
