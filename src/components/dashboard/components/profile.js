@@ -151,7 +151,7 @@ export default function Profile() {
         <Label color={userType}>
           <p className="title">
             {userType === "parliament_member"
-              ? "نمایندۀ مجلس شورای اسلامی"
+              ? "نامزد انتخابات مجلس"
               : " همیار نامزد ها"}{" "}
           </p>
           <p className="name">{`${userdata.first_name}   ${userdata.last_name}`}</p>
