@@ -190,6 +190,7 @@ export default function EditContactInformation() {
           <Box>
             <Button
               text="لغو"
+              type="button"
               textColor="#095644"
               borderColor="#095644"
               simple={true}
