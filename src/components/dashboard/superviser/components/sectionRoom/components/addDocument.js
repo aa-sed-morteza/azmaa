@@ -27,7 +27,7 @@ export default function AddDocument() {
   const addArticleLevel = useSelector(state => state.addArticleLevel.addArticleLevel);
   const typeArticle = useSelector(state => state.typeArticle.typeArticle);
   const contentArticle = useSelector(state => state.contentArticle.contentArticle);
-  const imageArticle = useSelector (state => state.imageArticle.Article);
+  const imageArticle = useSelector (state => state.imageArticle.imageArticle);
 
 
 
@@ -63,6 +63,7 @@ export default function AddDocument() {
     data.append("title", contentArticle.title);
     data.append("description", contentArticle.expand);
     data.append("main_image", imageArticle.picOne);
+    data.append("image" , imageArticle.picTwo)
     // data.append("related_blog",'test')
 
     let config = {
@@ -76,6 +77,7 @@ export default function AddDocument() {
 
     axios(config)
       .then(function (response) {
+        console.log(response);
         // dispatch({ type: "SET_DOC_ARTICLE", payload: values });
         // dispatch({ type: "SET_ADD_ARTICLE", payload: 1 });
         dispathRedux(setArticleLevel(1));
