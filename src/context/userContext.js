@@ -117,8 +117,8 @@ const reducer = (state, action) => {
     //   return { ...state, addActionLevel: action.payload };
     // case "SET_ADD_VOTE_LEVEL":
     //   return { ...state, addVoteLevel: action.payload };
-    // case "SET_TYPE_ACTION":
-    //   return { ...state, typeAction: action.payload };
+    case "SET_TYPE_ACTION":
+      return { ...state, typeAction: action.payload };
     // case "SET_SELECT_ENVOUY":
     //   return { ...state, selectEnvoy: action.payload };
     // case "SET_VOTE_ENVOY":

@@ -92,7 +92,7 @@ export default function Document() {
     } else {
       const data = new FormData();
       data.append("activity_id", state.typeAction.description);
-      // data.append("activity_choice_id", state.voteEnvoy);
+      data.append("activity_choice_id", voteEnvoy);
       data.append("activity_choice_id", 1);
 
       let config = {
