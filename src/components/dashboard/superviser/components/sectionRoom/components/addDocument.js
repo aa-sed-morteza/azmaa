@@ -143,6 +143,7 @@ export default function AddDocument() {
       </Container>
       <Box>
         <Button
+          type="button"
           text="لغو"
           textColor="#095644"
           borderColor="#095644"
