@@ -10,12 +10,29 @@ export const phoneSchema = yup.object().shape({
   type: yup.string().required("لطفا نوع کاربری خود را انتخاب کنید"),
 });
 
+function validateIranianNationalCode(nationalCode) {
+  if (!/^\d{10}$/.test(nationalCode)) {
+    return false; // Should be a 10-digit number
+  }
+
+  const digits = nationalCode.split('').map(Number);
+
+  // Calculate the check digit
+  const checkDigit = digits.slice(0, 9).reduce((sum, digit, index) => sum + digit * (10 - index), 0) % 11;
+  const calculatedCheckDigit = (checkDigit < 2) ? checkDigit : (11 - checkDigit);
+
+  return calculatedCheckDigit === digits[9];
+}
+
 export const infoSchema = yup.object().shape({
   firstName: yup.string().required("لطفا نام خود را وارد کنید"),
   lastName: yup.string().required("لطفا نام خانوادگی خود را وارد کنید"),
   birthPlace: yup.string().required("لطفا نام محل تولد خود را وارد کنید"),
   personalCode: yup
-    .number()
+  .string()
+    .test('is-valid-national-code', 'کد ملی اشتباه است', value => {
+      return validateIranianNationalCode(value);
+    })
     .min(10, "حداقل ۱۰ رقم وارد کنید")
     .required("لطفا کد ملی خود را وارد کنید"),
   birthDay: yup.string().required("لطفا تاریخ تولد خود را وارد کنید"),
