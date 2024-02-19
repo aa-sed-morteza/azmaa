@@ -456,11 +456,16 @@ export default function Navbar() {
             <MobilePanel
               color={islogin ? "#FF5A5A" : "#FFAA00"}
               onClick={goDashboard}
+              
             >
-              <div className="icon">
+              <div className="icon" onClick={() => {
+                dispatchRedux(togglmenu());
+              }}>
                 <img src={islogin ? exit : signInMobile} />
               </div>
-              <p className="content">
+              <p className="content" onClick={() => {
+                dispatchRedux(togglmenu());
+              }}>
                 {" "}
                 {islogin ? "خروج از پنل" : "ورود به پنل"}{" "}
               </p>{" "}
