@@ -96,7 +96,7 @@ export default function MySuggest() {
             />
             <Suggest
               type="دردست‌بررسی"
-              title="ثبت فعالیت جدید"
+              title="ثبت دیدگاه جدید"
               date="۲۹ اسفند ۱۴۰۰"
               superviser="مرتضی یزدان‌پرست"
               manager="سید یزدان حبیبی"
@@ -132,7 +132,7 @@ export default function MySuggest() {
             <GalleryTitle>آخرین درخواست‌های من</GalleryTitle>
             <Suggest
               type="دردست‌بررسی"
-              title="ثبت فعالیت جدید"
+              title="ثبت دیدگاه جدید"
               date="۲۹ اسفند ۱۴۰۰"
               superviser="مرتضی یزدان‌پرست"
               manager="سید یزدان حبیبی"

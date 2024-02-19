@@ -128,7 +128,7 @@ export default function MyActions() {
             navigate("فعالیت  جدید");
           }}
         >
-          <p className="text">ثبت فعالیت جدید</p>
+          <p className="text">ثبت دیدگاه جدید</p>
         </AddnewAction>
         <Filtering>
           <input placeholder="جستجو کن..." />

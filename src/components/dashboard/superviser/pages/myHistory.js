@@ -29,7 +29,7 @@ export default function MyHistory() {
           <p className="date">۲۹ اسفند ۱۴۰۰ | ۱۹:۳۱</p>
         </HistoryCard>
         <HistoryCard>
-          <h4 className="title">ثبت فعالیت جدید</h4>
+          <h4 className="title">ثبت دیدگاه جدید</h4>
           <p className="date">۲۹ اسفند ۱۴۰۰ | ۱۹:۳۱</p>
         </HistoryCard>
         <ShowMore>

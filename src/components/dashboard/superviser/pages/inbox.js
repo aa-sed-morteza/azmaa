@@ -126,7 +126,7 @@ export default function Inbox() {
             <GalleryTitle>آخرین پیام‌ها</GalleryTitle>
             <InboxItem
               type="دردست‌بررسی"
-              title="ثبت فعالیت جدید"
+              title="ثبت دیدگاه جدید"
               creator=" سید مرتضی یزدان‌پرست"
               date="۲۹ اسفند ۱۴۰۰"
               detailType="vote"
@@ -137,7 +137,7 @@ export default function Inbox() {
 
             <InboxItem
               type="دردست‌بررسی"
-              title="ثبت فعالیت جدید"
+              title="ثبت دیدگاه جدید"
               creator=" سید مرتضی یزدان‌پرست"
               date="۲۹ اسفند ۱۴۰۰"
               detailType="action"
@@ -152,7 +152,7 @@ export default function Inbox() {
             <GalleryTitle>آخرین پیام‌ها</GalleryTitle>
             <InboxItem
               type="دردست‌بررسی"
-              title="ثبت فعالیت جدید"
+              title="ثبت دیدگاه جدید"
               creator=" سید مرتضی یزدان‌پرست"
               date="۲۹ اسفند ۱۴۰۰"
               detailType="vote"
@@ -163,7 +163,7 @@ export default function Inbox() {
 
             <InboxItem
               type="دردست‌بررسی"
-              title="ثبت فعالیت جدید"
+              title="ثبت دیدگاه جدید"
               creator=" سید مرتضی یزدان‌پرست"
               date="۲۹ اسفند ۱۴۰۰"
               detailType="action"
