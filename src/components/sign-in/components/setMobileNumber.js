@@ -250,6 +250,9 @@ export default function SetMobileNumber() {
               }}
             />
           </Box>
+          <p>
+          پنل کاربری مخصوص نامزدهای انتخابات مجلس است. در صورتی که نامزد انتخابات هستید و شماره شما قبلا ثبت نشده است به شماره 09108993642 پیام بدهید
+          </p>
         </Form>
       ) : (
         <Form onSubmit={checkCode} autoComplete="off">
@@ -334,6 +337,12 @@ const Form = styled.form`
     max-width: 278px;
     text-align: center;
   }
+  p {
+    font-size: 2.5vw;
+    text-align: center;
+    color: #707070;
+    max-width: 278px;
+  }
   @media (min-width: 480px) {
     width: 20%;
     max-width: none;
@@ -343,6 +352,10 @@ const Form = styled.form`
       max-width: none;
       margin-bottom: 1.302vw;
     }
+      p {
+    font-size: 1vw;
+    max-width: none;
+  }
   }
 `;
 
