@@ -105,7 +105,7 @@ const Content = styled.div`
       color: #707070;
       font-weight: 400;
       font-size: 3.72vw;
-      border-left: 1px solid #ffaa00;
+      /* border-left: 1px solid #ffaa00; */
       padding-left: 7px;
       margin: 0;
     }
@@ -153,7 +153,7 @@ export default function BestEnvoyCard({ envoy, click }) {
         </h3>
         <div className="status">
           <p className="state">{envoy.electoral_district_name}</p>
-          <p className="position">{envoy.fraction_name}</p>
+          {/* <p className="position">{envoy.fraction_name}</p> */}
         </div>
         <div className="persantage">
           {/* <p className="text">شفافیت: ٪</p>
