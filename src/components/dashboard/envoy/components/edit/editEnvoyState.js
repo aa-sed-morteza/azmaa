@@ -73,7 +73,7 @@ export default function EditEnvoyState() {
   const onSubmit = async (values, actions) => {
     const data = new FormData();
     data.append("electoral_district.name", values.areaName);
-    data.append("vote_number", values.voteNumber);
+    data.append("vote_number", 0);
 
     let config = {
       method: "put",
@@ -118,7 +118,6 @@ export default function EditEnvoyState() {
   } = useFormik({
     initialValues: {
       areaName: state.electoral_district_name,
-      voteNumber: state.vote_number,
     },
     validationSchema: AreaSchema,
     onSubmit,
@@ -162,7 +161,7 @@ export default function EditEnvoyState() {
               <ErrorText>{errors.areaName}</ErrorText>
             )}
 
-            <SelectNumber
+            {/* <SelectNumber
               label="تعداد آراء"
               background="#FFFFFF"
               id="voteNumber"
@@ -172,7 +171,7 @@ export default function EditEnvoyState() {
             />
             {errors.voteNumber && touched.voteNumber && (
               <ErrorText>{errors.voteNumber}</ErrorText>
-            )}
+            )} */}
           </Form>
           <Box>
             <Button

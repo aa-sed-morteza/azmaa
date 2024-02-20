@@ -78,7 +78,6 @@ export const selectAreaSchema = yup.object().shape({
 });
 
 export const AreaSchema = yup.object().shape({
-  voteNumber: yup.number().required("لطفا تعداد آرا خود را وارد کنید"),
   areaName: yup.string().required("لطفا  حوزه انتخابی خود را انتخاب کنید"),
 });
 
