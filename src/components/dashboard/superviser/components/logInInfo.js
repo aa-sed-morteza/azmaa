@@ -17,7 +17,7 @@ export default function LogInInfo() {
     <Container>
       <Edit
         onClick={() => {
-          navigate("edit-log-info");
+          navigate("/forget");
         }}
       ></Edit>
       <Title> اطلاعات ورود</Title>
