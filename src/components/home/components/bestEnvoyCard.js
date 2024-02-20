@@ -156,8 +156,8 @@ export default function BestEnvoyCard({ envoy, click }) {
           <p className="position">{envoy.fraction_name}</p>
         </div>
         <div className="persantage">
-          <p className="text">شفافیت: ٪</p>
-          <p className="content">{toFarsiNumber(envoy.transparency)}</p>
+          {/* <p className="text">شفافیت: ٪</p>
+          <p className="content">{toFarsiNumber(envoy.transparency)}</p> */}
         </div>
       </Content>
     </EnvoyCard>

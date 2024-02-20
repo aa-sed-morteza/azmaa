@@ -40,7 +40,7 @@ export default function SetMobileNumber() {
   const istimeout = useSelector(state => state.istimeout.istimeout);
   const token = useSelector(state => state.token.token);
   const username = useSelector(state => state.username.username);
-
+  const islogin = useSelector(state => state.islogin.islogin);
   
 
   const checkCode = (e) => {
@@ -72,7 +72,7 @@ export default function SetMobileNumber() {
           setValidate(0);
           // dispatch({ type: "SET_ID", payload: res.data.id });
           dispatchRedux(setID(res.data.id));
-          navigate(`/sign-in/${state.userType}`);
+          navigate(`/sign-in/${userType}`);
           setStep(1);
           getToken(password, username);
         })
@@ -125,18 +125,18 @@ export default function SetMobileNumber() {
   };
 
   useEffect(() => {
-    if (state.loggedIn === false) {
+    if (islogin === false) {
       setStep(1);
     }
   }, []);
 
   useEffect(() => {
-    if (state.timeOut) {
+    if (istimeout) {
       setUpdate(true);
     } else {
       setUpdate(false);
     }
-  }, [state.timeOut]);
+  }, [istimeout]);
 
   const onSubmit = async (values, actions) => {
     // dispatch({ type: "SET_USERNAME", payload: values.phoneNember });
@@ -246,7 +246,7 @@ export default function SetMobileNumber() {
               disabled={isSubmitting}
               type="submit"
               click={() => {
-                navigate("/log-in");
+                // navigate("/log-in");
               }}
             />
           </Box>

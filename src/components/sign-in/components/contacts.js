@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../redux/slices/setTokenSlice";
 import { setuserdata } from "../../../redux/slices/setuserDataSlice";
 import { setsigninLevel } from "../../../redux/slices/setSignLevelSlice";
+import { login } from "../../../redux/slices/isLoginSlice";
 
 
 export default function Contacts() {
@@ -72,7 +73,8 @@ export default function Contacts() {
         dispathRedux(setuserdata(res.data ));
         // dispatch({ type: "SET_SIGN_LEVEL", payload: 1 });
         dispathRedux(setsigninLevel(1));
-        dispatch({ type: "SET_LOGGED_IN", payload: true });
+        // dispatch({ type: "SET_LOGGED_IN", payload: true });
+        dispathRedux(login())
         actions.resetForm();
         navigate("/dashboard");
         actions.resetForm();
