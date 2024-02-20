@@ -196,7 +196,10 @@ export default function SelectActionType() {
       {addActionLevel === 1 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
-            <Title>۱. فعالیت موردنظر خود را انتخاب کنید:</Title>
+            <Guid>
+              <Title>۱. فعالیت موردنظر خود را انتخاب کنید:</Title>
+              <p>بعد از انتخاب به پایین اسکرول کنید </p>
+            </Guid>
             <Filtering>
               <input
                 value={searchparams.get("filter") || ""}
@@ -265,10 +268,10 @@ const Title = styled.h2`
   color: #707070;
   font-size: 4.651vw;
   font-weight: 400;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   @media (min-width: 480px) {
     font-size: 1.458vw;
-    margin-bottom: 1.458vw;
+    /* margin-bottom: 1.458vw; */
   }
 `;
 
@@ -548,3 +551,18 @@ const ActiveOrder = styled.div`
     }
   }
 `;
+
+const Guid = styled.div`
+ display: flex;
+ align-items: center;
+ gap: 60px;
+ margin-bottom: 10px;
+ p {
+  font-size: 12px;
+  
+ }
+   @media (min-width: 480px) {
+    margin-bottom: 1.458vw;
+  }
+
+`
