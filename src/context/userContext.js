@@ -59,8 +59,8 @@ const reducer = (state, action) => {
     //   return { ...state, loggedIn: action.payload };
     // // case "REMOVE_CITY_FILTER":
     // //   return { ...state, removeCityFilter: action.payload };
-    // case "SET_LOGIN_INFO":
-    //   return { ...state, ...action.payload };
+    case "SET_LOGIN_INFO":
+      return { ...state, ...action.payload };
     // case "SET_USER_DATA":
     //   return { ...state, ...action.payload };
     // // case "SET_AREA_NAME":

@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../../../../redux/slices/setTokenSlice";
 import { setvotelevel } from "../../../../../../redux/slices/addVoteLevelSlice";
+import { setactionlevel } from "../../../../../../redux/slices/addActionLevelSlice";
 
 export default function Document() {
   const { state, dispatch } = useUser();
@@ -183,7 +184,8 @@ export default function Document() {
             toast.success(" فعالیت با موفقیت ثبت شد!", {
               position: toast.POSITION.TOP_RIGHT,
             });
-            dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
+            // dispatch({ type: "SET_ADD_ACT_LEVEL", payload: 1 });
+            dispathRedux(setactionlevel(1));
             navigate("/dashboard/myVotes");
             actions.resetForm();
           })
