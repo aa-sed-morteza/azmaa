@@ -18,7 +18,7 @@ export default function NewAction() {
   const addActionLevel = useSelector(state => state.addActionLevel.addActionLevel);
   const selectEnvoy = useSelector(state => state.selectEnvoy.selectEnvoy);
   const userType = useSelector((state) => state.userType.userType);
-  
+
 
   useEffect(() => {
     return () => {
@@ -50,20 +50,20 @@ export default function NewAction() {
       {addActionLevel === 2 && (
         <>
           <SelectActionType />
-          {userType == "envoy" ? goNextLevel() : <SelectEnvoys />}
+          {userType == "parliament_member" ? goNextLevel() : <SelectEnvoys />}
         </>
       )}
       {addActionLevel === 3 && (
         <>
           <SelectActionType />
-          {userType !== "envoy" && <SelectEnvoys />}
+          {userType !== "parliament_member" && <SelectEnvoys />}
           <VoteEnvoy />
         </>
       )}
       {addActionLevel === 4 && (
         <>
           <SelectActionType />
-          {userType !== "envoy" && <SelectEnvoys />}
+          {userType !== "parliament_member" && <SelectEnvoys />}
           <VoteEnvoy />
           <Document />
         </>
