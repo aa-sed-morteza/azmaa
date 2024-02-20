@@ -27,11 +27,15 @@ export default function MyActions() {
   const [filteredActivities, setFilteredActivities] = useState([]);
 
   const dispathRedux = useDispatch();
-  const token = useSelector(state => state.token.token);
-  const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
-  const userId = useSelector(state => {
-    return state.userID.id
-  } );
+  const token = useSelector((state) => state.token.token);
+  const refreshTokenstate = useSelector(
+    (state) => state.refreshTokenstate.refreshTokenstate
+  );
+  const userId = useSelector((state) => {
+    return state.userID.id;
+  });
+
+  console.log(userId);
 
   const refreshToken = () => {
     const data = new FormData();
@@ -68,6 +72,7 @@ export default function MyActions() {
 
     axios(config)
       .then((res) => {
+        console.log(res.data);
         setActivities([...res.data]);
       })
       .catch((err) => {
@@ -95,10 +100,8 @@ export default function MyActions() {
     let result = [];
 
     for (const activity of activities) {
-      for (const envoy of envoys) {
-        if (envoy.id === activity.voter_id) {
-          result.push(activity);
-        }
+      if (userId === activity.voter.id) {
+        result.push(activity);
       }
     }
 
@@ -106,10 +109,10 @@ export default function MyActions() {
   };
 
   useEffect(() => {
-    if (activities.length !== 0 && envoys.length !== 0) {
+    if (activities.length !== 0) {
       filterACtivity();
     }
-  }, [activities, envoys]);
+  }, [activities]);
 
   useEffect(() => {
     activityVoteUnconfirmed();
@@ -139,7 +142,7 @@ export default function MyActions() {
           {filteredActivities.length === 0 ? (
             <p>هیچ فعالیتی برای شما ثبت نشده است.</p>
           ) : (
-            <div>
+            <>
               {filteredActivities.map((item, i) => (
                 <ActionCard
                   img={pic2}
@@ -151,7 +154,7 @@ export default function MyActions() {
                   action={item.vote}
                 />
               ))}
-            </div>
+            </>
           )}
         </ActionGallery>
       </Wraper>
