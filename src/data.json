@@ -97,10 +97,16 @@
       "active_icon": "../../assets/history-active.webp"
     },
     {
-      "title": "مطالب من",
-      "path": "/dashboard/mySection",
-      "icon": "../../assets/section.webp",
-      "active_icon": "../../assets/section-active.webp"
+      "title" : "آزمون قانون اساسی" ,
+      "path" : "/dashboard/roleexam" ,
+      "icon" : "../../assets/history.webp" ,
+      "active_icon": "../../assets/history-active.webp"
+    } ,
+    {
+      "title" : "تعهدنامه رفتار نمایندگی" ,
+      "path" : "/dashboard/envoybehaivier" ,
+      "icon" : "../../assets/history.webp" ,
+      "active_icon": "../../assets/history-active.webp"
     }
   ],
   "envoysLess": [

@@ -17,7 +17,6 @@ export default function DashboardMenu() {
     setActive(num);
     navigate(path);
   };
-
   const dashboardItem = data.dashboardSuperviser.map((g, i) => {
     return (
       <List
@@ -54,7 +53,7 @@ export default function DashboardMenu() {
   return (
     <Container>
       <MenuList>
-        {userType == "envoy" ? envoyDashboardItems : dashboardItem}
+        {userType == "parliament_member" ? envoyDashboardItems : dashboardItem}
       </MenuList>
     </Container>
   );
