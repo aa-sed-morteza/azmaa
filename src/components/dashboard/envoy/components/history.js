@@ -13,6 +13,7 @@ import { setuserdata } from "../../../../redux/slices/setuserDataSlice";
 export default function HistoryEnvoy() {
   const { state, dispatch } = useUser();
   const [hisroty, setHistory] = useState(state.experiences);
+  console.log(hisroty);
   const navigate = useNavigate();
 
   const dispathRedux = useDispatch();

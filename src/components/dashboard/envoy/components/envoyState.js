@@ -5,10 +5,13 @@ import edit from "../../../../assets/left.svg";
 import { useNavigate } from "react-router-dom";
 import box from "../../../../assets/state.svg";
 import { toFarsiNumber } from "../../../../utils";
+import { useSelector } from "react-redux";
 
 export default function EnvoyState() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
+  const electoralState = useSelector ((state)=>state.userdata)
+  console.log(electoralState);
 
   return (
     <Container>
@@ -21,8 +24,8 @@ export default function EnvoyState() {
       <State>
         <span></span>
         <div className="content">
-          {state.electoral_district && (
-            <p className="title">{state.electoral_district.name}</p>
+          {electoralState.electoral_district && (
+            <p className="title">{electoralState.electoral_district.name}</p>
           )}
 
           <p className="persentage">درصد آراء: ۳۵٪</p>

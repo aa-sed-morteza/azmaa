@@ -142,6 +142,8 @@ const Content = styled.div`
 `;
 
 export default function BestEnvoyCard({ envoy, click }) {
+  console.log("تست فراکشن")
+  console.log(envoy.fraction_name)
   return (
     <EnvoyCard onClick={click}>
       <EnvoyImage>
