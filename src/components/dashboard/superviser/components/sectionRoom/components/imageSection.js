@@ -21,7 +21,6 @@ export default function ImageSection() {
 
   const onSubmit = async (values, actions) => {
     // dispatch({ type: "SET_IMG_ARTICLE", payload: values });
-    console.log(values);
     dispathRedux(setimgArticle(values));
     // dispatch({ type: "SET_ADD_ARTICLE", payload: 4 });
     dispathRedux(setArticleLevel(4));
