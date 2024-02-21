@@ -55,7 +55,7 @@ function App() {
     if(Cookies.get("token")) {
       dispatchRedux(settoken(Cookies.get("token")));
     } else {
-      navigate("/login")
+      navigate("/log-in")
     }
   }, []);
 
