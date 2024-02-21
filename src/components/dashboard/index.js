@@ -146,7 +146,6 @@ export default function Dashboard() {
         dispathRedux(setID(res.data.id));
         dispathRedux(setExperience(res.data.experiences))
         dispathRedux(login());
-        dispatch({ type: "SET_LOGIN_INFO", payload: { ...res.data } });
         // dispatch({ type: "SET_USERNAME", payload: Cookies.get("userName") });
         dispathRedux(setusername(Cookies.get("userName")));
         // dispatch({ type: "SET_TYPE_USER", payload: Cookies.get("userType") });

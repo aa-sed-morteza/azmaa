@@ -28,16 +28,15 @@ export default function PersonalInformation() {
   const navigate = useNavigate();
 
   const userType = useSelector((state) => state.userType.userType);
-  
 
   const dispathRedux = useDispatch();
 
-  const token = useSelector(state => state.token.token);
-  const userdata = useSelector(state => state.userdata);
-  const image = useSelector(state => state.image.image);
-  const userId = useSelector(state => {
-    return state.userID.id
-  } );
+  const token = useSelector((state) => state.token.token);
+  const userdata = useSelector((state) => state.userdata);
+  const image = useSelector((state) => state.image.image);
+  const userId = useSelector((state) => {
+    return state.userID.id;
+  });
 
   const changePicture = () => {
     const data = new FormData();
@@ -95,10 +94,7 @@ export default function PersonalInformation() {
           {selectedFile ? (
             <img src={preview} alt="profile-picture" />
           ) : (
-            <img
-              src={image ? image : DefaultAvatar}
-              alt="profile-picture"
-            />
+            <img src={image ? image : DefaultAvatar} alt="profile-picture" />
           )}
         </Image>
         <Label>

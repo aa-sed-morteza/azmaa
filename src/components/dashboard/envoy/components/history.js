@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../../redux/slices/setTokenSlice";
 import { setuserdata } from "../../../../redux/slices/setuserDataSlice";
 
-
 export default function HistoryEnvoy() {
   const { state, dispatch } = useUser();
   const [hisroty, setHistory] = useState(state.experiences);
@@ -19,9 +18,8 @@ export default function HistoryEnvoy() {
 
   const dispathRedux = useDispatch();
   const token = useSelector((state) => state.token.token);
-  const experience = useSelector((state)=> state.userID.experiences);
+  const experience = useSelector((state) => state.userID.experiences);
   console.log(experience);
- 
 
   const refreshToken = () => {
     const data = new FormData();
@@ -88,7 +86,7 @@ export default function HistoryEnvoy() {
           experience.map((item, i) => {
             return <p className="text-history">{item.title}</p>;
           })}
-      </Row>
+      </Row>{" "}
     </Container>
   );
 }
