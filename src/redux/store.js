@@ -34,6 +34,7 @@ import setVoteEnvoySlice from "./slices/setVoteEnvoySlice";
 import setProvinceSearchSlice from "./slices/setProvinceSearchSlice";
 import setCitySearchSlice from "./slices/setCitySearchSlice";
 import setImageSlice from "./slices/setImageSlice";
+import CommisionSlice from "./slices/CommisionSlice";
 
 
 
@@ -78,7 +79,8 @@ const reducers = combineReducers({
   voteEnvoy: setVoteEnvoySlice ,
   provinceSearch: setProvinceSearchSlice ,
   setcitySearch: setCitySearchSlice ,
-  image : setImageSlice
+  image : setImageSlice,
+  commision: CommisionSlice,
 });
 
 export const store = configureStore({
