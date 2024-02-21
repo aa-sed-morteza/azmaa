@@ -38,6 +38,8 @@ export default function EnvoyHistory({ id }) {
     getEnvoyHistory();
   }, []);
 
+  console.log(experiences);
+
   return (
     <Container onClick={handleClick} className={open ? "active" : ""}>
       <Title>سوابق نامزد</Title>

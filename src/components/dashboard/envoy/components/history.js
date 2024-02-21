@@ -79,12 +79,12 @@ export default function HistoryEnvoy() {
         }}
       ></Edit>
       <Title>سوابق نامزد</Title>
-      <Row>
+      {/* <Row>
         {hisroty &&
           hisroty.map((item, i) => {
             return <p className="text-history">{item.title}</p>;
           })}
-      </Row>
+      </Row> */}
     </Container>
   );
 }
