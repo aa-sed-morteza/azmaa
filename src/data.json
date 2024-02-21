@@ -52,8 +52,8 @@
     },
     {
       "title": "تعهدنامه رفتار نمایندگی",
-      "path": "/dashboard/mySection",
-      "icon": "../../assets/section.webp",
+      "path" : "/dashboard/envoybehaivier" ,
+      "icon" : "../../assets/history.webp" ,
       "active_icon": "../../assets/section-active.webp"
     }
   ],
