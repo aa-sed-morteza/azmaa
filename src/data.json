@@ -39,19 +39,19 @@
       "active_icon": "../../assets/account.webp"
     },
     {
-      "title": "نامزد ها من",
-      "path": "/dashboard/myEnvoy",
-      "icon": "../../assets/envoys.webp",
-      "active_icon": "../../assets/envoys-active.webp"
-    },
-    {
       "title": "دیدگاه ها",
       "path": "/dashboard/myActions",
       "icon": "../../assets/history.webp",
       "active_icon": "../../assets/history-active.webp"
     },
     {
-      "title": "مطالب من",
+      "title": "آزمون قانون اساسی",
+      "path" : "/dashboard/roleexam" ,
+      "icon" : "../../assets/history.webp" ,
+      "active_icon": "../../assets/envoys-active.webp"
+    },
+    {
+      "title": "تعهدنامه رفتار نمایندگی",
       "path": "/dashboard/mySection",
       "icon": "../../assets/section.webp",
       "active_icon": "../../assets/section-active.webp"

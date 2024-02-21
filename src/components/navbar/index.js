@@ -96,7 +96,7 @@ const List = styled.li`
   gap: 10px;
   position: relative;
   color: ${(props) => (props.active ? "#FFFFFF" : "#095644")};
-  font-size: 4.65vw;
+  font-size: 4.35vw;
   font-weight: light;
   &.active {
     font-weight: bolder;
