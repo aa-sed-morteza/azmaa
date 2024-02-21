@@ -28,6 +28,8 @@ export default function EditEnvoyState() {
   const userId = useSelector(state => {
     return state.userID.id
   } );
+  const userdata = useSelector(state => state.userdata);
+
 
 
   const getElectoralDistrict = () => {
@@ -40,7 +42,7 @@ export default function EditEnvoyState() {
       .then(function (response) {
         let options = []
         for(const item of response.data) {
-          options.push({value : item.name , label: item.name} )
+          options.push({value : response.data.indexOf(item) , label: item.name} )
         }
         // console.log(JSON.stringify(response.data));
         setAreaName([
@@ -77,7 +79,9 @@ export default function EditEnvoyState() {
 
   const onSubmit = async (values, actions) => {
     const data = new FormData();
-    data.append("electoral_district.name", values.areaName);
+    console.log(areaName);
+    console.log(values.areaName)
+    data.append("electoral_district", values.areaName + 2);
     data.append("vote_number", 0);
 
     let config = {
@@ -91,6 +95,7 @@ export default function EditEnvoyState() {
 
     axios(config)
       .then((res) => {
+        console.log(res.data)
         // console.log(JSON.stringify(res.data));
         // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
         dispathRedux(setuserdata(res.data ));
@@ -111,9 +116,11 @@ export default function EditEnvoyState() {
       });
   };
 
+
   const handleChangeItem = (selectedOption) => {
     setSelectedOption(selectedOption);
   }
+  // console.log(userdata);
 
   const {
     values,
