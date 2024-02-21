@@ -18,26 +18,7 @@ export default function CommissinInfo() {
 
 
   
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {  
-  //       const response = await axios.get("https://azmaa-back.iran.liara.run/api/v1/fraction/");
-  //       const data = response.data;
-  //       console.log(data);
-  //       let list = [];
-  //       for(const item of data) {
-  //         if(!list.includes(item.name)) {
-  //           list.push(item.name)
-  //         }
-  //       }
-        
-        
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []); 
+  
   const userdata = useSelector(state => state.userdata);
   console.log(userdata)
   return (

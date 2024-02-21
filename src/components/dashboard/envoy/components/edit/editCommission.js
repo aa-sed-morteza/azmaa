@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../../../redux/slices/setTokenSlice";
 import { setuserdata } from "../../../../../redux/slices/setuserDataSlice";
+import Select from "react-select"
 
 export default function EditCommission() {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ export default function EditCommission() {
 
   const onSubmit = async (values, actions) => {
     const data = new FormData();
-    data.append("fraction", values.commission);
+    data.append("fraction", 0);
 
     let config = {
       method: "put",
@@ -63,6 +64,7 @@ export default function EditCommission() {
 
     axios(config)
       .then((res) => {
+        console.log(res.data)
         // console.log(JSON.stringify(res.data));
         // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
         
