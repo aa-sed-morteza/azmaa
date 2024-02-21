@@ -58,7 +58,7 @@ export default function Dashboard() {
   const userdata = useSelector(state => state.userdata);
   const userType = useSelector((state) => state.userType.userType);
   
-
+console.log(token);
 
   const getPersonalInfo = (userId) => {
     let data = new FormData();
@@ -105,9 +105,9 @@ export default function Dashboard() {
       });
   };
 
-  useEffect(() => {
-    refreshToken();
-  }, []);
+  // useEffect(() => {
+  //   refreshToken();
+  // }, []);
 
   useEffect(() => {
     getPersonalInfo(Cookies.get("userId"));

@@ -28,8 +28,11 @@ import {
   getAllInitialData,
 } from "./dataFunctions/publicDataFunctions";
 import ClearFilterButton from "./components/general/clearFilterButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoadingScreen from "./components/loading/loadingScreen";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { settoken } from "./redux/slices/setTokenSlice";
 
 function App() {
   const { isEnvoyLoaded } = useSelector((state) => state.envoy);
@@ -37,6 +40,8 @@ function App() {
   const { isBlogLoaded } = useSelector((state) => state.blog);
   const { isActivityLoaded } = useSelector((state) => state.activity);
   const { isCityLoaded, isDistrictLoaded } = useSelector((state) => state.city);
+  const dispatchRedux = useDispatch();
+  const navigate = useNavigate();
   // console.log(
   //   isEnvoyLoaded,
   //   isVoteLoaded,
@@ -47,7 +52,14 @@ function App() {
   // );
   useEffect(() => {
     getAllInitialData();
+    if(Cookies.get("token")) {
+      dispatchRedux(settoken(Cookies.get("token")));
+    } else {
+      navigate("/login")
+    }
   }, []);
+
+
 
   const { isFilterActive } = useSelector((state) => state.filter);
   return (
