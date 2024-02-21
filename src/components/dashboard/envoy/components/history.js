@@ -56,10 +56,11 @@ export default function HistoryEnvoy() {
       .then((res) => {
         // console.log(JSON.stringify(res.data));
         // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
-        // dispathRedux(setuserdata(res.data ));
+        dispathRedux(setuserdata(res.data ));
         setHistory([...res.data]);
       })
       .catch((error) => {
+        console.log(error)
         if (error.response.status == 401) {
           // refreshToken();
         }
