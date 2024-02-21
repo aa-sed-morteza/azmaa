@@ -15,7 +15,9 @@ import Modal from "../../../general/modal";
 import useModal from "../../../../hook/useModal";
 import { Navigate, useNavigate } from "react-router-dom";
 import DefaultAvatar from "../../../../assets/default-avatar.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { BaseBackURL } from "../../../../constant/api";
+import axios from "axios";
 
 export default function PersonalInformation() {
   const { state, dispatch } = useUser();
@@ -25,10 +27,42 @@ export default function PersonalInformation() {
   const inputRef = useRef();
   const navigate = useNavigate();
 
+  const userType = useSelector((state) => state.userType.userType);
+  
+
+  const dispathRedux = useDispatch();
+
+  const token = useSelector(state => state.token.token);
   const userdata = useSelector(state => state.userdata);
   const image = useSelector(state => state.image.image);
+  const userId = useSelector(state => {
+    return state.userID.id
+  } );
 
+  const changePicture = () => {
+    const data = new FormData();
+    data.append("image", selectedFile);
+    let config = {
+      method: "put",
+      url: `${BaseBackURL}api/v1/accounts/profile/update/${userId}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: data,
+    };
 
+    axios(config)
+      .then(function (response) {
+        console.log(response);
+        // console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+        if (error.response.status == 401) {
+          // refreshToken();
+        }
+      });
+  };
 
   useEffect(() => {
     if (!selectedFile) {
@@ -103,7 +137,11 @@ export default function PersonalInformation() {
             textColor="#FFFFFF"
             background="#095644"
             width="62%"
-            click={toggle}
+            click={() => {
+              // toggle
+              changePicture();
+              toggle();
+            }}
           />
         </Box>
       </Modal>
