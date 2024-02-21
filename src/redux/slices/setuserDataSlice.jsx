@@ -13,6 +13,9 @@ export const setuserDataSlice = createSlice({
         last_name: "",
         national_code: "",
         telephone: 0,
+        fraction:"",
+        electoral_district:""
+
   },
   reducers: {
     setuserdata(state , action) {
@@ -25,6 +28,10 @@ export const setuserDataSlice = createSlice({
         state.address = action.payload.address ;
         state.birth_date = action.payload.birth_date ;
         state.birth_place = action.payload.birth_place ;
+        state.fraction = action.payload.fraction;
+        state.electoral_district = action.payload.electoral_district;
+
+
     }
     }
 });

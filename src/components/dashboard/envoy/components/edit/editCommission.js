@@ -65,6 +65,7 @@ export default function EditCommission() {
       .then((res) => {
         // console.log(JSON.stringify(res.data));
         // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
+        
         dispathRedux(setuserdata(res.data  ));
         navigate("/dashboard");
         actions.resetForm();
