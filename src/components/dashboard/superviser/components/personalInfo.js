@@ -8,9 +8,10 @@ import { useSelector } from "react-redux";
 
 export default function PersonalInfo() {
   const navigate = useNavigate();
-  const { state, dispatch } = useUser();
 
-  const userdata = useSelector(state => state.userdata);
+  const userdata = useSelector((state) => state.userdata);
+
+  console.log(userdata);
 
   return (
     <Container>

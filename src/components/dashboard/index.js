@@ -41,7 +41,6 @@ import { settoken } from "../../redux/slices/setTokenSlice";
 import { setuserdata } from "../../redux/slices/setuserDataSlice";
 import { setusername } from "../../redux/slices/setUserNameSlice";
 
-
 import { setUserType } from "../../redux/slices/userTypeSlice";
 import { setID } from "../../redux/slices/setId";
 import { setimage } from "../../redux/slices/setImageSlice";
@@ -53,12 +52,12 @@ export default function Dashboard() {
 
   const dispathRedux = useDispatch();
 
-  const islogin = useSelector(state => state.islogin.islogin);
-  const token = useSelector(state => state.token.token);
-  const userdata = useSelector(state => state.userdata);
+  const islogin = useSelector((state) => state.islogin.islogin);
+  const token = useSelector((state) => state.token.token);
+  const userdata = useSelector((state) => state.userdata);
   const userType = useSelector((state) => state.userType.userType);
-  
-console.log(token);
+
+  console.log(token);
 
   const getPersonalInfo = (userId) => {
     let data = new FormData();
@@ -74,36 +73,37 @@ console.log(token);
     axios(config)
       .then((res) => {
         // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
-        dispathRedux(setuserdata(res.data ));
+        console.log(res.data);
+        dispathRedux(setuserdata(res.data));
       })
       .catch((err) => {
         console.log("error", err);
       });
   };
 
-  const refreshToken = () => {
-    const data = new FormData();
-    data.append("refresh", Cookies.get("refreshToken"));
+  // const refreshToken = () => {
+  //   const data = new FormData();
+  //   data.append("refresh", Cookies.get("refreshToken"));
 
-    let config = {
-      method: "post",
-      url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${Cookies.get("token")}`,
-      },
-      data: data,
-    };
+  //   let config = {
+  //     method: "post",
+  //     url: `${BaseBackURL}api/token/refresh/`,
+  //     headers: {
+  //       Authorization: `Bearer ${Cookies.get("token")}`,
+  //     },
+  //     data: data,
+  //   };
 
-    axios(config)
-      .then((response) => {
-        // console.log(JSON.stringify(response.data));
-        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
-        dispathRedux(settoken(response.data.access));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  //   axios(config)
+  //     .then((response) => {
+  //       // console.log(JSON.stringify(response.data));
+  //       // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+  //       dispathRedux(settoken(response.data.access));
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
 
   // useEffect(() => {
   //   refreshToken();
@@ -150,7 +150,6 @@ console.log(token);
         dispathRedux(setusername(Cookies.get("userName")));
         // dispatch({ type: "SET_TYPE_USER", payload: Cookies.get("userType") });
         dispathRedux(setUserType(Cookies.get("userType")));
-     
 
         getPersonalInfo(userId);
         navigate("/dashboard");

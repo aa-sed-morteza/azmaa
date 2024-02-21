@@ -22,38 +22,36 @@ export default function EditPersonalInformation() {
   const [order, setOrder] = useState(false);
 
   const dispathRedux = useDispatch();
-  const token = useSelector(state => state.token.token);
-  const userdata = useSelector(state => state.userdata);
-  const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
-  const userId = useSelector(state => {
-    return state.userID.id
-  } );
+  const token = useSelector((state) => state.token.token);
+  const userdata = useSelector((state) => state.userdata);
 
+  const userId = useSelector((state) => {
+    return state.userID.id;
+  });
 
+  // const refreshToken = () => {
+  //   const data = new FormData();
+  //   data.append("refresh", refreshTokenstate);
 
-  const refreshToken = () => {
-    const data = new FormData();
-    data.append("refresh", refreshTokenstate);
+  //   let config = {
+  //     method: "post",
+  //     url: `${BaseBackURL}api/token/refresh/`,
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //     data: data,
+  //   };
 
-    let config = {
-      method: "post",
-      url: `${BaseBackURL}api/token/refresh/`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      data: data,
-    };
-
-    axios(config)
-      .then((response) => {
-        // console.log(JSON.stringify(response.data));
-        // dispatch({ type: "SET_TOKEN", payload: response.data.access });
-        dispathRedux(settoken(response.data.access));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  //   axios(config)
+  //     .then((response) => {
+  //       // console.log(JSON.stringify(response.data));
+  //       // dispatch({ type: "SET_TOKEN", payload: response.data.access });
+  //       dispathRedux(settoken(response.data.access));
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
 
   const onSubmit = async (values, actions) => {
     const data = new FormData();
@@ -74,9 +72,8 @@ export default function EditPersonalInformation() {
 
     axios(config)
       .then((res) => {
-        // console.log(JSON.stringify(res.data));
-        // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
-        dispathRedux(setuserdata(res.data ))
+        console.log(res.data);
+        dispathRedux(setuserdata(res.data));
         navigate("/dashboard");
         actions.resetForm();
         toast.success("اصلاح با موفقیت انجام شد!", {

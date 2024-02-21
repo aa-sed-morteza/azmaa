@@ -10,14 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../../redux/slices/setTokenSlice";
 import { setuserdata } from "../../../../redux/slices/setuserDataSlice";
 
-
 export default function HistoryEnvoy() {
   const { state, dispatch } = useUser();
   const [hisroty, setHistory] = useState(state.experiences);
   const navigate = useNavigate();
 
   const dispathRedux = useDispatch();
-  const token = useSelector(state => state.token.token);
+  const token = useSelector((state) => state.token.token);
 
   const refreshToken = () => {
     const data = new FormData();
@@ -56,20 +55,20 @@ export default function HistoryEnvoy() {
       .then((res) => {
         // console.log(JSON.stringify(res.data));
         // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
-        dispathRedux(setuserdata(res.data ));
+        dispathRedux(setuserdata(res.data));
         setHistory([...res.data]);
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         if (error.response.status == 401) {
           // refreshToken();
         }
       });
   };
 
-  useEffect(() => {
-    getExpriences();
-  }, [token]);
+  // useEffect(() => {
+  //   getExpriences();
+  // }, [token]);
 
   return (
     <Container>

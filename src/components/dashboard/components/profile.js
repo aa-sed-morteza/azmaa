@@ -15,6 +15,7 @@ import { setUserType } from "../../../redux/slices/userTypeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../redux/slices/setTokenSlice";
 import { setimage } from "../../../redux/slices/setImageSlice";
+import useWidth from "../../../hook/useWidth";
 
 
 export default function Profile() {
@@ -24,7 +25,7 @@ export default function Profile() {
   const [preview, setPreview] = useState();
 
   const userType = useSelector((state) => state.userType.userType);
-  
+  const width = useWidth();
 
   const dispathRedux = useDispatch();
 
@@ -136,72 +137,77 @@ export default function Profile() {
 
 
   return (
-    <Container>
-      <Content>
-        <Image show={userType} onClick={toggle}>
-          {selectedFile ? (
-            <img src={preview} alt="profile-picture" />
-          ) : (
-            <img
-              src={image ? image : DefaultAvatar}
-              alt="profile-picture"
-            />
-          )}
-        </Image>
-        <Label color={userType}>
-          <p className="title">
-            {userType === "parliament_member"
-              ? "نامزد انتخابات مجلس"
-              : " همیار نامزد ها"}{" "}
-          </p>
-          <p className="name">{`${userdata.first_name}   ${userdata.last_name}`}</p>
-          <p className="edit" onClick={toggle}>
-            ویرایش تصویر
-          </p>
-        </Label>
-      </Content>
-      <Modal isShowing={isShowing} hide={toggle} title="انتخاب عکس پروفایل ">
-        <Input icon={gallery} text="انتخاب از گالری">
-          <input type="file" onChange={onSelectFile} />
-          <span></span>
-        </Input>
-        <Input icon={camera} text="عکاسی با دوربین">
-          <input type="file" onChange={onSelectFile} />
-          <span></span>
-        </Input>
-        <div onClick={() => {
-          // dispathRedux(setimage(""));
-          // deletePicture();
-        }}>
-          <Input icon={remove} >
-            <p className="text">حذف عکس</p>
-            <span></span>
-          </Input>
-        </div>
+    <div >
+      {
+        width > 480 &&
+        <Container>
+          <Content>
+            <Image show={userType} onClick={toggle}>
+              {selectedFile ? (
+                <img src={preview} alt="profile-picture" />
+              ) : (
+                <img
+                  src={image ? image : DefaultAvatar}
+                  alt="profile-picture"
+                />
+              )}
+            </Image>
+            <Label color={userType}>
+              <p className="title">
+                {userType === "parliament_member"
+                  ? "نامزد انتخابات مجلس"
+                  : " همیار نامزد ها"}{" "}
+              </p>
+              <p className="name">{`${userdata.first_name}   ${userdata.last_name}`}</p>
+              <p className="edit" onClick={toggle}>
+                ویرایش تصویر
+              </p>
+            </Label>
+          </Content>
+          <Modal isShowing={isShowing} hide={toggle} title="انتخاب عکس پروفایل ">
+            <Input icon={gallery} text="انتخاب از گالری">
+              <input type="file" onChange={onSelectFile} />
+              <span></span>
+            </Input>
+            <Input icon={camera} text="عکاسی با دوربین">
+              <input type="file" onChange={onSelectFile} />
+              <span></span>
+            </Input>
+            <div onClick={() => {
+              // dispathRedux(setimage(""));
+              // deletePicture();
+            }}>
+              <Input icon={remove} >
+                <p className="text">حذف عکس</p>
+                <span></span>
+              </Input>
+            </div>
 
-        <Box>
-          <Button
-            type="button"
-            text="لغو"
-            textColor="#095644"
-            borderColor="#095644"
-            width="35%"
-            simple={true}
-            click={toggle}
-          />
-          <Button
-            text="ثبت"
-            textColor="#FFFFFF"
-            background="#095644"
-            width="62%"
-            click={() => {
-              toggle();
-              changePicture();
-            }}
-          />
-        </Box>
-      </Modal>
-    </Container>
+            <Box>
+              <Button
+                type="button"
+                text="لغو"
+                textColor="#095644"
+                borderColor="#095644"
+                width="35%"
+                simple={true}
+                click={toggle}
+              />
+              <Button
+                text="ثبت"
+                textColor="#FFFFFF"
+                background="#095644"
+                width="62%"
+                click={() => {
+                  toggle();
+                  changePicture();
+                }}
+              />
+            </Box>
+          </Modal>
+        </Container>
+      }
+    </div>
   );
 }
 

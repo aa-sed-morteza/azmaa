@@ -40,6 +40,7 @@ function App() {
   const { isBlogLoaded } = useSelector((state) => state.blog);
   const { isActivityLoaded } = useSelector((state) => state.activity);
   const { isCityLoaded, isDistrictLoaded } = useSelector((state) => state.city);
+  const token = useSelector((state) => state.token.token);
   const dispatchRedux = useDispatch();
   const navigate = useNavigate();
   // console.log(
@@ -52,14 +53,17 @@ function App() {
   // );
   useEffect(() => {
     getAllInitialData();
-    if(Cookies.get("token")) {
-      dispatchRedux(settoken(Cookies.get("token")));
-    } else {
-      navigate("/login")
-    }
   }, []);
 
+  useEffect(() => {
+    if (Cookies.get("token")) {
+      dispatchRedux(settoken(Cookies.get("token")));
+    } else {
+      navigate("/log-in");
+    }
+  }, [token]);
 
+  console.log(Cookies.get("token"));
 
   const { isFilterActive } = useSelector((state) => state.filter);
   return (

@@ -26,7 +26,6 @@ const TopBar = styled.section`
   display: flex;
   justify-content: space-between;
 
-
   @media (min-width: 481px) {
     justify-content: flex-start;
     align-items: center;
@@ -86,6 +85,11 @@ const MenuList = styled.ul`
   padding: 51px 81px 115px;
   gap: 10px;
   z-index: 40;
+
+  & > h2 {
+    color: #fff;
+    margin-right: -30px;
+  }
 `;
 
 const List = styled.li`
@@ -95,7 +99,14 @@ const List = styled.li`
   align-items: center;
   gap: 10px;
   position: relative;
-  color: ${(props) => (props.active ? "#FFFFFF" : "#095644")};
+  color: ${(props) =>
+    props.lightColor
+      ? props.active
+        ? "#095644"
+        : "#fff"
+      : props.active
+      ? "#FFFFFF"
+      : "#095644"};
   font-size: 4.35vw;
   font-weight: light;
   &.active {
@@ -103,7 +114,14 @@ const List = styled.li`
     &:before {
       content: "";
       display: "flex";
-      background-color: ${(props) => (props.active ? "#FFAA00" : "#095644")};
+      background-color: ${(props) =>
+        props.lightColor
+          ? props.active
+            ? "#095644"
+            : "#FFAA00"
+          : props.active
+          ? "#FFAA00"
+          : "#095644"};
       border-radius: 4px 0px 0px 4px;
       right: -81px;
       position: absolute;
@@ -317,6 +335,7 @@ export default function Navbar() {
   const menuItem = data.navbar.map((x, i) => {
     return (
       <List
+        lightColor={width < 481 && islogin}
         key={i}
         onClick={() => choiseItem(i, x.path)}
         className={i === active ? "active" : ""}
@@ -408,7 +427,6 @@ export default function Navbar() {
     dispatchRedux(togglmenu());
   }
 
-
   return (
     <TopBar>
       <Logo
@@ -451,21 +469,29 @@ export default function Navbar() {
         )}
         {width < 481 ? (
           <MenuList open={ismenuopen} back={dashboard && islogin}>
-            {dashboard && islogin ? <Profile /> : ""}
-            {dashboard && islogin ? checkUserMenu() : menuItem}{" "}
+            {dashboard && islogin && <Profile />}
+            {dashboard && islogin && <h2>صفحات سایت</h2>}
+            <>{menuItem}</>
+            {dashboard && islogin && <h2>صفحات داشبورد</h2>}
+            {dashboard && islogin && checkUserMenu()}
             <MobilePanel
               color={islogin ? "#FF5A5A" : "#FFAA00"}
               onClick={goDashboard}
-              
             >
-              <div className="icon" onClick={() => {
-                dispatchRedux(togglmenu());
-              }}>
+              <div
+                className="icon"
+                onClick={() => {
+                  dispatchRedux(togglmenu());
+                }}
+              >
                 <img src={islogin ? exit : signInMobile} />
               </div>
-              <p className="content" onClick={() => {
-                dispatchRedux(togglmenu());
-              }}>
+              <p
+                className="content"
+                onClick={() => {
+                  dispatchRedux(togglmenu());
+                }}
+              >
                 {" "}
                 {islogin ? "خروج از پنل" : "ورود به پنل"}{" "}
               </p>{" "}

@@ -21,8 +21,10 @@ export default function PersonalInformation() {
   const [preview, setPreview] = useState();
   const inputRef = useRef();
   const navigate = useNavigate();
-  const image = useSelector(state => state.image.image);
-  const userdata = useSelector(state => state.userdata);
+  const image = useSelector((state) => state.image.image);
+  const userdata = useSelector((state) => state.userdata);
+
+  console.log(userdata);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -55,10 +57,7 @@ export default function PersonalInformation() {
           {selectedFile ? (
             <img src={preview} alt="profile-picture" />
           ) : (
-            <img
-              src={image ? image : DefaultAvatar}
-              alt="profile-picture"
-            />
+            <img src={image ? image : DefaultAvatar} alt="profile-picture" />
           )}
         </Image>
         <Label>
