@@ -5,11 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../../../context/userContext";
 import { useFormik } from "formik";
 import { AreaSchema } from "../../../../schema";
-import Select from "../../../../general/select";
+// import Select from "../../../../general/select";
 import SelectNumber from "../../../../general/selectNumber";
 import axios from "axios";
 import { BaseBackURL } from "../../../../../constant/api";
 import { toast } from "react-toastify";
+import Select from "react-select"
 
 import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../../../redux/slices/setTokenSlice";
@@ -19,6 +20,7 @@ export default function EditEnvoyState() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
   const [areaName, setAreaName] = useState([]);
+  const [selectedOption , setSelectedOption] = useState(null);
 
   const dispathRedux = useDispatch();
   const token = useSelector(state => state.token.token);
@@ -31,21 +33,24 @@ export default function EditEnvoyState() {
   const getElectoralDistrict = () => {
     let config = {
       method: "get",
-      url: `${BaseBackURL}api/v1/electoral_district/?city__id&city__province__id`,
+      url: `${BaseBackURL}api/v1/electoral_district`,
     };
 
     axios(config)
       .then(function (response) {
+        let options = []
+        for(const item of response.data) {
+          options.push({value : item.name , label: item.name} )
+        }
         // console.log(JSON.stringify(response.data));
-        response.data.map((x) => {
-          setAreaName([...areaName, x.name]);
-        });
+        setAreaName([
+          ...options
+        ])
       })
       .catch(function (error) {
         console.log(error);
       });
   };
-
   const refreshToken = () => {
     const data = new FormData();
     data.append("refresh", refreshTokenstate);
@@ -106,6 +111,10 @@ export default function EditEnvoyState() {
       });
   };
 
+  const handleChangeItem = (selectedOption) => {
+    setSelectedOption(selectedOption);
+  }
+
   const {
     values,
     errors,
@@ -117,10 +126,10 @@ export default function EditEnvoyState() {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      areaName: state.electoral_district_name,
+      areaName:"",
     },
     validationSchema: AreaSchema,
-    onSubmit,
+    onSubmit
   });
 
   useEffect(() => {
@@ -149,13 +158,26 @@ export default function EditEnvoyState() {
         <Container>
           <Title>۱. اطلاعات حوزۀ انتخابیه را وارد کنید:</Title>
           <Form>
-            <Select
+            {/* <Select
               label="نام حوزه"
               background="#FFFFFF"
               value={values.areaName}
               onChange={handleChange}
               options={areaName}
               id="areaName"
+            /> */}
+            <Select 
+            id="areaName"
+            value={selectedOption}
+            onChange={(e) => {
+              // handleChange();
+              setFieldValue("areaName" , e.value)
+              handleChangeItem();
+            }}
+            options={areaName}
+            isSearchable={true}
+            placeholder={"select"}
+            
             />
             {errors.areaName && touched.areaName && (
               <ErrorText>{errors.areaName}</ErrorText>
