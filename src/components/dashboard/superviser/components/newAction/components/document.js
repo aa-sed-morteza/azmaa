@@ -15,20 +15,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../../../../redux/slices/setTokenSlice";
 import { setactionlevel } from "../../../../../../redux/slices/addActionLevelSlice";
 
-
 export default function Document() {
   const { state, dispatch } = useUser();
   const navigate = useNavigate();
 
   const dispathRedux = useDispatch();
-  const token = useSelector(state => state.token.token);
-  const refreshTokenstate = useSelector(state => state.refreshTokenstate.refreshTokenstate);
-  const selectEnvoy = useSelector(state => state.selectEnvoy.selectEnvoy);
-  const voteEnvoy = useSelector(state => state.voteEnvoy.voteEnvoy);
+  const token = useSelector((state) => state.token.token);
+  const refreshTokenstate = useSelector(
+    (state) => state.refreshTokenstate.refreshTokenstate
+  );
+  const selectEnvoy = useSelector((state) => state.selectEnvoy.selectEnvoy);
+  const voteEnvoy = useSelector((state) => state.voteEnvoy.voteEnvoy);
   const userType = useSelector((state) => state.userType.userType);
-
-
-
 
   const refreshToken = () => {
     const data = new FormData();
@@ -59,7 +57,7 @@ export default function Document() {
       const data = new FormData();
       data.append("activity_id", state.typeAction.description);
       data.append("activity_choice_id", voteEnvoy);
-      data.append("voter_id", selectEnvoy.envoy);
+      // data.append("voter_id", selectEnvoy.envoy);
 
       let config = {
         method: "post",
@@ -93,7 +91,7 @@ export default function Document() {
       const data = new FormData();
       data.append("activity_id", state.typeAction.description);
       data.append("activity_choice_id", voteEnvoy);
-      data.append("activity_choice_id", 1);
+      // data.append("activity_choice_id", 1);
 
       let config = {
         method: "post",
