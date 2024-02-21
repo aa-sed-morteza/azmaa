@@ -1,26 +1,22 @@
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import edit from "../../../../assets/left.svg";
 import { useUser } from "../../../../context/userContext";
-import {  useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setFraction } from "../../../../redux/slices/CommisionSlice";
 import axios from "axios";
-
 
 export default function CommissinInfo() {
   // const { state, dispatch } = useUser();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
-    const envoyList = useSelector((state) => state.envoy.envoyListToShow);
 
+  const envoyList = useSelector((state) => state.envoy.envoyListToShow);
 
-  
   // useEffect(() => {
   //   const fetchData = async () => {
-  //     try {  
+  //     try {
   //       const response = await axios.get("https://azmaa-back.iran.liara.run/api/v1/fraction/");
   //       const data = response.data;
   //       console.log(data);
@@ -30,16 +26,15 @@ export default function CommissinInfo() {
   //           list.push(item.name)
   //         }
   //       }
-        
-        
+
   //     } catch (error) {
   //       console.error("Error fetching data:", error);
   //     }
   //   };
   //   fetchData();
-  // }, []); 
-  const userdata = useSelector(state => state.userdata);
-  console.log(userdata)
+  // }, []);
+  const userdata = useSelector((state) => state.userdata);
+  console.log(userdata);
   return (
     <Container>
       <Edit
@@ -49,11 +44,11 @@ export default function CommissinInfo() {
       ></Edit>
       <Title> کمیسیون مورد نظر</Title>
       <Row>
-      {userdata && userdata.fraction ? (
-    <p className="text">{userdata.fraction}</p>
-  ) : (
-    <p className="text"> کمیسیونی انتخاب نشده</p>
-  )}
+        {userdata && userdata.fraction ? (
+          <p className="text">{userdata.fraction.name}</p>
+        ) : (
+          <p className="text"> کمیسیونی انتخاب نشده</p>
+        )}
       </Row>
     </Container>
   );

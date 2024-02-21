@@ -145,7 +145,7 @@ export default function PersonalInformation() {
       <LogInInfo />
       <ContactInfo />
       <EnvoyState />
-      {/* <CommissinInfo /> */}
+      <CommissinInfo />
       <HistoryEnvoy />
       <Edit
         onClick={() => {
