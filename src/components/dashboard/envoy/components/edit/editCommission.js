@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import CustomInput from "../../../../general/customInput";
 import Button from "../../../../general/button";
@@ -12,10 +12,13 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { settoken } from "../../../../../redux/slices/setTokenSlice";
 import { setuserdata } from "../../../../../redux/slices/setuserDataSlice";
+import Select from "react-select"
 
 export default function EditCommission() {
   const navigate = useNavigate();
   const { state, dispatch } = useUser();
+  const[commision,setCommision] = useState()
+  const [selectedOption , setSelectedOption] = useState(null);
 
   const dispathRedux = useDispatch();
   const token = useSelector(state => state.token.token);
@@ -47,10 +50,38 @@ export default function EditCommission() {
         console.log(error);
       });
   };
+  useEffect(() => {
+    let config = {
+      method: "get",
+      url: `${BaseBackURL}api/v1/fraction/`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    };
+    axios(config)
+    .then((res) => {
+      console.log(res.data)
+      let options = []
+      for(const item of res.data) {
+        options.push({value : res.data.indexOf(item) , label: item.name} )
+      }
+      // console.log(JSON.stringify(response.data));
+      setCommision([
+        ...options
+      ])
+    })
+    .catch((error) => {
+      console.log("Error", error);
+      if (error.response.status == 401) {
+  
+      }
+    });
+  }, [])
+  console.log(commision)
 
   const onSubmit = async (values, actions) => {
     const data = new FormData();
-    data.append("fraction", values.commission);
+    data.append("fraction", values.commission + 2);
 
     let config = {
       method: "put",
@@ -63,6 +94,7 @@ export default function EditCommission() {
 
     axios(config)
       .then((res) => {
+        console.log(res.data)
         // console.log(JSON.stringify(res.data));
         // dispatch({ type: "SET_USER_DATA", payload: { ...res.data } });
         
@@ -83,7 +115,9 @@ export default function EditCommission() {
         }
       });
   };
-
+  const handleChangeItem = (selectedOption) => {
+    setSelectedOption(selectedOption);
+  }
   const {
     values,
     errors,
@@ -92,13 +126,15 @@ export default function EditCommission() {
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue
   } = useFormik({
     initialValues: {
-      commission: state.commission,
+      commission: "",
     },
     validationSchema: commissionSchema,
     onSubmit,
   });
+  
 
   return (
     <Wraper>
@@ -111,12 +147,25 @@ export default function EditCommission() {
         <Container>
           <Title>۱. کمیسیون مورد نظر خود را تعیین کنید:</Title>
           <Form>
-            <CustomInput
+            {/* <CustomInput
               label="کمیسیون مورد نظر"
               back="#ffffff"
               value={values.commission}
               onChange={handleChange}
               id="commission"
+            /> */}
+             <Select 
+            id="commission"
+            value={selectedOption}
+            onChange={(e) => {
+              // handleChange();
+              setFieldValue("commission" , e.value)
+              handleChangeItem();
+            }}
+            options={commision}
+            isSearchable={true}
+            placeholder={"select"}
+            
             />
             {errors.commission && touched.commission && (
               <ErrorText>{errors.commission}</ErrorText>
