@@ -59,7 +59,9 @@ function App() {
     if (Cookies.get("token")) {
       dispatchRedux(settoken(Cookies.get("token")));
     } else {
-      navigate("/log-in");
+      if (window.location.href.includes("/dashboard")) {
+        navigate("/log-in");
+      }
     }
   }, [token]);
 
