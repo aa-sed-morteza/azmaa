@@ -10,6 +10,7 @@ import BestEnvoys from "../components/home/components/BestEnvoys";
 import TopBanner from "../components/home/components/topBanner";
 import IranMap from "../components/pluginIranMap/IranMap";
 import { useFetcher } from "react-router-dom";
+import DistrictsPart from "../components/home/components/districtstPart";
 
 const HomeContainer = styled.section`
   padding: 6vw 20px 0 20px;
@@ -30,25 +31,28 @@ export default function Home() {
 
   return (
     <HomeContainer>
-       <TopBanner /> 
+      <TopBanner />
       {/* <FirstBanner /> */}
-      
-<IranMap style={{
-  width: "63.5%",
-  margin: "auto",
-  marginBottom: isMobile ? "25px" : "0",
-}}/>
+
+      <IranMap
+        style={{
+          width: "63.5%",
+          margin: "auto",
+          marginBottom: isMobile ? "25px" : "0",
+        }}
+      />
       <FilterBox
         filterType={filterType}
         setFilterType={setFilterType}
         searchPhrase={searchPhrase}
         setSearchPhrase={setSearchPhrase}
       />
-      {(filterType === "all" || filterType === "vote") && (
-        <LastVotes searchPhrase={searchPhrase} />
-      )}
+
       {(filterType === "all" || filterType === "envoy") && (
         <BestEnvoys searchPhrase={searchPhrase} />
+      )}
+      {(filterType === "all" || filterType === "district") && (
+        <DistrictsPart searchPhrase={searchPhrase} />
       )}
       {(filterType === "all" || filterType === "activity") && (
         <LastActivities searchPhrase={searchPhrase} />

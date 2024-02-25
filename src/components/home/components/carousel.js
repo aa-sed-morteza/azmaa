@@ -110,6 +110,7 @@ const Slide = styled.div`
   justify-content: center;
   align-items: center;
   transition: 0.3s ease-in-out;
+
   .cover {
     position: absolute;
     left: 0px;

@@ -3,7 +3,6 @@ import data from "../../../../../data/test.json";
 import { useEffect, useState } from "react";
 
 export default function ExamModal({ visible, onClose }) {
-  console.log(data);
   const [answers, setAnswers] = useState([]);
   const [randomlyArrangedArray, setRandomlyArrangedArray] = useState([]);
   const [score, setScore] = useState(0);
@@ -30,8 +29,6 @@ export default function ExamModal({ visible, onClose }) {
     questions.push(data.questions[item]);
   }
 
-  console.log(questions);
-
   const handleTestResult = () => {
     let result = 0;
 
@@ -41,7 +38,6 @@ export default function ExamModal({ visible, onClose }) {
       }
     }
 
-    console.log(result);
     setScore(result);
   };
 
@@ -66,9 +62,6 @@ export default function ExamModal({ visible, onClose }) {
       </div>
     </QuestionBox>
   ));
-
-  console.log(answers);
-  console.log(questions);
 
   return (
     <ModalContainer visible={visible} onClick={onClose}>
