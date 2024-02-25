@@ -32,11 +32,8 @@ export default function Census({ data, complete, envoy }) {
 
   return (
     <Container>
-      <Title> آمار شفافیت</Title>
-      <Row>
-        <p className="type">آراء ثبت‌شده:</p>
-        {checkCensus(data, data)}
-      </Row>
+      <Title> شفافیت دیدگاه</Title>
+
       <Row>
         <p className="type">دیدگاه های ثبت‌شده:</p>
         {checkCensus(envoy, complete)}

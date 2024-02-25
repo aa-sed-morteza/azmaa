@@ -2,8 +2,19 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import profile from "../../assets/gray.svg";
 import { toFarsiNumber } from "../../utils";
+import Badge from "./badge";
 
-export default function EnvoyCard({name,state,commission,img,persantage,id,inBox,click,position}) {
+export default function EnvoyCard({
+  name,
+  state,
+  commission,
+  img,
+  persantage,
+  id,
+  inBox,
+  click,
+  position,
+}) {
   const [color, setColor] = useState("#FFAA00");
   const [firstHalf, setFirstHalf] = useState(0);
   const [secondHalf, setSecondHalf] = useState(0);
@@ -24,12 +35,11 @@ export default function EnvoyCard({name,state,commission,img,persantage,id,inBox
   const calculateFillCircle = () => {
     if (persantage <= 50) {
       setFirstHalf((persantage * 180) / 50);
-    }else{
-      const amount =persantage-50;
+    } else {
+      const amount = persantage - 50;
       setFirstHalf(180);
-      setSecondHalf(Math.floor((amount*180)/50));
+      setSecondHalf(Math.floor((amount * 180) / 50));
     }
-
   };
 
   useEffect(() => {
@@ -37,59 +47,74 @@ export default function EnvoyCard({name,state,commission,img,persantage,id,inBox
     generateColor();
   }, []);
 
- 
-
-
   return (
-    <Container width={inBox} onClick={click} pos={position} >
-      <EnvoyImage
-        coloring={color}
-        firstFill={firstHalf}
-        secondFill={secondHalf}
-        id={id}
-      >
-        <b>
-          <img src={img} />
-        </b>
-      </EnvoyImage>
-      <Content color={color}>
-        <h3>{name || "نام نامزد"}</h3>
-        <div className="status">
-          <p className="state"> {state || "حوزه نامزد"}</p>
-          <p className="position"> {commission || "کمیسیون مورد نظر"}</p>
-        </div>
-        <div className="persantage">
-          <p className="text">شفافیت: ٪</p>
-          <p className="content">{toFarsiNumber(persantage)  || "0"}</p>
-        </div>
-      </Content>
+    <Container width={inBox} onClick={click} pos={position}>
+      <ImageBox>
+        <EnvoyImage
+          coloring={color}
+          firstFill={firstHalf}
+          secondFill={secondHalf}
+          id={id}
+        >
+          <b>
+            <img src={img} />
+          </b>
+        </EnvoyImage>
+        <Content color={color}>
+          <h3>{name || "نام نامزد"}</h3>
+          <div className="status">
+            <p className="state"> {state || "حوزه نامزد"}</p>
+          </div>
+        </Content>
+      </ImageBox>
+
+      <BadgePart>
+        <Badge eWidth={5} data={{ name: "شفافیت دیدگاه", score: "90" }} />
+        <Badge eWidth={5} data={{ name: "قانون اساسی", score: "40" }} />
+        <Badge eWidth={5} data={{ name: "تعهدنامه نمایندگی", score: "30" }} />
+      </BadgePart>
     </Container>
   );
 }
 
+const ImageBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BadgePart = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+`;
+
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   padding: 15px 20px;
   background: #ffffff;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 20px -5px
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 20px -5px;
   border-radius: 4px;
   direction: rtl;
   cursor: pointer;
-  position: ${props=>props.pos ? props.pos :'static'};
-  top:${props=>props.pos == 'sticky' ? 0 :''};
+  position: ${(props) => (props.pos ? props.pos : "static")};
+  top: ${(props) => (props.pos == "sticky" ? 0 : "")};
   z-index: 20;
   @media (min-width: 481px) {
     margin: 0;
     box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     // padding: 31px 27px;
-    min-width:${props=>props.width?"inhiret":"460px"} ;
+    min-width: ${(props) => (props.width ? "inhiret" : "460px")};
     align-items: center;
   }
   @media (min-width: 769px) {
     padding: 31px 27px;
-    }
+  }
 `;
 
 const EnvoyImage = styled.div`
@@ -102,9 +127,9 @@ const EnvoyImage = styled.div`
   transform: rotate(0deg);
   /* background: #f9f9f9; */
   background: #ffffff;
-  @media(min-width:481px){
-    width:7.552vw;
-    height:7.552vw;
+  @media (min-width: 481px) {
+    width: 7.552vw;
+    height: 7.552vw;
   }
   &:before {
     content: "";
@@ -118,9 +143,9 @@ const EnvoyImage = styled.div`
     z-index: 2;
     left: -50%;
     background: #f9f9f9;
-    @media(min-width:481px){
-      width:7.552vw;
-      height:7.552vw;
+    @media (min-width: 481px) {
+      width: 7.552vw;
+      height: 7.552vw;
     }
   }
   &:after {
@@ -131,15 +156,15 @@ const EnvoyImage = styled.div`
     position: absolute;
     left: 0;
     top: 0;
-    @media(min-width:481px){
-      width:7.552vw;
-      height:7.552vw;
+    @media (min-width: 481px) {
+      width: 7.552vw;
+      height: 7.552vw;
     }
   }
   b {
     &:before {
       content: "";
-      display: ${(props) => props.secondFill===0?"none":""};
+      display: ${(props) => (props.secondFill === 0 ? "none" : "")};
       width: 90px;
       height: 93px;
       border-radius: 50%;
@@ -153,11 +178,11 @@ const EnvoyImage = styled.div`
         transparent 100%
       );
       z-index: 4;
-      animation: 3s ${props=>'span2'+props.id} linear forwards 3s;
+      animation: 3s ${(props) => "span2" + props.id} linear forwards 3s;
       opacity: 0;
-      @media(min-width:481px){
-        width:7.552vw;
-        height:7.552vw;
+      @media (min-width: 481px) {
+        width: 7.552vw;
+        height: 7.552vw;
       }
     }
     &:after {
@@ -175,11 +200,11 @@ const EnvoyImage = styled.div`
         transparent 100%
       );
       z-index: 1;
-      animation: 3s ${props=>'span'+props.id} linear forwards;
+      animation: 3s ${(props) => "span" + props.id} linear forwards;
       animation-delay: 4s;
-      @media(min-width:481px){
-        width:7.552vw;
-        height:7.552vw;
+      @media (min-width: 481px) {
+        width: 7.552vw;
+        height: 7.552vw;
       }
     }
   }
@@ -195,14 +220,14 @@ const EnvoyImage = styled.div`
     border-radius: 50%;
     object-fit: contain;
     background: #ffffff;
-    @media(min-width:481px){
-      width:7.292vw;
-      height:7.292vw;
+    @media (min-width: 481px) {
+      width: 7.292vw;
+      height: 7.292vw;
       margin: 1.5px auto;
     }
   }
 
-  @keyframes ${props=>'span'+props.id} {
+  @keyframes ${(props) => "span" + props.id} {
     from {
       transform: rotate(0);
     }
@@ -210,7 +235,7 @@ const EnvoyImage = styled.div`
       transform: rotate(${(props) => props.firstFill}deg);
     }
   }
-  @keyframes ${props=>'span2'+props.id}  {
+  @keyframes ${(props) => "span2" + props.id} {
     from {
       transform: rotate(0);
       opacity: 1;
@@ -244,8 +269,8 @@ const Content = styled.div`
   }
   .status {
     display: flex;
-    align-items:center;
-    gap:7px;
+    align-items: center;
+    gap: 7px;
     margin-bottom: 10px;
     &:before {
       content: "";
@@ -255,13 +280,11 @@ const Content = styled.div`
       background-image: url(${profile});
       background-size: contain;
       background-repeat: no-repeat;
-     
     }
     .state {
       color: #707070;
       font-weight: 400;
       font-size: 3.72vw;
-      border-left: 1px solid #ffaa00;
       padding-left: 7px;
       margin: 0;
     }

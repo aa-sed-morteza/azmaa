@@ -158,9 +158,9 @@ export default function BestEnvoyCard({ envoy, click }) {
         </Content>
       </ImageBox>
       <BadgePart>
-        <Badge data={{ name: "شفافیت دیدگاه", score: "90" }} />
-        <Badge data={{ name: "قانون اساسی", score: "50" }} />
-        <Badge data={{ name: "تعهدنامه نمایندگی", score: "30" }} />
+        <Badge eWidth={7} data={{ name: "شفافیت دیدگاه", score: "90" }} />
+        <Badge eWidth={7} data={{ name: "قانون اساسی", score: "50" }} />
+        <Badge eWidth={7} data={{ name: "تعهدنامه نمایندگی", score: "30" }} />
       </BadgePart>
     </EnvoyCard>
   );
