@@ -42,8 +42,9 @@ import { setuserdata } from "../../redux/slices/setuserDataSlice";
 import { setusername } from "../../redux/slices/setUserNameSlice";
 
 import { setUserType } from "../../redux/slices/userTypeSlice";
-import { setID ,setExperience } from "../../redux/slices/setId";
+import { setID, setExperience } from "../../redux/slices/setId";
 import { setimage } from "../../redux/slices/setImageSlice";
+import RuleExam from "./superviser/components/ruleExam/ruleExam";
 
 export default function Dashboard() {
   const { state, dispatch } = useUser();
@@ -144,7 +145,7 @@ export default function Dashboard() {
         // dispatch({ type: "SET_LOGGED_IN", payload: true });
         dispathRedux(setimage(res.data.image));
         dispathRedux(setID(res.data.id));
-        dispathRedux(setExperience(res.data.experiences))
+        dispathRedux(setExperience(res.data.experiences));
         dispathRedux(login());
         // dispatch({ type: "SET_USERNAME", payload: Cookies.get("userName") });
         dispathRedux(setusername(Cookies.get("userName")));
@@ -229,6 +230,7 @@ export default function Dashboard() {
             <Route path="/history" element={<MyHistory />} />
             <Route path="/mySection/:title" element={<News />} />
             <Route path="/edit" element={<GeneralEditInformation />} />
+            <Route path="/roleexam" element={<RuleExam />} />
           </Routes>
         )}
       </PageWraper>
