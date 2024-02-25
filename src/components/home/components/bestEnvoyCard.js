@@ -4,11 +4,11 @@ import pic from "../../../assets/pic.webp";
 import profile from "../../../assets/profile.webp";
 import area from "../../../assets/gray.svg";
 import { toFarsiNumber } from "../../../utils";
+import Badge from "../../general/badge";
 
 const EnvoyCard = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   padding: 15px 20px;
   background: #ffffff;
   box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.15);
@@ -22,9 +22,6 @@ const EnvoyCard = styled.div`
     border-radius: 8px;
     padding: 10px 5px;
     /* width: 25%; */
-    align-items: center;
-    justify-content: space-between;
-    max-height: 150px;
   }
   @media (min-width: 769px) {
     /* width: 30%; */
@@ -142,26 +139,43 @@ const Content = styled.div`
 `;
 
 export default function BestEnvoyCard({ envoy, click }) {
-  console.log("تست فراکشن")
-  console.log(envoy.fraction_name)
+  console.log("تست فراکشن");
+  console.log(envoy.fraction_name);
   return (
     <EnvoyCard onClick={click}>
-      <EnvoyImage>
-        <img src={envoy.image} />
-      </EnvoyImage>
-      <Content>
-        <h3>
-          {envoy.first_name} {envoy.last_name}
-        </h3>
-        <div className="status">
-          <p className="state">{envoy.electoral_district_name}</p>
-          {/* <p className="position">{envoy.fraction_name}</p> */}
-        </div>
-        <div className="persantage">
-          {/* <p className="text">شفافیت: ٪</p>
-          <p className="content">{toFarsiNumber(envoy.transparency)}</p> */}
-        </div>
-      </Content>
+      <ImageBox>
+        <EnvoyImage>
+          <img src={envoy.image} />
+        </EnvoyImage>
+        <Content>
+          <h3>
+            {envoy.first_name} {envoy.last_name}
+          </h3>
+          <div className="status">
+            <p className="state">{envoy.electoral_district_name}</p>
+            {/* <p className="position">{envoy.fraction_name}</p> */}
+          </div>
+        </Content>
+      </ImageBox>
+      <BadgePart>
+        <Badge data={{ name: "شفافیت دیدگاه", score: "90" }} />
+        <Badge data={{ name: "قانون اساسی", score: "50" }} />
+        <Badge data={{ name: "تعهدنامه نمایندگی", score: "30" }} />
+      </BadgePart>
     </EnvoyCard>
   );
 }
+
+const ImageBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BadgePart = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+`;
