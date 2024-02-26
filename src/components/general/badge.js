@@ -1,26 +1,28 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import useWidth from "../../hook/useWidth";
 
 export default function Badge({ data, eWidth }) {
   const degree = (data.score * 360) / 100;
+  const width = useWidth();
 
   return (
-    <Container eWidth={eWidth}>
-      <WhiteBoxLeft eWidth={eWidth}>
+    <Container eWidth={width > 480 ? eWidth : 22}>
+      <WhiteBoxLeft eWidth={width > 480 ? eWidth : 22}>
         <LeftRing
-          eWidth={eWidth}
+          eWidth={width > 480 ? eWidth : 22}
           degree={degree > 180 ? degree - 180 : 0}
           bColor={degree < 120 ? "red" : degree < 240 ? "#ffaa00" : "green"}
         />
       </WhiteBoxLeft>
       <WhiteBoxRight eWidth={eWidth}>
         <RightRing
-          eWidth={eWidth}
+          eWidth={width > 480 ? eWidth : 22}
           degree={degree < 180 ? degree : 180}
           bColor={degree < 120 ? "red" : degree < 240 ? "#ffaa00" : "green"}
         />
       </WhiteBoxRight>
-      <Box eWidth={eWidth}>
+      <Box eWidth={width > 480 ? eWidth : 22}>
         <h2>{data.name}</h2>
       </Box>
     </Container>
@@ -93,11 +95,17 @@ const Box = styled.div`
   display: flex;
   z-index: 10;
   position: relative;
+  padding: 10px;
+  box-sizing: border-box;
 
   & > h2 {
-    color: rgb(255, 170, 0);
-    font-size: ${(props) => `${props.eWidth * 2.4}px`};
+    color: #707070;
+    font-size: ${(props) => `${props.eWidth * 2}px`};
     font-weight: 900;
     margin: auto;
+
+    @media (max-width: 480px) {
+      font-size: 16px;
+    }
   }
 `;
