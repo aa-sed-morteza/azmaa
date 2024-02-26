@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/navbar";
@@ -35,6 +40,13 @@ import { useNavigate } from "react-router-dom";
 import { settoken } from "./redux/slices/setTokenSlice";
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(location);
+    window.scrollTo(0, 0);
+  }, [location]);
+  console.log(location);
   const { isEnvoyLoaded } = useSelector((state) => state.envoy);
   const { isVoteLoaded } = useSelector((state) => state.vote);
   const { isBlogLoaded } = useSelector((state) => state.blog);
