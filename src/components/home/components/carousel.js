@@ -121,6 +121,11 @@ const Slide = styled.div`
     -webkit-filter: brightness(0.5); /*Safari 6.0 - 9.0 */
     filter: brightness(0.5);
     object-fit: cover;
+
+    @media (max-width: 480px) {
+      object-fit: contain;
+      object-position: top;
+    }
   }
   .content {
     position: absolute;
@@ -130,6 +135,11 @@ const Slide = styled.div`
     top: 20%;
     right: 7%;
     z-index: 30;
+
+    @media (max-width: 480px) {
+      width: 80%;
+      top: 40%;
+    }
     h1 {
       color: #ffaa00;
       font-size: 2.5vw;
@@ -141,6 +151,11 @@ const Slide = styled.div`
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
+
+      @media (max-width: 480px) {
+        font-size: 24px;
+        line-height: 36px;
+      }
     }
     p {
       color: #ffffff;
@@ -148,11 +163,15 @@ const Slide = styled.div`
       font-size: 1.45vw;
       line-height: 2.5vw;
       text-align: justify;
-
       display: -webkit-box;
       -webkit-line-clamp: 6;
       -webkit-box-orient: vertical;
       overflow: hidden;
+
+      @media (max-width: 480px) {
+        font-size: 18px;
+        line-height: 28px;
+      }
     }
     .show-more {
       background-color: #ffaa00;
@@ -165,6 +184,11 @@ const Slide = styled.div`
       margin-top: 30px;
       position: relative;
       cursor: pointer;
+
+      @media (max-width: 480px) {
+        font-size: 18px;
+        line-height: 28px;
+      }
       &:before {
         content: "";
         display: block;
