@@ -98,7 +98,7 @@ export default function PersonalInformation() {
           )}
         </Image>
         <Label>
-          <p className="title">نامزد انتخابات مجلس</p>
+          <p className="title">نماینده انتخابات مجلس</p>
           <p className="name">{`${userdata.first_name}   ${userdata.last_name}`}</p>
           <p className="edit" onClick={toggle}>
             ویرایش تصویر

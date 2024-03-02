@@ -79,7 +79,7 @@ export default function Envoy() {
             navigate("/envoy");
           }}
         >
-          نامزد ها
+          نمایندگان
         </p>
       </Title>
       <Content ref={SearchrRef}>

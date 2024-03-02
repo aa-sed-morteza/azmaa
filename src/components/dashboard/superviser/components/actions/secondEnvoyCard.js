@@ -98,9 +98,9 @@ export default function SecondEnvoyCard({
         </b>
       </EnvoyImage>
       <Content color={actColor} actIcon={actIcon}>
-        <h3>{name || "نام نامزد"}</h3>
+        <h3>{name || "نام نماینده"}</h3>
         <div className="status">
-          <p className="state"> {state || "حوزه نامزد"}</p>
+          <p className="state"> {state || "حوزه نماینده"}</p>
           <p className="position"> {commission || "کمیسیون مورد نظر"}</p>
         </div>
         <div className="persantage">

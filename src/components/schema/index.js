@@ -161,12 +161,12 @@ export const selectActionTypeSchema = yup.object().shape({
 });
 
 export const selectEnvoyTypeSchema = yup.object().shape({
-  type: yup.string().required("لطفا دسته نامزد خود را انتخاب  کنید"),
-  envoy: yup.string().required("لطفا نامزد مورد نظر  خود را انتخاب  کنید"),
+  type: yup.string().required("لطفا دسته نماینده خود را انتخاب  کنید"),
+  envoy: yup.string().required("لطفا نماینده مورد نظر  خود را انتخاب  کنید"),
 });
 
 export const voteSchema = yup.object().shape({
-  vote: yup.string().required("لطفا رای نامزد را انتخاب کنید"),
+  vote: yup.string().required("لطفا رای نماینده را انتخاب کنید"),
 });
 
 export const documentSchema = yup.object().shape({

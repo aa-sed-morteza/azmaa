@@ -58,7 +58,7 @@ export default function BestEnvoys({ searchPhrase }) {
   return (
     <Section ref={envoyContainerRef}>
       <animated.div style={trails[3]}>
-        <Title>شفاف‌ترین نامزد ها</Title>
+        <Title>شفاف‌ترین نمایندگان</Title>
         <SecondAlbum>
           {envoyListToShow.slice(0, showLimit).map((item, i) => {
             return (

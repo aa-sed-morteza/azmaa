@@ -64,7 +64,7 @@ export default function DetailsEnvoy() {
             navigate("/envoy");
           }}
         >
-          خانه / نامزد ها /
+          خانه / نمایندگان /
         </p>
         <p className="component">
           {" "}

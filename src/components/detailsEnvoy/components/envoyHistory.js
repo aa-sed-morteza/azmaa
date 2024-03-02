@@ -42,7 +42,7 @@ export default function EnvoyHistory({ id }) {
 
   return (
     <Container onClick={handleClick} className={open ? "active" : ""}>
-      <Title>سوابق نامزد</Title>
+      <Title>سوابق نماینده</Title>
       <History>
         {!open && (
           <p className="text">

@@ -381,7 +381,7 @@ export default function Filtering({ id }) {
 
       {select == 1 && (
         <Calendar>
-          <CalendarTitle>کارنامۀ نامزد</CalendarTitle>
+          <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
           {/* <SubTitile>مرداد ۱۴۰۱</SubTitile>
           <Gallery>
             {positiveVote}
@@ -403,7 +403,7 @@ export default function Filtering({ id }) {
       {select == 2 && <>همه با فعالیت ها چه فرقی داره ؟</>}
       {select == 3 && (
         <Calendar>
-          <CalendarTitle>کارنامۀ نامزد</CalendarTitle>
+          <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
           {/* <SubTitile>مرداد ۱۴۰۰</SubTitile> */}
           {/* <Gallery> */}
           {/* {positiveVote} */}
@@ -417,7 +417,7 @@ export default function Filtering({ id }) {
       )}
       {select == 4 && (
         <Calendar>
-          <CalendarTitle>کارنامۀ نامزد</CalendarTitle>
+          <CalendarTitle>کارنامۀ نماینده</CalendarTitle>
           {/* <SubTitile>مرداد ۱۴۰۰</SubTitile> */}
           {/* <Gallery>{activity}</Gallery> */}
           {activityElements}

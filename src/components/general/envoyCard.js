@@ -61,9 +61,9 @@ export default function EnvoyCard({
           </b>
         </EnvoyImage>
         <Content color={color}>
-          <h3>{name || "نام نامزد"}</h3>
+          <h3>{name || "نام نماینده"}</h3>
           <div className="status">
-            <p className="state"> {state || "حوزه نامزد"}</p>
+            <p className="state"> {state || "حوزه نماینده"}</p>
           </div>
         </Content>
       </ImageBox>

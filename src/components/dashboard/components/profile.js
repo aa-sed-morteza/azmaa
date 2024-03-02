@@ -155,8 +155,8 @@ export default function Profile() {
             <Label color={userType}>
               <p className="title">
                 {userType === "parliament_member"
-                  ? "نامزد انتخابات مجلس"
-                  : " همیار نامزد ها"}{" "}
+                  ? "نماینده انتخابات مجلس"
+                  : " همیار نمایندگان"}{" "}
               </p>
               <p className="name">{`${userdata.first_name}   ${userdata.last_name}`}</p>
               <p className="edit" onClick={toggle}>

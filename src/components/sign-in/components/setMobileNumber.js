@@ -30,7 +30,7 @@ export default function SetMobileNumber() {
   const [validate, setValidate] = useState(0);
   const [code, setCode] = useState("");
   const [update, setUpdate] = useState(false);
-  const [type, setType] = useState(["نامزد", "همیار"]);
+  const [type, setType] = useState(["نماینده", "همیار"]);
   const [password, setPassword] = useState("");
   const userType = useSelector((state) => state.userType.userType);
 
@@ -141,7 +141,7 @@ export default function SetMobileNumber() {
   const onSubmit = async (values, actions) => {
     // dispatch({ type: "SET_USERNAME", payload: values.phoneNember });
     dispatchRedux(setusername(values.phoneNember ));
-    if (values.type == "نامزد") {
+    if (values.type == "نماینده") {
       // dispatch({ type: "SET_TYPE_USER", payload: "envoy" });
       dispatchRedux(setUserType("parliament_member"));
     } else {
@@ -251,7 +251,7 @@ export default function SetMobileNumber() {
             />
           </Box>
           <p>
-          پنل کاربری مخصوص نامزدهای انتخابات مجلس است. در صورتی که نامزد انتخابات هستید و شماره شما قبلا ثبت نشده است به شماره 09108993642 پیام بدهید
+          پنل کاربری مخصوص نمای مجلس است. در صورتی که نماینده انتخابات هستید و شماره شما قبلا ثبت نشده است به شماره 09108993642 پیام بدهید
           </p>
         </Form>
       ) : (

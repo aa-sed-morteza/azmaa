@@ -30,7 +30,7 @@ export default function Agree({ envoys }) {
         {envoys !== undefined && envoys.length > 0 && envoys[0]
           ? envoys[0].vote
             ? envoys[0].vote
-            : "نامزد ها موافق"
+            : "نمایندگان موافق"
           : ""}{" "}
       </Title>
       <Gallery>{envoysList}</Gallery>

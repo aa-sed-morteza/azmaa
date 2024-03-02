@@ -99,7 +99,7 @@ export default function NewEnvoy({ envoys }) {
 
   return (
     <Container>
-      <Title> جدیدترین نامزد ها</Title>
+      <Title> جدیدترین نمایندگان</Title>
       <EnvoyContainer hide={showMore}>
         {envoys
           .filter((item) => {

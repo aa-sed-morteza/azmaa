@@ -158,7 +158,7 @@ export default function VoteEnvoy() {
       {addActionLevel === 3 ? (
         <form onSubmit={handleSubmit} autoComplete="off">
           <Container>
-            <Title>۳. دیدگاه نامزد را انتخاب کنید:</Title>
+            <Title>۳. دیدگاه نماینده را انتخاب کنید:</Title>
             {actionsItems}
             {errors.vote && touched.vote && (
               <ErrorText>{errors.vote}</ErrorText>
@@ -187,7 +187,7 @@ export default function VoteEnvoy() {
         </form>
       ) : (
         <Container>
-          <Title>۳. دیدگاه نامزد را انتخاب کنید:</Title>
+          <Title>۳. دیدگاه نماینده را انتخاب کنید:</Title>
           {checkActionsItems}
         </Container>
       )}

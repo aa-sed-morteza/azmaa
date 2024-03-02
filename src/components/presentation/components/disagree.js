@@ -21,7 +21,7 @@ export default function Disagree({ envoys }) {
   });
   return (
     <Container>
-      <Title> نامزد ها مخالف</Title>
+      <Title> نمایندگان مخالف</Title>
       <Gallery>{envoysList}</Gallery>
 
       <ShowMore>

@@ -377,7 +377,7 @@ export default function NormalController({ vote_voter }) {
                 <hr />
               ) : (
                 <BestEnvoyContainer>
-                  <Title>شفاف‌ترین نامزد ها</Title>
+                  <Title>شفاف‌ترین نمایندگان</Title>
                   <SecondAlbum hide={thirdHide}>
                     {envoyListToShow
                       .filter((item) => {

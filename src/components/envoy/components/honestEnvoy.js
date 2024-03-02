@@ -11,7 +11,7 @@ export default function HonestEnvoy({ envoys }) {
 
   return (
     <Container>
-      <Title>شفاف‌ترین نامزد ها</Title>
+      <Title>شفاف‌ترین نمایندگان</Title>
       <Gallery>
         {newList.map((item, i) => (
           <BestEnvoy

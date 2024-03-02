@@ -7,7 +7,7 @@
       "active_icon": "../../assets/Home-active.webp"
     },
     {
-      "title": "نامزد ها",
+      "title": "نمایندگان",
       "path": "/envoy",
       "icon": "../../assets/profile.webp",
       "active_icon": "../../assets/profile-active.webp"
@@ -59,7 +59,7 @@
   ],
   "superviserLess": [
     {
-      "title": "نامزد ها من",
+      "title": "نمایندگان من",
       "path": "/dashboard/myEnvoy",
       "icon": "../../assets/envoys.webp",
       "active_icon": "../../assets/envoys-active.webp"
@@ -301,7 +301,7 @@
       "value": "all"
     },
     {
-      "name": "نامزد ها",
+      "name": "نمایندگان",
       "icon": "../../assets/user.webp",
       "value": "envoy"
     },

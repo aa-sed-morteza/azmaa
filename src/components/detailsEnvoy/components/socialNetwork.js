@@ -10,7 +10,7 @@ export default function SocialNetwork() {
 
   return (
     <Container>
-      <Title>شبکه‌های اجتماعی نامزد</Title>
+      <Title>شبکه‌های اجتماعی نماینده</Title>
       <Content>
         <NetworkRow icon={web}>
           <span></span>

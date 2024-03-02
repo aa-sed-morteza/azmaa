@@ -25,7 +25,7 @@ export default function UnKnown({ envoys }) {
   return (
     <Container>
       <Title>
-        {envoys && envoys.lenght > 0 ? envoys[0].vote : "نامزد ها مخالف"}{" "}
+        {envoys && envoys.lenght > 0 ? envoys[0].vote : "نمایندگان مخالف"}{" "}
       </Title>
       <Gallery>{envoysList}</Gallery>
       <ShowMore>

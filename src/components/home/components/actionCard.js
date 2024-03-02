@@ -188,7 +188,7 @@ export default function ActionCard({ activity }) {
         {/* <SmallButton>
           <p className="content">بازنشر</p>
         </SmallButton> */}
-        <ShareButton text={activity.name} title="اطلاع رسانی نامزد" />
+        <ShareButton text={activity.name} title="اطلاع رسانی نماینده" />
       </ButtonWraper>
     </VCContainer>
   );
