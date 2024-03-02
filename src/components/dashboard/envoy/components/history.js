@@ -80,7 +80,7 @@ export default function HistoryEnvoy() {
           navigate("edit-history-info");
         }}
       ></Edit>
-      <Title>سوابق نامزد</Title>
+      <Title>سوابق نماینده</Title>
       <Row>
         {experience &&
           experience.map((item, i) => {
